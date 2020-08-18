@@ -15,7 +15,7 @@
 [![codecov](https://codecov.io/gh/IBM/cloudant-node-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/IBM/cloudant-node-sdk)
 -->
 
-# IBM Cloudant Node.js SDK Version 0.0.6
+# IBM Cloudant Node.js SDK Version 0.0.7
 
 Node.js client library to interact with various [Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=node).
 
