@@ -1,0 +1,9 @@
+Cannot create "orders" database, it already exists.
+The document revision for "example" is set to 1-1b403633540686aa32d013fda9041a5d
+You have created the document:
+{
+  "_id": "example",
+  "name": "Bob Smith",
+  "joined": "2019-01-24T10:42:99.000Z",
+  "_rev": "2-4e2178e85cffb32d38ba4e451f6ca376"
+}

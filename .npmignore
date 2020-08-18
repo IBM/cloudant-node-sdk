@@ -1,0 +1,17 @@
+test
+coverage
+.travis.yml
+scripts/
+tslint.json
+.eslintrc.js
+.eslintcache
+.eslintignore
+.github
+Jenkinsfile
+*.env
+stubs/
+.releaserc
+.prettierrc.js              
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+KNOWN_ISSUES.md

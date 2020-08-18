@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2015",
+    "sourceMap": true
+  },
+  "exclude": [
+    "./node_modules"
+  ],
+  "files": [
+    "ts/CreateDbAndDoc.ts", "ts/DeleteDoc.ts", "ts/GetInfoFromExistingDatabase.ts", "ts/UpdateDoc.ts"]
+}
