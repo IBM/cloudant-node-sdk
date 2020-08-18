@@ -9,8 +9,8 @@
   -->
 
 [![Build Status](https://travis-ci.com/IBM/cloudant-node-sdk.svg?branch=master)](https://travis-ci.com/IBM/cloudant-node-sdk)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 <!--
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![npm-version](https://img.shields.io/npm/v/IBM/cloudant-node-sdk.svg)](https://www.npmjs.com/package/@ibmcloud/cloudant)
 [![codecov](https://codecov.io/gh/IBM/cloudant-node-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/IBM/cloudant-node-sdk)
 -->
