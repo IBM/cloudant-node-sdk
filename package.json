@@ -1,0 +1,83 @@
+{
+  "name": "@ibm-cloud/cloudant",
+  "version": "0.0.5",
+  "description": "IBM Cloudant Node.js SDK",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IBM/cloudant-node-sdk"
+  },
+  "keywords": [
+    "ibm",
+    "cloudant"
+  ],
+  "author": "IBM Corp.",
+  "scripts": {
+    "eslint:fix": "eslint . --fix",
+    "eslint:check": "eslint . --cache",
+    "tslint:fix": "tslint --fix -p . -c tslint.json",
+    "tslint:check": "tslint -p . -c ./tslint.json",
+    "lint": "npm run eslint:check && npm run tslint:check",
+    "lint-fix": "npm run eslint:fix && npm run tslint:fix",
+    "build": "tsc && cp package.json dist/",
+    "prepublishOnly": "npm run build",
+    "version": "bump2version --allow-dirty --new-version $npm_package_version patch && git add README.md .bumpversion.cfg",
+    "postversion": "tsc-publish --no-checks --dry-run",
+    "jest": "jest",
+    "test": "npm run build && npm run lint && jest test/",
+    "test-unit": "npm run build && jest test/unit/",
+    "test-integration": "npm run build && jest test/integration",
+    "test-travis": "jest --runInBand --testNamePattern='^((?!@slow).)*$' test/",
+    "test-unit-travis": "jest --runInBand test/unit/",
+    "test-integration-travis": "jest --runInBand --no-colors --testNamePattern='^((?!@slow).)*$' --json test/integration > test-output.log",
+    "report-coverage": "codecov",
+    "check-packages": "installed-check -e -d -v"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "dependencies": {
+    "@types/node": "^12.0.8",
+    "extend": "^3.0.2",
+    "ibm-cloud-sdk-core": "^2.4.0"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/git": "^7.0.12",
+    "@types/jest": "^26.0.4",
+    "@typescript-eslint/parser": "^3.5.0",
+    "axios": "^0.19.0",
+    "codecov": "^3.5.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.4.0",
+    "eslint-config-google": "^0.12.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-header": "^3.0.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^9.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "installed-check": "^2.2.0",
+    "jest": "^26.1.0",
+    "prettier": "^1.17.1",
+    "semantic-release": "^15.13.25",
+    "sinon": "^9.0.2",
+    "tough-cookie": "^4.0.0",
+    "ts-jest": "^26.1.2",
+    "tsc-publish": "^0.5.2",
+    "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "typedoc": "^0.15.0",
+    "typescript": "^3.9.6"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage/",
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/test/"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  }
+}
