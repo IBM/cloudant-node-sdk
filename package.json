@@ -84,7 +84,7 @@
   },
   "jest-junit": {
     "suiteName": "Generated unit tests",
-    "outputDirectory": "./test-reports/",
+    "outputDirectory": "./junitreports/",
     "outputName": "junit.xml",
     "uniqueOutputName": "false",
     "classNameTemplate": "{classname}",

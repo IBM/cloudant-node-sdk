@@ -35,7 +35,7 @@ lib-cov
 coverage
 
 # JUnit reports directory
-test-reports
+junitreports
 
 # nyc test coverage
 .nyc_output
