@@ -628,7 +628,8 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postChanges
         const db = 'testString';
         const docIds = ['testString'];
-        const selector = { 'key1' : 'any' };
+        const fields = ['testString'];
+        const selector = { 'key1': 'any' };
         const lastEventId = 'testString';
         const attEncodingInfo = true;
         const attachments = true;
@@ -647,6 +648,7 @@ describe('CloudantV1', () => {
         const params = {
           db: db,
           docIds: docIds,
+          fields: fields,
           selector: selector,
           lastEventId: lastEventId,
           attEncodingInfo: attEncodingInfo,
@@ -681,6 +683,7 @@ describe('CloudantV1', () => {
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Last-Event-ID', lastEventId);
         expect(options.body['doc_ids']).toEqual(docIds);
+        expect(options.body['fields']).toEqual(fields);
         expect(options.body['selector']).toEqual(selector);
         expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
         expect(options.qs['attachments']).toEqual(attachments);
@@ -747,7 +750,8 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postChangesAsStream
         const db = 'testString';
         const docIds = ['testString'];
-        const selector = { 'key1' : 'any' };
+        const fields = ['testString'];
+        const selector = { 'key1': 'any' };
         const lastEventId = 'testString';
         const attEncodingInfo = true;
         const attachments = true;
@@ -766,6 +770,7 @@ describe('CloudantV1', () => {
         const params = {
           db: db,
           docIds: docIds,
+          fields: fields,
           selector: selector,
           lastEventId: lastEventId,
           attEncodingInfo: attEncodingInfo,
@@ -800,6 +805,7 @@ describe('CloudantV1', () => {
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Last-Event-ID', lastEventId);
         expect(options.body['doc_ids']).toEqual(docIds);
+        expect(options.body['fields']).toEqual(fields);
         expect(options.body['selector']).toEqual(selector);
         expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
         expect(options.qs['attachments']).toEqual(attachments);
@@ -960,21 +966,21 @@ describe('CloudantV1', () => {
         stub: true,
       };
 
-      // DocumentRevisionStatus
-      const documentRevisionStatusModel = {
-        rev: 'testString',
-        status: 'available',
-      };
-
       // Revisions
       const revisionsModel = {
         ids: ['testString'],
         start: 1,
       };
 
+      // DocumentRevisionStatus
+      const documentRevisionStatusModel = {
+        rev: 'testString',
+        status: 'available',
+      };
+
       // Document
       const documentModel = {
-        _attachments: { 'key1' : attachmentModel },
+        _attachments: { 'key1': attachmentModel },
         _conflicts: ['testString'],
         _deleted: true,
         _deleted_conflicts: ['testString'],
@@ -1474,21 +1480,21 @@ describe('CloudantV1', () => {
         stub: true,
       };
 
-      // DocumentRevisionStatus
-      const documentRevisionStatusModel = {
-        rev: 'testString',
-        status: 'available',
-      };
-
       // Revisions
       const revisionsModel = {
         ids: ['testString'],
         start: 1,
       };
 
+      // DocumentRevisionStatus
+      const documentRevisionStatusModel = {
+        rev: 'testString',
+        status: 'available',
+      };
+
       // Document
       const documentModel = {
-        _attachments: { 'key1' : attachmentModel },
+        _attachments: { 'key1': attachmentModel },
         _conflicts: ['testString'],
         _deleted: true,
         _deleted_conflicts: ['testString'],
@@ -2500,21 +2506,21 @@ describe('CloudantV1', () => {
         stub: true,
       };
 
-      // DocumentRevisionStatus
-      const documentRevisionStatusModel = {
-        rev: 'testString',
-        status: 'available',
-      };
-
       // Revisions
       const revisionsModel = {
         ids: ['testString'],
         start: 1,
       };
 
+      // DocumentRevisionStatus
+      const documentRevisionStatusModel = {
+        rev: 'testString',
+        status: 'available',
+      };
+
       // Document
       const documentModel = {
-        _attachments: { 'key1' : attachmentModel },
+        _attachments: { 'key1': attachmentModel },
         _conflicts: ['testString'],
         _deleted: true,
         _deleted_conflicts: ['testString'],
@@ -2889,19 +2895,6 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
 
-      // Analyzer
-      const analyzerModel = {
-        name: 'classic',
-        stopwords: ['testString'],
-      };
-
-      // AnalyzerConfiguration
-      const analyzerConfigurationModel = {
-        name: 'classic',
-        stopwords: ['testString'],
-        fields: { 'key1' : analyzerModel },
-      };
-
       // Attachment
       const attachmentModel = {
         content_type: 'testString',
@@ -2915,6 +2908,37 @@ describe('CloudantV1', () => {
         stub: true,
       };
 
+      // Revisions
+      const revisionsModel = {
+        ids: ['testString'],
+        start: 1,
+      };
+
+      // DocumentRevisionStatus
+      const documentRevisionStatusModel = {
+        rev: 'testString',
+        status: 'available',
+      };
+
+      // Analyzer
+      const analyzerModel = {
+        name: 'classic',
+        stopwords: ['testString'],
+      };
+
+      // AnalyzerConfiguration
+      const analyzerConfigurationModel = {
+        name: 'classic',
+        stopwords: ['testString'],
+        fields: { 'key1': analyzerModel },
+      };
+
+      // SearchIndexDefinition
+      const searchIndexDefinitionModel = {
+        analyzer: analyzerConfigurationModel,
+        index: 'testString',
+      };
+
       // DesignDocumentOptions
       const designDocumentOptionsModel = {
         partitioned: true,
@@ -2926,32 +2950,14 @@ describe('CloudantV1', () => {
         reduce: 'testString',
       };
 
-      // DocumentRevisionStatus
-      const documentRevisionStatusModel = {
-        rev: 'testString',
-        status: 'available',
-      };
-
       // GeoIndexDefinition
       const geoIndexDefinitionModel = {
         index: 'testString',
       };
 
-      // Revisions
-      const revisionsModel = {
-        ids: ['testString'],
-        start: 1,
-      };
-
-      // SearchIndexDefinition
-      const searchIndexDefinitionModel = {
-        analyzer: analyzerConfigurationModel,
-        index: 'testString',
-      };
-
       // DesignDocument
       const designDocumentModel = {
-        _attachments: { 'key1' : attachmentModel },
+        _attachments: { 'key1': attachmentModel },
         _conflicts: ['testString'],
         _deleted: true,
         _deleted_conflicts: ['testString'],
@@ -2961,14 +2967,14 @@ describe('CloudantV1', () => {
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
         autoupdate: true,
-        filters: { 'key1' : 'testString' },
-        indexes: { 'key1' : searchIndexDefinitionModel },
+        filters: { 'key1': 'testString' },
+        indexes: { 'key1': searchIndexDefinitionModel },
         language: 'testString',
         options: designDocumentOptionsModel,
-        updates: { 'key1' : 'testString' },
-        validate_doc_update: { 'key1' : 'testString' },
-        views: { 'key1' : designDocumentViewsMapReduceModel },
-        st_indexes: { 'key1' : geoIndexDefinitionModel },
+        updates: { 'key1': 'testString' },
+        validate_doc_update: { 'key1': 'testString' },
+        views: { 'key1': designDocumentViewsMapReduceModel },
+        st_indexes: { 'key1': geoIndexDefinitionModel },
         foo: { foo: 'bar' },
       };
 
@@ -4656,14 +4662,14 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postPartitionFind
         const db = 'testString';
         const partitionKey = 'testString';
-        const selector = { 'key1' : 'any' };
+        const selector = { 'key1': 'any' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
         const fields = ['testString'];
         const limit = 0;
         const skip = 0;
-        const sort = [{ 'key1' : 'asc' }];
+        const sort = [{ 'key1': 'asc' }];
         const stable = true;
         const update = 'false';
         const useIndex = ['testString'];
@@ -4762,14 +4768,14 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postPartitionFindAsStream
         const db = 'testString';
         const partitionKey = 'testString';
-        const selector = { 'key1' : 'any' };
+        const selector = { 'key1': 'any' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
         const fields = ['testString'];
         const limit = 0;
         const skip = 0;
-        const sort = [{ 'key1' : 'asc' }];
+        const sort = [{ 'key1': 'asc' }];
         const stable = true;
         const update = 'false';
         const useIndex = ['testString'];
@@ -4868,14 +4874,14 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postExplain
         const db = 'testString';
-        const selector = { 'key1' : { foo: 'bar' } };
+        const selector = { 'key1': { foo: 'bar' } };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
         const fields = ['testString'];
         const limit = 0;
         const skip = 0;
-        const sort = [{ 'key1' : 'asc' }];
+        const sort = [{ 'key1': 'asc' }];
         const stable = true;
         const update = 'false';
         const useIndex = ['testString'];
@@ -4972,14 +4978,14 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postFind
         const db = 'testString';
-        const selector = { 'key1' : { foo: 'bar' } };
+        const selector = { 'key1': { foo: 'bar' } };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
         const fields = ['testString'];
         const limit = 0;
         const skip = 0;
-        const sort = [{ 'key1' : 'asc' }];
+        const sort = [{ 'key1': 'asc' }];
         const stable = true;
         const update = 'false';
         const useIndex = ['testString'];
@@ -5076,14 +5082,14 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postFindAsStream
         const db = 'testString';
-        const selector = { 'key1' : { foo: 'bar' } };
+        const selector = { 'key1': { foo: 'bar' } };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
         const fields = ['testString'];
         const limit = 0;
         const skip = 0;
-        const sort = [{ 'key1' : 'asc' }];
+        const sort = [{ 'key1': 'asc' }];
         const stable = true;
         const update = 'false';
         const useIndex = ['testString'];
@@ -5254,17 +5260,17 @@ describe('CloudantV1', () => {
         stopwords: ['testString'],
       };
 
+      // IndexTextOperatorDefaultField
+      const indexTextOperatorDefaultFieldModel = {
+        analyzer: analyzerModel,
+        enabled: true,
+      };
+
       // IndexField
       const indexFieldModel = {
         name: 'testString',
         type: 'boolean',
         foo: 'asc',
-      };
-
-      // IndexTextOperatorDefaultField
-      const indexTextOperatorDefaultFieldModel = {
-        analyzer: analyzerModel,
-        enabled: true,
       };
 
       // IndexDefinition
@@ -5282,7 +5288,7 @@ describe('CloudantV1', () => {
         const def = indexDefinitionModel;
         const index = indexDefinitionModel;
         const name = 'testString';
-        const partialFilterSelector = { 'key1' : 'any' };
+        const partialFilterSelector = { 'key1': 'any' };
         const partitioned = true;
         const type = 'json';
         const params = {
@@ -5520,7 +5526,7 @@ describe('CloudantV1', () => {
         const groupField = 'testString';
         const groupLimit = 1;
         const groupSort = ['testString'];
-        const ranges = { 'key1' : { 'key1' : { 'key1' : 'testString' } } };
+        const ranges = { 'key1': { 'key1': { 'key1': 'testString' } } };
         const params = {
           db: db,
           ddoc: ddoc,
@@ -5652,7 +5658,7 @@ describe('CloudantV1', () => {
         const groupField = 'testString';
         const groupLimit = 1;
         const groupSort = ['testString'];
-        const ranges = { 'key1' : { 'key1' : { 'key1' : 'testString' } } };
+        const ranges = { 'key1': { 'key1': { 'key1': 'testString' } } };
         const params = {
           db: db,
           ddoc: ddoc,
@@ -6432,16 +6438,6 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
 
-      // ReplicationDatabaseAuthIam
-      const replicationDatabaseAuthIamModel = {
-        api_key: 'testString',
-      };
-
-      // ReplicationDatabaseAuth
-      const replicationDatabaseAuthModel = {
-        iam: replicationDatabaseAuthIamModel,
-      };
-
       // Attachment
       const attachmentModel = {
         content_type: 'testString',
@@ -6453,6 +6449,12 @@ describe('CloudantV1', () => {
         length: 0,
         revpos: 1,
         stub: true,
+      };
+
+      // Revisions
+      const revisionsModel = {
+        ids: ['testString'],
+        start: 1,
       };
 
       // DocumentRevisionStatus
@@ -6468,17 +6470,21 @@ describe('CloudantV1', () => {
         q: 1,
       };
 
+      // ReplicationDatabaseAuthIam
+      const replicationDatabaseAuthIamModel = {
+        api_key: 'testString',
+      };
+
+      // ReplicationDatabaseAuth
+      const replicationDatabaseAuthModel = {
+        iam: replicationDatabaseAuthIamModel,
+      };
+
       // ReplicationDatabase
       const replicationDatabaseModel = {
         auth: replicationDatabaseAuthModel,
-        headers: { 'key1' : 'testString' },
+        headers: { 'key1': 'testString' },
         url: 'testString',
-      };
-
-      // Revisions
-      const revisionsModel = {
-        ids: ['testString'],
-        start: 1,
       };
 
       // UserContext
@@ -6490,7 +6496,7 @@ describe('CloudantV1', () => {
 
       // ReplicationDocument
       const replicationDocumentModel = {
-        _attachments: { 'key1' : attachmentModel },
+        _attachments: { 'key1': attachmentModel },
         _conflicts: ['testString'],
         _deleted: true,
         _deleted_conflicts: ['testString'],
@@ -6508,9 +6514,9 @@ describe('CloudantV1', () => {
         doc_ids: ['testString'],
         filter: 'testString',
         http_connections: 1,
-        query_params: { 'key1' : 'testString' },
+        query_params: { 'key1': 'testString' },
         retries_per_request: 0,
-        selector: { 'key1' : { foo: 'bar' } },
+        selector: { 'key1': { foo: 'bar' } },
         since_seq: 'testString',
         socket_options: 'testString',
         source: replicationDatabaseModel,
@@ -6758,16 +6764,6 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
 
-      // ReplicationDatabaseAuthIam
-      const replicationDatabaseAuthIamModel = {
-        api_key: 'testString',
-      };
-
-      // ReplicationDatabaseAuth
-      const replicationDatabaseAuthModel = {
-        iam: replicationDatabaseAuthIamModel,
-      };
-
       // Attachment
       const attachmentModel = {
         content_type: 'testString',
@@ -6779,6 +6775,12 @@ describe('CloudantV1', () => {
         length: 0,
         revpos: 1,
         stub: true,
+      };
+
+      // Revisions
+      const revisionsModel = {
+        ids: ['testString'],
+        start: 1,
       };
 
       // DocumentRevisionStatus
@@ -6794,17 +6796,21 @@ describe('CloudantV1', () => {
         q: 1,
       };
 
+      // ReplicationDatabaseAuthIam
+      const replicationDatabaseAuthIamModel = {
+        api_key: 'testString',
+      };
+
+      // ReplicationDatabaseAuth
+      const replicationDatabaseAuthModel = {
+        iam: replicationDatabaseAuthIamModel,
+      };
+
       // ReplicationDatabase
       const replicationDatabaseModel = {
         auth: replicationDatabaseAuthModel,
-        headers: { 'key1' : 'testString' },
+        headers: { 'key1': 'testString' },
         url: 'testString',
-      };
-
-      // Revisions
-      const revisionsModel = {
-        ids: ['testString'],
-        start: 1,
       };
 
       // UserContext
@@ -6816,7 +6822,7 @@ describe('CloudantV1', () => {
 
       // ReplicationDocument
       const replicationDocumentModel = {
-        _attachments: { 'key1' : attachmentModel },
+        _attachments: { 'key1': attachmentModel },
         _conflicts: ['testString'],
         _deleted: true,
         _deleted_conflicts: ['testString'],
@@ -6834,9 +6840,9 @@ describe('CloudantV1', () => {
         doc_ids: ['testString'],
         filter: 'testString',
         http_connections: 1,
-        query_params: { 'key1' : 'testString' },
+        query_params: { 'key1': 'testString' },
         retries_per_request: 0,
-        selector: { 'key1' : { foo: 'bar' } },
+        selector: { 'key1': { foo: 'bar' } },
         since_seq: 'testString',
         socket_options: 'testString',
         source: replicationDatabaseModel,
@@ -7435,7 +7441,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const admins = securityObjectModel;
         const members = securityObjectModel;
-        const cloudant = { 'key1' : ['_reader'] };
+        const cloudant = { 'key1': ['_reader'] };
         const couchdbAuthOnly = true;
         const params = {
           db: db,
@@ -7552,21 +7558,35 @@ describe('CloudantV1', () => {
       });
     });
   });
-  describe('putCloudantSecurity', () => {
+  describe('putCloudantSecurityConfiguration', () => {
     describe('positive tests', () => {
+      // Request models needed by this operation.
+
+      // SecurityObject
+      const securityObjectModel = {
+        names: ['testString'],
+        roles: ['testString'],
+      };
+
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation putCloudantSecurity
+        // Construct the params object for operation putCloudantSecurityConfiguration
         const db = 'testString';
-        const cloudant = { 'key1' : ['_reader'] };
+        const cloudant = { 'key1': ['_reader'] };
+        const admins = securityObjectModel;
+        const members = securityObjectModel;
+        const couchdbAuthOnly = true;
         const params = {
           db: db,
           cloudant: cloudant,
+          admins: admins,
+          members: members,
+          couchdbAuthOnly: couchdbAuthOnly,
         };
 
-        const putCloudantSecurityResult = cloudantService.putCloudantSecurity(params);
+        const putCloudantSecurityConfigurationResult = cloudantService.putCloudantSecurityConfiguration(params);
 
         // all methods should return a Promise
-        expectToBePromise(putCloudantSecurityResult);
+        expectToBePromise(putCloudantSecurityConfigurationResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -7578,6 +7598,9 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(options.body['cloudant']).toEqual(cloudant);
+        expect(options.body['admins']).toEqual(admins);
+        expect(options.body['members']).toEqual(members);
+        expect(options.body['couchdb_auth_only']).toEqual(couchdbAuthOnly);
         expect(options.path['db']).toEqual(db);
       });
 
@@ -7594,7 +7617,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putCloudantSecurity(params);
+        cloudantService.putCloudantSecurityConfiguration(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -7603,7 +7626,7 @@ describe('CloudantV1', () => {
       test('should enforce required parameters', async done => {
         let err;
         try {
-          await cloudantService.putCloudantSecurity({});
+          await cloudantService.putCloudantSecurityConfiguration({});
         } catch (e) {
           err = e;
         }
@@ -7613,10 +7636,10 @@ describe('CloudantV1', () => {
       });
 
       test('should reject promise when required params are not given', done => {
-        const putCloudantSecurityPromise = cloudantService.putCloudantSecurity();
-        expectToBePromise(putCloudantSecurityPromise);
+        const putCloudantSecurityConfigurationPromise = cloudantService.putCloudantSecurityConfiguration();
+        expectToBePromise(putCloudantSecurityConfigurationPromise);
 
-        putCloudantSecurityPromise.catch(err => {
+        putCloudantSecurityConfigurationPromise.catch(err => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8267,21 +8290,21 @@ describe('CloudantV1', () => {
         stub: true,
       };
 
-      // DocumentRevisionStatus
-      const documentRevisionStatusModel = {
-        rev: 'testString',
-        status: 'available',
-      };
-
       // Revisions
       const revisionsModel = {
         ids: ['testString'],
         start: 1,
       };
 
+      // DocumentRevisionStatus
+      const documentRevisionStatusModel = {
+        rev: 'testString',
+        status: 'available',
+      };
+
       // Document
       const documentModel = {
-        _attachments: { 'key1' : attachmentModel },
+        _attachments: { 'key1': attachmentModel },
         _conflicts: ['testString'],
         _deleted: true,
         _deleted_conflicts: ['testString'],
@@ -8649,10 +8672,10 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postMissingRevs
         const db = 'testString';
-        const missingRevs = { 'key1' : ['testString'] };
+        const documentRevisions = { 'key1': ['testString'] };
         const params = {
           db: db,
-          missingRevs: missingRevs,
+          documentRevisions: documentRevisions,
         };
 
         const postMissingRevsResult = cloudantService.postMissingRevs(params);
@@ -8669,7 +8692,7 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body).toEqual(missingRevs);
+        expect(options.body).toEqual(documentRevisions);
         expect(options.path['db']).toEqual(db);
       });
 
@@ -8720,10 +8743,10 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postRevsDiff
         const db = 'testString';
-        const revsDiffRequest = { 'key1' : ['testString'] };
+        const documentRevisions = { 'key1': ['testString'] };
         const params = {
           db: db,
-          revsDiffRequest: revsDiffRequest,
+          documentRevisions: documentRevisions,
         };
 
         const postRevsDiffResult = cloudantService.postRevsDiff(params);
@@ -8740,7 +8763,7 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body).toEqual(revsDiffRequest);
+        expect(options.body).toEqual(documentRevisions);
         expect(options.path['db']).toEqual(db);
       });
 

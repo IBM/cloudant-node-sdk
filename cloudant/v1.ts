@@ -15,10 +15,11 @@
  */
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 3.10.3-18e3fe12-20200803-172650
+ * IBM OpenAPI SDK Code Generator Version: 3.12.0-64fe8d3f-20200820-144050
  */
  
 
+import * as extend from 'extend';
 import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
 import { Authenticator, BaseService, getAuthenticatorFromEnvironment, getMissingParams, UserOptions } from 'ibm-cloud-sdk-core';
 import { getSdkHeaders } from '../lib/common';
@@ -113,8 +114,8 @@ class CloudantV1 extends CloudantBaseService {
           url: '/',
           method: 'GET',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -146,8 +147,8 @@ class CloudantV1 extends CloudantBaseService {
           url: '/_membership',
           method: 'GET',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -184,8 +185,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           qs: query,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -232,8 +233,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'HEAD',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
           }, _params.headers),
         }),
       };
@@ -279,8 +280,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           qs: query,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -318,8 +319,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'POST',
           body,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -364,8 +365,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'DELETE',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -405,8 +406,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -456,8 +457,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -476,6 +477,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string[]} [params.docIds] - Schema for a list of document IDs.
+   * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
+   * fields of a document must be returned. If it is omitted, the entire document is returned.
    * @param {JsonObject} [params.selector] - JSON object describing criteria used to select documents. The selector
    * specifies fields in the document, and provides an expression to evaluate with the field content or other data.
    *
@@ -560,6 +563,7 @@ class CloudantV1 extends CloudantBaseService {
 
       const body = {
         'doc_ids': _params.docIds,
+        'fields': _params.fields,
         'selector': _params.selector
       };
 
@@ -594,8 +598,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Last-Event-ID': _params.lastEventId
@@ -616,6 +620,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string[]} [params.docIds] - Schema for a list of document IDs.
+   * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
+   * fields of a document must be returned. If it is omitted, the entire document is returned.
    * @param {JsonObject} [params.selector] - JSON object describing criteria used to select documents. The selector
    * specifies fields in the document, and provides an expression to evaluate with the field content or other data.
    *
@@ -700,6 +706,7 @@ class CloudantV1 extends CloudantBaseService {
 
       const body = {
         'doc_ids': _params.docIds,
+        'fields': _params.fields,
         'selector': _params.selector
       };
 
@@ -735,8 +742,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Last-Event-ID': _params.lastEventId
@@ -800,8 +807,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'If-None-Match': _params.ifNoneMatch
           }, _params.headers),
         }),
@@ -859,8 +866,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': _params.contentType
           }, _params.headers),
@@ -942,8 +949,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -1026,8 +1033,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -1080,8 +1087,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -1135,8 +1142,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -1184,8 +1191,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -1250,8 +1257,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -1317,8 +1324,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'multipart/mixed',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -1384,8 +1391,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'multipart/related',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -1451,8 +1458,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -1510,8 +1517,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'If-Match': _params.ifMatch
           }, _params.headers),
@@ -1598,8 +1605,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'If-None-Match': _params.ifNoneMatch
           }, _params.headers),
@@ -1687,8 +1694,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'multipart/mixed',
             'If-None-Match': _params.ifNoneMatch
           }, _params.headers),
@@ -1776,8 +1783,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'multipart/related',
             'If-None-Match': _params.ifNoneMatch
           }, _params.headers),
@@ -1865,8 +1872,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'If-None-Match': _params.ifNoneMatch
           }, _params.headers),
@@ -1931,8 +1938,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': _params.contentType,
             'If-Match': _params.ifMatch
@@ -1989,8 +1996,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'HEAD',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'If-None-Match': _params.ifNoneMatch
           }, _params.headers),
         }),
@@ -2048,8 +2055,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'If-Match': _params.ifMatch
           }, _params.headers),
@@ -2137,8 +2144,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'If-None-Match': _params.ifNoneMatch
           }, _params.headers),
@@ -2202,8 +2209,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'If-Match': _params.ifMatch
@@ -2251,8 +2258,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -2334,8 +2341,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Content-Type': 'application/json',
             'Accept': _params.accept
           }, _params.headers),
@@ -2388,8 +2395,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Content-Type': 'application/json',
             'Accept': _params.accept
           }, _params.headers),
@@ -2499,8 +2506,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -2607,8 +2614,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -2664,8 +2671,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -2722,8 +2729,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -2772,8 +2779,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -2856,8 +2863,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -2942,8 +2949,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -3034,8 +3041,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -3127,8 +3134,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -3236,8 +3243,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -3346,8 +3353,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -3396,9 +3403,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.executionStats] - Use this option to find information about the query that was run. This
    * information includes total key lookups, total document lookups (when `include_docs=true` is used), and total quorum
    * document lookups (when each document replica is fetched).
-   * @param {string[]} [params.fields] - JSON array that uses the field syntax as described in the following
-   * information. Use this parameter to specify which fields of a document must be returned. If it is omitted, the
-   * entire document is returned.
+   * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
+   * fields of a document must be returned. If it is omitted, the entire document is returned.
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
@@ -3450,8 +3456,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -3500,9 +3506,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.executionStats] - Use this option to find information about the query that was run. This
    * information includes total key lookups, total document lookups (when `include_docs=true` is used), and total quorum
    * document lookups (when each document replica is fetched).
-   * @param {string[]} [params.fields] - JSON array that uses the field syntax as described in the following
-   * information. Use this parameter to specify which fields of a document must be returned. If it is omitted, the
-   * entire document is returned.
+   * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
+   * fields of a document must be returned. If it is omitted, the entire document is returned.
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
@@ -3555,8 +3560,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -3608,9 +3613,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.executionStats] - Use this option to find information about the query that was run. This
    * information includes total key lookups, total document lookups (when `include_docs=true` is used), and total quorum
    * document lookups (when each document replica is fetched).
-   * @param {string[]} [params.fields] - JSON array that uses the field syntax as described in the following
-   * information. Use this parameter to specify which fields of a document must be returned. If it is omitted, the
-   * entire document is returned.
+   * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
+   * fields of a document must be returned. If it is omitted, the entire document is returned.
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
@@ -3666,8 +3670,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -3715,9 +3719,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.executionStats] - Use this option to find information about the query that was run. This
    * information includes total key lookups, total document lookups (when `include_docs=true` is used), and total quorum
    * document lookups (when each document replica is fetched).
-   * @param {string[]} [params.fields] - JSON array that uses the field syntax as described in the following
-   * information. Use this parameter to specify which fields of a document must be returned. If it is omitted, the
-   * entire document is returned.
+   * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
+   * fields of a document must be returned. If it is omitted, the entire document is returned.
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
@@ -3773,8 +3776,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -3822,9 +3825,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.executionStats] - Use this option to find information about the query that was run. This
    * information includes total key lookups, total document lookups (when `include_docs=true` is used), and total quorum
    * document lookups (when each document replica is fetched).
-   * @param {string[]} [params.fields] - JSON array that uses the field syntax as described in the following
-   * information. Use this parameter to specify which fields of a document must be returned. If it is omitted, the
-   * entire document is returned.
+   * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
+   * fields of a document must be returned. If it is omitted, the entire document is returned.
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
@@ -3881,8 +3883,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -3927,8 +3929,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -4018,8 +4020,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -4067,8 +4069,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'DELETE',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -4111,8 +4113,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'POST',
           body,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -4229,8 +4231,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -4348,8 +4350,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -4397,8 +4399,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -4503,8 +4505,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -4606,8 +4608,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -4649,8 +4651,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'POST',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -4695,8 +4697,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -4751,8 +4753,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           qs: query,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -4800,8 +4802,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'HEAD',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'If-None-Match': _params.ifNoneMatch
           }, _params.headers),
         }),
@@ -4844,8 +4846,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'HEAD',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
           }, _params.headers),
         }),
       };
@@ -4877,8 +4879,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'POST',
           body,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -4932,8 +4934,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'If-Match': _params.ifMatch
           }, _params.headers),
@@ -5018,8 +5020,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'If-None-Match': _params.ifNoneMatch
           }, _params.headers),
@@ -5081,8 +5083,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'If-Match': _params.ifMatch
@@ -5129,8 +5131,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           qs: query,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -5173,8 +5175,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -5217,8 +5219,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           qs: query,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -5260,8 +5262,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -5295,8 +5297,8 @@ class CloudantV1 extends CloudantBaseService {
           url: '/_session',
           method: 'GET',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -5327,8 +5329,8 @@ class CloudantV1 extends CloudantBaseService {
           url: '/_iam_session',
           method: 'DELETE',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -5358,8 +5360,8 @@ class CloudantV1 extends CloudantBaseService {
           url: '/_iam_session',
           method: 'GET',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -5395,8 +5397,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'POST',
           body,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -5445,8 +5447,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -5502,8 +5504,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -5536,8 +5538,8 @@ class CloudantV1 extends CloudantBaseService {
           url: '/_api/v2/api_keys',
           method: 'POST',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -5556,10 +5558,13 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {JsonObject} [params.cloudant] - Database permissions for Cloudant users and/or API keys.
+   * @param {SecurityObject} [params.admins] - Schema for names and roles to map to a database permission.
+   * @param {SecurityObject} [params.members] - Schema for names and roles to map to a database permission.
+   * @param {boolean} [params.couchdbAuthOnly] - Manage permissions using the `_users` database only.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
-  public putCloudantSecurity(params: CloudantV1.PutCloudantSecurityParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+  public putCloudantSecurityConfiguration(params: CloudantV1.PutCloudantSecurityConfigurationParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['db'];
 
@@ -5570,14 +5575,17 @@ class CloudantV1 extends CloudantBaseService {
       }
 
       const body = {
-        'cloudant': _params.cloudant
+        'cloudant': _params.cloudant,
+        'admins': _params.admins,
+        'members': _params.members,
+        'couchdb_auth_only': _params.couchdbAuthOnly
       };
 
       const path = {
         'db': _params.db
       };
 
-      const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCloudantSecurity');
+      const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCloudantSecurityConfiguration');
 
       const parameters = {
         options: {
@@ -5586,8 +5594,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -5623,8 +5631,8 @@ class CloudantV1 extends CloudantBaseService {
           url: '/_api/v2/user/config/cors',
           method: 'GET',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -5668,8 +5676,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'PUT',
           body,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -5732,8 +5740,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'If-Match': _params.ifMatch,
             'If-None-Match': _params.ifNoneMatch
           }, _params.headers),
@@ -5792,8 +5800,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'If-Match': _params.ifMatch
           }, _params.headers),
@@ -5856,8 +5864,8 @@ class CloudantV1 extends CloudantBaseService {
           path,
           responseType: 'stream',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': _params.accept,
             'If-Match': _params.ifMatch,
             'If-None-Match': _params.ifNoneMatch,
@@ -5924,8 +5932,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': _params.contentType,
             'If-Match': _params.ifMatch
@@ -5983,8 +5991,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -6049,8 +6057,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': _params.accept,
             'If-None-Match': _params.ifNoneMatch
           }, _params.headers),
@@ -6107,8 +6115,8 @@ class CloudantV1 extends CloudantBaseService {
           qs: query,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': _params.contentType
           }, _params.headers),
@@ -6191,8 +6199,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Content-Type': 'application/json',
             'Accept': _params.accept
           }, _params.headers),
@@ -6245,8 +6253,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Content-Type': 'application/json',
             'Accept': _params.accept
           }, _params.headers),
@@ -6296,8 +6304,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'POST',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -6314,7 +6322,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {JsonObject} [params.missingRevs] - HTTP request body for postMissingRevs and postRevsDiff.
+   * @param {JsonObject} [params.documentRevisions] - HTTP request body for postMissingRevs and postRevsDiff.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.MissingRevsResult>>}
    */
@@ -6328,7 +6336,7 @@ class CloudantV1 extends CloudantBaseService {
         return reject(missingParams);
       }
 
-      const body = _params.missingRevs;
+      const body = _params.documentRevisions;
       const path = {
         'db': _params.db
       };
@@ -6342,8 +6350,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -6363,7 +6371,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {JsonObject} [params.revsDiffRequest] - HTTP request body for postMissingRevs and postRevsDiff.
+   * @param {JsonObject} [params.documentRevisions] - HTTP request body for postMissingRevs and postRevsDiff.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.JsonObject>>}
    */
@@ -6377,7 +6385,7 @@ class CloudantV1 extends CloudantBaseService {
         return reject(missingParams);
       }
 
-      const body = _params.revsDiffRequest;
+      const body = _params.documentRevisions;
       const path = {
         'db': _params.db
       };
@@ -6391,8 +6399,8 @@ class CloudantV1 extends CloudantBaseService {
           body,
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }, _params.headers),
@@ -6435,8 +6443,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -6481,8 +6489,8 @@ class CloudantV1 extends CloudantBaseService {
           method: 'GET',
           path,
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -6518,8 +6526,8 @@ class CloudantV1 extends CloudantBaseService {
           url: '/_active_tasks',
           method: 'GET',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -6550,8 +6558,8 @@ class CloudantV1 extends CloudantBaseService {
           url: '/_up',
           method: 'GET',
         },
-        defaultOptions: Object.assign({}, this.baseOptions, {
-          headers: Object.assign(sdkHeaders, {
+        defaultOptions: extend(true, {}, this.baseOptions, {
+          headers: extend(true, sdkHeaders, {
             'Accept': 'application/json',
           }, _params.headers),
         }),
@@ -6675,6 +6683,10 @@ namespace CloudantV1 {
     db: string;
     /** Schema for a list of document IDs. */
     docIds?: string[];
+    /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
+     *  returned. If it is omitted, the entire document is returned.
+     */
+    fields?: string[];
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
      *  provides an expression to evaluate with the field content or other data.
      *
@@ -6786,6 +6798,10 @@ namespace CloudantV1 {
     db: string;
     /** Schema for a list of document IDs. */
     docIds?: string[];
+    /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
+     *  returned. If it is omitted, the entire document is returned.
+     */
+    fields?: string[];
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
      *  provides an expression to evaluate with the field content or other data.
      *
@@ -8192,8 +8208,8 @@ namespace CloudantV1 {
      *  document replica is fetched).
      */
     executionStats?: boolean;
-    /** JSON array that uses the field syntax as described in the following information. Use this parameter to
-     *  specify which fields of a document must be returned. If it is omitted, the entire document is returned.
+    /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
+     *  returned. If it is omitted, the entire document is returned.
      */
     fields?: string[];
     /** Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried. */
@@ -8270,8 +8286,8 @@ namespace CloudantV1 {
      *  document replica is fetched).
      */
     executionStats?: boolean;
-    /** JSON array that uses the field syntax as described in the following information. Use this parameter to
-     *  specify which fields of a document must be returned. If it is omitted, the entire document is returned.
+    /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
+     *  returned. If it is omitted, the entire document is returned.
      */
     fields?: string[];
     /** Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried. */
@@ -8346,8 +8362,8 @@ namespace CloudantV1 {
      *  document replica is fetched).
      */
     executionStats?: boolean;
-    /** JSON array that uses the field syntax as described in the following information. Use this parameter to
-     *  specify which fields of a document must be returned. If it is omitted, the entire document is returned.
+    /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
+     *  returned. If it is omitted, the entire document is returned.
      */
     fields?: string[];
     /** Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried. */
@@ -8428,8 +8444,8 @@ namespace CloudantV1 {
      *  document replica is fetched).
      */
     executionStats?: boolean;
-    /** JSON array that uses the field syntax as described in the following information. Use this parameter to
-     *  specify which fields of a document must be returned. If it is omitted, the entire document is returned.
+    /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
+     *  returned. If it is omitted, the entire document is returned.
      */
     fields?: string[];
     /** Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried. */
@@ -8510,8 +8526,8 @@ namespace CloudantV1 {
      *  document replica is fetched).
      */
     executionStats?: boolean;
-    /** JSON array that uses the field syntax as described in the following information. Use this parameter to
-     *  specify which fields of a document must be returned. If it is omitted, the entire document is returned.
+    /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
+     *  returned. If it is omitted, the entire document is returned.
      */
     fields?: string[];
     /** Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried. */
@@ -9367,17 +9383,23 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `putCloudantSecurity` operation. */
-  export interface PutCloudantSecurityParams {
+  /** Parameters for the `putCloudantSecurityConfiguration` operation. */
+  export interface PutCloudantSecurityConfigurationParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Database permissions for Cloudant users and/or API keys. */
     cloudant?: JsonObject;
+    /** Schema for names and roles to map to a database permission. */
+    admins?: SecurityObject;
+    /** Schema for names and roles to map to a database permission. */
+    members?: SecurityObject;
+    /** Manage permissions using the `_users` database only. */
+    couchdbAuthOnly?: boolean;
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Constants for the `putCloudantSecurity` operation. */
-  export namespace PutCloudantSecurityConstants {
+  /** Constants for the `putCloudantSecurityConfiguration` operation. */
+  export namespace PutCloudantSecurityConfigurationConstants {
     /** Database permissions for Cloudant users and/or API keys. */
     export enum Cloudant {
       READER = '_reader',
@@ -9671,7 +9693,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the database name. */
     db: string;
     /** HTTP request body for postMissingRevs and postRevsDiff. */
-    missingRevs?: JsonObject;
+    documentRevisions?: JsonObject;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -9680,7 +9702,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the database name. */
     db: string;
     /** HTTP request body for postMissingRevs and postRevsDiff. */
-    revsDiffRequest?: JsonObject;
+    documentRevisions?: JsonObject;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -9820,10 +9842,10 @@ namespace CloudantV1 {
 
   /** Schema for api keys. */
   export interface ApiKeysResult {
+    /** ok. */
+    ok?: boolean;
     /** The generated api key. */
     key?: string;
-    /** Schema for an OK result. */
-    ok?: Ok;
     /** The password associated with the api key. */
     password?: string;
   }
@@ -10083,11 +10105,17 @@ namespace CloudantV1 {
     /** name. */
     name?: string;
     /** View index information. */
-    view_index?: DesignDocumentInformationViewIndex;
+    view_index?: DesignDocumentViewIndex;
+  }
+
+  /** Schema for design document options. */
+  export interface DesignDocumentOptions {
+    /** Whether this design document describes partitioned or global indexes. */
+    partitioned?: boolean;
   }
 
   /** View index information. */
-  export interface DesignDocumentInformationViewIndex {
+  export interface DesignDocumentViewIndex {
     /** Indicates whether a compaction routine is currently running on the view. */
     compact_running?: boolean;
     /** Language for the defined views. */
@@ -10104,12 +10132,6 @@ namespace CloudantV1 {
     waiting_clients?: number;
     /** Indicates if there are outstanding commits to the underlying database that need to processed. */
     waiting_commit?: boolean;
-  }
-
-  /** Schema for design document options. */
-  export interface DesignDocumentOptions {
-    /** Whether this design document describes partitioned or global indexes. */
-    partitioned?: boolean;
   }
 
   /** Schema for view functions definition. */
@@ -10449,10 +10471,10 @@ namespace CloudantV1 {
     cluster_nodes?: string[];
   }
 
-  /** Schema for mapping document IDs to lists of missed revisions. */
+  /** Schema for mapping document IDs to lists of missing revisions. */
   export interface MissingRevsResult {
     /** Schema for mapping document IDs to lists of revisions. */
-    missed_revs?: JsonObject;
+    missing_revs?: JsonObject;
   }
 
   /** Schema for an OK result. */
@@ -11093,6 +11115,8 @@ namespace CloudantV1 {
     error?: string;
     /** The reason the error occurred (if available). */
     reason?: string;
+    /** Schema for a document. */
+    doc?: Document;
     /** Schema for a document ID. */
     id?: string;
     /** Schema for any JSON type. */
