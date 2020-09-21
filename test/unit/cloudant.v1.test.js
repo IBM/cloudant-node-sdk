@@ -629,7 +629,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docIds = ['testString'];
         const fields = ['testString'];
-        const selector = { 'key1': 'any' };
+        const selector = { 'key1': 'testString' };
         const lastEventId = 'testString';
         const attEncodingInfo = true;
         const attachments = true;
@@ -751,7 +751,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docIds = ['testString'];
         const fields = ['testString'];
-        const selector = { 'key1': 'any' };
+        const selector = { 'key1': 'testString' };
         const lastEventId = 'testString';
         const attEncodingInfo = true;
         const attachments = true;
@@ -989,7 +989,7 @@ describe('CloudantV1', () => {
         _rev: 'testString',
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
-        foo: 'any',
+        foo: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -1503,7 +1503,7 @@ describe('CloudantV1', () => {
         _rev: 'testString',
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
-        foo: 'any',
+        foo: 'testString',
       };
 
       // BulkDocs
@@ -1681,9 +1681,9 @@ describe('CloudantV1', () => {
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
         atts_since: ['testString'],
-        id: 'testString',
+        id: 'foo',
         open_revs: ['testString'],
-        rev: 'testString',
+        rev: '4-753875d51501a6b1883a9d62b4d33f91',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -1775,9 +1775,9 @@ describe('CloudantV1', () => {
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
         atts_since: ['testString'],
-        id: 'testString',
+        id: 'foo',
         open_revs: ['testString'],
-        rev: 'testString',
+        rev: '4-753875d51501a6b1883a9d62b4d33f91',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -1869,9 +1869,9 @@ describe('CloudantV1', () => {
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
         atts_since: ['testString'],
-        id: 'testString',
+        id: 'foo',
         open_revs: ['testString'],
-        rev: 'testString',
+        rev: '4-753875d51501a6b1883a9d62b4d33f91',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -2529,7 +2529,7 @@ describe('CloudantV1', () => {
         _rev: 'testString',
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
-        foo: 'any',
+        foo: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -3356,15 +3356,15 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = true;
-        const endkey = 'any';
+        const endkey = 'testString';
         const endkeyDocid = 'testString';
         const group = true;
         const groupLevel = 1;
-        const key = 'any';
-        const keys = ['any'];
+        const key = 'testString';
+        const keys = ['testString'];
         const reduce = true;
         const stable = true;
-        const startkey = 'any';
+        const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
         const params = {
@@ -3494,15 +3494,15 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = true;
-        const endkey = 'any';
+        const endkey = 'testString';
         const endkeyDocid = 'testString';
         const group = true;
         const groupLevel = 1;
-        const key = 'any';
-        const keys = ['any'];
+        const key = 'testString';
+        const keys = ['testString'];
         const reduce = true;
         const stable = true;
-        const startkey = 'any';
+        const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
         const params = {
@@ -3632,15 +3632,15 @@ describe('CloudantV1', () => {
         limit: 0,
         skip: 0,
         update_seq: true,
-        endkey: 'any',
+        endkey: 'testString',
         endkey_docid: 'testString',
         group: true,
         group_level: 1,
-        key: 'any',
-        keys: ['any'],
+        key: 'testString',
+        keys: ['testString'],
         reduce: true,
         stable: true,
-        startkey: 'any',
+        startkey: 'testString',
         startkey_docid: 'testString',
         update: 'true',
       };
@@ -3739,15 +3739,15 @@ describe('CloudantV1', () => {
         limit: 0,
         skip: 0,
         update_seq: true,
-        endkey: 'any',
+        endkey: 'testString',
         endkey_docid: 'testString',
         group: true,
         group_level: 1,
-        key: 'any',
-        keys: ['any'],
+        key: 'testString',
+        keys: ['testString'],
         reduce: true,
         stable: true,
-        startkey: 'any',
+        startkey: 'testString',
         startkey_docid: 'testString',
         update: 'true',
       };
@@ -4266,7 +4266,7 @@ describe('CloudantV1', () => {
         const highlightSize = 1;
         const includeDocs = true;
         const includeFields = ['testString'];
-        const limit = 0;
+        const limit = 3;
         const sort = ['testString'];
         const stale = 'ok';
         const params = {
@@ -4386,15 +4386,15 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = true;
-        const endkey = 'any';
+        const endkey = 'testString';
         const endkeyDocid = 'testString';
         const group = true;
         const groupLevel = 1;
-        const key = 'any';
-        const keys = ['any'];
+        const key = 'testString';
+        const keys = ['testString'];
         const reduce = true;
         const stable = true;
-        const startkey = 'any';
+        const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
         const params = {
@@ -4529,15 +4529,15 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = true;
-        const endkey = 'any';
+        const endkey = 'testString';
         const endkeyDocid = 'testString';
         const group = true;
         const groupLevel = 1;
-        const key = 'any';
-        const keys = ['any'];
+        const key = 'testString';
+        const keys = ['testString'];
         const reduce = true;
         const stable = true;
-        const startkey = 'any';
+        const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
         const params = {
@@ -4662,7 +4662,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postPartitionFind
         const db = 'testString';
         const partitionKey = 'testString';
-        const selector = { 'key1': 'any' };
+        const selector = { 'key1': 'testString' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -4768,7 +4768,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postPartitionFindAsStream
         const db = 'testString';
         const partitionKey = 'testString';
-        const selector = { 'key1': 'any' };
+        const selector = { 'key1': 'testString' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5288,7 +5288,7 @@ describe('CloudantV1', () => {
         const def = indexDefinitionModel;
         const index = indexDefinitionModel;
         const name = 'testString';
-        const partialFilterSelector = { 'key1': 'any' };
+        const partialFilterSelector = { 'key1': 'testString' };
         const partitioned = true;
         const type = 'json';
         const params = {
@@ -5650,7 +5650,7 @@ describe('CloudantV1', () => {
         const highlightSize = 1;
         const includeDocs = true;
         const includeFields = ['testString'];
-        const limit = 0;
+        const limit = 3;
         const sort = ['testString'];
         const stale = 'ok';
         const counts = ['testString'];
@@ -6810,13 +6810,13 @@ describe('CloudantV1', () => {
       const replicationDatabaseModel = {
         auth: replicationDatabaseAuthModel,
         headers: { 'key1': 'testString' },
-        url: 'testString',
+        url: 'http://myserver.example:5984/foo-db',
       };
 
       // UserContext
       const userContextModel = {
         db: 'testString',
-        name: 'testString',
+        name: 'john',
         roles: ['_reader'],
       };
 
@@ -6831,28 +6831,28 @@ describe('CloudantV1', () => {
         _rev: 'testString',
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
-        cancel: true,
-        checkpoint_interval: 0,
-        connection_timeout: 0,
+        cancel: false,
+        checkpoint_interval: 4500,
+        connection_timeout: 15000,
         continuous: true,
         create_target: true,
         create_target_params: replicationCreateTargetParametersModel,
         doc_ids: ['testString'],
-        filter: 'testString',
-        http_connections: 1,
+        filter: 'ddoc/my_filter',
+        http_connections: 10,
         query_params: { 'key1': 'testString' },
-        retries_per_request: 0,
+        retries_per_request: 3,
         selector: { 'key1': { foo: 'bar' } },
-        since_seq: 'testString',
-        socket_options: 'testString',
+        since_seq: '34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU',
+        socket_options: '[{keepalive, true}, {nodelay, false}]',
         source: replicationDatabaseModel,
-        source_proxy: 'testString',
+        source_proxy: 'http://my-source-proxy.example:8888',
         target: replicationDatabaseModel,
-        target_proxy: 'testString',
-        use_checkpoints: true,
+        target_proxy: 'http://my-target-proxy.example:8888',
+        use_checkpoints: false,
         user_ctx: userContextModel,
-        worker_batch_size: 1,
-        worker_processes: 1,
+        worker_batch_size: 400,
+        worker_processes: 3,
         foo: { foo: 'bar' },
       };
 
@@ -8313,7 +8313,7 @@ describe('CloudantV1', () => {
         _rev: 'testString',
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
-        foo: 'any',
+        foo: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
