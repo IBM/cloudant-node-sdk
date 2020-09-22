@@ -15,7 +15,7 @@
  */
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 3.12.0-64fe8d3f-20200820-144050
+ * IBM OpenAPI SDK Code Generator Version: 3.12.2-b734cb71-20200916-142547
  */
  
 
