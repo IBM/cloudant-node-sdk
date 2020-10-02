@@ -298,15 +298,21 @@ class CloudantV1 extends CloudantBaseService {
    * multiple `GET /{db}` requests. It returns a list that contains an information object for each database specified in
    * the request.
    *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {string[]} [params.keys] - A list of database names.
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string[]} params.keys - A list of database names.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DbsInfoResult[]>>}
    */
-  public postDbsInfo(params?: CloudantV1.PostDbsInfoParams): Promise<CloudantV1.Response<CloudantV1.DbsInfoResult[]>> {
+  public postDbsInfo(params: CloudantV1.PostDbsInfoParams): Promise<CloudantV1.Response<CloudantV1.DbsInfoResult[]>> {
     const _params = Object.assign({}, params);
+    const requiredParams = ['keys'];
 
     return new Promise((resolve, reject) => {
+      const missingParams = getMissingParams(_params, requiredParams);
+      if (missingParams) {
+        return reject(missingParams);
+      }
+
       const body = {
         'keys': _params.keys
       };
@@ -830,7 +836,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {Document|NodeJS.ReadableStream|Buffer} [params.document] - HTTP request body for Document operations.
+   * @param {Document|NodeJS.ReadableStream|Buffer} params.document - HTTP request body for Document operations.
    * @param {string} [params.contentType] - The type of the input.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
    * with a HTTP 202 Accepted response code immediately.
@@ -839,7 +845,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postDocument(params: CloudantV1.PostDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'document'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -1054,7 +1060,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {AllDocsQuery[]} [params.queries] - An array of query objects with fields for the parameters of each
+   * @param {AllDocsQuery[]} params.queries - An array of query objects with fields for the parameters of each
    * individual view query to be executed. The field names and their meaning are the same as the query parameters of a
    * regular `/_all_docs` request.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -1062,7 +1068,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postAllDocsQueries(params: CloudantV1.PostAllDocsQueriesParams): Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'queries'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -1108,7 +1114,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {AllDocsQuery[]} [params.queries] - An array of query objects with fields for the parameters of each
+   * @param {AllDocsQuery[]} params.queries - An array of query objects with fields for the parameters of each
    * individual view query to be executed. The field names and their meaning are the same as the query parameters of a
    * regular `/_all_docs` request.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -1116,7 +1122,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postAllDocsQueriesAsStream(params: CloudantV1.PostAllDocsQueriesAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'queries'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -1163,13 +1169,13 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {BulkDocs|NodeJS.ReadableStream|Buffer} [params.bulkDocs] - HTTP request body for postBulkDocs.
+   * @param {BulkDocs|NodeJS.ReadableStream|Buffer} params.bulkDocs - HTTP request body for postBulkDocs.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult[]>>}
    */
   public postBulkDocs(params: CloudantV1.PostBulkDocsParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult[]>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'bulkDocs'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -1210,7 +1216,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {BulkGetQueryDocument[]} [params.docs] - List of document items to get in bulk.
+   * @param {BulkGetQueryDocument[]} params.docs - List of document items to get in bulk.
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -1224,7 +1230,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postBulkGet(params: CloudantV1.PostBulkGetParams): Promise<CloudantV1.Response<CloudantV1.BulkGetResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'docs'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -1276,7 +1282,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {BulkGetQueryDocument[]} [params.docs] - List of document items to get in bulk.
+   * @param {BulkGetQueryDocument[]} params.docs - List of document items to get in bulk.
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -1290,7 +1296,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postBulkGetAsMixed(params: CloudantV1.PostBulkGetAsMixedParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'docs'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -1343,7 +1349,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {BulkGetQueryDocument[]} [params.docs] - List of document items to get in bulk.
+   * @param {BulkGetQueryDocument[]} params.docs - List of document items to get in bulk.
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -1357,7 +1363,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postBulkGetAsRelated(params: CloudantV1.PostBulkGetAsRelatedParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'docs'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -1410,7 +1416,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {BulkGetQueryDocument[]} [params.docs] - List of document items to get in bulk.
+   * @param {BulkGetQueryDocument[]} params.docs - List of document items to get in bulk.
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -1424,7 +1430,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postBulkGetAsStream(params: CloudantV1.PostBulkGetAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'docs'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -1893,7 +1899,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {Document|NodeJS.ReadableStream|Buffer} [params.document] - HTTP request body for Document operations.
+   * @param {Document|NodeJS.ReadableStream|Buffer} params.document - HTTP request body for Document operations.
    * @param {string} [params.contentType] - The type of the input.
    * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
    * parameter.
@@ -1908,7 +1914,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public putDocument(params: CloudantV1.PutDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db', 'docId'];
+    const requiredParams = ['db', 'docId', 'document'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -2165,7 +2171,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
-   * @param {DesignDocument} [params.designDocument] - HTTP request body for DesignDocument operations.
+   * @param {DesignDocument} params.designDocument - HTTP request body for DesignDocument operations.
    * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
    * parameter.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
@@ -2179,7 +2185,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public putDesignDocument(params: CloudantV1.PutDesignDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db', 'ddoc'];
+    const requiredParams = ['db', 'ddoc', 'designDocument'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -2279,7 +2285,6 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {string} [params.accept] - The type of the response: application/json or application/octet-stream.
    * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
    * attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
@@ -2299,6 +2304,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.key] - Schema for a document ID.
    * @param {string[]} [params.keys] - Schema for a list of document IDs.
    * @param {string} [params.startkey] - Schema for a document ID.
+   * @param {string} [params.accept] - The type of the response: application/json or application/octet-stream.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsResult>>}
    */
@@ -2361,16 +2367,16 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {string} [params.accept] - The type of the response: application/json or application/octet-stream.
-   * @param {AllDocsQuery[]} [params.queries] - An array of query objects with fields for the parameters of each
+   * @param {AllDocsQuery[]} params.queries - An array of query objects with fields for the parameters of each
    * individual view query to be executed. The field names and their meaning are the same as the query parameters of a
    * regular `/_all_docs` request.
+   * @param {string} [params.accept] - The type of the response: application/json or application/octet-stream.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>>}
    */
   public postDesignDocsQueries(params: CloudantV1.PostDesignDocsQueriesParams): Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'queries'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -2636,7 +2642,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
    * @param {string} params.view - Path parameter to specify the map reduce view function name.
-   * @param {ViewQuery[]} [params.queries] - An array of query objects with fields for the parameters of each individual
+   * @param {ViewQuery[]} params.queries - An array of query objects with fields for the parameters of each individual
    * view query to be executed. The field names and their meaning are the same as the query parameters of a regular view
    * request.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -2644,7 +2650,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postViewQueries(params: CloudantV1.PostViewQueriesParams): Promise<CloudantV1.Response<CloudantV1.ViewQueriesResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db', 'ddoc', 'view'];
+    const requiredParams = ['db', 'ddoc', 'view', 'queries'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -2693,7 +2699,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
    * @param {string} params.view - Path parameter to specify the map reduce view function name.
-   * @param {ViewQuery[]} [params.queries] - An array of query objects with fields for the parameters of each individual
+   * @param {ViewQuery[]} params.queries - An array of query objects with fields for the parameters of each individual
    * view query to be executed. The field names and their meaning are the same as the query parameters of a regular view
    * request.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -2701,7 +2707,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postViewQueriesAsStream(params: CloudantV1.PostViewQueriesAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db', 'ddoc', 'view'];
+    const requiredParams = ['db', 'ddoc', 'view', 'queries'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -2974,7 +2980,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
    * @param {string} params.index - Path parameter to specify the index name.
-   * @param {string} [params.query] - The Lucene query to execute.
+   * @param {string} params.query - The Lucene query to execute.
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {string[]} [params.highlightFields] - Specifies which fields to highlight. If specified, the result object
    * contains a highlights field with an entry for each specified field.
@@ -3002,7 +3008,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postPartitionSearch(params: CloudantV1.PostPartitionSearchParams): Promise<CloudantV1.Response<CloudantV1.SearchResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db', 'partitionKey', 'ddoc', 'index'];
+    const requiredParams = ['db', 'partitionKey', 'ddoc', 'index', 'query'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -3066,7 +3072,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
    * @param {string} params.index - Path parameter to specify the index name.
-   * @param {string} [params.query] - The Lucene query to execute.
+   * @param {string} params.query - The Lucene query to execute.
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {string[]} [params.highlightFields] - Specifies which fields to highlight. If specified, the result object
    * contains a highlights field with an entry for each specified field.
@@ -3094,7 +3100,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postPartitionSearchAsStream(params: CloudantV1.PostPartitionSearchAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db', 'partitionKey', 'ddoc', 'index'];
+    const requiredParams = ['db', 'partitionKey', 'ddoc', 'index', 'query'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -3374,7 +3380,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.partitionKey - Path parameter to specify the database partition key.
-   * @param {JsonObject} [params.selector] - JSON object describing criteria used to select documents. The selector
+   * @param {JsonObject} params.selector - JSON object describing criteria used to select documents. The selector
    * specifies fields in the document, and provides an expression to evaluate with the field content or other data.
    *
    * The selector object must:
@@ -3420,7 +3426,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postPartitionFind(params: CloudantV1.PostPartitionFindParams): Promise<CloudantV1.Response<CloudantV1.FindResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db', 'partitionKey'];
+    const requiredParams = ['db', 'partitionKey', 'selector'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -3477,7 +3483,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.partitionKey - Path parameter to specify the database partition key.
-   * @param {JsonObject} [params.selector] - JSON object describing criteria used to select documents. The selector
+   * @param {JsonObject} params.selector - JSON object describing criteria used to select documents. The selector
    * specifies fields in the document, and provides an expression to evaluate with the field content or other data.
    *
    * The selector object must:
@@ -3523,7 +3529,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postPartitionFindAsStream(params: CloudantV1.PostPartitionFindAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db', 'partitionKey'];
+    const requiredParams = ['db', 'partitionKey', 'selector'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -3584,7 +3590,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {JsonObject} [params.selector] - JSON object describing criteria used to select documents. The selector
+   * @param {JsonObject} params.selector - JSON object describing criteria used to select documents. The selector
    * specifies fields in the document, and provides an expression to evaluate with the field content or other data.
    *
    * The selector object must:
@@ -3634,7 +3640,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postExplain(params: CloudantV1.PostExplainParams): Promise<CloudantV1.Response<CloudantV1.ExplainResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'selector'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -3690,7 +3696,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {JsonObject} [params.selector] - JSON object describing criteria used to select documents. The selector
+   * @param {JsonObject} params.selector - JSON object describing criteria used to select documents. The selector
    * specifies fields in the document, and provides an expression to evaluate with the field content or other data.
    *
    * The selector object must:
@@ -3740,7 +3746,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postFind(params: CloudantV1.PostFindParams): Promise<CloudantV1.Response<CloudantV1.FindResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'selector'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -3796,7 +3802,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {JsonObject} [params.selector] - JSON object describing criteria used to select documents. The selector
+   * @param {JsonObject} params.selector - JSON object describing criteria used to select documents. The selector
    * specifies fields in the document, and provides an expression to evaluate with the field content or other data.
    *
    * The selector object must:
@@ -3846,7 +3852,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postFindAsStream(params: CloudantV1.PostFindAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'selector'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -3947,12 +3953,12 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {string} [params.ddoc] - Name of the design document in which the index will be created.
-   * @param {IndexDefinition} [params.def] - Schema for a `json` or `text` query index definition. Indexes of type
+   * @param {IndexDefinition} params.index - Schema for a `json` or `text` query index definition. Indexes of type
    * `text` have additional configuration properties that do not apply to `json` indexes, these are:
    * * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
    * document fields and what analyzer to use for that purpose.
-   * @param {IndexDefinition} [params.index] - Schema for a `json` or `text` query index definition. Indexes of type
+   * @param {string} [params.ddoc] - Name of the design document in which the index will be created.
+   * @param {IndexDefinition} [params.def] - Schema for a `json` or `text` query index definition. Indexes of type
    * `text` have additional configuration properties that do not apply to `json` indexes, these are:
    * * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
    * document fields and what analyzer to use for that purpose.
@@ -3989,7 +3995,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postIndex(params: CloudantV1.PostIndexParams): Promise<CloudantV1.Response<CloudantV1.IndexResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'index'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -3998,9 +4004,9 @@ class CloudantV1 extends CloudantBaseService {
       }
 
       const body = {
+        'index': _params.index,
         'ddoc': _params.ddoc,
         'def': _params.def,
-        'index': _params.index,
         'name': _params.name,
         'partial_filter_selector': _params.partialFilterSelector,
         'partitioned': _params.partitioned,
@@ -4090,16 +4096,22 @@ class CloudantV1 extends CloudantBaseService {
    * Returns the results of analyzer tokenization of the provided sample text. This endpoint can be used for testing
    * analyzer tokenization.
    *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {string} [params.analyzer] - analyzer.
-   * @param {string} [params.text] - text.
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.analyzer - analyzer.
+   * @param {string} params.text - text.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.SearchAnalyzeResult>>}
    */
-  public postSearchAnalyze(params?: CloudantV1.PostSearchAnalyzeParams): Promise<CloudantV1.Response<CloudantV1.SearchAnalyzeResult>> {
+  public postSearchAnalyze(params: CloudantV1.PostSearchAnalyzeParams): Promise<CloudantV1.Response<CloudantV1.SearchAnalyzeResult>> {
     const _params = Object.assign({}, params);
+    const requiredParams = ['analyzer', 'text'];
 
     return new Promise((resolve, reject) => {
+      const missingParams = getMissingParams(_params, requiredParams);
+      if (missingParams) {
+        return reject(missingParams);
+      }
+
       const body = {
         'analyzer': _params.analyzer,
         'text': _params.text
@@ -4139,7 +4151,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
    * @param {string} params.index - Path parameter to specify the index name.
-   * @param {string} [params.query] - The Lucene query to execute.
+   * @param {string} params.query - The Lucene query to execute.
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {string[]} [params.highlightFields] - Specifies which fields to highlight. If specified, the result object
    * contains a highlights field with an entry for each specified field.
@@ -4187,7 +4199,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postSearch(params: CloudantV1.PostSearchParams): Promise<CloudantV1.Response<CloudantV1.SearchResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db', 'ddoc', 'index'];
+    const requiredParams = ['db', 'ddoc', 'index', 'query'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -4257,7 +4269,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
    * @param {string} params.index - Path parameter to specify the index name.
-   * @param {string} [params.query] - The Lucene query to execute.
+   * @param {string} params.query - The Lucene query to execute.
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {string[]} [params.highlightFields] - Specifies which fields to highlight. If specified, the result object
    * contains a highlights field with an entry for each specified field.
@@ -4305,7 +4317,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public postSearchAsStream(params: CloudantV1.PostSearchAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db', 'ddoc', 'index'];
+    const requiredParams = ['db', 'ddoc', 'index', 'query'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -4861,15 +4873,21 @@ class CloudantV1 extends CloudantBaseService {
    *
    * Requests, configures, or stops a replicate operation.
    *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {ReplicationDocument} [params.replicationDocument] - HTTP request body for replication operations.
+   * @param {Object} params - The parameters to send to the service.
+   * @param {ReplicationDocument} params.replicationDocument - HTTP request body for replication operations.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ReplicationResult>>}
    */
-  public postReplicate(params?: CloudantV1.PostReplicateParams): Promise<CloudantV1.Response<CloudantV1.ReplicationResult>> {
+  public postReplicate(params: CloudantV1.PostReplicateParams): Promise<CloudantV1.Response<CloudantV1.ReplicationResult>> {
     const _params = Object.assign({}, params);
+    const requiredParams = ['replicationDocument'];
 
     return new Promise((resolve, reject) => {
+      const missingParams = getMissingParams(_params, requiredParams);
+      if (missingParams) {
+        return reject(missingParams);
+      }
+
       const body = _params.replicationDocument;
       const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postReplicate');
 
@@ -5040,7 +5058,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {ReplicationDocument} [params.replicationDocument] - HTTP request body for replication operations.
+   * @param {ReplicationDocument} params.replicationDocument - HTTP request body for replication operations.
    * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
    * parameter.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
@@ -5054,7 +5072,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public putReplicationDocument(params: CloudantV1.PutReplicationDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['docId'];
+    const requiredParams = ['docId', 'replicationDocument'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -5308,107 +5326,6 @@ class CloudantV1 extends CloudantBaseService {
     });
   };
 
-  /**
-   * Delete an IAM cookie session.
-   *
-   * Returns a response that instructs the HTTP client to clear the cookie. The session cookies are stateless and cannot
-   * be invalidated; hence, this operation is optional and does not invalidate the cookie on the server.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
-   */
-  public deleteIamSession(params?: CloudantV1.DeleteIamSessionParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = Object.assign({}, params);
-
-    return new Promise((resolve, reject) => {
-      const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteIamSession');
-
-      const parameters = {
-        options: {
-          url: '/_iam_session',
-          method: 'DELETE',
-        },
-        defaultOptions: extend(true, {}, this.baseOptions, {
-          headers: extend(true, sdkHeaders, {
-            'Accept': 'application/json',
-          }, _params.headers),
-        }),
-      };
-
-      return resolve(this.createRequest(parameters));
-    });
-  };
-
-  /**
-   * Retrieve current IAM cookie session information.
-   *
-   * Retrieves information about an IAM cookie session.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.IamSessionInformation>>}
-   */
-  public getIamSessionInformation(params?: CloudantV1.GetIamSessionInformationParams): Promise<CloudantV1.Response<CloudantV1.IamSessionInformation>> {
-    const _params = Object.assign({}, params);
-
-    return new Promise((resolve, reject) => {
-      const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getIamSessionInformation');
-
-      const parameters = {
-        options: {
-          url: '/_iam_session',
-          method: 'GET',
-        },
-        defaultOptions: extend(true, {}, this.baseOptions, {
-          headers: extend(true, sdkHeaders, {
-            'Accept': 'application/json',
-          }, _params.headers),
-        }),
-      };
-
-      return resolve(this.createRequest(parameters));
-    });
-  };
-
-  /**
-   * Create a session cookie by using an IAM token.
-   *
-   * Log in by exchanging an IAM token for an IBM Cloudant cookie.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {string} [params.accessToken] - Token obtained from the IAM service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
-   */
-  public postIamSession(params?: CloudantV1.PostIamSessionParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = Object.assign({}, params);
-
-    return new Promise((resolve, reject) => {
-      const body = {
-        'access_token': _params.accessToken
-      };
-
-      const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postIamSession');
-
-      const parameters = {
-        options: {
-          url: '/_iam_session',
-          method: 'POST',
-          body,
-        },
-        defaultOptions: extend(true, {}, this.baseOptions, {
-          headers: extend(true, sdkHeaders, {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          }, _params.headers),
-        }),
-      };
-
-      return resolve(this.createRequest(parameters));
-    });
-  };
-
   /*************************
    * authorization
    ************************/
@@ -5557,7 +5474,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {JsonObject} [params.cloudant] - Database permissions for Cloudant users and/or API keys.
+   * @param {JsonObject} params.cloudant - Database permissions for Cloudant users and/or API keys.
    * @param {SecurityObject} [params.admins] - Schema for names and roles to map to a database permission.
    * @param {SecurityObject} [params.members] - Schema for names and roles to map to a database permission.
    * @param {boolean} [params.couchdbAuthOnly] - Manage permissions using the `_users` database only.
@@ -5566,7 +5483,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public putCloudantSecurityConfiguration(params: CloudantV1.PutCloudantSecurityConfigurationParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'cloudant'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -5648,9 +5565,9 @@ class CloudantV1 extends CloudantBaseService {
    * Sets the CORS configuration. The configuration applies to all databases and all account level endpoints in your
    * account.
    *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {string[]} [params.origins] - An array of strings that contain allowed origin domains. You have to specify
-   * the full URL including the protocol. It is recommended that only the HTTPS protocol is used. Subdomains count as
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string[]} params.origins - An array of strings that contain allowed origin domains. You have to specify the
+   * full URL including the protocol. It is recommended that only the HTTPS protocol is used. Subdomains count as
    * separate domains, so you have to specify all subdomains used.
    * @param {boolean} [params.allowCredentials] - Boolean value to allow authentication credentials. If set to true,
    * browser requests must be done by using withCredentials = true.
@@ -5658,10 +5575,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
-  public putCorsConfiguration(params?: CloudantV1.PutCorsConfigurationParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+  public putCorsConfiguration(params: CloudantV1.PutCorsConfigurationParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = Object.assign({}, params);
+    const requiredParams = ['origins'];
 
     return new Promise((resolve, reject) => {
+      const missingParams = getMissingParams(_params, requiredParams);
+      if (missingParams) {
+        return reject(missingParams);
+      }
+
       const body = {
         'origins': _params.origins,
         'allow_credentials': _params.allowCredentials,
@@ -6078,7 +6001,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {Document|NodeJS.ReadableStream|Buffer} [params.document] - HTTP request body for Document operations.
+   * @param {Document|NodeJS.ReadableStream|Buffer} params.document - HTTP request body for Document operations.
    * @param {string} [params.contentType] - The type of the input.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
    * with a HTTP 202 Accepted response code immediately.
@@ -6087,7 +6010,7 @@ class CloudantV1 extends CloudantBaseService {
    */
   public putLocalDocument(params: CloudantV1.PutLocalDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db', 'docId'];
+    const requiredParams = ['db', 'docId', 'document'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -6137,7 +6060,6 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {string} [params.accept] - The type of the response: application/json or application/octet-stream.
    * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
    * attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
@@ -6157,6 +6079,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.key] - Schema for a document ID.
    * @param {string[]} [params.keys] - Schema for a list of document IDs.
    * @param {string} [params.startkey] - Schema for a document ID.
+   * @param {string} [params.accept] - The type of the response: application/json or application/octet-stream.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsResult>>}
    */
@@ -6219,16 +6142,16 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {string} [params.accept] - The type of the response: application/json or application/octet-stream.
-   * @param {AllDocsQuery[]} [params.queries] - An array of query objects with fields for the parameters of each
+   * @param {AllDocsQuery[]} params.queries - An array of query objects with fields for the parameters of each
    * individual view query to be executed. The field names and their meaning are the same as the query parameters of a
    * regular `/_all_docs` request.
+   * @param {string} [params.accept] - The type of the response: application/json or application/octet-stream.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>>}
    */
   public postLocalDocsQueries(params: CloudantV1.PostLocalDocsQueriesParams): Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'queries'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -6270,65 +6193,19 @@ class CloudantV1 extends CloudantBaseService {
    ************************/
 
   /**
-   * Commit any recent changes to the specified database to disk.
-   *
-   * Commits any recent changes to the specified database to disk. You must make a request to this endpoint if you want
-   * to ensure that recent changes have been flushed. This function is likely not required, assuming you have the
-   * recommended configuration setting, `delayed_commits=false`. This setting requires that changes are written to disk
-   * before a 200 or similar result is returned.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.db - Path parameter to specify the database name.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.EnsureFullCommitInformation>>}
-   */
-  public postEnsureFullCommit(params: CloudantV1.PostEnsureFullCommitParams): Promise<CloudantV1.Response<CloudantV1.EnsureFullCommitInformation>> {
-    const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
-
-    return new Promise((resolve, reject) => {
-      const missingParams = getMissingParams(_params, requiredParams);
-      if (missingParams) {
-        return reject(missingParams);
-      }
-
-      const path = {
-        'db': _params.db
-      };
-
-      const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postEnsureFullCommit');
-
-      const parameters = {
-        options: {
-          url: '/{db}/_ensure_full_commit',
-          method: 'POST',
-          path,
-        },
-        defaultOptions: extend(true, {}, this.baseOptions, {
-          headers: extend(true, sdkHeaders, {
-            'Accept': 'application/json',
-          }, _params.headers),
-        }),
-      };
-
-      return resolve(this.createRequest(parameters));
-    });
-  };
-
-  /**
    * Query which document revisions are missing from the database.
    *
    * Given a list of document revisions, returns the document revisions that do not exist in the database.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {JsonObject} [params.documentRevisions] - HTTP request body for postMissingRevs and postRevsDiff.
+   * @param {JsonObject} params.documentRevisions - HTTP request body for postMissingRevs and postRevsDiff.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.MissingRevsResult>>}
    */
   public postMissingRevs(params: CloudantV1.PostMissingRevsParams): Promise<CloudantV1.Response<CloudantV1.MissingRevsResult>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'documentRevisions'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -6371,13 +6248,13 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {JsonObject} [params.documentRevisions] - HTTP request body for postMissingRevs and postRevsDiff.
+   * @param {JsonObject} params.documentRevisions - HTTP request body for postMissingRevs and postRevsDiff.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.JsonObject>>}
    */
   public postRevsDiff(params: CloudantV1.PostRevsDiffParams): Promise<CloudantV1.Response<CloudantV1.JsonObject>> {
     const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
+    const requiredParams = ['db', 'documentRevisions'];
 
     return new Promise((resolve, reject) => {
       const missingParams = getMissingParams(_params, requiredParams);
@@ -6646,7 +6523,7 @@ namespace CloudantV1 {
   /** Parameters for the `postDbsInfo` operation. */
   export interface PostDbsInfoParams {
     /** A list of database names. */
-    keys?: string[];
+    keys: string[];
     headers?: OutgoingHttpHeaders;
   }
 
@@ -6929,7 +6806,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the database name. */
     db: string;
     /** HTTP request body for Document operations. */
-    document?: Document|NodeJS.ReadableStream|Buffer;
+    document: Document|NodeJS.ReadableStream|Buffer;
     /** The type of the input. */
     contentType?: PostDocumentConstants.ContentType | string;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
@@ -7039,7 +6916,7 @@ namespace CloudantV1 {
     /** An array of query objects with fields for the parameters of each individual view query to be executed. The
      *  field names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
      */
-    queries?: AllDocsQuery[];
+    queries: AllDocsQuery[];
     headers?: OutgoingHttpHeaders;
   }
 
@@ -7050,7 +6927,7 @@ namespace CloudantV1 {
     /** An array of query objects with fields for the parameters of each individual view query to be executed. The
      *  field names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
      */
-    queries?: AllDocsQuery[];
+    queries: AllDocsQuery[];
     headers?: OutgoingHttpHeaders;
   }
 
@@ -7059,7 +6936,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the database name. */
     db: string;
     /** HTTP request body for postBulkDocs. */
-    bulkDocs?: BulkDocs|NodeJS.ReadableStream|Buffer;
+    bulkDocs: BulkDocs|NodeJS.ReadableStream|Buffer;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -7068,7 +6945,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the database name. */
     db: string;
     /** List of document items to get in bulk. */
-    docs?: BulkGetQueryDocument[];
+    docs: BulkGetQueryDocument[];
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
     /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
@@ -7089,7 +6966,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the database name. */
     db: string;
     /** List of document items to get in bulk. */
-    docs?: BulkGetQueryDocument[];
+    docs: BulkGetQueryDocument[];
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
     /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
@@ -7110,7 +6987,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the database name. */
     db: string;
     /** List of document items to get in bulk. */
-    docs?: BulkGetQueryDocument[];
+    docs: BulkGetQueryDocument[];
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
     /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
@@ -7131,7 +7008,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the database name. */
     db: string;
     /** List of document items to get in bulk. */
-    docs?: BulkGetQueryDocument[];
+    docs: BulkGetQueryDocument[];
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
     /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
@@ -7375,7 +7252,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the document ID. */
     docId: string;
     /** HTTP request body for Document operations. */
-    document?: Document|NodeJS.ReadableStream|Buffer;
+    document: Document|NodeJS.ReadableStream|Buffer;
     /** The type of the input. */
     contentType?: PutDocumentConstants.ContentType | string;
     /** Header parameter to specify the document revision. Alternative to rev query parameter. */
@@ -7509,7 +7386,7 @@ namespace CloudantV1 {
      */
     ddoc: string;
     /** HTTP request body for DesignDocument operations. */
-    designDocument?: DesignDocument;
+    designDocument: DesignDocument;
     /** Header parameter to specify the document revision. Alternative to rev query parameter. */
     ifMatch?: string;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
@@ -7549,8 +7426,6 @@ namespace CloudantV1 {
   export interface PostDesignDocsParams {
     /** Path parameter to specify the database name. */
     db: string;
-    /** The type of the response: application/json or application/octet-stream. */
-    accept?: PostDesignDocsConstants.Accept | string;
     /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
      *  attachment is compressed.
      */
@@ -7583,6 +7458,8 @@ namespace CloudantV1 {
     keys?: string[];
     /** Schema for a document ID. */
     startkey?: string;
+    /** The type of the response: application/json or application/octet-stream. */
+    accept?: PostDesignDocsConstants.Accept | string;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -7599,12 +7476,12 @@ namespace CloudantV1 {
   export interface PostDesignDocsQueriesParams {
     /** Path parameter to specify the database name. */
     db: string;
-    /** The type of the response: application/json or application/octet-stream. */
-    accept?: PostDesignDocsQueriesConstants.Accept | string;
     /** An array of query objects with fields for the parameters of each individual view query to be executed. The
      *  field names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
      */
-    queries?: AllDocsQuery[];
+    queries: AllDocsQuery[];
+    /** The type of the response: application/json or application/octet-stream. */
+    accept?: PostDesignDocsQueriesConstants.Accept | string;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -7780,7 +7657,7 @@ namespace CloudantV1 {
     /** An array of query objects with fields for the parameters of each individual view query to be executed. The
      *  field names and their meaning are the same as the query parameters of a regular view request.
      */
-    queries?: ViewQuery[];
+    queries: ViewQuery[];
     headers?: OutgoingHttpHeaders;
   }
 
@@ -7797,7 +7674,7 @@ namespace CloudantV1 {
     /** An array of query objects with fields for the parameters of each individual view query to be executed. The
      *  field names and their meaning are the same as the query parameters of a regular view request.
      */
-    queries?: ViewQuery[];
+    queries: ViewQuery[];
     headers?: OutgoingHttpHeaders;
   }
 
@@ -7905,7 +7782,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the index name. */
     index: string;
     /** The Lucene query to execute. */
-    query?: string;
+    query: string;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** Specifies which fields to highlight. If specified, the result object contains a highlights field with an
@@ -7965,7 +7842,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the index name. */
     index: string;
     /** The Lucene query to execute. */
-    query?: string;
+    query: string;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** Specifies which fields to highlight. If specified, the result object contains a highlights field with an
@@ -8196,7 +8073,7 @@ namespace CloudantV1 {
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
      */
-    selector?: JsonObject;
+    selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** A boolean value that indicates whether or not to include information about existing conflicts in the
@@ -8274,7 +8151,7 @@ namespace CloudantV1 {
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
      */
-    selector?: JsonObject;
+    selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** A boolean value that indicates whether or not to include information about existing conflicts in the
@@ -8350,7 +8227,7 @@ namespace CloudantV1 {
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
      */
-    selector?: JsonObject;
+    selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** A boolean value that indicates whether or not to include information about existing conflicts in the
@@ -8432,7 +8309,7 @@ namespace CloudantV1 {
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
      */
-    selector?: JsonObject;
+    selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** A boolean value that indicates whether or not to include information about existing conflicts in the
@@ -8514,7 +8391,7 @@ namespace CloudantV1 {
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
      */
-    selector?: JsonObject;
+    selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** A boolean value that indicates whether or not to include information about existing conflicts in the
@@ -8579,6 +8456,12 @@ namespace CloudantV1 {
   export interface PostIndexParams {
     /** Path parameter to specify the database name. */
     db: string;
+    /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
+     *  properties that do not apply to `json` indexes, these are:
+     *  * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
+     *  document fields and what analyzer to use for that purpose.
+     */
+    index: IndexDefinition;
     /** Name of the design document in which the index will be created. */
     ddoc?: string;
     /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
@@ -8587,12 +8470,6 @@ namespace CloudantV1 {
      *  document fields and what analyzer to use for that purpose.
      */
     def?: IndexDefinition;
-    /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
-     *  properties that do not apply to `json` indexes, these are:
-     *  * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
-     *  document fields and what analyzer to use for that purpose.
-     */
-    index?: IndexDefinition;
     /** name. */
     name?: string;
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
@@ -8667,9 +8544,9 @@ namespace CloudantV1 {
   /** Parameters for the `postSearchAnalyze` operation. */
   export interface PostSearchAnalyzeParams {
     /** analyzer. */
-    analyzer?: PostSearchAnalyzeConstants.Analyzer | string;
+    analyzer: PostSearchAnalyzeConstants.Analyzer | string;
     /** text. */
-    text?: string;
+    text: string;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -8731,7 +8608,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the index name. */
     index: string;
     /** The Lucene query to execute. */
-    query?: string;
+    query: string;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** Specifies which fields to highlight. If specified, the result object contains a highlights field with an
@@ -8820,7 +8697,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the index name. */
     index: string;
     /** The Lucene query to execute. */
-    query?: string;
+    query: string;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** Specifies which fields to highlight. If specified, the result object contains a highlights field with an
@@ -9165,7 +9042,7 @@ namespace CloudantV1 {
   /** Parameters for the `postReplicate` operation. */
   export interface PostReplicateParams {
     /** HTTP request body for replication operations. */
-    replicationDocument?: ReplicationDocument;
+    replicationDocument: ReplicationDocument;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -9244,7 +9121,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the document ID. */
     docId: string;
     /** HTTP request body for replication operations. */
-    replicationDocument?: ReplicationDocument;
+    replicationDocument: ReplicationDocument;
     /** Header parameter to specify the document revision. Alternative to rev query parameter. */
     ifMatch?: string;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
@@ -9324,23 +9201,6 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `deleteIamSession` operation. */
-  export interface DeleteIamSessionParams {
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `getIamSessionInformation` operation. */
-  export interface GetIamSessionInformationParams {
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `postIamSession` operation. */
-  export interface PostIamSessionParams {
-    /** Token obtained from the IAM service. */
-    accessToken?: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
   /** Parameters for the `getSecurity` operation. */
   export interface GetSecurityParams {
     /** Path parameter to specify the database name. */
@@ -9388,7 +9248,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the database name. */
     db: string;
     /** Database permissions for Cloudant users and/or API keys. */
-    cloudant?: JsonObject;
+    cloudant: JsonObject;
     /** Schema for names and roles to map to a database permission. */
     admins?: SecurityObject;
     /** Schema for names and roles to map to a database permission. */
@@ -9424,7 +9284,7 @@ namespace CloudantV1 {
      *  protocol. It is recommended that only the HTTPS protocol is used. Subdomains count as separate domains, so you
      *  have to specify all subdomains used.
      */
-    origins?: string[];
+    origins: string[];
     /** Boolean value to allow authentication credentials. If set to true, browser requests must be done by using
      *  withCredentials = true.
      */
@@ -9584,7 +9444,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the document ID. */
     docId: string;
     /** HTTP request body for Document operations. */
-    document?: Document|NodeJS.ReadableStream|Buffer;
+    document: Document|NodeJS.ReadableStream|Buffer;
     /** The type of the input. */
     contentType?: PutLocalDocumentConstants.ContentType | string;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
@@ -9613,8 +9473,6 @@ namespace CloudantV1 {
   export interface PostLocalDocsParams {
     /** Path parameter to specify the database name. */
     db: string;
-    /** The type of the response: application/json or application/octet-stream. */
-    accept?: PostLocalDocsConstants.Accept | string;
     /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
      *  attachment is compressed.
      */
@@ -9647,6 +9505,8 @@ namespace CloudantV1 {
     keys?: string[];
     /** Schema for a document ID. */
     startkey?: string;
+    /** The type of the response: application/json or application/octet-stream. */
+    accept?: PostLocalDocsConstants.Accept | string;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -9663,12 +9523,12 @@ namespace CloudantV1 {
   export interface PostLocalDocsQueriesParams {
     /** Path parameter to specify the database name. */
     db: string;
-    /** The type of the response: application/json or application/octet-stream. */
-    accept?: PostLocalDocsQueriesConstants.Accept | string;
     /** An array of query objects with fields for the parameters of each individual view query to be executed. The
      *  field names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
      */
-    queries?: AllDocsQuery[];
+    queries: AllDocsQuery[];
+    /** The type of the response: application/json or application/octet-stream. */
+    accept?: PostLocalDocsQueriesConstants.Accept | string;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -9681,19 +9541,12 @@ namespace CloudantV1 {
     }
   }
 
-  /** Parameters for the `postEnsureFullCommit` operation. */
-  export interface PostEnsureFullCommitParams {
-    /** Path parameter to specify the database name. */
-    db: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
   /** Parameters for the `postMissingRevs` operation. */
   export interface PostMissingRevsParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** HTTP request body for postMissingRevs and postRevsDiff. */
-    documentRevisions?: JsonObject;
+    documentRevisions: JsonObject;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -9702,7 +9555,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the database name. */
     db: string;
     /** HTTP request body for postMissingRevs and postRevsDiff. */
-    documentRevisions?: JsonObject;
+    documentRevisions: JsonObject;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -9886,7 +9739,7 @@ namespace CloudantV1 {
   /** Schema for submitting documents for bulk modifications. */
   export interface BulkDocs {
     /** Array of documents. */
-    docs?: Document[];
+    docs: Document[];
     /** If `false`, prevents the database from assigning them new revision IDs. Default is `true`. */
     new_edits?: boolean;
   }
@@ -10224,14 +10077,6 @@ namespace CloudantV1 {
     range?: string;
   }
 
-  /** Schema for the status of a commit operation. */
-  export interface EnsureFullCommitInformation {
-    /** Timestamp of when the database was opened, expressed in microseconds since the epoch. */
-    instance_start_time?: string;
-    /** Operation status. */
-    ok?: boolean;
-  }
-
   /** Schema for find query execution statistics. */
   export interface ExecutionStats {
     /** Time to execute the query. */
@@ -10378,18 +10223,6 @@ namespace CloudantV1 {
     id?: string;
     /** Schema for a document revision identifier. */
     rev?: string;
-  }
-
-  /** Schema for information about an IAM session. */
-  export interface IamSessionInformation {
-    /** User ID. */
-    id?: string;
-    /** Session is ok. */
-    ok?: boolean;
-    /** Scope of the session. */
-    scope?: string;
-    /** Type of the session. */
-    type?: string;
   }
 
   /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration properties that do not apply to `json` indexes, these are: * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all document fields and what analyzer to use for that purpose. */
@@ -10554,7 +10387,7 @@ namespace CloudantV1 {
   /** Schema for an IAM API key for replication database authentication. */
   export interface ReplicationDatabaseAuthIam {
     /** IAM API key. */
-    api_key?: string;
+    api_key: string;
   }
 
   /** Schema for a replication document. Note that `selector`, `doc_ids`, and `filter` are incompatible with each other. */
@@ -10636,13 +10469,13 @@ namespace CloudantV1 {
     /** Replication socket options. */
     socket_options?: string;
     /** Schema for a replication source or target database. */
-    source?: ReplicationDatabase;
+    source: ReplicationDatabase;
     /** Address of a (http or socks5 protocol) proxy server through which replication with the source database
      *  should occur.
      */
     source_proxy?: string;
     /** Schema for a replication source or target database. */
-    target?: ReplicationDatabase;
+    target: ReplicationDatabase;
     /** Address of a (http or socks5 protocol) proxy server through which replication with the target database
      *  should occur.
      */
