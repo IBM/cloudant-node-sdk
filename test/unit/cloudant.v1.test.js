@@ -392,9 +392,11 @@ describe('CloudantV1', () => {
 
       test('should prioritize user-given headers', () => {
         // parameters
+        const keys = ['testString'];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
+          keys,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -404,11 +406,29 @@ describe('CloudantV1', () => {
         cloudantService.postDbsInfo(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
+    });
 
-      test('should not have any problems when no parameters are passed in', () => {
-        // invoke the method with no parameters
-        cloudantService.postDbsInfo({});
-        checkForSuccessfulExecution(createRequestMock);
+    describe('negative tests', () => {
+      test('should enforce required parameters', async done => {
+        let err;
+        try {
+          await cloudantService.postDbsInfo({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', done => {
+        const postDbsInfoPromise = cloudantService.postDbsInfo();
+        expectToBePromise(postDbsInfoPromise);
+
+        postDbsInfoPromise.catch(err => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
       });
     });
   });
@@ -1028,10 +1048,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const document = documentModel;
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          document,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -1333,10 +1355,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const queries = [allDocsQueryModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          queries,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -1424,10 +1448,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const queries = [allDocsQueryModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          queries,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -1542,10 +1568,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const bulkDocs = bulkDocsModel;
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          bulkDocs,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -1635,10 +1663,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const docs = [bulkGetQueryDocumentModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          docs,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -1729,10 +1759,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const docs = [bulkGetQueryDocumentModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          docs,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -1823,10 +1855,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const docs = [bulkGetQueryDocumentModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          docs,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -1917,10 +1951,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const docs = [bulkGetQueryDocumentModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          docs,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -2581,11 +2617,13 @@ describe('CloudantV1', () => {
         // parameters
         const db = 'testString';
         const docId = 'testString';
+        const document = documentModel;
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
           docId,
+          document,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -3024,11 +3062,13 @@ describe('CloudantV1', () => {
         // parameters
         const db = 'testString';
         const ddoc = 'testString';
+        const designDocument = designDocumentModel;
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
           ddoc,
+          designDocument,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -3142,7 +3182,6 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postDesignDocs
         const db = 'testString';
-        const accept = 'application/json';
         const attEncodingInfo = true;
         const attachments = true;
         const conflicts = true;
@@ -3156,9 +3195,9 @@ describe('CloudantV1', () => {
         const key = 'testString';
         const keys = ['testString'];
         const startkey = 'testString';
+        const accept = 'application/json';
         const params = {
           db: db,
-          accept: accept,
           attEncodingInfo: attEncodingInfo,
           attachments: attachments,
           conflicts: conflicts,
@@ -3172,6 +3211,7 @@ describe('CloudantV1', () => {
           key: key,
           keys: keys,
           startkey: startkey,
+          accept: accept,
         };
 
         const postDesignDocsResult = cloudantService.postDesignDocs(params);
@@ -3271,12 +3311,12 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postDesignDocsQueries
         const db = 'testString';
-        const accept = 'application/json';
         const queries = [allDocsQueryModel];
+        const accept = 'application/json';
         const params = {
           db: db,
-          accept: accept,
           queries: queries,
+          accept: accept,
         };
 
         const postDesignDocsQueriesResult = cloudantService.postDesignDocsQueries(params);
@@ -3301,10 +3341,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const queries = [allDocsQueryModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          queries,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -3683,12 +3725,14 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const view = 'testString';
+        const queries = [viewQueryModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
           ddoc,
           view,
+          queries,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -3791,12 +3835,14 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const view = 'testString';
+        const queries = [viewQueryModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
           ddoc,
           view,
+          queries,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -4207,6 +4253,7 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
+        const query = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -4214,6 +4261,7 @@ describe('CloudantV1', () => {
           partitionKey,
           ddoc,
           index,
+          query,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -4327,6 +4375,7 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
+        const query = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -4334,6 +4383,7 @@ describe('CloudantV1', () => {
           partitionKey,
           ddoc,
           index,
+          query,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -4722,11 +4772,13 @@ describe('CloudantV1', () => {
         // parameters
         const db = 'testString';
         const partitionKey = 'testString';
+        const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
           partitionKey,
+          selector,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -4829,11 +4881,13 @@ describe('CloudantV1', () => {
         // parameters
         const db = 'testString';
         const partitionKey = 'testString';
+        const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
           partitionKey,
+          selector,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -4934,10 +4988,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const selector = { 'key1': { foo: 'bar' } };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          selector,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -5038,10 +5094,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const selector = { 'key1': { foo: 'bar' } };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          selector,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -5143,10 +5201,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const selector = { 'key1': { foo: 'bar' } };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          selector,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -5284,18 +5344,18 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postIndex
         const db = 'testString';
+        const index = indexDefinitionModel;
         const ddoc = 'testString';
         const def = indexDefinitionModel;
-        const index = indexDefinitionModel;
         const name = 'testString';
         const partialFilterSelector = { 'key1': 'testString' };
         const partitioned = true;
         const type = 'json';
         const params = {
           db: db,
+          index: index,
           ddoc: ddoc,
           def: def,
-          index: index,
           name: name,
           partialFilterSelector: partialFilterSelector,
           partitioned: partitioned,
@@ -5316,9 +5376,9 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(options.body['index']).toEqual(index);
         expect(options.body['ddoc']).toEqual(ddoc);
         expect(options.body['def']).toEqual(def);
-        expect(options.body['index']).toEqual(index);
         expect(options.body['name']).toEqual(name);
         expect(options.body['partial_filter_selector']).toEqual(partialFilterSelector);
         expect(options.body['partitioned']).toEqual(partitioned);
@@ -5329,10 +5389,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const index = indexDefinitionModel;
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          index,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -5482,9 +5544,13 @@ describe('CloudantV1', () => {
 
       test('should prioritize user-given headers', () => {
         // parameters
+        const analyzer = 'arabic';
+        const text = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
+          analyzer,
+          text,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -5494,11 +5560,29 @@ describe('CloudantV1', () => {
         cloudantService.postSearchAnalyze(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
+    });
 
-      test('should not have any problems when no parameters are passed in', () => {
-        // invoke the method with no parameters
-        cloudantService.postSearchAnalyze({});
-        checkForSuccessfulExecution(createRequestMock);
+    describe('negative tests', () => {
+      test('should enforce required parameters', async done => {
+        let err;
+        try {
+          await cloudantService.postSearchAnalyze({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', done => {
+        const postSearchAnalyzePromise = cloudantService.postSearchAnalyze();
+        expectToBePromise(postSearchAnalyzePromise);
+
+        postSearchAnalyzePromise.catch(err => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
       });
     });
   });
@@ -5593,12 +5677,14 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
+        const query = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
           ddoc,
           index,
+          query,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -5726,12 +5812,14 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
+        const query = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
           ddoc,
           index,
+          query,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -6556,9 +6644,11 @@ describe('CloudantV1', () => {
 
       test('should prioritize user-given headers', () => {
         // parameters
+        const replicationDocument = replicationDocumentModel;
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
+          replicationDocument,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -6568,11 +6658,29 @@ describe('CloudantV1', () => {
         cloudantService.postReplicate(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
+    });
 
-      test('should not have any problems when no parameters are passed in', () => {
-        // invoke the method with no parameters
-        cloudantService.postReplicate({});
-        checkForSuccessfulExecution(createRequestMock);
+    describe('negative tests', () => {
+      test('should enforce required parameters', async done => {
+        let err;
+        try {
+          await cloudantService.postReplicate({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', done => {
+        const postReplicatePromise = cloudantService.postReplicate();
+        expectToBePromise(postReplicatePromise);
+
+        postReplicatePromise.catch(err => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
       });
     });
   });
@@ -6898,10 +7006,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const docId = 'testString';
+        const replicationDocument = replicationDocumentModel;
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           docId,
+          replicationDocument,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -7222,142 +7332,6 @@ describe('CloudantV1', () => {
       });
     });
   });
-  describe('deleteIamSession', () => {
-    describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation deleteIamSession
-        const params = {};
-
-        const deleteIamSessionResult = cloudantService.deleteIamSession(params);
-
-        // all methods should return a Promise
-        expectToBePromise(deleteIamSessionResult);
-
-        // assert that create request was called
-        expect(createRequestMock).toHaveBeenCalledTimes(1);
-
-        const options = getOptions(createRequestMock);
-
-        checkUrlAndMethod(options, '/_iam_session', 'DELETE');
-        const expectedAccept = 'application/json';
-        const expectedContentType = undefined;
-        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-      });
-
-      test('should prioritize user-given headers', () => {
-        // parameters
-        const userAccept = 'fake/accept';
-        const userContentType = 'fake/contentType';
-        const params = {
-          headers: {
-            Accept: userAccept,
-            'Content-Type': userContentType,
-          },
-        };
-
-        cloudantService.deleteIamSession(params);
-        checkMediaHeaders(createRequestMock, userAccept, userContentType);
-      });
-
-      test('should not have any problems when no parameters are passed in', () => {
-        // invoke the method with no parameters
-        cloudantService.deleteIamSession({});
-        checkForSuccessfulExecution(createRequestMock);
-      });
-    });
-  });
-  describe('getIamSessionInformation', () => {
-    describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation getIamSessionInformation
-        const params = {};
-
-        const getIamSessionInformationResult = cloudantService.getIamSessionInformation(params);
-
-        // all methods should return a Promise
-        expectToBePromise(getIamSessionInformationResult);
-
-        // assert that create request was called
-        expect(createRequestMock).toHaveBeenCalledTimes(1);
-
-        const options = getOptions(createRequestMock);
-
-        checkUrlAndMethod(options, '/_iam_session', 'GET');
-        const expectedAccept = 'application/json';
-        const expectedContentType = undefined;
-        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-      });
-
-      test('should prioritize user-given headers', () => {
-        // parameters
-        const userAccept = 'fake/accept';
-        const userContentType = 'fake/contentType';
-        const params = {
-          headers: {
-            Accept: userAccept,
-            'Content-Type': userContentType,
-          },
-        };
-
-        cloudantService.getIamSessionInformation(params);
-        checkMediaHeaders(createRequestMock, userAccept, userContentType);
-      });
-
-      test('should not have any problems when no parameters are passed in', () => {
-        // invoke the method with no parameters
-        cloudantService.getIamSessionInformation({});
-        checkForSuccessfulExecution(createRequestMock);
-      });
-    });
-  });
-  describe('postIamSession', () => {
-    describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation postIamSession
-        const accessToken = 'testString';
-        const params = {
-          accessToken: accessToken,
-        };
-
-        const postIamSessionResult = cloudantService.postIamSession(params);
-
-        // all methods should return a Promise
-        expectToBePromise(postIamSessionResult);
-
-        // assert that create request was called
-        expect(createRequestMock).toHaveBeenCalledTimes(1);
-
-        const options = getOptions(createRequestMock);
-
-        checkUrlAndMethod(options, '/_iam_session', 'POST');
-        const expectedAccept = 'application/json';
-        const expectedContentType = 'application/json';
-        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['access_token']).toEqual(accessToken);
-      });
-
-      test('should prioritize user-given headers', () => {
-        // parameters
-        const userAccept = 'fake/accept';
-        const userContentType = 'fake/contentType';
-        const params = {
-          headers: {
-            Accept: userAccept,
-            'Content-Type': userContentType,
-          },
-        };
-
-        cloudantService.postIamSession(params);
-        checkMediaHeaders(createRequestMock, userAccept, userContentType);
-      });
-
-      test('should not have any problems when no parameters are passed in', () => {
-        // invoke the method with no parameters
-        cloudantService.postIamSession({});
-        checkForSuccessfulExecution(createRequestMock);
-      });
-    });
-  });
   describe('getSecurity', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
@@ -7607,10 +7581,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const cloudant = { 'key1': ['_reader'] };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          cloudant,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -7724,9 +7700,11 @@ describe('CloudantV1', () => {
 
       test('should prioritize user-given headers', () => {
         // parameters
+        const origins = ['testString'];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
+          origins,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -7736,11 +7714,29 @@ describe('CloudantV1', () => {
         cloudantService.putCorsConfiguration(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
+    });
 
-      test('should not have any problems when no parameters are passed in', () => {
-        // invoke the method with no parameters
-        cloudantService.putCorsConfiguration({});
-        checkForSuccessfulExecution(createRequestMock);
+    describe('negative tests', () => {
+      test('should enforce required parameters', async done => {
+        let err;
+        try {
+          await cloudantService.putCorsConfiguration({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', done => {
+        const putCorsConfigurationPromise = cloudantService.putCorsConfiguration();
+        expectToBePromise(putCorsConfigurationPromise);
+
+        putCorsConfigurationPromise.catch(err => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
       });
     });
   });
@@ -8356,11 +8352,13 @@ describe('CloudantV1', () => {
         // parameters
         const db = 'testString';
         const docId = 'testString';
+        const document = documentModel;
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
           docId,
+          document,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -8401,7 +8399,6 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postLocalDocs
         const db = 'testString';
-        const accept = 'application/json';
         const attEncodingInfo = true;
         const attachments = true;
         const conflicts = true;
@@ -8415,9 +8412,9 @@ describe('CloudantV1', () => {
         const key = 'testString';
         const keys = ['testString'];
         const startkey = 'testString';
+        const accept = 'application/json';
         const params = {
           db: db,
-          accept: accept,
           attEncodingInfo: attEncodingInfo,
           attachments: attachments,
           conflicts: conflicts,
@@ -8431,6 +8428,7 @@ describe('CloudantV1', () => {
           key: key,
           keys: keys,
           startkey: startkey,
+          accept: accept,
         };
 
         const postLocalDocsResult = cloudantService.postLocalDocs(params);
@@ -8530,12 +8528,12 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postLocalDocsQueries
         const db = 'testString';
-        const accept = 'application/json';
         const queries = [allDocsQueryModel];
+        const accept = 'application/json';
         const params = {
           db: db,
-          accept: accept,
           queries: queries,
+          accept: accept,
         };
 
         const postLocalDocsQueriesResult = cloudantService.postLocalDocsQueries(params);
@@ -8560,10 +8558,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const queries = [allDocsQueryModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          queries,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -8593,74 +8593,6 @@ describe('CloudantV1', () => {
         expectToBePromise(postLocalDocsQueriesPromise);
 
         postLocalDocsQueriesPromise.catch(err => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
-      });
-    });
-  });
-  describe('postEnsureFullCommit', () => {
-    describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation postEnsureFullCommit
-        const db = 'testString';
-        const params = {
-          db: db,
-        };
-
-        const postEnsureFullCommitResult = cloudantService.postEnsureFullCommit(params);
-
-        // all methods should return a Promise
-        expectToBePromise(postEnsureFullCommitResult);
-
-        // assert that create request was called
-        expect(createRequestMock).toHaveBeenCalledTimes(1);
-
-        const options = getOptions(createRequestMock);
-
-        checkUrlAndMethod(options, '/{db}/_ensure_full_commit', 'POST');
-        const expectedAccept = 'application/json';
-        const expectedContentType = undefined;
-        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
-      });
-
-      test('should prioritize user-given headers', () => {
-        // parameters
-        const db = 'testString';
-        const userAccept = 'fake/accept';
-        const userContentType = 'fake/contentType';
-        const params = {
-          db,
-          headers: {
-            Accept: userAccept,
-            'Content-Type': userContentType,
-          },
-        };
-
-        cloudantService.postEnsureFullCommit(params);
-        checkMediaHeaders(createRequestMock, userAccept, userContentType);
-      });
-    });
-
-    describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
-        let err;
-        try {
-          await cloudantService.postEnsureFullCommit({});
-        } catch (e) {
-          err = e;
-        }
-
-        expect(err.message).toMatch(/Missing required parameters/);
-        done();
-      });
-
-      test('should reject promise when required params are not given', done => {
-        const postEnsureFullCommitPromise = cloudantService.postEnsureFullCommit();
-        expectToBePromise(postEnsureFullCommitPromise);
-
-        postEnsureFullCommitPromise.catch(err => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8699,10 +8631,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const documentRevisions = { 'key1': ['testString'] };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          documentRevisions,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
@@ -8770,10 +8704,12 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
+        const documentRevisions = { 'key1': ['testString'] };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
           db,
+          documentRevisions,
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
