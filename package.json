@@ -91,5 +91,13 @@
     "titleTemplate": "{title}",
     "ancestorSeparator": " › ",
     "usePathForSuiteName": "true"
-  }
+  },
+  "files" : [
+    "/index.js",
+    "/index.js.map",
+    "/index.d.ts",
+    "/auth",
+    "/cloudant",
+    "/lib"
+  ]
 }
