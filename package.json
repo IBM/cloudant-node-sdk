@@ -92,7 +92,7 @@
     "ancestorSeparator": " › ",
     "usePathForSuiteName": "true"
   },
-  "files" : [
+  "files": [
     "/index.js",
     "/index.js.map",
     "/index.d.ts",
