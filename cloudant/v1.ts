@@ -190,6 +190,80 @@ class CloudantV1 extends CloudantBaseService {
     return this.createRequest(parameters);
   };
 
+  /**
+   * Retrieve provisioned throughput capacity information.
+   *
+   * View the amount of provisioned throughput capacity allocated to an IBM Cloudant instance and what is the target
+   * provisioned throughput capacity.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>>}
+   */
+  public getCapacityThroughputInformation(params?: CloudantV1.GetCapacityThroughputInformationParams): Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>> {
+    const _params = Object.assign({}, params);
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCapacityThroughputInformation');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/user/capacity/throughput',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Update the target provisioned throughput capacity.
+   *
+   * Sets the target provisioned throughput capacity for an IBM Cloudant instance. When target capacity is changed, the
+   * current capacity asynchronously changes to meet the target capacity.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {number} params.blocks - A number of blocks of throughput units. A block consists of 100 reads/sec, 50
+   * writes/sec, and 5 global queries/sec of provisioned throughput capacity.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>>}
+   */
+  public putCapacityThroughputInformation(params: CloudantV1.PutCapacityThroughputInformationParams): Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['blocks'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const body = {
+      'blocks': _params.blocks
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCapacityThroughputInformation');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/user/capacity/throughput',
+        method: 'PUT',
+        body,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
   /*************************
    * databases
    ************************/
@@ -3490,7 +3564,7 @@ class CloudantV1 extends CloudantBaseService {
    * Retrieve information about which index is used for a query.
    *
    * Shows which index is being used by the query. Parameters are the same as the [`_find`
-   * endpoint](#query-an-index-by-using-selector-syntax.
+   * endpoint](#query-an-index-by-using-selector-syntax).
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -5379,9 +5453,9 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} [params] - The parameters to send to the service.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.CorsConfiguration>>}
+   * @returns {Promise<CloudantV1.Response<CloudantV1.CorsInformation>>}
    */
-  public getCorsInformation(params?: CloudantV1.GetCorsInformationParams): Promise<CloudantV1.Response<CloudantV1.CorsConfiguration>> {
+  public getCorsInformation(params?: CloudantV1.GetCorsInformationParams): Promise<CloudantV1.Response<CloudantV1.CorsInformation>> {
     const _params = Object.assign({}, params);
 
     const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCorsInformation');
@@ -6256,6 +6330,109 @@ class CloudantV1 extends CloudantBaseService {
     return this.createRequest(parameters);
   };
 
+  /**
+   * Retrieve Activity Tracker events information.
+   *
+   * Check event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEventsConfiguration>>}
+   */
+  public getActivityTrackerEventsInformation(params?: CloudantV1.GetActivityTrackerEventsInformationParams): Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEventsConfiguration>> {
+    const _params = Object.assign({}, params);
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getActivityTrackerEventsInformation');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/user/activity_tracker/events',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Modify Activity Tracker events configuration.
+   *
+   * Configure event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string[]} params.types - An array of event types that are being sent to IBM Cloud Activity Tracker with
+   * LogDNA for the IBM Cloudant instance. "management" is a required element of this array.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
+   */
+  public postActivityTrackerEventsConfiguration(params: CloudantV1.PostActivityTrackerEventsConfigurationParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['types'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const body = {
+      'types': _params.types
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postActivityTrackerEventsConfiguration');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/user/activity_tracker/events',
+        method: 'POST',
+        body,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Retrieve the current provisioned throughput capacity consumption.
+   *
+   * View the current consumption of provisioned throughput capacity for an IBM Cloudant instance. The current
+   * consumption shows the quantities of reads, writes, and global queries conducted against the instance for a given
+   * second.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.CurrentThroughputInformation>>}
+   */
+  public getCurrentThroughputInformation(params?: CloudantV1.GetCurrentThroughputInformationParams): Promise<CloudantV1.Response<CloudantV1.CurrentThroughputInformation>> {
+    const _params = Object.assign({}, params);
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCurrentThroughputInformation');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/user/current/throughput',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
 }
 
 /*************************
@@ -6301,6 +6478,20 @@ namespace CloudantV1 {
   export interface GetUuidsParams {
     /** Query parameter to specify the number of UUIDs to return. */
     count?: number;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `getCapacityThroughputInformation` operation. */
+  export interface GetCapacityThroughputInformationParams {
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `putCapacityThroughputInformation` operation. */
+  export interface PutCapacityThroughputInformationParams {
+    /** A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global
+     *  queries/sec of provisioned throughput capacity.
+     */
+    blocks: number;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -9395,6 +9586,34 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
+  /** Parameters for the `getActivityTrackerEventsInformation` operation. */
+  export interface GetActivityTrackerEventsInformationParams {
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `postActivityTrackerEventsConfiguration` operation. */
+  export interface PostActivityTrackerEventsConfigurationParams {
+    /** An array of event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant
+     *  instance. "management" is a required element of this array.
+     */
+    types: PostActivityTrackerEventsConfigurationConstants.Types | string[];
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Constants for the `postActivityTrackerEventsConfiguration` operation. */
+  export namespace PostActivityTrackerEventsConfigurationConstants {
+    /** Types */
+    export enum Types {
+      MANAGEMENT = 'management',
+      DATA = 'data',
+    }
+  }
+
+  /** Parameters for the `getCurrentThroughputInformation` operation. */
+  export interface GetCurrentThroughputInformationParams {
+    headers?: OutgoingHttpHeaders;
+  }
+
   /*************************
    * model interfaces
    ************************/
@@ -9404,13 +9623,15 @@ namespace CloudantV1 {
     /** Processed changes. */
     changes_done?: number;
     /** Source database. */
-    database?: string;
+    database: string;
+    /** Cluster node where the task is running. */
+    node: string;
     /** Process ID. */
-    pid?: string;
+    pid: string;
     /** Current percentage progress. */
     progress?: number;
     /** Schema for a Unix epoch timestamp. */
-    started_on?: number;
+    started_on: number;
     /** Task status message. */
     status?: string;
     /** Task name. */
@@ -9418,9 +9639,17 @@ namespace CloudantV1 {
     /** Total changes to process. */
     total_changes?: number;
     /** Operation type. */
-    type?: string;
+    type: string;
     /** Schema for a Unix epoch timestamp. */
-    updated_on?: number;
+    updated_on: number;
+  }
+
+  /** Schema for Activity Tracker events configuration. */
+  export interface ActivityTrackerEventsConfiguration {
+    /** An array of event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant
+     *  instance. "management" is a required element of this array.
+     */
+    types: string[];
   }
 
   /** Schema for the result of an all documents queries operation. */
@@ -9470,9 +9699,9 @@ namespace CloudantV1 {
   /** Schema for the result of an all documents operation. */
   export interface AllDocsResult {
     /** Number of total rows. */
-    total_rows?: number;
+    total_rows: number;
     /** List of doc results. */
-    rows?: DocsResultRow[];
+    rows: DocsResultRow[];
     /** Current update sequence for the database. */
     update_seq?: string;
   }
@@ -9506,11 +9735,11 @@ namespace CloudantV1 {
   /** Schema for api keys. */
   export interface ApiKeysResult {
     /** ok. */
-    ok?: boolean;
+    ok: boolean;
     /** The generated api key. */
-    key?: string;
+    key: string;
     /** The password associated with the api key. */
-    password?: string;
+    password: string;
   }
 
   /** Schema for an attachment. */
@@ -9569,7 +9798,7 @@ namespace CloudantV1 {
   /** Schema for the results object of a bulk get operation. */
   export interface BulkGetResult {
     /** Results. */
-    results?: BulkGetResultItem[];
+    results: BulkGetResultItem[];
   }
 
   /** Schema for BulkGetResult object containing a successfully retrieved document or error information. */
@@ -9583,57 +9812,83 @@ namespace CloudantV1 {
   /** Schema for the document revisions information from a bulk get operation. */
   export interface BulkGetResultItem {
     /** Array of document revisions or error information. */
-    docs?: BulkGetResultDocument[];
+    docs: BulkGetResultDocument[];
     /** Schema for a document ID. */
-    id?: string;
+    id: string;
+  }
+
+  /** Schema for information about the currently provisioned and target throughput capacity. */
+  export interface CapacityThroughputInformation {
+    /** Detailed information about provisioned throughput capacity. */
+    current: CapacityThroughputInformationCurrent;
+    /** Detailed information about target throughput capacity. */
+    target?: CapacityThroughputInformationTarget;
+  }
+
+  /** Detailed information about provisioned throughput capacity. */
+  export interface CapacityThroughputInformationCurrent {
+    /** Schema for detailed information about throughput capacity with breakdown by specific throughput requests
+     *  classes.
+     */
+    throughput: ThroughputInformation;
+  }
+
+  /** Detailed information about target throughput capacity. */
+  export interface CapacityThroughputInformationTarget {
+    /** Schema for detailed information about throughput capacity with breakdown by specific throughput requests
+     *  classes.
+     */
+    throughput: ThroughputInformation;
   }
 
   /** Schema for a document leaf with single field rev. */
   export interface Change {
     /** Schema for a document revision identifier. */
-    rev?: string;
+    rev: string;
   }
 
   /** Schema for normal changes feed result. */
   export interface ChangesResult {
     /** last_seq. */
-    last_seq?: string;
+    last_seq: string;
     /** pending. */
-    pending?: number;
+    pending: number;
     /** results. */
-    results?: ChangesResultItem[];
+    results: ChangesResultItem[];
   }
 
   /** Schema for an item in the changes results array. */
   export interface ChangesResultItem {
     /** List of document's leaves with single field rev. */
-    changes?: Change[];
+    changes: Change[];
     /** if `true` then the document is deleted. */
     deleted?: boolean;
+    /** Schema for a document. */
+    doc?: Document;
     /** Schema for a document ID. */
-    id?: string;
+    id: string;
     /** Update sequence. */
-    seq?: string;
+    seq: string;
   }
 
   /** Schema for size information of content. */
   export interface ContentInformationSizes {
     /** The active size of the content, in bytes. */
-    active?: number;
+    active: number;
     /** The total uncompressed size of the content, in bytes. */
-    external?: number;
+    external: number;
     /** The total size of the content as stored on disk, in bytes. */
-    file?: number;
+    file: number;
   }
 
-  /** Schema for a CORS configuration. */
-  export interface CorsConfiguration {
+  /** Schema for information about the CORS configuration. */
+  export interface CorsInformation {
     /** Boolean value to allow authentication credentials. If set to true, browser requests must be done by using
      *  withCredentials = true.
      */
-    allow_credentials?: boolean;
+    allow_credentials: boolean;
     /** Boolean value to turn CORS on and off. */
-    enable_cors?: boolean;
+    enable_cors: boolean;
     /** An array of strings that contain allowed origin domains. You have to specify the full URL including the
      *  protocol. It is recommended that only the HTTPS protocol is used. Subdomains count as separate domains, so you
      *  have to specify all subdomains used.
@@ -9641,34 +9896,50 @@ namespace CloudantV1 {
     origins: string[];
   }
 
+  /** Schema for information about current consumption of a provisioned throughput capacity. */
+  export interface CurrentThroughputInformation {
+    /** Detailed information about current consumption. */
+    throughput: CurrentThroughputInformationThroughput;
+  }
+
+  /** Detailed information about current consumption. */
+  export interface CurrentThroughputInformationThroughput {
+    /** Number of global queries conducted against the instance for a given second. */
+    query: number;
+    /** Number of reads conducted against the instance for a given second. */
+    read: number;
+    /** Number of writes conducted against the instance for a given second. */
+    write: number;
+  }
+
   /** Schema for information about a database. */
   export interface DatabaseInformation {
     /** Schema for database cluster information. */
-    cluster?: DatabaseInformationCluster;
+    cluster: DatabaseInformationCluster;
     /** An opaque string that describes the committed state of the database. */
     committed_update_seq?: string;
     /** True if the database compaction routine is operating on this database. */
-    compact_running?: boolean;
+    compact_running: boolean;
     /** An opaque string that describes the compaction state of the database. */
     compacted_seq?: string;
     /** The name of the database. */
-    db_name?: string;
+    db_name: string;
     /** The version of the physical format used for the data when it is stored on disk. */
-    disk_format_version?: number;
+    disk_format_version: number;
     /** A count of the documents in the specified database. */
-    doc_count?: number;
+    doc_count: number;
     /** Number of deleted documents. */
-    doc_del_count?: number;
+    doc_del_count: number;
     /** The engine used for the database. */
     engine?: string;
     /** Schema for database properties. */
-    props?: DatabaseInformationProps;
+    props: DatabaseInformationProps;
     /** Schema for size information of content. */
-    sizes?: ContentInformationSizes;
+    sizes: ContentInformationSizes;
     /** An opaque string that describes the state of the database. Do not rely on this string for counting the
      *  number of updates.
      */
-    update_seq?: string;
+    update_seq: string;
     /** The UUID of the database. */
     uuid?: string;
   }
@@ -9676,13 +9947,13 @@ namespace CloudantV1 {
   /** Schema for database cluster information. */
   export interface DatabaseInformationCluster {
     /** Schema for the number of replicas of a database in a cluster. */
-    n?: number;
+    n: number;
     /** Schema for the number of shards in a database. Each shard is a partition of the hash value range. */
-    q?: number;
+    q: number;
     /** Read quorum. The number of consistent copies of a document that need to be read before a successful reply. */
-    r?: number;
+    r: number;
     /** Write quorum. The number of copies of a document that need to be written before a successful reply. */
-    w?: number;
+    w: number;
   }
 
   /** Schema for database properties. */
@@ -9696,19 +9967,19 @@ namespace CloudantV1 {
     /** Account name. */
     account?: string;
     /** Database name. */
-    dbname?: string;
+    db_name: string;
     /** Sequence number. */
-    seq?: string;
+    seq: string;
     /** A database event. */
-    type?: string;
+    type: string;
   }
 
   /** Schema for database updates. */
   export interface DbUpdates {
     /** Last sequence number. */
-    last_seq?: string;
+    last_seq: string;
     /** results. */
-    results?: DbEvent[];
+    results: DbEvent[];
   }
 
   /** Schema for database information keyed by database name. */
@@ -9716,7 +9987,7 @@ namespace CloudantV1 {
     /** Schema for information about a database. */
     info?: DatabaseInformation;
     /** Database name. */
-    key?: string;
+    key: string;
   }
 
   /** Schema for a design document. */
@@ -9766,9 +10037,9 @@ namespace CloudantV1 {
   /** Schema for information about a design document. */
   export interface DesignDocumentInformation {
     /** name. */
-    name?: string;
+    name: string;
     /** View index information. */
-    view_index?: DesignDocumentViewIndex;
+    view_index: DesignDocumentViewIndex;
   }
 
   /** Schema for design document options. */
@@ -9780,27 +10051,27 @@ namespace CloudantV1 {
   /** View index information. */
   export interface DesignDocumentViewIndex {
     /** Indicates whether a compaction routine is currently running on the view. */
-    compact_running?: boolean;
+    compact_running: boolean;
     /** Language for the defined views. */
-    language?: string;
+    language: string;
     /** MD5 signature of the views for the design document. */
-    signature?: string;
+    signature: string;
     /** Schema for size information of content. */
-    sizes?: ContentInformationSizes;
+    sizes: ContentInformationSizes;
     /** The update sequence of the corresponding database that has been indexed. */
-    update_seq?: string;
+    update_seq: string;
     /** Indicates if the view is currently being updated. */
-    updater_running?: boolean;
+    updater_running: boolean;
     /** Number of clients waiting on views from this design document. */
-    waiting_clients?: number;
+    waiting_clients: number;
     /** Indicates if there are outstanding commits to the underlying database that need to processed. */
-    waiting_commit?: boolean;
+    waiting_commit: boolean;
   }
 
   /** Schema for view functions definition. */
   export interface DesignDocumentViewsMapReduce {
     /** JavaScript map function as a string. */
-    map?: string;
+    map: string;
     /** JavaScript reduce function as a string. */
     reduce?: string;
   }
@@ -9818,7 +10089,7 @@ namespace CloudantV1 {
     /** id. */
     id?: string;
     /** Document ID. */
-    key?: string;
+    key: string;
     /** Value of built-in `/_all_docs` style view. */
     value?: DocsResultRowValue;
   }
@@ -9826,7 +10097,7 @@ namespace CloudantV1 {
   /** Value of built-in `/_all_docs` style view. */
   export interface DocsResultRowValue {
     /** Schema for a document revision identifier. */
-    rev?: string;
+    rev: string;
   }
 
   /** Schema for a document. */
@@ -9856,7 +10127,7 @@ namespace CloudantV1 {
   /** Schema for the result of a document modification. */
   export interface DocumentResult {
     /** Schema for a document ID. */
-    id?: string;
+    id: string;
     /** Schema for a document revision identifier. */
     rev?: string;
     /** ok. */
@@ -9872,47 +10143,47 @@ namespace CloudantV1 {
   /** Schema for information about revisions and their status. */
   export interface DocumentRevisionStatus {
     /** Schema for a document revision identifier. */
-    rev?: string;
+    rev: string;
     /** Status of the revision. May be one of: - `available`: Revision is available for retrieving with rev query
      *  parameter - `missing`: Revision is not available - `deleted`: Revision belongs to deleted document.
      */
-    status?: string;
+    status: string;
   }
 
   /** Schema for document shard information. */
   export interface DocumentShardInfo {
     /** List of nodes serving a replica of the shard. */
-    nodes?: string[];
+    nodes: string[];
     /** The shard range in which the document is stored. */
-    range?: string;
+    range: string;
   }
 
   /** Schema for find query execution statistics. */
   export interface ExecutionStats {
     /** Time to execute the query. */
-    execution_time_ms?: number;
+    execution_time_ms: number;
     /** Number of results returned. */
-    results_returned?: number;
+    results_returned: number;
     /** Number of documents fetched from the index. */
-    total_docs_examined?: number;
+    total_docs_examined: number;
     /** Number of rows scanned in the index. */
-    total_keys_examined?: number;
+    total_keys_examined: number;
     /** Number of documents fetched from the primary index with the specified read quorum. */
-    total_quorum_docs_examined?: number;
+    total_quorum_docs_examined: number;
   }
 
   /** Schema for information about the index used for a find query. */
   export interface ExplainResult {
     /** dbname. */
-    dbname?: string;
+    dbname: string;
     /** fields. */
-    fields?: string[];
+    fields: string[];
     /** Schema for information about an index. */
-    index?: IndexInformation;
+    index: IndexInformation;
     /** limit. */
-    limit?: number;
+    limit: number;
     /** opts. */
-    opts?: JsonObject;
+    opts: JsonObject;
     /** range. */
     range?: ExplainResultRange;
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
@@ -9939,9 +10210,9 @@ namespace CloudantV1 {
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
      */
-    selector?: JsonObject;
+    selector: JsonObject;
     /** skip. */
-    skip?: number;
+    skip: number;
   }
 
   /** range. */
@@ -9955,9 +10226,9 @@ namespace CloudantV1 {
   /** Schema for the result of a query find operation. */
   export interface FindResult {
     /** Opaque bookmark token used when paginating results. */
-    bookmark?: string;
+    bookmark: string;
     /** Documents matching the selector. */
-    docs?: Document[];
+    docs: Document[];
     /** Schema for find query execution statistics. */
     execution_stats?: ExecutionStats;
     /** warning. */
@@ -9976,17 +10247,19 @@ namespace CloudantV1 {
   /** Schema for information about a geospatial index. */
   export interface GeoIndexInformation {
     /** Schema for geospatial index statistics. */
-    geo_index?: GeoIndexStats;
+    geo_index: GeoIndexStats;
+    /** The name of the geospatial index design document. */
+    name: string;
   }
 
   /** Schema for geospatial index statistics. */
   export interface GeoIndexStats {
     /** The size of the geospatial index, in bytes. */
-    data_size?: number;
+    data_size: number;
     /** The size of the geospatial index, as stored on disk, in bytes. */
-    disk_size?: number;
+    disk_size: number;
     /** Number of documents in the geospatial index. */
-    doc_count?: number;
+    doc_count: number;
   }
 
   /** Schema for a GeoJSON feature object. Note that the content of the feature objects varies depending on the response format chosen and whether the `include_docs` parameter is `true`. */
@@ -10014,11 +10287,11 @@ namespace CloudantV1 {
   /** Schema for the result of a geospatial query operation. For the `legacy`, `geojson`, or `application/vnd.geo+json` format this is a GeoJson FeatureCollection with additional metadata in foreign members. */
   export interface GeoResult {
     /** Opaque bookmark token used when paginating results. */
-    bookmark?: string;
+    bookmark: string;
     /** The array of GeoJSON Feature Objects matching the geospatial query. */
     features?: GeoJsonFeature[];
     /** The array of rows matching the geospatial query. Present only when using `view` format. */
-    rows?: GeoResultRow[];
+    rows: GeoResultRow[];
     /** Declaration of the GeoJSON type: FeatureCollection Object. */
     type?: string;
   }
@@ -10067,27 +10340,27 @@ namespace CloudantV1 {
   /** Schema for information about an index. */
   export interface IndexInformation {
     /** Design document ID. */
-    ddoc?: string;
+    ddoc: string;
     /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
      *  properties that do not apply to `json` indexes, these are:
      *  * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
      *  document fields and what analyzer to use for that purpose.
      */
-    def?: IndexDefinition;
+    def: IndexDefinition;
     /** Index name. */
-    name?: string;
+    name: string;
     /** Schema for the type of an index. */
-    type?: string;
+    type: string;
   }
 
   /** Schema for the result of creating an index. */
   export interface IndexResult {
     /** Id of the design document the index was created in. */
-    id?: string;
+    id: string;
     /** Name of the index created. */
-    name?: string;
+    name: string;
     /** Flag to show whether the index was created or one already exists. */
-    result?: string;
+    result: string;
   }
 
   /** Schema for the text index default field configuration. The default field is used to index the text of all fields within a document for use with the `$text` operator. */
@@ -10101,23 +10374,23 @@ namespace CloudantV1 {
   /** Schema for information about the indexes in a database. */
   export interface IndexesInformation {
     /** Number of total rows. */
-    total_rows?: number;
+    total_rows: number;
     /** Indexes. */
-    indexes?: IndexInformation[];
+    indexes: IndexInformation[];
   }
 
   /** Schema for information about known nodes and cluster membership. */
   export interface MembershipInformation {
     /** List of nodes this node knows about, including the ones that are part of the cluster. */
-    all_nodes?: string[];
+    all_nodes: string[];
     /** All cluster nodes. */
-    cluster_nodes?: string[];
+    cluster_nodes: string[];
   }
 
   /** Schema for mapping document IDs to lists of missing revisions. */
   export interface MissingRevsResult {
     /** Schema for mapping document IDs to lists of revisions. */
-    missing_revs?: JsonObject;
+    missing_revs: JsonObject;
   }
 
   /** Schema for an OK result. */
@@ -10129,17 +10402,17 @@ namespace CloudantV1 {
   /** Schema for information about a database partition. */
   export interface PartitionInformation {
     /** The name of the database. */
-    db_name?: string;
+    db_name: string;
     /** A count of the documents in the specified database partition. */
-    doc_count?: number;
+    doc_count: number;
     /** Number of deleted documents. */
-    doc_del_count?: number;
+    doc_del_count: number;
     /** The name of the partition in the database. */
-    partition?: string;
+    partition: string;
     /** Schema for information about the partition index count and limit in a database. */
     partitioned_indexes?: PartitionInformationIndexes;
     /** The size of active and external data, in bytes. */
-    sizes?: PartitionInformationSizes;
+    sizes: PartitionInformationSizes;
   }
 
   /** Schema for information about the partition index count and limit in a database. */
@@ -10185,7 +10458,7 @@ namespace CloudantV1 {
     /** Replication request headers. */
     headers?: JsonObject;
     /** Replication database URL. */
-    url?: string;
+    url: string;
   }
 
   /** Schema for replication source or target database authentication. */
@@ -10311,49 +10584,49 @@ namespace CloudantV1 {
   /** Schema for replication history information. */
   export interface ReplicationHistory {
     /** Number of document write failures. */
-    doc_write_failures?: number;
+    doc_write_failures: number;
     /** Number of documents read. */
-    docs_read?: number;
+    docs_read: number;
     /** Number of documents written to target. */
-    docs_written?: number;
+    docs_written: number;
     /** Last sequence number in changes stream. */
-    end_last_seq?: string;
+    end_last_seq: string;
     /** Date/Time replication operation completed in RFC 2822 format. */
-    end_time?: string;
+    end_time: string;
     /** Number of missing documents checked. */
-    missing_checked?: number;
+    missing_checked: number;
     /** Number of missing documents found. */
-    missing_found?: number;
+    missing_found: number;
     /** Last recorded sequence number. */
-    recorded_seq?: string;
+    recorded_seq: string;
     /** Session ID for this replication operation. */
-    session_id?: string;
+    session_id: string;
     /** First sequence number in changes stream. */
-    start_last_seq?: string;
+    start_last_seq: string;
     /** Date/Time replication operation started in RFC 2822 format. */
-    start_time?: string;
+    start_time: string;
   }
 
   /** Schema for a replication result. */
   export interface ReplicationResult {
     /** Replication history. */
-    history?: ReplicationHistory[];
+    history: ReplicationHistory[];
     /** Replication status. */
-    ok?: boolean;
+    ok: boolean;
     /** Replication protocol version. */
-    replication_id_version?: number;
+    replication_id_version: number;
     /** Unique session ID. */
-    session_id?: string;
+    session_id: string;
     /** Last sequence number read from source database. */
-    source_last_seq?: string;
+    source_last_seq: string;
   }
 
   /** Schema for list of revision information. */
   export interface Revisions {
     /** Array of valid revision IDs, in reverse order (latest first). */
-    ids?: string[];
+    ids: string[];
     /** Prefix number for the latest revision. */
-    start?: number;
+    start: number;
   }
 
   /** Schema for information about missing revs and possible ancestors. */
@@ -10367,30 +10640,30 @@ namespace CloudantV1 {
   /** Schema for a listing of replication scheduler documents. */
   export interface SchedulerDocsResult {
     /** Number of total rows. */
-    total_rows?: number;
+    total_rows: number;
     /** Array of replication scheduler doc objects. */
-    docs?: SchedulerDocument[];
+    docs: SchedulerDocument[];
   }
 
   /** Schema for a replication scheduler document. */
   export interface SchedulerDocument {
     /** Database where replication document came from. */
-    database?: string;
+    database: string;
     /** Replication document ID. */
-    doc_id?: string;
+    doc_id: string;
     /** Consecutive errors count. Indicates how many times in a row this replication has crashed. Replication will
      *  be retried with an exponential backoff based on this number. As soon as the replication succeeds this count is
      *  reset to 0. To can be used to get an idea why a particular replication is not making progress.
      */
-    error_count?: number;
+    error_count: number;
     /** Replication ID, or null if state is completed or failed. */
-    id?: string;
+    id: string;
     /** Schema for scheduler document information. A JSON object that may contain additional information about the
      *  state. For error states this will contain an error field and string value.
      */
-    info?: SchedulerInfo;
+    info: SchedulerInfo;
     /** Timestamp of last state update. */
-    last_updated?: string;
+    last_updated: string;
     /** Cluster node where the job is running. */
     node?: string;
     /** Replication source. */
@@ -10400,9 +10673,9 @@ namespace CloudantV1 {
      */
     source_proxy?: string;
     /** Timestamp of when the replication was started. */
-    start_time?: string;
+    start_time: string;
     /** Schema for replication state. */
-    state?: string;
+    state: string;
     /** Replication target. */
     target?: string;
     /** Address of the (http or socks5 protocol) proxy server through which replication with the target database
@@ -10438,51 +10711,51 @@ namespace CloudantV1 {
   /** Schema for a replication scheduler job. */
   export interface SchedulerJob {
     /** Replication document database. */
-    database?: string;
+    database: string;
     /** Replication document ID. */
-    doc_id?: string;
+    doc_id: string;
     /** Timestamped history of events as a list of objects. */
-    history?: SchedulerJobEvent[];
+    history: SchedulerJobEvent[];
     /** Schema for a replication job id. */
-    id?: string;
+    id: string;
     /** Schema for scheduler document information. A JSON object that may contain additional information about the
      *  state. For error states this will contain an error field and string value.
      */
-    info?: SchedulerInfo;
+    info: SchedulerInfo;
     /** Cluster node where the job is running. */
-    node?: string;
+    node: string;
     /** Replication process ID. */
-    pid?: string;
+    pid: string;
     /** Replication source. */
-    source?: string;
+    source: string;
     /** Timestamp of when the replication was started. */
-    start_time?: string;
+    start_time: string;
     /** Replication target. */
-    target?: string;
+    target: string;
     /** Name of user running replication. */
-    user?: string;
+    user: string;
   }
 
   /** Schema for a replication scheduler job event. */
   export interface SchedulerJobEvent {
     /** Timestamp of the event. */
-    timestamp?: string;
+    timestamp: string;
     /** Type of the event. */
-    type?: string;
+    type: string;
   }
 
   /** Schema for a listing of replication scheduler jobs. */
   export interface SchedulerJobsResult {
     /** Number of total rows. */
-    total_rows?: number;
+    total_rows: number;
     /** Array of replication job objects. */
-    jobs?: SchedulerJob[];
+    jobs: SchedulerJob[];
   }
 
   /** Schema for the output of testing search analyzer tokenization. */
   export interface SearchAnalyzeResult {
     /** tokens. */
-    tokens?: string[];
+    tokens: string[];
   }
 
   /** Schema for a search index definition. */
@@ -10537,7 +10810,7 @@ namespace CloudantV1 {
   /** Schema for the result of a query search operation. */
   export interface SearchResult {
     /** Number of total rows. */
-    total_rows?: number;
+    total_rows: number;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** Grouped search matches. */
@@ -10557,7 +10830,7 @@ namespace CloudantV1 {
   /** Schema for the result of a query search operation. */
   export interface SearchResultProperties {
     /** Number of total rows. */
-    total_rows?: number;
+    total_rows: number;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** Grouped search matches. */
@@ -10577,13 +10850,13 @@ namespace CloudantV1 {
     /** Schema for a document. */
     doc?: Document;
     /** Schema for the fields returned by a query search operation, a map of field name to value. */
-    fields?: JsonObject;
+    fields: JsonObject;
     /** Returns the context in which a search term was mentioned so that you can display more emphasized results to
      *  a user.
      */
     highlights?: JsonObject;
     /** Schema for a document ID. */
-    id?: string;
+    id: string;
   }
 
   /** Schema for a security document. */
@@ -10609,19 +10882,21 @@ namespace CloudantV1 {
   /** Schema for information about the server instance. */
   export interface ServerInformation {
     /** Welcome message. */
-    couchdb?: string;
+    couchdb: string;
     /** List of enabled optional features. */
-    features?: string[];
+    features: string[];
     /** Schema for server vendor information. */
-    vendor?: ServerVendor;
+    vendor: ServerVendor;
     /** Apache CouchDB version. */
-    version?: string;
+    version: string;
+    /** List of feature flags. */
+    features_flags: string[];
   }
 
   /** Schema for server vendor information. */
   export interface ServerVendor {
     /** Vendor name. */
-    name?: string;
+    name: string;
     /** Vendor variant. */
     variant?: string;
     /** Vendor version. */
@@ -10635,29 +10910,45 @@ namespace CloudantV1 {
     /** authentication_db. */
     authentication_db?: string;
     /** authentication_handlers. */
-    authentication_handlers?: string[];
+    authentication_handlers: string[];
   }
 
   /** Schema for information about a session. */
   export interface SessionInformation {
     /** ok. */
-    ok?: boolean;
+    ok: boolean;
     /** Schema for session authentication information. */
-    info?: SessionAuthentication;
+    info: SessionAuthentication;
     /** Schema for the user context of a session. */
-    userCtx?: UserContext;
+    userCtx: UserContext;
   }
 
   /** Schema for a shards object that maps the hash value range for each shard to the array of nodes that contain a copy of that shard. */
   export interface ShardsInformation {
     /** Mapping of shard hash value range to a list of nodes. */
-    shards?: JsonObject;
+    shards: JsonObject;
+  }
+
+  /** Schema for detailed information about throughput capacity with breakdown by specific throughput requests classes. */
+  export interface ThroughputInformation {
+    /** A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global
+     *  queries/sec of provisioned throughput capacity.
+     */
+    blocks: number;
+    /** Provisioned global queries capacity in operations per second. */
+    query: number;
+    /** Provisioned reads capacity in operations per second. */
+    read: number;
+    /** Provisioned writes capacity in operations per second. */
+    write: number;
   }
 
   /** Schema for information about the up state of the server. */
   export interface UpInformation {
+    /** seeds. */
+    seeds: JsonObject;
     /** status. */
-    status?: string;
+    status: string;
   }
 
   /** Schema for the user context of a session. */
@@ -10665,15 +10956,15 @@ namespace CloudantV1 {
     /** Database name in the context of the provided operation. */
     db?: string;
     /** User name. */
-    name?: string;
+    name: string;
     /** List of user roles. */
-    roles?: string[];
+    roles: string[];
   }
 
   /** Schema for a set of uuids generated by the server. */
   export interface UuidsResult {
     /** uuids. */
-    uuids?: string[];
+    uuids: string[];
   }
 
   /** Schema for the results of a queries view operation. */
@@ -10747,7 +11038,7 @@ namespace CloudantV1 {
     /** Current update sequence for the database. */
     update_seq?: string;
     /** rows. */
-    rows?: ViewResultRow[];
+    rows: ViewResultRow[];
   }
 
   /** Schema for a row of a view result. */
@@ -10763,9 +11054,9 @@ namespace CloudantV1 {
     /** Schema for a document ID. */
     id?: string;
     /** Schema for any JSON type. */
-    key?: any;
+    key: any;
     /** Schema for any JSON type. */
-    value?: any;
+    value: any;
   }
 
   /** Schema for a GeoJSON geometry. */
