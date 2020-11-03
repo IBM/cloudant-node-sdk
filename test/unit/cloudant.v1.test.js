@@ -236,6 +236,118 @@ describe('CloudantV1', () => {
       });
     });
   });
+  describe('getCapacityThroughputInformation', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation getCapacityThroughputInformation
+        const params = {};
+
+        const getCapacityThroughputInformationResult = cloudantService.getCapacityThroughputInformation(params);
+
+        // all methods should return a Promise
+        expectToBePromise(getCapacityThroughputInformationResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/_api/v2/user/capacity/throughput', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.getCapacityThroughputInformation(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+
+      test('should not have any problems when no parameters are passed in', () => {
+        // invoke the method with no parameters
+        cloudantService.getCapacityThroughputInformation({});
+        checkForSuccessfulExecution(createRequestMock);
+      });
+    });
+  });
+  describe('putCapacityThroughputInformation', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation putCapacityThroughputInformation
+        const blocks = 0;
+        const params = {
+          blocks: blocks,
+        };
+
+        const putCapacityThroughputInformationResult = cloudantService.putCapacityThroughputInformation(params);
+
+        // all methods should return a Promise
+        expectToBePromise(putCapacityThroughputInformationResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/_api/v2/user/capacity/throughput', 'PUT');
+        const expectedAccept = 'application/json';
+        const expectedContentType = 'application/json';
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(options.body['blocks']).toEqual(blocks);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const blocks = 0;
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          blocks,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.putCapacityThroughputInformation(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async done => {
+        let err;
+        try {
+          await cloudantService.putCapacityThroughputInformation({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', done => {
+        const putCapacityThroughputInformationPromise = cloudantService.putCapacityThroughputInformation();
+        expectToBePromise(putCapacityThroughputInformationPromise);
+
+        putCapacityThroughputInformationPromise.catch(err => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
+      });
+    });
+  });
   describe('headDatabase', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
@@ -1207,13 +1319,13 @@ describe('CloudantV1', () => {
         const descending = true;
         const includeDocs = true;
         const inclusiveEnd = true;
-        const limit = 0;
+        const limit = 10;
         const skip = 0;
         const updateSeq = true;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = 'testString';
+        const startkey = '0007741142412418284';
         const params = {
           db: db,
           attEncodingInfo: attEncodingInfo,
@@ -1711,9 +1823,9 @@ describe('CloudantV1', () => {
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
         atts_since: ['testString'],
-        id: 'foo',
+        id: 'small-appliances:1000042',
         open_revs: ['testString'],
-        rev: '4-753875d51501a6b1883a9d62b4d33f91',
+        rev: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -1807,9 +1919,9 @@ describe('CloudantV1', () => {
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
         atts_since: ['testString'],
-        id: 'foo',
+        id: 'small-appliances:1000042',
         open_revs: ['testString'],
-        rev: '4-753875d51501a6b1883a9d62b4d33f91',
+        rev: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -1903,9 +2015,9 @@ describe('CloudantV1', () => {
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
         atts_since: ['testString'],
-        id: 'foo',
+        id: 'small-appliances:1000042',
         open_revs: ['testString'],
-        rev: '4-753875d51501a6b1883a9d62b4d33f91',
+        rev: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -2560,7 +2672,7 @@ describe('CloudantV1', () => {
         _conflicts: ['testString'],
         _deleted: true,
         _deleted_conflicts: ['testString'],
-        _id: 'testString',
+        _id: 'exampleid',
         _local_seq: 'testString',
         _rev: 'testString',
         _revisions: revisionsModel,
@@ -3188,13 +3300,13 @@ describe('CloudantV1', () => {
         const descending = true;
         const includeDocs = true;
         const inclusiveEnd = true;
-        const limit = 0;
+        const limit = 10;
         const skip = 0;
         const updateSeq = true;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = 'testString';
+        const startkey = '0007741142412418284';
         const accept = 'application/json';
         const params = {
           db: db,
@@ -3533,7 +3645,7 @@ describe('CloudantV1', () => {
         const descending = true;
         const includeDocs = true;
         const inclusiveEnd = true;
-        const limit = 0;
+        const limit = 10;
         const skip = 0;
         const updateSeq = true;
         const endkey = 'testString';
@@ -3780,7 +3892,7 @@ describe('CloudantV1', () => {
         descending: true,
         include_docs: true,
         inclusive_end: true,
-        limit: 0,
+        limit: 5,
         skip: 0,
         update_seq: true,
         endkey: 'testString',
@@ -3963,13 +4075,13 @@ describe('CloudantV1', () => {
         const descending = true;
         const includeDocs = true;
         const inclusiveEnd = true;
-        const limit = 0;
+        const limit = 10;
         const skip = 0;
         const updateSeq = true;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = 'testString';
+        const startkey = '0007741142412418284';
         const params = {
           db: db,
           partitionKey: partitionKey,
@@ -4075,13 +4187,13 @@ describe('CloudantV1', () => {
         const descending = true;
         const includeDocs = true;
         const inclusiveEnd = true;
-        const limit = 0;
+        const limit = 10;
         const skip = 0;
         const updateSeq = true;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = 'testString';
+        const startkey = '0007741142412418284';
         const params = {
           db: db,
           partitionKey: partitionKey,
@@ -4433,7 +4545,7 @@ describe('CloudantV1', () => {
         const descending = true;
         const includeDocs = true;
         const inclusiveEnd = true;
-        const limit = 0;
+        const limit = 10;
         const skip = 0;
         const updateSeq = true;
         const endkey = 'testString';
@@ -4576,7 +4688,7 @@ describe('CloudantV1', () => {
         const descending = true;
         const includeDocs = true;
         const inclusiveEnd = true;
-        const limit = 0;
+        const limit = 10;
         const skip = 0;
         const updateSeq = true;
         const endkey = 'testString';
@@ -5039,7 +5151,7 @@ describe('CloudantV1', () => {
         const conflicts = true;
         const executionStats = true;
         const fields = ['testString'];
-        const limit = 0;
+        const limit = 3;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
@@ -5145,7 +5257,7 @@ describe('CloudantV1', () => {
         const conflicts = true;
         const executionStats = true;
         const fields = ['testString'];
-        const limit = 0;
+        const limit = 3;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
@@ -6918,7 +7030,7 @@ describe('CloudantV1', () => {
       const replicationDatabaseModel = {
         auth: replicationDatabaseAuthModel,
         headers: { 'key1': 'testString' },
-        url: 'http://myserver.example:5984/foo-db',
+        url: 'https://examples.cloudant.com/animaldb',
       };
 
       // UserContext
@@ -8304,7 +8416,7 @@ describe('CloudantV1', () => {
         _conflicts: ['testString'],
         _deleted: true,
         _deleted_conflicts: ['testString'],
-        _id: 'testString',
+        _id: 'exampleid',
         _local_seq: 'testString',
         _rev: 'testString',
         _revisions: revisionsModel,
@@ -8405,13 +8517,13 @@ describe('CloudantV1', () => {
         const descending = true;
         const includeDocs = true;
         const inclusiveEnd = true;
-        const limit = 0;
+        const limit = 10;
         const skip = 0;
         const updateSeq = true;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = 'testString';
+        const startkey = '0007741142412418284';
         const accept = 'application/json';
         const params = {
           db: db,
@@ -8970,6 +9082,162 @@ describe('CloudantV1', () => {
       test('should not have any problems when no parameters are passed in', () => {
         // invoke the method with no parameters
         cloudantService.getUpInformation({});
+        checkForSuccessfulExecution(createRequestMock);
+      });
+    });
+  });
+  describe('getActivityTrackerEventsInformation', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation getActivityTrackerEventsInformation
+        const params = {};
+
+        const getActivityTrackerEventsInformationResult = cloudantService.getActivityTrackerEventsInformation(params);
+
+        // all methods should return a Promise
+        expectToBePromise(getActivityTrackerEventsInformationResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/_api/v2/user/activity_tracker/events', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.getActivityTrackerEventsInformation(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+
+      test('should not have any problems when no parameters are passed in', () => {
+        // invoke the method with no parameters
+        cloudantService.getActivityTrackerEventsInformation({});
+        checkForSuccessfulExecution(createRequestMock);
+      });
+    });
+  });
+  describe('postActivityTrackerEventsConfiguration', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation postActivityTrackerEventsConfiguration
+        const types = ['management'];
+        const params = {
+          types: types,
+        };
+
+        const postActivityTrackerEventsConfigurationResult = cloudantService.postActivityTrackerEventsConfiguration(params);
+
+        // all methods should return a Promise
+        expectToBePromise(postActivityTrackerEventsConfigurationResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/_api/v2/user/activity_tracker/events', 'POST');
+        const expectedAccept = 'application/json';
+        const expectedContentType = 'application/json';
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(options.body['types']).toEqual(types);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const types = ['management'];
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          types,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.postActivityTrackerEventsConfiguration(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async done => {
+        let err;
+        try {
+          await cloudantService.postActivityTrackerEventsConfiguration({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', done => {
+        const postActivityTrackerEventsConfigurationPromise = cloudantService.postActivityTrackerEventsConfiguration();
+        expectToBePromise(postActivityTrackerEventsConfigurationPromise);
+
+        postActivityTrackerEventsConfigurationPromise.catch(err => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
+      });
+    });
+  });
+  describe('getCurrentThroughputInformation', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation getCurrentThroughputInformation
+        const params = {};
+
+        const getCurrentThroughputInformationResult = cloudantService.getCurrentThroughputInformation(params);
+
+        // all methods should return a Promise
+        expectToBePromise(getCurrentThroughputInformationResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/_api/v2/user/current/throughput', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.getCurrentThroughputInformation(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+
+      test('should not have any problems when no parameters are passed in', () => {
+        // invoke the method with no parameters
+        cloudantService.getCurrentThroughputInformation({});
         checkForSuccessfulExecution(createRequestMock);
       });
     });
