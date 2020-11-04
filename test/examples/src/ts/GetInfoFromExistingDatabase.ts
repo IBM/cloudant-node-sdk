@@ -19,12 +19,12 @@
 import {CloudantV1} from "../../../../index";
 
 // 1. Create a Cloudant client with "EXAMPLES" service name ===================
-const examplesClient =
+const client =
     CloudantV1.newInstance({serviceName:"EXAMPLES"});
 
 // 2. Get server information ==================================================
 // call service without parameters:
-examplesClient.getServerInformation()
+client.getServerInformation()
     .then(serverInformation => {
         const version = serverInformation.result.version;
         console.log(`Server version ${version}`);
@@ -34,7 +34,7 @@ examplesClient.getServerInformation()
 const dbName = "animaldb";
 
 // call service with embedded parameters:
-examplesClient.getDatabaseInformation({db: dbName})
+client.getDatabaseInformation({db: dbName})
     .then(dbInfo => {
         const documentCount = dbInfo.result.doc_count;
         const dbNameResult = dbInfo.result.db_name;
@@ -49,7 +49,7 @@ const getDocParams:
     CloudantV1.GetDocumentParams = {db: dbName, docId: "zebra"};
 
 // call service with predefined parameters:
-examplesClient.getDocument(getDocParams)
+client.getDocument(getDocParams)
     .then(documentAboutZebra => {
         // result object is defined as a Document here:
         const result: CloudantV1.Document = documentAboutZebra.result;

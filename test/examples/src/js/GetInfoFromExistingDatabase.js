@@ -22,18 +22,18 @@ const { CloudantV1 } = require('../../../../index.ts');
 
 const getInfoFromExistingDatabase = async () => {
   // 1. Create a Cloudant client with "EXAMPLES" service name ===================
-  const examplesClient = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
+  const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
 
   // 2. Get server information ==================================================
   // call service without parameters:
-  const version = (await examplesClient.getServerInformation()).result.version;
+  const version = (await client.getServerInformation()).result.version;
   console.log(`Server version ${version}`);
 
   // 3. Get database information for "animaldb" =================================
   const dbName = 'animaldb';
 
   // call service with embedded parameters:
-  const dbInfo = await examplesClient.getDatabaseInformation({ db: dbName });
+  const dbInfo = await client.getDatabaseInformation({ db: dbName });
   const documentCount = dbInfo.result.doc_count;
   const dbNameResult = dbInfo.result.db_name;
 
@@ -44,7 +44,7 @@ const getInfoFromExistingDatabase = async () => {
   const getDocParams = { db: dbName, docId: 'zebra' };
 
   // call service with predefined parameters:
-  const documentAboutZebra = await examplesClient.getDocument(getDocParams);
+  const documentAboutZebra = await client.getDocument(getDocParams);
 
   // result object is defined as a Document here:
   const result = documentAboutZebra.result;
