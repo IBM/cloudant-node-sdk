@@ -17,7 +17,8 @@
 
 # IBM Cloudant Node.js SDK Version 0.0.10
 
-Node.js client library to interact with various [Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=node).
+Node.js client library to interact with the
+[IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=node).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
 Changes might occur which impact applications that use this SDK.
@@ -66,18 +67,24 @@ Changes might occur which impact applications that use this SDK.
 
 ## Overview
 
-The IBM Cloudant Node.js SDK allows developers to programmatically interact with [Cloudant](https://cloud.ibm.com/apidocs/cloudant?code=node).
+The IBM Cloudant Node.js SDK allows developers to programmatically
+interact with IBM [Cloudant](https://cloud.ibm.com/apidocs/cloudant)
+with the help of the `@ibm-cloud/cloudant` package.
 
 ## Features
 
-The purpose of this Node.js SDK is to wrap most of the HTTP request APIs provided by Cloudant and
-supply other functions to ease the usage of Cloudant.
-This SDK should make life easier for programmers to do what’s really important for them: develop.
+The purpose of this Node.js SDK is to wrap most of the HTTP request APIs
+provided by Cloudant and supply other functions to ease the usage of Cloudant.
+Moreover, it has limited support for CouchDB as well.
+This SDK should make life easier for programmers to do what’s really important
+for them: develop.
 
-Reasons why you should consider using Cloudant SDK for Node.js in your project:
+Reasons why you should consider using Cloudant Node.js SDK in your
+project:
 
 - Supported by IBM Cloudant.
-- Includes all the most popular and latest supported endpoints for applications.
+- Includes all the most popular and latest supported endpoints for
+  applications.
 - Handles the authentication.
 - Familiar user experience of IBM Cloud SDKs.
 - `Promise` based design with asynchronous HTTP requests.
@@ -85,10 +92,14 @@ Reasons why you should consider using Cloudant SDK for Node.js in your project:
 
 ## Prerequisites
 
-- You need an [IBM Cloud][ibm-cloud-onboarding] account.
-- **Node.js 10, 12, 14**: This SDK is tested with Node.js versions 10, 12, and 14. It may work on other versions but those are not officially supported.
-
 [ibm-cloud-onboarding]: http://cloud.ibm.com/registration
+
+- You need an [IBM Cloud][ibm-cloud-onboarding] account.
+- An IAM API key to allow the SDK to access your account.
+  Create one [here](https://cloud.ibm.com/iam/apikeys).
+- **Node.js 10, 12, 14**: This SDK is tested with Node.js versions 10, 12, and 14.
+  It may work on other versions but those are not officially supported.
+
 
 ## Installation
 
@@ -100,14 +111,35 @@ npm install @ibm-cloud/cloudant
 
 ### Authentication
 
-This library requires some of your [Cloudant service credentials](https://cloud.ibm.com/docs/Cloudant?topic=cloudant-creating-an-ibm-cloudant-instance-on-ibm-cloud#locating-your-service-credentials) to authenticate with your account.
+[service-credentials]: https://cloud.ibm.com/docs/Cloudant?topic=cloudant-creating-an-ibm-cloudant-instance-on-ibm-cloud#locating-your-service-credentials
+[cloud-IAM-mgmt]: https://cloud.ibm.com/docs/Cloudant?topic=cloudant-ibm-cloud-identity-and-access-management-iam-
+[couch-cookie-auth]: https://docs.couchdb.org/en/stable/api/server/authn.html#cookie-authentication
+[cloudant-cookie-auth]: https://cloud.ibm.com/docs/Cloudant?topic=cloudant-authentication#cookie-authentication
+[couch-basic-auth]: https://docs.couchdb.org/en/stable/api/server/authn.html#basic-authentication
+[cloudant-basic-auth]: https://cloud.ibm.com/docs/services/Cloudant/api?topic=cloudant-authentication#basic-authentication
+
+This library requires some of your
+[Cloudant service credentials][service-credentials] to authenticate with your
+account.
 
 1. `IAM`, `COUCHDB_SESSION`, `BASIC` or `NOAUTH` **authentication type**.
-    1. [*IAM authentication*](#iam-authentication) is highly recommended when your back-end database server is [**Cloudant**](https://cloud.ibm.com/docs/Cloudant?topic=cloudant-ibm-cloud-identity-and-access-management-iam-). This authentication type requires a server-generated `apikey` instead of a user-given password.
-    1. [*Session cookie (`COUCHDB_SESSION`) authentication*](#session-cookie-authentication) is recommended for [Apache CouchDB](https://docs.couchdb.org/en/stable/api/server/authn.html#cookie-authentication) or for [Cloudant](https://cloud.ibm.com/docs/Cloudant?topic=cloudant-authentication#cookie-authentication) when IAM is unavailable. It exchanges username and password credentials for an `AuthSession` cookie from the `/_session` endpoint.
-    1. [*Basic* (or legacy) *authentication*](#basic-authentication) is good for both [Cloudant](https://cloud.ibm.com/docs/services/Cloudant/api?topic=cloudant-authentication#basic-authentication) and [CouchDB](https://docs.couchdb.org/en/stable/api/server/authn.html#basic-authentication) back-end database servers. This authentication type requires the good old `username` and `password` credentials.
-    1. *Noauth* authentication does not need any credentials. Note that this authentication type will only work for queries against a database with read access for everyone.
-1. The service `url`
+    1. [*IAM authentication*](#iam-authentication) is highly recommended when your
+    back-end database server is [**Cloudant**][cloud-IAM-mgmt]. This
+    authentication type requires a server-generated `apikey` instead of a
+    user-given password.
+    1. [*Session cookie (`COUCHDB_SESSION`) authentication*](#session-cookie-authentication)
+    is recommended for [Apache CouchDB][couch-cookie-auth] or for
+    [Cloudant][cloudant-cookie-auth] when IAM is unavailable. It exchanges username
+    and password credentials for an `AuthSession` cookie from the `/_session`
+    endpoint.
+    1. [*Basic* (or legacy) *authentication*](#basic-authentication) is a fallback
+    for both [Cloudant][cloudant-basic-auth] and [Apache CouchDB][couch-basic-auth]
+    back-end database servers. This authentication type requires the good old
+    `username` and `password` credentials.
+    1. *Noauth* authentication does not need any credentials. Note that this
+    authentication type will only work for queries against a database with read
+    access for everyone.
+1. The service `url`.
 
 You have to add these properties as your **environment variables**, because some
 examples that follow assume that these variables are set.
@@ -117,18 +149,23 @@ To learn more about authentication configuration see the related documentation i
 
 #### IAM authentication
 
-For Cloudant *IAM authentication* set the following environmental variables by replacing `<url>` and `<apikey>` with your proper [service credentials](https://cloud.ibm.com/docs/Cloudant?topic=cloudant-creating-an-ibm-cloudant-instance-on-ibm-cloud#locating-your-service-credentials). There is no need to set `CLOUDANT_AUTH_TYPE` to `IAM` because it is the default.
+For Cloudant *IAM authentication* set the following environmental variables by
+replacing `<url>` and `<apikey>` with your proper
+[service credentials][service-credentials]. There is no need to set
+`CLOUDANT_AUTH_TYPE` to `IAM` because it is the default.
 
-```sh
+```bash
 CLOUDANT_URL=<url>
 CLOUDANT_APIKEY=<apikey>
 ```
 
 #### Session cookie authentication
 
-For `COUCHDB_SESSION` authentication set the following environmental variables by replacing `<url>`, `<username>` and `<password>` with your proper [service credentials](https://cloud.ibm.com/docs/Cloudant?topic=cloudant-creating-an-ibm-cloudant-instance-on-ibm-cloud#locating-your-service-credentials).
+For `COUCHDB_SESSION` authentication set the following environmental variables
+by replacing `<url>`, `<username>` and `<password>` with your proper
+[service credentials][service-credentials].
 
-```sh
+```bash
 CLOUDANT_AUTH_TYPE=COUCHDB_SESSION
 CLOUDANT_URL=<url>
 CLOUDANT_USERNAME=<username>
@@ -137,9 +174,11 @@ CLOUDANT_PASSWORD=<password>
 
 #### Basic authentication
 
-For *Basic authentication* set the following environmental variables by replacing `<url>`, `<username>` and `<password>` with your proper [service credentials](https://cloud.ibm.com/docs/Cloudant?topic=cloudant-creating-an-ibm-cloudant-instance-on-ibm-cloud#locating-your-service-credentials).
+For *Basic authentication* set the following environmental variables by
+replacing `<url>`, `<username>` and `<password>` with your proper
+[service credentials][service-credentials].
 
-```sh
+```bash
 CLOUDANT_AUTH_TYPE=BASIC
 CLOUDANT_URL=<url>
 CLOUDANT_USERNAME=<username>
@@ -153,14 +192,14 @@ CLOUDANT_PASSWORD=<password>
 
 #### 1. Retrieve information from an existing database
 
-This example code gathers some information about an existing database hosted on the https://examples.cloudant.com
-service `url`.
-To do this, you need to extend your environment variables with the *service url* and *authentication type* to use
-`NOAUTH` authentication while reaching the `animaldb` database.
-This step is necessary for the SDK to distinguish the `EXAMPLES` custom service name from the default service name
-which is `CLOUDANT`.
+This example code gathers some information about an existing database hosted on
+the https://examples.cloudant.com/ service `url`. To do this, you need to
+extend your environment variables with the *service url* and *authentication
+type* to use `NOAUTH` authentication while reaching the `animaldb` database.
+This step is necessary for the SDK to distinguish the `EXAMPLES` custom service
+name from the default service name which is `CLOUDANT`.
 
-```sh
+```bash
 EXAMPLES_URL=https://examples.cloudant.com
 EXAMPLES_AUTH_TYPE=NOAUTH
 ```
@@ -280,8 +319,9 @@ Document retrieved from database:
 
 #### 2. Create your own database and add a document
 
-Now comes the exciting part of creating your own `orders` database and adding a document
-about *Bob Smith* with your own [IAM](#iam-authentication) or [Basic](#basic-authentication) service credentials.
+Now comes the exciting part of creating your own `orders` database and adding
+a document about *Bob Smith* with your own [IAM](#iam-authentication) or
+[Basic](#basic-authentication) service credentials.
 
 <details open>
 <summary>TypeScript:</summary>
@@ -449,10 +489,11 @@ You have created the document:
 
 #### 3. Update your previously created document
 
-**Note**: this example code assumes that you have created both the `orders` database and the `example`
-document by [running this previous example code](#2-create-your-own-database-and-add-a-document)
-successfully, otherwise you get the `Cannot update document because either "orders" database or
-"example" document was not found.` message.
+**Note**: this example code assumes that you have created both the `orders`
+database and the `example` document by
+[running this previous example code](#2-create-your-own-database-and-add-a-document)
+successfully, otherwise you get the `Cannot update document because either "orders"
+database or "example" document was not found.` message.
 
 <details open>
 <summary>TypeScript:</summary>
@@ -579,10 +620,11 @@ You have updated the document:
 
 #### 4. Delete your previously created document
 
-**Note**: this example code assumes that you have created both the `orders` database and the `example`
-document by [running this previous example code](#2-create-your-own-database-and-add-a-document)
-successfully, otherwise you get the `Cannot delete document because either "orders" database or
-"example" document was not found.` message.
+**Note**: this example code assumes that you have created both the `orders`
+database and the `example` document by
+[running this previous example code](#2-create-your-own-database-and-add-a-document)
+successfully, otherwise you get the `Cannot delete document because either "orders"
+database or "example" document was not found.` message.
 
 <details open>
 <summary>TypeScript:</summary>
@@ -690,17 +732,18 @@ You have deleted the document.
 
 ## Error handling
 
-For sample code on handling errors, please see [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=node#error-handling)
+For sample code on handling errors, please see
+[Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=node#error-handling).
 
 ## Using the SDK
 
 For general SDK usage information, please see
-[this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md)
+[this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md).
 
 ## Questions
 
-If you are having difficulties using this SDK or have a question about the IBM Cloud services,
-please ask a question at
+If you are having difficulties using this SDK or have a question about
+the IBM Cloud services, please ask a question on
 [Stack Overflow](http://stackoverflow.com/questions/ask?tags=ibm-cloud).
 
 ## Issues
@@ -712,14 +755,19 @@ already encountered this issue.
 
 ## Further resources
 
-- [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=node): API examples for Cloudant Node.js SDK.
-- [Cloudant docs](https://cloud.ibm.com/docs/services/Cloudant?topic=cloudant-overview#overview): The official documentation page for Cloudant.
-- [Cloudant Learning Center](https://developer.ibm.com/clouddataservices/docs/compose/cloudant/): The official learning center with several useful videos which help you to use Cloudant successfully.
-- [Cloudant blog](https://blog.cloudant.com/): Many useful articles how to optimize Cloudant for common problems.
+- [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=node):
+  API examples for Cloudant Node.js SDK.
+- [Cloudant docs](https://cloud.ibm.com/docs/services/Cloudant?topic=cloudant-overview#overview):
+  The official documentation page for Cloudant.
+- [Cloudant Learning Center](https://developer.ibm.com/clouddataservices/docs/compose/cloudant/):
+  The official learning center with several useful videos which help you to use
+  Cloudant successfully.
+- [Cloudant blog](https://blog.cloudant.com/):
+  Many useful articles how to optimize Cloudant for common problems.
 
 ## Open source @ IBM
 
-Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
+Find more open source projects on the [IBM Github Page](http://ibm.github.io/).
 
 ## Contributing
 
@@ -727,6 +775,5 @@ See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## License
 
-This project is released under the Apache 2.0 license.
-The license's full text can be found in
-[LICENSE](LICENSE).
+This SDK is released under the Apache 2.0 license.
+The license's full text can be found in [LICENSE](LICENSE).
