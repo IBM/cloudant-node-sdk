@@ -42,16 +42,18 @@ Changes might occur which impact applications that use this SDK.
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-- [Getting started](#getting-started)
-  * [Authentication](#authentication)
+- [Authentication](#authentication)
+  * [Authenticate with environment variables](#authenticate-with-environment-variables)
     + [IAM authentication](#iam-authentication)
     + [Session cookie authentication](#session-cookie-authentication)
     + [Basic authentication](#basic-authentication)
-  * [Code examples](#code-examples)
-    + [1. Retrieve information from an existing database](#1-retrieve-information-from-an-existing-database)
-    + [2. Create your own database and add a document](#2-create-your-own-database-and-add-a-document)
-    + [3. Update your previously created document](#3-update-your-previously-created-document)
-    + [4. Delete your previously created document](#4-delete-your-previously-created-document)
+  * [Authenticate with external configuration](#authenticate-with-external-configuration)
+  * [Authenticate programmatically](#authenticate-programmatically)
+- [Code examples](#code-examples)
+  * [1. Retrieve information from an existing database](#1-retrieve-information-from-an-existing-database)
+  * [2. Create your own database and add a document](#2-create-your-own-database-and-add-a-document)
+  * [3. Update your previously created document](#3-update-your-previously-created-document)
+  * [4. Delete your previously created document](#4-delete-your-previously-created-document)
 - [Error handling](#error-handling)
 - [Using the SDK](#using-the-sdk)
 - [Questions](#questions)
@@ -108,9 +110,7 @@ project:
 npm install @ibm-cloud/cloudant
 ```
 
-## Getting started
-
-### Authentication
+## Authentication
 
 [service-credentials]: https://cloud.ibm.com/docs/Cloudant?topic=cloudant-creating-an-ibm-cloudant-instance-on-ibm-cloud#locating-your-service-credentials
 [cloud-IAM-mgmt]: https://cloud.ibm.com/docs/Cloudant?topic=cloudant-ibm-cloud-identity-and-access-management-iam-
@@ -142,11 +142,13 @@ account.
     access for everyone.
 1. The service `url`.
 
-You have to add these properties as your **environment variables**, because some
-examples that follow assume that these variables are set.
-To learn more about authentication configuration see the related documentation in the
-[Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant#authentication?code=node) or in the
-[general SDK usage information](https://github.com/IBM/ibm-cloud-sdk-common#authentication).
+There are several ways to **set** these properties:
+
+1. As [environment variables](#authenticate-with-environment-variables)
+1. The [programmatic approach](#authenticate-programmatically)
+1. With an [external credentials file](#authenticate-with-external-configuration)
+
+### Authenticate with environment variables
 
 #### IAM authentication
 
@@ -189,9 +191,28 @@ CLOUDANT_PASSWORD=<password>
 **Note**: We recommend using [IAM](#iam-authentication) for Cloudant and
 [Session](#session-cookie-authentication) for CouchDB authentication.
 
-### Code examples
+### Authenticate with external configuration
 
-#### 1. Retrieve information from an existing database
+To use an external configuration file, the
+[Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=node#authentication-with-external-configuration),
+or the
+[general SDK usage information](https://github.com/IBM/ibm-cloud-sdk-common#using-external-configuration)
+will guide you.
+
+### Authenticate programmatically
+
+To learn more about how to use programmatic authentication, see the related
+documentation in the
+[Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=python#programmatic-authentication)
+or in the
+[Node.js SDK Core document about authentication](https://github.com/IBM/node-sdk-core/blob/master/Authentication.md).
+
+## Code examples
+
+The code examples below will follow the
+[authentication with environment variables](#authenticate-with-environment-variables).
+
+### 1. Retrieve information from an existing database
 
 This example code gathers some information about an existing database hosted on
 the https://examples.cloudant.com/ service `url`. To do this, you need to
@@ -318,7 +339,7 @@ Document retrieved from database:
 }
 ```
 
-#### 2. Create your own database and add a document
+### 2. Create your own database and add a document
 
 Now comes the exciting part of creating your own `orders` database and adding
 a document about *Bob Smith* with your own [IAM](#iam-authentication) or
@@ -488,7 +509,7 @@ You have created the document:
 }
 ```
 
-#### 3. Update your previously created document
+### 3. Update your previously created document
 
 **Note**: this example code assumes that you have created both the `orders`
 database and the `example` document by
@@ -619,7 +640,7 @@ You have updated the document:
 }
 ```
 
-#### 4. Delete your previously created document
+### 4. Delete your previously created document
 
 **Note**: this example code assumes that you have created both the `orders`
 database and the `example` document by
