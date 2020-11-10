@@ -82,6 +82,7 @@ Reasons why you should consider using Cloudant SDK for Node.js in your project:
 - Familiar user experience of IBM Cloud SDKs.
 - `Promise` based design with asynchronous HTTP requests.
 - Use either as native JavaScript or take advantage of TypeScript models.
+- Transparently compresses request and response bodies.
 
 ## Prerequisites
 
