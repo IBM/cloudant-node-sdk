@@ -99,6 +99,16 @@ describe('CloudantV1', () => {
 
       expect(testInstance.baseOptions.serviceUrl).toBe(CloudantV1.DEFAULT_SERVICE_URL);
     });
+
+    test('should set `enableGzipCompression` by default', () => {
+      const options = {
+        authenticator: new NoAuthAuthenticator(),
+      };
+
+      const testInstance = new CloudantV1(options);
+
+      expect(testInstance.baseOptions.enableGzipCompression).toBe(true);
+    });
   });
   describe('getServerInformation', () => {
     describe('positive tests', () => {

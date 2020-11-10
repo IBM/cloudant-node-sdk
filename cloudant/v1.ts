@@ -80,6 +80,8 @@ class CloudantV1 extends CloudantBaseService {
   constructor(options: UserOptions) {
     options = options || {};
 
+    // enable gzip compression of request bodies
+    options.enableGzipCompression = true;
     super(options);
     if (options.serviceUrl) {
       this.setServiceUrl(options.serviceUrl);
