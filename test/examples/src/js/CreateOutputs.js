@@ -26,7 +26,7 @@ const { updateDoc } = require('./UpdateDoc.js');
 const { deleteDoc } = require('./DeleteDoc.js');
 
 let consoleOutput = ''; // flush consoleOutput
-const mockedLog = output => (consoleOutput = consoleOutput + '\n' + output);
+const mockedLog = (output) => (consoleOutput = consoleOutput + '\n' + output);
 global.console.log = mockedLog; // Mock console.log
 
 const run = async () => {
@@ -35,7 +35,7 @@ const run = async () => {
   fs.writeFile(
     'test/examples/output/GetInfoFromExistingDatabase.txt',
     consoleOutput.trim(),
-    err => {
+    (err) => {
       if (err) throw err;
     }
   );
@@ -44,7 +44,7 @@ const run = async () => {
 
   await createDbAndDoc();
 
-  fs.writeFile('test/examples/output/CreateDbAndDoc.txt', consoleOutput.trim(), err => {
+  fs.writeFile('test/examples/output/CreateDbAndDoc.txt', consoleOutput.trim(), (err) => {
     if (err) throw err;
   });
 
@@ -52,7 +52,7 @@ const run = async () => {
 
   await updateDoc();
 
-  fs.writeFile('test/examples/output/UpdateDoc.txt', consoleOutput.trim(), err => {
+  fs.writeFile('test/examples/output/UpdateDoc.txt', consoleOutput.trim(), (err) => {
     if (err) throw err;
   });
 
@@ -60,7 +60,7 @@ const run = async () => {
 
   await deleteDoc();
 
-  fs.writeFile('test/examples/output/DeleteDoc.txt', consoleOutput.trim(), err => {
+  fs.writeFile('test/examples/output/DeleteDoc.txt', consoleOutput.trim(), (err) => {
     if (err) throw err;
   });
 };

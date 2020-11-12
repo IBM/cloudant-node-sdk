@@ -30,7 +30,7 @@ let configFileExists;
 
 // `filename` is the location of the credentials file
 // returns the appropriate "describe" to be used for the tests.
-module.exports.prepareTests = filename => {
+module.exports.prepareTests = (filename) => {
   // Save off the name of the config file.
   configFilename = filename;
 

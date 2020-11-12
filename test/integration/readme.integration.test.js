@@ -67,7 +67,7 @@ describe('Readme integration tests', () => {
     await getInfoFromExistingDatabase();
     const consoleOutput = consoleLogSpy
       .getCalls()
-      .map(a => a.args[0])
+      .map((a) => a.args[0])
       .join('\n');
     expect(consoleOutput).toStrictEqual(expectedJoinedConsoleOutput);
   });
@@ -86,7 +86,7 @@ describe('Readme integration tests', () => {
     await createDbAndDoc();
     const consoleOutput = consoleLogSpy
       .getCalls()
-      .map(a => a.args[0])
+      .map((a) => a.args[0])
       .join('\n');
     expect(consoleOutput).toStrictEqual(expectedJoinedConsoleOutput);
   });
@@ -105,7 +105,7 @@ describe('Readme integration tests', () => {
     await createDbAndDoc();
     const consoleOutput = consoleLogSpy
       .getCalls()
-      .map(a => a.args[0])
+      .map((a) => a.args[0])
       .join('\n');
     expect(consoleOutput).toStrictEqual(expectedJoinedConsoleOutput);
   });
@@ -124,7 +124,7 @@ describe('Readme integration tests', () => {
     await updateDoc();
     const consoleOutput = consoleLogSpy
       .getCalls()
-      .map(a => a.args[0])
+      .map((a) => a.args[0])
       .join('\n');
     expect(consoleOutput).toStrictEqual(expectedJoinedConsoleOutput);
   });
@@ -143,14 +143,14 @@ describe('Readme integration tests', () => {
     await updateDoc();
     const consoleOutput = consoleLogSpy
       .getCalls()
-      .map(a => a.args[0])
+      .map((a) => a.args[0])
       .join('\n');
     expect(consoleOutput).toStrictEqual(expectedJoinedConsoleOutput);
   });
 
   it('Delete existing doc', async () => {
     await deleteDoc();
-    const consoleOutput = consoleLogSpy.getCalls().map(a => a.args[0]);
+    const consoleOutput = consoleLogSpy.getCalls().map((a) => a.args[0]);
     expect(consoleOutput.join('\n')).toBe('You have deleted the document.');
   });
 
@@ -158,7 +158,7 @@ describe('Readme integration tests', () => {
     await deleteDoc();
     const consoleOutput = consoleLogSpy
       .getCalls()
-      .map(a => a.args[0])
+      .map((a) => a.args[0])
       .join('\n');
     expect(consoleOutput).toBe(
       'Cannot delete document because either "orders" database or the "example" document was not found.'
