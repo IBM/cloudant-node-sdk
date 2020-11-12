@@ -38,8 +38,8 @@ const dbName = process.env.DATABASE_NAME || 'stores';
 describe('validate', () => {
   jest.setTimeout(timeout);
 
-  it('server information', function() {
-    return cloudant.getServerInformation().then(response => {
+  it('server information', () => {
+    return cloudant.getServerInformation().then((response) => {
       assert.ok(response);
       const result = response.result;
       assert.ok(result);
@@ -49,7 +49,7 @@ describe('validate', () => {
   });
 
   it('db exists', () => {
-    return cloudant.headDatabase({ db: dbName }).then(response => {
+    return cloudant.headDatabase({ db: dbName }).then((response) => {
       assert.ok(response);
       assert.ok(response.headers);
       assert.ok(Object.keys(response.headers).length > 0);
@@ -57,7 +57,7 @@ describe('validate', () => {
   });
 
   it('all docs', () => {
-    return cloudant.postAllDocs({ db: dbName }).then(response => {
+    return cloudant.postAllDocs({ db: dbName }).then((response) => {
       assert.ok(response);
       const result = response.result;
       assert.ok(result);
