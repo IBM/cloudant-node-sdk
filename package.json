@@ -61,7 +61,7 @@
     "jest": "^26.1.0",
     "jest-junit": "^11.1.0",
     "prettier": "^2.1.2",
-    "semantic-release": "^15.13.25",
+    "semantic-release": "^17.2.3",
     "sinon": "^9.0.2",
     "tough-cookie": "^4.0.0",
     "ts-jest": "^26.1.2",
