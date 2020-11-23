@@ -57,7 +57,7 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^9.0.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "installed-check": "^2.2.0",
+    "installed-check": "^3.0.0",
     "jest": "^26.1.0",
     "jest-junit": "^11.1.0",
     "prettier": "^2.1.2",
