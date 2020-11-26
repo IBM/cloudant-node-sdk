@@ -46,7 +46,7 @@
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
     "@types/jest": "^26.0.4",
-    "@typescript-eslint/parser": "^3.5.0",
+    "@typescript-eslint/parser": "^4.8.2",
     "axios": "^0.21.0",
     "codecov": "^3.5.0",
     "dotenv": "^8.2.0",
