@@ -1,19 +1,17 @@
 <!--
-  The example codes and outputs below are generated using the `embedmd` go package.
+  The example codes and outputs below are generated using the `embedmd` go
+  package.
 
       https://github.com/campoy/embedmd
 
-  You should regenerate the example codes after making any changes to examples in the test/examples/ folder.
+  You should regenerate the example codes after making any changes to
+  examples in the test/examples/ folder.
 
       embedmd -w README.md
   -->
 
 [![Build Status](https://travis-ci.com/IBM/cloudant-node-sdk.svg?branch=master)](https://travis-ci.com/IBM/cloudant-node-sdk)
-<!--
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![npm-version](https://img.shields.io/npm/v/IBM/cloudant-node-sdk.svg)](https://www.npmjs.com/package/@ibmcloud/cloudant)
-[![codecov](https://codecov.io/gh/IBM/cloudant-node-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/IBM/cloudant-node-sdk)
--->
+[![Release](https://img.shields.io/github/v/release/IBM/cloudant-node-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-node-sdk/releases/latest)
 
 # IBM Cloudant Node.js SDK Version 0.0.11
 
@@ -49,16 +47,16 @@ Changes might occur which impact applications that use this SDK.
     + [Basic authentication](#basic-authentication)
   * [Authenticate with external configuration](#authenticate-with-external-configuration)
   * [Authenticate programmatically](#authenticate-programmatically)
-- [Code examples](#code-examples)
-  * [1. Retrieve information from an existing database](#1-retrieve-information-from-an-existing-database)
-  * [2. Create your own database and add a document](#2-create-your-own-database-and-add-a-document)
-  * [3. Update your previously created document](#3-update-your-previously-created-document)
-  * [4. Delete your previously created document](#4-delete-your-previously-created-document)
-- [Error handling](#error-handling)
 - [Using the SDK](#using-the-sdk)
+  * [Code examples](#code-examples)
+    + [1. Retrieve information from an existing database](#1-retrieve-information-from-an-existing-database)
+    + [2. Create your own database and add a document](#2-create-your-own-database-and-add-a-document)
+    + [3. Update your previously created document](#3-update-your-previously-created-document)
+    + [4. Delete your previously created document](#4-delete-your-previously-created-document)
+  * [Error handling](#error-handling)
+  * [Further resources](#further-resources)
 - [Questions](#questions)
 - [Issues](#issues)
-- [Further resources](#further-resources)
 - [Open source @ IBM](#open-source--ibm)
 - [Contributing](#contributing)
 - [License](#license)
@@ -77,7 +75,6 @@ with the help of the `@ibm-cloud/cloudant` package.
 
 The purpose of this Node.js SDK is to wrap most of the HTTP request APIs
 provided by Cloudant and supply other functions to ease the usage of Cloudant.
-Moreover, it has limited support for CouchDB as well.
 This SDK should make life easier for programmers to do what’s really important
 for them: develop.
 
@@ -85,6 +82,9 @@ Reasons why you should consider using Cloudant Node.js SDK in your
 project:
 
 - Supported by IBM Cloudant.
+- Service compatibility besides Cloudant _Classic_ with
+  [CouchDB 3.x](https://docs.couchdb.org/en/stable/) and some
+  [Cloudant TXE](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-overview-te)
 - Includes all the most popular and latest supported endpoints for
   applications.
 - Handles the authentication.
@@ -95,14 +95,13 @@ project:
 
 ## Prerequisites
 
-[ibm-cloud-onboarding]: http://cloud.ibm.com/registration
-
-- You need an [IBM Cloud][ibm-cloud-onboarding] account.
-- An IAM API key to allow the SDK to access your account.
-  Create one [here](https://cloud.ibm.com/iam/apikeys).
+- A
+  [Cloudant](https://cloud.ibm.com/docs/Cloudant/getting-started.html#step-1-connect-to-your-cloudant-nosql-db-service-instance-on-ibm-cloud)
+  service instance or a
+  [CouchDB](https://docs.couchdb.org/en/latest/install/index.html)
+  server.
 - **Node.js 10, 12, 14**: This SDK is tested with Node.js versions 10, 12, and 14.
   It may work on other versions but those are not officially supported.
-
 
 ## Installation
 
@@ -127,7 +126,8 @@ account.
     1. [*IAM authentication*](#iam-authentication) is highly recommended when your
     back-end database server is [**Cloudant**][cloud-IAM-mgmt]. This
     authentication type requires a server-generated `apikey` instead of a
-    user-given password.
+    user-given password. You can create one
+    [here](https://cloud.ibm.com/iam/apikeys).
     1. [*Session cookie (`COUCHDB_SESSION`) authentication*](#session-cookie-authentication)
     is recommended for [Apache CouchDB][couch-cookie-auth] or for
     [Cloudant][cloudant-cookie-auth] when IAM is unavailable. It exchanges username
@@ -207,12 +207,17 @@ documentation in the
 or in the
 [Node.js SDK Core document about authentication](https://github.com/IBM/node-sdk-core/blob/master/Authentication.md).
 
-## Code examples
+## Using the SDK
+
+For general IBM Cloud SDK usage information, please see
+[this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md).
+
+### Code examples
 
 The code examples below will follow the
 [authentication with environment variables](#authenticate-with-environment-variables).
 
-### 1. Retrieve information from an existing database
+#### 1. Retrieve information from an existing database
 
 This example code gathers some information about an existing database hosted on
 the https://examples.cloudant.com/ service `url`. To do this, you need to
@@ -231,6 +236,9 @@ Once the environment variables are set, you can try out the code examples.
 <details open>
 <summary>TypeScript:</summary>
 
+```ts
+import {CloudantV1} from "@ibm-cloud/cloudant";
+```
 [embedmd]:# (test/examples/src/ts/GetInfoFromExistingDatabase.ts /\/\/ 1./ $)
 ```ts
 // 1. Create a Cloudant client with "EXAMPLES" service name ===================
@@ -277,6 +285,9 @@ client.getDocument(getDocParams)
 <details>
 <summary>JavaScript:</summary>
 
+```js
+const { CloudantV1 } = require('@ibm-cloud/cloudant');
+```
 [embedmd]:# (test/examples/src/js/GetInfoFromExistingDatabase.js /const getInfoFromExistingDatabase/ /getInfoFromExistingDatabase\(\);\n\}/)
 ```js
 const getInfoFromExistingDatabase = async () => {
@@ -319,7 +330,6 @@ if (require.main === module) {
 </details>
 
 The result of the code is similar to the following output.
-The order of the output lines may change due to the asynchronicity.
 
 [embedmd]:# (test/examples/output/GetInfoFromExistingDatabase.txt)
 ```txt
@@ -339,15 +349,21 @@ Document retrieved from database:
 }
 ```
 
-### 2. Create your own database and add a document
+#### 2. Create your own database and add a document
 
 Now comes the exciting part of creating your own `orders` database and adding
 a document about *Bob Smith* with your own [IAM](#iam-authentication) or
 [Basic](#basic-authentication) service credentials.
 
+<details>
+<summary>Create code example</summary>
+
 <details open>
 <summary>TypeScript:</summary>
 
+```ts
+import {CloudantV1} from "@ibm-cloud/cloudant";
+```
 [embedmd]:# (test/examples/src/ts/CreateDbAndDoc.ts /interface/ $)
 ```ts
 interface OrderDocument extends CloudantV1.Document {
@@ -417,12 +433,14 @@ createDb.then(() => {
         });
 });
 ```
-
 </details>
 
 <details>
 <summary>JavaScript:</summary>
 
+```js
+const { CloudantV1 } = require('@ibm-cloud/cloudant');
+```
 [embedmd]:# (test/examples/src/js/CreateDbAndDoc.js /const createDbAndDoc/ /createDbAndDoc\(\);\n\}/)
 ```js
 const createDbAndDoc = async () => {
@@ -491,11 +509,11 @@ if (require.main === module) {
   createDbAndDoc();
 }
 ```
-
 </details>
 
+
+</details>
 The result of the code is similar to the following output.
-The order of the output lines may change due to the asynchronicity.
 
 [embedmd]:# (test/examples/output/CreateDbAndDoc.txt)
 ```txt
@@ -509,7 +527,7 @@ You have created the document:
 }
 ```
 
-### 3. Update your previously created document
+#### 3. Update your previously created document
 
 **Note**: this example code assumes that you have created both the `orders`
 database and the `example` document by
@@ -517,9 +535,15 @@ database and the `example` document by
 successfully, otherwise you get the `Cannot update document because either "orders"
 database or "example" document was not found.` message.
 
+<details>
+<summary>Update code example</summary>
+
 <details open>
 <summary>TypeScript:</summary>
 
+```ts
+import {CloudantV1} from "@ibm-cloud/cloudant";
+```
 [embedmd]:# (test/examples/src/ts/UpdateDoc.ts /interface/ $)
 ```ts
 interface OrderDocument extends CloudantV1.Document {
@@ -569,12 +593,14 @@ client.getDocument(getDocParams)
         }
     });
 ```
-
 </details>
 
 <details>
 <summary>JavaScript:</summary>
 
+```js
+const { CloudantV1 } = require('@ibm-cloud/cloudant');
+```
 [embedmd]:# (test/examples/src/js/UpdateDoc.js /const updateDoc/ /updateDoc\(\);\n\}/)
 ```js
 const updateDoc = async () => {
@@ -624,9 +650,10 @@ if (require.main === module) {
   updateDoc();
 }
 ```
-
 </details>
 
+
+</details>
 The result of the code is similar to the following output.
 
 [embedmd]:# (test/examples/output/UpdateDoc.txt)
@@ -640,7 +667,7 @@ You have updated the document:
 }
 ```
 
-### 4. Delete your previously created document
+#### 4. Delete your previously created document
 
 **Note**: this example code assumes that you have created both the `orders`
 database and the `example` document by
@@ -648,9 +675,15 @@ database and the `example` document by
 successfully, otherwise you get the `Cannot delete document because either "orders"
 database or "example" document was not found.` message.
 
+<details>
+<summary>Delete code example</summary>
+
 <details open>
 <summary>TypeScript:</summary>
 
+```ts
+import {CloudantV1} from "@ibm-cloud/cloudant";
+```
 [embedmd]:# (test/examples/src/ts/DeleteDoc.ts /interface/ $)
 ```ts
 interface OrderDocument extends CloudantV1.Document {
@@ -694,12 +727,14 @@ client.getDocument(getDocParams)
         }
     });
 ```
-
 </details>
 
 <details>
 <summary>JavaScript:</summary>
 
+```js
+const { CloudantV1 } = require('@ibm-cloud/cloudant');
+```
 [embedmd]:# (test/examples/src/js/DeleteDoc.js /const deleteDoc/ /deleteDoc\(\);\n\}/)
 ```js
 const deleteDoc = async () => {
@@ -742,9 +777,10 @@ if (require.main === module) {
   deleteDoc();
 }
 ```
-
 </details>
 
+
+</details>
 The result of the code is the following output.
 
 [embedmd]:# (test/examples/output/DeleteDoc.txt)
@@ -752,30 +788,12 @@ The result of the code is the following output.
 You have deleted the document.
 ```
 
-## Error handling
+### Error handling
 
 For sample code on handling errors, please see
 [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=node#error-handling).
 
-## Using the SDK
-
-For general SDK usage information, please see
-[this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md).
-
-## Questions
-
-If you are having difficulties using this SDK or have a question about
-the IBM Cloud services, please ask a question on
-[Stack Overflow](http://stackoverflow.com/questions/ask?tags=ibm-cloud).
-
-## Issues
-
-If you encounter an issue with the SDK, you are welcome to submit
-a [bug report](https://github.com/IBM/cloudant-node-sdk/issues).
-Before that, please search for similar issues. It's possible someone has
-already encountered this issue.
-
-## Further resources
+### Further resources
 
 - [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=node):
   API examples for Cloudant Node.js SDK.
@@ -786,6 +804,19 @@ already encountered this issue.
   Cloudant successfully.
 - [Cloudant blog](https://blog.cloudant.com/):
   Many useful articles how to optimize Cloudant for common problems.
+
+## Questions
+
+If you are having difficulties using this SDK or have a question about the
+IBM Cloud services, please ask a question on
+[Stack Overflow](http://stackoverflow.com/questions/ask?tags=ibm-cloud).
+
+## Issues
+
+If you encounter an issue with the project, you are welcome to submit a
+[bug report](https://github.com/IBM/cloudant-node-sdk/issues).
+Before that, please search for similar issues. It's possible that someone
+has already reported the problem.
 
 ## Open source @ IBM
 
