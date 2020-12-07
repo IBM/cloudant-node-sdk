@@ -24,7 +24,7 @@
     "version": "bump2version --allow-dirty --new-version $npm_package_version patch && git add README.md .bumpversion.cfg",
     "postversion": "tsc-publish --no-checks --dry-run",
     "jest": "jest",
-    "test": "nyc report --reporter=text-lcov > coverage.lcov && npm run build && npm run lint && jest test/",
+    "test": "npm run build && npm run lint && jest test/",
     "test-unit": "npm run build && jest test/unit/",
     "test-integration": "npm run build && jest test/integration",
     "test-travis": "jest --runInBand --testNamePattern='^((?!@slow).)*$' test/",
@@ -60,7 +60,6 @@
     "installed-check": "^3.0.0",
     "jest": "^26.1.0",
     "jest-junit": "^12.0.0",
-    "nyc": "^13.0.1",
     "prettier": "^2.1.2",
     "semantic-release": "^17.2.3",
     "sinon": "^9.0.2",
@@ -81,7 +80,10 @@
     ],
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "testResultsProcessor": "jest-junit"
+    "testResultsProcessor": "jest-junit",
+    "collectCoverageFrom": [
+      "dist/**"
+    ]
   },
   "jest-junit": {
     "suiteName": "Generated unit tests",
