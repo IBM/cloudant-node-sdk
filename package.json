@@ -22,7 +22,6 @@
     "build": "tsc && cp package.json dist/",
     "prepublishOnly": "npm run build",
     "version": "bump2version --allow-dirty --new-version $npm_package_version patch && git add README.md .bumpversion.cfg",
-    "posttest": "nyc report --reporter=json",
     "postversion": "tsc-publish --no-checks --dry-run",
     "jest": "jest",
     "test": "npm run build && npm run lint && jest test/",
@@ -31,7 +30,7 @@
     "test-travis": "jest --runInBand --testNamePattern='^((?!@slow).)*$' test/",
     "test-unit-travis": "jest --runInBand test/unit/",
     "test-integration-travis": "jest --runInBand --no-colors --testNamePattern='^((?!@slow).)*$' --json test/integration > test-output.log",
-    "report-coverage": "codecov -f coverage/*.json",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "check-packages": "installed-check -e -d -v"
   },
   "license": "Apache-2.0",
