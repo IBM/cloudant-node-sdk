@@ -21,7 +21,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Must gather (please complete the following information):**
  - SDK Version [e.g. 1.2.1]
- - Node Version [e.g. 12.2]
+ - Node.js Version [e.g. Node.js 14.15.1]
  - Name of service that you're trying to use (if applicable)
  - Name of operation that you're trying to invoke (if applicable)
 

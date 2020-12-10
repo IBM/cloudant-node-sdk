@@ -4,10 +4,9 @@ please ask a question at
 [Stack Overflow](http://stackoverflow.com/questions/ask?tags=ibm-cloud).
 
 # Issues
-If you encounter an issue with the SDK, you are welcome to submit
-a [bug report](https://github.com/IBM/cloudant-node-sdk/issues).
-Before that, please search for similar issues. It's possible someone has
-already encountered this issue.
+If you encounter an issue with the project, you are welcome to submit a
+[bug report](https://github.com/IBM/cloudant-node-sdk/issues).
+Before that, please search for similar issues. It's possible that someone has already reported the problem.
 
 # PRs
 We ask that an **issue is always opened prior to a PR** to give us the
@@ -21,5 +20,5 @@ instead. Please, first [look at the list of files](.github/CODEOWNERS) that
 _should not_ be modified.
 
 # General Information
-For general guidance on contributing to this project, please see
-[this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/CONTRIBUTING_nodejs.md)
+For general guidance on contributing to this project, please see the
+[general guidance for contributing](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/CONTRIBUTING_nodejs.md).
