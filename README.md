@@ -206,7 +206,7 @@ To learn more about how to use programmatic authentication, see the related
 documentation in the
 [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=python#programmatic-authentication)
 or in the
-[Node.js SDK Core document about authentication](https://github.com/IBM/node-sdk-core/blob/master/Authentication.md).
+[Node.js SDK Core document about authentication](https://github.com/IBM/node-sdk-core/blob/master/AUTHENTICATION.md).
 
 ## Using the SDK
 
