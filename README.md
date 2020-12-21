@@ -145,9 +145,9 @@ account.
 
 There are several ways to **set** these properties:
 
-1. As [environment variables](#authenticate-with-environment-variables)
-1. The [programmatic approach](#authenticate-programmatically)
-1. With an [external credentials file](#authenticate-with-external-configuration)
+1. As [environment variables](#authentication-with-environment-variables)
+1. The [programmatic approach](#programmatic-authentication)
+1. With an [external credentials file](#authentication-with-external-configuration)
 
 ### Authentication with environment variables
 
