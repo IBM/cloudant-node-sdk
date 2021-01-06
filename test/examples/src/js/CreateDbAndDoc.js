@@ -53,33 +53,15 @@ const createDbAndDoc = async () => {
   exampleDocument['name'] = 'Bob Smith';
   exampleDocument.joined = '2019-01-24T10:42:99.000Z';
 
-  /* Try to get the document and set revision of exampleDocument to the
-           latest one if it previously existed in the database */
-  try {
-    exampleDocument._rev = (
-      await client.getDocument({
-        db: exampleDbName,
-        docId: exampleDocId,
-      })
-    ).result._rev;
-    console.log(
-      'The document revision for "' + exampleDocId + '" is set to ' + exampleDocument._rev
-    );
-  } catch (err) {
-    if (err.code === 404) {
-      // Document does not exist in database
-    }
-  } finally {
-    // Save the document in the database
-    const createDocumentResponse = await client.postDocument({
-      db: exampleDbName,
-      document: exampleDocument,
-    });
+  // Save the document in the database
+  const createDocumentResponse = await client.postDocument({
+    db: exampleDbName,
+    document: exampleDocument,
+  });
 
-    // Keep track with the revision number of the document object
-    exampleDocument._rev = createDocumentResponse.result.rev;
-    console.log('You have created the document:\n' + JSON.stringify(exampleDocument, null, 2));
-  }
+  // Keep track with the revision number of the document object
+  exampleDocument._rev = createDocumentResponse.result.rev;
+  console.log('You have created the document:\n' + JSON.stringify(exampleDocument, null, 2));
 };
 
 if (require.main === module) {

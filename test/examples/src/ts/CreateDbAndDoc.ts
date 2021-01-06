@@ -56,31 +56,15 @@ const exampleDocument: OrderDocument = {_id: exampleDocId};
 exampleDocument.name = "Bob Smith";
 exampleDocument.joined = "2019-01-24T10:42:99.000Z";
 
-/* Try to get the document and set revision of exampleDocument to the
-           latest one if it previously existed in the database */
+// Save the document in the database
 createDb.then(() => {
-    client.getDocument({db: exampleDbName, docId: exampleDocId})
-        .then(documentInfo => {
-            exampleDocument._rev = documentInfo.result._rev;
-            console.log("The document revision for" + exampleDocId +
-                "is set to " + exampleDocument._rev);
-        })
-        .catch(err => {
-            if (err.code === 404) {
-                // Document does not exist in database
-            }
-        })
-        .finally(() => {
-            // Save the document in the database
-            client.postDocument({
-                    db: exampleDbName,
-                    document: exampleDocument
-                }
-            ).then(createDocumentResponse => {
-                // Keep track with the revision number of the document object
-                exampleDocument._rev = createDocumentResponse.result.rev;
-                console.log("You have created the document:\n" +
-                    JSON.stringify(exampleDocument, null, 2));
-            });
-        });
+    client.postDocument({
+        db: exampleDbName,
+        document: exampleDocument
+    }).then(createDocumentResponse => {
+        // Keep track with the revision number of the document object
+        exampleDocument._rev = createDocumentResponse.result.rev;
+        console.log("You have created the document:\n" +
+            JSON.stringify(exampleDocument, null, 2));
+    });
 });

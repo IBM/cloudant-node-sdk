@@ -91,28 +91,9 @@ describe('Readme integration tests', () => {
     expect(consoleOutput).toStrictEqual(expectedJoinedConsoleOutput);
   });
 
-  it('Create db and doc for the second time', async () => {
-    const expectedJoinedConsoleOutput = fs.readFileSync(
-      'test/examples/output/CreateDbAndDoc2.txt',
-      'utf8',
-      (err, data) => {
-        if (err) {
-          return console.log(err);
-        }
-        return data;
-      }
-    );
-    await createDbAndDoc();
-    const consoleOutput = consoleLogSpy
-      .getCalls()
-      .map((a) => a.args[0])
-      .join('\n');
-    expect(consoleOutput).toStrictEqual(expectedJoinedConsoleOutput);
-  });
-
   it('Update doc for the first time', async () => {
     const expectedJoinedConsoleOutput = fs.readFileSync(
-      'test/examples/output/UpdateDoc2.txt',
+      'test/examples/output/UpdateDoc.txt',
       'utf8',
       (err, data) => {
         if (err) {
@@ -131,7 +112,7 @@ describe('Readme integration tests', () => {
 
   it('Update doc for the second time', async () => {
     const expectedJoinedConsoleOutput = fs.readFileSync(
-      'test/examples/output/UpdateDoc3.txt',
+      'test/examples/output/UpdateDoc2.txt',
       'utf8',
       (err, data) => {
         if (err) {
