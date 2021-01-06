@@ -145,9 +145,9 @@ account.
 
 There are several ways to **set** these properties:
 
-1. As [environment variables](#authenticate-with-environment-variables)
-1. The [programmatic approach](#authenticate-programmatically)
-1. With an [external credentials file](#authenticate-with-external-configuration)
+1. As [environment variables](#authentication-with-environment-variables)
+1. The [programmatic approach](#programmatic-authentication)
+1. With an [external credentials file](#authentication-with-external-configuration)
 
 ### Authentication with environment variables
 
@@ -409,33 +409,17 @@ const exampleDocument: OrderDocument = {_id: exampleDocId};
 exampleDocument.name = "Bob Smith";
 exampleDocument.joined = "2019-01-24T10:42:99.000Z";
 
-/* Try to get the document and set revision of exampleDocument to the
-           latest one if it previously existed in the database */
+// Save the document in the database
 createDb.then(() => {
-    client.getDocument({db: exampleDbName, docId: exampleDocId})
-        .then(documentInfo => {
-            exampleDocument._rev = documentInfo.result._rev;
-            console.log("The document revision for" + exampleDocId +
-                "is set to " + exampleDocument._rev);
-        })
-        .catch(err => {
-            if (err.code === 404) {
-                // Document does not exist in database
-            }
-        })
-        .finally(() => {
-            // Save the document in the database
-            client.postDocument({
-                    db: exampleDbName,
-                    document: exampleDocument
-                }
-            ).then(createDocumentResponse => {
-                // Keep track with the revision number of the document object
-                exampleDocument._rev = createDocumentResponse.result.rev;
-                console.log("You have created the document:\n" +
-                    JSON.stringify(exampleDocument, null, 2));
-            });
-        });
+    client.postDocument({
+        db: exampleDbName,
+        document: exampleDocument
+    }).then(createDocumentResponse => {
+        // Keep track with the revision number of the document object
+        exampleDocument._rev = createDocumentResponse.result.rev;
+        console.log("You have created the document:\n" +
+            JSON.stringify(exampleDocument, null, 2));
+    });
 });
 ```
 </details>
@@ -481,33 +465,15 @@ const createDbAndDoc = async () => {
   exampleDocument['name'] = 'Bob Smith';
   exampleDocument.joined = '2019-01-24T10:42:99.000Z';
 
-  /* Try to get the document and set revision of exampleDocument to the
-           latest one if it previously existed in the database */
-  try {
-    exampleDocument._rev = (
-      await client.getDocument({
-        db: exampleDbName,
-        docId: exampleDocId,
-      })
-    ).result._rev;
-    console.log(
-      'The document revision for "' + exampleDocId + '" is set to ' + exampleDocument._rev
-    );
-  } catch (err) {
-    if (err.code === 404) {
-      // Document does not exist in database
-    }
-  } finally {
-    // Save the document in the database
-    const createDocumentResponse = await client.postDocument({
-      db: exampleDbName,
-      document: exampleDocument,
-    });
+  // Save the document in the database
+  const createDocumentResponse = await client.postDocument({
+    db: exampleDbName,
+    document: exampleDocument,
+  });
 
-    // Keep track with the revision number of the document object
-    exampleDocument._rev = createDocumentResponse.result.rev;
-    console.log('You have created the document:\n' + JSON.stringify(exampleDocument, null, 2));
-  }
+  // Keep track with the revision number of the document object
+  exampleDocument._rev = createDocumentResponse.result.rev;
+  console.log('You have created the document:\n' + JSON.stringify(exampleDocument, null, 2));
 };
 
 if (require.main === module) {
@@ -666,7 +632,7 @@ The result of the code is similar to the following output.
 You have updated the document:
 {
   "_id": "example",
-  "_rev": "2-70476cf75eb02f55c6c4061aa6941ec8",
+  "_rev": "2-4e2178e85cffb32d38ba4e451f6ca376",
   "name": "Bob Smith",
   "address": "19 Front Street, Darlington, DL5 1TY"
 }
