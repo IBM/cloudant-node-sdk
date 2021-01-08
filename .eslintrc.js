@@ -43,7 +43,7 @@ module.exports = {
         '*',
         {
           pattern:
-            ' * © Copyright IBM Corporation 20\\d\\d(?:, 20\\d\\d)?\\. All Rights Reserved\\.',
+            ' * (© Copyright IBM Corporation 20\\d\\d(?:, 20\\d\\d)?\\. All Rights Reserved\\.|\\(C\\) Copyright IBM Corp\\. 20\\d\\d\\.)',
           template: ' * © Copyright IBM Corporation 2020. All Rights Reserved.',
         },
         ' *',
@@ -62,6 +62,15 @@ module.exports = {
       ],
     ],
   },
+  overrides: [
+    {
+      files: ['test/unit/cloudant.v1.test.js'],
+      rules: {
+        'prettier/prettier': 'off',
+        'node/no-missing-require': 'off',
+      },
+    },
+  ],
   settings: {
     'import/resolver': {
       node: {
