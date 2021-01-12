@@ -13,7 +13,7 @@
 [![Build Status](https://travis-ci.com/IBM/cloudant-node-sdk.svg?branch=master)](https://travis-ci.com/IBM/cloudant-node-sdk)
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-node-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-node-sdk/releases/latest)
 
-# IBM Cloudant Node.js SDK Version 0.0.11
+# IBM Cloudant Node.js SDK Version 0.0.12
 
 Node.js client library to interact with the
 [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=node).
