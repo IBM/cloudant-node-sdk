@@ -18,12 +18,12 @@ pipeline {
           applyCustomizations()
           checkoutResult = checkout scm
           commitHash = "${checkoutResult.GIT_COMMIT[0..6]}"
-          sh """
-            git config user.email '71659186+cloudant-sdks-automation@users.noreply.github.com'
-            git config user.name 'cloudant-sdks-automation'
-            git config credential.username '${env.GH_CREDS_USR}'
-            git config credential.helper '!f() { echo password=\$GH_CREDS_PSW; echo; }; f'
-          """
+          sh '''
+            git config --global user.email $GH_SDKS_AUTOMATION_MAIL
+            git config --global user.name $GH_CREDS_USR
+            git config --global credential.username $GH_CREDS_USR
+            git config --global credential.helper '!f() { echo password=\$GH_CREDS_PSW; echo; }; f'
+          '''
         }
       }
     }
@@ -108,6 +108,7 @@ pipeline {
         // Push the version bump and release tag
         sh 'git push --tags origin HEAD:master'
         publishPublic()
+        publishDocs()
       }
     }
   }
@@ -162,6 +163,7 @@ String getNewVersion(isDevRelease, version) {
 // runTests()
 // publishStaging()
 // publishPublic()
+// publishDocs()
 // + other customizations
 void applyCustomizations() {
   libName = 'node'
@@ -214,5 +216,9 @@ void publishNpm() {
   // Note trailing slash is important for matching .npmrc entries
   // npm-cli-login always adds a trailing slash, so we don't use one in the NPM_REGISTRY var
   sh "npm publish dist --registry ${env.NPM_REGISTRY}/"
+}
+
+void publishDocs() {
+  sh './scripts/typedoc/publish-doc.sh'
 }
 
