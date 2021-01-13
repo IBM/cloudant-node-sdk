@@ -13,6 +13,8 @@ LICENSE @IBM/cloudant-sdks
 README.md @IBM/cloudant-sdks
 scripts/setup_couch.sh @IBM/cloudant-sdks
 scripts/setup_wiremock.sh @IBM/cloudant-sdks
+scripts/typedoc/generate-index-html.sh @IBM/cloudant-sdks
+scripts/typedoc/publish-doc.sh @IBM/cloudant-sdks
 stubs/mappings.json @IBM/cloudant-sdks
 
 # Generated code files:
