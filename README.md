@@ -12,6 +12,7 @@
 
 [![Build Status](https://travis-ci.com/IBM/cloudant-node-sdk.svg?branch=master)](https://travis-ci.com/IBM/cloudant-node-sdk)
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-node-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-node-sdk/releases/latest)
+[![Docs](https://img.shields.io/static/v1?label=nodedoc&message=latest&color=blue)](https://ibm.github.io/cloudant-node-sdk/)
 
 # IBM Cloudant Node.js SDK Version 0.0.12
 
