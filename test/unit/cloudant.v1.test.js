@@ -358,6 +358,308 @@ describe('CloudantV1', () => {
       });
     });
   });
+  describe('getDbUpdates', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation getDbUpdates
+        const feed = 'continuous';
+        const heartbeat = 0;
+        const timeout = 0;
+        const since = 'testString';
+        const params = {
+          feed: feed,
+          heartbeat: heartbeat,
+          timeout: timeout,
+          since: since,
+        };
+
+        const getDbUpdatesResult = cloudantService.getDbUpdates(params);
+
+        // all methods should return a Promise
+        expectToBePromise(getDbUpdatesResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/_db_updates', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(options.qs['feed']).toEqual(feed);
+        expect(options.qs['heartbeat']).toEqual(heartbeat);
+        expect(options.qs['timeout']).toEqual(timeout);
+        expect(options.qs['since']).toEqual(since);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.getDbUpdates(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+
+      test('should not have any problems when no parameters are passed in', () => {
+        // invoke the method with no parameters
+        cloudantService.getDbUpdates({});
+        checkForSuccessfulExecution(createRequestMock);
+      });
+    });
+  });
+  describe('postChanges', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation postChanges
+        const db = 'testString';
+        const docIds = ['testString'];
+        const fields = ['testString'];
+        const selector = { 'key1': 'testString' };
+        const lastEventId = 'testString';
+        const attEncodingInfo = true;
+        const attachments = true;
+        const conflicts = true;
+        const descending = true;
+        const feed = 'continuous';
+        const filter = 'testString';
+        const heartbeat = 0;
+        const includeDocs = true;
+        const limit = 0;
+        const seqInterval = 1;
+        const since = 'testString';
+        const style = 'testString';
+        const timeout = 0;
+        const view = 'testString';
+        const params = {
+          db: db,
+          docIds: docIds,
+          fields: fields,
+          selector: selector,
+          lastEventId: lastEventId,
+          attEncodingInfo: attEncodingInfo,
+          attachments: attachments,
+          conflicts: conflicts,
+          descending: descending,
+          feed: feed,
+          filter: filter,
+          heartbeat: heartbeat,
+          includeDocs: includeDocs,
+          limit: limit,
+          seqInterval: seqInterval,
+          since: since,
+          style: style,
+          timeout: timeout,
+          view: view,
+        };
+
+        const postChangesResult = cloudantService.postChanges(params);
+
+        // all methods should return a Promise
+        expectToBePromise(postChangesResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/{db}/_changes', 'POST');
+        const expectedAccept = 'application/json';
+        const expectedContentType = 'application/json';
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        checkUserHeader(createRequestMock, 'Last-Event-ID', lastEventId);
+        expect(options.body['doc_ids']).toEqual(docIds);
+        expect(options.body['fields']).toEqual(fields);
+        expect(options.body['selector']).toEqual(selector);
+        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
+        expect(options.qs['attachments']).toEqual(attachments);
+        expect(options.qs['conflicts']).toEqual(conflicts);
+        expect(options.qs['descending']).toEqual(descending);
+        expect(options.qs['feed']).toEqual(feed);
+        expect(options.qs['filter']).toEqual(filter);
+        expect(options.qs['heartbeat']).toEqual(heartbeat);
+        expect(options.qs['include_docs']).toEqual(includeDocs);
+        expect(options.qs['limit']).toEqual(limit);
+        expect(options.qs['seq_interval']).toEqual(seqInterval);
+        expect(options.qs['since']).toEqual(since);
+        expect(options.qs['style']).toEqual(style);
+        expect(options.qs['timeout']).toEqual(timeout);
+        expect(options.qs['view']).toEqual(view);
+        expect(options.path['db']).toEqual(db);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const db = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          db,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.postChanges(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async done => {
+        let err;
+        try {
+          await cloudantService.postChanges({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', done => {
+        const postChangesPromise = cloudantService.postChanges();
+        expectToBePromise(postChangesPromise);
+
+        postChangesPromise.catch(err => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
+      });
+    });
+  });
+  describe('postChangesAsStream', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation postChangesAsStream
+        const db = 'testString';
+        const docIds = ['testString'];
+        const fields = ['testString'];
+        const selector = { 'key1': 'testString' };
+        const lastEventId = 'testString';
+        const attEncodingInfo = true;
+        const attachments = true;
+        const conflicts = true;
+        const descending = true;
+        const feed = 'continuous';
+        const filter = 'testString';
+        const heartbeat = 0;
+        const includeDocs = true;
+        const limit = 0;
+        const seqInterval = 1;
+        const since = 'testString';
+        const style = 'testString';
+        const timeout = 0;
+        const view = 'testString';
+        const params = {
+          db: db,
+          docIds: docIds,
+          fields: fields,
+          selector: selector,
+          lastEventId: lastEventId,
+          attEncodingInfo: attEncodingInfo,
+          attachments: attachments,
+          conflicts: conflicts,
+          descending: descending,
+          feed: feed,
+          filter: filter,
+          heartbeat: heartbeat,
+          includeDocs: includeDocs,
+          limit: limit,
+          seqInterval: seqInterval,
+          since: since,
+          style: style,
+          timeout: timeout,
+          view: view,
+        };
+
+        const postChangesAsStreamResult = cloudantService.postChangesAsStream(params);
+
+        // all methods should return a Promise
+        expectToBePromise(postChangesAsStreamResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/{db}/_changes', 'POST');
+        const expectedAccept = 'application/json';
+        const expectedContentType = 'application/json';
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        checkUserHeader(createRequestMock, 'Last-Event-ID', lastEventId);
+        expect(options.body['doc_ids']).toEqual(docIds);
+        expect(options.body['fields']).toEqual(fields);
+        expect(options.body['selector']).toEqual(selector);
+        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
+        expect(options.qs['attachments']).toEqual(attachments);
+        expect(options.qs['conflicts']).toEqual(conflicts);
+        expect(options.qs['descending']).toEqual(descending);
+        expect(options.qs['feed']).toEqual(feed);
+        expect(options.qs['filter']).toEqual(filter);
+        expect(options.qs['heartbeat']).toEqual(heartbeat);
+        expect(options.qs['include_docs']).toEqual(includeDocs);
+        expect(options.qs['limit']).toEqual(limit);
+        expect(options.qs['seq_interval']).toEqual(seqInterval);
+        expect(options.qs['since']).toEqual(since);
+        expect(options.qs['style']).toEqual(style);
+        expect(options.qs['timeout']).toEqual(timeout);
+        expect(options.qs['view']).toEqual(view);
+        expect(options.path['db']).toEqual(db);
+        expect(options.responseType).toBe('stream');
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const db = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          db,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.postChangesAsStream(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async done => {
+        let err;
+        try {
+          await cloudantService.postChangesAsStream({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', done => {
+        const postChangesAsStreamPromise = cloudantService.postChangesAsStream();
+        expectToBePromise(postChangesAsStreamPromise);
+
+        postChangesAsStreamPromise.catch(err => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
+      });
+    });
+  });
   describe('headDatabase', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
@@ -758,251 +1060,6 @@ describe('CloudantV1', () => {
         expectToBePromise(putDatabasePromise);
 
         putDatabasePromise.catch(err => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
-      });
-    });
-  });
-  describe('postChanges', () => {
-    describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation postChanges
-        const db = 'testString';
-        const docIds = ['testString'];
-        const fields = ['testString'];
-        const selector = { 'key1': 'testString' };
-        const lastEventId = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const feed = 'continuous';
-        const filter = 'testString';
-        const heartbeat = 0;
-        const includeDocs = true;
-        const limit = 0;
-        const seqInterval = 1;
-        const since = 'testString';
-        const style = 'testString';
-        const timeout = 0;
-        const view = 'testString';
-        const params = {
-          db: db,
-          docIds: docIds,
-          fields: fields,
-          selector: selector,
-          lastEventId: lastEventId,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          feed: feed,
-          filter: filter,
-          heartbeat: heartbeat,
-          includeDocs: includeDocs,
-          limit: limit,
-          seqInterval: seqInterval,
-          since: since,
-          style: style,
-          timeout: timeout,
-          view: view,
-        };
-
-        const postChangesResult = cloudantService.postChanges(params);
-
-        // all methods should return a Promise
-        expectToBePromise(postChangesResult);
-
-        // assert that create request was called
-        expect(createRequestMock).toHaveBeenCalledTimes(1);
-
-        const options = getOptions(createRequestMock);
-
-        checkUrlAndMethod(options, '/{db}/_changes', 'POST');
-        const expectedAccept = 'application/json';
-        const expectedContentType = 'application/json';
-        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        checkUserHeader(createRequestMock, 'Last-Event-ID', lastEventId);
-        expect(options.body['doc_ids']).toEqual(docIds);
-        expect(options.body['fields']).toEqual(fields);
-        expect(options.body['selector']).toEqual(selector);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['conflicts']).toEqual(conflicts);
-        expect(options.qs['descending']).toEqual(descending);
-        expect(options.qs['feed']).toEqual(feed);
-        expect(options.qs['filter']).toEqual(filter);
-        expect(options.qs['heartbeat']).toEqual(heartbeat);
-        expect(options.qs['include_docs']).toEqual(includeDocs);
-        expect(options.qs['limit']).toEqual(limit);
-        expect(options.qs['seq_interval']).toEqual(seqInterval);
-        expect(options.qs['since']).toEqual(since);
-        expect(options.qs['style']).toEqual(style);
-        expect(options.qs['timeout']).toEqual(timeout);
-        expect(options.qs['view']).toEqual(view);
-        expect(options.path['db']).toEqual(db);
-      });
-
-      test('should prioritize user-given headers', () => {
-        // parameters
-        const db = 'testString';
-        const userAccept = 'fake/accept';
-        const userContentType = 'fake/contentType';
-        const params = {
-          db,
-          headers: {
-            Accept: userAccept,
-            'Content-Type': userContentType,
-          },
-        };
-
-        cloudantService.postChanges(params);
-        checkMediaHeaders(createRequestMock, userAccept, userContentType);
-      });
-    });
-
-    describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
-        let err;
-        try {
-          await cloudantService.postChanges({});
-        } catch (e) {
-          err = e;
-        }
-
-        expect(err.message).toMatch(/Missing required parameters/);
-        done();
-      });
-
-      test('should reject promise when required params are not given', done => {
-        const postChangesPromise = cloudantService.postChanges();
-        expectToBePromise(postChangesPromise);
-
-        postChangesPromise.catch(err => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
-      });
-    });
-  });
-  describe('postChangesAsStream', () => {
-    describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation postChangesAsStream
-        const db = 'testString';
-        const docIds = ['testString'];
-        const fields = ['testString'];
-        const selector = { 'key1': 'testString' };
-        const lastEventId = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const feed = 'continuous';
-        const filter = 'testString';
-        const heartbeat = 0;
-        const includeDocs = true;
-        const limit = 0;
-        const seqInterval = 1;
-        const since = 'testString';
-        const style = 'testString';
-        const timeout = 0;
-        const view = 'testString';
-        const params = {
-          db: db,
-          docIds: docIds,
-          fields: fields,
-          selector: selector,
-          lastEventId: lastEventId,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          feed: feed,
-          filter: filter,
-          heartbeat: heartbeat,
-          includeDocs: includeDocs,
-          limit: limit,
-          seqInterval: seqInterval,
-          since: since,
-          style: style,
-          timeout: timeout,
-          view: view,
-        };
-
-        const postChangesAsStreamResult = cloudantService.postChangesAsStream(params);
-
-        // all methods should return a Promise
-        expectToBePromise(postChangesAsStreamResult);
-
-        // assert that create request was called
-        expect(createRequestMock).toHaveBeenCalledTimes(1);
-
-        const options = getOptions(createRequestMock);
-
-        checkUrlAndMethod(options, '/{db}/_changes', 'POST');
-        const expectedAccept = 'application/json';
-        const expectedContentType = 'application/json';
-        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        checkUserHeader(createRequestMock, 'Last-Event-ID', lastEventId);
-        expect(options.body['doc_ids']).toEqual(docIds);
-        expect(options.body['fields']).toEqual(fields);
-        expect(options.body['selector']).toEqual(selector);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['conflicts']).toEqual(conflicts);
-        expect(options.qs['descending']).toEqual(descending);
-        expect(options.qs['feed']).toEqual(feed);
-        expect(options.qs['filter']).toEqual(filter);
-        expect(options.qs['heartbeat']).toEqual(heartbeat);
-        expect(options.qs['include_docs']).toEqual(includeDocs);
-        expect(options.qs['limit']).toEqual(limit);
-        expect(options.qs['seq_interval']).toEqual(seqInterval);
-        expect(options.qs['since']).toEqual(since);
-        expect(options.qs['style']).toEqual(style);
-        expect(options.qs['timeout']).toEqual(timeout);
-        expect(options.qs['view']).toEqual(view);
-        expect(options.path['db']).toEqual(db);
-        expect(options.responseType).toBe('stream');
-      });
-
-      test('should prioritize user-given headers', () => {
-        // parameters
-        const db = 'testString';
-        const userAccept = 'fake/accept';
-        const userContentType = 'fake/contentType';
-        const params = {
-          db,
-          headers: {
-            Accept: userAccept,
-            'Content-Type': userContentType,
-          },
-        };
-
-        cloudantService.postChangesAsStream(params);
-        checkMediaHeaders(createRequestMock, userAccept, userContentType);
-      });
-    });
-
-    describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
-        let err;
-        try {
-          await cloudantService.postChangesAsStream({});
-        } catch (e) {
-          err = e;
-        }
-
-        expect(err.message).toMatch(/Missing required parameters/);
-        done();
-      });
-
-      test('should reject promise when required params are not given', done => {
-        const postChangesAsStreamPromise = cloudantService.postChangesAsStream();
-        expectToBePromise(postChangesAsStreamPromise);
-
-        postChangesAsStreamPromise.catch(err => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -6448,63 +6505,6 @@ describe('CloudantV1', () => {
       });
     });
   });
-  describe('getDbUpdates', () => {
-    describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation getDbUpdates
-        const feed = 'continuous';
-        const heartbeat = 0;
-        const timeout = 0;
-        const since = 'testString';
-        const params = {
-          feed: feed,
-          heartbeat: heartbeat,
-          timeout: timeout,
-          since: since,
-        };
-
-        const getDbUpdatesResult = cloudantService.getDbUpdates(params);
-
-        // all methods should return a Promise
-        expectToBePromise(getDbUpdatesResult);
-
-        // assert that create request was called
-        expect(createRequestMock).toHaveBeenCalledTimes(1);
-
-        const options = getOptions(createRequestMock);
-
-        checkUrlAndMethod(options, '/_db_updates', 'GET');
-        const expectedAccept = 'application/json';
-        const expectedContentType = undefined;
-        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['feed']).toEqual(feed);
-        expect(options.qs['heartbeat']).toEqual(heartbeat);
-        expect(options.qs['timeout']).toEqual(timeout);
-        expect(options.qs['since']).toEqual(since);
-      });
-
-      test('should prioritize user-given headers', () => {
-        // parameters
-        const userAccept = 'fake/accept';
-        const userContentType = 'fake/contentType';
-        const params = {
-          headers: {
-            Accept: userAccept,
-            'Content-Type': userContentType,
-          },
-        };
-
-        cloudantService.getDbUpdates(params);
-        checkMediaHeaders(createRequestMock, userAccept, userContentType);
-      });
-
-      test('should not have any problems when no parameters are passed in', () => {
-        // invoke the method with no parameters
-        cloudantService.getDbUpdates({});
-        checkForSuccessfulExecution(createRequestMock);
-      });
-    });
-  });
   describe('headReplicationDocument', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
@@ -6570,6 +6570,74 @@ describe('CloudantV1', () => {
         expectToBePromise(headReplicationDocumentPromise);
 
         headReplicationDocumentPromise.catch(err => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
+      });
+    });
+  });
+  describe('headSchedulerDocument', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation headSchedulerDocument
+        const docId = 'testString';
+        const params = {
+          docId: docId,
+        };
+
+        const headSchedulerDocumentResult = cloudantService.headSchedulerDocument(params);
+
+        // all methods should return a Promise
+        expectToBePromise(headSchedulerDocumentResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/_scheduler/docs/_replicator/{doc_id}', 'HEAD');
+        const expectedAccept = undefined;
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(options.path['doc_id']).toEqual(docId);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const docId = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          docId,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.headSchedulerDocument(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async done => {
+        let err;
+        try {
+          await cloudantService.headSchedulerDocument({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', done => {
+        const headSchedulerDocumentPromise = cloudantService.headSchedulerDocument();
+        expectToBePromise(headSchedulerDocumentPromise);
+
+        headSchedulerDocumentPromise.catch(err => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8224,6 +8292,82 @@ describe('CloudantV1', () => {
       });
     });
   });
+  describe('headLocalDocument', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation headLocalDocument
+        const db = 'testString';
+        const docId = 'testString';
+        const ifNoneMatch = 'testString';
+        const params = {
+          db: db,
+          docId: docId,
+          ifNoneMatch: ifNoneMatch,
+        };
+
+        const headLocalDocumentResult = cloudantService.headLocalDocument(params);
+
+        // all methods should return a Promise
+        expectToBePromise(headLocalDocumentResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/{db}/_local/{doc_id}', 'HEAD');
+        const expectedAccept = undefined;
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
+        expect(options.path['db']).toEqual(db);
+        expect(options.path['doc_id']).toEqual(docId);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const db = 'testString';
+        const docId = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          db,
+          docId,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.headLocalDocument(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async done => {
+        let err;
+        try {
+          await cloudantService.headLocalDocument({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', done => {
+        const headLocalDocumentPromise = cloudantService.headLocalDocument();
+        expectToBePromise(headLocalDocumentPromise);
+
+        headLocalDocumentPromise.catch(err => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
+      });
+    });
+  });
   describe('deleteLocalDocument', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
@@ -9005,6 +9149,50 @@ describe('CloudantV1', () => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
+      });
+    });
+  });
+  describe('headUpInformation', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation headUpInformation
+        const params = {};
+
+        const headUpInformationResult = cloudantService.headUpInformation(params);
+
+        // all methods should return a Promise
+        expectToBePromise(headUpInformationResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/_up', 'HEAD');
+        const expectedAccept = undefined;
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.headUpInformation(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+
+      test('should not have any problems when no parameters are passed in', () => {
+        // invoke the method with no parameters
+        cloudantService.headUpInformation({});
+        checkForSuccessfulExecution(createRequestMock);
       });
     });
   });
