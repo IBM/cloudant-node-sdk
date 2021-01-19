@@ -267,48 +267,260 @@ class CloudantV1 extends CloudantBaseService {
   };
 
   /*************************
-   * changes
+   * databases
    ************************/
 
   /**
-   * Retrieve change events for all databases.
+   * Retrieve the HTTP headers for a database.
    *
-   * Lists changes to databases, like a global changes feed. Types of changes include updating the database and creating
-   * or deleting a database. Like the changes feed, the feed is not guaranteed to return changes in the correct order
-   * and might repeat changes. Polling modes for this method work like polling modes for the changes feed.
-   * **Note: This endpoint requires _admin or _db_updates role and is only available on dedicated clusters.**.
+   * Returns the HTTP headers that contain a minimal amount of information about the specified database. Since the
+   * response body is empty, using the HEAD method is a lightweight way to check if the database exists or not.
    *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {string} [params.feed] - Query parameter to specify the changes feed type.
-   * @param {number} [params.heartbeat] - Query parameter to specify the period in milliseconds after which an empty
-   * line is sent in the results. Only applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout
-   * to keep the feed alive indefinitely. May also be `true` to use default value of 60000.
-   * @param {number} [params.timeout] - Query parameter to specify the maximum period in milliseconds to wait for a
-   * change before the response is sent, even if there are no results. Only applicable for `longpoll` or `continuous`
-   * feeds. Default value is specified by `httpd/changes_timeout` configuration option. Note that `60000` value is also
-   * the default maximum timeout to prevent undetected dead connections.
-   * @param {string} [params.since] - Query parameter to specify to start the results from the change immediately after
-   * the given update sequence. Can be a valid update sequence or `now` value. Default is `0` i.e. all changes.
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.db - Path parameter to specify the database name.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.DbUpdates>>}
+   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
    */
-  public getDbUpdates(params?: CloudantV1.GetDbUpdatesParams): Promise<CloudantV1.Response<CloudantV1.DbUpdates>> {
+  public headDatabase(params: CloudantV1.HeadDatabaseParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
     const _params = Object.assign({}, params);
+    const requiredParams = ['db'];
 
-    const query = {
-      'feed': _params.feed,
-      'heartbeat': _params.heartbeat,
-      'timeout': _params.timeout,
-      'since': _params.since
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const path = {
+      'db': _params.db
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDbUpdates');
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headDatabase');
 
     const parameters = {
       options: {
-        url: '/_db_updates',
+        url: '/{db}',
+        method: 'HEAD',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Query a list of all database names in the instance.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
+   * key order.
+   * @param {string} [params.endkey] - Query parameter to specify to stop returning records when the specified key is
+   * reached. String representation of any JSON type that matches the key type emitted by the view function.
+   * @param {number} [params.limit] - Query parameter to specify the number of returned documents to limit the result
+   * to.
+   * @param {number} [params.skip] - Query parameter to specify the number of records before starting to return the
+   * results.
+   * @param {string} [params.startkey] - Query parameter to specify to start returning records from the specified key.
+   * String representation of any JSON type that matches the key type emitted by the view function.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<string[]>>}
+   */
+  public getAllDbs(params?: CloudantV1.GetAllDbsParams): Promise<CloudantV1.Response<string[]>> {
+    const _params = Object.assign({}, params);
+
+    const query = {
+      'descending': _params.descending,
+      'endkey': _params.endkey,
+      'limit': _params.limit,
+      'skip': _params.skip,
+      'startkey': _params.startkey
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getAllDbs');
+
+    const parameters = {
+      options: {
+        url: '/_all_dbs',
         method: 'GET',
         qs: query,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Query information about multiple databases.
+   *
+   * This operation enables you to request information about multiple databases in a single request, instead of issuing
+   * multiple `GET /{db}` requests. It returns a list that contains an information object for each database specified in
+   * the request.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string[]} params.keys - A list of database names.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.DbsInfoResult[]>>}
+   */
+  public postDbsInfo(params: CloudantV1.PostDbsInfoParams): Promise<CloudantV1.Response<CloudantV1.DbsInfoResult[]>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['keys'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const body = {
+      'keys': _params.keys
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postDbsInfo');
+
+    const parameters = {
+      options: {
+        url: '/_dbs_info',
+        method: 'POST',
+        body,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Delete a database.
+   *
+   * Deletes the specified database and all documents and attachments contained within it. To avoid deleting a database,
+   * the server responds with a 400 HTTP status code when the request URL includes a `?rev=` parameter. This response
+   * suggests that a user wanted to delete a document but forgot to add the document ID to the URL.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.db - Path parameter to specify the database name.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
+   */
+  public deleteDatabase(params: CloudantV1.DeleteDatabaseParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['db'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const path = {
+      'db': _params.db
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteDatabase');
+
+    const parameters = {
+      options: {
+        url: '/{db}',
+        method: 'DELETE',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Retrieve information about a database.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.db - Path parameter to specify the database name.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.DatabaseInformation>>}
+   */
+  public getDatabaseInformation(params: CloudantV1.GetDatabaseInformationParams): Promise<CloudantV1.Response<CloudantV1.DatabaseInformation>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['db'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const path = {
+      'db': _params.db
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDatabaseInformation');
+
+    const parameters = {
+      options: {
+        url: '/{db}',
+        method: 'GET',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Create a database.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.db - Path parameter to specify the database name.
+   * @param {boolean} [params.partitioned] - Query parameter to specify whether to enable database partitions when
+   * creating a database.
+   * @param {number} [params.q] - The number of shards in the database. Each shard is a partition of the hash value
+   * range. Default is 8, unless overridden in the `cluster config`.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
+   */
+  public putDatabase(params: CloudantV1.PutDatabaseParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['db'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const query = {
+      'partitioned': _params.partitioned,
+      'q': _params.q
+    };
+
+    const path = {
+      'db': _params.db
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putDatabase');
+
+    const parameters = {
+      options: {
+        url: '/{db}',
+        method: 'PUT',
+        qs: query,
+        path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
         headers: extend(true, sdkHeaders, {
@@ -596,272 +808,6 @@ class CloudantV1 extends CloudantBaseService {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Last-Event-ID': _params.lastEventId
-        }, _params.headers),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  };
-
-  /*************************
-   * databases
-   ************************/
-
-  /**
-   * Retrieve the HTTP headers for a database.
-   *
-   * Returns the HTTP headers that contain a minimal amount of information about the specified database. Since the
-   * response body is empty, using the HEAD method is a lightweight way to check if the database exists or not.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.db - Path parameter to specify the database name.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
-   */
-  public headDatabase(params: CloudantV1.HeadDatabaseParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
-    }
-
-    const path = {
-      'db': _params.db
-    };
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headDatabase');
-
-    const parameters = {
-      options: {
-        url: '/{db}',
-        method: 'HEAD',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-        }, _params.headers),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  };
-
-  /**
-   * Query a list of all database names in the instance.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
-   * key order.
-   * @param {string} [params.endkey] - Query parameter to specify to stop returning records when the specified key is
-   * reached. String representation of any JSON type that matches the key type emitted by the view function.
-   * @param {number} [params.limit] - Query parameter to specify the number of returned documents to limit the result
-   * to.
-   * @param {number} [params.skip] - Query parameter to specify the number of records before starting to return the
-   * results.
-   * @param {string} [params.startkey] - Query parameter to specify to start returning records from the specified key.
-   * String representation of any JSON type that matches the key type emitted by the view function.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<string[]>>}
-   */
-  public getAllDbs(params?: CloudantV1.GetAllDbsParams): Promise<CloudantV1.Response<string[]>> {
-    const _params = Object.assign({}, params);
-
-    const query = {
-      'descending': _params.descending,
-      'endkey': _params.endkey,
-      'limit': _params.limit,
-      'skip': _params.skip,
-      'startkey': _params.startkey
-    };
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getAllDbs');
-
-    const parameters = {
-      options: {
-        url: '/_all_dbs',
-        method: 'GET',
-        qs: query,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  };
-
-  /**
-   * Query information about multiple databases.
-   *
-   * This operation enables you to request information about multiple databases in a single request, instead of issuing
-   * multiple `GET /{db}` requests. It returns a list that contains an information object for each database specified in
-   * the request.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string[]} params.keys - A list of database names.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.DbsInfoResult[]>>}
-   */
-  public postDbsInfo(params: CloudantV1.PostDbsInfoParams): Promise<CloudantV1.Response<CloudantV1.DbsInfoResult[]>> {
-    const _params = Object.assign({}, params);
-    const requiredParams = ['keys'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
-    }
-
-    const body = {
-      'keys': _params.keys
-    };
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postDbsInfo');
-
-    const parameters = {
-      options: {
-        url: '/_dbs_info',
-        method: 'POST',
-        body,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  };
-
-  /**
-   * Delete a database.
-   *
-   * Deletes the specified database and all documents and attachments contained within it. To avoid deleting a database,
-   * the server responds with a 400 HTTP status code when the request URL includes a `?rev=` parameter. This response
-   * suggests that a user wanted to delete a document but forgot to add the document ID to the URL.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.db - Path parameter to specify the database name.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
-   */
-  public deleteDatabase(params: CloudantV1.DeleteDatabaseParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
-    }
-
-    const path = {
-      'db': _params.db
-    };
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteDatabase');
-
-    const parameters = {
-      options: {
-        url: '/{db}',
-        method: 'DELETE',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  };
-
-  /**
-   * Retrieve information about a database.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.db - Path parameter to specify the database name.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.DatabaseInformation>>}
-   */
-  public getDatabaseInformation(params: CloudantV1.GetDatabaseInformationParams): Promise<CloudantV1.Response<CloudantV1.DatabaseInformation>> {
-    const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
-    }
-
-    const path = {
-      'db': _params.db
-    };
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDatabaseInformation');
-
-    const parameters = {
-      options: {
-        url: '/{db}',
-        method: 'GET',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  };
-
-  /**
-   * Create a database.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.db - Path parameter to specify the database name.
-   * @param {boolean} [params.partitioned] - Query parameter to specify whether to enable database partitions when
-   * creating a database.
-   * @param {number} [params.q] - The number of shards in the database. Each shard is a partition of the hash value
-   * range. Default is 8, unless overridden in the `cluster config`.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
-   */
-  public putDatabase(params: CloudantV1.PutDatabaseParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = Object.assign({}, params);
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
-    }
-
-    const query = {
-      'partitioned': _params.partitioned,
-      'q': _params.q
-    };
-
-    const path = {
-      'db': _params.db
-    };
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putDatabase');
-
-    const parameters = {
-      options: {
-        url: '/{db}',
-        method: 'PUT',
-        qs: query,
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
         }, _params.headers),
       }),
     };
@@ -4119,8 +4065,8 @@ class CloudantV1 extends CloudantBaseService {
    * analyzer tokenization.
    *
    * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.analyzer - The analyzer type that is being used at the tokenization.
-   * @param {string} params.text - The text to tokenize with the analyzer.
+   * @param {string} params.analyzer - analyzer.
+   * @param {string} params.text - text.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.SearchAnalyzeResult>>}
    */
@@ -4727,15 +4673,67 @@ class CloudantV1 extends CloudantBaseService {
   };
 
   /*************************
+   * changes
+   ************************/
+
+  /**
+   * Retrieve change events for all databases.
+   *
+   * Lists changes to databases, like a global changes feed. Types of changes include updating the database and creating
+   * or deleting a database. Like the changes feed, the feed is not guaranteed to return changes in the correct order
+   * and might repeat changes. Polling modes for this method work like polling modes for the changes feed.
+   * **Note: This endpoint requires _admin or _db_updates role and is only available on dedicated clusters.**.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {string} [params.feed] - Query parameter to specify the changes feed type.
+   * @param {number} [params.heartbeat] - Query parameter to specify the period in milliseconds after which an empty
+   * line is sent in the results. Only applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout
+   * to keep the feed alive indefinitely. May also be `true` to use default value of 60000.
+   * @param {number} [params.timeout] - Query parameter to specify the maximum period in milliseconds to wait for a
+   * change before the response is sent, even if there are no results. Only applicable for `longpoll` or `continuous`
+   * feeds. Default value is specified by `httpd/changes_timeout` configuration option. Note that `60000` value is also
+   * the default maximum timeout to prevent undetected dead connections.
+   * @param {string} [params.since] - Query parameter to specify to start the results from the change immediately after
+   * the given update sequence. Can be a valid update sequence or `now` value. Default is `0` i.e. all changes.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.DbUpdates>>}
+   */
+  public getDbUpdates(params?: CloudantV1.GetDbUpdatesParams): Promise<CloudantV1.Response<CloudantV1.DbUpdates>> {
+    const _params = Object.assign({}, params);
+
+    const query = {
+      'feed': _params.feed,
+      'heartbeat': _params.heartbeat,
+      'timeout': _params.timeout,
+      'since': _params.since
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDbUpdates');
+
+    const parameters = {
+      options: {
+        url: '/_db_updates',
+        method: 'GET',
+        qs: query,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /*************************
    * replication
    ************************/
 
   /**
    * Retrieve the HTTP headers for a replication document.
    *
-   * Retrieves the HTTP headers containing minimal amount of information about the specified replication document from
-   * the `_replicator` database.  The method supports the same query arguments as the `GET /_replicator/{doc_id}`
-   * method, but only headers like content length and the revision (ETag header) are returned.
+   * Retrieves the HTTP headers for a replication document from the `_replicator` database.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.docId - Path parameter to specify the document ID.
@@ -4768,48 +4766,6 @@ class CloudantV1 extends CloudantBaseService {
       defaultOptions: extend(true, {}, this.baseOptions, {
         headers: extend(true, sdkHeaders, {
           'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  };
-
-  /**
-   * Retrieve HTTP headers for a replication scheduler document.
-   *
-   * Retrieves the HTTP headers containing minimal amount of information about the specified replication scheduler
-   * document.  Since the response body is empty, using the HEAD method is a lightweight way to check if the replication
-   * scheduler document exists or not.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
-   */
-  public headSchedulerDocument(params: CloudantV1.HeadSchedulerDocumentParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
-    const requiredParams = ['docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
-    }
-
-    const path = {
-      'doc_id': _params.docId
-    };
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headSchedulerDocument');
-
-    const parameters = {
-      options: {
-        url: '/_scheduler/docs/_replicator/{doc_id}',
-        method: 'HEAD',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
         }, _params.headers),
       }),
     };
@@ -5825,52 +5781,6 @@ class CloudantV1 extends CloudantBaseService {
    ************************/
 
   /**
-   * Retrieve HTTP headers for a local document.
-   *
-   * Retrieves the HTTP headers containing minimal amount of information about the specified local document. Since the
-   * response body is empty, using the HEAD method is a lightweight way to check if the local document exists or not.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.db - Path parameter to specify the database name.
-   * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
-   */
-  public headLocalDocument(params: CloudantV1.HeadLocalDocumentParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
-    const requiredParams = ['db', 'docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
-    }
-
-    const path = {
-      'db': _params.db,
-      'doc_id': _params.docId
-    };
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headLocalDocument');
-
-    const parameters = {
-      options: {
-        url: '/{db}/_local/{doc_id}',
-        method: 'HEAD',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  };
-
-  /**
    * Delete a local document.
    *
    * Deletes the specified local document. The semantics are identical to deleting a standard document in the specified
@@ -6362,34 +6272,6 @@ class CloudantV1 extends CloudantBaseService {
    ************************/
 
   /**
-   * Retrieve HTTP headers about whether the server is up.
-   *
-   * Retrieves the HTTP headers about whether the server is up.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
-   */
-  public headUpInformation(params?: CloudantV1.HeadUpInformationParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headUpInformation');
-
-    const parameters = {
-      options: {
-        url: '/_up',
-        method: 'HEAD',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-        }, _params.headers),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  };
-
-  /**
    * Retrieve list of running tasks.
    *
    * Lists running tasks, including the task type, name, status, and process ID. The result includes a JSON array of the
@@ -6615,37 +6497,64 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `getDbUpdates` operation. */
-  export interface GetDbUpdatesParams {
-    /** Query parameter to specify the changes feed type. */
-    feed?: GetDbUpdatesConstants.Feed | string;
-    /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Only
-     *  applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout to keep the feed alive
-     *  indefinitely. May also be `true` to use default value of 60000.
-     */
-    heartbeat?: number;
-    /** Query parameter to specify the maximum period in milliseconds to wait for a change before the response is
-     *  sent, even if there are no results. Only applicable for `longpoll` or `continuous` feeds. Default value is
-     *  specified by `httpd/changes_timeout` configuration option. Note that `60000` value is also the default maximum
-     *  timeout to prevent undetected dead connections.
-     */
-    timeout?: number;
-    /** Query parameter to specify to start the results from the change immediately after the given update sequence.
-     *  Can be a valid update sequence or `now` value. Default is `0` i.e. all changes.
-     */
-    since?: string;
+  /** Parameters for the `headDatabase` operation. */
+  export interface HeadDatabaseParams {
+    /** Path parameter to specify the database name. */
+    db: string;
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Constants for the `getDbUpdates` operation. */
-  export namespace GetDbUpdatesConstants {
-    /** Query parameter to specify the changes feed type. */
-    export enum Feed {
-      CONTINUOUS = 'continuous',
-      EVENTSOURCE = 'eventsource',
-      LONGPOLL = 'longpoll',
-      NORMAL = 'normal',
-    }
+  /** Parameters for the `getAllDbs` operation. */
+  export interface GetAllDbsParams {
+    /** Query parameter to specify whether to return the documents in descending by key order. */
+    descending?: boolean;
+    /** Query parameter to specify to stop returning records when the specified key is reached. String
+     *  representation of any JSON type that matches the key type emitted by the view function.
+     */
+    endkey?: string;
+    /** Query parameter to specify the number of returned documents to limit the result to. */
+    limit?: number;
+    /** Query parameter to specify the number of records before starting to return the results. */
+    skip?: number;
+    /** Query parameter to specify to start returning records from the specified key. String representation of any
+     *  JSON type that matches the key type emitted by the view function.
+     */
+    startkey?: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `postDbsInfo` operation. */
+  export interface PostDbsInfoParams {
+    /** A list of database names. */
+    keys: string[];
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `deleteDatabase` operation. */
+  export interface DeleteDatabaseParams {
+    /** Path parameter to specify the database name. */
+    db: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `getDatabaseInformation` operation. */
+  export interface GetDatabaseInformationParams {
+    /** Path parameter to specify the database name. */
+    db: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `putDatabase` operation. */
+  export interface PutDatabaseParams {
+    /** Path parameter to specify the database name. */
+    db: string;
+    /** Query parameter to specify whether to enable database partitions when creating a database. */
+    partitioned?: boolean;
+    /** The number of shards in the database. Each shard is a partition of the hash value range. Default is 8,
+     *  unless overridden in the `cluster config`.
+     */
+    q?: number;
+    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postChanges` operation. */
@@ -6876,66 +6785,6 @@ namespace CloudantV1 {
       LONGPOLL = 'longpoll',
       NORMAL = 'normal',
     }
-  }
-
-  /** Parameters for the `headDatabase` operation. */
-  export interface HeadDatabaseParams {
-    /** Path parameter to specify the database name. */
-    db: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `getAllDbs` operation. */
-  export interface GetAllDbsParams {
-    /** Query parameter to specify whether to return the documents in descending by key order. */
-    descending?: boolean;
-    /** Query parameter to specify to stop returning records when the specified key is reached. String
-     *  representation of any JSON type that matches the key type emitted by the view function.
-     */
-    endkey?: string;
-    /** Query parameter to specify the number of returned documents to limit the result to. */
-    limit?: number;
-    /** Query parameter to specify the number of records before starting to return the results. */
-    skip?: number;
-    /** Query parameter to specify to start returning records from the specified key. String representation of any
-     *  JSON type that matches the key type emitted by the view function.
-     */
-    startkey?: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `postDbsInfo` operation. */
-  export interface PostDbsInfoParams {
-    /** A list of database names. */
-    keys: string[];
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `deleteDatabase` operation. */
-  export interface DeleteDatabaseParams {
-    /** Path parameter to specify the database name. */
-    db: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `getDatabaseInformation` operation. */
-  export interface GetDatabaseInformationParams {
-    /** Path parameter to specify the database name. */
-    db: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `putDatabase` operation. */
-  export interface PutDatabaseParams {
-    /** Path parameter to specify the database name. */
-    db: string;
-    /** Query parameter to specify whether to enable database partitions when creating a database. */
-    partitioned?: boolean;
-    /** The number of shards in the database. Each shard is a partition of the hash value range. Default is 8,
-     *  unless overridden in the `cluster config`.
-     */
-    q?: number;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `headDocument` operation. */
@@ -8697,16 +8546,16 @@ namespace CloudantV1 {
 
   /** Parameters for the `postSearchAnalyze` operation. */
   export interface PostSearchAnalyzeParams {
-    /** The analyzer type that is being used at the tokenization. */
+    /** analyzer. */
     analyzer: PostSearchAnalyzeConstants.Analyzer | string;
-    /** The text to tokenize with the analyzer. */
+    /** text. */
     text: string;
     headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postSearchAnalyze` operation. */
   export namespace PostSearchAnalyzeConstants {
-    /** The analyzer type that is being used at the tokenization. */
+    /** analyzer. */
     export enum Analyzer {
       ARABIC = 'arabic',
       ARMENIAN = 'armenian',
@@ -9144,19 +8993,45 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
+  /** Parameters for the `getDbUpdates` operation. */
+  export interface GetDbUpdatesParams {
+    /** Query parameter to specify the changes feed type. */
+    feed?: GetDbUpdatesConstants.Feed | string;
+    /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Only
+     *  applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout to keep the feed alive
+     *  indefinitely. May also be `true` to use default value of 60000.
+     */
+    heartbeat?: number;
+    /** Query parameter to specify the maximum period in milliseconds to wait for a change before the response is
+     *  sent, even if there are no results. Only applicable for `longpoll` or `continuous` feeds. Default value is
+     *  specified by `httpd/changes_timeout` configuration option. Note that `60000` value is also the default maximum
+     *  timeout to prevent undetected dead connections.
+     */
+    timeout?: number;
+    /** Query parameter to specify to start the results from the change immediately after the given update sequence.
+     *  Can be a valid update sequence or `now` value. Default is `0` i.e. all changes.
+     */
+    since?: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Constants for the `getDbUpdates` operation. */
+  export namespace GetDbUpdatesConstants {
+    /** Query parameter to specify the changes feed type. */
+    export enum Feed {
+      CONTINUOUS = 'continuous',
+      EVENTSOURCE = 'eventsource',
+      LONGPOLL = 'longpoll',
+      NORMAL = 'normal',
+    }
+  }
+
   /** Parameters for the `headReplicationDocument` operation. */
   export interface HeadReplicationDocumentParams {
     /** Path parameter to specify the document ID. */
     docId: string;
     /** Header parameter to specify a double quoted document revision token for cache control. */
     ifNoneMatch?: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `headSchedulerDocument` operation. */
-  export interface HeadSchedulerDocumentParams {
-    /** Path parameter to specify the document ID. */
-    docId: string;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -9508,17 +9383,6 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `headLocalDocument` operation. */
-  export interface HeadLocalDocumentParams {
-    /** Path parameter to specify the database name. */
-    db: string;
-    /** Path parameter to specify the document ID. */
-    docId: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
-    ifNoneMatch?: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
   /** Parameters for the `deleteLocalDocument` operation. */
   export interface DeleteLocalDocumentParams {
     /** Path parameter to specify the database name. */
@@ -9711,11 +9575,6 @@ namespace CloudantV1 {
     db: string;
     /** Path parameter to specify the document ID. */
     docId: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `headUpInformation` operation. */
-  export interface HeadUpInformationParams {
     headers?: OutgoingHttpHeaders;
   }
 
