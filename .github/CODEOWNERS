@@ -16,6 +16,7 @@ scripts/setup_wiremock.sh @IBM/cloudant-sdks
 scripts/typedoc/generate-index-html.sh @IBM/cloudant-sdks
 scripts/typedoc/publish-doc.sh @IBM/cloudant-sdks
 stubs/mappings.json @IBM/cloudant-sdks
+stubs/mappings.json @IBM/cloudant-sdks
 
 # Generated code files:
 
