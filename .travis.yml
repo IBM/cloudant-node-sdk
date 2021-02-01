@@ -21,7 +21,7 @@ script:
 - npm run build
 - npm run test-travis || travis_terminate 1
 - npm run lint
-- npm run check-packages
+- if [[ $(node --version) =~ v1[^0][\d.]* ]]; then npm run check-packages; fi
 # - sh scripts/typedoc/generate_typedoc.sh currently in progress
 
 after_success:
