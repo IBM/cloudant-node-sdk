@@ -215,7 +215,7 @@ void publishPublic() {
 void publishNpm() {
   // Note trailing slash is important for matching .npmrc entries
   // npm-cli-login always adds a trailing slash, so we don't use one in the NPM_REGISTRY var
-  sh "npm publish dist --registry ${env.NPM_REGISTRY}/"
+  sh "npm publish ./dist --registry ${env.NPM_REGISTRY}/"
 }
 
 void publishDocs() {
