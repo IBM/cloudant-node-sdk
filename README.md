@@ -14,7 +14,7 @@
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-node-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-node-sdk/releases/latest)
 [![Docs](https://img.shields.io/static/v1?label=nodedoc&message=latest&color=blue)](https://ibm.github.io/cloudant-node-sdk/)
 
-# IBM Cloudant Node.js SDK Version 0.0.12
+# IBM Cloudant Node.js SDK Version 0.0.13
 
 IBM Cloudant Node.js SDK is a client library that interacts with the
 [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=node).
