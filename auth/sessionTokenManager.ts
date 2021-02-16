@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020.
+ * © Copyright IBM Corporation 2020. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {OutgoingHttpHeaders} from "http";
+import { OutgoingHttpHeaders } from 'http';
 import { getCurrentTime, TokenManager, UserOptions, validateInput } from 'ibm-cloud-sdk-core';
 
 /** Configuration options for CouchDB session token retrieval. */
@@ -68,7 +68,8 @@ export class SessionTokenManager extends TokenManager {
    * @returns {Error}
    */
   public setHeaders(headers: OutgoingHttpHeaders): void {
-    const errMsg = 'During CouchDB Session Authentication only `request` service headers are in use';
+    const errMsg =
+      'During CouchDB Session Authentication only `request` service headers are in use';
     throw new Error(errMsg);
   }
 
@@ -89,9 +90,9 @@ export class SessionTokenManager extends TokenManager {
         method: 'POST',
         body: {
           username: this.options.username,
-          password: this.options.password
-        }
-      }
+          password: this.options.password,
+        },
+      },
     };
     return this.requestWrapperInstance.sendRequest(parameters);
   }
@@ -107,21 +108,21 @@ export class SessionTokenManager extends TokenManager {
    */
   protected saveTokenInfo(tokenResponse): void {
     const sessionCookie = tokenResponse.headers['set-cookie'];
-    if ( !(sessionCookie instanceof Array ) ) {
+    if (!(sessionCookie instanceof Array)) {
       const err = 'Set-Cookie header not present in response';
       throw new Error(err);
     }
     let sessionToken = null;
     let expireTime = null;
     let refreshTime = null;
-    for ( let i = 0; i < sessionCookie.length && sessionToken == null; i++ ) {
+    for (let i = 0; i < sessionCookie.length && sessionToken == null; i++) {
       sessionToken = new RegExp('AuthSession=([^;]*);').exec(sessionCookie[i]);
-      if (sessionToken != null ) {
+      if (sessionToken != null) {
         expireTime = new RegExp('.*Expires=([^;]*);').exec(sessionCookie[i]);
         refreshTime = new RegExp('.*Max-Age=([^;]*);').exec(sessionCookie[i]);
       }
     }
-    if ( sessionToken == null) {
+    if (sessionToken == null) {
       const err = 'Session token not present in response';
       throw new Error(err);
     }
@@ -133,14 +134,14 @@ export class SessionTokenManager extends TokenManager {
         this.refreshTime = 0;
       } else {
         this.expireTime = Number(refreshTime[1]) + getCurrentTime();
-        this.refreshTime = ( Number(refreshTime[1]) * fractionOfTtl ) + getCurrentTime();
+        this.refreshTime = Number(refreshTime[1]) * fractionOfTtl + getCurrentTime();
       }
     } else {
       // Store expire time in seconds
       this.expireTime = Date.parse(expireTime[1]) / 1000;
       // Set refresh time from the expire time
       const timeToLive = this.expireTime - getCurrentTime();
-      this.refreshTime = this.expireTime - (timeToLive * (1.0 - fractionOfTtl))
+      this.refreshTime = this.expireTime - timeToLive * (1.0 - fractionOfTtl);
     }
   }
 }

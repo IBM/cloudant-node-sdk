@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020.
+ * © Copyright IBM Corporation 2020. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,15 @@
  * limitations under the License.
  */
 
-import { Authenticator, getAuthenticatorFromEnvironment, readExternalSources } from "ibm-cloud-sdk-core";
-import { CouchdbSessionAuthenticator } from "../auth";
+import {
+  Authenticator,
+  getAuthenticatorFromEnvironment,
+  readExternalSources,
+} from 'ibm-cloud-sdk-core';
+// eslint-disable-next-line node/no-missing-import
+import { CouchdbSessionAuthenticator } from '../auth';
 
-const COUCHDB_SESSION_AUTH_TYPE = 'couchdb_session'
+const COUCHDB_SESSION_AUTH_TYPE = 'couchdb_session';
 
 /**
  * Extend the creating Authenticator from external configuration function with
@@ -29,7 +34,7 @@ const COUCHDB_SESSION_AUTH_TYPE = 'couchdb_session'
 export function getAuthenticatorFromEnvCloudantExtension(serviceName: string): Authenticator {
   let auth;
   const credentials = readExternalSources(serviceName);
-  if( (credentials.authType || '').toLowerCase() === COUCHDB_SESSION_AUTH_TYPE ) {
+  if ((credentials.authType || '').toLowerCase() === COUCHDB_SESSION_AUTH_TYPE) {
     auth = new CouchdbSessionAuthenticator(credentials);
   } else {
     auth = getAuthenticatorFromEnvironment(serviceName);

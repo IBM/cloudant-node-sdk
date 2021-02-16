@@ -14,53 +14,51 @@
  * limitations under the License.
  */
 
-/* tslint:disable:no-console */
-
-import {CloudantV1} from "../../../../index";
+// eslint-disable-next-line node/no-missing-import
+import { CloudantV1 } from '../../../../index';
 
 interface OrderDocument extends CloudantV1.Document {
-    address?: string;
-    joined?: string;
-    _id?: string;
-    _rev?: string;
+  address?: string;
+  joined?: string;
+  _id?: string;
+  _rev?: string;
 }
 
 // 1. Create a client with `CLOUDANT` default service name ================
 const client = CloudantV1.newInstance({});
 // 2. Update the document =====================================================
 // Set the options to get the document out of the database if it exists
-const exampleDbName = "orders";
+const exampleDbName = 'orders';
 
 // Try to get the document if it previously existed in the database
-const getDocParams: CloudantV1.GetDocumentParams =
-    {docId: "example", db: exampleDbName};
+const getDocParams: CloudantV1.GetDocumentParams = { docId: 'example', db: exampleDbName };
 
-client.getDocument(getDocParams)
-    .then(docResult => {
-        // using OrderDocument on getDocument result:
-        const document: OrderDocument = docResult.result;
+client
+  .getDocument(getDocParams)
+  .then((docResult) => {
+    // using OrderDocument on getDocument result:
+    const document: OrderDocument = docResult.result;
 
-        // Add Bob Smith's address to the document
-        document.address = "19 Front Street, Darlington, DL5 1TY";
+    // Add Bob Smith's address to the document
+    document.address = '19 Front Street, Darlington, DL5 1TY';
 
-        // Remove the joined property from document object
-        delete document.joined;
+    // Remove the joined property from document object
+    delete document.joined;
 
-        // Update the document in the database
-        client.postDocument({db: exampleDbName, document})
-            .then(res => {
-                // Keeping track with the revision number of the document object:
-                document._rev = res.result.rev;
-                console.log("You have updated the document:\n" +
-                    JSON.stringify(document, null, 2));
-            });
-    })
-    .catch(err => {
-        if (err.code === 404) {
-            console.log(
-                "Cannot update document because either \"" +
-                exampleDbName + "\" database or the \"example\" " +
-                "document was not found."
-            );
-        }
+    // Update the document in the database
+    client.postDocument({ db: exampleDbName, document }).then((res) => {
+      // Keeping track with the revision number of the document object:
+      document._rev = res.result.rev;
+      console.log('You have updated the document:\n' + JSON.stringify(document, null, 2));
     });
+  })
+  .catch((err) => {
+    if (err.code === 404) {
+      console.log(
+        'Cannot update document because either "' +
+          exampleDbName +
+          '" database or the "example" ' +
+          'document was not found.'
+      );
+    }
+  });

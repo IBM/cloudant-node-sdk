@@ -15,7 +15,8 @@
  */
 
 import { Authenticator, UserOptions, validateInput } from 'ibm-cloud-sdk-core';
-import { SessionTokenManager, SessionTokenManagerOptions } from './sessionTokenManager'
+// eslint-disable-next-line node/no-missing-import
+import { SessionTokenManager, SessionTokenManagerOptions } from './sessionTokenManager';
 
 /** Configuration options for CouchDB session authentication. */
 export type CouchdbSessionAuthenticatorOptions = {
@@ -37,9 +38,9 @@ export type CouchdbSessionAuthenticatorOptions = {
  *                     Version=1; Path=/; HttpOnly; Secure
  *
  */
-export class CouchdbSessionAuthenticator extends Authenticator{
+export class CouchdbSessionAuthenticator extends Authenticator {
   protected tokenManager: SessionTokenManager;
-  protected requiredOptions: ["username", "password"];
+  protected requiredOptions: ['username', 'password'];
   private tokenOptions: SessionTokenManagerOptions;
 
   /**

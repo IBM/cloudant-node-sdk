@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020.
+ * © Copyright IBM Corporation 2020. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-
 /**
  * @module cloudant-node-sdk
  */
-export import CloudantV1 = require("./cloudant/v1");
+// eslint-disable-next-line no-unused-vars
+export import CloudantV1 = require('./cloudant/v1');
 
-export {BasicAuthenticator, IamAuthenticator, CouchdbSessionAuthenticator} from './auth';
+// eslint-disable-next-line node/no-missing-import
+export { BasicAuthenticator, IamAuthenticator, CouchdbSessionAuthenticator } from './auth';

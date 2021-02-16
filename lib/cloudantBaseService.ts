@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020.
+ * © Copyright IBM Corporation 2020. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
-import { Authenticator, BaseService, UserOptions } from "ibm-cloud-sdk-core";
-import { CookieJar } from 'tough-cookie'
-import { CouchdbSessionAuthenticator } from "../auth";
-import {getSdkHeaders} from "./common";
+import { Authenticator, BaseService, UserOptions } from 'ibm-cloud-sdk-core';
+// eslint-disable-next-line node/no-unpublished-import
+import { CookieJar } from 'tough-cookie';
+// eslint-disable-next-line node/no-missing-import
+import { CouchdbSessionAuthenticator } from '../auth';
+// eslint-disable-next-line node/no-missing-import
+import { getSdkHeaders } from './common';
 
 /**
  * Cloudant specific service that extends the base service functions.
@@ -75,11 +78,13 @@ export abstract class CloudantBaseService extends BaseService {
     const auth: Authenticator = this.getAuthenticator();
     if (auth instanceof CouchdbSessionAuthenticator) {
       const serviceClass = this.constructor as typeof BaseService;
-      const newHeaders = getSdkHeaders(serviceClass.DEFAULT_SERVICE_NAME,
-          'v1',
-          'authenticatorPostSession');
-      if(this.baseOptions.headers === undefined) {
-        Object.assign(this.baseOptions, {'headers': newHeaders});
+      const newHeaders = getSdkHeaders(
+        serviceClass.DEFAULT_SERVICE_NAME,
+        'v1',
+        'authenticatorPostSession'
+      );
+      if (this.baseOptions.headers === undefined) {
+        Object.assign(this.baseOptions, { 'headers': newHeaders });
       } else {
         Object.assign(this.baseOptions.headers, newHeaders);
       }
