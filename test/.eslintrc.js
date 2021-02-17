@@ -23,7 +23,11 @@ module.exports = {
     'require-jsdoc': 'off',
     'valid-jsdoc': 'off',
   },
-  extends: ['plugin:import/errors', 'plugin:import/warnings', 'plugin:import/typescript'],
+  extends: [
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+  ],
   settings: {
     'import/resolver': {
       node: {

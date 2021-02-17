@@ -28,7 +28,10 @@ describe('Test CloudantBaseService', () => {
     process.env.APPLE_URL = appleUrl;
   });
   it('Use couchdb_session authenticator', () => {
-    const auth = new CouchdbSessionAuthenticator({ username: 'test', password: 'user' });
+    const auth = new CouchdbSessionAuthenticator({
+      username: 'test',
+      password: 'user',
+    });
     const service = new CloudantBaseService({
       authenticator: auth,
       serviceUrl: appleUrl,
@@ -41,11 +44,17 @@ describe('Test CloudantBaseService', () => {
       service.requestWrapperInstance.axiosInstance.defaults.jar
     );
     // Check the trailing slash is removed by the constructor
-    assert.strictEqual(service.getAuthenticator().tokenOptions.serviceUrl, appleUrl.slice(0, -1));
+    assert.strictEqual(
+      service.getAuthenticator().tokenOptions.serviceUrl,
+      appleUrl.slice(0, -1)
+    );
 
     service.setServiceUrl(newUrl);
     // newUrl is used in authenticator
-    assert.strictEqual(service.getAuthenticator().tokenOptions.serviceUrl, newUrl.slice(0, -1));
+    assert.strictEqual(
+      service.getAuthenticator().tokenOptions.serviceUrl,
+      newUrl.slice(0, -1)
+    );
 
     service.configureService('apple');
     // the authenticator and the request using the same jar
@@ -54,11 +63,17 @@ describe('Test CloudantBaseService', () => {
       service.requestWrapperInstance.axiosInstance.defaults.jar
     );
     // authentication url uses serviceUrl
-    assert.strictEqual(service.getAuthenticator().tokenOptions.serviceUrl, appleUrl.slice(0, -1));
+    assert.strictEqual(
+      service.getAuthenticator().tokenOptions.serviceUrl,
+      appleUrl.slice(0, -1)
+    );
   });
 
   it('Invalidate token on setServiceUrl', () => {
-    const auth = new CouchdbSessionAuthenticator({ username: 'test', password: 'user' });
+    const auth = new CouchdbSessionAuthenticator({
+      username: 'test',
+      password: 'user',
+    });
     const service = new CloudantBaseService({
       authenticator: auth,
       serviceUrl: appleUrl,
@@ -70,7 +85,10 @@ describe('Test CloudantBaseService', () => {
   });
 
   it('Apply SDK UA header', () => {
-    const auth = new CouchdbSessionAuthenticator({ username: 'test', password: 'user' });
+    const auth = new CouchdbSessionAuthenticator({
+      username: 'test',
+      password: 'user',
+    });
     class MockV1 extends CloudantBaseService {}
     MockV1.DEFAULT_SERVICE_NAME = 'cloudant';
     new MockV1({
@@ -86,15 +104,19 @@ describe('Test CloudantBaseService', () => {
     assert.ok(auth.tokenManager.requestWrapperInstance.sendRequest.calledOnce);
 
     assert.strictEqual(
-      auth.tokenManager.requestWrapperInstance.sendRequest.getCall(-1).args[0]['options'][
-        'headers'
-      ]['X-IBMCloud-SDK-Analytics'],
+      auth.tokenManager.requestWrapperInstance.sendRequest.getCall(-1).args[0][
+        'options'
+      ]['headers']['X-IBMCloud-SDK-Analytics'],
       'service_name=cloudant;service_version=v1;operation_id=authenticatorPostSession'
     );
   });
 
   it('Use basic authenticator', () => {
-    const auth = new IamAuthenticator({ apikey: '1234', clientId: '345', clientSecret: '234' });
+    const auth = new IamAuthenticator({
+      apikey: '1234',
+      clientId: '345',
+      clientSecret: '234',
+    });
     const service = new CloudantBaseService({ authenticator: auth });
     assert.ok(service);
     // no new jar was generated

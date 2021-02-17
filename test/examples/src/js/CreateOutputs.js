@@ -20,7 +20,9 @@
 
 const fs = require('fs');
 
-const { getInfoFromExistingDatabase } = require('./GetInfoFromExistingDatabase.js');
+const {
+  getInfoFromExistingDatabase,
+} = require('./GetInfoFromExistingDatabase.js');
 const { createDbAndDoc } = require('./CreateDbAndDoc.js');
 const { updateDoc } = require('./UpdateDoc.js');
 const { deleteDoc } = require('./DeleteDoc.js');
@@ -44,25 +46,37 @@ const run = async () => {
 
   await createDbAndDoc();
 
-  fs.writeFile('test/examples/output/CreateDbAndDoc.txt', consoleOutput.trim(), (err) => {
-    if (err) throw err;
-  });
+  fs.writeFile(
+    'test/examples/output/CreateDbAndDoc.txt',
+    consoleOutput.trim(),
+    (err) => {
+      if (err) throw err;
+    }
+  );
 
   consoleOutput = ''; // flush consoleOutput
 
   await updateDoc();
 
-  fs.writeFile('test/examples/output/UpdateDoc.txt', consoleOutput.trim(), (err) => {
-    if (err) throw err;
-  });
+  fs.writeFile(
+    'test/examples/output/UpdateDoc.txt',
+    consoleOutput.trim(),
+    (err) => {
+      if (err) throw err;
+    }
+  );
 
   consoleOutput = ''; // flush consoleOutput
 
   await deleteDoc();
 
-  fs.writeFile('test/examples/output/DeleteDoc.txt', consoleOutput.trim(), (err) => {
-    if (err) throw err;
-  });
+  fs.writeFile(
+    'test/examples/output/DeleteDoc.txt',
+    consoleOutput.trim(),
+    (err) => {
+      if (err) throw err;
+    }
+  );
 };
 
 run();

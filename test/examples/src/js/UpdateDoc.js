@@ -50,7 +50,9 @@ const updateDoc = async () => {
       })
     ).result.rev;
 
-    console.log('You have updated the document:\n' + JSON.stringify(document, null, 2));
+    console.log(
+      'You have updated the document:\n' + JSON.stringify(document, null, 2)
+    );
   } catch (err) {
     if (err.code === 404) {
       console.log(
