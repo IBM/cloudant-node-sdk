@@ -22,7 +22,5 @@ export {
   getAuthenticatorFromEnvironment,
 } from 'ibm-cloud-sdk-core';
 
-// eslint-disable-next-line node/no-missing-import
 export { CouchdbSessionAuthenticator } from './couchdbSessionAuthenticator';
-// eslint-disable-next-line node/no-missing-import
 export { SessionTokenManager } from './sessionTokenManager';

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-// eslint-disable-next-line node/no-missing-import
 import { CloudantV1 } from '../../../../index';
 
 interface OrderDocument extends CloudantV1.Document {
@@ -31,7 +30,10 @@ const client = CloudantV1.newInstance({});
 const exampleDbName = 'orders';
 
 // Try to get the document if it previously existed in the database
-const getDocParams: CloudantV1.GetDocumentParams = { docId: 'example', db: exampleDbName };
+const getDocParams: CloudantV1.GetDocumentParams = {
+  docId: 'example',
+  db: exampleDbName,
+};
 
 client
   .getDocument(getDocParams)
@@ -49,7 +51,9 @@ client
     client.postDocument({ db: exampleDbName, document }).then((res) => {
       // Keeping track with the revision number of the document object:
       document._rev = res.result.rev;
-      console.log('You have updated the document:\n' + JSON.stringify(document, null, 2));
+      console.log(
+        'You have updated the document:\n' + JSON.stringify(document, null, 2)
+      );
     });
   })
   .catch((err) => {

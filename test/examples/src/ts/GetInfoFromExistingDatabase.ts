@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-// eslint-disable-next-line node/no-missing-import
 import { CloudantV1 } from '../../../../index';
 
 // 1. Create a Cloudant client with "EXAMPLES" service name ===================
@@ -36,15 +35,22 @@ client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
   const dbNameResult = dbInfo.result.db_name;
 
   // 4. Show document count in database =================================
-  console.log(`Document count in "${dbNameResult}" database is ` + documentCount + '.');
+  console.log(
+    `Document count in "${dbNameResult}" database is ` + documentCount + '.'
+  );
 });
 
 // 5. Get zebra document out of the database by document id ===================
-const getDocParams: CloudantV1.GetDocumentParams = { db: dbName, docId: 'zebra' };
+const getDocParams: CloudantV1.GetDocumentParams = {
+  db: dbName,
+  docId: 'zebra',
+};
 
 // call service with predefined parameters:
 client.getDocument(getDocParams).then((documentAboutZebra) => {
   // result object is defined as a Document here:
   const result: CloudantV1.Document = documentAboutZebra.result;
-  console.log('Document retrieved from database:\n' + JSON.stringify(result, null, 2));
+  console.log(
+    'Document retrieved from database:\n' + JSON.stringify(result, null, 2)
+  );
 });

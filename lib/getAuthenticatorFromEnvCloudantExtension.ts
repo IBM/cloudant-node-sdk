@@ -19,7 +19,6 @@ import {
   getAuthenticatorFromEnvironment,
   readExternalSources,
 } from 'ibm-cloud-sdk-core';
-// eslint-disable-next-line node/no-missing-import
 import { CouchdbSessionAuthenticator } from '../auth';
 
 const COUCHDB_SESSION_AUTH_TYPE = 'couchdb_session';
@@ -31,10 +30,14 @@ const COUCHDB_SESSION_AUTH_TYPE = 'couchdb_session';
  * @param {string} serviceName The service name prefix.
  *
  */
-export function getAuthenticatorFromEnvCloudantExtension(serviceName: string): Authenticator {
+export function getAuthenticatorFromEnvCloudantExtension(
+  serviceName: string
+): Authenticator {
   let auth;
   const credentials = readExternalSources(serviceName);
-  if ((credentials.authType || '').toLowerCase() === COUCHDB_SESSION_AUTH_TYPE) {
+  if (
+    (credentials.authType || '').toLowerCase() === COUCHDB_SESSION_AUTH_TYPE
+  ) {
     auth = new CouchdbSessionAuthenticator(credentials);
   } else {
     auth = getAuthenticatorFromEnvironment(serviceName);

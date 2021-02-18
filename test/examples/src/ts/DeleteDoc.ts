@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-// eslint-disable-next-line node/no-missing-import
 import { CloudantV1 } from '../../../../index';
 
 interface OrderDocument extends CloudantV1.Document {
@@ -34,7 +33,10 @@ const exampleDbName = 'orders';
 const exampleDocId = 'example';
 
 // Try to get the document if it previously existed in the database
-const getDocParams: CloudantV1.GetDocumentParams = { docId: exampleDocId, db: exampleDbName };
+const getDocParams: CloudantV1.GetDocumentParams = {
+  docId: exampleDocId,
+  db: exampleDbName,
+};
 
 client
   .getDocument(getDocParams)

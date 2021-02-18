@@ -17,9 +17,7 @@
 import { Authenticator, BaseService, UserOptions } from 'ibm-cloud-sdk-core';
 // eslint-disable-next-line node/no-unpublished-import
 import { CookieJar } from 'tough-cookie';
-// eslint-disable-next-line node/no-missing-import
 import { CouchdbSessionAuthenticator } from '../auth';
-// eslint-disable-next-line node/no-missing-import
 import { getSdkHeaders } from './common';
 
 /**

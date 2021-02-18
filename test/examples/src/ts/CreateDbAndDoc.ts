@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-// eslint-disable-next-line node/no-missing-import
 import { CloudantV1 } from '../../../../index';
 
 interface OrderDocument extends CloudantV1.Document {
@@ -40,7 +39,9 @@ const createDb = client
   })
   .catch((err) => {
     if (err.code === 412) {
-      console.log('Cannot create "' + exampleDbName + '" database, it already exists.');
+      console.log(
+        'Cannot create "' + exampleDbName + '" database, it already exists.'
+      );
     }
   });
 
@@ -65,6 +66,9 @@ createDb.then(() => {
     .then((createDocumentResponse) => {
       // Keep track with the revision number of the document object
       exampleDocument._rev = createDocumentResponse.result.rev;
-      console.log('You have created the document:\n' + JSON.stringify(exampleDocument, null, 2));
+      console.log(
+        'You have created the document:\n' +
+          JSON.stringify(exampleDocument, null, 2)
+      );
     });
 });

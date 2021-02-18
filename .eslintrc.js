@@ -29,6 +29,10 @@ module.exports = {
     'plugin:import/typescript',
   ],
   'rules': {
+    'node/no-unsupported-features/es-syntax': [
+      'error',
+      { 'ignores': ['modules'] },
+    ],
     'prettier/prettier': ['error', { 'singleQuote': true, 'printWidth': 80 }],
     'prefer-const': 'error',
     'prefer-rest-params': 'off', // https://github.com/mysticatea/eslint-plugin-node/issues/63
@@ -91,9 +95,11 @@ module.exports = {
     },
   ],
   settings: {
+    node: {
+      tryExtensions: ['.js', '.json', '.ts', '.d.ts'],
+    },
     'import/resolver': {
       node: {
-        paths: ['lib', 'test'],
         extensions: ['.js', '.ts'],
         moduleDirectory: ['node_modules'],
       },

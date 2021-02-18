@@ -15,7 +15,12 @@
  */
 
 import { OutgoingHttpHeaders } from 'http';
-import { getCurrentTime, TokenManager, UserOptions, validateInput } from 'ibm-cloud-sdk-core';
+import {
+  getCurrentTime,
+  TokenManager,
+  UserOptions,
+  validateInput,
+} from 'ibm-cloud-sdk-core';
 
 /** Configuration options for CouchDB session token retrieval. */
 export interface SessionTokenManagerOptions extends UserOptions {
@@ -32,7 +37,12 @@ export interface SessionTokenManagerOptions extends UserOptions {
  * to acquire session tokens.
  */
 export class SessionTokenManager extends TokenManager {
-  protected requiredOptions: string[] = ['username', 'password', 'serviceUrl', 'jar'];
+  protected requiredOptions: string[] = [
+    'username',
+    'password',
+    'serviceUrl',
+    'jar',
+  ];
   private tokenName: string;
   private options: SessionTokenManagerOptions;
 
@@ -134,7 +144,8 @@ export class SessionTokenManager extends TokenManager {
         this.refreshTime = 0;
       } else {
         this.expireTime = Number(refreshTime[1]) + getCurrentTime();
-        this.refreshTime = Number(refreshTime[1]) * fractionOfTtl + getCurrentTime();
+        this.refreshTime =
+          Number(refreshTime[1]) * fractionOfTtl + getCurrentTime();
       }
     } else {
       // Store expire time in seconds
