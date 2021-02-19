@@ -14,45 +14,43 @@
  * limitations under the License.
  */
 
-/* tslint:disable:no-console */
-
-import {CloudantV1} from "../../../../index";
+import { CloudantV1 } from '../../../../index';
 
 // 1. Create a Cloudant client with "EXAMPLES" service name ===================
-const client =
-    CloudantV1.newInstance({serviceName:"EXAMPLES"});
+const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
 
 // 2. Get server information ==================================================
 // call service without parameters:
-client.getServerInformation()
-    .then(serverInformation => {
-        const version = serverInformation.result.version;
-        console.log(`Server version ${version}`);
-    });
+client.getServerInformation().then((serverInformation) => {
+  const version = serverInformation.result.version;
+  console.log(`Server version ${version}`);
+});
 
 // 3. Get database information for "animaldb" =================================
-const dbName = "animaldb";
+const dbName = 'animaldb';
 
 // call service with embedded parameters:
-client.getDatabaseInformation({db: dbName})
-    .then(dbInfo => {
-        const documentCount = dbInfo.result.doc_count;
-        const dbNameResult = dbInfo.result.db_name;
+client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
+  const documentCount = dbInfo.result.doc_count;
+  const dbNameResult = dbInfo.result.db_name;
 
-        // 4. Show document count in database =================================
-        console.log(`Document count in "${dbNameResult}" database is ` +
-            documentCount + ".");
-    });
+  // 4. Show document count in database =================================
+  console.log(
+    `Document count in "${dbNameResult}" database is ` + documentCount + '.'
+  );
+});
 
 // 5. Get zebra document out of the database by document id ===================
-const getDocParams:
-    CloudantV1.GetDocumentParams = {db: dbName, docId: "zebra"};
+const getDocParams: CloudantV1.GetDocumentParams = {
+  db: dbName,
+  docId: 'zebra',
+};
 
 // call service with predefined parameters:
-client.getDocument(getDocParams)
-    .then(documentAboutZebra => {
-        // result object is defined as a Document here:
-        const result: CloudantV1.Document = documentAboutZebra.result;
-        console.log("Document retrieved from database:\n" +
-            JSON.stringify(result, null, 2));
-    });
+client.getDocument(getDocParams).then((documentAboutZebra) => {
+  // result object is defined as a Document here:
+  const result: CloudantV1.Document = documentAboutZebra.result;
+  console.log(
+    'Document retrieved from database:\n' + JSON.stringify(result, null, 2)
+  );
+});

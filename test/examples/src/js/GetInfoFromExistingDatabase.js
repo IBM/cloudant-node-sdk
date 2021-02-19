@@ -38,7 +38,9 @@ const getInfoFromExistingDatabase = async () => {
   const dbNameResult = dbInfo.result.db_name;
 
   // 4. Show document count in database =================================
-  console.log(`Document count in "${dbNameResult}" database is ` + documentCount + '.');
+  console.log(
+    `Document count in "${dbNameResult}" database is ` + documentCount + '.'
+  );
 
   // 5. Get zebra document out of the database by document id ===================
   const getDocParams = { db: dbName, docId: 'zebra' };
@@ -49,7 +51,9 @@ const getInfoFromExistingDatabase = async () => {
   // result object is defined as a Document here:
   const result = documentAboutZebra.result;
 
-  console.log('Document retrieved from database:\n' + JSON.stringify(result, null, 2));
+  console.log(
+    'Document retrieved from database:\n' + JSON.stringify(result, null, 2)
+  );
 };
 
 if (require.main === module) {

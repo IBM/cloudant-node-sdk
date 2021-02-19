@@ -71,7 +71,10 @@ describe('SessionTokenManager tests', () => {
       };
 
       const manager = new SessionTokenManager(Object.assign({}, OPTIONS));
-      const sendRequestStubFn = sinon.stub(manager.requestWrapperInstance, 'sendRequest');
+      const sendRequestStubFn = sinon.stub(
+        manager.requestWrapperInstance,
+        'sendRequest'
+      );
       sendRequestStubFn.returnsArg(0);
       const parameters = manager.requestToken();
       assert.deepStrictEqual(parameters, expectedParameters);
@@ -88,7 +91,10 @@ describe('SessionTokenManager tests', () => {
       try {
         manager.saveTokenInfo(response);
       } catch (error) {
-        assert.strictEqual('Error: Set-Cookie header not present in response', error.toString());
+        assert.strictEqual(
+          'Error: Set-Cookie header not present in response',
+          error.toString()
+        );
       }
 
       assert.strictEqual(manager.expireTime, undefined);
@@ -107,7 +113,10 @@ describe('SessionTokenManager tests', () => {
       try {
         manager.saveTokenInfo(response);
       } catch (error) {
-        assert.strictEqual('Error: Session token not present in response', error.toString());
+        assert.strictEqual(
+          'Error: Session token not present in response',
+          error.toString()
+        );
       }
 
       assert.strictEqual(manager.expireTime, undefined);
@@ -119,7 +128,11 @@ describe('SessionTokenManager tests', () => {
       const manager = new SessionTokenManager(OPTIONS);
       const response = {
         'headers': {
-          'set-cookie': ['ProxyToken=987456;', 'AuthSession=123456;', 'JwtToken=758493'],
+          'set-cookie': [
+            'ProxyToken=987456;',
+            'AuthSession=123456;',
+            'JwtToken=758493',
+          ],
         },
       };
 

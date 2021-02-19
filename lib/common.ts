@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020.
+ * © Copyright IBM Corporation 2020. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,23 @@
  * limitations under the License.
  */
 
-import * as os from "os";
+import * as os from 'os';
 // tslint:disable-next-line:no-var-requires
 const pkg = require('../package.json');
 
 export type SdkHeaders = {
   'User-Agent': string;
   'X-IBMCloud-SDK-Analytics': string;
-}
+};
 
 /**
  * Get the request headers to be sent in requests by the SDK.
  */
-export function getSdkHeaders(serviceName: string, serviceVersion: string, operationId: string): SdkHeaders | {} {
+export function getSdkHeaders(
+  serviceName: string,
+  serviceVersion: string,
+  operationId: string
+): SdkHeaders | {} {
   const sdkName = 'cloudant-node-sdk';
   const sdkVersion = pkg.version;
   const osName = os.platform();

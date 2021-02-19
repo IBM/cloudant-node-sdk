@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020.
+ * © Copyright IBM Corporation 2020. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,12 @@
  */
 
 export {
-    NoAuthAuthenticator,
-    BasicAuthenticator,
-    IamAuthenticator,
-    IamTokenManager,
-    getAuthenticatorFromEnvironment,
+  NoAuthAuthenticator,
+  BasicAuthenticator,
+  IamAuthenticator,
+  IamTokenManager,
+  getAuthenticatorFromEnvironment,
 } from 'ibm-cloud-sdk-core';
 
-export {CouchdbSessionAuthenticator} from './couchdbSessionAuthenticator';
-export {SessionTokenManager} from './sessionTokenManager';
+export { CouchdbSessionAuthenticator } from './couchdbSessionAuthenticator';
+export { SessionTokenManager } from './sessionTokenManager';

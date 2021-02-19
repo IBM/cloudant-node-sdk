@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020.
+ * © Copyright IBM Corporation 2021. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,10 @@
  */
 
 import { Authenticator, UserOptions, validateInput } from 'ibm-cloud-sdk-core';
-import { SessionTokenManager, SessionTokenManagerOptions } from './sessionTokenManager'
+import {
+  SessionTokenManager,
+  SessionTokenManagerOptions,
+} from './sessionTokenManager';
 
 /** Configuration options for CouchDB session authentication. */
 export type CouchdbSessionAuthenticatorOptions = {
@@ -37,9 +40,9 @@ export type CouchdbSessionAuthenticatorOptions = {
  *                     Version=1; Path=/; HttpOnly; Secure
  *
  */
-export class CouchdbSessionAuthenticator extends Authenticator{
+export class CouchdbSessionAuthenticator extends Authenticator {
   protected tokenManager: SessionTokenManager;
-  protected requiredOptions: ["username", "password"];
+  protected requiredOptions: ['username', 'password'];
   private tokenOptions: SessionTokenManagerOptions;
 
   /**

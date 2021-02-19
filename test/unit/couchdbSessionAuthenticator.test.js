@@ -24,7 +24,10 @@ describe('CouchdbSessionAutheticator tests', () => {
     try {
       new CouchdbSessionAuthenticator({});
     } catch (err) {
-      assert.strictEqual('Error: Missing required parameters: username, password', err.toString());
+      assert.strictEqual(
+        'Error: Missing required parameters: username, password',
+        err.toString()
+      );
     }
   });
 

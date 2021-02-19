@@ -17,7 +17,8 @@ module.exports = {
   'env': {
     'node': true,
   },
-  'plugins': ['node', 'prettier', 'header'],
+  parser: '@typescript-eslint/parser',
+  'plugins': ['node', 'prettier', 'header', '@typescript-eslint'],
   'extends': [
     'eslint:recommended',
     'google',
@@ -28,7 +29,11 @@ module.exports = {
     'plugin:import/typescript',
   ],
   'rules': {
-    'prettier/prettier': ['error', { 'singleQuote': true, 'printWidth': 100 }],
+    'node/no-unsupported-features/es-syntax': [
+      'error',
+      { 'ignores': ['modules'] },
+    ],
+    'prettier/prettier': ['error', { 'singleQuote': true, 'printWidth': 80 }],
     'prefer-const': 'error',
     'prefer-rest-params': 'off', // https://github.com/mysticatea/eslint-plugin-node/issues/63
     // The rest of these override rules that are enabled by one of the configs we extend but not compatible with current codebase
@@ -44,7 +49,7 @@ module.exports = {
         {
           pattern:
             ' * (© Copyright IBM Corporation 20\\d\\d(?:, 20\\d\\d)?\\. All Rights Reserved\\.|\\(C\\) Copyright IBM Corp\\. 20\\d\\d\\.)',
-          template: ' * © Copyright IBM Corporation 2020. All Rights Reserved.',
+          template: ' * © Copyright IBM Corporation 2021. All Rights Reserved.',
         },
         ' *',
         ' * Licensed under the Apache License, Version 2.0 (the "License");',
@@ -66,15 +71,35 @@ module.exports = {
     {
       files: ['test/unit/cloudant.v1.test.js'],
       rules: {
-        'prettier/prettier': 'off',
         'node/no-missing-require': 'off',
+        'prettier/prettier': 'off',
+      },
+    },
+    {
+      files: ['cloudant/v1.ts'],
+      rules: {
+        '@typescript-eslint/no-empty-interface': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-namespace': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
+        'no-redeclare': 'off',
+        'no-undef': 'off',
+        'no-unused-vars': 'off',
+        'node/no-missing-import': 'off',
+        'node/no-unsupported-features/es-syntax': 'off',
+        'prettier': 'off',
+        'prettier/prettier': 'off',
+        'require-jsdoc': 'off',
+        'spaced-comment': 'off',
       },
     },
   ],
   settings: {
+    node: {
+      tryExtensions: ['.js', '.json', '.ts', '.d.ts'],
+    },
     'import/resolver': {
       node: {
-        paths: ['lib', 'test'],
         extensions: ['.js', '.ts'],
         moduleDirectory: ['node_modules'],
       },
