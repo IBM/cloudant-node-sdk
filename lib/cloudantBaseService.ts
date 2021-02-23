@@ -69,6 +69,20 @@ export abstract class CloudantBaseService extends BaseService {
   }
 
   /**
+   * Turn request body compression on or off.
+   * Cloudant specific extensions:
+   * - Apply the gzip compression option on CouchdbSessionAuthenticator.
+   * 
+   * @param {boolean} setting Will turn it on if 'true', off if 'false'.
+   */
+  public setEnableGzipCompression(setting: boolean): void {
+    // Read external configuration and set as request defaults.
+    super.setEnableGzipCompression(setting);
+    this.baseOptions.enableGzipCompression = setting;
+    this.configureSessionAuthenticator();    
+  }
+
+  /**
    * In case of CouchdbSessionAuthenticator
    * the service options should be applied on it.
    */
