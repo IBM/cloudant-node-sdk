@@ -78,16 +78,31 @@ describe('Test CloudantBaseService', () => {
       authenticator: auth,
       serviceUrl: appleUrl,
     });
-    service.setEnableGzipCompression(false);
     assert.ok(service);
-    // Check gzip compression option in options and in request wrapper
+    
+    // Enable gzip compression as this is the default setting
+    service.setEnableGzipCompression(true);
+    // Assert default value of gzip compression is true in base options, token options, and in request wrapper
+    assert.strictEqual(service.baseOptions.enableGzipCompression, true);
+    assert.strictEqual(
+      service.getAuthenticator().tokenOptions.enableGzipCompression,
+      true
+    );
+    let isGzipCompressionEnabled = service.getAuthenticator().tokenManager
+      .requestWrapperInstance.axiosInstance.defaults.enableGzipCompression;
+    assert.strictEqual(isGzipCompressionEnabled, true);
+    
+    // Disable gzip compression
+    service.setEnableGzipCompression(false);
+    // Assert gzip compression is disabled in base options, token options, and in request wrapper
+    assert.strictEqual(service.baseOptions.enableGzipCompression, false);
     assert.strictEqual(
       service.getAuthenticator().tokenOptions.enableGzipCompression,
       false
     );
-    const enableGzipCompression = service.getAuthenticator().tokenManager
+    isGzipCompressionEnabled = service.getAuthenticator().tokenManager
       .requestWrapperInstance.axiosInstance.defaults.enableGzipCompression;
-    assert.strictEqual(enableGzipCompression, false);
+    assert.strictEqual(isGzipCompressionEnabled, false);
   });
 
   it('Invalidate token on setServiceUrl', () => {
