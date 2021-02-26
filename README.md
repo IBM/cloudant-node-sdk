@@ -254,43 +254,43 @@ import {CloudantV1} from "@ibm-cloud/cloudant";
 [embedmd]:# (test/examples/src/ts/GetInfoFromExistingDatabase.ts /\/\/ 1./ $)
 ```ts
 // 1. Create a Cloudant client with "EXAMPLES" service name ===================
-const client =
-    CloudantV1.newInstance({serviceName:"EXAMPLES"});
+const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
 
 // 2. Get server information ==================================================
 // call service without parameters:
-client.getServerInformation()
-    .then(serverInformation => {
-        const version = serverInformation.result.version;
-        console.log(`Server version ${version}`);
-    });
+client.getServerInformation().then((serverInformation) => {
+  const version = serverInformation.result.version;
+  console.log(`Server version ${version}`);
+});
 
 // 3. Get database information for "animaldb" =================================
-const dbName = "animaldb";
+const dbName = 'animaldb';
 
 // call service with embedded parameters:
-client.getDatabaseInformation({db: dbName})
-    .then(dbInfo => {
-        const documentCount = dbInfo.result.doc_count;
-        const dbNameResult = dbInfo.result.db_name;
+client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
+  const documentCount = dbInfo.result.doc_count;
+  const dbNameResult = dbInfo.result.db_name;
 
-        // 4. Show document count in database =================================
-        console.log(`Document count in "${dbNameResult}" database is ` +
-            documentCount + ".");
-    });
+  // 4. Show document count in database =================================
+  console.log(
+    `Document count in "${dbNameResult}" database is ` + documentCount + '.'
+  );
+});
 
 // 5. Get zebra document out of the database by document id ===================
-const getDocParams:
-    CloudantV1.GetDocumentParams = {db: dbName, docId: "zebra"};
+const getDocParams: CloudantV1.GetDocumentParams = {
+  db: dbName,
+  docId: 'zebra',
+};
 
 // call service with predefined parameters:
-client.getDocument(getDocParams)
-    .then(documentAboutZebra => {
-        // result object is defined as a Document here:
-        const result: CloudantV1.Document = documentAboutZebra.result;
-        console.log("Document retrieved from database:\n" +
-            JSON.stringify(result, null, 2));
-    });
+client.getDocument(getDocParams).then((documentAboutZebra) => {
+  // result object is defined as a Document here:
+  const result: CloudantV1.Document = documentAboutZebra.result;
+  console.log(
+    'Document retrieved from database:\n' + JSON.stringify(result, null, 2)
+  );
+});
 ```
 </details>
 
@@ -320,7 +320,9 @@ const getInfoFromExistingDatabase = async () => {
   const dbNameResult = dbInfo.result.db_name;
 
   // 4. Show document count in database =================================
-  console.log(`Document count in "${dbNameResult}" database is ` + documentCount + '.');
+  console.log(
+    `Document count in "${dbNameResult}" database is ` + documentCount + '.'
+  );
 
   // 5. Get zebra document out of the database by document id ===================
   const getDocParams = { db: dbName, docId: 'zebra' };
@@ -331,7 +333,9 @@ const getInfoFromExistingDatabase = async () => {
   // result object is defined as a Document here:
   const result = documentAboutZebra.result;
 
-  console.log('Document retrieved from database:\n' + JSON.stringify(result, null, 2));
+  console.log(
+    'Document retrieved from database:\n' + JSON.stringify(result, null, 2)
+  );
 };
 
 if (require.main === module) {
@@ -380,53 +384,59 @@ import {CloudantV1} from "@ibm-cloud/cloudant";
 [embedmd]:# (test/examples/src/ts/CreateDbAndDoc.ts /interface/ $)
 ```ts
 interface OrderDocument extends CloudantV1.Document {
-    name?: string;
-    joined?: string;
-    _id: string;
-    _rev?: string;
+  name?: string;
+  joined?: string;
+  _id: string;
+  _rev?: string;
 }
 
 // 1. Create a client with `CLOUDANT` default service name ================
 const client = CloudantV1.newInstance({});
 
 // 2. Create a database =======================================================
-const exampleDbName = "orders";
+const exampleDbName = 'orders';
 
 // Try to create database if it doesn't exist
-const createDb = client.putDatabase({db: exampleDbName})
-    .then(putDatabaseResult => {
-        if (putDatabaseResult.result.ok) {
-            console.log(`"${exampleDbName}" database created."`);
-        }
-    })
-    .catch(err => {
-        if (err.code === 412){
-            console.log("Cannot create \"" + exampleDbName +
-                "\" database, it already exists.");
-        }
-    });
+const createDb = client
+  .putDatabase({ db: exampleDbName })
+  .then((putDatabaseResult) => {
+    if (putDatabaseResult.result.ok) {
+      console.log(`"${exampleDbName}" database created."`);
+    }
+  })
+  .catch((err) => {
+    if (err.code === 412) {
+      console.log(
+        'Cannot create "' + exampleDbName + '" database, it already exists.'
+      );
+    }
+  });
 
 // 3. Create a document =======================================================
 // Create a document object with "example" id
-const exampleDocId = "example";
+const exampleDocId = 'example';
 
 // set required _id property on exampleDocument:
-const exampleDocument: OrderDocument = {_id: exampleDocId};
+const exampleDocument: OrderDocument = { _id: exampleDocId };
 
 // Add "name" and "joined" fields to the document
-exampleDocument.name = "Bob Smith";
-exampleDocument.joined = "2019-01-24T10:42:99.000Z";
+exampleDocument.name = 'Bob Smith';
+exampleDocument.joined = '2019-01-24T10:42:99.000Z';
 
 // Save the document in the database
 createDb.then(() => {
-    client.postDocument({
-        db: exampleDbName,
-        document: exampleDocument
-    }).then(createDocumentResponse => {
-        // Keep track with the revision number of the document object
-        exampleDocument._rev = createDocumentResponse.result.rev;
-        console.log("You have created the document:\n" +
-            JSON.stringify(exampleDocument, null, 2));
+  client
+    .postDocument({
+      db: exampleDbName,
+      document: exampleDocument,
+    })
+    .then((createDocumentResponse) => {
+      // Keep track with the revision number of the document object
+      exampleDocument._rev = createDocumentResponse.result.rev;
+      console.log(
+        'You have created the document:\n' +
+          JSON.stringify(exampleDocument, null, 2)
+      );
     });
 });
 ```
@@ -459,7 +469,9 @@ const createDbAndDoc = async () => {
     }
   } catch (err) {
     if (err.code === 412) {
-      console.log('Cannot create "' + exampleDbName + '" database, it already exists.');
+      console.log(
+        'Cannot create "' + exampleDbName + '" database, it already exists.'
+      );
     }
   }
 
@@ -481,7 +493,10 @@ const createDbAndDoc = async () => {
 
   // Keep track with the revision number of the document object
   exampleDocument._rev = createDocumentResponse.result.rev;
-  console.log('You have created the document:\n' + JSON.stringify(exampleDocument, null, 2));
+  console.log(
+    'You have created the document:\n' +
+      JSON.stringify(exampleDocument, null, 2)
+  );
 };
 
 if (require.main === module) {
@@ -526,51 +541,55 @@ import {CloudantV1} from "@ibm-cloud/cloudant";
 [embedmd]:# (test/examples/src/ts/UpdateDoc.ts /interface/ $)
 ```ts
 interface OrderDocument extends CloudantV1.Document {
-    address?: string;
-    joined?: string;
-    _id?: string;
-    _rev?: string;
+  address?: string;
+  joined?: string;
+  _id?: string;
+  _rev?: string;
 }
 
 // 1. Create a client with `CLOUDANT` default service name ================
 const client = CloudantV1.newInstance({});
 // 2. Update the document =====================================================
 // Set the options to get the document out of the database if it exists
-const exampleDbName = "orders";
+const exampleDbName = 'orders';
 
 // Try to get the document if it previously existed in the database
-const getDocParams: CloudantV1.GetDocumentParams =
-    {docId: "example", db: exampleDbName};
+const getDocParams: CloudantV1.GetDocumentParams = {
+  docId: 'example',
+  db: exampleDbName,
+};
 
-client.getDocument(getDocParams)
-    .then(docResult => {
-        // using OrderDocument on getDocument result:
-        const document: OrderDocument = docResult.result;
+client
+  .getDocument(getDocParams)
+  .then((docResult) => {
+    // using OrderDocument on getDocument result:
+    const document: OrderDocument = docResult.result;
 
-        // Add Bob Smith's address to the document
-        document.address = "19 Front Street, Darlington, DL5 1TY";
+    // Add Bob Smith's address to the document
+    document.address = '19 Front Street, Darlington, DL5 1TY';
 
-        // Remove the joined property from document object
-        delete document.joined;
+    // Remove the joined property from document object
+    delete document.joined;
 
-        // Update the document in the database
-        client.postDocument({db: exampleDbName, document})
-            .then(res => {
-                // Keeping track with the revision number of the document object:
-                document._rev = res.result.rev;
-                console.log("You have updated the document:\n" +
-                    JSON.stringify(document, null, 2));
-            });
-    })
-    .catch(err => {
-        if (err.code === 404) {
-            console.log(
-                "Cannot update document because either \"" +
-                exampleDbName + "\" database or the \"example\" " +
-                "document was not found."
-            );
-        }
+    // Update the document in the database
+    client.postDocument({ db: exampleDbName, document }).then((res) => {
+      // Keeping track with the revision number of the document object:
+      document._rev = res.result.rev;
+      console.log(
+        'You have updated the document:\n' + JSON.stringify(document, null, 2)
+      );
     });
+  })
+  .catch((err) => {
+    if (err.code === 404) {
+      console.log(
+        'Cannot update document because either "' +
+          exampleDbName +
+          '" database or the "example" ' +
+          'document was not found.'
+      );
+    }
+  });
 ```
 </details>
 
@@ -612,7 +631,9 @@ const updateDoc = async () => {
       })
     ).result.rev;
 
-    console.log('You have updated the document:\n' + JSON.stringify(document, null, 2));
+    console.log(
+      'You have updated the document:\n' + JSON.stringify(document, null, 2)
+    );
   } catch (err) {
     if (err.code === 404) {
       console.log(
@@ -666,11 +687,11 @@ import {CloudantV1} from "@ibm-cloud/cloudant";
 [embedmd]:# (test/examples/src/ts/DeleteDoc.ts /interface/ $)
 ```ts
 interface OrderDocument extends CloudantV1.Document {
-    name?: string;
-    address?: string;
-    joined?: string;
-    _id?: string;
-    _rev?: string;
+  name?: string;
+  address?: string;
+  joined?: string;
+  _id?: string;
+  _rev?: string;
 }
 
 // 1. Create a client with `CLOUDANT` default service name ================
@@ -678,33 +699,40 @@ const client = CloudantV1.newInstance({});
 
 // 2. Delete the document =============================================
 // Set the options to get the document out of the database if it exists
-const exampleDbName = "orders";
-const exampleDocId = "example";
+const exampleDbName = 'orders';
+const exampleDocId = 'example';
 
 // Try to get the document if it previously existed in the database
-const getDocParams: CloudantV1.GetDocumentParams =
-    {docId: exampleDocId, db: exampleDbName};
+const getDocParams: CloudantV1.GetDocumentParams = {
+  docId: exampleDocId,
+  db: exampleDbName,
+};
 
-client.getDocument(getDocParams)
-    .then(docResult => {
-        const document: OrderDocument = docResult.result;
+client
+  .getDocument(getDocParams)
+  .then((docResult) => {
+    const document: OrderDocument = docResult.result;
 
-        client.deleteDocument({
-            db: exampleDbName,
-            docId: document._id,
-            rev: document._rev}).then(() => {
-                console.log("You have deleted the document.");
-        });
-    })
-    .catch(err => {
-        if (err.code === 404) {
-            console.log(
-                "Cannot delete document because either \"" +
-                exampleDbName + "\" database or the \"example\" " +
-                "document was not found."
-            );
-        }
-    });
+    client
+      .deleteDocument({
+        db: exampleDbName,
+        docId: document._id,
+        rev: document._rev,
+      })
+      .then(() => {
+        console.log('You have deleted the document.');
+      });
+  })
+  .catch((err) => {
+    if (err.code === 404) {
+      console.log(
+        'Cannot delete document because either "' +
+          exampleDbName +
+          '" database or the "example" ' +
+          'document was not found.'
+      );
+    }
+  });
 ```
 </details>
 
