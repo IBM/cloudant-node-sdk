@@ -542,7 +542,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postChangesAsStream
         const db = 'testString';
-        const docIds = ['testString'];
+        const docIds = ['0007741142412418284'];
         const fields = ['testString'];
         const selector = { 'key1': 'testString' };
         const lastEventId = 'testString';
@@ -1592,7 +1592,7 @@ describe('CloudantV1', () => {
         update_seq: true,
         endkey: 'testString',
         key: 'testString',
-        keys: ['testString'],
+        keys: ['small-appliances:1000042', 'small-appliances:1000043'],
         startkey: 'testString',
       };
 
@@ -3483,7 +3483,7 @@ describe('CloudantV1', () => {
         update_seq: true,
         endkey: 'testString',
         key: 'testString',
-        keys: ['testString'],
+        keys: ['small-appliances:1000042', 'small-appliances:1000043'],
         startkey: 'testString',
       };
 
@@ -3720,7 +3720,7 @@ describe('CloudantV1', () => {
         const group = true;
         const groupLevel = 1;
         const key = 'testString';
-        const keys = ['testString'];
+        const keys = ['examplekey'];
         const reduce = true;
         const stable = true;
         const startkey = 'testString';
@@ -4620,7 +4620,7 @@ describe('CloudantV1', () => {
         const group = true;
         const groupLevel = 1;
         const key = 'testString';
-        const keys = ['testString'];
+        const keys = ['examplekey'];
         const reduce = true;
         const stable = true;
         const startkey = 'testString';
@@ -4763,7 +4763,7 @@ describe('CloudantV1', () => {
         const group = true;
         const groupLevel = 1;
         const key = 'testString';
-        const keys = ['testString'];
+        const keys = ['examplekey'];
         const reduce = true;
         const stable = true;
         const startkey = 'testString';
@@ -5003,7 +5003,7 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
-        const fields = ['testString'];
+        const fields = ['productid', 'name', 'description'];
         const limit = 0;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
@@ -5217,7 +5217,7 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
-        const fields = ['testString'];
+        const fields = ['_id', 'type', 'name', 'email'];
         const limit = 3;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
@@ -5323,7 +5323,7 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
-        const fields = ['testString'];
+        const fields = ['_id', 'type', 'name', 'email'];
         const limit = 3;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
@@ -7115,7 +7115,7 @@ describe('CloudantV1', () => {
       const userContextModel = {
         db: 'testString',
         name: 'john',
-        roles: ['_reader'],
+        roles: ['researcher'],
       };
 
       // ReplicationDocument
@@ -7135,7 +7135,7 @@ describe('CloudantV1', () => {
         continuous: true,
         create_target: true,
         create_target_params: replicationCreateTargetParametersModel,
-        doc_ids: ['testString'],
+        doc_ids: ['badger', 'lemur', 'llama'],
         filter: 'ddoc/my_filter',
         http_connections: 10,
         query_params: { 'key1': 'testString' },
