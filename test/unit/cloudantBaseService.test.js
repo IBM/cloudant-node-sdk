@@ -69,6 +69,42 @@ describe('Test CloudantBaseService', () => {
     );
   });
 
+  it('Verify gzip compression is disabled', () => {
+    const auth = new CouchdbSessionAuthenticator({
+      username: 'test',
+      password: 'user',
+    });
+    const service = new CloudantBaseService({
+      authenticator: auth,
+      serviceUrl: appleUrl,
+    });
+    assert.ok(service);
+
+    // Enable gzip compression as this is the default setting
+    service.setEnableGzipCompression(true);
+    // Assert default value of gzip compression is true in base options, token options, and in request wrapper
+    assert.strictEqual(service.baseOptions.enableGzipCompression, true);
+    assert.strictEqual(
+      service.getAuthenticator().tokenOptions.enableGzipCompression,
+      true
+    );
+    let isGzipCompressionEnabled = service.getAuthenticator().tokenManager
+      .requestWrapperInstance.axiosInstance.defaults.enableGzipCompression;
+    assert.strictEqual(isGzipCompressionEnabled, true);
+
+    // Disable gzip compression
+    service.setEnableGzipCompression(false);
+    // Assert gzip compression is disabled in base options, token options, and in request wrapper
+    assert.strictEqual(service.baseOptions.enableGzipCompression, false);
+    assert.strictEqual(
+      service.getAuthenticator().tokenOptions.enableGzipCompression,
+      false
+    );
+    isGzipCompressionEnabled = service.getAuthenticator().tokenManager
+      .requestWrapperInstance.axiosInstance.defaults.enableGzipCompression;
+    assert.strictEqual(isGzipCompressionEnabled, false);
+  });
+
   it('Invalidate token on setServiceUrl', () => {
     const auth = new CouchdbSessionAuthenticator({
       username: 'test',
