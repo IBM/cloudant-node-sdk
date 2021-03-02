@@ -5518,6 +5518,7 @@ describe('CloudantV1', () => {
         default_field: indexTextOperatorDefaultFieldModel,
         fields: [indexFieldModel],
         index_array_lengths: true,
+        partial_filter_selector: { 'key1': 'testString' },
       };
 
       test('should pass the right params to createRequest', () => {
@@ -5527,7 +5528,6 @@ describe('CloudantV1', () => {
         const ddoc = 'testString';
         const def = indexDefinitionModel;
         const name = 'testString';
-        const partialFilterSelector = { 'key1': 'testString' };
         const partitioned = true;
         const type = 'json';
         const params = {
@@ -5536,7 +5536,6 @@ describe('CloudantV1', () => {
           ddoc: ddoc,
           def: def,
           name: name,
-          partialFilterSelector: partialFilterSelector,
           partitioned: partitioned,
           type: type,
         };
@@ -5559,7 +5558,6 @@ describe('CloudantV1', () => {
         expect(options.body['ddoc']).toEqual(ddoc);
         expect(options.body['def']).toEqual(def);
         expect(options.body['name']).toEqual(name);
-        expect(options.body['partial_filter_selector']).toEqual(partialFilterSelector);
         expect(options.body['partitioned']).toEqual(partitioned);
         expect(options.body['type']).toEqual(type);
         expect(options.path['db']).toEqual(db);
