@@ -542,7 +542,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postChangesAsStream
         const db = 'testString';
-        const docIds = ['0007741142412418284'];
+        const docIds = ['testString'];
         const fields = ['testString'];
         const selector = { 'key1': 'testString' };
         const lastEventId = 'testString';
@@ -1592,7 +1592,7 @@ describe('CloudantV1', () => {
         update_seq: true,
         endkey: 'testString',
         key: 'testString',
-        keys: ['small-appliances:1000042', 'small-appliances:1000043'],
+        keys: ['testString'],
         startkey: 'testString',
       };
 
@@ -3483,7 +3483,7 @@ describe('CloudantV1', () => {
         update_seq: true,
         endkey: 'testString',
         key: 'testString',
-        keys: ['small-appliances:1000042', 'small-appliances:1000043'],
+        keys: ['testString'],
         startkey: 'testString',
       };
 
@@ -3720,7 +3720,7 @@ describe('CloudantV1', () => {
         const group = true;
         const groupLevel = 1;
         const key = 'testString';
-        const keys = ['examplekey'];
+        const keys = ['testString'];
         const reduce = true;
         const stable = true;
         const startkey = 'testString';
@@ -4620,7 +4620,7 @@ describe('CloudantV1', () => {
         const group = true;
         const groupLevel = 1;
         const key = 'testString';
-        const keys = ['examplekey'];
+        const keys = ['testString'];
         const reduce = true;
         const stable = true;
         const startkey = 'testString';
@@ -4763,7 +4763,7 @@ describe('CloudantV1', () => {
         const group = true;
         const groupLevel = 1;
         const key = 'testString';
-        const keys = ['examplekey'];
+        const keys = ['testString'];
         const reduce = true;
         const stable = true;
         const startkey = 'testString';
@@ -5003,7 +5003,7 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
-        const fields = ['productid', 'name', 'description'];
+        const fields = ['testString'];
         const limit = 0;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
@@ -5217,7 +5217,7 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
-        const fields = ['_id', 'type', 'name', 'email'];
+        const fields = ['testString'];
         const limit = 3;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
@@ -5323,7 +5323,7 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
-        const fields = ['_id', 'type', 'name', 'email'];
+        const fields = ['testString'];
         const limit = 3;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
@@ -5518,7 +5518,6 @@ describe('CloudantV1', () => {
         default_field: indexTextOperatorDefaultFieldModel,
         fields: [indexFieldModel],
         index_array_lengths: true,
-        partial_filter_selector: { 'key1': 'testString' },
       };
 
       test('should pass the right params to createRequest', () => {
@@ -5528,6 +5527,7 @@ describe('CloudantV1', () => {
         const ddoc = 'testString';
         const def = indexDefinitionModel;
         const name = 'testString';
+        const partialFilterSelector = { 'key1': 'testString' };
         const partitioned = true;
         const type = 'json';
         const params = {
@@ -5536,6 +5536,7 @@ describe('CloudantV1', () => {
           ddoc: ddoc,
           def: def,
           name: name,
+          partialFilterSelector: partialFilterSelector,
           partitioned: partitioned,
           type: type,
         };
@@ -5558,6 +5559,7 @@ describe('CloudantV1', () => {
         expect(options.body['ddoc']).toEqual(ddoc);
         expect(options.body['def']).toEqual(def);
         expect(options.body['name']).toEqual(name);
+        expect(options.body['partial_filter_selector']).toEqual(partialFilterSelector);
         expect(options.body['partitioned']).toEqual(partitioned);
         expect(options.body['type']).toEqual(type);
         expect(options.path['db']).toEqual(db);
@@ -7113,7 +7115,7 @@ describe('CloudantV1', () => {
       const userContextModel = {
         db: 'testString',
         name: 'john',
-        roles: ['researcher'],
+        roles: ['_reader'],
       };
 
       // ReplicationDocument
@@ -7133,7 +7135,7 @@ describe('CloudantV1', () => {
         continuous: true,
         create_target: true,
         create_target_params: replicationCreateTargetParametersModel,
-        doc_ids: ['badger', 'lemur', 'llama'],
+        doc_ids: ['testString'],
         filter: 'ddoc/my_filter',
         http_connections: 10,
         query_params: { 'key1': 'testString' },

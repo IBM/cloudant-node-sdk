@@ -102,7 +102,8 @@ project:
   service instance or a
   [CouchDB](https://docs.couchdb.org/en/latest/install/index.html)
   server.
-- Node.js 10, 12 or 14.
+- **Node.js 10, 12, 14**: This SDK is tested with Node.js versions 10, 12, and 14.
+  It may work on other versions but those are not officially supported.
 
 ## Installation
 

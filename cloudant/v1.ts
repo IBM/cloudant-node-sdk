@@ -15,7 +15,7 @@
  */
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 3.28.0-55613c9e-20210220-164656
+ * IBM OpenAPI SDK Code Generator Version: 3.26.0-4b317b0c-20210127-171701
  */
 
 
@@ -3989,6 +3989,30 @@ class CloudantV1 extends CloudantBaseService {
    * * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
    * document fields and what analyzer to use for that purpose.
    * @param {string} [params.name] - name.
+   * @param {JsonObject} [params.partialFilterSelector] - JSON object describing criteria used to select documents. The
+   * selector specifies fields in the document, and provides an expression to evaluate with the field content or other
+   * data.
+   *
+   * The selector object must:
+   *   * Be structured as valid JSON.
+   *   * Contain a valid query expression.
+   *
+   * Using a selector is significantly more efficient than using a JavaScript filter function, and is the recommended
+   * option if filtering on document attributes only.
+   *
+   * Elementary selector syntax requires you to specify one or more fields, and the corresponding values required for
+   * those fields. You can create more complex selector expressions by combining operators.
+   *
+   * Operators are identified by the use of a dollar sign `$` prefix in the name field.
+   *
+   * There are two core types of operators in the selector syntax:
+   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
+   * to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
+   * `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
+   * selector, or an array of selectors.
+   * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
+   * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
+   * argument.
    * @param {boolean} [params.partitioned] - The default value is `true` for databases with `partitioned: true` and
    * `false` otherwise. For databases with `partitioned: false` if this option is specified the value must be `false`.
    * @param {string} [params.type] - Schema for the type of an index.
@@ -4009,6 +4033,7 @@ class CloudantV1 extends CloudantBaseService {
       'ddoc': _params.ddoc,
       'def': _params.def,
       'name': _params.name,
+      'partial_filter_selector': _params.partialFilterSelector,
       'partitioned': _params.partitioned,
       'type': _params.type
     };
@@ -8467,6 +8492,31 @@ namespace CloudantV1 {
     def?: IndexDefinition;
     /** name. */
     name?: string;
+    /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
+     *  provides an expression to evaluate with the field content or other data.
+     *
+     *  The selector object must:
+     *    * Be structured as valid JSON.
+     *    * Contain a valid query expression.
+     *
+     *  Using a selector is significantly more efficient than using a JavaScript filter function, and is the recommended
+     *  option if filtering on document attributes only.
+     *
+     *  Elementary selector syntax requires you to specify one or more fields, and the corresponding values required for
+     *  those fields. You can create more complex selector expressions by combining operators.
+     *
+     *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
+     *
+     *  There are two core types of operators in the selector syntax:
+     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In
+     *  addition to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators:
+     *  `$all`, `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either
+     *  another selector, or an array of selectors.
+     *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
+     *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
+     *  supplied argument.
+     */
+    partialFilterSelector?: JsonObject;
     /** The default value is `true` for databases with `partitioned: true` and `false` otherwise. For databases with
      *  `partitioned: false` if this option is specified the value must be `false`.
      */
@@ -10212,31 +10262,6 @@ namespace CloudantV1 {
      *  of the extra processing that is needed to determine and store the arrays lengths.
      */
     index_array_lengths?: boolean;
-    /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
-     *  provides an expression to evaluate with the field content or other data.
-     *
-     *  The selector object must:
-     *    * Be structured as valid JSON.
-     *    * Contain a valid query expression.
-     *
-     *  Using a selector is significantly more efficient than using a JavaScript filter function, and is the recommended
-     *  option if filtering on document attributes only.
-     *
-     *  Elementary selector syntax requires you to specify one or more fields, and the corresponding values required for
-     *  those fields. You can create more complex selector expressions by combining operators.
-     *
-     *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
-     *
-     *  There are two core types of operators in the selector syntax:
-     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In
-     *  addition to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators:
-     *  `$all`, `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either
-     *  another selector, or an array of selectors.
-     *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
-     *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument.
-     */
-    partial_filter_selector?: JsonObject;
   }
 
   /** Schema for indexed fields for use with declarative JSON query. */
