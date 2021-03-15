@@ -30,7 +30,7 @@ describe('Test CloudantBaseService', () => {
   it('Use couchdb_session authenticator', () => {
     const auth = new CouchdbSessionAuthenticator({
       username: 'test',
-      password: 'user',
+      password: 'user', // pragma: allowlist secret
     });
     const service = new CloudantBaseService({
       authenticator: auth,
@@ -72,7 +72,7 @@ describe('Test CloudantBaseService', () => {
   it('Verify gzip compression is disabled', () => {
     const auth = new CouchdbSessionAuthenticator({
       username: 'test',
-      password: 'user',
+      password: 'user', // pragma: allowlist secret
     });
     const service = new CloudantBaseService({
       authenticator: auth,
@@ -108,7 +108,7 @@ describe('Test CloudantBaseService', () => {
   it('Invalidate token on setServiceUrl', () => {
     const auth = new CouchdbSessionAuthenticator({
       username: 'test',
-      password: 'user',
+      password: 'user', // pragma: allowlist secret
     });
     const service = new CloudantBaseService({
       authenticator: auth,
@@ -123,7 +123,7 @@ describe('Test CloudantBaseService', () => {
   it('Apply SDK UA header', () => {
     const auth = new CouchdbSessionAuthenticator({
       username: 'test',
-      password: 'user',
+      password: 'user', // pragma: allowlist secret
     });
     class MockV1 extends CloudantBaseService {}
     MockV1.DEFAULT_SERVICE_NAME = 'cloudant';
