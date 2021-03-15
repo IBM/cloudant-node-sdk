@@ -23,7 +23,7 @@ const sinon = require('sinon');
 describe('Test CloudantBaseService', () => {
   const newUrl = 'something.new/';
   const appleUrl = 'http://cloudant.example/';
-  const iamUrl = 'https://iam.cloud.ibm.com/identity/token';
+  const iamUrl = 'https://iam.cloud.ibm.com';
   beforeEach(() => {
     process.env.APPLE_URL = appleUrl;
   });
