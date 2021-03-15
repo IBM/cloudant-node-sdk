@@ -78,7 +78,6 @@ export abstract class CloudantBaseService extends BaseService {
   public setEnableGzipCompression(setting: boolean): void {
     // Read external configuration and set as request defaults.
     super.setEnableGzipCompression(setting);
-    this.baseOptions.enableGzipCompression = setting;
     this.configureSessionAuthenticator();
   }
 
