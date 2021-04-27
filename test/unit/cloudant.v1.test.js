@@ -290,19 +290,19 @@ describe('CloudantV1', () => {
       });
     });
   });
-  describe('putCapacityThroughputInformation', () => {
+  describe('putCapacityThroughputConfiguration', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation putCapacityThroughputInformation
+        // Construct the params object for operation putCapacityThroughputConfiguration
         const blocks = 0;
         const params = {
           blocks: blocks,
         };
 
-        const putCapacityThroughputInformationResult = cloudantService.putCapacityThroughputInformation(params);
+        const putCapacityThroughputConfigurationResult = cloudantService.putCapacityThroughputConfiguration(params);
 
         // all methods should return a Promise
-        expectToBePromise(putCapacityThroughputInformationResult);
+        expectToBePromise(putCapacityThroughputConfigurationResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -329,7 +329,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putCapacityThroughputInformation(params);
+        cloudantService.putCapacityThroughputConfiguration(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -338,7 +338,7 @@ describe('CloudantV1', () => {
       test('should enforce required parameters', async done => {
         let err;
         try {
-          await cloudantService.putCapacityThroughputInformation({});
+          await cloudantService.putCapacityThroughputConfiguration({});
         } catch (e) {
           err = e;
         }
@@ -348,10 +348,10 @@ describe('CloudantV1', () => {
       });
 
       test('should reject promise when required params are not given', done => {
-        const putCapacityThroughputInformationPromise = cloudantService.putCapacityThroughputInformation();
-        expectToBePromise(putCapacityThroughputInformationPromise);
+        const putCapacityThroughputConfigurationPromise = cloudantService.putCapacityThroughputConfiguration();
+        expectToBePromise(putCapacityThroughputConfigurationPromise);
 
-        putCapacityThroughputInformationPromise.catch(err => {
+        putCapacityThroughputConfigurationPromise.catch(err => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -1890,9 +1890,9 @@ describe('CloudantV1', () => {
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
         atts_since: ['testString'],
-        id: 'small-appliances:1000042',
+        id: 'order00067',
         open_revs: ['testString'],
-        rev: 'testString',
+        rev: '3-917fa2381192822767f010b95b45325b',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -1986,9 +1986,9 @@ describe('CloudantV1', () => {
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
         atts_since: ['testString'],
-        id: 'small-appliances:1000042',
+        id: 'order00067',
         open_revs: ['testString'],
-        rev: 'testString',
+        rev: '3-917fa2381192822767f010b95b45325b',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -2082,9 +2082,9 @@ describe('CloudantV1', () => {
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
         atts_since: ['testString'],
-        id: 'small-appliances:1000042',
+        id: 'order00067',
         open_revs: ['testString'],
-        rev: 'testString',
+        rev: '3-917fa2381192822767f010b95b45325b',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -2262,13 +2262,11 @@ describe('CloudantV1', () => {
         const ifNoneMatch = 'testString';
         const attachments = true;
         const attEncodingInfo = true;
-        const attsSince = ['testString'];
         const conflicts = true;
         const deletedConflicts = true;
         const latest = true;
         const localSeq = true;
         const meta = true;
-        const openRevs = ['testString'];
         const rev = 'testString';
         const revs = true;
         const revsInfo = true;
@@ -2278,13 +2276,11 @@ describe('CloudantV1', () => {
           ifNoneMatch: ifNoneMatch,
           attachments: attachments,
           attEncodingInfo: attEncodingInfo,
-          attsSince: attsSince,
           conflicts: conflicts,
           deletedConflicts: deletedConflicts,
           latest: latest,
           localSeq: localSeq,
           meta: meta,
-          openRevs: openRevs,
           rev: rev,
           revs: revs,
           revsInfo: revsInfo,
@@ -2307,13 +2303,11 @@ describe('CloudantV1', () => {
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(options.qs['attachments']).toEqual(attachments);
         expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['atts_since']).toEqual(attsSince);
         expect(options.qs['conflicts']).toEqual(conflicts);
         expect(options.qs['deleted_conflicts']).toEqual(deletedConflicts);
         expect(options.qs['latest']).toEqual(latest);
         expect(options.qs['local_seq']).toEqual(localSeq);
         expect(options.qs['meta']).toEqual(meta);
-        expect(options.qs['open_revs']).toEqual(openRevs);
         expect(options.qs['rev']).toEqual(rev);
         expect(options.qs['revs']).toEqual(revs);
         expect(options.qs['revs_info']).toEqual(revsInfo);
@@ -2374,13 +2368,11 @@ describe('CloudantV1', () => {
         const ifNoneMatch = 'testString';
         const attachments = true;
         const attEncodingInfo = true;
-        const attsSince = ['testString'];
         const conflicts = true;
         const deletedConflicts = true;
         const latest = true;
         const localSeq = true;
         const meta = true;
-        const openRevs = ['testString'];
         const rev = 'testString';
         const revs = true;
         const revsInfo = true;
@@ -2390,13 +2382,11 @@ describe('CloudantV1', () => {
           ifNoneMatch: ifNoneMatch,
           attachments: attachments,
           attEncodingInfo: attEncodingInfo,
-          attsSince: attsSince,
           conflicts: conflicts,
           deletedConflicts: deletedConflicts,
           latest: latest,
           localSeq: localSeq,
           meta: meta,
-          openRevs: openRevs,
           rev: rev,
           revs: revs,
           revsInfo: revsInfo,
@@ -2419,13 +2409,11 @@ describe('CloudantV1', () => {
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(options.qs['attachments']).toEqual(attachments);
         expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['atts_since']).toEqual(attsSince);
         expect(options.qs['conflicts']).toEqual(conflicts);
         expect(options.qs['deleted_conflicts']).toEqual(deletedConflicts);
         expect(options.qs['latest']).toEqual(latest);
         expect(options.qs['local_seq']).toEqual(localSeq);
         expect(options.qs['meta']).toEqual(meta);
-        expect(options.qs['open_revs']).toEqual(openRevs);
         expect(options.qs['rev']).toEqual(rev);
         expect(options.qs['revs']).toEqual(revs);
         expect(options.qs['revs_info']).toEqual(revsInfo);
@@ -2487,13 +2475,11 @@ describe('CloudantV1', () => {
         const ifNoneMatch = 'testString';
         const attachments = true;
         const attEncodingInfo = true;
-        const attsSince = ['testString'];
         const conflicts = true;
         const deletedConflicts = true;
         const latest = true;
         const localSeq = true;
         const meta = true;
-        const openRevs = ['testString'];
         const rev = 'testString';
         const revs = true;
         const revsInfo = true;
@@ -2503,13 +2489,11 @@ describe('CloudantV1', () => {
           ifNoneMatch: ifNoneMatch,
           attachments: attachments,
           attEncodingInfo: attEncodingInfo,
-          attsSince: attsSince,
           conflicts: conflicts,
           deletedConflicts: deletedConflicts,
           latest: latest,
           localSeq: localSeq,
           meta: meta,
-          openRevs: openRevs,
           rev: rev,
           revs: revs,
           revsInfo: revsInfo,
@@ -2532,13 +2516,11 @@ describe('CloudantV1', () => {
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(options.qs['attachments']).toEqual(attachments);
         expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['atts_since']).toEqual(attsSince);
         expect(options.qs['conflicts']).toEqual(conflicts);
         expect(options.qs['deleted_conflicts']).toEqual(deletedConflicts);
         expect(options.qs['latest']).toEqual(latest);
         expect(options.qs['local_seq']).toEqual(localSeq);
         expect(options.qs['meta']).toEqual(meta);
-        expect(options.qs['open_revs']).toEqual(openRevs);
         expect(options.qs['rev']).toEqual(rev);
         expect(options.qs['revs']).toEqual(revs);
         expect(options.qs['revs_info']).toEqual(revsInfo);
@@ -2600,13 +2582,11 @@ describe('CloudantV1', () => {
         const ifNoneMatch = 'testString';
         const attachments = true;
         const attEncodingInfo = true;
-        const attsSince = ['testString'];
         const conflicts = true;
         const deletedConflicts = true;
         const latest = true;
         const localSeq = true;
         const meta = true;
-        const openRevs = ['testString'];
         const rev = 'testString';
         const revs = true;
         const revsInfo = true;
@@ -2616,13 +2596,11 @@ describe('CloudantV1', () => {
           ifNoneMatch: ifNoneMatch,
           attachments: attachments,
           attEncodingInfo: attEncodingInfo,
-          attsSince: attsSince,
           conflicts: conflicts,
           deletedConflicts: deletedConflicts,
           latest: latest,
           localSeq: localSeq,
           meta: meta,
-          openRevs: openRevs,
           rev: rev,
           revs: revs,
           revsInfo: revsInfo,
@@ -2645,13 +2623,11 @@ describe('CloudantV1', () => {
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(options.qs['attachments']).toEqual(attachments);
         expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['atts_since']).toEqual(attsSince);
         expect(options.qs['conflicts']).toEqual(conflicts);
         expect(options.qs['deleted_conflicts']).toEqual(deletedConflicts);
         expect(options.qs['latest']).toEqual(latest);
         expect(options.qs['local_seq']).toEqual(localSeq);
         expect(options.qs['meta']).toEqual(meta);
-        expect(options.qs['open_revs']).toEqual(openRevs);
         expect(options.qs['rev']).toEqual(rev);
         expect(options.qs['revs']).toEqual(revs);
         expect(options.qs['revs_info']).toEqual(revsInfo);
@@ -3005,13 +2981,11 @@ describe('CloudantV1', () => {
         const ifNoneMatch = 'testString';
         const attachments = true;
         const attEncodingInfo = true;
-        const attsSince = ['testString'];
         const conflicts = true;
         const deletedConflicts = true;
         const latest = true;
         const localSeq = true;
         const meta = true;
-        const openRevs = ['testString'];
         const rev = 'testString';
         const revs = true;
         const revsInfo = true;
@@ -3021,13 +2995,11 @@ describe('CloudantV1', () => {
           ifNoneMatch: ifNoneMatch,
           attachments: attachments,
           attEncodingInfo: attEncodingInfo,
-          attsSince: attsSince,
           conflicts: conflicts,
           deletedConflicts: deletedConflicts,
           latest: latest,
           localSeq: localSeq,
           meta: meta,
-          openRevs: openRevs,
           rev: rev,
           revs: revs,
           revsInfo: revsInfo,
@@ -3050,13 +3022,11 @@ describe('CloudantV1', () => {
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(options.qs['attachments']).toEqual(attachments);
         expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['atts_since']).toEqual(attsSince);
         expect(options.qs['conflicts']).toEqual(conflicts);
         expect(options.qs['deleted_conflicts']).toEqual(deletedConflicts);
         expect(options.qs['latest']).toEqual(latest);
         expect(options.qs['local_seq']).toEqual(localSeq);
         expect(options.qs['meta']).toEqual(meta);
-        expect(options.qs['open_revs']).toEqual(openRevs);
         expect(options.qs['rev']).toEqual(rev);
         expect(options.qs['revs']).toEqual(revs);
         expect(options.qs['revs_info']).toEqual(revsInfo);
@@ -6957,13 +6927,11 @@ describe('CloudantV1', () => {
         const ifNoneMatch = 'testString';
         const attachments = true;
         const attEncodingInfo = true;
-        const attsSince = ['testString'];
         const conflicts = true;
         const deletedConflicts = true;
         const latest = true;
         const localSeq = true;
         const meta = true;
-        const openRevs = ['testString'];
         const rev = 'testString';
         const revs = true;
         const revsInfo = true;
@@ -6972,13 +6940,11 @@ describe('CloudantV1', () => {
           ifNoneMatch: ifNoneMatch,
           attachments: attachments,
           attEncodingInfo: attEncodingInfo,
-          attsSince: attsSince,
           conflicts: conflicts,
           deletedConflicts: deletedConflicts,
           latest: latest,
           localSeq: localSeq,
           meta: meta,
-          openRevs: openRevs,
           rev: rev,
           revs: revs,
           revsInfo: revsInfo,
@@ -7001,13 +6967,11 @@ describe('CloudantV1', () => {
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(options.qs['attachments']).toEqual(attachments);
         expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['atts_since']).toEqual(attsSince);
         expect(options.qs['conflicts']).toEqual(conflicts);
         expect(options.qs['deleted_conflicts']).toEqual(deletedConflicts);
         expect(options.qs['latest']).toEqual(latest);
         expect(options.qs['local_seq']).toEqual(localSeq);
         expect(options.qs['meta']).toEqual(meta);
-        expect(options.qs['open_revs']).toEqual(openRevs);
         expect(options.qs['rev']).toEqual(rev);
         expect(options.qs['revs']).toEqual(revs);
         expect(options.qs['revs_info']).toEqual(revsInfo);
@@ -8452,7 +8416,6 @@ describe('CloudantV1', () => {
         const ifNoneMatch = 'testString';
         const attachments = true;
         const attEncodingInfo = true;
-        const attsSince = ['testString'];
         const localSeq = true;
         const params = {
           db: db,
@@ -8461,7 +8424,6 @@ describe('CloudantV1', () => {
           ifNoneMatch: ifNoneMatch,
           attachments: attachments,
           attEncodingInfo: attEncodingInfo,
-          attsSince: attsSince,
           localSeq: localSeq,
         };
 
@@ -8483,7 +8445,6 @@ describe('CloudantV1', () => {
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(options.qs['attachments']).toEqual(attachments);
         expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['atts_since']).toEqual(attsSince);
         expect(options.qs['local_seq']).toEqual(localSeq);
         expect(options.path['db']).toEqual(db);
         expect(options.path['doc_id']).toEqual(docId);
@@ -9077,16 +9038,16 @@ describe('CloudantV1', () => {
       });
     });
   });
-  describe('getActivityTrackerEventsInformation', () => {
+  describe('getActivityTrackerEvents', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation getActivityTrackerEventsInformation
+        // Construct the params object for operation getActivityTrackerEvents
         const params = {};
 
-        const getActivityTrackerEventsInformationResult = cloudantService.getActivityTrackerEventsInformation(params);
+        const getActivityTrackerEventsResult = cloudantService.getActivityTrackerEvents(params);
 
         // all methods should return a Promise
-        expectToBePromise(getActivityTrackerEventsInformationResult);
+        expectToBePromise(getActivityTrackerEventsResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -9110,30 +9071,30 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getActivityTrackerEventsInformation(params);
+        cloudantService.getActivityTrackerEvents(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
       test('should not have any problems when no parameters are passed in', () => {
         // invoke the method with no parameters
-        cloudantService.getActivityTrackerEventsInformation({});
+        cloudantService.getActivityTrackerEvents({});
         checkForSuccessfulExecution(createRequestMock);
       });
     });
   });
-  describe('postActivityTrackerEventsConfiguration', () => {
+  describe('postActivityTrackerEvents', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation postActivityTrackerEventsConfiguration
+        // Construct the params object for operation postActivityTrackerEvents
         const types = ['management'];
         const params = {
           types: types,
         };
 
-        const postActivityTrackerEventsConfigurationResult = cloudantService.postActivityTrackerEventsConfiguration(params);
+        const postActivityTrackerEventsResult = cloudantService.postActivityTrackerEvents(params);
 
         // all methods should return a Promise
-        expectToBePromise(postActivityTrackerEventsConfigurationResult);
+        expectToBePromise(postActivityTrackerEventsResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -9160,7 +9121,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postActivityTrackerEventsConfiguration(params);
+        cloudantService.postActivityTrackerEvents(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -9169,7 +9130,7 @@ describe('CloudantV1', () => {
       test('should enforce required parameters', async done => {
         let err;
         try {
-          await cloudantService.postActivityTrackerEventsConfiguration({});
+          await cloudantService.postActivityTrackerEvents({});
         } catch (e) {
           err = e;
         }
@@ -9179,10 +9140,10 @@ describe('CloudantV1', () => {
       });
 
       test('should reject promise when required params are not given', done => {
-        const postActivityTrackerEventsConfigurationPromise = cloudantService.postActivityTrackerEventsConfiguration();
-        expectToBePromise(postActivityTrackerEventsConfigurationPromise);
+        const postActivityTrackerEventsPromise = cloudantService.postActivityTrackerEvents();
+        expectToBePromise(postActivityTrackerEventsPromise);
 
-        postActivityTrackerEventsConfigurationPromise.catch(err => {
+        postActivityTrackerEventsPromise.catch(err => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });

@@ -195,8 +195,8 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Retrieve provisioned throughput capacity information.
    *
-   * View the amount of provisioned throughput capacity allocated to an IBM Cloudant instance and what is the target
-   * provisioned throughput capacity.
+   * View the amount of provisioned throughput capacity that is allocated to an IBM Cloudant instance and what is the
+   * target provisioned throughput capacity.
    *
    * @param {Object} [params] - The parameters to send to the service.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -234,7 +234,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>>}
    */
-  public putCapacityThroughputInformation(params: CloudantV1.PutCapacityThroughputInformationParams): Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>> {
+  public putCapacityThroughputConfiguration(params: CloudantV1.PutCapacityThroughputConfigurationParams): Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['blocks'];
 
@@ -247,7 +247,7 @@ class CloudantV1 extends CloudantBaseService {
       'blocks': _params.blocks
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCapacityThroughputInformation');
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCapacityThroughputConfiguration');
 
     const parameters = {
       options: {
@@ -1634,8 +1634,6 @@ class CloudantV1 extends CloudantBaseService {
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
-   * @param {string[]} [params.attsSince] - Query parameter to specify whether to include attachments only since
-   * specified revisions. Note this does not include the attachments for the specified revisions.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
    * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
@@ -1646,8 +1644,6 @@ class CloudantV1 extends CloudantBaseService {
    * document.
    * @param {boolean} [params.meta] - Query parameter to specify whether to include document meta information. Acts the
    * same as specifying all of the conflicts, deleted_conflicts and open_revs query parameters.
-   * @param {string[]} [params.openRevs] - Query parameter to specify leaf revisions to retrieve. Additionally, it
-   * accepts a value of `all` to return all leaf revisions.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
    * revisions.
@@ -1668,13 +1664,11 @@ class CloudantV1 extends CloudantBaseService {
     const query = {
       'attachments': _params.attachments,
       'att_encoding_info': _params.attEncodingInfo,
-      'atts_since': _params.attsSince,
       'conflicts': _params.conflicts,
       'deleted_conflicts': _params.deletedConflicts,
       'latest': _params.latest,
       'local_seq': _params.localSeq,
       'meta': _params.meta,
-      'open_revs': _params.openRevs,
       'rev': _params.rev,
       'revs': _params.revs,
       'revs_info': _params.revsInfo
@@ -1720,8 +1714,6 @@ class CloudantV1 extends CloudantBaseService {
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
-   * @param {string[]} [params.attsSince] - Query parameter to specify whether to include attachments only since
-   * specified revisions. Note this does not include the attachments for the specified revisions.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
    * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
@@ -1732,8 +1724,6 @@ class CloudantV1 extends CloudantBaseService {
    * document.
    * @param {boolean} [params.meta] - Query parameter to specify whether to include document meta information. Acts the
    * same as specifying all of the conflicts, deleted_conflicts and open_revs query parameters.
-   * @param {string[]} [params.openRevs] - Query parameter to specify leaf revisions to retrieve. Additionally, it
-   * accepts a value of `all` to return all leaf revisions.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
    * revisions.
@@ -1754,13 +1744,11 @@ class CloudantV1 extends CloudantBaseService {
     const query = {
       'attachments': _params.attachments,
       'att_encoding_info': _params.attEncodingInfo,
-      'atts_since': _params.attsSince,
       'conflicts': _params.conflicts,
       'deleted_conflicts': _params.deletedConflicts,
       'latest': _params.latest,
       'local_seq': _params.localSeq,
       'meta': _params.meta,
-      'open_revs': _params.openRevs,
       'rev': _params.rev,
       'revs': _params.revs,
       'revs_info': _params.revsInfo
@@ -1807,8 +1795,6 @@ class CloudantV1 extends CloudantBaseService {
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
-   * @param {string[]} [params.attsSince] - Query parameter to specify whether to include attachments only since
-   * specified revisions. Note this does not include the attachments for the specified revisions.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
    * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
@@ -1819,8 +1805,6 @@ class CloudantV1 extends CloudantBaseService {
    * document.
    * @param {boolean} [params.meta] - Query parameter to specify whether to include document meta information. Acts the
    * same as specifying all of the conflicts, deleted_conflicts and open_revs query parameters.
-   * @param {string[]} [params.openRevs] - Query parameter to specify leaf revisions to retrieve. Additionally, it
-   * accepts a value of `all` to return all leaf revisions.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
    * revisions.
@@ -1841,13 +1825,11 @@ class CloudantV1 extends CloudantBaseService {
     const query = {
       'attachments': _params.attachments,
       'att_encoding_info': _params.attEncodingInfo,
-      'atts_since': _params.attsSince,
       'conflicts': _params.conflicts,
       'deleted_conflicts': _params.deletedConflicts,
       'latest': _params.latest,
       'local_seq': _params.localSeq,
       'meta': _params.meta,
-      'open_revs': _params.openRevs,
       'rev': _params.rev,
       'revs': _params.revs,
       'revs_info': _params.revsInfo
@@ -1894,8 +1876,6 @@ class CloudantV1 extends CloudantBaseService {
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
-   * @param {string[]} [params.attsSince] - Query parameter to specify whether to include attachments only since
-   * specified revisions. Note this does not include the attachments for the specified revisions.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
    * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
@@ -1906,8 +1886,6 @@ class CloudantV1 extends CloudantBaseService {
    * document.
    * @param {boolean} [params.meta] - Query parameter to specify whether to include document meta information. Acts the
    * same as specifying all of the conflicts, deleted_conflicts and open_revs query parameters.
-   * @param {string[]} [params.openRevs] - Query parameter to specify leaf revisions to retrieve. Additionally, it
-   * accepts a value of `all` to return all leaf revisions.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
    * revisions.
@@ -1928,13 +1906,11 @@ class CloudantV1 extends CloudantBaseService {
     const query = {
       'attachments': _params.attachments,
       'att_encoding_info': _params.attEncodingInfo,
-      'atts_since': _params.attsSince,
       'conflicts': _params.conflicts,
       'deleted_conflicts': _params.deletedConflicts,
       'latest': _params.latest,
       'local_seq': _params.localSeq,
       'meta': _params.meta,
-      'open_revs': _params.openRevs,
       'rev': _params.rev,
       'revs': _params.revs,
       'revs_info': _params.revsInfo
@@ -2159,8 +2135,6 @@ class CloudantV1 extends CloudantBaseService {
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
-   * @param {string[]} [params.attsSince] - Query parameter to specify whether to include attachments only since
-   * specified revisions. Note this does not include the attachments for the specified revisions.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
    * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
@@ -2171,8 +2145,6 @@ class CloudantV1 extends CloudantBaseService {
    * document.
    * @param {boolean} [params.meta] - Query parameter to specify whether to include document meta information. Acts the
    * same as specifying all of the conflicts, deleted_conflicts and open_revs query parameters.
-   * @param {string[]} [params.openRevs] - Query parameter to specify leaf revisions to retrieve. Additionally, it
-   * accepts a value of `all` to return all leaf revisions.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
    * revisions.
@@ -2193,13 +2165,11 @@ class CloudantV1 extends CloudantBaseService {
     const query = {
       'attachments': _params.attachments,
       'att_encoding_info': _params.attEncodingInfo,
-      'atts_since': _params.attsSince,
       'conflicts': _params.conflicts,
       'deleted_conflicts': _params.deletedConflicts,
       'latest': _params.latest,
       'local_seq': _params.localSeq,
       'meta': _params.meta,
-      'open_revs': _params.openRevs,
       'rev': _params.rev,
       'revs': _params.revs,
       'revs_info': _params.revsInfo
@@ -4939,8 +4909,6 @@ class CloudantV1 extends CloudantBaseService {
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
-   * @param {string[]} [params.attsSince] - Query parameter to specify whether to include attachments only since
-   * specified revisions. Note this does not include the attachments for the specified revisions.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
    * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
@@ -4951,8 +4919,6 @@ class CloudantV1 extends CloudantBaseService {
    * document.
    * @param {boolean} [params.meta] - Query parameter to specify whether to include document meta information. Acts the
    * same as specifying all of the conflicts, deleted_conflicts and open_revs query parameters.
-   * @param {string[]} [params.openRevs] - Query parameter to specify leaf revisions to retrieve. Additionally, it
-   * accepts a value of `all` to return all leaf revisions.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
    * revisions.
@@ -4973,13 +4939,11 @@ class CloudantV1 extends CloudantBaseService {
     const query = {
       'attachments': _params.attachments,
       'att_encoding_info': _params.attEncodingInfo,
-      'atts_since': _params.attsSince,
       'conflicts': _params.conflicts,
       'deleted_conflicts': _params.deletedConflicts,
       'latest': _params.latest,
       'local_seq': _params.localSeq,
       'meta': _params.meta,
-      'open_revs': _params.openRevs,
       'rev': _params.rev,
       'revs': _params.revs,
       'revs_info': _params.revsInfo
@@ -5913,8 +5877,6 @@ class CloudantV1 extends CloudantBaseService {
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
-   * @param {string[]} [params.attsSince] - Query parameter to specify whether to include attachments only since
-   * specified revisions. Note this does not include the attachments for the specified revisions.
    * @param {boolean} [params.localSeq] - Query parameter to specify whether to include the last update sequence for the
    * document.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -5932,7 +5894,6 @@ class CloudantV1 extends CloudantBaseService {
     const query = {
       'attachments': _params.attachments,
       'att_encoding_info': _params.attEncodingInfo,
-      'atts_since': _params.attsSince,
       'local_seq': _params.localSeq
     };
 
@@ -6294,16 +6255,16 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Retrieve Activity Tracker events information.
    *
-   * Check event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
+   * Check event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
    *
    * @param {Object} [params] - The parameters to send to the service.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEventsConfiguration>>}
+   * @returns {Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEvents>>}
    */
-  public getActivityTrackerEventsInformation(params?: CloudantV1.GetActivityTrackerEventsInformationParams): Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEventsConfiguration>> {
+  public getActivityTrackerEvents(params?: CloudantV1.GetActivityTrackerEventsParams): Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEvents>> {
     const _params = Object.assign({}, params);
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getActivityTrackerEventsInformation');
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getActivityTrackerEvents');
 
     const parameters = {
       options: {
@@ -6323,15 +6284,15 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Modify Activity Tracker events configuration.
    *
-   * Configure event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
+   * Configure event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
    *
    * @param {Object} params - The parameters to send to the service.
-   * @param {string[]} params.types - An array of event types that are being sent to IBM Cloud Activity Tracker with
-   * LogDNA for the IBM Cloudant instance. "management" is a required element of this array.
+   * @param {string[]} params.types - An array of event types that are being sent to IBM Cloud Activity Tracker for the
+   * IBM Cloudant instance. "management" is a required element of this array.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
-  public postActivityTrackerEventsConfiguration(params: CloudantV1.PostActivityTrackerEventsConfigurationParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+  public postActivityTrackerEvents(params: CloudantV1.PostActivityTrackerEventsParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['types'];
 
@@ -6344,7 +6305,7 @@ class CloudantV1 extends CloudantBaseService {
       'types': _params.types
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postActivityTrackerEventsConfiguration');
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postActivityTrackerEvents');
 
     const parameters = {
       options: {
@@ -6447,8 +6408,8 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `putCapacityThroughputInformation` operation. */
-  export interface PutCapacityThroughputInformationParams {
+  /** Parameters for the `putCapacityThroughputConfiguration` operation. */
+  export interface PutCapacityThroughputConfigurationParams {
     /** A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global
      *  queries/sec of provisioned throughput capacity.
      */
@@ -7058,10 +7019,6 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include attachments only since specified revisions. Note this does not
-     *  include the attachments for the specified revisions.
-     */
-    attsSince?: string[];
     /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
      *  the returned document. Ignored if `include_docs` isn't `true`.
      */
@@ -7080,10 +7037,6 @@ namespace CloudantV1 {
      *  the conflicts, deleted_conflicts and open_revs query parameters.
      */
     meta?: boolean;
-    /** Query parameter to specify leaf revisions to retrieve. Additionally, it accepts a value of `all` to return
-     *  all leaf revisions.
-     */
-    openRevs?: string[];
     /** Query parameter to specify a document revision. */
     rev?: string;
     /** Query parameter to specify whether to include a list of all known document revisions. */
@@ -7107,10 +7060,6 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include attachments only since specified revisions. Note this does not
-     *  include the attachments for the specified revisions.
-     */
-    attsSince?: string[];
     /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
      *  the returned document. Ignored if `include_docs` isn't `true`.
      */
@@ -7129,10 +7078,6 @@ namespace CloudantV1 {
      *  the conflicts, deleted_conflicts and open_revs query parameters.
      */
     meta?: boolean;
-    /** Query parameter to specify leaf revisions to retrieve. Additionally, it accepts a value of `all` to return
-     *  all leaf revisions.
-     */
-    openRevs?: string[];
     /** Query parameter to specify a document revision. */
     rev?: string;
     /** Query parameter to specify whether to include a list of all known document revisions. */
@@ -7156,10 +7101,6 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include attachments only since specified revisions. Note this does not
-     *  include the attachments for the specified revisions.
-     */
-    attsSince?: string[];
     /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
      *  the returned document. Ignored if `include_docs` isn't `true`.
      */
@@ -7178,10 +7119,6 @@ namespace CloudantV1 {
      *  the conflicts, deleted_conflicts and open_revs query parameters.
      */
     meta?: boolean;
-    /** Query parameter to specify leaf revisions to retrieve. Additionally, it accepts a value of `all` to return
-     *  all leaf revisions.
-     */
-    openRevs?: string[];
     /** Query parameter to specify a document revision. */
     rev?: string;
     /** Query parameter to specify whether to include a list of all known document revisions. */
@@ -7205,10 +7142,6 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include attachments only since specified revisions. Note this does not
-     *  include the attachments for the specified revisions.
-     */
-    attsSince?: string[];
     /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
      *  the returned document. Ignored if `include_docs` isn't `true`.
      */
@@ -7227,10 +7160,6 @@ namespace CloudantV1 {
      *  the conflicts, deleted_conflicts and open_revs query parameters.
      */
     meta?: boolean;
-    /** Query parameter to specify leaf revisions to retrieve. Additionally, it accepts a value of `all` to return
-     *  all leaf revisions.
-     */
-    openRevs?: string[];
     /** Query parameter to specify a document revision. */
     rev?: string;
     /** Query parameter to specify whether to include a list of all known document revisions. */
@@ -7337,10 +7266,6 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include attachments only since specified revisions. Note this does not
-     *  include the attachments for the specified revisions.
-     */
-    attsSince?: string[];
     /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
      *  the returned document. Ignored if `include_docs` isn't `true`.
      */
@@ -7359,10 +7284,6 @@ namespace CloudantV1 {
      *  the conflicts, deleted_conflicts and open_revs query parameters.
      */
     meta?: boolean;
-    /** Query parameter to specify leaf revisions to retrieve. Additionally, it accepts a value of `all` to return
-     *  all leaf revisions.
-     */
-    openRevs?: string[];
     /** Query parameter to specify a document revision. */
     rev?: string;
     /** Query parameter to specify whether to include a list of all known document revisions. */
@@ -9025,10 +8946,6 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include attachments only since specified revisions. Note this does not
-     *  include the attachments for the specified revisions.
-     */
-    attsSince?: string[];
     /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
      *  the returned document. Ignored if `include_docs` isn't `true`.
      */
@@ -9047,10 +8964,6 @@ namespace CloudantV1 {
      *  the conflicts, deleted_conflicts and open_revs query parameters.
      */
     meta?: boolean;
-    /** Query parameter to specify leaf revisions to retrieve. Additionally, it accepts a value of `all` to return
-     *  all leaf revisions.
-     */
-    openRevs?: string[];
     /** Query parameter to specify a document revision. */
     rev?: string;
     /** Query parameter to specify whether to include a list of all known document revisions. */
@@ -9372,10 +9285,6 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include attachments only since specified revisions. Note this does not
-     *  include the attachments for the specified revisions.
-     */
-    attsSince?: string[];
     /** Query parameter to specify whether to include the last update sequence for the document. */
     localSeq?: boolean;
     headers?: OutgoingHttpHeaders;
@@ -9473,22 +9382,22 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `getActivityTrackerEventsInformation` operation. */
-  export interface GetActivityTrackerEventsInformationParams {
+  /** Parameters for the `getActivityTrackerEvents` operation. */
+  export interface GetActivityTrackerEventsParams {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `postActivityTrackerEventsConfiguration` operation. */
-  export interface PostActivityTrackerEventsConfigurationParams {
-    /** An array of event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant
-     *  instance. "management" is a required element of this array.
+  /** Parameters for the `postActivityTrackerEvents` operation. */
+  export interface PostActivityTrackerEventsParams {
+    /** An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
+     *  "management" is a required element of this array.
      */
-    types: PostActivityTrackerEventsConfigurationConstants.Types | string[];
+    types: PostActivityTrackerEventsConstants.Types | string[];
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Constants for the `postActivityTrackerEventsConfiguration` operation. */
-  export namespace PostActivityTrackerEventsConfigurationConstants {
+  /** Constants for the `postActivityTrackerEvents` operation. */
+  export namespace PostActivityTrackerEventsConstants {
     /** Types */
     export enum Types {
       MANAGEMENT = 'management',
@@ -9531,10 +9440,10 @@ namespace CloudantV1 {
     updated_on: number;
   }
 
-  /** Schema for Activity Tracker events configuration. */
-  export interface ActivityTrackerEventsConfiguration {
-    /** An array of event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant
-     *  instance. "management" is a required element of this array.
+  /** Schema for Activity Tracker events. */
+  export interface ActivityTrackerEvents {
+    /** An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
+     *  "management" is a required element of this array.
      */
     types: string[];
   }
