@@ -36,6 +36,14 @@ const updateDoc = async () => {
       })
     ).result;
 
+    // Note: for byte response (Output Stream) use:
+    // const documentAsStream = (
+    //     await client.getDocumentAsStream({
+    //       docId: 'example',
+    //       db: exampleDbName,
+    //     })
+    // ).result;
+
     // Add Bob Smith's address to the document
     document.address = '19 Front Street, Darlington, DL5 1TY';
 
@@ -49,6 +57,14 @@ const updateDoc = async () => {
         document: document,
       })
     ).result.rev;
+
+    // Note: for byte request (Input Stream) use:
+    // document._rev = (
+    //     await client.postDocument({
+    //       db: exampleDbName,
+    //       document: inputStream,
+    //     })
+    // ).result.rev;
 
     console.log(
       'You have updated the document:\n' + JSON.stringify(document, null, 2)
