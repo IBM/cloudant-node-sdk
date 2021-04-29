@@ -58,10 +58,10 @@ client
 
     // Update the document in the database
     client
-      .postDocument({ db: exampleDbName, document })
+      .postDocument({ db: exampleDbName, document: document })
       // Note: for byte request (Input Stream) use:
       // .postDocument(
-      //   {db: exampleDbName, documentAsStream}
+      //   {db: exampleDbName, document: documentAsStream}
       // )
       .then((res) => {
         // Keeping track with the revision number of the document object:
