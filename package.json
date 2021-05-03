@@ -28,11 +28,11 @@
     "test-travis": "jest --runInBand --testNamePattern='^((?!@slow).)*$' test/",
     "test-unit-travis": "jest --runInBand test/unit/",
     "test-integration-travis": "jest --runInBand --no-colors --testNamePattern='^((?!@slow).)*$' --json test/integration > test-output.log",
-    "check-packages": "installed-check -e -d -v"
+    "check-packages": "installed-check -e -d -v -i ibm-cloud-sdk-core"
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": "^12 || ^14 || ^16"
   },
   "dependencies": {
     "@types/node": "^15.0.1",
