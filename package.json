@@ -27,8 +27,7 @@
     "test-integration": "npm run build && jest test/integration",
     "test-travis": "jest --runInBand --testNamePattern='^((?!@slow).)*$' test/",
     "test-unit-travis": "jest --runInBand test/unit/",
-    "test-integration-travis": "jest --runInBand --no-colors --testNamePattern='^((?!@slow).)*$' --json test/integration > test-output.log",
-    "check-packages": "installed-check -e -d -v -i ibm-cloud-sdk-core"
+    "test-integration-travis": "jest --runInBand --no-colors --testNamePattern='^((?!@slow).)*$' --json test/integration > test-output.log"
   },
   "license": "Apache-2.0",
   "engines": {
@@ -56,7 +55,6 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "installed-check": "^4.0.0",
     "jest": "^26.1.0",
     "jest-junit": "^12.0.0",
     "prettier": "^2.1.2",
