@@ -120,7 +120,9 @@ consult the Cloudant documentation for further information.
 
 ### Session authentication
 
-Session authentication does not work with compressed request bodies when the server is CouchDB <= 3.1.1 or Cloudant <= 8169. Disabling gzip compression for requests is required when using session authentication with these server versions:
+Session authentication does not work with compressed request bodies when the server is CouchDB <= 3.1.1 or Cloudant <= 8169. [Disabling gzip compression](#disabling-request-body-compression) for requests is required when using session authentication with these server versions
+
+### Disabling request body compression
 ```js
 const { CloudantV1 } = require('@ibm-cloud/cloudant');
 const client = CloudantV1.newInstance({ serviceName: 'YOUR_SERVICE_NAME' });
