@@ -1,6 +1,6 @@
 {
   "name": "@ibm-cloud/cloudant",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "IBM Cloudant Node.js SDK",
   "main": "index.js",
   "repository": {
@@ -27,13 +27,11 @@
     "test-integration": "npm run build && jest test/integration",
     "test-travis": "jest --runInBand --testNamePattern='^((?!@slow).)*$' test/",
     "test-unit-travis": "jest --runInBand test/unit/",
-    "test-integration-travis": "jest --runInBand --no-colors --testNamePattern='^((?!@slow).)*$' --json test/integration > test-output.log",
-    "report-coverage": "codecov",
-    "check-packages": "installed-check -e -d -v"
+    "test-integration-travis": "jest --runInBand --no-colors --testNamePattern='^((?!@slow).)*$' --json test/integration > test-output.log"
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": "^12 || ^14 || ^16"
   },
   "dependencies": {
     "@types/node": "^15.0.1",
@@ -48,8 +46,7 @@
     "@typescript-eslint/eslint-plugin-tslint": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "axios": "^0.21.0",
-    "codecov": "^3.5.0",
-    "dotenv": "^8.2.0",
+    "dotenv": "^9.0.0",
     "eslint": "^7.20.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.0.0",
@@ -58,7 +55,6 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "installed-check": "^4.0.0",
     "jest": "^26.1.0",
     "jest-junit": "^12.0.0",
     "prettier": "^2.1.2",

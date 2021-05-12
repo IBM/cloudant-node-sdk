@@ -13,20 +13,17 @@ before_install:
 sudo: false
 
 node_js:
-- 10
 - 12
 - 14
-- 15
+- 16
 
 script:
 - npm run build
 - npm run test-travis || travis_terminate 1
 - npm run lint
-- if [[ $(node --version) =~ v1[^0][\d.]* ]]; then npm run check-packages; fi
-# - sh scripts/typedoc/generate_typedoc.sh currently in progress
 
 after_success:
-- npm run report-coverage
+
 # - scripts/jsdoc/publish.sh - currently in progress
 
 # To enable semantic-release, uncomment this section.
