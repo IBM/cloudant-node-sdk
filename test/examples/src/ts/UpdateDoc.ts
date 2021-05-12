@@ -42,7 +42,7 @@ const getDocParams: CloudantV1.GetDocumentParams = {
 // };
 // client
 //   .getDocumentAsStream(getdocAsStreamParam)
-//   .then((documentAsStream) => {});
+//   .then((documentAsByteStream) => {});
 
 client
   .getDocument(getDocParams)

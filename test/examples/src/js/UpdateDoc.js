@@ -37,7 +37,7 @@ const updateDoc = async () => {
     ).result;
 
     // Note: for response byte stream use:
-    // const documentAsStream = (
+    // const documentAsByteStream = (
     //     await client.getDocumentAsStream({
     //       docId: 'example',
     //       db: exampleDbName,
