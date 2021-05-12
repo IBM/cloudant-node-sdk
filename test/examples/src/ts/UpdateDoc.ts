@@ -35,6 +35,15 @@ const getDocParams: CloudantV1.GetDocumentParams = {
   db: exampleDbName,
 };
 
+// Note: for response byte stream use:
+// const getdocAsStreamParam: CloudantV1.GetDocumentAsStreamParams = {
+//   docId: 'example',
+//   db: exampleDbName,
+// };
+// client
+//   .getDocumentAsStream(getdocAsStreamParam)
+//   .then((documentAsByteStream) => {});
+
 client
   .getDocument(getDocParams)
   .then((docResult) => {
@@ -48,13 +57,19 @@ client
     delete document.joined;
 
     // Update the document in the database
-    client.postDocument({ db: exampleDbName, document }).then((res) => {
-      // Keeping track with the revision number of the document object:
-      document._rev = res.result.rev;
-      console.log(
-        'You have updated the document:\n' + JSON.stringify(document, null, 2)
-      );
-    });
+    client
+      .postDocument({ db: exampleDbName, document: document })
+      // Note: for request byte stream use:
+      // .postDocument(
+      //   {db: exampleDbName, document: documentAsByteStream}
+      // )
+      .then((res) => {
+        // Keeping track with the revision number of the document object:
+        document._rev = res.result.rev;
+        console.log(
+          'You have updated the document:\n' + JSON.stringify(document, null, 2)
+        );
+      });
   })
   .catch((err) => {
     if (err.code === 404) {
