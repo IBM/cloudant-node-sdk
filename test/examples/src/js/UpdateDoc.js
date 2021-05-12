@@ -36,7 +36,7 @@ const updateDoc = async () => {
       })
     ).result;
 
-    // Note: for byte response (Output Stream) use:
+    // Note: for response byte stream use:
     // const documentAsStream = (
     //     await client.getDocumentAsStream({
     //       docId: 'example',
@@ -58,11 +58,11 @@ const updateDoc = async () => {
       })
     ).result.rev;
 
-    // Note: for byte request (Input Stream) use:
+    // Note: for request byte stream use:
     // document._rev = (
     //     await client.postDocument({
     //       db: exampleDbName,
-    //       document: inputStream,
+    //       document: documentAsByteStream,
     //     })
     // ).result.rev;
 

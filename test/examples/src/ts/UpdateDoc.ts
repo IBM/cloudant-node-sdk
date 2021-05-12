@@ -35,14 +35,14 @@ const getDocParams: CloudantV1.GetDocumentParams = {
   db: exampleDbName,
 };
 
-// Note: for byte response (Output Stream) use:
+// Note: for response byte stream use:
 // const getdocAsStreamParam: CloudantV1.GetDocumentAsStreamParams = {
 //   docId: 'example',
 //   db: exampleDbName,
 // };
 // client
 //   .getDocumentAsStream(getdocAsStreamParam)
-//   .then((outputStream) => {});
+//   .then((documentAsStream) => {});
 
 client
   .getDocument(getDocParams)
@@ -59,9 +59,9 @@ client
     // Update the document in the database
     client
       .postDocument({ db: exampleDbName, document: document })
-      // Note: for byte request (Input Stream) use:
+      // Note: for request byte stream use:
       // .postDocument(
-      //   {db: exampleDbName, document: documentAsStream}
+      //   {db: exampleDbName, document: documentAsByteStream}
       // )
       .then((res) => {
         // Keeping track with the revision number of the document object:
