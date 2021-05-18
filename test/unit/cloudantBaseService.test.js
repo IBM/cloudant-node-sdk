@@ -88,8 +88,9 @@ describe('Test CloudantBaseService', () => {
       service.getAuthenticator().tokenOptions.enableGzipCompression,
       true
     );
-    let isGzipCompressionEnabled = service.getAuthenticator().tokenManager
-      .requestWrapperInstance.axiosInstance.defaults.enableGzipCompression;
+    let isGzipCompressionEnabled =
+      service.getAuthenticator().tokenManager.requestWrapperInstance
+        .axiosInstance.defaults.enableGzipCompression;
     assert.strictEqual(isGzipCompressionEnabled, true);
 
     // Disable gzip compression
@@ -100,8 +101,9 @@ describe('Test CloudantBaseService', () => {
       service.getAuthenticator().tokenOptions.enableGzipCompression,
       false
     );
-    isGzipCompressionEnabled = service.getAuthenticator().tokenManager
-      .requestWrapperInstance.axiosInstance.defaults.enableGzipCompression;
+    isGzipCompressionEnabled =
+      service.getAuthenticator().tokenManager.requestWrapperInstance
+        .axiosInstance.defaults.enableGzipCompression;
     assert.strictEqual(isGzipCompressionEnabled, false);
   });
 
