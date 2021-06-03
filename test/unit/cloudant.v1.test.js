@@ -1794,9 +1794,8 @@ describe('CloudantV1', () => {
 
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
-        atts_since: ['testString'],
+        atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
         id: 'testString',
-        open_revs: ['testString'],
         rev: 'testString',
       };
 
@@ -1889,9 +1888,8 @@ describe('CloudantV1', () => {
 
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
-        atts_since: ['testString'],
+        atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
         id: 'order00067',
-        open_revs: ['testString'],
         rev: '3-917fa2381192822767f010b95b45325b',
       };
 
@@ -1985,9 +1983,8 @@ describe('CloudantV1', () => {
 
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
-        atts_since: ['testString'],
+        atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
         id: 'order00067',
-        open_revs: ['testString'],
         rev: '3-917fa2381192822767f010b95b45325b',
       };
 
@@ -2081,9 +2078,8 @@ describe('CloudantV1', () => {
 
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
-        atts_since: ['testString'],
+        atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
         id: 'order00067',
-        open_revs: ['testString'],
         rev: '3-917fa2381192822767f010b95b45325b',
       };
 
