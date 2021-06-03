@@ -9585,8 +9585,6 @@ namespace CloudantV1 {
     atts_since?: string[];
     /** Schema for a document ID. */
     id: string;
-    /** Retrieves documents of specified leaf revisions. */
-    open_revs?: string[];
     /** Schema for a document revision identifier. */
     rev?: string;
   }
