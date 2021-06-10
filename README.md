@@ -7,6 +7,8 @@
 IBM Cloudant Node.js SDK is a client library that interacts with the
 [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=node).
 
+Add some content
+
 Disclaimer: This SDK is being released initially as a **pre-release** version.
 Changes might occur which impact applications that use this SDK.
 
