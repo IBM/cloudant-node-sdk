@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2021. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -118,7 +118,7 @@ export class SessionTokenManager extends TokenManager {
    */
   protected saveTokenInfo(tokenResponse): void {
     const sessionCookie = tokenResponse.headers['set-cookie'];
-    if (!(sessionCookie instanceof Array)) {
+    if (!Array.isArray(sessionCookie)) {
       const err = 'Set-Cookie header not present in response';
       throw new Error(err);
     }
