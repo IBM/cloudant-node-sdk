@@ -159,7 +159,10 @@ describe('SessionTokenManager tests', () => {
       assert.strictEqual(Math.ceil(manager.expireTime - dateNow / 1000), 10);
       assert.strictEqual(Math.ceil(manager.refreshTime - dateNow / 1000), 8);
       /* time difference between expire time and refresh time should be 2 seconds */
-      assert.strictEqual(manager.expireTime - manager.refreshTime, 2);
+      assert.strictEqual(
+        Math.ceil(manager.expireTime - manager.refreshTime),
+        2
+      );
       assert.strictEqual(manager.accessToken, '123456');
     });
 
