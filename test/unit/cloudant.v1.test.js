@@ -30,12 +30,12 @@ const {
   checkForSuccessfulExecution,
 } = unitTestUtils;
 
-const service = {
+const cloudantServiceOptions = {
   authenticator: new NoAuthAuthenticator(),
   url: 'http://localhost:5984',
 };
 
-const cloudantService = new CloudantV1(service);
+const cloudantService = new CloudantV1(cloudantServiceOptions);
 
 // dont actually create a request
 const createRequestMock = jest.spyOn(cloudantService, 'createRequest');
@@ -2716,7 +2716,16 @@ describe('CloudantV1', () => {
         _rev: 'testString',
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
-        foo: 'testString',
+        brand: 'Foo',
+        colours: '["red","green","black","blue"]',
+        description: 'Slim Colourful Design Electronic Cooking Appliance for ...',
+        image: 'assets/img/0gmsnghhew.jpg',
+        keywords: '["Foo","Scales","Weight","Digital","Kitchen"]',
+        name: 'Digital Kitchen Scales',
+        price: '14.99',
+        productid: '1000042',
+        taxonomy: '["Home","Kitchen","Small Appliances"]',
+        type: 'product',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -3158,7 +3167,7 @@ describe('CloudantV1', () => {
         validate_doc_update: { 'key1': 'testString' },
         views: { 'key1': designDocumentViewsMapReduceModel },
         st_indexes: { 'key1': geoIndexDefinitionModel },
-        foo: { foo: 'bar' },
+        foo: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -5073,7 +5082,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postExplain
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5133,7 +5142,7 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -5179,7 +5188,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postFind
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5239,7 +5248,7 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -5285,7 +5294,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postFindAsStream
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5346,7 +5355,7 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -6758,7 +6767,7 @@ describe('CloudantV1', () => {
         http_connections: 1,
         query_params: { 'key1': 'testString' },
         retries_per_request: 0,
-        selector: { 'key1': { foo: 'bar' } },
+        selector: { 'key1': 'testString' },
         since_seq: 'testString',
         socket_options: 'testString',
         source: replicationDatabaseModel,
@@ -6769,7 +6778,7 @@ describe('CloudantV1', () => {
         user_ctx: userContextModel,
         worker_batch_size: 1,
         worker_processes: 1,
-        foo: { foo: 'bar' },
+        foo: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -7098,7 +7107,7 @@ describe('CloudantV1', () => {
         http_connections: 10,
         query_params: { 'key1': 'testString' },
         retries_per_request: 3,
-        selector: { 'key1': { foo: 'bar' } },
+        selector: { 'key1': 'testString' },
         since_seq: '34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU',
         socket_options: '[{keepalive, true}, {nodelay, false}]',
         source: replicationDatabaseModel,
@@ -7109,7 +7118,7 @@ describe('CloudantV1', () => {
         user_ctx: userContextModel,
         worker_batch_size: 400,
         worker_processes: 3,
-        foo: { foo: 'bar' },
+        foo: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -8530,7 +8539,16 @@ describe('CloudantV1', () => {
         _rev: 'testString',
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
-        foo: 'testString',
+        brand: 'Foo',
+        colours: '["red","green","black","blue"]',
+        description: 'Slim Colourful Design Electronic Cooking Appliance for ...',
+        image: 'assets/img/0gmsnghhew.jpg',
+        keywords: '["Foo","Scales","Weight","Digital","Kitchen"]',
+        name: 'Digital Kitchen Scales',
+        price: '14.99',
+        productid: '1000042',
+        taxonomy: '["Home","Kitchen","Small Appliances"]',
+        type: 'product',
       };
 
       test('should pass the right params to createRequest', () => {
