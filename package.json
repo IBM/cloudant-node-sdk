@@ -63,7 +63,7 @@
     "tough-cookie": "^4.0.0",
     "ts-jest": "^26.1.2",
     "tsc-publish": "^0.5.2",
-    "typedoc": "^0.20.10",
+    "typedoc": "^0.21.0",
     "typescript": "^4.1.5"
   },
   "jest": {
