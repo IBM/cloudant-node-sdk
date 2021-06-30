@@ -6676,168 +6676,6 @@ describe('CloudantV1', () => {
       });
     });
   });
-  describe('postReplicate', () => {
-    describe('positive tests', () => {
-      // Request models needed by this operation.
-
-      // Attachment
-      const attachmentModel = {
-        content_type: 'testString',
-        data: 'This is a mock byte array value.',
-        digest: 'testString',
-        encoded_length: 0,
-        encoding: 'testString',
-        follows: true,
-        length: 0,
-        revpos: 1,
-        stub: true,
-      };
-
-      // Revisions
-      const revisionsModel = {
-        ids: ['testString'],
-        start: 1,
-      };
-
-      // DocumentRevisionStatus
-      const documentRevisionStatusModel = {
-        rev: 'testString',
-        status: 'available',
-      };
-
-      // ReplicationCreateTargetParameters
-      const replicationCreateTargetParametersModel = {
-        n: 1,
-        partitioned: true,
-        q: 1,
-      };
-
-      // ReplicationDatabaseAuthIam
-      const replicationDatabaseAuthIamModel = {
-        api_key: 'testString',
-      };
-
-      // ReplicationDatabaseAuth
-      const replicationDatabaseAuthModel = {
-        iam: replicationDatabaseAuthIamModel,
-      };
-
-      // ReplicationDatabase
-      const replicationDatabaseModel = {
-        auth: replicationDatabaseAuthModel,
-        headers: { 'key1': 'testString' },
-        url: 'testString',
-      };
-
-      // UserContext
-      const userContextModel = {
-        db: 'testString',
-        name: 'testString',
-        roles: ['_reader'],
-      };
-
-      // ReplicationDocument
-      const replicationDocumentModel = {
-        _attachments: { 'key1': attachmentModel },
-        _conflicts: ['testString'],
-        _deleted: true,
-        _deleted_conflicts: ['testString'],
-        _id: 'testString',
-        _local_seq: 'testString',
-        _rev: 'testString',
-        _revisions: revisionsModel,
-        _revs_info: [documentRevisionStatusModel],
-        cancel: true,
-        checkpoint_interval: 0,
-        connection_timeout: 0,
-        continuous: true,
-        create_target: true,
-        create_target_params: replicationCreateTargetParametersModel,
-        doc_ids: ['testString'],
-        filter: 'testString',
-        http_connections: 1,
-        query_params: { 'key1': 'testString' },
-        retries_per_request: 0,
-        selector: { 'key1': { foo: 'bar' } },
-        since_seq: 'testString',
-        socket_options: 'testString',
-        source: replicationDatabaseModel,
-        source_proxy: 'testString',
-        target: replicationDatabaseModel,
-        target_proxy: 'testString',
-        use_checkpoints: true,
-        user_ctx: userContextModel,
-        worker_batch_size: 1,
-        worker_processes: 1,
-        foo: { foo: 'bar' },
-      };
-
-      test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation postReplicate
-        const replicationDocument = replicationDocumentModel;
-        const params = {
-          replicationDocument: replicationDocument,
-        };
-
-        const postReplicateResult = cloudantService.postReplicate(params);
-
-        // all methods should return a Promise
-        expectToBePromise(postReplicateResult);
-
-        // assert that create request was called
-        expect(createRequestMock).toHaveBeenCalledTimes(1);
-
-        const options = getOptions(createRequestMock);
-
-        checkUrlAndMethod(options, '/_replicate', 'POST');
-        const expectedAccept = 'application/json';
-        const expectedContentType = 'application/json';
-        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body).toEqual(replicationDocument);
-      });
-
-      test('should prioritize user-given headers', () => {
-        // parameters
-        const replicationDocument = replicationDocumentModel;
-        const userAccept = 'fake/accept';
-        const userContentType = 'fake/contentType';
-        const params = {
-          replicationDocument,
-          headers: {
-            Accept: userAccept,
-            'Content-Type': userContentType,
-          },
-        };
-
-        cloudantService.postReplicate(params);
-        checkMediaHeaders(createRequestMock, userAccept, userContentType);
-      });
-    });
-
-    describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
-        let err;
-        try {
-          await cloudantService.postReplicate({});
-        } catch (e) {
-          err = e;
-        }
-
-        expect(err.message).toMatch(/Missing required parameters/);
-        done();
-      });
-
-      test('should reject promise when required params are not given', done => {
-        const postReplicatePromise = cloudantService.postReplicate();
-        expectToBePromise(postReplicatePromise);
-
-        postReplicatePromise.catch(err => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
-      });
-    });
-  });
   describe('deleteReplicationDocument', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
@@ -7066,14 +6904,14 @@ describe('CloudantV1', () => {
       const replicationDatabaseModel = {
         auth: replicationDatabaseAuthModel,
         headers: { 'key1': 'testString' },
-        url: 'https://examples.cloudant.com/animaldb',
+        url: 'testString',
       };
 
       // UserContext
       const userContextModel = {
         db: 'testString',
-        name: 'john',
-        roles: ['researcher'],
+        name: 'testString',
+        roles: ['_reader'],
       };
 
       // ReplicationDocument
@@ -7087,28 +6925,28 @@ describe('CloudantV1', () => {
         _rev: 'testString',
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
-        cancel: false,
-        checkpoint_interval: 4500,
-        connection_timeout: 15000,
+        cancel: true,
+        checkpoint_interval: 0,
+        connection_timeout: 0,
         continuous: true,
         create_target: true,
         create_target_params: replicationCreateTargetParametersModel,
-        doc_ids: ['badger', 'lemur', 'llama'],
-        filter: 'ddoc/my_filter',
-        http_connections: 10,
+        doc_ids: ['testString'],
+        filter: 'testString',
+        http_connections: 1,
         query_params: { 'key1': 'testString' },
-        retries_per_request: 3,
+        retries_per_request: 0,
         selector: { 'key1': { foo: 'bar' } },
-        since_seq: '34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU',
-        socket_options: '[{keepalive, true}, {nodelay, false}]',
+        since_seq: 'testString',
+        socket_options: 'testString',
         source: replicationDatabaseModel,
-        source_proxy: 'http://my-source-proxy.example:8888',
+        source_proxy: 'testString',
         target: replicationDatabaseModel,
-        target_proxy: 'http://my-target-proxy.example:8888',
-        use_checkpoints: false,
+        target_proxy: 'testString',
+        use_checkpoints: true,
         user_ctx: userContextModel,
-        worker_batch_size: 400,
-        worker_processes: 3,
+        worker_batch_size: 1,
+        worker_processes: 1,
         foo: { foo: 'bar' },
       };
 
