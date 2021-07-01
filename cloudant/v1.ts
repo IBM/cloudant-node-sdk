@@ -4804,6 +4804,45 @@ class CloudantV1 extends CloudantBaseService {
   };
 
   /**
+   * Create or modify a replication operation.
+   *
+   * Requests, configures, or stops a replicate operation.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {ReplicationDocument} params.replicationDocument - HTTP request body for replication operations.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.ReplicationResult>>}
+   */
+  public postReplicate(params: CloudantV1.PostReplicateParams): Promise<CloudantV1.Response<CloudantV1.ReplicationResult>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['replicationDocument'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const body = _params.replicationDocument;
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postReplicate');
+
+    const parameters = {
+      options: {
+        url: '/_replicate',
+        method: 'POST',
+        body,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
    * Cancel a replication.
    *
    * Cancels a replication by deleting the document that describes it from the `_replicator` database.
@@ -4935,7 +4974,7 @@ class CloudantV1 extends CloudantBaseService {
   };
 
   /**
-   * Create or modify a replication using a replication document.
+   * Start or update a replication.
    *
    * Creates or modifies a document in the `_replicator` database to start a new replication or to edit an existing
    * replication.
@@ -8865,6 +8904,13 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
+  /** Parameters for the `postReplicate` operation. */
+  export interface PostReplicateParams {
+    /** HTTP request body for replication operations. */
+    replicationDocument: ReplicationDocument;
+    headers?: OutgoingHttpHeaders;
+  }
+
   /** Parameters for the `deleteReplicationDocument` operation. */
   export interface DeleteReplicationDocumentParams {
     /** Path parameter to specify the document ID. */
@@ -10352,6 +10398,46 @@ namespace CloudantV1 {
     worker_processes?: number;
     /** ReplicationDocument accepts additional properties. */
     [propName: string]: any;
+  }
+
+  /** Schema for replication history information. */
+  export interface ReplicationHistory {
+    /** Number of document write failures. */
+    doc_write_failures: number;
+    /** Number of documents read. */
+    docs_read: number;
+    /** Number of documents written to target. */
+    docs_written: number;
+    /** Last sequence number in changes stream. */
+    end_last_seq: string;
+    /** Date/Time replication operation completed in RFC 2822 format. */
+    end_time: string;
+    /** Number of missing documents checked. */
+    missing_checked: number;
+    /** Number of missing documents found. */
+    missing_found: number;
+    /** Last recorded sequence number. */
+    recorded_seq: string;
+    /** Session ID for this replication operation. */
+    session_id: string;
+    /** First sequence number in changes stream. */
+    start_last_seq: string;
+    /** Date/Time replication operation started in RFC 2822 format. */
+    start_time: string;
+  }
+
+  /** Schema for a replication result. */
+  export interface ReplicationResult {
+    /** Replication history. */
+    history: ReplicationHistory[];
+    /** Replication status. */
+    ok: boolean;
+    /** Replication protocol version. */
+    replication_id_version: number;
+    /** Unique session ID. */
+    session_id: string;
+    /** Last sequence number read from source database. */
+    source_last_seq: string;
   }
 
   /** Schema for list of revision information. */
