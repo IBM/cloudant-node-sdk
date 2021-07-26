@@ -30,12 +30,12 @@ const {
   checkForSuccessfulExecution,
 } = unitTestUtils;
 
-const service = {
+const cloudantServiceOptions = {
   authenticator: new NoAuthAuthenticator(),
   url: 'http://localhost:5984',
 };
 
-const cloudantService = new CloudantV1(service);
+const cloudantService = new CloudantV1(cloudantServiceOptions);
 
 // dont actually create a request
 const createRequestMock = jest.spyOn(cloudantService, 'createRequest');
@@ -362,10 +362,10 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation getDbUpdates
-        const feed = 'continuous';
+        const feed = 'normal';
         const heartbeat = 0;
         const timeout = 0;
-        const since = 'testString';
+        const since = '0';
         const params = {
           feed: feed,
           heartbeat: heartbeat,
@@ -424,18 +424,18 @@ describe('CloudantV1', () => {
         const fields = ['testString'];
         const selector = { 'key1': 'testString' };
         const lastEventId = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const feed = 'continuous';
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const feed = 'normal';
         const filter = 'testString';
         const heartbeat = 0;
-        const includeDocs = true;
+        const includeDocs = false;
         const limit = 0;
         const seqInterval = 1;
-        const since = 'testString';
-        const style = 'testString';
+        const since = '0';
+        const style = 'main_only';
         const timeout = 0;
         const view = 'testString';
         const params = {
@@ -546,18 +546,18 @@ describe('CloudantV1', () => {
         const fields = ['testString'];
         const selector = { 'key1': 'testString' };
         const lastEventId = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const feed = 'continuous';
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const feed = 'normal';
         const filter = 'testString';
         const heartbeat = 0;
-        const includeDocs = true;
+        const includeDocs = false;
         const limit = 0;
         const seqInterval = 1;
-        const since = 'testString';
-        const style = 'testString';
+        const since = '0';
+        const style = 'main_only';
         const timeout = 0;
         const view = 'testString';
         const params = {
@@ -732,7 +732,7 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation getAllDbs
-        const descending = true;
+        const descending = false;
         const endkey = 'testString';
         const limit = 0;
         const skip = 0;
@@ -997,7 +997,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation putDatabase
         const db = 'testString';
-        const partitioned = true;
+        const partitioned = false;
         const q = 1;
         const params = {
           db: db,
@@ -1073,7 +1073,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const latest = true;
+        const latest = false;
         const rev = 'testString';
         const params = {
           db: db,
@@ -1273,15 +1273,15 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postAllDocs
         const db = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const includeDocs = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const includeDocs = false;
         const inclusiveEnd = true;
         const limit = 0;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
@@ -1380,15 +1380,15 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postAllDocsAsStream
         const db = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const includeDocs = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const includeDocs = false;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
@@ -1489,15 +1489,15 @@ describe('CloudantV1', () => {
 
       // AllDocsQuery
       const allDocsQueryModel = {
-        att_encoding_info: true,
-        attachments: true,
-        conflicts: true,
-        descending: true,
-        include_docs: true,
+        att_encoding_info: false,
+        attachments: false,
+        conflicts: false,
+        descending: false,
+        include_docs: false,
         inclusive_end: true,
         limit: 0,
         skip: 0,
-        update_seq: true,
+        update_seq: false,
         endkey: 'testString',
         key: 'testString',
         keys: ['testString'],
@@ -1581,15 +1581,15 @@ describe('CloudantV1', () => {
 
       // AllDocsQuery
       const allDocsQueryModel = {
-        att_encoding_info: true,
-        attachments: true,
-        conflicts: true,
-        descending: true,
-        include_docs: true,
+        att_encoding_info: false,
+        attachments: false,
+        conflicts: false,
+        descending: false,
+        include_docs: false,
         inclusive_end: true,
         limit: 0,
         skip: 0,
-        update_seq: true,
+        update_seq: false,
         endkey: 'testString',
         key: 'testString',
         keys: ['small-appliances:1000042', 'small-appliances:1000043'],
@@ -1803,10 +1803,10 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postBulkGet
         const db = 'testString';
         const docs = [bulkGetQueryDocumentModel];
-        const attachments = true;
-        const attEncodingInfo = true;
-        const latest = true;
-        const revs = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const latest = false;
+        const revs = false;
         const params = {
           db: db,
           docs: docs,
@@ -1897,10 +1897,10 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postBulkGetAsMixed
         const db = 'testString';
         const docs = [bulkGetQueryDocumentModel];
-        const attachments = true;
-        const attEncodingInfo = true;
-        const latest = true;
-        const revs = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const latest = false;
+        const revs = false;
         const params = {
           db: db,
           docs: docs,
@@ -1992,10 +1992,10 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postBulkGetAsRelated
         const db = 'testString';
         const docs = [bulkGetQueryDocumentModel];
-        const attachments = true;
-        const attEncodingInfo = true;
-        const latest = true;
-        const revs = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const latest = false;
+        const revs = false;
         const params = {
           db: db,
           docs: docs,
@@ -2087,10 +2087,10 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postBulkGetAsStream
         const db = 'testString';
         const docs = [bulkGetQueryDocumentModel];
-        const attachments = true;
-        const attEncodingInfo = true;
-        const latest = true;
-        const revs = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const latest = false;
+        const revs = false;
         const params = {
           db: db,
           docs: docs,
@@ -2256,16 +2256,16 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const conflicts = true;
-        const deletedConflicts = true;
-        const latest = true;
-        const localSeq = true;
-        const meta = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const conflicts = false;
+        const deletedConflicts = false;
+        const latest = false;
+        const localSeq = false;
+        const meta = false;
         const rev = 'testString';
-        const revs = true;
-        const revsInfo = true;
+        const revs = false;
+        const revsInfo = false;
         const params = {
           db: db,
           docId: docId,
@@ -2362,16 +2362,16 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const conflicts = true;
-        const deletedConflicts = true;
-        const latest = true;
-        const localSeq = true;
-        const meta = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const conflicts = false;
+        const deletedConflicts = false;
+        const latest = false;
+        const localSeq = false;
+        const meta = false;
         const rev = 'testString';
-        const revs = true;
-        const revsInfo = true;
+        const revs = false;
+        const revsInfo = false;
         const params = {
           db: db,
           docId: docId,
@@ -2469,16 +2469,16 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const conflicts = true;
-        const deletedConflicts = true;
-        const latest = true;
-        const localSeq = true;
-        const meta = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const conflicts = false;
+        const deletedConflicts = false;
+        const latest = false;
+        const localSeq = false;
+        const meta = false;
         const rev = 'testString';
-        const revs = true;
-        const revsInfo = true;
+        const revs = false;
+        const revsInfo = false;
         const params = {
           db: db,
           docId: docId,
@@ -2576,16 +2576,16 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const conflicts = true;
-        const deletedConflicts = true;
-        const latest = true;
-        const localSeq = true;
-        const meta = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const conflicts = false;
+        const deletedConflicts = false;
+        const latest = false;
+        const localSeq = false;
+        const meta = false;
         const rev = 'testString';
-        const revs = true;
-        const revsInfo = true;
+        const revs = false;
+        const revsInfo = false;
         const params = {
           db: db,
           docId: docId,
@@ -2716,7 +2716,16 @@ describe('CloudantV1', () => {
         _rev: 'testString',
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
-        foo: 'testString',
+        brand: 'Foo',
+        colours: '["red","green","black","blue"]',
+        description: 'Slim Colourful Design Electronic Cooking Appliance for ...',
+        image: 'assets/img/0gmsnghhew.jpg',
+        keywords: '["Foo","Scales","Weight","Digital","Kitchen"]',
+        name: 'Digital Kitchen Scales',
+        price: '14.99',
+        productid: '1000042',
+        taxonomy: '["Home","Kitchen","Small Appliances"]',
+        type: 'product',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -2727,7 +2736,7 @@ describe('CloudantV1', () => {
         const contentType = 'application/json';
         const ifMatch = 'testString';
         const batch = 'ok';
-        const newEdits = true;
+        const newEdits = false;
         const rev = 'testString';
         const params = {
           db: db,
@@ -2975,16 +2984,16 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const conflicts = true;
-        const deletedConflicts = true;
-        const latest = true;
-        const localSeq = true;
-        const meta = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const conflicts = false;
+        const deletedConflicts = false;
+        const latest = false;
+        const localSeq = false;
+        const meta = false;
         const rev = 'testString';
-        const revs = true;
-        const revsInfo = true;
+        const revs = false;
+        const revsInfo = false;
         const params = {
           db: db,
           ddoc: ddoc,
@@ -3152,13 +3161,13 @@ describe('CloudantV1', () => {
         autoupdate: true,
         filters: { 'key1': 'testString' },
         indexes: { 'key1': searchIndexDefinitionModel },
-        language: 'testString',
+        language: 'javascript',
         options: designDocumentOptionsModel,
         updates: { 'key1': 'testString' },
         validate_doc_update: { 'key1': 'testString' },
         views: { 'key1': designDocumentViewsMapReduceModel },
         st_indexes: { 'key1': geoIndexDefinitionModel },
-        foo: { foo: 'bar' },
+        foo: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -3168,7 +3177,7 @@ describe('CloudantV1', () => {
         const designDocument = designDocumentModel;
         const ifMatch = 'testString';
         const batch = 'ok';
-        const newEdits = true;
+        const newEdits = false;
         const rev = 'testString';
         const params = {
           db: db,
@@ -3327,15 +3336,15 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postDesignDocs
         const db = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const includeDocs = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const includeDocs = false;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
@@ -3438,15 +3447,15 @@ describe('CloudantV1', () => {
 
       // AllDocsQuery
       const allDocsQueryModel = {
-        att_encoding_info: true,
-        attachments: true,
-        conflicts: true,
-        descending: true,
-        include_docs: true,
+        att_encoding_info: false,
+        attachments: false,
+        conflicts: false,
+        descending: false,
+        include_docs: false,
         inclusive_end: true,
         limit: 0,
         skip: 0,
-        update_seq: true,
+        update_seq: false,
         endkey: 'testString',
         key: 'testString',
         keys: ['small-appliances:1000042', 'small-appliances:1000043'],
@@ -3534,23 +3543,23 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const view = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const includeDocs = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const includeDocs = false;
         const inclusiveEnd = true;
         const limit = 0;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const endkeyDocid = 'testString';
-        const group = true;
+        const group = false;
         const groupLevel = 1;
         const key = 'testString';
         const keys = ['testString'];
         const reduce = true;
-        const stable = true;
+        const stable = false;
         const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
@@ -3672,23 +3681,23 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const view = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
         const includeDocs = true;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const endkeyDocid = 'testString';
-        const group = true;
+        const group = false;
         const groupLevel = 1;
         const key = 'testString';
         const keys = ['examplekey'];
         const reduce = true;
-        const stable = true;
+        const stable = false;
         const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
@@ -3810,23 +3819,23 @@ describe('CloudantV1', () => {
 
       // ViewQuery
       const viewQueryModel = {
-        att_encoding_info: true,
-        attachments: true,
-        conflicts: true,
-        descending: true,
-        include_docs: true,
+        att_encoding_info: false,
+        attachments: false,
+        conflicts: false,
+        descending: false,
+        include_docs: false,
         inclusive_end: true,
         limit: 0,
         skip: 0,
-        update_seq: true,
+        update_seq: false,
         endkey: 'testString',
         endkey_docid: 'testString',
-        group: true,
+        group: false,
         group_level: 1,
         key: 'testString',
         keys: ['testString'],
         reduce: true,
-        stable: true,
+        stable: false,
         startkey: 'testString',
         startkey_docid: 'testString',
         update: 'true',
@@ -3919,23 +3928,23 @@ describe('CloudantV1', () => {
 
       // ViewQuery
       const viewQueryModel = {
-        att_encoding_info: true,
-        attachments: true,
-        conflicts: true,
-        descending: true,
+        att_encoding_info: false,
+        attachments: false,
+        conflicts: false,
+        descending: false,
         include_docs: true,
         inclusive_end: true,
         limit: 5,
         skip: 0,
-        update_seq: true,
+        update_seq: false,
         endkey: 'testString',
         endkey_docid: 'testString',
-        group: true,
+        group: false,
         group_level: 1,
         key: 'testString',
         keys: ['testString'],
         reduce: true,
-        stable: true,
+        stable: false,
         startkey: 'testString',
         startkey_docid: 'testString',
         update: 'true',
@@ -4102,15 +4111,15 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postPartitionAllDocs
         const db = 'testString';
         const partitionKey = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const includeDocs = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const includeDocs = false;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
@@ -4214,15 +4223,15 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postPartitionAllDocsAsStream
         const db = 'testString';
         const partitionKey = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const includeDocs = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const includeDocs = false;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
@@ -4333,10 +4342,10 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const highlightFields = ['testString'];
         const highlightNumber = 1;
-        const highlightPostTag = 'testString';
-        const highlightPreTag = 'testString';
+        const highlightPostTag = '</em>';
+        const highlightPreTag = '<em>';
         const highlightSize = 1;
-        const includeDocs = true;
+        const includeDocs = false;
         const includeFields = ['testString'];
         const limit = 0;
         const sort = ['testString'];
@@ -4454,10 +4463,10 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const highlightFields = ['testString'];
         const highlightNumber = 1;
-        const highlightPostTag = 'testString';
-        const highlightPreTag = 'testString';
+        const highlightPostTag = '</em>';
+        const highlightPreTag = '<em>';
         const highlightSize = 1;
-        const includeDocs = true;
+        const includeDocs = false;
         const includeFields = ['testString'];
         const limit = 3;
         const sort = ['testString'];
@@ -4572,23 +4581,23 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const ddoc = 'testString';
         const view = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
         const includeDocs = true;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const endkeyDocid = 'testString';
-        const group = true;
+        const group = false;
         const groupLevel = 1;
         const key = 'testString';
         const keys = ['examplekey'];
         const reduce = true;
-        const stable = true;
+        const stable = false;
         const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
@@ -4715,23 +4724,23 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const ddoc = 'testString';
         const view = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
         const includeDocs = true;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const endkeyDocid = 'testString';
-        const group = true;
+        const group = false;
         const groupLevel = 1;
         const key = 'testString';
         const keys = ['examplekey'];
         const reduce = true;
-        const stable = true;
+        const stable = false;
         const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
@@ -4866,7 +4875,7 @@ describe('CloudantV1', () => {
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
-        const update = 'false';
+        const update = 'true';
         const useIndex = ['testString'];
         const params = {
           db: db,
@@ -4974,7 +4983,7 @@ describe('CloudantV1', () => {
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
-        const update = 'false';
+        const update = 'true';
         const useIndex = ['testString'];
         const params = {
           db: db,
@@ -5073,7 +5082,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postExplain
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5082,7 +5091,7 @@ describe('CloudantV1', () => {
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
-        const update = 'false';
+        const update = 'true';
         const useIndex = ['testString'];
         const r = 1;
         const params = {
@@ -5133,7 +5142,7 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -5179,7 +5188,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postFind
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5188,7 +5197,7 @@ describe('CloudantV1', () => {
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
-        const update = 'false';
+        const update = 'true';
         const useIndex = ['testString'];
         const r = 1;
         const params = {
@@ -5239,7 +5248,7 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -5285,7 +5294,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postFindAsStream
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5294,7 +5303,7 @@ describe('CloudantV1', () => {
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
-        const update = 'false';
+        const update = 'true';
         const useIndex = ['testString'];
         const r = 1;
         const params = {
@@ -5346,7 +5355,7 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -5740,10 +5749,10 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const highlightFields = ['testString'];
         const highlightNumber = 1;
-        const highlightPostTag = 'testString';
-        const highlightPreTag = 'testString';
+        const highlightPostTag = '</em>';
+        const highlightPreTag = '<em>';
         const highlightSize = 1;
-        const includeDocs = true;
+        const includeDocs = false;
         const includeFields = ['testString'];
         const limit = 0;
         const sort = ['testString'];
@@ -5874,10 +5883,10 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const highlightFields = ['testString'];
         const highlightNumber = 1;
-        const highlightPostTag = 'testString';
-        const highlightPreTag = 'testString';
+        const highlightPostTag = '</em>';
+        const highlightPreTag = '<em>';
         const highlightSize = 1;
-        const includeDocs = true;
+        const includeDocs = false;
         const includeFields = ['testString'];
         const limit = 3;
         const sort = ['testString'];
@@ -6085,17 +6094,17 @@ describe('CloudantV1', () => {
         const index = 'testString';
         const bbox = 'testString';
         const bookmark = 'testString';
-        const format = 'legacy';
+        const format = 'view';
         const g = 'testString';
-        const includeDocs = true;
+        const includeDocs = false;
         const lat = -90;
         const limit = 0;
         const lon = -180;
-        const nearest = true;
+        const nearest = false;
         const radius = 0;
         const rangex = 0;
         const rangey = 0;
-        const relation = 'contains';
+        const relation = 'intersects';
         const skip = 0;
         const stale = 'ok';
         const params = {
@@ -6208,17 +6217,17 @@ describe('CloudantV1', () => {
         const index = 'testString';
         const bbox = 'testString';
         const bookmark = 'testString';
-        const format = 'legacy';
+        const format = 'view';
         const g = 'testString';
-        const includeDocs = true;
+        const includeDocs = false;
         const lat = -90;
         const limit = 0;
         const lon = -180;
-        const nearest = true;
+        const nearest = false;
         const radius = 0;
         const rangex = 0;
         const rangey = 0;
-        const relation = 'contains';
+        const relation = 'intersects';
         const skip = 0;
         const stale = 'ok';
         const params = {
@@ -6759,16 +6768,16 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getReplicationDocument
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const conflicts = true;
-        const deletedConflicts = true;
-        const latest = true;
-        const localSeq = true;
-        const meta = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const conflicts = false;
+        const deletedConflicts = false;
+        const latest = false;
+        const localSeq = false;
+        const meta = false;
         const rev = 'testString';
-        const revs = true;
-        const revsInfo = true;
+        const revs = false;
+        const revsInfo = false;
         const params = {
           docId: docId,
           ifNoneMatch: ifNoneMatch,
@@ -6886,7 +6895,7 @@ describe('CloudantV1', () => {
       // ReplicationCreateTargetParameters
       const replicationCreateTargetParametersModel = {
         n: 1,
-        partitioned: true,
+        partitioned: false,
         q: 1,
       };
 
@@ -6928,15 +6937,15 @@ describe('CloudantV1', () => {
         cancel: true,
         checkpoint_interval: 0,
         connection_timeout: 0,
-        continuous: true,
-        create_target: true,
+        continuous: false,
+        create_target: false,
         create_target_params: replicationCreateTargetParametersModel,
         doc_ids: ['testString'],
         filter: 'testString',
         http_connections: 1,
         query_params: { 'key1': 'testString' },
         retries_per_request: 0,
-        selector: { 'key1': { foo: 'bar' } },
+        selector: { 'key1': 'testString' },
         since_seq: 'testString',
         socket_options: 'testString',
         source: replicationDatabaseModel,
@@ -6947,7 +6956,7 @@ describe('CloudantV1', () => {
         user_ctx: userContextModel,
         worker_batch_size: 1,
         worker_processes: 1,
-        foo: { foo: 'bar' },
+        foo: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -6956,7 +6965,7 @@ describe('CloudantV1', () => {
         const replicationDocument = replicationDocumentModel;
         const ifMatch = 'testString';
         const batch = 'ok';
-        const newEdits = true;
+        const newEdits = false;
         const rev = 'testString';
         const params = {
           docId: docId,
@@ -8002,7 +8011,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const attachmentName = 'testString';
         const attachment = Buffer.from('This is a mock file.');
-        const contentType = 'testString';
+        const contentType = 'application/octet-stream';
         const ifMatch = 'testString';
         const rev = 'testString';
         const params = {
@@ -8044,7 +8053,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const attachmentName = 'testString';
         const attachment = Buffer.from('This is a mock file.');
-        const contentType = 'testString';
+        const contentType = 'application/octet-stream';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -8248,9 +8257,9 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const accept = 'application/json';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const localSeq = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const localSeq = false;
         const params = {
           db: db,
           docId: docId,
@@ -8368,7 +8377,16 @@ describe('CloudantV1', () => {
         _rev: 'testString',
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
-        foo: 'testString',
+        brand: 'Foo',
+        colours: '["red","green","black","blue"]',
+        description: 'Slim Colourful Design Electronic Cooking Appliance for ...',
+        image: 'assets/img/0gmsnghhew.jpg',
+        keywords: '["Foo","Scales","Weight","Digital","Kitchen"]',
+        name: 'Digital Kitchen Scales',
+        price: '14.99',
+        productid: '1000042',
+        taxonomy: '["Home","Kitchen","Small Appliances"]',
+        type: 'product',
       };
 
       test('should pass the right params to createRequest', () => {
