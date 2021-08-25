@@ -65,4 +65,82 @@ describe('validate', () => {
       assert.ok(result.rows.length > 0);
     });
   });
+
+  it('delete invalid _design', () => {
+    return cloudant
+      .deleteDocument({
+        db: dbName,
+        docId: '_design',
+      })
+      .then(() => {
+        assert.fail('should not have response');
+      })
+      .catch((err) => {
+        expect(err.message).toEqual(
+          'Document ID _design starts with the invalid _ character.'
+        );
+      });
+  });
+
+  it('get invalid _design document ID', () => {
+    return cloudant
+      .getDocument({
+        db: dbName,
+        docId: '_design',
+      })
+      .then(() => {
+        assert.fail('should not have response');
+      })
+      .catch((err) => {
+        expect(err.message).toEqual(
+          'Document ID _design starts with the invalid _ character.'
+        );
+      });
+  });
+
+  it('get invalid _att1 attachment name', () => {
+    return cloudant
+      .getAttachment({
+        db: dbName,
+        docId: 'doc1',
+        attachmentName: '_att1',
+      })
+      .then(() => {
+        assert.fail('should not have response');
+      })
+      .catch((err) => {
+        expect(err.message).toEqual(
+          'Attachment name _att1 starts with the invalid _ character.'
+        );
+      });
+  });
+
+  it('head invalid _design document ID', () => {
+    return cloudant
+      .headDocument({
+        db: dbName,
+        docId: '_design',
+      })
+      .then(() => {
+        assert.fail('should not have response');
+      })
+      .catch((err) => {
+        expect(err.message).toEqual(
+          'Document ID _design starts with the invalid _ character.'
+        );
+      });
+  });
+
+  it('put invalid _design document ID', () => {
+    return cloudant
+      .putDocument({ db: dbName, docId: '_design', document: {} })
+      .then(() => {
+        assert.fail('should not have response');
+      })
+      .catch((err) => {
+        expect(err.message).toEqual(
+          'Document ID _design starts with the invalid _ character.'
+        );
+      });
+  });
 });

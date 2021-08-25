@@ -20,6 +20,55 @@ import { CookieJar } from 'tough-cookie';
 import { CouchdbSessionAuthenticator } from '../auth';
 import { getSdkHeaders } from './common';
 
+const DocumentOperations = [
+  'deleteDocument',
+  'getDocument',
+  'headDocument',
+  'putDocument',
+  'deleteAttachment',
+  'getAttachment',
+  'headAttachment',
+  'putAttachment',
+];
+
+const AttachmentOperations = [
+  'deleteAttachment',
+  'getAttachment',
+  'headAttachment',
+  'putAttachment',
+];
+
+const docIdRule = {
+  pathSegment: 'doc_id',
+  errorParameterName: 'Document ID',
+  operationIds: DocumentOperations,
+};
+
+const attIdRule = {
+  pathSegment: 'attachment_name',
+  errorParameterName: 'Attachment name',
+  operationIds: AttachmentOperations,
+};
+
+const validationRules = [docIdRule, attIdRule];
+const rulesByOperation = {};
+for (const rule of validationRules) {
+  for (const operationId of rule.operationIds) {
+    if (!(operationId in rulesByOperation)) {
+      rulesByOperation[operationId] = [];
+    }
+    rulesByOperation[operationId].push(rule);
+  }
+}
+Object.freeze(rulesByOperation);
+
+/**
+ * Extend Error interface to access the proper Error definition.
+ */
+class InvalidArgumentValueError extends Error {
+  code?: string;
+}
+
 /**
  * Cloudant specific service that extends the base service functions.
  *
@@ -101,5 +150,45 @@ export abstract class CloudantBaseService extends BaseService {
       }
       (auth as CouchdbSessionAuthenticator).configure(this.baseOptions);
     }
+  }
+  /**
+   * Extend createRequest to handle document and attachment validation.
+   */
+  protected createRequest(parameters: any): Promise<any> {
+    let operationId = null;
+    if ('X-IBMCloud-SDK-Analytics' in parameters['defaultOptions']['headers']) {
+      // Extract operation id
+      const analyticsHeader =
+        parameters['defaultOptions']['headers']['X-IBMCloud-SDK-Analytics'];
+      for (const element of analyticsHeader.split(';')) {
+        if (element.startsWith('operation_id')) {
+          operationId = element.split('=')[1];
+        }
+      }
+      // Check if operation id exists in rulesByOperation object
+      if (
+        operationId != null &&
+        Object.keys(rulesByOperation).includes(operationId)
+      ) {
+        for (const rule of rulesByOperation[operationId]) {
+          // get the path segment e.g. doc_id from the response's path object
+          if (
+            'path' in parameters['options'] &&
+            rule.pathSegment in parameters['options']['path']
+          ) {
+            const segmentToValidate =
+              parameters['options']['path'][rule.pathSegment];
+            if (segmentToValidate.startsWith('_')) {
+              const err = new InvalidArgumentValueError(
+                `${rule.errorParameterName} ${segmentToValidate} starts with the invalid _ character.`
+              );
+              err.code = 'ERR_INVALID_ARG_VALUE';
+              return Promise.reject(err);
+            }
+          }
+        }
+      }
+    }
+    return super.createRequest(parameters);
   }
 }
