@@ -36,7 +36,7 @@
   "dependencies": {
     "@types/node": "^16.0.0",
     "extend": "^3.0.2",
-    "ibm-cloud-sdk-core": "~2.13.0"
+    "ibm-cloud-sdk-core": "~2.14.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
