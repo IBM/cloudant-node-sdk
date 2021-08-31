@@ -23,7 +23,7 @@ import * as extend from 'extend';
 import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
 import { Authenticator, BaseService, getAuthenticatorFromEnvironment, getMissingParams, UserOptions } from 'ibm-cloud-sdk-core';
 import { getSdkHeaders } from '../lib/common';
-import { CloudantBaseService} from '../lib/cloudantBaseService';
+import { CloudantBaseService } from '../lib/cloudantBaseService';
 import { getAuthenticatorFromEnvCloudantExtension } from '../lib/getAuthenticatorFromEnvCloudantExtension';
 
 /**
