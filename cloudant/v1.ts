@@ -15,13 +15,18 @@
  */
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 3.30.0-bd714324-20210406-200538
+ * IBM OpenAPI SDK Code Generator Version: 3.37.1-66e80f2e-20210813-202232
  */
-
 
 import * as extend from 'extend';
 import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
-import { Authenticator, BaseService, getAuthenticatorFromEnvironment, getMissingParams, UserOptions } from 'ibm-cloud-sdk-core';
+import {
+  Authenticator,
+  BaseService,
+  getAuthenticatorFromEnvironment,
+  getMissingParams,
+  UserOptions,
+} from 'ibm-cloud-sdk-core';
 import { getSdkHeaders } from '../lib/common';
 import { CloudantBaseService } from '../lib/cloudantBaseService';
 import { getAuthenticatorFromEnvCloudantExtension } from '../lib/getAuthenticatorFromEnvCloudantExtension';
@@ -31,8 +36,8 @@ import { getAuthenticatorFromEnvCloudantExtension } from '../lib/getAuthenticato
  */
 
 class CloudantV1 extends CloudantBaseService {
-
   static DEFAULT_SERVICE_URL: string = 'http://localhost:5984';
+
   static DEFAULT_SERVICE_NAME: string = 'cloudant';
 
   /*************************
@@ -65,7 +70,6 @@ class CloudantV1 extends CloudantBaseService {
     }
     return service;
   }
-
 
   /**
    * Construct a CloudantV1 object.
@@ -105,10 +109,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ServerInformation>>}
    */
-  public getServerInformation(params?: CloudantV1.GetServerInformationParams): Promise<CloudantV1.Response<CloudantV1.ServerInformation>> {
-    const _params = Object.assign({}, params);
+  public getServerInformation(
+    params?: CloudantV1.GetServerInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.ServerInformation>> {
+    const _params = { ...params };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getServerInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getServerInformation'
+    );
 
     const parameters = {
       options: {
@@ -116,14 +126,19 @@ class CloudantV1 extends CloudantBaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve cluster membership information.
@@ -136,10 +151,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.MembershipInformation>>}
    */
-  public getMembershipInformation(params?: CloudantV1.GetMembershipInformationParams): Promise<CloudantV1.Response<CloudantV1.MembershipInformation>> {
-    const _params = Object.assign({}, params);
+  public getMembershipInformation(
+    params?: CloudantV1.GetMembershipInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.MembershipInformation>> {
+    const _params = { ...params };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getMembershipInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getMembershipInformation'
+    );
 
     const parameters = {
       options: {
@@ -147,14 +168,19 @@ class CloudantV1 extends CloudantBaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve one or more UUIDs.
@@ -167,14 +193,20 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.UuidsResult>>}
    */
-  public getUuids(params?: CloudantV1.GetUuidsParams): Promise<CloudantV1.Response<CloudantV1.UuidsResult>> {
-    const _params = Object.assign({}, params);
+  public getUuids(
+    params?: CloudantV1.GetUuidsParams
+  ): Promise<CloudantV1.Response<CloudantV1.UuidsResult>> {
+    const _params = { ...params };
 
     const query = {
-      'count': _params.count
+      'count': _params.count,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getUuids');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getUuids'
+    );
 
     const parameters = {
       options: {
@@ -183,14 +215,19 @@ class CloudantV1 extends CloudantBaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve provisioned throughput capacity information.
@@ -202,10 +239,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>>}
    */
-  public getCapacityThroughputInformation(params?: CloudantV1.GetCapacityThroughputInformationParams): Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>> {
-    const _params = Object.assign({}, params);
+  public getCapacityThroughputInformation(
+    params?: CloudantV1.GetCapacityThroughputInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>> {
+    const _params = { ...params };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCapacityThroughputInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getCapacityThroughputInformation'
+    );
 
     const parameters = {
       options: {
@@ -213,14 +256,19 @@ class CloudantV1 extends CloudantBaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Update the target provisioned throughput capacity.
@@ -234,8 +282,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>>}
    */
-  public putCapacityThroughputConfiguration(params: CloudantV1.PutCapacityThroughputConfigurationParams): Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>> {
-    const _params = Object.assign({}, params);
+  public putCapacityThroughputConfiguration(
+    params: CloudantV1.PutCapacityThroughputConfigurationParams
+  ): Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>> {
+    const _params = { ...params };
     const requiredParams = ['blocks'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -244,10 +294,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'blocks': _params.blocks
+      'blocks': _params.blocks,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCapacityThroughputConfiguration');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'putCapacityThroughputConfiguration'
+    );
 
     const parameters = {
       options: {
@@ -256,16 +310,20 @@ class CloudantV1 extends CloudantBaseService {
         body,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * changes
    ************************/
@@ -292,17 +350,23 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DbUpdates>>}
    */
-  public getDbUpdates(params?: CloudantV1.GetDbUpdatesParams): Promise<CloudantV1.Response<CloudantV1.DbUpdates>> {
-    const _params = Object.assign({}, params);
+  public getDbUpdates(
+    params?: CloudantV1.GetDbUpdatesParams
+  ): Promise<CloudantV1.Response<CloudantV1.DbUpdates>> {
+    const _params = { ...params };
 
     const query = {
       'feed': _params.feed,
       'heartbeat': _params.heartbeat,
       'timeout': _params.timeout,
-      'since': _params.since
+      'since': _params.since,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDbUpdates');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getDbUpdates'
+    );
 
     const parameters = {
       options: {
@@ -311,14 +375,19 @@ class CloudantV1 extends CloudantBaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query the database document changes feed.
@@ -403,8 +472,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ChangesResult>>}
    */
-  public postChanges(params: CloudantV1.PostChangesParams): Promise<CloudantV1.Response<CloudantV1.ChangesResult>> {
-    const _params = Object.assign({}, params);
+  public postChanges(
+    params: CloudantV1.PostChangesParams
+  ): Promise<CloudantV1.Response<CloudantV1.ChangesResult>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -415,7 +486,7 @@ class CloudantV1 extends CloudantBaseService {
     const body = {
       'doc_ids': _params.docIds,
       'fields': _params.fields,
-      'selector': _params.selector
+      'selector': _params.selector,
     };
 
     const query = {
@@ -432,14 +503,18 @@ class CloudantV1 extends CloudantBaseService {
       'since': _params.since,
       'style': _params.style,
       'timeout': _params.timeout,
-      'view': _params.view
+      'view': _params.view,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postChanges');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postChanges'
+    );
 
     const parameters = {
       options: {
@@ -450,16 +525,21 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Last-Event-ID': _params.lastEventId
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Last-Event-ID': _params.lastEventId,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query the database document changes feed as stream.
@@ -542,10 +622,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.view] - Query parameter to specify a view function as a filter. Documents pass the filter
    * if the view's map function emits at least one record for them.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postChangesAsStream(params: CloudantV1.PostChangesAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postChangesAsStream(
+    params: CloudantV1.PostChangesAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -556,7 +638,7 @@ class CloudantV1 extends CloudantBaseService {
     const body = {
       'doc_ids': _params.docIds,
       'fields': _params.fields,
-      'selector': _params.selector
+      'selector': _params.selector,
     };
 
     const query = {
@@ -573,14 +655,18 @@ class CloudantV1 extends CloudantBaseService {
       'since': _params.since,
       'style': _params.style,
       'timeout': _params.timeout,
-      'view': _params.view
+      'view': _params.view,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postChangesAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postChangesAsStream'
+    );
 
     const parameters = {
       options: {
@@ -592,17 +678,21 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Last-Event-ID': _params.lastEventId
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Last-Event-ID': _params.lastEventId,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * databases
    ************************/
@@ -618,8 +708,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
    */
-  public headDatabase(params: CloudantV1.HeadDatabaseParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
+  public headDatabase(
+    params: CloudantV1.HeadDatabaseParams
+  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -628,10 +720,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headDatabase');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'headDatabase'
+    );
 
     const parameters = {
       options: {
@@ -640,13 +736,18 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a list of all database names in the instance.
@@ -665,18 +766,24 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<string[]>>}
    */
-  public getAllDbs(params?: CloudantV1.GetAllDbsParams): Promise<CloudantV1.Response<string[]>> {
-    const _params = Object.assign({}, params);
+  public getAllDbs(
+    params?: CloudantV1.GetAllDbsParams
+  ): Promise<CloudantV1.Response<string[]>> {
+    const _params = { ...params };
 
     const query = {
       'descending': _params.descending,
       'endkey': _params.endkey,
       'limit': _params.limit,
       'skip': _params.skip,
-      'startkey': _params.startkey
+      'startkey': _params.startkey,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getAllDbs');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getAllDbs'
+    );
 
     const parameters = {
       options: {
@@ -685,14 +792,19 @@ class CloudantV1 extends CloudantBaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query information about multiple databases.
@@ -706,8 +818,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DbsInfoResult[]>>}
    */
-  public postDbsInfo(params: CloudantV1.PostDbsInfoParams): Promise<CloudantV1.Response<CloudantV1.DbsInfoResult[]>> {
-    const _params = Object.assign({}, params);
+  public postDbsInfo(
+    params: CloudantV1.PostDbsInfoParams
+  ): Promise<CloudantV1.Response<CloudantV1.DbsInfoResult[]>> {
+    const _params = { ...params };
     const requiredParams = ['keys'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -716,10 +830,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'keys': _params.keys
+      'keys': _params.keys,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postDbsInfo');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postDbsInfo'
+    );
 
     const parameters = {
       options: {
@@ -728,15 +846,20 @@ class CloudantV1 extends CloudantBaseService {
         body,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Delete a database.
@@ -750,8 +873,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
-  public deleteDatabase(params: CloudantV1.DeleteDatabaseParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = Object.assign({}, params);
+  public deleteDatabase(
+    params: CloudantV1.DeleteDatabaseParams
+  ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -760,10 +885,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteDatabase');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'deleteDatabase'
+    );
 
     const parameters = {
       options: {
@@ -772,14 +901,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve information about a database.
@@ -789,8 +923,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DatabaseInformation>>}
    */
-  public getDatabaseInformation(params: CloudantV1.GetDatabaseInformationParams): Promise<CloudantV1.Response<CloudantV1.DatabaseInformation>> {
-    const _params = Object.assign({}, params);
+  public getDatabaseInformation(
+    params: CloudantV1.GetDatabaseInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.DatabaseInformation>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -799,10 +935,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDatabaseInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getDatabaseInformation'
+    );
 
     const parameters = {
       options: {
@@ -811,14 +951,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Create a database.
@@ -832,8 +977,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
-  public putDatabase(params: CloudantV1.PutDatabaseParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = Object.assign({}, params);
+  public putDatabase(
+    params: CloudantV1.PutDatabaseParams
+  ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -843,14 +990,18 @@ class CloudantV1 extends CloudantBaseService {
 
     const query = {
       'partitioned': _params.partitioned,
-      'q': _params.q
+      'q': _params.q,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putDatabase');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'putDatabase'
+    );
 
     const parameters = {
       options: {
@@ -860,15 +1011,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * documents
    ************************/
@@ -892,8 +1047,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
    */
-  public headDocument(params: CloudantV1.HeadDocumentParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
+  public headDocument(
+    params: CloudantV1.HeadDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -903,15 +1060,19 @@ class CloudantV1 extends CloudantBaseService {
 
     const query = {
       'latest': _params.latest,
-      'rev': _params.rev
+      'rev': _params.rev,
     };
 
     const path = {
       'db': _params.db,
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'headDocument'
+    );
 
     const parameters = {
       options: {
@@ -921,14 +1082,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'If-None-Match': _params.ifNoneMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Create or modify a document in a database.
@@ -942,15 +1108,17 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {Document|NodeJS.ReadableStream|Buffer} params.document - HTTP request body for Document operations.
+   * @param {Document | NodeJS.ReadableStream | Buffer} params.document - HTTP request body for Document operations.
    * @param {string} [params.contentType] - The type of the input.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
    * with a HTTP 202 Accepted response code immediately.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
    */
-  public postDocument(params: CloudantV1.PostDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
-    const _params = Object.assign({}, params);
+  public postDocument(
+    params: CloudantV1.PostDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'document'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -960,14 +1128,18 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = _params.document;
     const query = {
-      'batch': _params.batch
+      'batch': _params.batch,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postDocument'
+    );
 
     const parameters = {
       options: {
@@ -978,15 +1150,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': _params.contentType
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': _params.contentType,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a list of all documents in a database.
@@ -1020,8 +1197,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsResult>>}
    */
-  public postAllDocs(params: CloudantV1.PostAllDocsParams): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
-    const _params = Object.assign({}, params);
+  public postAllDocs(
+    params: CloudantV1.PostAllDocsParams
+  ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1042,14 +1221,18 @@ class CloudantV1 extends CloudantBaseService {
       'endkey': _params.endkey,
       'key': _params.key,
       'keys': _params.keys,
-      'startkey': _params.startkey
+      'startkey': _params.startkey,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postAllDocs');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postAllDocs'
+    );
 
     const parameters = {
       options: {
@@ -1059,15 +1242,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a list of all documents in a database as stream.
@@ -1099,10 +1287,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string[]} [params.keys] - Schema for a list of document IDs.
    * @param {string} [params.startkey] - Schema for a document ID.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postAllDocsAsStream(params: CloudantV1.PostAllDocsAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postAllDocsAsStream(
+    params: CloudantV1.PostAllDocsAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1123,14 +1313,18 @@ class CloudantV1 extends CloudantBaseService {
       'endkey': _params.endkey,
       'key': _params.key,
       'keys': _params.keys,
-      'startkey': _params.startkey
+      'startkey': _params.startkey,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postAllDocsAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postAllDocsAsStream'
+    );
 
     const parameters = {
       options: {
@@ -1141,15 +1335,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Multi-query the list of all documents in a database.
@@ -1166,8 +1365,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>>}
    */
-  public postAllDocsQueries(params: CloudantV1.PostAllDocsQueriesParams): Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>> {
-    const _params = Object.assign({}, params);
+  public postAllDocsQueries(
+    params: CloudantV1.PostAllDocsQueriesParams
+  ): Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'queries'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1176,14 +1377,18 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'queries': _params.queries
+      'queries': _params.queries,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postAllDocsQueries');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postAllDocsQueries'
+    );
 
     const parameters = {
       options: {
@@ -1193,15 +1398,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Multi-query the list of all documents in a database as stream.
@@ -1216,10 +1426,12 @@ class CloudantV1 extends CloudantBaseService {
    * individual view query to be executed. The field names and their meaning are the same as the query parameters of a
    * regular `/_all_docs` request.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postAllDocsQueriesAsStream(params: CloudantV1.PostAllDocsQueriesAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postAllDocsQueriesAsStream(
+    params: CloudantV1.PostAllDocsQueriesAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'queries'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1228,14 +1440,18 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'queries': _params.queries
+      'queries': _params.queries,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postAllDocsQueriesAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postAllDocsQueriesAsStream'
+    );
 
     const parameters = {
       options: {
@@ -1246,15 +1462,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Bulk modify multiple documents in a database.
@@ -1265,12 +1486,14 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {BulkDocs|NodeJS.ReadableStream|Buffer} params.bulkDocs - HTTP request body for postBulkDocs.
+   * @param {BulkDocs | NodeJS.ReadableStream | Buffer} params.bulkDocs - HTTP request body for postBulkDocs.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult[]>>}
    */
-  public postBulkDocs(params: CloudantV1.PostBulkDocsParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult[]>> {
-    const _params = Object.assign({}, params);
+  public postBulkDocs(
+    params: CloudantV1.PostBulkDocsParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult[]>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'bulkDocs'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1280,10 +1503,14 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = _params.bulkDocs;
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postBulkDocs');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postBulkDocs'
+    );
 
     const parameters = {
       options: {
@@ -1293,15 +1520,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Bulk query revision information for multiple documents.
@@ -1322,8 +1554,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.BulkGetResult>>}
    */
-  public postBulkGet(params: CloudantV1.PostBulkGetParams): Promise<CloudantV1.Response<CloudantV1.BulkGetResult>> {
-    const _params = Object.assign({}, params);
+  public postBulkGet(
+    params: CloudantV1.PostBulkGetParams
+  ): Promise<CloudantV1.Response<CloudantV1.BulkGetResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docs'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1332,21 +1566,25 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'docs': _params.docs
+      'docs': _params.docs,
     };
 
     const query = {
       'attachments': _params.attachments,
       'att_encoding_info': _params.attEncodingInfo,
       'latest': _params.latest,
-      'revs': _params.revs
+      'revs': _params.revs,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postBulkGet');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postBulkGet'
+    );
 
     const parameters = {
       options: {
@@ -1357,15 +1595,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Bulk query revision information for multiple documents as mixed.
@@ -1384,10 +1627,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
    * revisions.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postBulkGetAsMixed(params: CloudantV1.PostBulkGetAsMixedParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postBulkGetAsMixed(
+    params: CloudantV1.PostBulkGetAsMixedParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docs'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1396,21 +1641,25 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'docs': _params.docs
+      'docs': _params.docs,
     };
 
     const query = {
       'attachments': _params.attachments,
       'att_encoding_info': _params.attEncodingInfo,
       'latest': _params.latest,
-      'revs': _params.revs
+      'revs': _params.revs,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postBulkGetAsMixed');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postBulkGetAsMixed'
+    );
 
     const parameters = {
       options: {
@@ -1422,15 +1671,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'multipart/mixed',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'multipart/mixed',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Bulk query revision information for multiple documents as related.
@@ -1449,10 +1703,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
    * revisions.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postBulkGetAsRelated(params: CloudantV1.PostBulkGetAsRelatedParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postBulkGetAsRelated(
+    params: CloudantV1.PostBulkGetAsRelatedParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docs'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1461,21 +1717,25 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'docs': _params.docs
+      'docs': _params.docs,
     };
 
     const query = {
       'attachments': _params.attachments,
       'att_encoding_info': _params.attEncodingInfo,
       'latest': _params.latest,
-      'revs': _params.revs
+      'revs': _params.revs,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postBulkGetAsRelated');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postBulkGetAsRelated'
+    );
 
     const parameters = {
       options: {
@@ -1487,15 +1747,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'multipart/related',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'multipart/related',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Bulk query revision information for multiple documents as stream.
@@ -1514,10 +1779,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
    * revisions.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postBulkGetAsStream(params: CloudantV1.PostBulkGetAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postBulkGetAsStream(
+    params: CloudantV1.PostBulkGetAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docs'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1526,21 +1793,25 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'docs': _params.docs
+      'docs': _params.docs,
     };
 
     const query = {
       'attachments': _params.attachments,
       'att_encoding_info': _params.attEncodingInfo,
       'latest': _params.latest,
-      'revs': _params.revs
+      'revs': _params.revs,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postBulkGetAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postBulkGetAsStream'
+    );
 
     const parameters = {
       options: {
@@ -1552,15 +1823,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Delete a document.
@@ -1580,8 +1856,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
    */
-  public deleteDocument(params: CloudantV1.DeleteDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
-    const _params = Object.assign({}, params);
+  public deleteDocument(
+    params: CloudantV1.DeleteDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1591,15 +1869,19 @@ class CloudantV1 extends CloudantBaseService {
 
     const query = {
       'batch': _params.batch,
-      'rev': _params.rev
+      'rev': _params.rev,
     };
 
     const path = {
       'db': _params.db,
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'deleteDocument'
+    );
 
     const parameters = {
       options: {
@@ -1609,15 +1891,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'If-Match': _params.ifMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'If-Match': _params.ifMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve a document.
@@ -1652,8 +1939,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Document>>}
    */
-  public getDocument(params: CloudantV1.GetDocumentParams): Promise<CloudantV1.Response<CloudantV1.Document>> {
-    const _params = Object.assign({}, params);
+  public getDocument(
+    params: CloudantV1.GetDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.Document>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1671,15 +1960,19 @@ class CloudantV1 extends CloudantBaseService {
       'meta': _params.meta,
       'rev': _params.rev,
       'revs': _params.revs,
-      'revs_info': _params.revsInfo
+      'revs_info': _params.revsInfo,
     };
 
     const path = {
       'db': _params.db,
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getDocument'
+    );
 
     const parameters = {
       options: {
@@ -1689,15 +1982,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'If-None-Match': _params.ifNoneMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve a document as mixed.
@@ -1730,10 +2028,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.revsInfo] - Query parameter to specify whether to includes detailed information for all
    * known document revisions.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public getDocumentAsMixed(params: CloudantV1.GetDocumentAsMixedParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public getDocumentAsMixed(
+    params: CloudantV1.GetDocumentAsMixedParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1751,15 +2051,19 @@ class CloudantV1 extends CloudantBaseService {
       'meta': _params.meta,
       'rev': _params.rev,
       'revs': _params.revs,
-      'revs_info': _params.revsInfo
+      'revs_info': _params.revsInfo,
     };
 
     const path = {
       'db': _params.db,
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDocumentAsMixed');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getDocumentAsMixed'
+    );
 
     const parameters = {
       options: {
@@ -1770,15 +2074,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'multipart/mixed',
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'multipart/mixed',
+            'If-None-Match': _params.ifNoneMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve a document as related.
@@ -1811,10 +2120,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.revsInfo] - Query parameter to specify whether to includes detailed information for all
    * known document revisions.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public getDocumentAsRelated(params: CloudantV1.GetDocumentAsRelatedParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public getDocumentAsRelated(
+    params: CloudantV1.GetDocumentAsRelatedParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1832,15 +2143,19 @@ class CloudantV1 extends CloudantBaseService {
       'meta': _params.meta,
       'rev': _params.rev,
       'revs': _params.revs,
-      'revs_info': _params.revsInfo
+      'revs_info': _params.revsInfo,
     };
 
     const path = {
       'db': _params.db,
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDocumentAsRelated');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getDocumentAsRelated'
+    );
 
     const parameters = {
       options: {
@@ -1851,15 +2166,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'multipart/related',
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'multipart/related',
+            'If-None-Match': _params.ifNoneMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve a document as stream.
@@ -1892,10 +2212,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.revsInfo] - Query parameter to specify whether to includes detailed information for all
    * known document revisions.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public getDocumentAsStream(params: CloudantV1.GetDocumentAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public getDocumentAsStream(
+    params: CloudantV1.GetDocumentAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1913,15 +2235,19 @@ class CloudantV1 extends CloudantBaseService {
       'meta': _params.meta,
       'rev': _params.rev,
       'revs': _params.revs,
-      'revs_info': _params.revsInfo
+      'revs_info': _params.revsInfo,
     };
 
     const path = {
       'db': _params.db,
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDocumentAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getDocumentAsStream'
+    );
 
     const parameters = {
       options: {
@@ -1932,15 +2258,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'If-None-Match': _params.ifNoneMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Create or modify a document.
@@ -1951,7 +2282,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {Document|NodeJS.ReadableStream|Buffer} params.document - HTTP request body for Document operations.
+   * @param {Document | NodeJS.ReadableStream | Buffer} params.document - HTTP request body for Document operations.
    * @param {string} [params.contentType] - The type of the input.
    * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
    * parameter.
@@ -1964,8 +2295,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
    */
-  public putDocument(params: CloudantV1.PutDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
-    const _params = Object.assign({}, params);
+  public putDocument(
+    params: CloudantV1.PutDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId', 'document'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -1977,15 +2310,19 @@ class CloudantV1 extends CloudantBaseService {
     const query = {
       'batch': _params.batch,
       'new_edits': _params.newEdits,
-      'rev': _params.rev
+      'rev': _params.rev,
     };
 
     const path = {
       'db': _params.db,
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'putDocument'
+    );
 
     const parameters = {
       options: {
@@ -1996,17 +2333,21 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': _params.contentType,
-          'If-Match': _params.ifMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': _params.contentType,
+            'If-Match': _params.ifMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * designDocuments
    ************************/
@@ -2029,8 +2370,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
    */
-  public headDesignDocument(params: CloudantV1.HeadDesignDocumentParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
+  public headDesignDocument(
+    params: CloudantV1.HeadDesignDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2040,10 +2383,14 @@ class CloudantV1 extends CloudantBaseService {
 
     const path = {
       'db': _params.db,
-      'ddoc': _params.ddoc
+      'ddoc': _params.ddoc,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headDesignDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'headDesignDocument'
+    );
 
     const parameters = {
       options: {
@@ -2052,14 +2399,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'If-None-Match': _params.ifNoneMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Delete a design document.
@@ -2080,8 +2432,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
    */
-  public deleteDesignDocument(params: CloudantV1.DeleteDesignDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
-    const _params = Object.assign({}, params);
+  public deleteDesignDocument(
+    params: CloudantV1.DeleteDesignDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2091,15 +2445,19 @@ class CloudantV1 extends CloudantBaseService {
 
     const query = {
       'batch': _params.batch,
-      'rev': _params.rev
+      'rev': _params.rev,
     };
 
     const path = {
       'db': _params.db,
-      'ddoc': _params.ddoc
+      'ddoc': _params.ddoc,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteDesignDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'deleteDesignDocument'
+    );
 
     const parameters = {
       options: {
@@ -2109,15 +2467,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'If-Match': _params.ifMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'If-Match': _params.ifMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve a design document.
@@ -2153,8 +2516,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DesignDocument>>}
    */
-  public getDesignDocument(params: CloudantV1.GetDesignDocumentParams): Promise<CloudantV1.Response<CloudantV1.DesignDocument>> {
-    const _params = Object.assign({}, params);
+  public getDesignDocument(
+    params: CloudantV1.GetDesignDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.DesignDocument>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2172,15 +2537,19 @@ class CloudantV1 extends CloudantBaseService {
       'meta': _params.meta,
       'rev': _params.rev,
       'revs': _params.revs,
-      'revs_info': _params.revsInfo
+      'revs_info': _params.revsInfo,
     };
 
     const path = {
       'db': _params.db,
-      'ddoc': _params.ddoc
+      'ddoc': _params.ddoc,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDesignDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getDesignDocument'
+    );
 
     const parameters = {
       options: {
@@ -2190,15 +2559,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'If-None-Match': _params.ifNoneMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Create or modify a design document.
@@ -2221,8 +2595,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
    */
-  public putDesignDocument(params: CloudantV1.PutDesignDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
-    const _params = Object.assign({}, params);
+  public putDesignDocument(
+    params: CloudantV1.PutDesignDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'designDocument'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2234,15 +2610,19 @@ class CloudantV1 extends CloudantBaseService {
     const query = {
       'batch': _params.batch,
       'new_edits': _params.newEdits,
-      'rev': _params.rev
+      'rev': _params.rev,
     };
 
     const path = {
       'db': _params.db,
-      'ddoc': _params.ddoc
+      'ddoc': _params.ddoc,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putDesignDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'putDesignDocument'
+    );
 
     const parameters = {
       options: {
@@ -2253,16 +2633,21 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'If-Match': _params.ifMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'If-Match': _params.ifMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve information about a design document.
@@ -2277,8 +2662,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DesignDocumentInformation>>}
    */
-  public getDesignDocumentInformation(params: CloudantV1.GetDesignDocumentInformationParams): Promise<CloudantV1.Response<CloudantV1.DesignDocumentInformation>> {
-    const _params = Object.assign({}, params);
+  public getDesignDocumentInformation(
+    params: CloudantV1.GetDesignDocumentInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.DesignDocumentInformation>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2288,10 +2675,14 @@ class CloudantV1 extends CloudantBaseService {
 
     const path = {
       'db': _params.db,
-      'ddoc': _params.ddoc
+      'ddoc': _params.ddoc,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDesignDocumentInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getDesignDocumentInformation'
+    );
 
     const parameters = {
       options: {
@@ -2300,14 +2691,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a list of all design documents in a database.
@@ -2342,8 +2738,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsResult>>}
    */
-  public postDesignDocs(params: CloudantV1.PostDesignDocsParams): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
-    const _params = Object.assign({}, params);
+  public postDesignDocs(
+    params: CloudantV1.PostDesignDocsParams
+  ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2364,14 +2762,18 @@ class CloudantV1 extends CloudantBaseService {
       'endkey': _params.endkey,
       'key': _params.key,
       'keys': _params.keys,
-      'startkey': _params.startkey
+      'startkey': _params.startkey,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postDesignDocs');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postDesignDocs'
+    );
 
     const parameters = {
       options: {
@@ -2381,15 +2783,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Content-Type': 'application/json',
-          'Accept': _params.accept
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Content-Type': 'application/json',
+            'Accept': _params.accept,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Multi-query the list of all design documents.
@@ -2406,8 +2813,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>>}
    */
-  public postDesignDocsQueries(params: CloudantV1.PostDesignDocsQueriesParams): Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>> {
-    const _params = Object.assign({}, params);
+  public postDesignDocsQueries(
+    params: CloudantV1.PostDesignDocsQueriesParams
+  ): Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'queries'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2416,14 +2825,18 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'queries': _params.queries
+      'queries': _params.queries,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postDesignDocsQueries');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postDesignDocsQueries'
+    );
 
     const parameters = {
       options: {
@@ -2433,16 +2846,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Content-Type': 'application/json',
-          'Accept': _params.accept
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Content-Type': 'application/json',
+            'Accept': _params.accept,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * views
    ************************/
@@ -2494,8 +2911,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ViewResult>>}
    */
-  public postView(params: CloudantV1.PostViewParams): Promise<CloudantV1.Response<CloudantV1.ViewResult>> {
-    const _params = Object.assign({}, params);
+  public postView(
+    params: CloudantV1.PostViewParams
+  ): Promise<CloudantV1.Response<CloudantV1.ViewResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'view'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2523,16 +2942,20 @@ class CloudantV1 extends CloudantBaseService {
       'stable': _params.stable,
       'startkey': _params.startkey,
       'startkey_docid': _params.startkeyDocid,
-      'update': _params.update
+      'update': _params.update,
     };
 
     const path = {
       'db': _params.db,
       'ddoc': _params.ddoc,
-      'view': _params.view
+      'view': _params.view,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postView');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postView'
+    );
 
     const parameters = {
       options: {
@@ -2542,15 +2965,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a MapReduce view as stream.
@@ -2597,10 +3025,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
    * to responding to the user.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postViewAsStream(params: CloudantV1.PostViewAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postViewAsStream(
+    params: CloudantV1.PostViewAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'view'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2628,16 +3058,20 @@ class CloudantV1 extends CloudantBaseService {
       'stable': _params.stable,
       'startkey': _params.startkey,
       'startkey_docid': _params.startkeyDocid,
-      'update': _params.update
+      'update': _params.update,
     };
 
     const path = {
       'db': _params.db,
       'ddoc': _params.ddoc,
-      'view': _params.view
+      'view': _params.view,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postViewAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postViewAsStream'
+    );
 
     const parameters = {
       options: {
@@ -2648,15 +3082,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Multi-query a MapReduce view.
@@ -2674,8 +3113,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ViewQueriesResult>>}
    */
-  public postViewQueries(params: CloudantV1.PostViewQueriesParams): Promise<CloudantV1.Response<CloudantV1.ViewQueriesResult>> {
-    const _params = Object.assign({}, params);
+  public postViewQueries(
+    params: CloudantV1.PostViewQueriesParams
+  ): Promise<CloudantV1.Response<CloudantV1.ViewQueriesResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'view', 'queries'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2684,16 +3125,20 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'queries': _params.queries
+      'queries': _params.queries,
     };
 
     const path = {
       'db': _params.db,
       'ddoc': _params.ddoc,
-      'view': _params.view
+      'view': _params.view,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postViewQueries');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postViewQueries'
+    );
 
     const parameters = {
       options: {
@@ -2703,15 +3148,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Multi-query a MapReduce view as stream.
@@ -2727,10 +3177,12 @@ class CloudantV1 extends CloudantBaseService {
    * view query to be executed. The field names and their meaning are the same as the query parameters of a regular view
    * request.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postViewQueriesAsStream(params: CloudantV1.PostViewQueriesAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postViewQueriesAsStream(
+    params: CloudantV1.PostViewQueriesAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'view', 'queries'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2739,16 +3191,20 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'queries': _params.queries
+      'queries': _params.queries,
     };
 
     const path = {
       'db': _params.db,
       'ddoc': _params.ddoc,
-      'view': _params.view
+      'view': _params.view,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postViewQueriesAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postViewQueriesAsStream'
+    );
 
     const parameters = {
       options: {
@@ -2759,16 +3215,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * partitionedDatabases
    ************************/
@@ -2784,8 +3244,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.PartitionInformation>>}
    */
-  public getPartitionInformation(params: CloudantV1.GetPartitionInformationParams): Promise<CloudantV1.Response<CloudantV1.PartitionInformation>> {
-    const _params = Object.assign({}, params);
+  public getPartitionInformation(
+    params: CloudantV1.GetPartitionInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.PartitionInformation>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'partitionKey'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2795,10 +3257,14 @@ class CloudantV1 extends CloudantBaseService {
 
     const path = {
       'db': _params.db,
-      'partition_key': _params.partitionKey
+      'partition_key': _params.partitionKey,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getPartitionInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getPartitionInformation'
+    );
 
     const parameters = {
       options: {
@@ -2807,14 +3273,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a list of all documents in a database partition.
@@ -2849,8 +3320,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsResult>>}
    */
-  public postPartitionAllDocs(params: CloudantV1.PostPartitionAllDocsParams): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
-    const _params = Object.assign({}, params);
+  public postPartitionAllDocs(
+    params: CloudantV1.PostPartitionAllDocsParams
+  ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'partitionKey'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2871,15 +3344,19 @@ class CloudantV1 extends CloudantBaseService {
       'endkey': _params.endkey,
       'key': _params.key,
       'keys': _params.keys,
-      'startkey': _params.startkey
+      'startkey': _params.startkey,
     };
 
     const path = {
       'db': _params.db,
-      'partition_key': _params.partitionKey
+      'partition_key': _params.partitionKey,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionAllDocs');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postPartitionAllDocs'
+    );
 
     const parameters = {
       options: {
@@ -2889,15 +3366,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a list of all documents in a database partition as stream.
@@ -2930,10 +3412,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string[]} [params.keys] - Schema for a list of document IDs.
    * @param {string} [params.startkey] - Schema for a document ID.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postPartitionAllDocsAsStream(params: CloudantV1.PostPartitionAllDocsAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postPartitionAllDocsAsStream(
+    params: CloudantV1.PostPartitionAllDocsAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'partitionKey'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -2954,15 +3438,19 @@ class CloudantV1 extends CloudantBaseService {
       'endkey': _params.endkey,
       'key': _params.key,
       'keys': _params.keys,
-      'startkey': _params.startkey
+      'startkey': _params.startkey,
     };
 
     const path = {
       'db': _params.db,
-      'partition_key': _params.partitionKey
+      'partition_key': _params.partitionKey,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionAllDocsAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postPartitionAllDocsAsStream'
+    );
 
     const parameters = {
       options: {
@@ -2973,15 +3461,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a database partition search index.
@@ -3022,8 +3515,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.SearchResult>>}
    */
-  public postPartitionSearch(params: CloudantV1.PostPartitionSearchParams): Promise<CloudantV1.Response<CloudantV1.SearchResult>> {
-    const _params = Object.assign({}, params);
+  public postPartitionSearch(
+    params: CloudantV1.PostPartitionSearchParams
+  ): Promise<CloudantV1.Response<CloudantV1.SearchResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'partitionKey', 'ddoc', 'index', 'query'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -3043,17 +3538,21 @@ class CloudantV1 extends CloudantBaseService {
       'include_fields': _params.includeFields,
       'limit': _params.limit,
       'sort': _params.sort,
-      'stale': _params.stale
+      'stale': _params.stale,
     };
 
     const path = {
       'db': _params.db,
       'partition_key': _params.partitionKey,
       'ddoc': _params.ddoc,
-      'index': _params.index
+      'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionSearch');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postPartitionSearch'
+    );
 
     const parameters = {
       options: {
@@ -3063,15 +3562,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a database partition search index as stream.
@@ -3110,10 +3614,12 @@ class CloudantV1 extends CloudantBaseService {
    * Fields that are used for sorting must be indexed by the same indexer that is used for the search query.
    * @param {string} [params.stale] - Do not wait for the index to finish building to return results.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postPartitionSearchAsStream(params: CloudantV1.PostPartitionSearchAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postPartitionSearchAsStream(
+    params: CloudantV1.PostPartitionSearchAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'partitionKey', 'ddoc', 'index', 'query'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -3133,17 +3639,21 @@ class CloudantV1 extends CloudantBaseService {
       'include_fields': _params.includeFields,
       'limit': _params.limit,
       'sort': _params.sort,
-      'stale': _params.stale
+      'stale': _params.stale,
     };
 
     const path = {
       'db': _params.db,
       'partition_key': _params.partitionKey,
       'ddoc': _params.ddoc,
-      'index': _params.index
+      'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionSearchAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postPartitionSearchAsStream'
+    );
 
     const parameters = {
       options: {
@@ -3154,15 +3664,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a database partition MapReduce view function.
@@ -3212,8 +3727,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ViewResult>>}
    */
-  public postPartitionView(params: CloudantV1.PostPartitionViewParams): Promise<CloudantV1.Response<CloudantV1.ViewResult>> {
-    const _params = Object.assign({}, params);
+  public postPartitionView(
+    params: CloudantV1.PostPartitionViewParams
+  ): Promise<CloudantV1.Response<CloudantV1.ViewResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -3241,17 +3758,21 @@ class CloudantV1 extends CloudantBaseService {
       'stable': _params.stable,
       'startkey': _params.startkey,
       'startkey_docid': _params.startkeyDocid,
-      'update': _params.update
+      'update': _params.update,
     };
 
     const path = {
       'db': _params.db,
       'partition_key': _params.partitionKey,
       'ddoc': _params.ddoc,
-      'view': _params.view
+      'view': _params.view,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionView');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postPartitionView'
+    );
 
     const parameters = {
       options: {
@@ -3261,15 +3782,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a database partition MapReduce view function as stream.
@@ -3317,10 +3843,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
    * to responding to the user.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postPartitionViewAsStream(params: CloudantV1.PostPartitionViewAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postPartitionViewAsStream(
+    params: CloudantV1.PostPartitionViewAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -3348,17 +3876,21 @@ class CloudantV1 extends CloudantBaseService {
       'stable': _params.stable,
       'startkey': _params.startkey,
       'startkey_docid': _params.startkeyDocid,
-      'update': _params.update
+      'update': _params.update,
     };
 
     const path = {
       'db': _params.db,
       'partition_key': _params.partitionKey,
       'ddoc': _params.ddoc,
-      'view': _params.view
+      'view': _params.view,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionViewAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postPartitionViewAsStream'
+    );
 
     const parameters = {
       options: {
@@ -3369,15 +3901,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a database partition index by using selector syntax (POST).
@@ -3432,8 +3969,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.FindResult>>}
    */
-  public postPartitionFind(params: CloudantV1.PostPartitionFindParams): Promise<CloudantV1.Response<CloudantV1.FindResult>> {
-    const _params = Object.assign({}, params);
+  public postPartitionFind(
+    params: CloudantV1.PostPartitionFindParams
+  ): Promise<CloudantV1.Response<CloudantV1.FindResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'partitionKey', 'selector'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -3452,15 +3991,19 @@ class CloudantV1 extends CloudantBaseService {
       'sort': _params.sort,
       'stable': _params.stable,
       'update': _params.update,
-      'use_index': _params.useIndex
+      'use_index': _params.useIndex,
     };
 
     const path = {
       'db': _params.db,
-      'partition_key': _params.partitionKey
+      'partition_key': _params.partitionKey,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionFind');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postPartitionFind'
+    );
 
     const parameters = {
       options: {
@@ -3470,15 +4013,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a database partition index by using selector syntax (POST) as stream.
@@ -3531,10 +4079,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string[]} [params.useIndex] - Use this option to identify a specific index for query to run against, rather
    * than by using the IBM Cloudant Query algorithm to find the best index.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postPartitionFindAsStream(params: CloudantV1.PostPartitionFindAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postPartitionFindAsStream(
+    params: CloudantV1.PostPartitionFindAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'partitionKey', 'selector'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -3553,15 +4103,19 @@ class CloudantV1 extends CloudantBaseService {
       'sort': _params.sort,
       'stable': _params.stable,
       'update': _params.update,
-      'use_index': _params.useIndex
+      'use_index': _params.useIndex,
     };
 
     const path = {
       'db': _params.db,
-      'partition_key': _params.partitionKey
+      'partition_key': _params.partitionKey,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionFindAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postPartitionFindAsStream'
+    );
 
     const parameters = {
       options: {
@@ -3572,16 +4126,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * queries
    ************************/
@@ -3642,8 +4200,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ExplainResult>>}
    */
-  public postExplain(params: CloudantV1.PostExplainParams): Promise<CloudantV1.Response<CloudantV1.ExplainResult>> {
-    const _params = Object.assign({}, params);
+  public postExplain(
+    params: CloudantV1.PostExplainParams
+  ): Promise<CloudantV1.Response<CloudantV1.ExplainResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'selector'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -3663,14 +4223,18 @@ class CloudantV1 extends CloudantBaseService {
       'stable': _params.stable,
       'update': _params.update,
       'use_index': _params.useIndex,
-      'r': _params.r
+      'r': _params.r,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postExplain');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postExplain'
+    );
 
     const parameters = {
       options: {
@@ -3680,15 +4244,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query an index by using selector syntax.
@@ -3746,8 +4315,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.FindResult>>}
    */
-  public postFind(params: CloudantV1.PostFindParams): Promise<CloudantV1.Response<CloudantV1.FindResult>> {
-    const _params = Object.assign({}, params);
+  public postFind(
+    params: CloudantV1.PostFindParams
+  ): Promise<CloudantV1.Response<CloudantV1.FindResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'selector'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -3767,14 +4338,18 @@ class CloudantV1 extends CloudantBaseService {
       'stable': _params.stable,
       'update': _params.update,
       'use_index': _params.useIndex,
-      'r': _params.r
+      'r': _params.r,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postFind');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postFind'
+    );
 
     const parameters = {
       options: {
@@ -3784,15 +4359,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query an index by using selector syntax as stream.
@@ -3848,10 +4428,12 @@ class CloudantV1 extends CloudantBaseService {
    * that many replicas before it is returned in the results. The request will take more time than using only the
    * document that is stored locally with the index.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postFindAsStream(params: CloudantV1.PostFindAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postFindAsStream(
+    params: CloudantV1.PostFindAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'selector'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -3871,14 +4453,18 @@ class CloudantV1 extends CloudantBaseService {
       'stable': _params.stable,
       'update': _params.update,
       'use_index': _params.useIndex,
-      'r': _params.r
+      'r': _params.r,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postFindAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postFindAsStream'
+    );
 
     const parameters = {
       options: {
@@ -3889,15 +4475,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve information about all indexes.
@@ -3911,8 +4502,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.IndexesInformation>>}
    */
-  public getIndexesInformation(params: CloudantV1.GetIndexesInformationParams): Promise<CloudantV1.Response<CloudantV1.IndexesInformation>> {
-    const _params = Object.assign({}, params);
+  public getIndexesInformation(
+    params: CloudantV1.GetIndexesInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.IndexesInformation>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -3921,10 +4514,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getIndexesInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getIndexesInformation'
+    );
 
     const parameters = {
       options: {
@@ -3933,14 +4530,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Create a new index on a database.
@@ -3965,8 +4567,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.IndexResult>>}
    */
-  public postIndex(params: CloudantV1.PostIndexParams): Promise<CloudantV1.Response<CloudantV1.IndexResult>> {
-    const _params = Object.assign({}, params);
+  public postIndex(
+    params: CloudantV1.PostIndexParams
+  ): Promise<CloudantV1.Response<CloudantV1.IndexResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'index'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -3980,14 +4584,18 @@ class CloudantV1 extends CloudantBaseService {
       'def': _params.def,
       'name': _params.name,
       'partitioned': _params.partitioned,
-      'type': _params.type
+      'type': _params.type,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postIndex');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postIndex'
+    );
 
     const parameters = {
       options: {
@@ -3997,15 +4605,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Delete an index.
@@ -4019,8 +4632,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
-  public deleteIndex(params: CloudantV1.DeleteIndexParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = Object.assign({}, params);
+  public deleteIndex(
+    params: CloudantV1.DeleteIndexParams
+  ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'type', 'index'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4032,10 +4647,14 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
       'ddoc': _params.ddoc,
       'type': _params.type,
-      'index': _params.index
+      'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteIndex');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'deleteIndex'
+    );
 
     const parameters = {
       options: {
@@ -4044,15 +4663,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * searches
    ************************/
@@ -4069,8 +4692,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.SearchAnalyzeResult>>}
    */
-  public postSearchAnalyze(params: CloudantV1.PostSearchAnalyzeParams): Promise<CloudantV1.Response<CloudantV1.SearchAnalyzeResult>> {
-    const _params = Object.assign({}, params);
+  public postSearchAnalyze(
+    params: CloudantV1.PostSearchAnalyzeParams
+  ): Promise<CloudantV1.Response<CloudantV1.SearchAnalyzeResult>> {
+    const _params = { ...params };
     const requiredParams = ['analyzer', 'text'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4080,10 +4705,14 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = {
       'analyzer': _params.analyzer,
-      'text': _params.text
+      'text': _params.text,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postSearchAnalyze');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postSearchAnalyze'
+    );
 
     const parameters = {
       options: {
@@ -4092,15 +4721,20 @@ class CloudantV1 extends CloudantBaseService {
         body,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a search index.
@@ -4162,8 +4796,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.SearchResult>>}
    */
-  public postSearch(params: CloudantV1.PostSearchParams): Promise<CloudantV1.Response<CloudantV1.SearchResult>> {
-    const _params = Object.assign({}, params);
+  public postSearch(
+    params: CloudantV1.PostSearchParams
+  ): Promise<CloudantV1.Response<CloudantV1.SearchResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'index', 'query'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4189,16 +4825,20 @@ class CloudantV1 extends CloudantBaseService {
       'group_field': _params.groupField,
       'group_limit': _params.groupLimit,
       'group_sort': _params.groupSort,
-      'ranges': _params.ranges
+      'ranges': _params.ranges,
     };
 
     const path = {
       'db': _params.db,
       'ddoc': _params.ddoc,
-      'index': _params.index
+      'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postSearch');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postSearch'
+    );
 
     const parameters = {
       options: {
@@ -4208,15 +4848,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a search index as stream.
@@ -4276,10 +4921,12 @@ class CloudantV1 extends CloudantBaseService {
    * objects. The field names of the JSON objects are names for ranges. The values are strings that describe the range,
    * for example "[0 TO 10]". This option is only available when making global queries.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public postSearchAsStream(params: CloudantV1.PostSearchAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public postSearchAsStream(
+    params: CloudantV1.PostSearchAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'index', 'query'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4305,16 +4952,20 @@ class CloudantV1 extends CloudantBaseService {
       'group_field': _params.groupField,
       'group_limit': _params.groupLimit,
       'group_sort': _params.groupSort,
-      'ranges': _params.ranges
+      'ranges': _params.ranges,
     };
 
     const path = {
       'db': _params.db,
       'ddoc': _params.ddoc,
-      'index': _params.index
+      'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postSearchAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postSearchAsStream'
+    );
 
     const parameters = {
       options: {
@@ -4325,15 +4976,20 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve information about a search index.
@@ -4348,8 +5004,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.SearchInfoResult>>}
    */
-  public getSearchInfo(params: CloudantV1.GetSearchInfoParams): Promise<CloudantV1.Response<CloudantV1.SearchInfoResult>> {
-    const _params = Object.assign({}, params);
+  public getSearchInfo(
+    params: CloudantV1.GetSearchInfoParams
+  ): Promise<CloudantV1.Response<CloudantV1.SearchInfoResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'index'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4360,10 +5018,14 @@ class CloudantV1 extends CloudantBaseService {
     const path = {
       'db': _params.db,
       'ddoc': _params.ddoc,
-      'index': _params.index
+      'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSearchInfo');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getSearchInfo'
+    );
 
     const parameters = {
       options: {
@@ -4372,15 +5034,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * geospatial
    ************************/
@@ -4433,8 +5099,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.GeoResult>>}
    */
-  public getGeo(params: CloudantV1.GetGeoParams): Promise<CloudantV1.Response<CloudantV1.GeoResult>> {
-    const _params = Object.assign({}, params);
+  public getGeo(
+    params: CloudantV1.GetGeoParams
+  ): Promise<CloudantV1.Response<CloudantV1.GeoResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'index'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4457,16 +5125,20 @@ class CloudantV1 extends CloudantBaseService {
       'rangey': _params.rangey,
       'relation': _params.relation,
       'skip': _params.skip,
-      'stale': _params.stale
+      'stale': _params.stale,
     };
 
     const path = {
       'db': _params.db,
       'ddoc': _params.ddoc,
-      'index': _params.index
+      'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getGeo');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getGeo'
+    );
 
     const parameters = {
       options: {
@@ -4476,14 +5148,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query a geospatial index as stream.
@@ -4531,10 +5208,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.stale] - Query parameter to specify to not wait for the index to finish building before
    * returning results.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public getGeoAsStream(params: CloudantV1.GetGeoAsStreamParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public getGeoAsStream(
+    params: CloudantV1.GetGeoAsStreamParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'index'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4557,16 +5236,20 @@ class CloudantV1 extends CloudantBaseService {
       'rangey': _params.rangey,
       'relation': _params.relation,
       'skip': _params.skip,
-      'stale': _params.stale
+      'stale': _params.stale,
     };
 
     const path = {
       'db': _params.db,
       'ddoc': _params.ddoc,
-      'index': _params.index
+      'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getGeoAsStream');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getGeoAsStream'
+    );
 
     const parameters = {
       options: {
@@ -4577,14 +5260,19 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Cleanup old geospatial indexes.
@@ -4596,8 +5284,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
-  public postGeoCleanup(params: CloudantV1.PostGeoCleanupParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = Object.assign({}, params);
+  public postGeoCleanup(
+    params: CloudantV1.PostGeoCleanupParams
+  ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4606,10 +5296,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postGeoCleanup');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postGeoCleanup'
+    );
 
     const parameters = {
       options: {
@@ -4618,14 +5312,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve information about a geospatial index.
@@ -4638,8 +5337,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.GeoIndexInformation>>}
    */
-  public getGeoIndexInformation(params: CloudantV1.GetGeoIndexInformationParams): Promise<CloudantV1.Response<CloudantV1.GeoIndexInformation>> {
-    const _params = Object.assign({}, params);
+  public getGeoIndexInformation(
+    params: CloudantV1.GetGeoIndexInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.GeoIndexInformation>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'index'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4650,10 +5351,14 @@ class CloudantV1 extends CloudantBaseService {
     const path = {
       'db': _params.db,
       'ddoc': _params.ddoc,
-      'index': _params.index
+      'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getGeoIndexInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getGeoIndexInformation'
+    );
 
     const parameters = {
       options: {
@@ -4662,15 +5367,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * replication
    ************************/
@@ -4689,8 +5398,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
    */
-  public headReplicationDocument(params: CloudantV1.HeadReplicationDocumentParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
+  public headReplicationDocument(
+    params: CloudantV1.HeadReplicationDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+    const _params = { ...params };
     const requiredParams = ['docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4699,10 +5410,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const path = {
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headReplicationDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'headReplicationDocument'
+    );
 
     const parameters = {
       options: {
@@ -4711,14 +5426,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'If-None-Match': _params.ifNoneMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve HTTP headers for a replication scheduler document.
@@ -4732,8 +5452,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
    */
-  public headSchedulerDocument(params: CloudantV1.HeadSchedulerDocumentParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
+  public headSchedulerDocument(
+    params: CloudantV1.HeadSchedulerDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+    const _params = { ...params };
     const requiredParams = ['docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4742,10 +5464,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const path = {
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headSchedulerDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'headSchedulerDocument'
+    );
 
     const parameters = {
       options: {
@@ -4754,13 +5480,18 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve the HTTP headers for a replication scheduler job.
@@ -4773,8 +5504,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
    */
-  public headSchedulerJob(params: CloudantV1.HeadSchedulerJobParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
+  public headSchedulerJob(
+    params: CloudantV1.HeadSchedulerJobParams
+  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+    const _params = { ...params };
     const requiredParams = ['jobId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4783,10 +5516,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const path = {
-      'job_id': _params.jobId
+      'job_id': _params.jobId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headSchedulerJob');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'headSchedulerJob'
+    );
 
     const parameters = {
       options: {
@@ -4795,13 +5532,18 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Cancel a replication.
@@ -4818,8 +5560,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
    */
-  public deleteReplicationDocument(params: CloudantV1.DeleteReplicationDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
-    const _params = Object.assign({}, params);
+  public deleteReplicationDocument(
+    params: CloudantV1.DeleteReplicationDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
     const requiredParams = ['docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4829,14 +5573,18 @@ class CloudantV1 extends CloudantBaseService {
 
     const query = {
       'batch': _params.batch,
-      'rev': _params.rev
+      'rev': _params.rev,
     };
 
     const path = {
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteReplicationDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'deleteReplicationDocument'
+    );
 
     const parameters = {
       options: {
@@ -4846,15 +5594,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'If-Match': _params.ifMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'If-Match': _params.ifMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve a replication document.
@@ -4888,8 +5641,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ReplicationDocument>>}
    */
-  public getReplicationDocument(params: CloudantV1.GetReplicationDocumentParams): Promise<CloudantV1.Response<CloudantV1.ReplicationDocument>> {
-    const _params = Object.assign({}, params);
+  public getReplicationDocument(
+    params: CloudantV1.GetReplicationDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.ReplicationDocument>> {
+    const _params = { ...params };
     const requiredParams = ['docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4907,14 +5662,18 @@ class CloudantV1 extends CloudantBaseService {
       'meta': _params.meta,
       'rev': _params.rev,
       'revs': _params.revs,
-      'revs_info': _params.revsInfo
+      'revs_info': _params.revsInfo,
     };
 
     const path = {
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getReplicationDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getReplicationDocument'
+    );
 
     const parameters = {
       options: {
@@ -4924,15 +5683,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'If-None-Match': _params.ifNoneMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Create or modify a replication using a replication document.
@@ -4954,8 +5718,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
    */
-  public putReplicationDocument(params: CloudantV1.PutReplicationDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
-    const _params = Object.assign({}, params);
+  public putReplicationDocument(
+    params: CloudantV1.PutReplicationDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
     const requiredParams = ['docId', 'replicationDocument'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -4967,14 +5733,18 @@ class CloudantV1 extends CloudantBaseService {
     const query = {
       'batch': _params.batch,
       'new_edits': _params.newEdits,
-      'rev': _params.rev
+      'rev': _params.rev,
     };
 
     const path = {
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putReplicationDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'putReplicationDocument'
+    );
 
     const parameters = {
       options: {
@@ -4985,16 +5755,21 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'If-Match': _params.ifMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'If-Match': _params.ifMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve replication scheduler documents.
@@ -5013,16 +5788,22 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.SchedulerDocsResult>>}
    */
-  public getSchedulerDocs(params?: CloudantV1.GetSchedulerDocsParams): Promise<CloudantV1.Response<CloudantV1.SchedulerDocsResult>> {
-    const _params = Object.assign({}, params);
+  public getSchedulerDocs(
+    params?: CloudantV1.GetSchedulerDocsParams
+  ): Promise<CloudantV1.Response<CloudantV1.SchedulerDocsResult>> {
+    const _params = { ...params };
 
     const query = {
       'limit': _params.limit,
       'skip': _params.skip,
-      'states': _params.states
+      'states': _params.states,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSchedulerDocs');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getSchedulerDocs'
+    );
 
     const parameters = {
       options: {
@@ -5031,14 +5812,19 @@ class CloudantV1 extends CloudantBaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve a replication scheduler document.
@@ -5051,8 +5837,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.SchedulerDocument>>}
    */
-  public getSchedulerDocument(params: CloudantV1.GetSchedulerDocumentParams): Promise<CloudantV1.Response<CloudantV1.SchedulerDocument>> {
-    const _params = Object.assign({}, params);
+  public getSchedulerDocument(
+    params: CloudantV1.GetSchedulerDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.SchedulerDocument>> {
+    const _params = { ...params };
     const requiredParams = ['docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5061,10 +5849,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const path = {
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSchedulerDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getSchedulerDocument'
+    );
 
     const parameters = {
       options: {
@@ -5073,14 +5865,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve replication scheduler jobs.
@@ -5098,15 +5895,21 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.SchedulerJobsResult>>}
    */
-  public getSchedulerJobs(params?: CloudantV1.GetSchedulerJobsParams): Promise<CloudantV1.Response<CloudantV1.SchedulerJobsResult>> {
-    const _params = Object.assign({}, params);
+  public getSchedulerJobs(
+    params?: CloudantV1.GetSchedulerJobsParams
+  ): Promise<CloudantV1.Response<CloudantV1.SchedulerJobsResult>> {
+    const _params = { ...params };
 
     const query = {
       'limit': _params.limit,
-      'skip': _params.skip
+      'skip': _params.skip,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSchedulerJobs');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getSchedulerJobs'
+    );
 
     const parameters = {
       options: {
@@ -5115,14 +5918,19 @@ class CloudantV1 extends CloudantBaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve a replication scheduler job.
@@ -5134,8 +5942,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.SchedulerJob>>}
    */
-  public getSchedulerJob(params: CloudantV1.GetSchedulerJobParams): Promise<CloudantV1.Response<CloudantV1.SchedulerJob>> {
-    const _params = Object.assign({}, params);
+  public getSchedulerJob(
+    params: CloudantV1.GetSchedulerJobParams
+  ): Promise<CloudantV1.Response<CloudantV1.SchedulerJob>> {
+    const _params = { ...params };
     const requiredParams = ['jobId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5144,10 +5954,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const path = {
-      'job_id': _params.jobId
+      'job_id': _params.jobId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSchedulerJob');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getSchedulerJob'
+    );
 
     const parameters = {
       options: {
@@ -5156,15 +5970,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * authentication
    ************************/
@@ -5178,10 +5996,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.SessionInformation>>}
    */
-  public getSessionInformation(params?: CloudantV1.GetSessionInformationParams): Promise<CloudantV1.Response<CloudantV1.SessionInformation>> {
-    const _params = Object.assign({}, params);
+  public getSessionInformation(
+    params?: CloudantV1.GetSessionInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.SessionInformation>> {
+    const _params = { ...params };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSessionInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getSessionInformation'
+    );
 
     const parameters = {
       options: {
@@ -5189,15 +6013,19 @@ class CloudantV1 extends CloudantBaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * authorization
    ************************/
@@ -5214,8 +6042,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Security>>}
    */
-  public getSecurity(params: CloudantV1.GetSecurityParams): Promise<CloudantV1.Response<CloudantV1.Security>> {
-    const _params = Object.assign({}, params);
+  public getSecurity(
+    params: CloudantV1.GetSecurityParams
+  ): Promise<CloudantV1.Response<CloudantV1.Security>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5224,10 +6054,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSecurity');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getSecurity'
+    );
 
     const parameters = {
       options: {
@@ -5236,14 +6070,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Modify database permissions.
@@ -5261,8 +6100,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
-  public putSecurity(params: CloudantV1.PutSecurityParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = Object.assign({}, params);
+  public putSecurity(
+    params: CloudantV1.PutSecurityParams
+  ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5274,14 +6115,18 @@ class CloudantV1 extends CloudantBaseService {
       'admins': _params.admins,
       'members': _params.members,
       'cloudant': _params.cloudant,
-      'couchdb_auth_only': _params.couchdbAuthOnly
+      'couchdb_auth_only': _params.couchdbAuthOnly,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putSecurity');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'putSecurity'
+    );
 
     const parameters = {
       options: {
@@ -5291,15 +6136,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Generates API keys for apps or persons to enable database access.
@@ -5312,10 +6162,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ApiKeysResult>>}
    */
-  public postApiKeys(params?: CloudantV1.PostApiKeysParams): Promise<CloudantV1.Response<CloudantV1.ApiKeysResult>> {
-    const _params = Object.assign({}, params);
+  public postApiKeys(
+    params?: CloudantV1.PostApiKeysParams
+  ): Promise<CloudantV1.Response<CloudantV1.ApiKeysResult>> {
+    const _params = { ...params };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postApiKeys');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postApiKeys'
+    );
 
     const parameters = {
       options: {
@@ -5323,14 +6179,19 @@ class CloudantV1 extends CloudantBaseService {
         method: 'POST',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Modify only Cloudant related database permissions.
@@ -5347,8 +6208,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
-  public putCloudantSecurityConfiguration(params: CloudantV1.PutCloudantSecurityConfigurationParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = Object.assign({}, params);
+  public putCloudantSecurityConfiguration(
+    params: CloudantV1.PutCloudantSecurityConfigurationParams
+  ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'cloudant'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5360,14 +6223,18 @@ class CloudantV1 extends CloudantBaseService {
       'cloudant': _params.cloudant,
       'admins': _params.admins,
       'members': _params.members,
-      'couchdb_auth_only': _params.couchdbAuthOnly
+      'couchdb_auth_only': _params.couchdbAuthOnly,
     };
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCloudantSecurityConfiguration');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'putCloudantSecurityConfiguration'
+    );
 
     const parameters = {
       options: {
@@ -5377,16 +6244,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * cORS
    ************************/
@@ -5401,10 +6272,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.CorsInformation>>}
    */
-  public getCorsInformation(params?: CloudantV1.GetCorsInformationParams): Promise<CloudantV1.Response<CloudantV1.CorsInformation>> {
-    const _params = Object.assign({}, params);
+  public getCorsInformation(
+    params?: CloudantV1.GetCorsInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.CorsInformation>> {
+    const _params = { ...params };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCorsInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getCorsInformation'
+    );
 
     const parameters = {
       options: {
@@ -5412,14 +6289,19 @@ class CloudantV1 extends CloudantBaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Modify CORS configuration.
@@ -5437,8 +6319,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
-  public putCorsConfiguration(params: CloudantV1.PutCorsConfigurationParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = Object.assign({}, params);
+  public putCorsConfiguration(
+    params: CloudantV1.PutCorsConfigurationParams
+  ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = { ...params };
     const requiredParams = ['origins'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5449,10 +6333,14 @@ class CloudantV1 extends CloudantBaseService {
     const body = {
       'origins': _params.origins,
       'allow_credentials': _params.allowCredentials,
-      'enable_cors': _params.enableCors
+      'enable_cors': _params.enableCors,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCorsConfiguration');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'putCorsConfiguration'
+    );
 
     const parameters = {
       options: {
@@ -5461,16 +6349,20 @@ class CloudantV1 extends CloudantBaseService {
         body,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * attachments
    ************************/
@@ -5494,8 +6386,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
    */
-  public headAttachment(params: CloudantV1.HeadAttachmentParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
+  public headAttachment(
+    params: CloudantV1.HeadAttachmentParams
+  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId', 'attachmentName'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5504,16 +6398,20 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const query = {
-      'rev': _params.rev
+      'rev': _params.rev,
     };
 
     const path = {
       'db': _params.db,
       'doc_id': _params.docId,
-      'attachment_name': _params.attachmentName
+      'attachment_name': _params.attachmentName,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headAttachment');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'headAttachment'
+    );
 
     const parameters = {
       options: {
@@ -5523,15 +6421,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'If-Match': _params.ifMatch,
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'If-Match': _params.ifMatch,
+            'If-None-Match': _params.ifNoneMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Delete an attachment.
@@ -5551,8 +6454,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
    */
-  public deleteAttachment(params: CloudantV1.DeleteAttachmentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
-    const _params = Object.assign({}, params);
+  public deleteAttachment(
+    params: CloudantV1.DeleteAttachmentParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId', 'attachmentName'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5562,16 +6467,20 @@ class CloudantV1 extends CloudantBaseService {
 
     const query = {
       'rev': _params.rev,
-      'batch': _params.batch
+      'batch': _params.batch,
     };
 
     const path = {
       'db': _params.db,
       'doc_id': _params.docId,
-      'attachment_name': _params.attachmentName
+      'attachment_name': _params.attachmentName,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteAttachment');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'deleteAttachment'
+    );
 
     const parameters = {
       options: {
@@ -5581,15 +6490,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'If-Match': _params.ifMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'If-Match': _params.ifMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve an attachment.
@@ -5611,10 +6525,12 @@ class CloudantV1 extends CloudantBaseService {
    * implementation of resumable downloads and skippable streams. This is available for all attachments inside CouchDB.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
    */
-  public getAttachment(params: CloudantV1.GetAttachmentParams): Promise<CloudantV1.Response<NodeJS.ReadableStream|Buffer>> {
-    const _params = Object.assign({}, params);
+  public getAttachment(
+    params: CloudantV1.GetAttachmentParams
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId', 'attachmentName'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5623,16 +6539,20 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const query = {
-      'rev': _params.rev
+      'rev': _params.rev,
     };
 
     const path = {
       'db': _params.db,
       'doc_id': _params.docId,
-      'attachment_name': _params.attachmentName
+      'attachment_name': _params.attachmentName,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getAttachment');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getAttachment'
+    );
 
     const parameters = {
       options: {
@@ -5643,17 +6563,22 @@ class CloudantV1 extends CloudantBaseService {
         responseType: 'stream',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': _params.accept,
-          'If-Match': _params.ifMatch,
-          'If-None-Match': _params.ifNoneMatch,
-          'Range': _params.range
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': _params.accept,
+            'If-Match': _params.ifMatch,
+            'If-None-Match': _params.ifNoneMatch,
+            'Range': _params.range,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Create or modify an attachment.
@@ -5670,7 +6595,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {string} params.attachmentName - Path parameter to specify the attachment name.
-   * @param {NodeJS.ReadableStream|Buffer} params.attachment - HTTP request body for attachment operations.
+   * @param {NodeJS.ReadableStream | Buffer} params.attachment - HTTP request body for attachment operations.
    * @param {string} params.contentType - Content-Type of the attachment.
    * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
    * parameter.
@@ -5678,8 +6603,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
    */
-  public putAttachment(params: CloudantV1.PutAttachmentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
-    const _params = Object.assign({}, params);
+  public putAttachment(
+    params: CloudantV1.PutAttachmentParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId', 'attachmentName', 'attachment', 'contentType'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5689,16 +6616,20 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = _params.attachment;
     const query = {
-      'rev': _params.rev
+      'rev': _params.rev,
     };
 
     const path = {
       'db': _params.db,
       'doc_id': _params.docId,
-      'attachment_name': _params.attachmentName
+      'attachment_name': _params.attachmentName,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putAttachment');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'putAttachment'
+    );
 
     const parameters = {
       options: {
@@ -5709,17 +6640,21 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': _params.contentType,
-          'If-Match': _params.ifMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': _params.contentType,
+            'If-Match': _params.ifMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * localDocuments
    ************************/
@@ -5738,8 +6673,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
    */
-  public headLocalDocument(params: CloudantV1.HeadLocalDocumentParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
+  public headLocalDocument(
+    params: CloudantV1.HeadLocalDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5749,10 +6686,14 @@ class CloudantV1 extends CloudantBaseService {
 
     const path = {
       'db': _params.db,
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headLocalDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'headLocalDocument'
+    );
 
     const parameters = {
       options: {
@@ -5761,14 +6702,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'If-None-Match': _params.ifNoneMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Delete a local document.
@@ -5784,8 +6730,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
    */
-  public deleteLocalDocument(params: CloudantV1.DeleteLocalDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
-    const _params = Object.assign({}, params);
+  public deleteLocalDocument(
+    params: CloudantV1.DeleteLocalDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5794,15 +6742,19 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const query = {
-      'batch': _params.batch
+      'batch': _params.batch,
     };
 
     const path = {
       'db': _params.db,
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteLocalDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'deleteLocalDocument'
+    );
 
     const parameters = {
       options: {
@@ -5812,14 +6764,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve a local document.
@@ -5843,8 +6800,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Document>>}
    */
-  public getLocalDocument(params: CloudantV1.GetLocalDocumentParams): Promise<CloudantV1.Response<CloudantV1.Document>> {
-    const _params = Object.assign({}, params);
+  public getLocalDocument(
+    params: CloudantV1.GetLocalDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.Document>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5855,15 +6814,19 @@ class CloudantV1 extends CloudantBaseService {
     const query = {
       'attachments': _params.attachments,
       'att_encoding_info': _params.attEncodingInfo,
-      'local_seq': _params.localSeq
+      'local_seq': _params.localSeq,
     };
 
     const path = {
       'db': _params.db,
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getLocalDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getLocalDocument'
+    );
 
     const parameters = {
       options: {
@@ -5873,15 +6836,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': _params.accept,
-          'If-None-Match': _params.ifNoneMatch
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': _params.accept,
+            'If-None-Match': _params.ifNoneMatch,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Create or modify a local document.
@@ -5892,15 +6860,17 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {Document|NodeJS.ReadableStream|Buffer} params.document - HTTP request body for Document operations.
+   * @param {Document | NodeJS.ReadableStream | Buffer} params.document - HTTP request body for Document operations.
    * @param {string} [params.contentType] - The type of the input.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
    * with a HTTP 202 Accepted response code immediately.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
    */
-  public putLocalDocument(params: CloudantV1.PutLocalDocumentParams): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
-    const _params = Object.assign({}, params);
+  public putLocalDocument(
+    params: CloudantV1.PutLocalDocumentParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId', 'document'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5910,15 +6880,19 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = _params.document;
     const query = {
-      'batch': _params.batch
+      'batch': _params.batch,
     };
 
     const path = {
       'db': _params.db,
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putLocalDocument');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'putLocalDocument'
+    );
 
     const parameters = {
       options: {
@@ -5929,16 +6903,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': _params.contentType
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': _params.contentType,
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * databaseDetails
    ************************/
@@ -5954,8 +6932,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.MissingRevsResult>>}
    */
-  public postMissingRevs(params: CloudantV1.PostMissingRevsParams): Promise<CloudantV1.Response<CloudantV1.MissingRevsResult>> {
-    const _params = Object.assign({}, params);
+  public postMissingRevs(
+    params: CloudantV1.PostMissingRevsParams
+  ): Promise<CloudantV1.Response<CloudantV1.MissingRevsResult>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'documentRevisions'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -5965,10 +6945,14 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = _params.documentRevisions;
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postMissingRevs');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postMissingRevs'
+    );
 
     const parameters = {
       options: {
@@ -5978,15 +6962,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Query the document revisions and possible ancestors missing from the database.
@@ -6001,8 +6990,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.JsonObject>>}
    */
-  public postRevsDiff(params: CloudantV1.PostRevsDiffParams): Promise<CloudantV1.Response<CloudantV1.JsonObject>> {
-    const _params = Object.assign({}, params);
+  public postRevsDiff(
+    params: CloudantV1.PostRevsDiffParams
+  ): Promise<CloudantV1.Response<CloudantV1.JsonObject>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'documentRevisions'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -6012,10 +7003,14 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = _params.documentRevisions;
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postRevsDiff');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postRevsDiff'
+    );
 
     const parameters = {
       options: {
@@ -6025,15 +7020,20 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve shard information.
@@ -6045,8 +7045,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ShardsInformation>>}
    */
-  public getShardsInformation(params: CloudantV1.GetShardsInformationParams): Promise<CloudantV1.Response<CloudantV1.ShardsInformation>> {
-    const _params = Object.assign({}, params);
+  public getShardsInformation(
+    params: CloudantV1.GetShardsInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.ShardsInformation>> {
+    const _params = { ...params };
     const requiredParams = ['db'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -6055,10 +7057,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const path = {
-      'db': _params.db
+      'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getShardsInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getShardsInformation'
+    );
 
     const parameters = {
       options: {
@@ -6067,14 +7073,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve shard information for a specific document.
@@ -6088,8 +7099,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentShardInfo>>}
    */
-  public getDocumentShardsInfo(params: CloudantV1.GetDocumentShardsInfoParams): Promise<CloudantV1.Response<CloudantV1.DocumentShardInfo>> {
-    const _params = Object.assign({}, params);
+  public getDocumentShardsInfo(
+    params: CloudantV1.GetDocumentShardsInfoParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentShardInfo>> {
+    const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -6099,10 +7112,14 @@ class CloudantV1 extends CloudantBaseService {
 
     const path = {
       'db': _params.db,
-      'doc_id': _params.docId
+      'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDocumentShardsInfo');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getDocumentShardsInfo'
+    );
 
     const parameters = {
       options: {
@@ -6111,15 +7128,19 @@ class CloudantV1 extends CloudantBaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
   /*************************
    * monitoring
    ************************/
@@ -6133,10 +7154,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
    */
-  public headUpInformation(params?: CloudantV1.HeadUpInformationParams): Promise<CloudantV1.Response<CloudantV1.Empty>> {
-    const _params = Object.assign({}, params);
+  public headUpInformation(
+    params?: CloudantV1.HeadUpInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+    const _params = { ...params };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headUpInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'headUpInformation'
+    );
 
     const parameters = {
       options: {
@@ -6144,13 +7171,18 @@ class CloudantV1 extends CloudantBaseService {
         method: 'HEAD',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve list of running tasks.
@@ -6163,10 +7195,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ActiveTask[]>>}
    */
-  public getActiveTasks(params?: CloudantV1.GetActiveTasksParams): Promise<CloudantV1.Response<CloudantV1.ActiveTask[]>> {
-    const _params = Object.assign({}, params);
+  public getActiveTasks(
+    params?: CloudantV1.GetActiveTasksParams
+  ): Promise<CloudantV1.Response<CloudantV1.ActiveTask[]>> {
+    const _params = { ...params };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getActiveTasks');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getActiveTasks'
+    );
 
     const parameters = {
       options: {
@@ -6174,14 +7212,19 @@ class CloudantV1 extends CloudantBaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve information about whether the server is up.
@@ -6193,10 +7236,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.UpInformation>>}
    */
-  public getUpInformation(params?: CloudantV1.GetUpInformationParams): Promise<CloudantV1.Response<CloudantV1.UpInformation>> {
-    const _params = Object.assign({}, params);
+  public getUpInformation(
+    params?: CloudantV1.GetUpInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.UpInformation>> {
+    const _params = { ...params };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getUpInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getUpInformation'
+    );
 
     const parameters = {
       options: {
@@ -6204,14 +7253,19 @@ class CloudantV1 extends CloudantBaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve Activity Tracker events information.
@@ -6222,10 +7276,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEvents>>}
    */
-  public getActivityTrackerEvents(params?: CloudantV1.GetActivityTrackerEventsParams): Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEvents>> {
-    const _params = Object.assign({}, params);
+  public getActivityTrackerEvents(
+    params?: CloudantV1.GetActivityTrackerEventsParams
+  ): Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEvents>> {
+    const _params = { ...params };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getActivityTrackerEvents');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getActivityTrackerEvents'
+    );
 
     const parameters = {
       options: {
@@ -6233,14 +7293,19 @@ class CloudantV1 extends CloudantBaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Modify Activity Tracker events configuration.
@@ -6253,8 +7318,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
-  public postActivityTrackerEvents(params: CloudantV1.PostActivityTrackerEventsParams): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = Object.assign({}, params);
+  public postActivityTrackerEvents(
+    params: CloudantV1.PostActivityTrackerEventsParams
+  ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = { ...params };
     const requiredParams = ['types'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -6263,10 +7330,14 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'types': _params.types
+      'types': _params.types,
     };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postActivityTrackerEvents');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'postActivityTrackerEvents'
+    );
 
     const parameters = {
       options: {
@@ -6275,15 +7346,20 @@ class CloudantV1 extends CloudantBaseService {
         body,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Retrieve the current provisioned throughput capacity consumption.
@@ -6296,10 +7372,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.CurrentThroughputInformation>>}
    */
-  public getCurrentThroughputInformation(params?: CloudantV1.GetCurrentThroughputInformationParams): Promise<CloudantV1.Response<CloudantV1.CurrentThroughputInformation>> {
-    const _params = Object.assign({}, params);
+  public getCurrentThroughputInformation(
+    params?: CloudantV1.GetCurrentThroughputInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.CurrentThroughputInformation>> {
+    const _params = { ...params };
 
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCurrentThroughputInformation');
+    const sdkHeaders = getSdkHeaders(
+      CloudantV1.DEFAULT_SERVICE_NAME,
+      'v1',
+      'getCurrentThroughputInformation'
+    );
 
     const parameters = {
       options: {
@@ -6307,15 +7389,19 @@ class CloudantV1 extends CloudantBaseService {
         method: 'GET',
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
 }
 
 /*************************
@@ -6323,9 +7409,8 @@ class CloudantV1 extends CloudantBaseService {
  ************************/
 
 namespace CloudantV1 {
-
   /** An operation response. */
-  export interface Response<T = any>  {
+  export interface Response<T = any> {
     result: T;
     status: number;
     statusText: string;
@@ -6336,7 +7421,7 @@ namespace CloudantV1 {
   export type Callback<T> = (error: any, response?: Response<T>) => void;
 
   /** The body of a service request that returns no response data. */
-  export interface Empty { }
+  export interface Empty {}
 
   /** A standard JS object, defined to avoid the limitations of `Object` and `object` */
   export interface JsonObject {
@@ -6723,7 +7808,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the database name. */
     db: string;
     /** HTTP request body for Document operations. */
-    document: Document|NodeJS.ReadableStream|Buffer;
+    document: Document | NodeJS.ReadableStream | Buffer;
     /** The type of the input. */
     contentType?: PostDocumentConstants.ContentType | string;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
@@ -6853,7 +7938,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the database name. */
     db: string;
     /** HTTP request body for postBulkDocs. */
-    bulkDocs: BulkDocs|NodeJS.ReadableStream|Buffer;
+    bulkDocs: BulkDocs | NodeJS.ReadableStream | Buffer;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -7137,7 +8222,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the document ID. */
     docId: string;
     /** HTTP request body for Document operations. */
-    document: Document|NodeJS.ReadableStream|Buffer;
+    document: Document | NodeJS.ReadableStream | Buffer;
     /** The type of the input. */
     contentType?: PutDocumentConstants.ContentType | string;
     /** Header parameter to specify the document revision. Alternative to rev query parameter. */
@@ -9181,7 +10266,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the attachment name. */
     attachmentName: string;
     /** HTTP request body for attachment operations. */
-    attachment: NodeJS.ReadableStream|Buffer;
+    attachment: NodeJS.ReadableStream | Buffer;
     /** Content-Type of the attachment. */
     contentType: string;
     /** Header parameter to specify the document revision. Alternative to rev query parameter. */
@@ -9262,7 +10347,7 @@ namespace CloudantV1 {
     /** Path parameter to specify the document ID. */
     docId: string;
     /** HTTP request body for Document operations. */
-    document: Document|NodeJS.ReadableStream|Buffer;
+    document: Document | NodeJS.ReadableStream | Buffer;
     /** The type of the input. */
     contentType?: PutLocalDocumentConstants.ContentType | string;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
@@ -10834,7 +11919,6 @@ namespace CloudantV1 {
     /** Used for the `GeometryCollection` type. */
     geometries: GeoJsonGeometry[];
   }
-
 }
 
 export = CloudantV1;

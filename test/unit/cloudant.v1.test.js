@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict';
 
 // need to import the whole package to mock getAuthenticatorFromEnvironment
 const core = require('ibm-cloud-sdk-core');
+
 const { NoAuthAuthenticator, unitTestUtils } = core;
 
 const CloudantV1 = require('../../dist/cloudant/v1');
@@ -30,12 +30,12 @@ const {
   checkForSuccessfulExecution,
 } = unitTestUtils;
 
-const service = {
+const cloudantServiceOptions = {
   authenticator: new NoAuthAuthenticator(),
   url: 'http://localhost:5984',
 };
 
-const cloudantService = new CloudantV1(service);
+const cloudantService = new CloudantV1(cloudantServiceOptions);
 
 // dont actually create a request
 const createRequestMock = jest.spyOn(cloudantService, 'createRequest');
@@ -124,9 +124,9 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -168,9 +168,9 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_membership', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_membership', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -215,13 +215,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_uuids', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_uuids', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['count']).toEqual(count);
+        expect(mockRequestOptions.qs.count).toEqual(count);
       });
 
       test('should prioritize user-given headers', () => {
@@ -260,9 +260,9 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_api/v2/user/capacity/throughput', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/capacity/throughput', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -307,13 +307,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_api/v2/user/capacity/throughput', 'PUT');
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/capacity/throughput', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['blocks']).toEqual(blocks);
+        expect(mockRequestOptions.body.blocks).toEqual(blocks);
       });
 
       test('should prioritize user-given headers', () => {
@@ -335,7 +335,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.putCapacityThroughputConfiguration({});
@@ -347,11 +347,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const putCapacityThroughputConfigurationPromise = cloudantService.putCapacityThroughputConfiguration();
         expectToBePromise(putCapacityThroughputConfigurationPromise);
 
-        putCapacityThroughputConfigurationPromise.catch(err => {
+        putCapacityThroughputConfigurationPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -362,10 +362,10 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation getDbUpdates
-        const feed = 'continuous';
+        const feed = 'normal';
         const heartbeat = 0;
         const timeout = 0;
-        const since = 'testString';
+        const since = '0';
         const params = {
           feed: feed,
           heartbeat: heartbeat,
@@ -381,16 +381,16 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_db_updates', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_db_updates', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['feed']).toEqual(feed);
-        expect(options.qs['heartbeat']).toEqual(heartbeat);
-        expect(options.qs['timeout']).toEqual(timeout);
-        expect(options.qs['since']).toEqual(since);
+        expect(mockRequestOptions.qs.feed).toEqual(feed);
+        expect(mockRequestOptions.qs.heartbeat).toEqual(heartbeat);
+        expect(mockRequestOptions.qs.timeout).toEqual(timeout);
+        expect(mockRequestOptions.qs.since).toEqual(since);
       });
 
       test('should prioritize user-given headers', () => {
@@ -424,18 +424,18 @@ describe('CloudantV1', () => {
         const fields = ['testString'];
         const selector = { 'key1': 'testString' };
         const lastEventId = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const feed = 'continuous';
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const feed = 'normal';
         const filter = 'testString';
         const heartbeat = 0;
-        const includeDocs = true;
+        const includeDocs = false;
         const limit = 0;
         const seqInterval = 1;
-        const since = 'testString';
-        const style = 'testString';
+        const since = '0';
+        const style = 'main_only';
         const timeout = 0;
         const view = 'testString';
         const params = {
@@ -468,31 +468,31 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_changes', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_changes', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Last-Event-ID', lastEventId);
-        expect(options.body['doc_ids']).toEqual(docIds);
-        expect(options.body['fields']).toEqual(fields);
-        expect(options.body['selector']).toEqual(selector);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['conflicts']).toEqual(conflicts);
-        expect(options.qs['descending']).toEqual(descending);
-        expect(options.qs['feed']).toEqual(feed);
-        expect(options.qs['filter']).toEqual(filter);
-        expect(options.qs['heartbeat']).toEqual(heartbeat);
-        expect(options.qs['include_docs']).toEqual(includeDocs);
-        expect(options.qs['limit']).toEqual(limit);
-        expect(options.qs['seq_interval']).toEqual(seqInterval);
-        expect(options.qs['since']).toEqual(since);
-        expect(options.qs['style']).toEqual(style);
-        expect(options.qs['timeout']).toEqual(timeout);
-        expect(options.qs['view']).toEqual(view);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body.doc_ids).toEqual(docIds);
+        expect(mockRequestOptions.body.fields).toEqual(fields);
+        expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.qs.descending).toEqual(descending);
+        expect(mockRequestOptions.qs.feed).toEqual(feed);
+        expect(mockRequestOptions.qs.filter).toEqual(filter);
+        expect(mockRequestOptions.qs.heartbeat).toEqual(heartbeat);
+        expect(mockRequestOptions.qs.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.qs.limit).toEqual(limit);
+        expect(mockRequestOptions.qs.seq_interval).toEqual(seqInterval);
+        expect(mockRequestOptions.qs.since).toEqual(since);
+        expect(mockRequestOptions.qs.style).toEqual(style);
+        expect(mockRequestOptions.qs.timeout).toEqual(timeout);
+        expect(mockRequestOptions.qs.view).toEqual(view);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -514,7 +514,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postChanges({});
@@ -526,11 +526,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postChangesPromise = cloudantService.postChanges();
         expectToBePromise(postChangesPromise);
 
-        postChangesPromise.catch(err => {
+        postChangesPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -546,18 +546,18 @@ describe('CloudantV1', () => {
         const fields = ['testString'];
         const selector = { 'key1': 'testString' };
         const lastEventId = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const feed = 'continuous';
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const feed = 'normal';
         const filter = 'testString';
         const heartbeat = 0;
-        const includeDocs = true;
+        const includeDocs = false;
         const limit = 0;
         const seqInterval = 1;
-        const since = 'testString';
-        const style = 'testString';
+        const since = '0';
+        const style = 'main_only';
         const timeout = 0;
         const view = 'testString';
         const params = {
@@ -590,32 +590,32 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_changes', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_changes', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Last-Event-ID', lastEventId);
-        expect(options.body['doc_ids']).toEqual(docIds);
-        expect(options.body['fields']).toEqual(fields);
-        expect(options.body['selector']).toEqual(selector);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['conflicts']).toEqual(conflicts);
-        expect(options.qs['descending']).toEqual(descending);
-        expect(options.qs['feed']).toEqual(feed);
-        expect(options.qs['filter']).toEqual(filter);
-        expect(options.qs['heartbeat']).toEqual(heartbeat);
-        expect(options.qs['include_docs']).toEqual(includeDocs);
-        expect(options.qs['limit']).toEqual(limit);
-        expect(options.qs['seq_interval']).toEqual(seqInterval);
-        expect(options.qs['since']).toEqual(since);
-        expect(options.qs['style']).toEqual(style);
-        expect(options.qs['timeout']).toEqual(timeout);
-        expect(options.qs['view']).toEqual(view);
-        expect(options.path['db']).toEqual(db);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.doc_ids).toEqual(docIds);
+        expect(mockRequestOptions.body.fields).toEqual(fields);
+        expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.qs.descending).toEqual(descending);
+        expect(mockRequestOptions.qs.feed).toEqual(feed);
+        expect(mockRequestOptions.qs.filter).toEqual(filter);
+        expect(mockRequestOptions.qs.heartbeat).toEqual(heartbeat);
+        expect(mockRequestOptions.qs.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.qs.limit).toEqual(limit);
+        expect(mockRequestOptions.qs.seq_interval).toEqual(seqInterval);
+        expect(mockRequestOptions.qs.since).toEqual(since);
+        expect(mockRequestOptions.qs.style).toEqual(style);
+        expect(mockRequestOptions.qs.timeout).toEqual(timeout);
+        expect(mockRequestOptions.qs.view).toEqual(view);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -637,7 +637,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postChangesAsStream({});
@@ -649,11 +649,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postChangesAsStreamPromise = cloudantService.postChangesAsStream();
         expectToBePromise(postChangesAsStreamPromise);
 
-        postChangesAsStreamPromise.catch(err => {
+        postChangesAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -677,13 +677,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}', 'HEAD');
+        checkUrlAndMethod(mockRequestOptions, '/{db}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -705,7 +705,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.headDatabase({});
@@ -717,11 +717,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const headDatabasePromise = cloudantService.headDatabase();
         expectToBePromise(headDatabasePromise);
 
-        headDatabasePromise.catch(err => {
+        headDatabasePromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -732,7 +732,7 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation getAllDbs
-        const descending = true;
+        const descending = false;
         const endkey = 'testString';
         const limit = 0;
         const skip = 0;
@@ -753,17 +753,17 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_all_dbs', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_all_dbs', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['descending']).toEqual(descending);
-        expect(options.qs['endkey']).toEqual(endkey);
-        expect(options.qs['limit']).toEqual(limit);
-        expect(options.qs['skip']).toEqual(skip);
-        expect(options.qs['startkey']).toEqual(startkey);
+        expect(mockRequestOptions.qs.descending).toEqual(descending);
+        expect(mockRequestOptions.qs.endkey).toEqual(endkey);
+        expect(mockRequestOptions.qs.limit).toEqual(limit);
+        expect(mockRequestOptions.qs.skip).toEqual(skip);
+        expect(mockRequestOptions.qs.startkey).toEqual(startkey);
       });
 
       test('should prioritize user-given headers', () => {
@@ -805,13 +805,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_dbs_info', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/_dbs_info', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['keys']).toEqual(keys);
+        expect(mockRequestOptions.body.keys).toEqual(keys);
       });
 
       test('should prioritize user-given headers', () => {
@@ -833,7 +833,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postDbsInfo({});
@@ -845,11 +845,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postDbsInfoPromise = cloudantService.postDbsInfo();
         expectToBePromise(postDbsInfoPromise);
 
-        postDbsInfoPromise.catch(err => {
+        postDbsInfoPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -873,13 +873,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}', 'DELETE');
+        checkUrlAndMethod(mockRequestOptions, '/{db}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -901,7 +901,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.deleteDatabase({});
@@ -913,11 +913,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const deleteDatabasePromise = cloudantService.deleteDatabase();
         expectToBePromise(deleteDatabasePromise);
 
-        deleteDatabasePromise.catch(err => {
+        deleteDatabasePromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -941,13 +941,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -969,7 +969,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getDatabaseInformation({});
@@ -981,11 +981,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getDatabaseInformationPromise = cloudantService.getDatabaseInformation();
         expectToBePromise(getDatabaseInformationPromise);
 
-        getDatabaseInformationPromise.catch(err => {
+        getDatabaseInformationPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -997,7 +997,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation putDatabase
         const db = 'testString';
-        const partitioned = true;
+        const partitioned = false;
         const q = 1;
         const params = {
           db: db,
@@ -1013,15 +1013,15 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}', 'PUT');
+        checkUrlAndMethod(mockRequestOptions, '/{db}', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['partitioned']).toEqual(partitioned);
-        expect(options.qs['q']).toEqual(q);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.qs.partitioned).toEqual(partitioned);
+        expect(mockRequestOptions.qs.q).toEqual(q);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -1043,7 +1043,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.putDatabase({});
@@ -1055,11 +1055,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const putDatabasePromise = cloudantService.putDatabase();
         expectToBePromise(putDatabasePromise);
 
-        putDatabasePromise.catch(err => {
+        putDatabasePromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -1073,7 +1073,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const latest = true;
+        const latest = false;
         const rev = 'testString';
         const params = {
           db: db,
@@ -1091,17 +1091,17 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/{doc_id}', 'HEAD');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
-        expect(options.qs['latest']).toEqual(latest);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.qs.latest).toEqual(latest);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -1125,7 +1125,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.headDocument({});
@@ -1137,11 +1137,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const headDocumentPromise = cloudantService.headDocument();
         expectToBePromise(headDocumentPromise);
 
-        headDocumentPromise.catch(err => {
+        headDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -1150,51 +1150,10 @@ describe('CloudantV1', () => {
   });
   describe('postDocument', () => {
     describe('positive tests', () => {
-      // Request models needed by this operation.
-
-      // Attachment
-      const attachmentModel = {
-        content_type: 'testString',
-        data: 'This is a mock byte array value.',
-        digest: 'testString',
-        encoded_length: 0,
-        encoding: 'testString',
-        follows: true,
-        length: 0,
-        revpos: 1,
-        stub: true,
-      };
-
-      // Revisions
-      const revisionsModel = {
-        ids: ['testString'],
-        start: 1,
-      };
-
-      // DocumentRevisionStatus
-      const documentRevisionStatusModel = {
-        rev: 'testString',
-        status: 'available',
-      };
-
-      // Document
-      const documentModel = {
-        _attachments: { 'key1': attachmentModel },
-        _conflicts: ['testString'],
-        _deleted: true,
-        _deleted_conflicts: ['testString'],
-        _id: 'testString',
-        _local_seq: 'testString',
-        _rev: 'testString',
-        _revisions: revisionsModel,
-        _revs_info: [documentRevisionStatusModel],
-        foo: 'testString',
-      };
-
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postDocument
         const db = 'testString';
-        const document = documentModel;
+        const document = {};
         const contentType = 'application/json';
         const batch = 'ok';
         const params = {
@@ -1212,22 +1171,22 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = contentType;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Content-Type', contentType);
-        expect(options.body).toEqual(document);
-        expect(options.qs['batch']).toEqual(batch);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body).toEqual(document);
+        expect(mockRequestOptions.qs.batch).toEqual(batch);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const document = documentModel;
+        const document = {};
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -1245,7 +1204,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postDocument({});
@@ -1257,11 +1216,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postDocumentPromise = cloudantService.postDocument();
         expectToBePromise(postDocumentPromise);
 
-        postDocumentPromise.catch(err => {
+        postDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -1273,15 +1232,15 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postAllDocs
         const db = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const includeDocs = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const includeDocs = false;
         const inclusiveEnd = true;
         const limit = 0;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
@@ -1311,26 +1270,26 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_all_docs', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_all_docs', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.body['attachments']).toEqual(attachments);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['descending']).toEqual(descending);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['inclusive_end']).toEqual(inclusiveEnd);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['update_seq']).toEqual(updateSeq);
-        expect(options.body['endkey']).toEqual(endkey);
-        expect(options.body['key']).toEqual(key);
-        expect(options.body['keys']).toEqual(keys);
-        expect(options.body['startkey']).toEqual(startkey);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.body.attachments).toEqual(attachments);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.descending).toEqual(descending);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.inclusive_end).toEqual(inclusiveEnd);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
+        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.key).toEqual(key);
+        expect(mockRequestOptions.body.keys).toEqual(keys);
+        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -1352,7 +1311,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postAllDocs({});
@@ -1364,11 +1323,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postAllDocsPromise = cloudantService.postAllDocs();
         expectToBePromise(postAllDocsPromise);
 
-        postAllDocsPromise.catch(err => {
+        postAllDocsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -1380,15 +1339,15 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postAllDocsAsStream
         const db = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const includeDocs = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const includeDocs = false;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
@@ -1418,27 +1377,27 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_all_docs', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_all_docs', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.body['attachments']).toEqual(attachments);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['descending']).toEqual(descending);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['inclusive_end']).toEqual(inclusiveEnd);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['update_seq']).toEqual(updateSeq);
-        expect(options.body['endkey']).toEqual(endkey);
-        expect(options.body['key']).toEqual(key);
-        expect(options.body['keys']).toEqual(keys);
-        expect(options.body['startkey']).toEqual(startkey);
-        expect(options.path['db']).toEqual(db);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.body.attachments).toEqual(attachments);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.descending).toEqual(descending);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.inclusive_end).toEqual(inclusiveEnd);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
+        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.key).toEqual(key);
+        expect(mockRequestOptions.body.keys).toEqual(keys);
+        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -1460,7 +1419,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postAllDocsAsStream({});
@@ -1472,11 +1431,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postAllDocsAsStreamPromise = cloudantService.postAllDocsAsStream();
         expectToBePromise(postAllDocsAsStreamPromise);
 
-        postAllDocsAsStreamPromise.catch(err => {
+        postAllDocsAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -1489,15 +1448,15 @@ describe('CloudantV1', () => {
 
       // AllDocsQuery
       const allDocsQueryModel = {
-        att_encoding_info: true,
-        attachments: true,
-        conflicts: true,
-        descending: true,
-        include_docs: true,
+        att_encoding_info: false,
+        attachments: false,
+        conflicts: false,
+        descending: false,
+        include_docs: false,
         inclusive_end: true,
         limit: 0,
         skip: 0,
-        update_seq: true,
+        update_seq: false,
         endkey: 'testString',
         key: 'testString',
         keys: ['testString'],
@@ -1521,14 +1480,14 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_all_docs/queries', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_all_docs/queries', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['queries']).toEqual(queries);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body.queries).toEqual(queries);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -1552,7 +1511,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postAllDocsQueries({});
@@ -1564,11 +1523,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postAllDocsQueriesPromise = cloudantService.postAllDocsQueries();
         expectToBePromise(postAllDocsQueriesPromise);
 
-        postAllDocsQueriesPromise.catch(err => {
+        postAllDocsQueriesPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -1581,15 +1540,15 @@ describe('CloudantV1', () => {
 
       // AllDocsQuery
       const allDocsQueryModel = {
-        att_encoding_info: true,
-        attachments: true,
-        conflicts: true,
-        descending: true,
-        include_docs: true,
+        att_encoding_info: false,
+        attachments: false,
+        conflicts: false,
+        descending: false,
+        include_docs: false,
         inclusive_end: true,
         limit: 0,
         skip: 0,
-        update_seq: true,
+        update_seq: false,
         endkey: 'testString',
         key: 'testString',
         keys: ['small-appliances:1000042', 'small-appliances:1000043'],
@@ -1613,15 +1572,15 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_all_docs/queries', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_all_docs/queries', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['queries']).toEqual(queries);
-        expect(options.path['db']).toEqual(db);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.queries).toEqual(queries);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -1645,7 +1604,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postAllDocsQueriesAsStream({});
@@ -1657,11 +1616,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postAllDocsQueriesAsStreamPromise = cloudantService.postAllDocsQueriesAsStream();
         expectToBePromise(postAllDocsQueriesAsStreamPromise);
 
-        postAllDocsQueriesAsStreamPromise.catch(err => {
+        postAllDocsQueriesAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -1670,57 +1629,10 @@ describe('CloudantV1', () => {
   });
   describe('postBulkDocs', () => {
     describe('positive tests', () => {
-      // Request models needed by this operation.
-
-      // Attachment
-      const attachmentModel = {
-        content_type: 'testString',
-        data: 'This is a mock byte array value.',
-        digest: 'testString',
-        encoded_length: 0,
-        encoding: 'testString',
-        follows: true,
-        length: 0,
-        revpos: 1,
-        stub: true,
-      };
-
-      // Revisions
-      const revisionsModel = {
-        ids: ['testString'],
-        start: 1,
-      };
-
-      // DocumentRevisionStatus
-      const documentRevisionStatusModel = {
-        rev: 'testString',
-        status: 'available',
-      };
-
-      // Document
-      const documentModel = {
-        _attachments: { 'key1': attachmentModel },
-        _conflicts: ['testString'],
-        _deleted: true,
-        _deleted_conflicts: ['testString'],
-        _id: 'testString',
-        _local_seq: 'testString',
-        _rev: 'testString',
-        _revisions: revisionsModel,
-        _revs_info: [documentRevisionStatusModel],
-        foo: 'testString',
-      };
-
-      // BulkDocs
-      const bulkDocsModel = {
-        docs: [documentModel],
-        new_edits: true,
-      };
-
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postBulkDocs
         const db = 'testString';
-        const bulkDocs = bulkDocsModel;
+        const bulkDocs = {};
         const params = {
           db: db,
           bulkDocs: bulkDocs,
@@ -1734,20 +1646,20 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_bulk_docs', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_bulk_docs', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body).toEqual(bulkDocs);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body).toEqual(bulkDocs);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const bulkDocs = bulkDocsModel;
+        const bulkDocs = {};
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -1765,7 +1677,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postBulkDocs({});
@@ -1777,11 +1689,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postBulkDocsPromise = cloudantService.postBulkDocs();
         expectToBePromise(postBulkDocsPromise);
 
-        postBulkDocsPromise.catch(err => {
+        postBulkDocsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -1803,10 +1715,10 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postBulkGet
         const db = 'testString';
         const docs = [bulkGetQueryDocumentModel];
-        const attachments = true;
-        const attEncodingInfo = true;
-        const latest = true;
-        const revs = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const latest = false;
+        const revs = false;
         const params = {
           db: db,
           docs: docs,
@@ -1824,18 +1736,18 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_bulk_get', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_bulk_get', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['docs']).toEqual(docs);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['latest']).toEqual(latest);
-        expect(options.qs['revs']).toEqual(revs);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body.docs).toEqual(docs);
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.latest).toEqual(latest);
+        expect(mockRequestOptions.qs.revs).toEqual(revs);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -1859,7 +1771,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postBulkGet({});
@@ -1871,11 +1783,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postBulkGetPromise = cloudantService.postBulkGet();
         expectToBePromise(postBulkGetPromise);
 
-        postBulkGetPromise.catch(err => {
+        postBulkGetPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -1897,10 +1809,10 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postBulkGetAsMixed
         const db = 'testString';
         const docs = [bulkGetQueryDocumentModel];
-        const attachments = true;
-        const attEncodingInfo = true;
-        const latest = true;
-        const revs = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const latest = false;
+        const revs = false;
         const params = {
           db: db,
           docs: docs,
@@ -1918,19 +1830,19 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_bulk_get', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_bulk_get', 'POST');
         const expectedAccept = 'multipart/mixed';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['docs']).toEqual(docs);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['latest']).toEqual(latest);
-        expect(options.qs['revs']).toEqual(revs);
-        expect(options.path['db']).toEqual(db);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.docs).toEqual(docs);
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.latest).toEqual(latest);
+        expect(mockRequestOptions.qs.revs).toEqual(revs);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -1954,7 +1866,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postBulkGetAsMixed({});
@@ -1966,11 +1878,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postBulkGetAsMixedPromise = cloudantService.postBulkGetAsMixed();
         expectToBePromise(postBulkGetAsMixedPromise);
 
-        postBulkGetAsMixedPromise.catch(err => {
+        postBulkGetAsMixedPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -1992,10 +1904,10 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postBulkGetAsRelated
         const db = 'testString';
         const docs = [bulkGetQueryDocumentModel];
-        const attachments = true;
-        const attEncodingInfo = true;
-        const latest = true;
-        const revs = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const latest = false;
+        const revs = false;
         const params = {
           db: db,
           docs: docs,
@@ -2013,19 +1925,19 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_bulk_get', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_bulk_get', 'POST');
         const expectedAccept = 'multipart/related';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['docs']).toEqual(docs);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['latest']).toEqual(latest);
-        expect(options.qs['revs']).toEqual(revs);
-        expect(options.path['db']).toEqual(db);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.docs).toEqual(docs);
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.latest).toEqual(latest);
+        expect(mockRequestOptions.qs.revs).toEqual(revs);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -2049,7 +1961,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postBulkGetAsRelated({});
@@ -2061,11 +1973,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postBulkGetAsRelatedPromise = cloudantService.postBulkGetAsRelated();
         expectToBePromise(postBulkGetAsRelatedPromise);
 
-        postBulkGetAsRelatedPromise.catch(err => {
+        postBulkGetAsRelatedPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -2087,10 +1999,10 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postBulkGetAsStream
         const db = 'testString';
         const docs = [bulkGetQueryDocumentModel];
-        const attachments = true;
-        const attEncodingInfo = true;
-        const latest = true;
-        const revs = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const latest = false;
+        const revs = false;
         const params = {
           db: db,
           docs: docs,
@@ -2108,19 +2020,19 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_bulk_get', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_bulk_get', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['docs']).toEqual(docs);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['latest']).toEqual(latest);
-        expect(options.qs['revs']).toEqual(revs);
-        expect(options.path['db']).toEqual(db);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.docs).toEqual(docs);
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.latest).toEqual(latest);
+        expect(mockRequestOptions.qs.revs).toEqual(revs);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -2144,7 +2056,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postBulkGetAsStream({});
@@ -2156,11 +2068,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postBulkGetAsStreamPromise = cloudantService.postBulkGetAsStream();
         expectToBePromise(postBulkGetAsStreamPromise);
 
-        postBulkGetAsStreamPromise.catch(err => {
+        postBulkGetAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -2192,17 +2104,17 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/{doc_id}', 'DELETE');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
-        expect(options.qs['batch']).toEqual(batch);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.qs.batch).toEqual(batch);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -2226,7 +2138,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.deleteDocument({});
@@ -2238,11 +2150,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const deleteDocumentPromise = cloudantService.deleteDocument();
         expectToBePromise(deleteDocumentPromise);
 
-        deleteDocumentPromise.catch(err => {
+        deleteDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -2256,16 +2168,16 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const conflicts = true;
-        const deletedConflicts = true;
-        const latest = true;
-        const localSeq = true;
-        const meta = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const conflicts = false;
+        const deletedConflicts = false;
+        const latest = false;
+        const localSeq = false;
+        const meta = false;
         const rev = 'testString';
-        const revs = true;
-        const revsInfo = true;
+        const revs = false;
+        const revsInfo = false;
         const params = {
           db: db,
           docId: docId,
@@ -2290,25 +2202,25 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/{doc_id}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['conflicts']).toEqual(conflicts);
-        expect(options.qs['deleted_conflicts']).toEqual(deletedConflicts);
-        expect(options.qs['latest']).toEqual(latest);
-        expect(options.qs['local_seq']).toEqual(localSeq);
-        expect(options.qs['meta']).toEqual(meta);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.qs['revs']).toEqual(revs);
-        expect(options.qs['revs_info']).toEqual(revsInfo);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(deletedConflicts);
+        expect(mockRequestOptions.qs.latest).toEqual(latest);
+        expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
+        expect(mockRequestOptions.qs.meta).toEqual(meta);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.qs.revs).toEqual(revs);
+        expect(mockRequestOptions.qs.revs_info).toEqual(revsInfo);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -2332,7 +2244,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getDocument({});
@@ -2344,11 +2256,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getDocumentPromise = cloudantService.getDocument();
         expectToBePromise(getDocumentPromise);
 
-        getDocumentPromise.catch(err => {
+        getDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -2362,16 +2274,16 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const conflicts = true;
-        const deletedConflicts = true;
-        const latest = true;
-        const localSeq = true;
-        const meta = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const conflicts = false;
+        const deletedConflicts = false;
+        const latest = false;
+        const localSeq = false;
+        const meta = false;
         const rev = 'testString';
-        const revs = true;
-        const revsInfo = true;
+        const revs = false;
+        const revsInfo = false;
         const params = {
           db: db,
           docId: docId,
@@ -2396,26 +2308,26 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/{doc_id}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'GET');
         const expectedAccept = 'multipart/mixed';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['conflicts']).toEqual(conflicts);
-        expect(options.qs['deleted_conflicts']).toEqual(deletedConflicts);
-        expect(options.qs['latest']).toEqual(latest);
-        expect(options.qs['local_seq']).toEqual(localSeq);
-        expect(options.qs['meta']).toEqual(meta);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.qs['revs']).toEqual(revs);
-        expect(options.qs['revs_info']).toEqual(revsInfo);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(deletedConflicts);
+        expect(mockRequestOptions.qs.latest).toEqual(latest);
+        expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
+        expect(mockRequestOptions.qs.meta).toEqual(meta);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.qs.revs).toEqual(revs);
+        expect(mockRequestOptions.qs.revs_info).toEqual(revsInfo);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -2439,7 +2351,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getDocumentAsMixed({});
@@ -2451,11 +2363,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getDocumentAsMixedPromise = cloudantService.getDocumentAsMixed();
         expectToBePromise(getDocumentAsMixedPromise);
 
-        getDocumentAsMixedPromise.catch(err => {
+        getDocumentAsMixedPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -2469,16 +2381,16 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const conflicts = true;
-        const deletedConflicts = true;
-        const latest = true;
-        const localSeq = true;
-        const meta = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const conflicts = false;
+        const deletedConflicts = false;
+        const latest = false;
+        const localSeq = false;
+        const meta = false;
         const rev = 'testString';
-        const revs = true;
-        const revsInfo = true;
+        const revs = false;
+        const revsInfo = false;
         const params = {
           db: db,
           docId: docId,
@@ -2503,26 +2415,26 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/{doc_id}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'GET');
         const expectedAccept = 'multipart/related';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['conflicts']).toEqual(conflicts);
-        expect(options.qs['deleted_conflicts']).toEqual(deletedConflicts);
-        expect(options.qs['latest']).toEqual(latest);
-        expect(options.qs['local_seq']).toEqual(localSeq);
-        expect(options.qs['meta']).toEqual(meta);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.qs['revs']).toEqual(revs);
-        expect(options.qs['revs_info']).toEqual(revsInfo);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(deletedConflicts);
+        expect(mockRequestOptions.qs.latest).toEqual(latest);
+        expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
+        expect(mockRequestOptions.qs.meta).toEqual(meta);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.qs.revs).toEqual(revs);
+        expect(mockRequestOptions.qs.revs_info).toEqual(revsInfo);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -2546,7 +2458,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getDocumentAsRelated({});
@@ -2558,11 +2470,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getDocumentAsRelatedPromise = cloudantService.getDocumentAsRelated();
         expectToBePromise(getDocumentAsRelatedPromise);
 
-        getDocumentAsRelatedPromise.catch(err => {
+        getDocumentAsRelatedPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -2576,16 +2488,16 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const conflicts = true;
-        const deletedConflicts = true;
-        const latest = true;
-        const localSeq = true;
-        const meta = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const conflicts = false;
+        const deletedConflicts = false;
+        const latest = false;
+        const localSeq = false;
+        const meta = false;
         const rev = 'testString';
-        const revs = true;
-        const revsInfo = true;
+        const revs = false;
+        const revsInfo = false;
         const params = {
           db: db,
           docId: docId,
@@ -2610,26 +2522,26 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/{doc_id}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['conflicts']).toEqual(conflicts);
-        expect(options.qs['deleted_conflicts']).toEqual(deletedConflicts);
-        expect(options.qs['latest']).toEqual(latest);
-        expect(options.qs['local_seq']).toEqual(localSeq);
-        expect(options.qs['meta']).toEqual(meta);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.qs['revs']).toEqual(revs);
-        expect(options.qs['revs_info']).toEqual(revsInfo);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(deletedConflicts);
+        expect(mockRequestOptions.qs.latest).toEqual(latest);
+        expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
+        expect(mockRequestOptions.qs.meta).toEqual(meta);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.qs.revs).toEqual(revs);
+        expect(mockRequestOptions.qs.revs_info).toEqual(revsInfo);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -2653,7 +2565,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getDocumentAsStream({});
@@ -2665,11 +2577,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getDocumentAsStreamPromise = cloudantService.getDocumentAsStream();
         expectToBePromise(getDocumentAsStreamPromise);
 
-        getDocumentAsStreamPromise.catch(err => {
+        getDocumentAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -2678,56 +2590,15 @@ describe('CloudantV1', () => {
   });
   describe('putDocument', () => {
     describe('positive tests', () => {
-      // Request models needed by this operation.
-
-      // Attachment
-      const attachmentModel = {
-        content_type: 'testString',
-        data: 'This is a mock byte array value.',
-        digest: 'testString',
-        encoded_length: 0,
-        encoding: 'testString',
-        follows: true,
-        length: 0,
-        revpos: 1,
-        stub: true,
-      };
-
-      // Revisions
-      const revisionsModel = {
-        ids: ['testString'],
-        start: 1,
-      };
-
-      // DocumentRevisionStatus
-      const documentRevisionStatusModel = {
-        rev: 'testString',
-        status: 'available',
-      };
-
-      // Document
-      const documentModel = {
-        _attachments: { 'key1': attachmentModel },
-        _conflicts: ['testString'],
-        _deleted: true,
-        _deleted_conflicts: ['testString'],
-        _id: 'exampleid',
-        _local_seq: 'testString',
-        _rev: 'testString',
-        _revisions: revisionsModel,
-        _revs_info: [documentRevisionStatusModel],
-        foo: 'testString',
-      };
-
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation putDocument
         const db = 'testString';
         const docId = 'testString';
-        const document = documentModel;
+        const document = {};
         const contentType = 'application/json';
         const ifMatch = 'testString';
         const batch = 'ok';
-        const newEdits = true;
+        const newEdits = false;
         const rev = 'testString';
         const params = {
           db: db,
@@ -2748,27 +2619,27 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/{doc_id}', 'PUT');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = contentType;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Content-Type', contentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
-        expect(options.body).toEqual(document);
-        expect(options.qs['batch']).toEqual(batch);
-        expect(options.qs['new_edits']).toEqual(newEdits);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.body).toEqual(document);
+        expect(mockRequestOptions.qs.batch).toEqual(batch);
+        expect(mockRequestOptions.qs.new_edits).toEqual(newEdits);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
         const docId = 'testString';
-        const document = documentModel;
+        const document = {};
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -2787,7 +2658,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.putDocument({});
@@ -2799,11 +2670,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const putDocumentPromise = cloudantService.putDocument();
         expectToBePromise(putDocumentPromise);
 
-        putDocumentPromise.catch(err => {
+        putDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -2831,15 +2702,15 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}', 'HEAD');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
       });
 
       test('should prioritize user-given headers', () => {
@@ -2863,7 +2734,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.headDesignDocument({});
@@ -2875,11 +2746,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const headDesignDocumentPromise = cloudantService.headDesignDocument();
         expectToBePromise(headDesignDocumentPromise);
 
-        headDesignDocumentPromise.catch(err => {
+        headDesignDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -2911,17 +2782,17 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}', 'DELETE');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
-        expect(options.qs['batch']).toEqual(batch);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
+        expect(mockRequestOptions.qs.batch).toEqual(batch);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
       });
 
       test('should prioritize user-given headers', () => {
@@ -2945,7 +2816,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.deleteDesignDocument({});
@@ -2957,11 +2828,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const deleteDesignDocumentPromise = cloudantService.deleteDesignDocument();
         expectToBePromise(deleteDesignDocumentPromise);
 
-        deleteDesignDocumentPromise.catch(err => {
+        deleteDesignDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -2975,16 +2846,16 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const conflicts = true;
-        const deletedConflicts = true;
-        const latest = true;
-        const localSeq = true;
-        const meta = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const conflicts = false;
+        const deletedConflicts = false;
+        const latest = false;
+        const localSeq = false;
+        const meta = false;
         const rev = 'testString';
-        const revs = true;
-        const revsInfo = true;
+        const revs = false;
+        const revsInfo = false;
         const params = {
           db: db,
           ddoc: ddoc,
@@ -3009,25 +2880,25 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['conflicts']).toEqual(conflicts);
-        expect(options.qs['deleted_conflicts']).toEqual(deletedConflicts);
-        expect(options.qs['latest']).toEqual(latest);
-        expect(options.qs['local_seq']).toEqual(localSeq);
-        expect(options.qs['meta']).toEqual(meta);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.qs['revs']).toEqual(revs);
-        expect(options.qs['revs_info']).toEqual(revsInfo);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(deletedConflicts);
+        expect(mockRequestOptions.qs.latest).toEqual(latest);
+        expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
+        expect(mockRequestOptions.qs.meta).toEqual(meta);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.qs.revs).toEqual(revs);
+        expect(mockRequestOptions.qs.revs_info).toEqual(revsInfo);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
       });
 
       test('should prioritize user-given headers', () => {
@@ -3051,7 +2922,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getDesignDocument({});
@@ -3063,11 +2934,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getDesignDocumentPromise = cloudantService.getDesignDocument();
         expectToBePromise(getDesignDocumentPromise);
 
-        getDesignDocumentPromise.catch(err => {
+        getDesignDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -3152,13 +3023,13 @@ describe('CloudantV1', () => {
         autoupdate: true,
         filters: { 'key1': 'testString' },
         indexes: { 'key1': searchIndexDefinitionModel },
-        language: 'testString',
+        language: 'javascript',
         options: designDocumentOptionsModel,
         updates: { 'key1': 'testString' },
         validate_doc_update: 'testString',
         views: { 'key1': designDocumentViewsMapReduceModel },
         st_indexes: { 'key1': geoIndexDefinitionModel },
-        foo: { foo: 'bar' },
+        foo: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -3168,7 +3039,7 @@ describe('CloudantV1', () => {
         const designDocument = designDocumentModel;
         const ifMatch = 'testString';
         const batch = 'ok';
-        const newEdits = true;
+        const newEdits = false;
         const rev = 'testString';
         const params = {
           db: db,
@@ -3188,19 +3059,19 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}', 'PUT');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
-        expect(options.body).toEqual(designDocument);
-        expect(options.qs['batch']).toEqual(batch);
-        expect(options.qs['new_edits']).toEqual(newEdits);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
+        expect(mockRequestOptions.body).toEqual(designDocument);
+        expect(mockRequestOptions.qs.batch).toEqual(batch);
+        expect(mockRequestOptions.qs.new_edits).toEqual(newEdits);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
       });
 
       test('should prioritize user-given headers', () => {
@@ -3226,7 +3097,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.putDesignDocument({});
@@ -3238,11 +3109,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const putDesignDocumentPromise = cloudantService.putDesignDocument();
         expectToBePromise(putDesignDocumentPromise);
 
-        putDesignDocumentPromise.catch(err => {
+        putDesignDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -3268,14 +3139,14 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}/_info', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_info', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
       });
 
       test('should prioritize user-given headers', () => {
@@ -3299,7 +3170,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getDesignDocumentInformation({});
@@ -3311,11 +3182,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getDesignDocumentInformationPromise = cloudantService.getDesignDocumentInformation();
         expectToBePromise(getDesignDocumentInformationPromise);
 
-        getDesignDocumentInformationPromise.catch(err => {
+        getDesignDocumentInformationPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -3327,15 +3198,15 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postDesignDocs
         const db = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const includeDocs = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const includeDocs = false;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
@@ -3367,27 +3238,27 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design_docs', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design_docs', 'POST');
         const expectedAccept = accept;
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Accept', accept);
-        expect(options.body['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.body['attachments']).toEqual(attachments);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['descending']).toEqual(descending);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['inclusive_end']).toEqual(inclusiveEnd);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['update_seq']).toEqual(updateSeq);
-        expect(options.body['endkey']).toEqual(endkey);
-        expect(options.body['key']).toEqual(key);
-        expect(options.body['keys']).toEqual(keys);
-        expect(options.body['startkey']).toEqual(startkey);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.body.attachments).toEqual(attachments);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.descending).toEqual(descending);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.inclusive_end).toEqual(inclusiveEnd);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
+        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.key).toEqual(key);
+        expect(mockRequestOptions.body.keys).toEqual(keys);
+        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -3409,7 +3280,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postDesignDocs({});
@@ -3421,11 +3292,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postDesignDocsPromise = cloudantService.postDesignDocs();
         expectToBePromise(postDesignDocsPromise);
 
-        postDesignDocsPromise.catch(err => {
+        postDesignDocsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -3438,15 +3309,15 @@ describe('CloudantV1', () => {
 
       // AllDocsQuery
       const allDocsQueryModel = {
-        att_encoding_info: true,
-        attachments: true,
-        conflicts: true,
-        descending: true,
-        include_docs: true,
+        att_encoding_info: false,
+        attachments: false,
+        conflicts: false,
+        descending: false,
+        include_docs: false,
         inclusive_end: true,
         limit: 0,
         skip: 0,
-        update_seq: true,
+        update_seq: false,
         endkey: 'testString',
         key: 'testString',
         keys: ['small-appliances:1000042', 'small-appliances:1000043'],
@@ -3472,15 +3343,15 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design_docs/queries', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design_docs/queries', 'POST');
         const expectedAccept = accept;
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Accept', accept);
-        expect(options.body['queries']).toEqual(queries);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body.queries).toEqual(queries);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -3504,7 +3375,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postDesignDocsQueries({});
@@ -3516,11 +3387,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postDesignDocsQueriesPromise = cloudantService.postDesignDocsQueries();
         expectToBePromise(postDesignDocsQueriesPromise);
 
-        postDesignDocsQueriesPromise.catch(err => {
+        postDesignDocsQueriesPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -3534,23 +3405,23 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const view = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const includeDocs = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const includeDocs = false;
         const inclusiveEnd = true;
         const limit = 0;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const endkeyDocid = 'testString';
-        const group = true;
+        const group = false;
         const groupLevel = 1;
         const key = 'testString';
         const keys = ['testString'];
         const reduce = true;
-        const stable = true;
+        const stable = false;
         const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
@@ -3588,35 +3459,35 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}/_view/{view}', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_view/{view}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.body['attachments']).toEqual(attachments);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['descending']).toEqual(descending);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['inclusive_end']).toEqual(inclusiveEnd);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['update_seq']).toEqual(updateSeq);
-        expect(options.body['endkey']).toEqual(endkey);
-        expect(options.body['endkey_docid']).toEqual(endkeyDocid);
-        expect(options.body['group']).toEqual(group);
-        expect(options.body['group_level']).toEqual(groupLevel);
-        expect(options.body['key']).toEqual(key);
-        expect(options.body['keys']).toEqual(keys);
-        expect(options.body['reduce']).toEqual(reduce);
-        expect(options.body['stable']).toEqual(stable);
-        expect(options.body['startkey']).toEqual(startkey);
-        expect(options.body['startkey_docid']).toEqual(startkeyDocid);
-        expect(options.body['update']).toEqual(update);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['view']).toEqual(view);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.body.attachments).toEqual(attachments);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.descending).toEqual(descending);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.inclusive_end).toEqual(inclusiveEnd);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
+        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.endkey_docid).toEqual(endkeyDocid);
+        expect(mockRequestOptions.body.group).toEqual(group);
+        expect(mockRequestOptions.body.group_level).toEqual(groupLevel);
+        expect(mockRequestOptions.body.key).toEqual(key);
+        expect(mockRequestOptions.body.keys).toEqual(keys);
+        expect(mockRequestOptions.body.reduce).toEqual(reduce);
+        expect(mockRequestOptions.body.stable).toEqual(stable);
+        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.body.startkey_docid).toEqual(startkeyDocid);
+        expect(mockRequestOptions.body.update).toEqual(update);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.view).toEqual(view);
       });
 
       test('should prioritize user-given headers', () => {
@@ -3642,7 +3513,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postView({});
@@ -3654,11 +3525,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postViewPromise = cloudantService.postView();
         expectToBePromise(postViewPromise);
 
-        postViewPromise.catch(err => {
+        postViewPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -3672,23 +3543,23 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const view = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
         const includeDocs = true;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const endkeyDocid = 'testString';
-        const group = true;
+        const group = false;
         const groupLevel = 1;
         const key = 'testString';
         const keys = ['examplekey'];
         const reduce = true;
-        const stable = true;
+        const stable = false;
         const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
@@ -3726,36 +3597,36 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}/_view/{view}', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_view/{view}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.body['attachments']).toEqual(attachments);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['descending']).toEqual(descending);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['inclusive_end']).toEqual(inclusiveEnd);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['update_seq']).toEqual(updateSeq);
-        expect(options.body['endkey']).toEqual(endkey);
-        expect(options.body['endkey_docid']).toEqual(endkeyDocid);
-        expect(options.body['group']).toEqual(group);
-        expect(options.body['group_level']).toEqual(groupLevel);
-        expect(options.body['key']).toEqual(key);
-        expect(options.body['keys']).toEqual(keys);
-        expect(options.body['reduce']).toEqual(reduce);
-        expect(options.body['stable']).toEqual(stable);
-        expect(options.body['startkey']).toEqual(startkey);
-        expect(options.body['startkey_docid']).toEqual(startkeyDocid);
-        expect(options.body['update']).toEqual(update);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['view']).toEqual(view);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.body.attachments).toEqual(attachments);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.descending).toEqual(descending);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.inclusive_end).toEqual(inclusiveEnd);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
+        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.endkey_docid).toEqual(endkeyDocid);
+        expect(mockRequestOptions.body.group).toEqual(group);
+        expect(mockRequestOptions.body.group_level).toEqual(groupLevel);
+        expect(mockRequestOptions.body.key).toEqual(key);
+        expect(mockRequestOptions.body.keys).toEqual(keys);
+        expect(mockRequestOptions.body.reduce).toEqual(reduce);
+        expect(mockRequestOptions.body.stable).toEqual(stable);
+        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.body.startkey_docid).toEqual(startkeyDocid);
+        expect(mockRequestOptions.body.update).toEqual(update);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.view).toEqual(view);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -3781,7 +3652,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postViewAsStream({});
@@ -3793,11 +3664,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postViewAsStreamPromise = cloudantService.postViewAsStream();
         expectToBePromise(postViewAsStreamPromise);
 
-        postViewAsStreamPromise.catch(err => {
+        postViewAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -3810,23 +3681,23 @@ describe('CloudantV1', () => {
 
       // ViewQuery
       const viewQueryModel = {
-        att_encoding_info: true,
-        attachments: true,
-        conflicts: true,
-        descending: true,
-        include_docs: true,
+        att_encoding_info: false,
+        attachments: false,
+        conflicts: false,
+        descending: false,
+        include_docs: false,
         inclusive_end: true,
         limit: 0,
         skip: 0,
-        update_seq: true,
+        update_seq: false,
         endkey: 'testString',
         endkey_docid: 'testString',
-        group: true,
+        group: false,
         group_level: 1,
         key: 'testString',
         keys: ['testString'],
         reduce: true,
-        stable: true,
+        stable: false,
         startkey: 'testString',
         startkey_docid: 'testString',
         update: 'true',
@@ -3853,16 +3724,16 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}/_view/{view}/queries', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_view/{view}/queries', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['queries']).toEqual(queries);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['view']).toEqual(view);
+        expect(mockRequestOptions.body.queries).toEqual(queries);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.view).toEqual(view);
       });
 
       test('should prioritize user-given headers', () => {
@@ -3890,7 +3761,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postViewQueries({});
@@ -3902,11 +3773,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postViewQueriesPromise = cloudantService.postViewQueries();
         expectToBePromise(postViewQueriesPromise);
 
-        postViewQueriesPromise.catch(err => {
+        postViewQueriesPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -3919,23 +3790,23 @@ describe('CloudantV1', () => {
 
       // ViewQuery
       const viewQueryModel = {
-        att_encoding_info: true,
-        attachments: true,
-        conflicts: true,
-        descending: true,
+        att_encoding_info: false,
+        attachments: false,
+        conflicts: false,
+        descending: false,
         include_docs: true,
         inclusive_end: true,
         limit: 5,
         skip: 0,
-        update_seq: true,
+        update_seq: false,
         endkey: 'testString',
         endkey_docid: 'testString',
-        group: true,
+        group: false,
         group_level: 1,
         key: 'testString',
         keys: ['testString'],
         reduce: true,
-        stable: true,
+        stable: false,
         startkey: 'testString',
         startkey_docid: 'testString',
         update: 'true',
@@ -3962,17 +3833,17 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}/_view/{view}/queries', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_view/{view}/queries', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['queries']).toEqual(queries);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['view']).toEqual(view);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.queries).toEqual(queries);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.view).toEqual(view);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -4000,7 +3871,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postViewQueriesAsStream({});
@@ -4012,11 +3883,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postViewQueriesAsStreamPromise = cloudantService.postViewQueriesAsStream();
         expectToBePromise(postViewQueriesAsStreamPromise);
 
-        postViewQueriesAsStreamPromise.catch(err => {
+        postViewQueriesAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -4042,14 +3913,14 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_partition/{partition_key}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['partition_key']).toEqual(partitionKey);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
       });
 
       test('should prioritize user-given headers', () => {
@@ -4073,7 +3944,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getPartitionInformation({});
@@ -4085,11 +3956,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getPartitionInformationPromise = cloudantService.getPartitionInformation();
         expectToBePromise(getPartitionInformationPromise);
 
-        getPartitionInformationPromise.catch(err => {
+        getPartitionInformationPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -4102,15 +3973,15 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postPartitionAllDocs
         const db = 'testString';
         const partitionKey = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const includeDocs = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const includeDocs = false;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
@@ -4141,27 +4012,27 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_partition/{partition_key}/_all_docs', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_all_docs', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.body['attachments']).toEqual(attachments);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['descending']).toEqual(descending);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['inclusive_end']).toEqual(inclusiveEnd);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['update_seq']).toEqual(updateSeq);
-        expect(options.body['endkey']).toEqual(endkey);
-        expect(options.body['key']).toEqual(key);
-        expect(options.body['keys']).toEqual(keys);
-        expect(options.body['startkey']).toEqual(startkey);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['partition_key']).toEqual(partitionKey);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.body.attachments).toEqual(attachments);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.descending).toEqual(descending);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.inclusive_end).toEqual(inclusiveEnd);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
+        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.key).toEqual(key);
+        expect(mockRequestOptions.body.keys).toEqual(keys);
+        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
       });
 
       test('should prioritize user-given headers', () => {
@@ -4185,7 +4056,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postPartitionAllDocs({});
@@ -4197,11 +4068,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postPartitionAllDocsPromise = cloudantService.postPartitionAllDocs();
         expectToBePromise(postPartitionAllDocsPromise);
 
-        postPartitionAllDocsPromise.catch(err => {
+        postPartitionAllDocsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -4214,15 +4085,15 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postPartitionAllDocsAsStream
         const db = 'testString';
         const partitionKey = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
-        const includeDocs = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
+        const includeDocs = false;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
@@ -4253,28 +4124,28 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_partition/{partition_key}/_all_docs', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_all_docs', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.body['attachments']).toEqual(attachments);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['descending']).toEqual(descending);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['inclusive_end']).toEqual(inclusiveEnd);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['update_seq']).toEqual(updateSeq);
-        expect(options.body['endkey']).toEqual(endkey);
-        expect(options.body['key']).toEqual(key);
-        expect(options.body['keys']).toEqual(keys);
-        expect(options.body['startkey']).toEqual(startkey);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['partition_key']).toEqual(partitionKey);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.body.attachments).toEqual(attachments);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.descending).toEqual(descending);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.inclusive_end).toEqual(inclusiveEnd);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
+        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.key).toEqual(key);
+        expect(mockRequestOptions.body.keys).toEqual(keys);
+        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -4298,7 +4169,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postPartitionAllDocsAsStream({});
@@ -4310,11 +4181,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postPartitionAllDocsAsStreamPromise = cloudantService.postPartitionAllDocsAsStream();
         expectToBePromise(postPartitionAllDocsAsStreamPromise);
 
-        postPartitionAllDocsAsStreamPromise.catch(err => {
+        postPartitionAllDocsAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -4333,10 +4204,10 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const highlightFields = ['testString'];
         const highlightNumber = 1;
-        const highlightPostTag = 'testString';
-        const highlightPreTag = 'testString';
+        const highlightPostTag = '</em>';
+        const highlightPreTag = '<em>';
         const highlightSize = 1;
-        const includeDocs = true;
+        const includeDocs = false;
         const includeFields = ['testString'];
         const limit = 0;
         const sort = ['testString'];
@@ -4368,28 +4239,28 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['query']).toEqual(query);
-        expect(options.body['bookmark']).toEqual(bookmark);
-        expect(options.body['highlight_fields']).toEqual(highlightFields);
-        expect(options.body['highlight_number']).toEqual(highlightNumber);
-        expect(options.body['highlight_post_tag']).toEqual(highlightPostTag);
-        expect(options.body['highlight_pre_tag']).toEqual(highlightPreTag);
-        expect(options.body['highlight_size']).toEqual(highlightSize);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['include_fields']).toEqual(includeFields);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['sort']).toEqual(sort);
-        expect(options.body['stale']).toEqual(stale);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['partition_key']).toEqual(partitionKey);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['index']).toEqual(index);
+        expect(mockRequestOptions.body.query).toEqual(query);
+        expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
+        expect(mockRequestOptions.body.highlight_fields).toEqual(highlightFields);
+        expect(mockRequestOptions.body.highlight_number).toEqual(highlightNumber);
+        expect(mockRequestOptions.body.highlight_post_tag).toEqual(highlightPostTag);
+        expect(mockRequestOptions.body.highlight_pre_tag).toEqual(highlightPreTag);
+        expect(mockRequestOptions.body.highlight_size).toEqual(highlightSize);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.include_fields).toEqual(includeFields);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.sort).toEqual(sort);
+        expect(mockRequestOptions.body.stale).toEqual(stale);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.index).toEqual(index);
       });
 
       test('should prioritize user-given headers', () => {
@@ -4419,7 +4290,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postPartitionSearch({});
@@ -4431,11 +4302,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postPartitionSearchPromise = cloudantService.postPartitionSearch();
         expectToBePromise(postPartitionSearchPromise);
 
-        postPartitionSearchPromise.catch(err => {
+        postPartitionSearchPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -4454,10 +4325,10 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const highlightFields = ['testString'];
         const highlightNumber = 1;
-        const highlightPostTag = 'testString';
-        const highlightPreTag = 'testString';
+        const highlightPostTag = '</em>';
+        const highlightPreTag = '<em>';
         const highlightSize = 1;
-        const includeDocs = true;
+        const includeDocs = false;
         const includeFields = ['testString'];
         const limit = 3;
         const sort = ['testString'];
@@ -4489,29 +4360,29 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['query']).toEqual(query);
-        expect(options.body['bookmark']).toEqual(bookmark);
-        expect(options.body['highlight_fields']).toEqual(highlightFields);
-        expect(options.body['highlight_number']).toEqual(highlightNumber);
-        expect(options.body['highlight_post_tag']).toEqual(highlightPostTag);
-        expect(options.body['highlight_pre_tag']).toEqual(highlightPreTag);
-        expect(options.body['highlight_size']).toEqual(highlightSize);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['include_fields']).toEqual(includeFields);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['sort']).toEqual(sort);
-        expect(options.body['stale']).toEqual(stale);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['partition_key']).toEqual(partitionKey);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['index']).toEqual(index);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.query).toEqual(query);
+        expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
+        expect(mockRequestOptions.body.highlight_fields).toEqual(highlightFields);
+        expect(mockRequestOptions.body.highlight_number).toEqual(highlightNumber);
+        expect(mockRequestOptions.body.highlight_post_tag).toEqual(highlightPostTag);
+        expect(mockRequestOptions.body.highlight_pre_tag).toEqual(highlightPreTag);
+        expect(mockRequestOptions.body.highlight_size).toEqual(highlightSize);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.include_fields).toEqual(includeFields);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.sort).toEqual(sort);
+        expect(mockRequestOptions.body.stale).toEqual(stale);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.index).toEqual(index);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -4541,7 +4412,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postPartitionSearchAsStream({});
@@ -4553,11 +4424,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postPartitionSearchAsStreamPromise = cloudantService.postPartitionSearchAsStream();
         expectToBePromise(postPartitionSearchAsStreamPromise);
 
-        postPartitionSearchAsStreamPromise.catch(err => {
+        postPartitionSearchAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -4572,23 +4443,23 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const ddoc = 'testString';
         const view = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
         const includeDocs = true;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const endkeyDocid = 'testString';
-        const group = true;
+        const group = false;
         const groupLevel = 1;
         const key = 'testString';
         const keys = ['examplekey'];
         const reduce = true;
-        const stable = true;
+        const stable = false;
         const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
@@ -4627,36 +4498,36 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.body['attachments']).toEqual(attachments);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['descending']).toEqual(descending);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['inclusive_end']).toEqual(inclusiveEnd);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['update_seq']).toEqual(updateSeq);
-        expect(options.body['endkey']).toEqual(endkey);
-        expect(options.body['endkey_docid']).toEqual(endkeyDocid);
-        expect(options.body['group']).toEqual(group);
-        expect(options.body['group_level']).toEqual(groupLevel);
-        expect(options.body['key']).toEqual(key);
-        expect(options.body['keys']).toEqual(keys);
-        expect(options.body['reduce']).toEqual(reduce);
-        expect(options.body['stable']).toEqual(stable);
-        expect(options.body['startkey']).toEqual(startkey);
-        expect(options.body['startkey_docid']).toEqual(startkeyDocid);
-        expect(options.body['update']).toEqual(update);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['partition_key']).toEqual(partitionKey);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['view']).toEqual(view);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.body.attachments).toEqual(attachments);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.descending).toEqual(descending);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.inclusive_end).toEqual(inclusiveEnd);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
+        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.endkey_docid).toEqual(endkeyDocid);
+        expect(mockRequestOptions.body.group).toEqual(group);
+        expect(mockRequestOptions.body.group_level).toEqual(groupLevel);
+        expect(mockRequestOptions.body.key).toEqual(key);
+        expect(mockRequestOptions.body.keys).toEqual(keys);
+        expect(mockRequestOptions.body.reduce).toEqual(reduce);
+        expect(mockRequestOptions.body.stable).toEqual(stable);
+        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.body.startkey_docid).toEqual(startkeyDocid);
+        expect(mockRequestOptions.body.update).toEqual(update);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.view).toEqual(view);
       });
 
       test('should prioritize user-given headers', () => {
@@ -4684,7 +4555,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postPartitionView({});
@@ -4696,11 +4567,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postPartitionViewPromise = cloudantService.postPartitionView();
         expectToBePromise(postPartitionViewPromise);
 
-        postPartitionViewPromise.catch(err => {
+        postPartitionViewPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -4715,23 +4586,23 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const ddoc = 'testString';
         const view = 'testString';
-        const attEncodingInfo = true;
-        const attachments = true;
-        const conflicts = true;
-        const descending = true;
+        const attEncodingInfo = false;
+        const attachments = false;
+        const conflicts = false;
+        const descending = false;
         const includeDocs = true;
         const inclusiveEnd = true;
         const limit = 10;
         const skip = 0;
-        const updateSeq = true;
+        const updateSeq = false;
         const endkey = 'testString';
         const endkeyDocid = 'testString';
-        const group = true;
+        const group = false;
         const groupLevel = 1;
         const key = 'testString';
         const keys = ['examplekey'];
         const reduce = true;
-        const stable = true;
+        const stable = false;
         const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
@@ -4770,37 +4641,37 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.body['attachments']).toEqual(attachments);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['descending']).toEqual(descending);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['inclusive_end']).toEqual(inclusiveEnd);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['update_seq']).toEqual(updateSeq);
-        expect(options.body['endkey']).toEqual(endkey);
-        expect(options.body['endkey_docid']).toEqual(endkeyDocid);
-        expect(options.body['group']).toEqual(group);
-        expect(options.body['group_level']).toEqual(groupLevel);
-        expect(options.body['key']).toEqual(key);
-        expect(options.body['keys']).toEqual(keys);
-        expect(options.body['reduce']).toEqual(reduce);
-        expect(options.body['stable']).toEqual(stable);
-        expect(options.body['startkey']).toEqual(startkey);
-        expect(options.body['startkey_docid']).toEqual(startkeyDocid);
-        expect(options.body['update']).toEqual(update);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['partition_key']).toEqual(partitionKey);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['view']).toEqual(view);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.body.attachments).toEqual(attachments);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.descending).toEqual(descending);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.inclusive_end).toEqual(inclusiveEnd);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
+        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.endkey_docid).toEqual(endkeyDocid);
+        expect(mockRequestOptions.body.group).toEqual(group);
+        expect(mockRequestOptions.body.group_level).toEqual(groupLevel);
+        expect(mockRequestOptions.body.key).toEqual(key);
+        expect(mockRequestOptions.body.keys).toEqual(keys);
+        expect(mockRequestOptions.body.reduce).toEqual(reduce);
+        expect(mockRequestOptions.body.stable).toEqual(stable);
+        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.body.startkey_docid).toEqual(startkeyDocid);
+        expect(mockRequestOptions.body.update).toEqual(update);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.view).toEqual(view);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -4828,7 +4699,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postPartitionViewAsStream({});
@@ -4840,11 +4711,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postPartitionViewAsStreamPromise = cloudantService.postPartitionViewAsStream();
         expectToBePromise(postPartitionViewAsStreamPromise);
 
-        postPartitionViewAsStreamPromise.catch(err => {
+        postPartitionViewAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -4866,7 +4737,7 @@ describe('CloudantV1', () => {
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
-        const update = 'false';
+        const update = 'true';
         const useIndex = ['testString'];
         const params = {
           db: db,
@@ -4892,25 +4763,25 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_partition/{partition_key}/_find', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_find', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['selector']).toEqual(selector);
-        expect(options.body['bookmark']).toEqual(bookmark);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['execution_stats']).toEqual(executionStats);
-        expect(options.body['fields']).toEqual(fields);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['sort']).toEqual(sort);
-        expect(options.body['stable']).toEqual(stable);
-        expect(options.body['update']).toEqual(update);
-        expect(options.body['use_index']).toEqual(useIndex);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['partition_key']).toEqual(partitionKey);
+        expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.execution_stats).toEqual(executionStats);
+        expect(mockRequestOptions.body.fields).toEqual(fields);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.sort).toEqual(sort);
+        expect(mockRequestOptions.body.stable).toEqual(stable);
+        expect(mockRequestOptions.body.update).toEqual(update);
+        expect(mockRequestOptions.body.use_index).toEqual(useIndex);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
       });
 
       test('should prioritize user-given headers', () => {
@@ -4936,7 +4807,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postPartitionFind({});
@@ -4948,11 +4819,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postPartitionFindPromise = cloudantService.postPartitionFind();
         expectToBePromise(postPartitionFindPromise);
 
-        postPartitionFindPromise.catch(err => {
+        postPartitionFindPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -4974,7 +4845,7 @@ describe('CloudantV1', () => {
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
-        const update = 'false';
+        const update = 'true';
         const useIndex = ['testString'];
         const params = {
           db: db,
@@ -5000,26 +4871,26 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_partition/{partition_key}/_find', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_find', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['selector']).toEqual(selector);
-        expect(options.body['bookmark']).toEqual(bookmark);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['execution_stats']).toEqual(executionStats);
-        expect(options.body['fields']).toEqual(fields);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['sort']).toEqual(sort);
-        expect(options.body['stable']).toEqual(stable);
-        expect(options.body['update']).toEqual(update);
-        expect(options.body['use_index']).toEqual(useIndex);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['partition_key']).toEqual(partitionKey);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.execution_stats).toEqual(executionStats);
+        expect(mockRequestOptions.body.fields).toEqual(fields);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.sort).toEqual(sort);
+        expect(mockRequestOptions.body.stable).toEqual(stable);
+        expect(mockRequestOptions.body.update).toEqual(update);
+        expect(mockRequestOptions.body.use_index).toEqual(useIndex);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -5045,7 +4916,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postPartitionFindAsStream({});
@@ -5057,11 +4928,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postPartitionFindAsStreamPromise = cloudantService.postPartitionFindAsStream();
         expectToBePromise(postPartitionFindAsStreamPromise);
 
-        postPartitionFindAsStreamPromise.catch(err => {
+        postPartitionFindAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -5073,7 +4944,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postExplain
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5082,7 +4953,7 @@ describe('CloudantV1', () => {
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
-        const update = 'false';
+        const update = 'true';
         const useIndex = ['testString'];
         const r = 1;
         const params = {
@@ -5109,31 +4980,31 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_explain', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_explain', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['selector']).toEqual(selector);
-        expect(options.body['bookmark']).toEqual(bookmark);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['execution_stats']).toEqual(executionStats);
-        expect(options.body['fields']).toEqual(fields);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['sort']).toEqual(sort);
-        expect(options.body['stable']).toEqual(stable);
-        expect(options.body['update']).toEqual(update);
-        expect(options.body['use_index']).toEqual(useIndex);
-        expect(options.body['r']).toEqual(r);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.execution_stats).toEqual(executionStats);
+        expect(mockRequestOptions.body.fields).toEqual(fields);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.sort).toEqual(sort);
+        expect(mockRequestOptions.body.stable).toEqual(stable);
+        expect(mockRequestOptions.body.update).toEqual(update);
+        expect(mockRequestOptions.body.use_index).toEqual(useIndex);
+        expect(mockRequestOptions.body.r).toEqual(r);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -5151,7 +5022,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postExplain({});
@@ -5163,11 +5034,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postExplainPromise = cloudantService.postExplain();
         expectToBePromise(postExplainPromise);
 
-        postExplainPromise.catch(err => {
+        postExplainPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -5179,7 +5050,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postFind
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5188,7 +5059,7 @@ describe('CloudantV1', () => {
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
-        const update = 'false';
+        const update = 'true';
         const useIndex = ['testString'];
         const r = 1;
         const params = {
@@ -5215,31 +5086,31 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_find', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_find', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['selector']).toEqual(selector);
-        expect(options.body['bookmark']).toEqual(bookmark);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['execution_stats']).toEqual(executionStats);
-        expect(options.body['fields']).toEqual(fields);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['sort']).toEqual(sort);
-        expect(options.body['stable']).toEqual(stable);
-        expect(options.body['update']).toEqual(update);
-        expect(options.body['use_index']).toEqual(useIndex);
-        expect(options.body['r']).toEqual(r);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.execution_stats).toEqual(executionStats);
+        expect(mockRequestOptions.body.fields).toEqual(fields);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.sort).toEqual(sort);
+        expect(mockRequestOptions.body.stable).toEqual(stable);
+        expect(mockRequestOptions.body.update).toEqual(update);
+        expect(mockRequestOptions.body.use_index).toEqual(useIndex);
+        expect(mockRequestOptions.body.r).toEqual(r);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -5257,7 +5128,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postFind({});
@@ -5269,11 +5140,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postFindPromise = cloudantService.postFind();
         expectToBePromise(postFindPromise);
 
-        postFindPromise.catch(err => {
+        postFindPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -5285,7 +5156,7 @@ describe('CloudantV1', () => {
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation postFindAsStream
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5294,7 +5165,7 @@ describe('CloudantV1', () => {
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
-        const update = 'false';
+        const update = 'true';
         const useIndex = ['testString'];
         const r = 1;
         const params = {
@@ -5321,32 +5192,32 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_find', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_find', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['selector']).toEqual(selector);
-        expect(options.body['bookmark']).toEqual(bookmark);
-        expect(options.body['conflicts']).toEqual(conflicts);
-        expect(options.body['execution_stats']).toEqual(executionStats);
-        expect(options.body['fields']).toEqual(fields);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['skip']).toEqual(skip);
-        expect(options.body['sort']).toEqual(sort);
-        expect(options.body['stable']).toEqual(stable);
-        expect(options.body['update']).toEqual(update);
-        expect(options.body['use_index']).toEqual(useIndex);
-        expect(options.body['r']).toEqual(r);
-        expect(options.path['db']).toEqual(db);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.execution_stats).toEqual(executionStats);
+        expect(mockRequestOptions.body.fields).toEqual(fields);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.sort).toEqual(sort);
+        expect(mockRequestOptions.body.stable).toEqual(stable);
+        expect(mockRequestOptions.body.update).toEqual(update);
+        expect(mockRequestOptions.body.use_index).toEqual(useIndex);
+        expect(mockRequestOptions.body.r).toEqual(r);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { 'key1': { foo: 'bar' } };
+        const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -5364,7 +5235,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postFindAsStream({});
@@ -5376,11 +5247,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postFindAsStreamPromise = cloudantService.postFindAsStream();
         expectToBePromise(postFindAsStreamPromise);
 
-        postFindAsStreamPromise.catch(err => {
+        postFindAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -5404,13 +5275,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_index', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_index', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -5432,7 +5303,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getIndexesInformation({});
@@ -5444,11 +5315,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getIndexesInformationPromise = cloudantService.getIndexesInformation();
         expectToBePromise(getIndexesInformationPromise);
 
-        getIndexesInformationPromise.catch(err => {
+        getIndexesInformationPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -5514,19 +5385,19 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_index', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_index', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['index']).toEqual(index);
-        expect(options.body['ddoc']).toEqual(ddoc);
-        expect(options.body['def']).toEqual(def);
-        expect(options.body['name']).toEqual(name);
-        expect(options.body['partitioned']).toEqual(partitioned);
-        expect(options.body['type']).toEqual(type);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body.index).toEqual(index);
+        expect(mockRequestOptions.body.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.body.def).toEqual(def);
+        expect(mockRequestOptions.body.name).toEqual(name);
+        expect(mockRequestOptions.body.partitioned).toEqual(partitioned);
+        expect(mockRequestOptions.body.type).toEqual(type);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -5550,7 +5421,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postIndex({});
@@ -5562,11 +5433,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postIndexPromise = cloudantService.postIndex();
         expectToBePromise(postIndexPromise);
 
-        postIndexPromise.catch(err => {
+        postIndexPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -5596,16 +5467,16 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_index/_design/{ddoc}/{type}/{index}', 'DELETE');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_index/_design/{ddoc}/{type}/{index}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['type']).toEqual(type);
-        expect(options.path['index']).toEqual(index);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.type).toEqual(type);
+        expect(mockRequestOptions.path.index).toEqual(index);
       });
 
       test('should prioritize user-given headers', () => {
@@ -5633,7 +5504,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.deleteIndex({});
@@ -5645,11 +5516,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const deleteIndexPromise = cloudantService.deleteIndex();
         expectToBePromise(deleteIndexPromise);
 
-        deleteIndexPromise.catch(err => {
+        deleteIndexPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -5675,14 +5546,14 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_search_analyze', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/_search_analyze', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['analyzer']).toEqual(analyzer);
-        expect(options.body['text']).toEqual(text);
+        expect(mockRequestOptions.body.analyzer).toEqual(analyzer);
+        expect(mockRequestOptions.body.text).toEqual(text);
       });
 
       test('should prioritize user-given headers', () => {
@@ -5706,7 +5577,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postSearchAnalyze({});
@@ -5718,11 +5589,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postSearchAnalyzePromise = cloudantService.postSearchAnalyze();
         expectToBePromise(postSearchAnalyzePromise);
 
-        postSearchAnalyzePromise.catch(err => {
+        postSearchAnalyzePromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -5740,10 +5611,10 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const highlightFields = ['testString'];
         const highlightNumber = 1;
-        const highlightPostTag = 'testString';
-        const highlightPreTag = 'testString';
+        const highlightPostTag = '</em>';
+        const highlightPreTag = '<em>';
         const highlightSize = 1;
-        const includeDocs = true;
+        const includeDocs = false;
         const includeFields = ['testString'];
         const limit = 0;
         const sort = ['testString'];
@@ -5786,33 +5657,33 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}/_search/{index}', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_search/{index}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['query']).toEqual(query);
-        expect(options.body['bookmark']).toEqual(bookmark);
-        expect(options.body['highlight_fields']).toEqual(highlightFields);
-        expect(options.body['highlight_number']).toEqual(highlightNumber);
-        expect(options.body['highlight_post_tag']).toEqual(highlightPostTag);
-        expect(options.body['highlight_pre_tag']).toEqual(highlightPreTag);
-        expect(options.body['highlight_size']).toEqual(highlightSize);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['include_fields']).toEqual(includeFields);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['sort']).toEqual(sort);
-        expect(options.body['stale']).toEqual(stale);
-        expect(options.body['counts']).toEqual(counts);
-        expect(options.body['drilldown']).toEqual(drilldown);
-        expect(options.body['group_field']).toEqual(groupField);
-        expect(options.body['group_limit']).toEqual(groupLimit);
-        expect(options.body['group_sort']).toEqual(groupSort);
-        expect(options.body['ranges']).toEqual(ranges);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['index']).toEqual(index);
+        expect(mockRequestOptions.body.query).toEqual(query);
+        expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
+        expect(mockRequestOptions.body.highlight_fields).toEqual(highlightFields);
+        expect(mockRequestOptions.body.highlight_number).toEqual(highlightNumber);
+        expect(mockRequestOptions.body.highlight_post_tag).toEqual(highlightPostTag);
+        expect(mockRequestOptions.body.highlight_pre_tag).toEqual(highlightPreTag);
+        expect(mockRequestOptions.body.highlight_size).toEqual(highlightSize);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.include_fields).toEqual(includeFields);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.sort).toEqual(sort);
+        expect(mockRequestOptions.body.stale).toEqual(stale);
+        expect(mockRequestOptions.body.counts).toEqual(counts);
+        expect(mockRequestOptions.body.drilldown).toEqual(drilldown);
+        expect(mockRequestOptions.body.group_field).toEqual(groupField);
+        expect(mockRequestOptions.body.group_limit).toEqual(groupLimit);
+        expect(mockRequestOptions.body.group_sort).toEqual(groupSort);
+        expect(mockRequestOptions.body.ranges).toEqual(ranges);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.index).toEqual(index);
       });
 
       test('should prioritize user-given headers', () => {
@@ -5840,7 +5711,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postSearch({});
@@ -5852,11 +5723,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postSearchPromise = cloudantService.postSearch();
         expectToBePromise(postSearchPromise);
 
-        postSearchPromise.catch(err => {
+        postSearchPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -5874,10 +5745,10 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const highlightFields = ['testString'];
         const highlightNumber = 1;
-        const highlightPostTag = 'testString';
-        const highlightPreTag = 'testString';
+        const highlightPostTag = '</em>';
+        const highlightPreTag = '<em>';
         const highlightSize = 1;
-        const includeDocs = true;
+        const includeDocs = false;
         const includeFields = ['testString'];
         const limit = 3;
         const sort = ['testString'];
@@ -5920,34 +5791,34 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}/_search/{index}', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_search/{index}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['query']).toEqual(query);
-        expect(options.body['bookmark']).toEqual(bookmark);
-        expect(options.body['highlight_fields']).toEqual(highlightFields);
-        expect(options.body['highlight_number']).toEqual(highlightNumber);
-        expect(options.body['highlight_post_tag']).toEqual(highlightPostTag);
-        expect(options.body['highlight_pre_tag']).toEqual(highlightPreTag);
-        expect(options.body['highlight_size']).toEqual(highlightSize);
-        expect(options.body['include_docs']).toEqual(includeDocs);
-        expect(options.body['include_fields']).toEqual(includeFields);
-        expect(options.body['limit']).toEqual(limit);
-        expect(options.body['sort']).toEqual(sort);
-        expect(options.body['stale']).toEqual(stale);
-        expect(options.body['counts']).toEqual(counts);
-        expect(options.body['drilldown']).toEqual(drilldown);
-        expect(options.body['group_field']).toEqual(groupField);
-        expect(options.body['group_limit']).toEqual(groupLimit);
-        expect(options.body['group_sort']).toEqual(groupSort);
-        expect(options.body['ranges']).toEqual(ranges);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['index']).toEqual(index);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.body.query).toEqual(query);
+        expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
+        expect(mockRequestOptions.body.highlight_fields).toEqual(highlightFields);
+        expect(mockRequestOptions.body.highlight_number).toEqual(highlightNumber);
+        expect(mockRequestOptions.body.highlight_post_tag).toEqual(highlightPostTag);
+        expect(mockRequestOptions.body.highlight_pre_tag).toEqual(highlightPreTag);
+        expect(mockRequestOptions.body.highlight_size).toEqual(highlightSize);
+        expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.body.include_fields).toEqual(includeFields);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.sort).toEqual(sort);
+        expect(mockRequestOptions.body.stale).toEqual(stale);
+        expect(mockRequestOptions.body.counts).toEqual(counts);
+        expect(mockRequestOptions.body.drilldown).toEqual(drilldown);
+        expect(mockRequestOptions.body.group_field).toEqual(groupField);
+        expect(mockRequestOptions.body.group_limit).toEqual(groupLimit);
+        expect(mockRequestOptions.body.group_sort).toEqual(groupSort);
+        expect(mockRequestOptions.body.ranges).toEqual(ranges);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.index).toEqual(index);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -5975,7 +5846,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postSearchAsStream({});
@@ -5987,11 +5858,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postSearchAsStreamPromise = cloudantService.postSearchAsStream();
         expectToBePromise(postSearchAsStreamPromise);
 
-        postSearchAsStreamPromise.catch(err => {
+        postSearchAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -6019,15 +5890,15 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}/_search_info/{index}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_search_info/{index}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['index']).toEqual(index);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.index).toEqual(index);
       });
 
       test('should prioritize user-given headers', () => {
@@ -6053,7 +5924,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getSearchInfo({});
@@ -6065,11 +5936,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getSearchInfoPromise = cloudantService.getSearchInfo();
         expectToBePromise(getSearchInfoPromise);
 
-        getSearchInfoPromise.catch(err => {
+        getSearchInfoPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -6085,17 +5956,17 @@ describe('CloudantV1', () => {
         const index = 'testString';
         const bbox = 'testString';
         const bookmark = 'testString';
-        const format = 'legacy';
+        const format = 'view';
         const g = 'testString';
-        const includeDocs = true;
+        const includeDocs = false;
         const lat = -90;
         const limit = 0;
         const lon = -180;
-        const nearest = true;
+        const nearest = false;
         const radius = 0;
         const rangex = 0;
         const rangey = 0;
-        const relation = 'contains';
+        const relation = 'intersects';
         const skip = 0;
         const stale = 'ok';
         const params = {
@@ -6127,30 +5998,30 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}/_geo/{index}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_geo/{index}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['bbox']).toEqual(bbox);
-        expect(options.qs['bookmark']).toEqual(bookmark);
-        expect(options.qs['format']).toEqual(format);
-        expect(options.qs['g']).toEqual(g);
-        expect(options.qs['include_docs']).toEqual(includeDocs);
-        expect(options.qs['lat']).toEqual(lat);
-        expect(options.qs['limit']).toEqual(limit);
-        expect(options.qs['lon']).toEqual(lon);
-        expect(options.qs['nearest']).toEqual(nearest);
-        expect(options.qs['radius']).toEqual(radius);
-        expect(options.qs['rangex']).toEqual(rangex);
-        expect(options.qs['rangey']).toEqual(rangey);
-        expect(options.qs['relation']).toEqual(relation);
-        expect(options.qs['skip']).toEqual(skip);
-        expect(options.qs['stale']).toEqual(stale);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['index']).toEqual(index);
+        expect(mockRequestOptions.qs.bbox).toEqual(bbox);
+        expect(mockRequestOptions.qs.bookmark).toEqual(bookmark);
+        expect(mockRequestOptions.qs.format).toEqual(format);
+        expect(mockRequestOptions.qs.g).toEqual(g);
+        expect(mockRequestOptions.qs.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.qs.lat).toEqual(lat);
+        expect(mockRequestOptions.qs.limit).toEqual(limit);
+        expect(mockRequestOptions.qs.lon).toEqual(lon);
+        expect(mockRequestOptions.qs.nearest).toEqual(nearest);
+        expect(mockRequestOptions.qs.radius).toEqual(radius);
+        expect(mockRequestOptions.qs.rangex).toEqual(rangex);
+        expect(mockRequestOptions.qs.rangey).toEqual(rangey);
+        expect(mockRequestOptions.qs.relation).toEqual(relation);
+        expect(mockRequestOptions.qs.skip).toEqual(skip);
+        expect(mockRequestOptions.qs.stale).toEqual(stale);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.index).toEqual(index);
       });
 
       test('should prioritize user-given headers', () => {
@@ -6176,7 +6047,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getGeo({});
@@ -6188,11 +6059,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getGeoPromise = cloudantService.getGeo();
         expectToBePromise(getGeoPromise);
 
-        getGeoPromise.catch(err => {
+        getGeoPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -6208,17 +6079,17 @@ describe('CloudantV1', () => {
         const index = 'testString';
         const bbox = 'testString';
         const bookmark = 'testString';
-        const format = 'legacy';
+        const format = 'view';
         const g = 'testString';
-        const includeDocs = true;
+        const includeDocs = false;
         const lat = -90;
         const limit = 0;
         const lon = -180;
-        const nearest = true;
+        const nearest = false;
         const radius = 0;
         const rangex = 0;
         const rangey = 0;
-        const relation = 'contains';
+        const relation = 'intersects';
         const skip = 0;
         const stale = 'ok';
         const params = {
@@ -6250,31 +6121,31 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}/_geo/{index}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_geo/{index}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['bbox']).toEqual(bbox);
-        expect(options.qs['bookmark']).toEqual(bookmark);
-        expect(options.qs['format']).toEqual(format);
-        expect(options.qs['g']).toEqual(g);
-        expect(options.qs['include_docs']).toEqual(includeDocs);
-        expect(options.qs['lat']).toEqual(lat);
-        expect(options.qs['limit']).toEqual(limit);
-        expect(options.qs['lon']).toEqual(lon);
-        expect(options.qs['nearest']).toEqual(nearest);
-        expect(options.qs['radius']).toEqual(radius);
-        expect(options.qs['rangex']).toEqual(rangex);
-        expect(options.qs['rangey']).toEqual(rangey);
-        expect(options.qs['relation']).toEqual(relation);
-        expect(options.qs['skip']).toEqual(skip);
-        expect(options.qs['stale']).toEqual(stale);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['index']).toEqual(index);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.qs.bbox).toEqual(bbox);
+        expect(mockRequestOptions.qs.bookmark).toEqual(bookmark);
+        expect(mockRequestOptions.qs.format).toEqual(format);
+        expect(mockRequestOptions.qs.g).toEqual(g);
+        expect(mockRequestOptions.qs.include_docs).toEqual(includeDocs);
+        expect(mockRequestOptions.qs.lat).toEqual(lat);
+        expect(mockRequestOptions.qs.limit).toEqual(limit);
+        expect(mockRequestOptions.qs.lon).toEqual(lon);
+        expect(mockRequestOptions.qs.nearest).toEqual(nearest);
+        expect(mockRequestOptions.qs.radius).toEqual(radius);
+        expect(mockRequestOptions.qs.rangex).toEqual(rangex);
+        expect(mockRequestOptions.qs.rangey).toEqual(rangey);
+        expect(mockRequestOptions.qs.relation).toEqual(relation);
+        expect(mockRequestOptions.qs.skip).toEqual(skip);
+        expect(mockRequestOptions.qs.stale).toEqual(stale);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.index).toEqual(index);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -6300,7 +6171,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getGeoAsStream({});
@@ -6312,11 +6183,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getGeoAsStreamPromise = cloudantService.getGeoAsStream();
         expectToBePromise(getGeoAsStreamPromise);
 
-        getGeoAsStreamPromise.catch(err => {
+        getGeoAsStreamPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -6340,13 +6211,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_geo_cleanup', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_geo_cleanup', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -6368,7 +6239,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postGeoCleanup({});
@@ -6380,11 +6251,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postGeoCleanupPromise = cloudantService.postGeoCleanup();
         expectToBePromise(postGeoCleanupPromise);
 
-        postGeoCleanupPromise.catch(err => {
+        postGeoCleanupPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -6412,15 +6283,15 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_design/{ddoc}/_geo_info/{index}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_geo_info/{index}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['ddoc']).toEqual(ddoc);
-        expect(options.path['index']).toEqual(index);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.index).toEqual(index);
       });
 
       test('should prioritize user-given headers', () => {
@@ -6446,7 +6317,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getGeoIndexInformation({});
@@ -6458,11 +6329,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getGeoIndexInformationPromise = cloudantService.getGeoIndexInformation();
         expectToBePromise(getGeoIndexInformationPromise);
 
-        getGeoIndexInformationPromise.catch(err => {
+        getGeoIndexInformationPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -6488,14 +6359,14 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_replicator/{doc_id}', 'HEAD');
+        checkUrlAndMethod(mockRequestOptions, '/_replicator/{doc_id}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -6517,7 +6388,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.headReplicationDocument({});
@@ -6529,11 +6400,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const headReplicationDocumentPromise = cloudantService.headReplicationDocument();
         expectToBePromise(headReplicationDocumentPromise);
 
-        headReplicationDocumentPromise.catch(err => {
+        headReplicationDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -6557,13 +6428,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_scheduler/docs/_replicator/{doc_id}', 'HEAD');
+        checkUrlAndMethod(mockRequestOptions, '/_scheduler/docs/_replicator/{doc_id}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -6585,7 +6456,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.headSchedulerDocument({});
@@ -6597,11 +6468,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const headSchedulerDocumentPromise = cloudantService.headSchedulerDocument();
         expectToBePromise(headSchedulerDocumentPromise);
 
-        headSchedulerDocumentPromise.catch(err => {
+        headSchedulerDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -6625,13 +6496,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_scheduler/jobs/{job_id}', 'HEAD');
+        checkUrlAndMethod(mockRequestOptions, '/_scheduler/jobs/{job_id}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['job_id']).toEqual(jobId);
+        expect(mockRequestOptions.path.job_id).toEqual(jobId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -6653,7 +6524,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.headSchedulerJob({});
@@ -6665,11 +6536,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const headSchedulerJobPromise = cloudantService.headSchedulerJob();
         expectToBePromise(headSchedulerJobPromise);
 
-        headSchedulerJobPromise.catch(err => {
+        headSchedulerJobPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -6699,16 +6570,16 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_replicator/{doc_id}', 'DELETE');
+        checkUrlAndMethod(mockRequestOptions, '/_replicator/{doc_id}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
-        expect(options.qs['batch']).toEqual(batch);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.qs.batch).toEqual(batch);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -6730,7 +6601,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.deleteReplicationDocument({});
@@ -6742,11 +6613,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const deleteReplicationDocumentPromise = cloudantService.deleteReplicationDocument();
         expectToBePromise(deleteReplicationDocumentPromise);
 
-        deleteReplicationDocumentPromise.catch(err => {
+        deleteReplicationDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -6759,16 +6630,16 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getReplicationDocument
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const conflicts = true;
-        const deletedConflicts = true;
-        const latest = true;
-        const localSeq = true;
-        const meta = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const conflicts = false;
+        const deletedConflicts = false;
+        const latest = false;
+        const localSeq = false;
+        const meta = false;
         const rev = 'testString';
-        const revs = true;
-        const revsInfo = true;
+        const revs = false;
+        const revsInfo = false;
         const params = {
           docId: docId,
           ifNoneMatch: ifNoneMatch,
@@ -6792,24 +6663,24 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_replicator/{doc_id}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_replicator/{doc_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['conflicts']).toEqual(conflicts);
-        expect(options.qs['deleted_conflicts']).toEqual(deletedConflicts);
-        expect(options.qs['latest']).toEqual(latest);
-        expect(options.qs['local_seq']).toEqual(localSeq);
-        expect(options.qs['meta']).toEqual(meta);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.qs['revs']).toEqual(revs);
-        expect(options.qs['revs_info']).toEqual(revsInfo);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(deletedConflicts);
+        expect(mockRequestOptions.qs.latest).toEqual(latest);
+        expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
+        expect(mockRequestOptions.qs.meta).toEqual(meta);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.qs.revs).toEqual(revs);
+        expect(mockRequestOptions.qs.revs_info).toEqual(revsInfo);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -6831,7 +6702,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getReplicationDocument({});
@@ -6843,11 +6714,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getReplicationDocumentPromise = cloudantService.getReplicationDocument();
         expectToBePromise(getReplicationDocumentPromise);
 
-        getReplicationDocumentPromise.catch(err => {
+        getReplicationDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -6886,7 +6757,7 @@ describe('CloudantV1', () => {
       // ReplicationCreateTargetParameters
       const replicationCreateTargetParametersModel = {
         n: 1,
-        partitioned: true,
+        partitioned: false,
         q: 1,
       };
 
@@ -6928,15 +6799,15 @@ describe('CloudantV1', () => {
         cancel: true,
         checkpoint_interval: 0,
         connection_timeout: 0,
-        continuous: true,
-        create_target: true,
+        continuous: false,
+        create_target: false,
         create_target_params: replicationCreateTargetParametersModel,
         doc_ids: ['testString'],
         filter: 'testString',
         http_connections: 1,
         query_params: { 'key1': 'testString' },
         retries_per_request: 0,
-        selector: { 'key1': { foo: 'bar' } },
+        selector: { 'key1': 'testString' },
         since_seq: 'testString',
         socket_options: 'testString',
         source: replicationDatabaseModel,
@@ -6947,7 +6818,7 @@ describe('CloudantV1', () => {
         user_ctx: userContextModel,
         worker_batch_size: 1,
         worker_processes: 1,
-        foo: { foo: 'bar' },
+        foo: 'testString',
       };
 
       test('should pass the right params to createRequest', () => {
@@ -6956,7 +6827,7 @@ describe('CloudantV1', () => {
         const replicationDocument = replicationDocumentModel;
         const ifMatch = 'testString';
         const batch = 'ok';
-        const newEdits = true;
+        const newEdits = false;
         const rev = 'testString';
         const params = {
           docId: docId,
@@ -6975,18 +6846,18 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_replicator/{doc_id}', 'PUT');
+        checkUrlAndMethod(mockRequestOptions, '/_replicator/{doc_id}', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
-        expect(options.body).toEqual(replicationDocument);
-        expect(options.qs['batch']).toEqual(batch);
-        expect(options.qs['new_edits']).toEqual(newEdits);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.body).toEqual(replicationDocument);
+        expect(mockRequestOptions.qs.batch).toEqual(batch);
+        expect(mockRequestOptions.qs.new_edits).toEqual(newEdits);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -7010,7 +6881,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.putReplicationDocument({});
@@ -7022,11 +6893,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const putReplicationDocumentPromise = cloudantService.putReplicationDocument();
         expectToBePromise(putReplicationDocumentPromise);
 
-        putReplicationDocumentPromise.catch(err => {
+        putReplicationDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -7054,15 +6925,15 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_scheduler/docs', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_scheduler/docs', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['limit']).toEqual(limit);
-        expect(options.qs['skip']).toEqual(skip);
-        expect(options.qs['states']).toEqual(states);
+        expect(mockRequestOptions.qs.limit).toEqual(limit);
+        expect(mockRequestOptions.qs.skip).toEqual(skip);
+        expect(mockRequestOptions.qs.states).toEqual(states);
       });
 
       test('should prioritize user-given headers', () => {
@@ -7104,13 +6975,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_scheduler/docs/_replicator/{doc_id}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_scheduler/docs/_replicator/{doc_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -7132,7 +7003,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getSchedulerDocument({});
@@ -7144,11 +7015,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getSchedulerDocumentPromise = cloudantService.getSchedulerDocument();
         expectToBePromise(getSchedulerDocumentPromise);
 
-        getSchedulerDocumentPromise.catch(err => {
+        getSchedulerDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -7174,14 +7045,14 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_scheduler/jobs', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_scheduler/jobs', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['limit']).toEqual(limit);
-        expect(options.qs['skip']).toEqual(skip);
+        expect(mockRequestOptions.qs.limit).toEqual(limit);
+        expect(mockRequestOptions.qs.skip).toEqual(skip);
       });
 
       test('should prioritize user-given headers', () => {
@@ -7223,13 +7094,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_scheduler/jobs/{job_id}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_scheduler/jobs/{job_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['job_id']).toEqual(jobId);
+        expect(mockRequestOptions.path.job_id).toEqual(jobId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -7251,7 +7122,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getSchedulerJob({});
@@ -7263,11 +7134,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getSchedulerJobPromise = cloudantService.getSchedulerJob();
         expectToBePromise(getSchedulerJobPromise);
 
-        getSchedulerJobPromise.catch(err => {
+        getSchedulerJobPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -7288,9 +7159,9 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_session', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_session', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -7335,13 +7206,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_security', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_security', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -7363,7 +7234,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getSecurity({});
@@ -7375,11 +7246,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getSecurityPromise = cloudantService.getSecurity();
         expectToBePromise(getSecurityPromise);
 
-        getSecurityPromise.catch(err => {
+        getSecurityPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -7419,17 +7290,17 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_security', 'PUT');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_security', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['admins']).toEqual(admins);
-        expect(options.body['members']).toEqual(members);
-        expect(options.body['cloudant']).toEqual(cloudant);
-        expect(options.body['couchdb_auth_only']).toEqual(couchdbAuthOnly);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body.admins).toEqual(admins);
+        expect(mockRequestOptions.body.members).toEqual(members);
+        expect(mockRequestOptions.body.cloudant).toEqual(cloudant);
+        expect(mockRequestOptions.body.couchdb_auth_only).toEqual(couchdbAuthOnly);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -7451,7 +7322,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.putSecurity({});
@@ -7463,11 +7334,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const putSecurityPromise = cloudantService.putSecurity();
         expectToBePromise(putSecurityPromise);
 
-        putSecurityPromise.catch(err => {
+        putSecurityPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -7488,9 +7359,9 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_api/v2/api_keys', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/api_keys', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -7551,17 +7422,17 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_api/v2/db/{db}/_security', 'PUT');
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/db/{db}/_security', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['cloudant']).toEqual(cloudant);
-        expect(options.body['admins']).toEqual(admins);
-        expect(options.body['members']).toEqual(members);
-        expect(options.body['couchdb_auth_only']).toEqual(couchdbAuthOnly);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body.cloudant).toEqual(cloudant);
+        expect(mockRequestOptions.body.admins).toEqual(admins);
+        expect(mockRequestOptions.body.members).toEqual(members);
+        expect(mockRequestOptions.body.couchdb_auth_only).toEqual(couchdbAuthOnly);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -7585,7 +7456,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.putCloudantSecurityConfiguration({});
@@ -7597,11 +7468,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const putCloudantSecurityConfigurationPromise = cloudantService.putCloudantSecurityConfiguration();
         expectToBePromise(putCloudantSecurityConfigurationPromise);
 
-        putCloudantSecurityConfigurationPromise.catch(err => {
+        putCloudantSecurityConfigurationPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -7622,9 +7493,9 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_api/v2/user/config/cors', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/config/cors', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -7673,15 +7544,15 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_api/v2/user/config/cors', 'PUT');
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/config/cors', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['origins']).toEqual(origins);
-        expect(options.body['allow_credentials']).toEqual(allowCredentials);
-        expect(options.body['enable_cors']).toEqual(enableCors);
+        expect(mockRequestOptions.body.origins).toEqual(origins);
+        expect(mockRequestOptions.body.allow_credentials).toEqual(allowCredentials);
+        expect(mockRequestOptions.body.enable_cors).toEqual(enableCors);
       });
 
       test('should prioritize user-given headers', () => {
@@ -7703,7 +7574,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.putCorsConfiguration({});
@@ -7715,11 +7586,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const putCorsConfigurationPromise = cloudantService.putCorsConfiguration();
         expectToBePromise(putCorsConfigurationPromise);
 
-        putCorsConfigurationPromise.catch(err => {
+        putCorsConfigurationPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -7753,18 +7624,18 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/{doc_id}/{attachment_name}', 'HEAD');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}/{attachment_name}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
-        expect(options.path['attachment_name']).toEqual(attachmentName);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
+        expect(mockRequestOptions.path.attachment_name).toEqual(attachmentName);
       });
 
       test('should prioritize user-given headers', () => {
@@ -7790,7 +7661,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.headAttachment({});
@@ -7802,11 +7673,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const headAttachmentPromise = cloudantService.headAttachment();
         expectToBePromise(headAttachmentPromise);
 
-        headAttachmentPromise.catch(err => {
+        headAttachmentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -7840,18 +7711,18 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/{doc_id}/{attachment_name}', 'DELETE');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}/{attachment_name}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.qs['batch']).toEqual(batch);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
-        expect(options.path['attachment_name']).toEqual(attachmentName);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.qs.batch).toEqual(batch);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
+        expect(mockRequestOptions.path.attachment_name).toEqual(attachmentName);
       });
 
       test('should prioritize user-given headers', () => {
@@ -7877,7 +7748,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.deleteAttachment({});
@@ -7889,11 +7760,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const deleteAttachmentPromise = cloudantService.deleteAttachment();
         expectToBePromise(deleteAttachmentPromise);
 
-        deleteAttachmentPromise.catch(err => {
+        deleteAttachmentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -7931,9 +7802,9 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/{doc_id}/{attachment_name}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}/{attachment_name}', 'GET');
         const expectedAccept = accept;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -7941,11 +7812,11 @@ describe('CloudantV1', () => {
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         checkUserHeader(createRequestMock, 'Range', range);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
-        expect(options.path['attachment_name']).toEqual(attachmentName);
-        expect(options.responseType).toBe('stream');
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
+        expect(mockRequestOptions.path.attachment_name).toEqual(attachmentName);
+        expect(mockRequestOptions.responseType).toBe('stream');
       });
 
       test('should prioritize user-given headers', () => {
@@ -7971,7 +7842,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getAttachment({});
@@ -7983,11 +7854,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getAttachmentPromise = cloudantService.getAttachment();
         expectToBePromise(getAttachmentPromise);
 
-        getAttachmentPromise.catch(err => {
+        getAttachmentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8002,7 +7873,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const attachmentName = 'testString';
         const attachment = Buffer.from('This is a mock file.');
-        const contentType = 'testString';
+        const contentType = 'application/octet-stream';
         const ifMatch = 'testString';
         const rev = 'testString';
         const params = {
@@ -8023,19 +7894,19 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/{doc_id}/{attachment_name}', 'PUT');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}/{attachment_name}', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = contentType;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Content-Type', contentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
-        expect(options.body).toEqual(attachment);
-        expect(options.qs['rev']).toEqual(rev);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
-        expect(options.path['attachment_name']).toEqual(attachmentName);
+        expect(mockRequestOptions.body).toEqual(attachment);
+        expect(mockRequestOptions.qs.rev).toEqual(rev);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
+        expect(mockRequestOptions.path.attachment_name).toEqual(attachmentName);
       });
 
       test('should prioritize user-given headers', () => {
@@ -8044,7 +7915,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const attachmentName = 'testString';
         const attachment = Buffer.from('This is a mock file.');
-        const contentType = 'testString';
+        const contentType = 'application/octet-stream';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -8065,7 +7936,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.putAttachment({});
@@ -8077,11 +7948,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const putAttachmentPromise = cloudantService.putAttachment();
         expectToBePromise(putAttachmentPromise);
 
-        putAttachmentPromise.catch(err => {
+        putAttachmentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8109,15 +7980,15 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_local/{doc_id}', 'HEAD');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_local/{doc_id}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -8141,7 +8012,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.headLocalDocument({});
@@ -8153,11 +8024,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const headLocalDocumentPromise = cloudantService.headLocalDocument();
         expectToBePromise(headLocalDocumentPromise);
 
-        headLocalDocumentPromise.catch(err => {
+        headLocalDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8185,15 +8056,15 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_local/{doc_id}', 'DELETE');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_local/{doc_id}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['batch']).toEqual(batch);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.qs.batch).toEqual(batch);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -8217,7 +8088,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.deleteLocalDocument({});
@@ -8229,11 +8100,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const deleteLocalDocumentPromise = cloudantService.deleteLocalDocument();
         expectToBePromise(deleteLocalDocumentPromise);
 
-        deleteLocalDocumentPromise.catch(err => {
+        deleteLocalDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8248,9 +8119,9 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const accept = 'application/json';
         const ifNoneMatch = 'testString';
-        const attachments = true;
-        const attEncodingInfo = true;
-        const localSeq = true;
+        const attachments = false;
+        const attEncodingInfo = false;
+        const localSeq = false;
         const params = {
           db: db,
           docId: docId,
@@ -8269,19 +8140,19 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_local/{doc_id}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_local/{doc_id}', 'GET');
         const expectedAccept = accept;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Accept', accept);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
-        expect(options.qs['attachments']).toEqual(attachments);
-        expect(options.qs['att_encoding_info']).toEqual(attEncodingInfo);
-        expect(options.qs['local_seq']).toEqual(localSeq);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.qs.attachments).toEqual(attachments);
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
+        expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -8305,7 +8176,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getLocalDocument({});
@@ -8317,11 +8188,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getLocalDocumentPromise = cloudantService.getLocalDocument();
         expectToBePromise(getLocalDocumentPromise);
 
-        getLocalDocumentPromise.catch(err => {
+        getLocalDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8330,52 +8201,11 @@ describe('CloudantV1', () => {
   });
   describe('putLocalDocument', () => {
     describe('positive tests', () => {
-      // Request models needed by this operation.
-
-      // Attachment
-      const attachmentModel = {
-        content_type: 'testString',
-        data: 'This is a mock byte array value.',
-        digest: 'testString',
-        encoded_length: 0,
-        encoding: 'testString',
-        follows: true,
-        length: 0,
-        revpos: 1,
-        stub: true,
-      };
-
-      // Revisions
-      const revisionsModel = {
-        ids: ['testString'],
-        start: 1,
-      };
-
-      // DocumentRevisionStatus
-      const documentRevisionStatusModel = {
-        rev: 'testString',
-        status: 'available',
-      };
-
-      // Document
-      const documentModel = {
-        _attachments: { 'key1': attachmentModel },
-        _conflicts: ['testString'],
-        _deleted: true,
-        _deleted_conflicts: ['testString'],
-        _id: 'exampleid',
-        _local_seq: 'testString',
-        _rev: 'testString',
-        _revisions: revisionsModel,
-        _revs_info: [documentRevisionStatusModel],
-        foo: 'testString',
-      };
-
       test('should pass the right params to createRequest', () => {
         // Construct the params object for operation putLocalDocument
         const db = 'testString';
         const docId = 'testString';
-        const document = documentModel;
+        const document = {};
         const contentType = 'application/json';
         const batch = 'ok';
         const params = {
@@ -8394,24 +8224,24 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_local/{doc_id}', 'PUT');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_local/{doc_id}', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = contentType;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Content-Type', contentType);
-        expect(options.body).toEqual(document);
-        expect(options.qs['batch']).toEqual(batch);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.body).toEqual(document);
+        expect(mockRequestOptions.qs.batch).toEqual(batch);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
         const docId = 'testString';
-        const document = documentModel;
+        const document = {};
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const params = {
@@ -8430,7 +8260,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.putLocalDocument({});
@@ -8442,11 +8272,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const putLocalDocumentPromise = cloudantService.putLocalDocument();
         expectToBePromise(putLocalDocumentPromise);
 
-        putLocalDocumentPromise.catch(err => {
+        putLocalDocumentPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8472,14 +8302,14 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_missing_revs', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_missing_revs', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body).toEqual(documentRevisions);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body).toEqual(documentRevisions);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -8503,7 +8333,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postMissingRevs({});
@@ -8515,11 +8345,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postMissingRevsPromise = cloudantService.postMissingRevs();
         expectToBePromise(postMissingRevsPromise);
 
-        postMissingRevsPromise.catch(err => {
+        postMissingRevsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8545,14 +8375,14 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_revs_diff', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_revs_diff', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body).toEqual(documentRevisions);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.body).toEqual(documentRevisions);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -8576,7 +8406,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postRevsDiff({});
@@ -8588,11 +8418,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postRevsDiffPromise = cloudantService.postRevsDiff();
         expectToBePromise(postRevsDiffPromise);
 
-        postRevsDiffPromise.catch(err => {
+        postRevsDiffPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8616,13 +8446,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_shards', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_shards', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
+        expect(mockRequestOptions.path.db).toEqual(db);
       });
 
       test('should prioritize user-given headers', () => {
@@ -8644,7 +8474,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getShardsInformation({});
@@ -8656,11 +8486,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getShardsInformationPromise = cloudantService.getShardsInformation();
         expectToBePromise(getShardsInformationPromise);
 
-        getShardsInformationPromise.catch(err => {
+        getShardsInformationPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8686,14 +8516,14 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/{db}/_shards/{doc_id}', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_shards/{doc_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.path['db']).toEqual(db);
-        expect(options.path['doc_id']).toEqual(docId);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.doc_id).toEqual(docId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -8717,7 +8547,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.getDocumentShardsInfo({});
@@ -8729,11 +8559,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const getDocumentShardsInfoPromise = cloudantService.getDocumentShardsInfo();
         expectToBePromise(getDocumentShardsInfoPromise);
 
-        getDocumentShardsInfoPromise.catch(err => {
+        getDocumentShardsInfoPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8754,9 +8584,9 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_up', 'HEAD');
+        checkUrlAndMethod(mockRequestOptions, '/_up', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -8798,9 +8628,9 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_active_tasks', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_active_tasks', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -8842,9 +8672,9 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_up', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_up', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -8886,9 +8716,9 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_api/v2/user/activity_tracker/events', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/activity_tracker/events', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -8933,13 +8763,13 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_api/v2/user/activity_tracker/events', 'POST');
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/activity_tracker/events', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['types']).toEqual(types);
+        expect(mockRequestOptions.body.types).toEqual(types);
       });
 
       test('should prioritize user-given headers', () => {
@@ -8961,7 +8791,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async done => {
+      test('should enforce required parameters', async (done) => {
         let err;
         try {
           await cloudantService.postActivityTrackerEvents({});
@@ -8973,11 +8803,11 @@ describe('CloudantV1', () => {
         done();
       });
 
-      test('should reject promise when required params are not given', done => {
+      test('should reject promise when required params are not given', (done) => {
         const postActivityTrackerEventsPromise = cloudantService.postActivityTrackerEvents();
         expectToBePromise(postActivityTrackerEventsPromise);
 
-        postActivityTrackerEventsPromise.catch(err => {
+        postActivityTrackerEventsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
@@ -8998,9 +8828,9 @@ describe('CloudantV1', () => {
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
 
-        const options = getOptions(createRequestMock);
+        const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(options, '/_api/v2/user/current/throughput', 'GET');
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/current/throughput', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
