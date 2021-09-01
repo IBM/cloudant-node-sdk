@@ -3155,7 +3155,7 @@ describe('CloudantV1', () => {
         language: 'testString',
         options: designDocumentOptionsModel,
         updates: { 'key1': 'testString' },
-        validate_doc_update: { 'key1': 'testString' },
+        validate_doc_update: 'testString',
         views: { 'key1': designDocumentViewsMapReduceModel },
         st_indexes: { 'key1': geoIndexDefinitionModel },
         foo: { foo: 'bar' },
