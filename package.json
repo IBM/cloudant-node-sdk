@@ -36,7 +36,8 @@
   "dependencies": {
     "@types/node": "16.7.10",
     "extend": "3.0.2",
-    "ibm-cloud-sdk-core": "2.14.1"
+    "ibm-cloud-sdk-core": "2.14.1",
+    "tough-cookie": "4.0.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "5.0.1",
@@ -60,7 +61,6 @@
     "prettier": "2.3.2",
     "semantic-release": "17.4.7",
     "sinon": "11.1.2",
-    "tough-cookie": "4.0.0",
     "ts-jest": "26.5.6",
     "tsc-publish": "0.5.2",
     "typedoc": "0.21.9",
