@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@semantic-release/changelog": "5.0.1",
-    "@semantic-release/git": "9.0.0",
+    "@semantic-release/git": "9.0.1",
     "@types/jest": "27.0.1",
     "@typescript-eslint/eslint-plugin": "4.30.0",
     "@typescript-eslint/eslint-plugin-tslint": "4.30.0",
