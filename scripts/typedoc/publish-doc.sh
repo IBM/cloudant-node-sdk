@@ -23,7 +23,7 @@ printf ">>>>> Finished cloning...\n"
 pushd gh-pages
 
 # Create a new directory for this tag_name and copy the aggregated typedocs there, if it's a tagged release.
-if [ -n "TAG_NAME" ]; then
+if [ -z "TAG_NAME" ]; then
   printf "\n>>>>> Copying aggregated typedocs to new tagged-release directory: %s\n" ${BRANCH_NAME}
   rm -rf docs/${TAG_NAME}
   mkdir -p docs/${TAG_NAME}
