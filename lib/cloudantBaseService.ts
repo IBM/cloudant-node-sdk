@@ -87,6 +87,10 @@ export abstract class CloudantBaseService extends BaseService {
     if (userOptions.authenticator instanceof CouchdbSessionAuthenticator) {
       userOptions.jar = userOptions.jar || new CookieJar();
     }
+    if (!('timeout' in userOptions)) {
+      // Set default timeout to 2.5 minutes (= 150.000ms)
+      userOptions.timeout = 150000;
+    }
     super(userOptions);
     this.configureSessionAuthenticator();
   }
@@ -151,6 +155,7 @@ export abstract class CloudantBaseService extends BaseService {
       (auth as CouchdbSessionAuthenticator).configure(this.baseOptions);
     }
   }
+
   /**
    * Extend createRequest to handle document and attachment validation.
    */

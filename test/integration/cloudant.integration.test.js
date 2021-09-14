@@ -17,6 +17,7 @@
 'use strict';
 
 const { CloudantV1 } = require('../../index.ts');
+const { NoAuthAuthenticator } = require('ibm-cloud-sdk-core');
 const authHelper = require('../resources/auth-helper.js');
 
 // Use this to retrieve test-specific config properties from your credentials file.
@@ -142,5 +143,45 @@ describe('validate', () => {
           'Document ID _design starts with the invalid _ character.'
         );
       });
+  });
+});
+
+describe('Default timeout config tests', () => {
+  it('Check default timeout value - newInstance', () => {
+    const autenticator = new NoAuthAuthenticator();
+    const myService = CloudantV1.newInstance({
+      authenticator: autenticator,
+    });
+    assert.ok(myService.baseOptions.timeout);
+    assert.equal(myService.baseOptions.timeout, 150000);
+  });
+
+  it('Allow timeout overwrite - newInstance', () => {
+    const autenticator = new NoAuthAuthenticator();
+    const myService = CloudantV1.newInstance({
+      authenticator: autenticator,
+      timeout: 10000,
+    });
+    assert.ok(myService.baseOptions.timeout);
+    assert.equal(myService.baseOptions.timeout, 10000);
+  });
+
+  it('Check default timeout value - CloudantV1', () => {
+    const autenticator = new NoAuthAuthenticator();
+    const myService = new CloudantV1({
+      authenticator: autenticator,
+    });
+    assert.ok(myService.baseOptions.timeout);
+    assert.equal(myService.baseOptions.timeout, 150000);
+  });
+
+  it('Allow timeout overwrite - CloudantV1', () => {
+    const autenticator = new NoAuthAuthenticator();
+    const myService = new CloudantV1({
+      authenticator: autenticator,
+      timeout: 10000,
+    });
+    assert.ok(myService.baseOptions.timeout);
+    assert.equal(myService.baseOptions.timeout, 10000);
   });
 });
