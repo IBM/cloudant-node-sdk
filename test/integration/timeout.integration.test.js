@@ -43,7 +43,7 @@ describe('Default timeout config tests', () => {
     assert.equal(myService.baseOptions.timeout, DEFAULT_TIMEOUT);
     const auth = myService.getAuthenticator();
     assert.ok(auth.tokenOptions.timeout);
-    assert.equal(myService.baseOptions.timeout, DEFAULT_TIMEOUT);
+    assert.equal(auth.tokenOptions.timeout, DEFAULT_TIMEOUT);
   });
 
   it('Allow timeout overwrite - CloudantV1 - SessionAuth', () => {
@@ -59,7 +59,7 @@ describe('Default timeout config tests', () => {
     assert.equal(myService.baseOptions.timeout, CUSTOM_TIMEOUT);
     const auth = myService.getAuthenticator();
     assert.ok(auth.tokenOptions.timeout);
-    assert.equal(myService.baseOptions.timeout, CUSTOM_TIMEOUT);
+    assert.equal(auth.tokenOptions.timeout, CUSTOM_TIMEOUT);
   });
 
   it('Check default timeout value - newInstance - IamAuth', () => {
