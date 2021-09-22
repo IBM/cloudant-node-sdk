@@ -28,7 +28,6 @@ const READ_TIMEOUT = 150000;
 /**
  * Set Validation rules
  */
-
 const DocumentOperations = [
   'deleteDocument',
   'getDocument',
@@ -72,7 +71,7 @@ for (const rule of validationRules) {
 Object.freeze(rulesByOperation);
 
 /**
- * --- Functions ---
+ * --- Classes ---
  */
 
 /**
