@@ -46,29 +46,35 @@ describe('Default timeout config tests', () => {
     assert.equal(auth.tokenOptions.timeout, expTimeoutValue);
   }
 
+  // Every test case tests an authenticator.
+  // 1. case: its default timeout value checked,
+  // 2.case: a custom overwrite possibility is checked.
+  const testCases = [
+    // Default
+    {
+      options: {
+        authenticator: {},
+      },
+      expTimeout: DEFAULT_TIMEOUT,
+    },
+    // Overwrite
+    {
+      options: {
+        authenticator: {},
+        timeout: CUSTOM_TIMEOUT,
+      },
+      expTimeout: CUSTOM_TIMEOUT,
+    },
+  ];
+
   it('CloudantV1 - BasicAuth', () => {
     const basicAuth = new BasicAuthenticator({
       username: 'user',
       password: 'pwd',
     });
-    const testCases = [
-      // Default
-      {
-        options: {
-          authenticator: basicAuth,
-        },
-        expTimeout: DEFAULT_TIMEOUT,
-      },
-      // Overwrite
-      {
-        options: {
-          authenticator: basicAuth,
-          timeout: CUSTOM_TIMEOUT,
-        },
-        expTimeout: CUSTOM_TIMEOUT,
-      },
-    ];
+
     for (const tc of testCases) {
+      tc.options.authenticator = basicAuth;
       const myService = new CloudantV1(tc.options);
       assertBaseTimeoutOptions(myService, tc.expTimeout);
     }
@@ -79,24 +85,8 @@ describe('Default timeout config tests', () => {
       username: 'name',
       password: 'pwd',
     });
-    const testCases = [
-      // Default
-      {
-        options: {
-          authenticator: sessionAuth,
-        },
-        expTimeout: DEFAULT_TIMEOUT,
-      },
-      // Overwrite
-      {
-        options: {
-          authenticator: sessionAuth,
-          timeout: CUSTOM_TIMEOUT,
-        },
-        expTimeout: CUSTOM_TIMEOUT,
-      },
-    ];
     for (const tc of testCases) {
+      tc.options.authenticator = sessionAuth;
       const myService = new CloudantV1(tc.options);
       assertBaseTimeoutOptions(myService, tc.expTimeout);
       assertAuthTokenTimeoutOptions(myService, tc.expTimeout);
@@ -146,24 +136,8 @@ describe('Default timeout config tests', () => {
     const iamAuth = new IamAuthenticator({
       apikey: 'apikey',
     });
-    const testCases = [
-      // Default
-      {
-        options: {
-          authenticator: iamAuth,
-        },
-        expTimeout: DEFAULT_TIMEOUT,
-      },
-      // Overwrite
-      {
-        options: {
-          authenticator: iamAuth,
-          timeout: CUSTOM_TIMEOUT,
-        },
-        expTimeout: CUSTOM_TIMEOUT,
-      },
-    ];
     for (const tc of testCases) {
+      tc.options.authenticator = iamAuth;
       const myService = CloudantV1.newInstance(tc.options);
       assertBaseTimeoutOptions(myService, DEFAULT_TIMEOUT);
       return assertIamAuthRequestTimeout(myService, tc.expTimeout);
@@ -172,24 +146,8 @@ describe('Default timeout config tests', () => {
 
   it('newInstance - NoAuth', () => {
     const noAuth = new NoAuthAuthenticator();
-    const testCases = [
-      // Default
-      {
-        options: {
-          authenticator: noAuth,
-        },
-        expTimeout: DEFAULT_TIMEOUT,
-      },
-      // Overwrite
-      {
-        options: {
-          authenticator: noAuth,
-          timeout: CUSTOM_TIMEOUT,
-        },
-        expTimeout: CUSTOM_TIMEOUT,
-      },
-    ];
     for (const tc of testCases) {
+      tc.options.authenticator = noAuth;
       const myService = CloudantV1.newInstance(tc.options);
       assertBaseTimeoutOptions(myService, tc.expTimeout);
     }
