@@ -30,6 +30,7 @@ const {
 const DEFAULT_TIMEOUT = 150000; // (2.5m=150s)
 const CUSTOM_TIMEOUT = 30000; // (30s)
 
+// Every method tests an authenticator.
 describe('Default timeout config tests', () => {
   function assertBaseTimeoutOptions(myService, expTimeoutValue) {
     assert.ok(myService.baseOptions.timeout);
@@ -42,18 +43,16 @@ describe('Default timeout config tests', () => {
     assert.equal(auth.tokenOptions.timeout, expTimeoutValue);
   }
 
-  // Every test case tests an authenticator.
-  // 1. case: its default timeout value checked,
-  // 2. case: a custom overwrite possibility is checked.
+  // Every test case tests a timeout settings.
   const testCases = [
-    // Default
+    // 1. case: check default timeout value
     {
       options: {
         authenticator: {},
       },
       expTimeout: DEFAULT_TIMEOUT,
     },
-    // Overwrite
+    // 2. case: check custom timeout overwrite
     {
       options: {
         authenticator: {},
