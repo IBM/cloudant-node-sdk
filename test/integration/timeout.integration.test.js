@@ -27,14 +27,10 @@ const {
   NoAuthAuthenticator,
 } = require('ibm-cloud-sdk-core');
 
-const TESTCASE_TIMEOUT = 500; // (0.5s)
-
 const DEFAULT_TIMEOUT = 150000; // (2.5m=150s)
 const CUSTOM_TIMEOUT = 30000; // (30s)
 
 describe('Default timeout config tests', () => {
-  jest.setTimeout(TESTCASE_TIMEOUT);
-
   function assertBaseTimeoutOptions(myService, expTimeoutValue) {
     assert.ok(myService.baseOptions.timeout);
     assert.equal(myService.baseOptions.timeout, expTimeoutValue);
