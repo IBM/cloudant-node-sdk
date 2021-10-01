@@ -32,17 +32,6 @@ const CUSTOM_TIMEOUT = 30000; // (30s)
 
 // Every method tests an authenticator.
 describe('Default timeout config tests', () => {
-  function assertBaseTimeoutOptions(myService, expTimeoutValue) {
-    assert.ok(myService.baseOptions.timeout);
-    assert.equal(myService.baseOptions.timeout, expTimeoutValue);
-  }
-
-  function assertAuthTokenTimeoutOptions(myService, expTimeoutValue) {
-    const auth = myService.getAuthenticator();
-    assert.ok(auth.tokenOptions.timeout);
-    assert.equal(auth.tokenOptions.timeout, expTimeoutValue);
-  }
-
   // Every test case tests a timeout settings.
   const testCases = [
     // 1. case: check default timeout value
@@ -62,6 +51,11 @@ describe('Default timeout config tests', () => {
     },
   ];
 
+  function assertBaseTimeoutOptions(myService, expTimeoutValue) {
+    assert.ok(myService.baseOptions.timeout);
+    assert.equal(myService.baseOptions.timeout, expTimeoutValue);
+  }
+
   it('CloudantV1 - BasicAuth', () => {
     const basicAuth = new BasicAuthenticator({
       username: 'user',
@@ -74,6 +68,21 @@ describe('Default timeout config tests', () => {
       assertBaseTimeoutOptions(myService, tc.expTimeout);
     }
   });
+
+  it('newInstance - NoAuth', () => {
+    const noAuth = new NoAuthAuthenticator();
+    for (const tc of testCases) {
+      tc.options.authenticator = noAuth;
+      const myService = CloudantV1.newInstance(tc.options);
+      assertBaseTimeoutOptions(myService, tc.expTimeout);
+    }
+  });
+
+  function assertAuthTokenTimeoutOptions(myService, expTimeoutValue) {
+    const auth = myService.getAuthenticator();
+    assert.ok(auth.tokenOptions.timeout);
+    assert.equal(auth.tokenOptions.timeout, expTimeoutValue);
+  }
 
   it('CloudantV1 - SessionAuth', () => {
     const sessionAuth = new CouchdbSessionAuthenticator({
@@ -136,15 +145,6 @@ describe('Default timeout config tests', () => {
       const myService = CloudantV1.newInstance(tc.options);
       assertBaseTimeoutOptions(myService, DEFAULT_TIMEOUT);
       return assertIamAuthRequestTimeout(myService, tc.expTimeout);
-    }
-  });
-
-  it('newInstance - NoAuth', () => {
-    const noAuth = new NoAuthAuthenticator();
-    for (const tc of testCases) {
-      tc.options.authenticator = noAuth;
-      const myService = CloudantV1.newInstance(tc.options);
-      assertBaseTimeoutOptions(myService, tc.expTimeout);
     }
   });
 });
