@@ -21,7 +21,7 @@ import { CouchdbSessionAuthenticator } from '../auth';
 import { getSdkHeaders } from './common';
 
 /**
- * Set default timeout to 2.5 minutes (= 150.000ms)
+ * Set default timeout to 2.5 minutes (= 150000ms)
  */
 const READ_TIMEOUT = 150000;
 
