@@ -20,6 +20,14 @@ import { CookieJar } from 'tough-cookie';
 import { CouchdbSessionAuthenticator } from '../auth';
 import { getSdkHeaders } from './common';
 
+/**
+ * Set default timeout to 2.5 minutes (= 150000ms)
+ */
+const READ_TIMEOUT = 150000;
+
+/**
+ * Set Validation rules
+ */
 const DocumentOperations = [
   'deleteDocument',
   'getDocument',
@@ -63,6 +71,10 @@ for (const rule of validationRules) {
 Object.freeze(rulesByOperation);
 
 /**
+ * --- Classes ---
+ */
+
+/**
  * Extend Error interface to access the proper Error definition.
  */
 class InvalidArgumentValueError extends Error {
@@ -86,6 +98,9 @@ export abstract class CloudantBaseService extends BaseService {
   constructor(userOptions: UserOptions) {
     if (userOptions.authenticator instanceof CouchdbSessionAuthenticator) {
       userOptions.jar = userOptions.jar || new CookieJar();
+    }
+    if (!('timeout' in userOptions)) {
+      userOptions.timeout = READ_TIMEOUT;
     }
     super(userOptions);
     this.configureSessionAuthenticator();
@@ -151,6 +166,7 @@ export abstract class CloudantBaseService extends BaseService {
       (auth as CouchdbSessionAuthenticator).configure(this.baseOptions);
     }
   }
+
   /**
    * Extend createRequest to handle document and attachment validation.
    */
