@@ -3025,7 +3025,6 @@ describe('CloudantV1', () => {
         indexes: { 'key1': searchIndexDefinitionModel },
         language: 'javascript',
         options: designDocumentOptionsModel,
-        updates: { 'key1': 'testString' },
         validate_doc_update: 'testString',
         views: { 'key1': designDocumentViewsMapReduceModel },
         st_indexes: { 'key1': geoIndexDefinitionModel },
@@ -6761,6 +6760,12 @@ describe('CloudantV1', () => {
         q: 1,
       };
 
+      // ReplicationDatabaseAuthBasic
+      const replicationDatabaseAuthBasicModel = {
+        password: 'testString',
+        username: 'testString',
+      };
+
       // ReplicationDatabaseAuthIam
       const replicationDatabaseAuthIamModel = {
         api_key: 'testString',
@@ -6768,6 +6773,7 @@ describe('CloudantV1', () => {
 
       // ReplicationDatabaseAuth
       const replicationDatabaseAuthModel = {
+        basic: replicationDatabaseAuthBasicModel,
         iam: replicationDatabaseAuthIamModel,
       };
 
@@ -8277,79 +8283,6 @@ describe('CloudantV1', () => {
         expectToBePromise(putLocalDocumentPromise);
 
         putLocalDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
-      });
-    });
-  });
-  describe('postMissingRevs', () => {
-    describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation postMissingRevs
-        const db = 'testString';
-        const documentRevisions = { 'key1': ['testString'] };
-        const params = {
-          db: db,
-          documentRevisions: documentRevisions,
-        };
-
-        const postMissingRevsResult = cloudantService.postMissingRevs(params);
-
-        // all methods should return a Promise
-        expectToBePromise(postMissingRevsResult);
-
-        // assert that create request was called
-        expect(createRequestMock).toHaveBeenCalledTimes(1);
-
-        const mockRequestOptions = getOptions(createRequestMock);
-
-        checkUrlAndMethod(mockRequestOptions, '/{db}/_missing_revs', 'POST');
-        const expectedAccept = 'application/json';
-        const expectedContentType = 'application/json';
-        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(mockRequestOptions.body).toEqual(documentRevisions);
-        expect(mockRequestOptions.path.db).toEqual(db);
-      });
-
-      test('should prioritize user-given headers', () => {
-        // parameters
-        const db = 'testString';
-        const documentRevisions = { 'key1': ['testString'] };
-        const userAccept = 'fake/accept';
-        const userContentType = 'fake/contentType';
-        const params = {
-          db,
-          documentRevisions,
-          headers: {
-            Accept: userAccept,
-            'Content-Type': userContentType,
-          },
-        };
-
-        cloudantService.postMissingRevs(params);
-        checkMediaHeaders(createRequestMock, userAccept, userContentType);
-      });
-    });
-
-    describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
-        let err;
-        try {
-          await cloudantService.postMissingRevs({});
-        } catch (e) {
-          err = e;
-        }
-
-        expect(err.message).toMatch(/Missing required parameters/);
-        done();
-      });
-
-      test('should reject promise when required params are not given', (done) => {
-        const postMissingRevsPromise = cloudantService.postMissingRevs();
-        expectToBePromise(postMissingRevsPromise);
-
-        postMissingRevsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });

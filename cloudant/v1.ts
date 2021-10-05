@@ -435,17 +435,18 @@ class CloudantV1 extends CloudantBaseService {
    * key order.
    * @param {string} [params.feed] - Query parameter to specify the changes feed type.
    * @param {string} [params.filter] - Query parameter to specify a filter function from a design document that will
-   * filter the changes stream emitting only filtered events. Additionally, several built-in filters are available:
-   * - `_design`
-   * - Returns only changes to design documents.
-   * - `_doc_ids`
-   * - Returns changes for documents whit an ID matching one specified in `doc_ids` request body parameter.
-   * - `_selector`
-   * - Returns changes for documents that match the `selector` request body parameter. The selector syntax is the same
-   * as used for `_find`.
-   * - `_view`
-   * - Returns changes for documents that match an existing map function in the view specified by the query parameter
-   * `view`.
+   * filter the changes stream emitting only filtered events. For example: `design_doc/filtername`.
+   *
+   * Additionally, some keywords are reserved for built-in filters:
+   *
+   *   * `_design` - Returns only changes to design documents.
+   *   * `_doc_ids` - Returns changes for documents with an ID matching one specified in
+   *       `doc_ids` request body parameter.
+   *   * `_selector` - Returns changes for documents that match the `selector`
+   *       request body parameter. The selector syntax is the same as used for
+   *       `_find`.
+   *   * `_view` - Returns changes for documents that match an existing map
+   *       function in the view specified by the query parameter `view`.
    * @param {number} [params.heartbeat] - Query parameter to specify the period in milliseconds after which an empty
    * line is sent in the results. Only applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout
    * to keep the feed alive indefinitely. May also be `true` to use default value of 60000.
@@ -587,17 +588,18 @@ class CloudantV1 extends CloudantBaseService {
    * key order.
    * @param {string} [params.feed] - Query parameter to specify the changes feed type.
    * @param {string} [params.filter] - Query parameter to specify a filter function from a design document that will
-   * filter the changes stream emitting only filtered events. Additionally, several built-in filters are available:
-   * - `_design`
-   * - Returns only changes to design documents.
-   * - `_doc_ids`
-   * - Returns changes for documents whit an ID matching one specified in `doc_ids` request body parameter.
-   * - `_selector`
-   * - Returns changes for documents that match the `selector` request body parameter. The selector syntax is the same
-   * as used for `_find`.
-   * - `_view`
-   * - Returns changes for documents that match an existing map function in the view specified by the query parameter
-   * `view`.
+   * filter the changes stream emitting only filtered events. For example: `design_doc/filtername`.
+   *
+   * Additionally, some keywords are reserved for built-in filters:
+   *
+   *   * `_design` - Returns only changes to design documents.
+   *   * `_doc_ids` - Returns changes for documents with an ID matching one specified in
+   *       `doc_ids` request body parameter.
+   *   * `_selector` - Returns changes for documents that match the `selector`
+   *       request body parameter. The selector syntax is the same as used for
+   *       `_find`.
+   *   * `_view` - Returns changes for documents that match an existing map
+   *       function in the view specified by the query parameter `view`.
    * @param {number} [params.heartbeat] - Query parameter to specify the period in milliseconds after which an empty
    * line is sent in the results. Only applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout
    * to keep the feed alive indefinitely. May also be `true` to use default value of 60000.
@@ -6922,62 +6924,6 @@ class CloudantV1 extends CloudantBaseService {
    ************************/
 
   /**
-   * Query which document revisions are missing from the database.
-   *
-   * Given a list of document revisions, returns the document revisions that do not exist in the database.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.db - Path parameter to specify the database name.
-   * @param {JsonObject} params.documentRevisions - HTTP request body for postMissingRevs and postRevsDiff.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.MissingRevsResult>>}
-   */
-  public postMissingRevs(
-    params: CloudantV1.PostMissingRevsParams
-  ): Promise<CloudantV1.Response<CloudantV1.MissingRevsResult>> {
-    const _params = { ...params };
-    const requiredParams = ['db', 'documentRevisions'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
-    }
-
-    const body = _params.documentRevisions;
-    const path = {
-      'db': _params.db,
-    };
-
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postMissingRevs'
-    );
-
-    const parameters = {
-      options: {
-        url: '/{db}/_missing_revs',
-        method: 'POST',
-        body,
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
    * Query the document revisions and possible ancestors missing from the database.
    *
    * The replicator is the primary user of this operation. After receiving a set of new revision IDs from the source
@@ -7550,17 +7496,18 @@ namespace CloudantV1 {
     /** Query parameter to specify the changes feed type. */
     feed?: PostChangesConstants.Feed | string;
     /** Query parameter to specify a filter function from a design document that will filter the changes stream
-     *  emitting only filtered events. Additionally, several built-in filters are available:
-     *  - `_design`
-     *  - Returns only changes to design documents.
-     *  - `_doc_ids`
-     *  - Returns changes for documents whit an ID matching one specified in `doc_ids` request body parameter.
-     *  - `_selector`
-     *  - Returns changes for documents that match the `selector` request body parameter. The selector syntax is the
-     *  same as used for `_find`.
-     *  - `_view`
-     *  - Returns changes for documents that match an existing map function in the view specified by the query parameter
-     *  `view`.
+     *  emitting only filtered events. For example: `design_doc/filtername`.
+     *
+     *  Additionally, some keywords are reserved for built-in filters:
+     *
+     *    * `_design` - Returns only changes to design documents.
+     *    * `_doc_ids` - Returns changes for documents with an ID matching one specified in
+     *        `doc_ids` request body parameter.
+     *    * `_selector` - Returns changes for documents that match the `selector`
+     *        request body parameter. The selector syntax is the same as used for
+     *        `_find`.
+     *    * `_view` - Returns changes for documents that match an existing map
+     *        function in the view specified by the query parameter `view`.
      */
     filter?: string;
     /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Only
@@ -7665,17 +7612,18 @@ namespace CloudantV1 {
     /** Query parameter to specify the changes feed type. */
     feed?: PostChangesAsStreamConstants.Feed | string;
     /** Query parameter to specify a filter function from a design document that will filter the changes stream
-     *  emitting only filtered events. Additionally, several built-in filters are available:
-     *  - `_design`
-     *  - Returns only changes to design documents.
-     *  - `_doc_ids`
-     *  - Returns changes for documents whit an ID matching one specified in `doc_ids` request body parameter.
-     *  - `_selector`
-     *  - Returns changes for documents that match the `selector` request body parameter. The selector syntax is the
-     *  same as used for `_find`.
-     *  - `_view`
-     *  - Returns changes for documents that match an existing map function in the view specified by the query parameter
-     *  `view`.
+     *  emitting only filtered events. For example: `design_doc/filtername`.
+     *
+     *  Additionally, some keywords are reserved for built-in filters:
+     *
+     *    * `_design` - Returns only changes to design documents.
+     *    * `_doc_ids` - Returns changes for documents with an ID matching one specified in
+     *        `doc_ids` request body parameter.
+     *    * `_selector` - Returns changes for documents that match the `selector`
+     *        request body parameter. The selector syntax is the same as used for
+     *        `_find`.
+     *    * `_view` - Returns changes for documents that match an existing map
+     *        function in the view specified by the query parameter `view`.
      */
     filter?: string;
     /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Only
@@ -10372,15 +10320,6 @@ namespace CloudantV1 {
     }
   }
 
-  /** Parameters for the `postMissingRevs` operation. */
-  export interface PostMissingRevsParams {
-    /** Path parameter to specify the database name. */
-    db: string;
-    /** HTTP request body for postMissingRevs and postRevsDiff. */
-    documentRevisions: JsonObject;
-    headers?: OutgoingHttpHeaders;
-  }
-
   /** Parameters for the `postRevsDiff` operation. */
   export interface PostRevsDiffParams {
     /** Path parameter to specify the database name. */
@@ -10817,6 +10756,8 @@ namespace CloudantV1 {
 
   /** Schema for database information keyed by database name. */
   export interface DbsInfoResult {
+    /** The name of the error. */
+    error?: string;
     /** Schema for information about a database. */
     info?: DatabaseInformation;
     /** Database name. */
@@ -10855,8 +10796,6 @@ namespace CloudantV1 {
     language?: string;
     /** Schema for design document options. */
     options?: DesignDocumentOptions;
-    /** Schema for update function definitions. */
-    updates?: JsonObject;
     /** Validate document update function can be used to prevent invalid or unauthorized document update requests
      *  from being stored. Validation functions typically examine the structure of the new document to ensure that
      *  required fields are present and to verify that the requesting user should be allowed to make changes to the
@@ -10916,8 +10855,6 @@ namespace CloudantV1 {
     signature: string;
     /** Schema for size information of content. */
     sizes: ContentInformationSizes;
-    /** The update sequence of the corresponding database that has been indexed. */
-    update_seq: string;
     /** Indicates if the view is currently being updated. */
     updater_running: boolean;
     /** Number of clients waiting on views from this design document. */
@@ -11270,12 +11207,6 @@ namespace CloudantV1 {
     cluster_nodes: string[];
   }
 
-  /** Schema for mapping document IDs to lists of missing revisions. */
-  export interface MissingRevsResult {
-    /** Schema for mapping document IDs to lists of revisions. */
-    missing_revs: JsonObject;
-  }
-
   /** Schema for an OK result. */
   export interface Ok {
     /** ok. */
@@ -11346,8 +11277,18 @@ namespace CloudantV1 {
 
   /** Schema for replication source or target database authentication. */
   export interface ReplicationDatabaseAuth {
+    /** Schema for basic authentication of replication source or target database. */
+    basic?: ReplicationDatabaseAuthBasic;
     /** Schema for an IAM API key for replication database authentication. */
     iam?: ReplicationDatabaseAuthIam;
+  }
+
+  /** Schema for basic authentication of replication source or target database. */
+  export interface ReplicationDatabaseAuthBasic {
+    /** The password associated with the username. */
+    password: string;
+    /** The username. */
+    username: string;
   }
 
   /** Schema for an IAM API key for replication database authentication. */
@@ -11581,6 +11522,8 @@ namespace CloudantV1 {
 
   /** Schema for a replication scheduler job event. */
   export interface SchedulerJobEvent {
+    /** Reason for current state of event. */
+    reason?: string;
     /** Timestamp of the event. */
     timestamp: string;
     /** Type of the event. */
