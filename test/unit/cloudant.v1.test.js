@@ -112,7 +112,7 @@ describe('CloudantV1', () => {
   });
   describe('getServerInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getServerInformationTest() {
         // Construct the params object for operation getServerInformation
         const params = {};
 
@@ -130,6 +130,21 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getServerInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getServerInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getServerInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -156,7 +171,7 @@ describe('CloudantV1', () => {
   });
   describe('getMembershipInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getMembershipInformationTest() {
         // Construct the params object for operation getMembershipInformation
         const params = {};
 
@@ -174,6 +189,21 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getMembershipInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getMembershipInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getMembershipInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -200,7 +230,7 @@ describe('CloudantV1', () => {
   });
   describe('getUuids', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getUuidsTest() {
         // Construct the params object for operation getUuids
         const count = 1;
         const params = {
@@ -222,6 +252,21 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.qs.count).toEqual(count);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getUuidsTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getUuidsTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getUuidsTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -248,7 +293,7 @@ describe('CloudantV1', () => {
   });
   describe('getCapacityThroughputInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getCapacityThroughputInformationTest() {
         // Construct the params object for operation getCapacityThroughputInformation
         const params = {};
 
@@ -266,6 +311,21 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getCapacityThroughputInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getCapacityThroughputInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getCapacityThroughputInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -292,7 +352,7 @@ describe('CloudantV1', () => {
   });
   describe('putCapacityThroughputConfiguration', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __putCapacityThroughputConfigurationTest() {
         // Construct the params object for operation putCapacityThroughputConfiguration
         const blocks = 0;
         const params = {
@@ -314,6 +374,21 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.blocks).toEqual(blocks);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __putCapacityThroughputConfigurationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __putCapacityThroughputConfigurationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __putCapacityThroughputConfigurationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -360,7 +435,7 @@ describe('CloudantV1', () => {
   });
   describe('getDbUpdates', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getDbUpdatesTest() {
         // Construct the params object for operation getDbUpdates
         const feed = 'normal';
         const heartbeat = 0;
@@ -391,6 +466,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.heartbeat).toEqual(heartbeat);
         expect(mockRequestOptions.qs.timeout).toEqual(timeout);
         expect(mockRequestOptions.qs.since).toEqual(since);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getDbUpdatesTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getDbUpdatesTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getDbUpdatesTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -417,7 +507,7 @@ describe('CloudantV1', () => {
   });
   describe('postChanges', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postChangesTest() {
         // Construct the params object for operation postChanges
         const db = 'testString';
         const docIds = ['testString'];
@@ -493,6 +583,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.timeout).toEqual(timeout);
         expect(mockRequestOptions.qs.view).toEqual(view);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postChangesTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postChangesTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postChangesTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -539,7 +644,7 @@ describe('CloudantV1', () => {
   });
   describe('postChangesAsStream', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postChangesAsStreamTest() {
         // Construct the params object for operation postChangesAsStream
         const db = 'testString';
         const docIds = ['0007741142412418284'];
@@ -616,6 +721,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.view).toEqual(view);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postChangesAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postChangesAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postChangesAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -662,7 +782,7 @@ describe('CloudantV1', () => {
   });
   describe('headDatabase', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __headDatabaseTest() {
         // Construct the params object for operation headDatabase
         const db = 'testString';
         const params = {
@@ -684,6 +804,21 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __headDatabaseTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __headDatabaseTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __headDatabaseTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -730,7 +865,7 @@ describe('CloudantV1', () => {
   });
   describe('getAllDbs', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getAllDbsTest() {
         // Construct the params object for operation getAllDbs
         const descending = false;
         const endkey = 'testString';
@@ -764,6 +899,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.limit).toEqual(limit);
         expect(mockRequestOptions.qs.skip).toEqual(skip);
         expect(mockRequestOptions.qs.startkey).toEqual(startkey);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getAllDbsTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getAllDbsTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getAllDbsTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -790,7 +940,7 @@ describe('CloudantV1', () => {
   });
   describe('postDbsInfo', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postDbsInfoTest() {
         // Construct the params object for operation postDbsInfo
         const keys = ['testString'];
         const params = {
@@ -812,6 +962,21 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.keys).toEqual(keys);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postDbsInfoTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postDbsInfoTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postDbsInfoTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -858,7 +1023,7 @@ describe('CloudantV1', () => {
   });
   describe('deleteDatabase', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __deleteDatabaseTest() {
         // Construct the params object for operation deleteDatabase
         const db = 'testString';
         const params = {
@@ -880,6 +1045,21 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __deleteDatabaseTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __deleteDatabaseTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __deleteDatabaseTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -926,7 +1106,7 @@ describe('CloudantV1', () => {
   });
   describe('getDatabaseInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getDatabaseInformationTest() {
         // Construct the params object for operation getDatabaseInformation
         const db = 'testString';
         const params = {
@@ -948,6 +1128,21 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getDatabaseInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getDatabaseInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getDatabaseInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -994,7 +1189,7 @@ describe('CloudantV1', () => {
   });
   describe('putDatabase', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __putDatabaseTest() {
         // Construct the params object for operation putDatabase
         const db = 'testString';
         const partitioned = false;
@@ -1022,6 +1217,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.partitioned).toEqual(partitioned);
         expect(mockRequestOptions.qs.q).toEqual(q);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __putDatabaseTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __putDatabaseTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __putDatabaseTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1068,7 +1278,7 @@ describe('CloudantV1', () => {
   });
   describe('headDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __headDocumentTest() {
         // Construct the params object for operation headDocument
         const db = 'testString';
         const docId = 'testString';
@@ -1102,6 +1312,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.rev).toEqual(rev);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __headDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __headDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __headDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1150,7 +1375,7 @@ describe('CloudantV1', () => {
   });
   describe('postDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postDocumentTest() {
         // Construct the params object for operation postDocument
         const db = 'testString';
         const document = {};
@@ -1181,6 +1406,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body).toEqual(document);
         expect(mockRequestOptions.qs.batch).toEqual(batch);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1229,7 +1469,7 @@ describe('CloudantV1', () => {
   });
   describe('postAllDocs', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postAllDocsTest() {
         // Construct the params object for operation postAllDocs
         const db = 'testString';
         const attEncodingInfo = false;
@@ -1290,6 +1530,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.keys).toEqual(keys);
         expect(mockRequestOptions.body.startkey).toEqual(startkey);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postAllDocsTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postAllDocsTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postAllDocsTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1336,7 +1591,7 @@ describe('CloudantV1', () => {
   });
   describe('postAllDocsAsStream', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postAllDocsAsStreamTest() {
         // Construct the params object for operation postAllDocsAsStream
         const db = 'testString';
         const attEncodingInfo = false;
@@ -1398,6 +1653,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.startkey).toEqual(startkey);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postAllDocsAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postAllDocsAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postAllDocsAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1463,7 +1733,7 @@ describe('CloudantV1', () => {
         startkey: 'testString',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __postAllDocsQueriesTest() {
         // Construct the params object for operation postAllDocsQueries
         const db = 'testString';
         const queries = [allDocsQueryModel];
@@ -1488,6 +1758,21 @@ describe('CloudantV1', () => {
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.queries).toEqual(queries);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postAllDocsQueriesTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postAllDocsQueriesTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postAllDocsQueriesTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1555,7 +1840,7 @@ describe('CloudantV1', () => {
         startkey: 'testString',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __postAllDocsQueriesAsStreamTest() {
         // Construct the params object for operation postAllDocsQueriesAsStream
         const db = 'testString';
         const queries = [allDocsQueryModel];
@@ -1581,6 +1866,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.queries).toEqual(queries);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postAllDocsQueriesAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postAllDocsQueriesAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postAllDocsQueriesAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1629,7 +1929,7 @@ describe('CloudantV1', () => {
   });
   describe('postBulkDocs', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postBulkDocsTest() {
         // Construct the params object for operation postBulkDocs
         const db = 'testString';
         const bulkDocs = {};
@@ -1654,6 +1954,21 @@ describe('CloudantV1', () => {
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body).toEqual(bulkDocs);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postBulkDocsTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postBulkDocsTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postBulkDocsTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1711,7 +2026,7 @@ describe('CloudantV1', () => {
         rev: 'testString',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __postBulkGetTest() {
         // Construct the params object for operation postBulkGet
         const db = 'testString';
         const docs = [bulkGetQueryDocumentModel];
@@ -1748,6 +2063,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.latest).toEqual(latest);
         expect(mockRequestOptions.qs.revs).toEqual(revs);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postBulkGetTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postBulkGetTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postBulkGetTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1805,7 +2135,7 @@ describe('CloudantV1', () => {
         rev: '3-917fa2381192822767f010b95b45325b',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __postBulkGetAsMixedTest() {
         // Construct the params object for operation postBulkGetAsMixed
         const db = 'testString';
         const docs = [bulkGetQueryDocumentModel];
@@ -1843,6 +2173,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.revs).toEqual(revs);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postBulkGetAsMixedTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postBulkGetAsMixedTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postBulkGetAsMixedTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1900,7 +2245,7 @@ describe('CloudantV1', () => {
         rev: '3-917fa2381192822767f010b95b45325b',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __postBulkGetAsRelatedTest() {
         // Construct the params object for operation postBulkGetAsRelated
         const db = 'testString';
         const docs = [bulkGetQueryDocumentModel];
@@ -1938,6 +2283,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.revs).toEqual(revs);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postBulkGetAsRelatedTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postBulkGetAsRelatedTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postBulkGetAsRelatedTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -1995,7 +2355,7 @@ describe('CloudantV1', () => {
         rev: '3-917fa2381192822767f010b95b45325b',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __postBulkGetAsStreamTest() {
         // Construct the params object for operation postBulkGetAsStream
         const db = 'testString';
         const docs = [bulkGetQueryDocumentModel];
@@ -2033,6 +2393,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.revs).toEqual(revs);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postBulkGetAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postBulkGetAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postBulkGetAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -2081,7 +2456,7 @@ describe('CloudantV1', () => {
   });
   describe('deleteDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __deleteDocumentTest() {
         // Construct the params object for operation deleteDocument
         const db = 'testString';
         const docId = 'testString';
@@ -2115,6 +2490,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.rev).toEqual(rev);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __deleteDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __deleteDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __deleteDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -2163,7 +2553,7 @@ describe('CloudantV1', () => {
   });
   describe('getDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getDocumentTest() {
         // Construct the params object for operation getDocument
         const db = 'testString';
         const docId = 'testString';
@@ -2221,6 +2611,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.revs_info).toEqual(revsInfo);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -2269,7 +2674,7 @@ describe('CloudantV1', () => {
   });
   describe('getDocumentAsMixed', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getDocumentAsMixedTest() {
         // Construct the params object for operation getDocumentAsMixed
         const db = 'testString';
         const docId = 'testString';
@@ -2328,6 +2733,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getDocumentAsMixedTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getDocumentAsMixedTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getDocumentAsMixedTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -2376,7 +2796,7 @@ describe('CloudantV1', () => {
   });
   describe('getDocumentAsRelated', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getDocumentAsRelatedTest() {
         // Construct the params object for operation getDocumentAsRelated
         const db = 'testString';
         const docId = 'testString';
@@ -2435,6 +2855,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getDocumentAsRelatedTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getDocumentAsRelatedTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getDocumentAsRelatedTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -2483,7 +2918,7 @@ describe('CloudantV1', () => {
   });
   describe('getDocumentAsStream', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getDocumentAsStreamTest() {
         // Construct the params object for operation getDocumentAsStream
         const db = 'testString';
         const docId = 'testString';
@@ -2542,6 +2977,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getDocumentAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getDocumentAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getDocumentAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -2590,7 +3040,7 @@ describe('CloudantV1', () => {
   });
   describe('putDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __putDocumentTest() {
         // Construct the params object for operation putDocument
         const db = 'testString';
         const docId = 'testString';
@@ -2633,6 +3083,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.rev).toEqual(rev);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __putDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __putDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __putDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -2683,7 +3148,7 @@ describe('CloudantV1', () => {
   });
   describe('headDesignDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __headDesignDocumentTest() {
         // Construct the params object for operation headDesignDocument
         const db = 'testString';
         const ddoc = 'testString';
@@ -2711,6 +3176,21 @@ describe('CloudantV1', () => {
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __headDesignDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __headDesignDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __headDesignDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -2759,7 +3239,7 @@ describe('CloudantV1', () => {
   });
   describe('deleteDesignDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __deleteDesignDocumentTest() {
         // Construct the params object for operation deleteDesignDocument
         const db = 'testString';
         const ddoc = 'testString';
@@ -2793,6 +3273,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.rev).toEqual(rev);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __deleteDesignDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __deleteDesignDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __deleteDesignDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -2841,7 +3336,7 @@ describe('CloudantV1', () => {
   });
   describe('getDesignDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getDesignDocumentTest() {
         // Construct the params object for operation getDesignDocument
         const db = 'testString';
         const ddoc = 'testString';
@@ -2899,6 +3394,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.revs_info).toEqual(revsInfo);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getDesignDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getDesignDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getDesignDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -3031,7 +3541,7 @@ describe('CloudantV1', () => {
         foo: 'testString',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __putDesignDocumentTest() {
         // Construct the params object for operation putDesignDocument
         const db = 'testString';
         const ddoc = 'testString';
@@ -3071,6 +3581,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.rev).toEqual(rev);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __putDesignDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __putDesignDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __putDesignDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -3121,7 +3646,7 @@ describe('CloudantV1', () => {
   });
   describe('getDesignDocumentInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getDesignDocumentInformationTest() {
         // Construct the params object for operation getDesignDocumentInformation
         const db = 'testString';
         const ddoc = 'testString';
@@ -3146,6 +3671,21 @@ describe('CloudantV1', () => {
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getDesignDocumentInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getDesignDocumentInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getDesignDocumentInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -3194,7 +3734,7 @@ describe('CloudantV1', () => {
   });
   describe('postDesignDocs', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postDesignDocsTest() {
         // Construct the params object for operation postDesignDocs
         const db = 'testString';
         const attEncodingInfo = false;
@@ -3258,6 +3798,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.keys).toEqual(keys);
         expect(mockRequestOptions.body.startkey).toEqual(startkey);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postDesignDocsTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postDesignDocsTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postDesignDocsTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -3323,7 +3878,7 @@ describe('CloudantV1', () => {
         startkey: 'testString',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __postDesignDocsQueriesTest() {
         // Construct the params object for operation postDesignDocsQueries
         const db = 'testString';
         const queries = [allDocsQueryModel];
@@ -3351,6 +3906,21 @@ describe('CloudantV1', () => {
         checkUserHeader(createRequestMock, 'Accept', accept);
         expect(mockRequestOptions.body.queries).toEqual(queries);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postDesignDocsQueriesTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postDesignDocsQueriesTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postDesignDocsQueriesTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -3399,7 +3969,7 @@ describe('CloudantV1', () => {
   });
   describe('postView', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postViewTest() {
         // Construct the params object for operation postView
         const db = 'testString';
         const ddoc = 'testString';
@@ -3487,6 +4057,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.view).toEqual(view);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postViewTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postViewTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postViewTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -3537,7 +4122,7 @@ describe('CloudantV1', () => {
   });
   describe('postViewAsStream', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postViewAsStreamTest() {
         // Construct the params object for operation postViewAsStream
         const db = 'testString';
         const ddoc = 'testString';
@@ -3626,6 +4211,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.view).toEqual(view);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postViewAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postViewAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postViewAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -3702,7 +4302,7 @@ describe('CloudantV1', () => {
         update: 'true',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __postViewQueriesTest() {
         // Construct the params object for operation postViewQueries
         const db = 'testString';
         const ddoc = 'testString';
@@ -3733,6 +4333,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.view).toEqual(view);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postViewQueriesTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postViewQueriesTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postViewQueriesTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -3811,7 +4426,7 @@ describe('CloudantV1', () => {
         update: 'true',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __postViewQueriesAsStreamTest() {
         // Construct the params object for operation postViewQueriesAsStream
         const db = 'testString';
         const ddoc = 'testString';
@@ -3843,6 +4458,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.view).toEqual(view);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postViewQueriesAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postViewQueriesAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postViewQueriesAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -3895,7 +4525,7 @@ describe('CloudantV1', () => {
   });
   describe('getPartitionInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getPartitionInformationTest() {
         // Construct the params object for operation getPartitionInformation
         const db = 'testString';
         const partitionKey = 'testString';
@@ -3920,6 +4550,21 @@ describe('CloudantV1', () => {
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getPartitionInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getPartitionInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getPartitionInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -3968,7 +4613,7 @@ describe('CloudantV1', () => {
   });
   describe('postPartitionAllDocs', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postPartitionAllDocsTest() {
         // Construct the params object for operation postPartitionAllDocs
         const db = 'testString';
         const partitionKey = 'testString';
@@ -4032,6 +4677,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.startkey).toEqual(startkey);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postPartitionAllDocsTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postPartitionAllDocsTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postPartitionAllDocsTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -4080,7 +4740,7 @@ describe('CloudantV1', () => {
   });
   describe('postPartitionAllDocsAsStream', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postPartitionAllDocsAsStreamTest() {
         // Construct the params object for operation postPartitionAllDocsAsStream
         const db = 'testString';
         const partitionKey = 'testString';
@@ -4145,6 +4805,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postPartitionAllDocsAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postPartitionAllDocsAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postPartitionAllDocsAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -4193,7 +4868,7 @@ describe('CloudantV1', () => {
   });
   describe('postPartitionSearch', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postPartitionSearchTest() {
         // Construct the params object for operation postPartitionSearch
         const db = 'testString';
         const partitionKey = 'testString';
@@ -4260,6 +4935,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.index).toEqual(index);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postPartitionSearchTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postPartitionSearchTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postPartitionSearchTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -4314,7 +5004,7 @@ describe('CloudantV1', () => {
   });
   describe('postPartitionSearchAsStream', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postPartitionSearchAsStreamTest() {
         // Construct the params object for operation postPartitionSearchAsStream
         const db = 'testString';
         const partitionKey = 'testString';
@@ -4382,6 +5072,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.index).toEqual(index);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postPartitionSearchAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postPartitionSearchAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postPartitionSearchAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -4436,7 +5141,7 @@ describe('CloudantV1', () => {
   });
   describe('postPartitionView', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postPartitionViewTest() {
         // Construct the params object for operation postPartitionView
         const db = 'testString';
         const partitionKey = 'testString';
@@ -4527,6 +5232,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.view).toEqual(view);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postPartitionViewTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postPartitionViewTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postPartitionViewTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -4579,7 +5299,7 @@ describe('CloudantV1', () => {
   });
   describe('postPartitionViewAsStream', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postPartitionViewAsStreamTest() {
         // Construct the params object for operation postPartitionViewAsStream
         const db = 'testString';
         const partitionKey = 'testString';
@@ -4671,6 +5391,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.view).toEqual(view);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postPartitionViewAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postPartitionViewAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postPartitionViewAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -4723,7 +5458,7 @@ describe('CloudantV1', () => {
   });
   describe('postPartitionFind', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postPartitionFindTest() {
         // Construct the params object for operation postPartitionFind
         const db = 'testString';
         const partitionKey = 'testString';
@@ -4781,6 +5516,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.use_index).toEqual(useIndex);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postPartitionFindTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postPartitionFindTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postPartitionFindTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -4831,7 +5581,7 @@ describe('CloudantV1', () => {
   });
   describe('postPartitionFindAsStream', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postPartitionFindAsStreamTest() {
         // Construct the params object for operation postPartitionFindAsStream
         const db = 'testString';
         const partitionKey = 'testString';
@@ -4890,6 +5640,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postPartitionFindAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postPartitionFindAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postPartitionFindAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -4940,7 +5705,7 @@ describe('CloudantV1', () => {
   });
   describe('postExplain', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postExplainTest() {
         // Construct the params object for operation postExplain
         const db = 'testString';
         const selector = { 'key1': 'testString' };
@@ -4998,6 +5763,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.use_index).toEqual(useIndex);
         expect(mockRequestOptions.body.r).toEqual(r);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postExplainTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postExplainTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postExplainTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -5046,7 +5826,7 @@ describe('CloudantV1', () => {
   });
   describe('postFind', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postFindTest() {
         // Construct the params object for operation postFind
         const db = 'testString';
         const selector = { 'key1': 'testString' };
@@ -5104,6 +5884,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.use_index).toEqual(useIndex);
         expect(mockRequestOptions.body.r).toEqual(r);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postFindTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postFindTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postFindTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -5152,7 +5947,7 @@ describe('CloudantV1', () => {
   });
   describe('postFindAsStream', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postFindAsStreamTest() {
         // Construct the params object for operation postFindAsStream
         const db = 'testString';
         const selector = { 'key1': 'testString' };
@@ -5211,6 +6006,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.r).toEqual(r);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postFindAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postFindAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postFindAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -5259,7 +6069,7 @@ describe('CloudantV1', () => {
   });
   describe('getIndexesInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getIndexesInformationTest() {
         // Construct the params object for operation getIndexesInformation
         const db = 'testString';
         const params = {
@@ -5281,6 +6091,21 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getIndexesInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getIndexesInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getIndexesInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -5357,7 +6182,7 @@ describe('CloudantV1', () => {
         partial_filter_selector: { 'key1': 'testString' },
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __postIndexTest() {
         // Construct the params object for operation postIndex
         const db = 'testString';
         const index = indexDefinitionModel;
@@ -5397,6 +6222,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.partitioned).toEqual(partitioned);
         expect(mockRequestOptions.body.type).toEqual(type);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postIndexTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postIndexTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postIndexTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -5445,7 +6285,7 @@ describe('CloudantV1', () => {
   });
   describe('deleteIndex', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __deleteIndexTest() {
         // Construct the params object for operation deleteIndex
         const db = 'testString';
         const ddoc = 'testString';
@@ -5476,6 +6316,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.type).toEqual(type);
         expect(mockRequestOptions.path.index).toEqual(index);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __deleteIndexTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __deleteIndexTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __deleteIndexTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -5528,7 +6383,7 @@ describe('CloudantV1', () => {
   });
   describe('postSearchAnalyze', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postSearchAnalyzeTest() {
         // Construct the params object for operation postSearchAnalyze
         const analyzer = 'arabic';
         const text = 'testString';
@@ -5553,6 +6408,21 @@ describe('CloudantV1', () => {
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.analyzer).toEqual(analyzer);
         expect(mockRequestOptions.body.text).toEqual(text);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postSearchAnalyzeTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postSearchAnalyzeTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postSearchAnalyzeTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -5601,7 +6471,7 @@ describe('CloudantV1', () => {
   });
   describe('postSearch', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postSearchTest() {
         // Construct the params object for operation postSearch
         const db = 'testString';
         const ddoc = 'testString';
@@ -5683,6 +6553,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.index).toEqual(index);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postSearchTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postSearchTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postSearchTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -5735,7 +6620,7 @@ describe('CloudantV1', () => {
   });
   describe('postSearchAsStream', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postSearchAsStreamTest() {
         // Construct the params object for operation postSearchAsStream
         const db = 'testString';
         const ddoc = 'testString';
@@ -5818,6 +6703,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.index).toEqual(index);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postSearchAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postSearchAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postSearchAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -5870,7 +6770,7 @@ describe('CloudantV1', () => {
   });
   describe('getSearchInfo', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getSearchInfoTest() {
         // Construct the params object for operation getSearchInfo
         const db = 'testString';
         const ddoc = 'testString';
@@ -5898,6 +6798,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.index).toEqual(index);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getSearchInfoTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getSearchInfoTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getSearchInfoTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -5948,7 +6863,7 @@ describe('CloudantV1', () => {
   });
   describe('getGeo', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getGeoTest() {
         // Construct the params object for operation getGeo
         const db = 'testString';
         const ddoc = 'testString';
@@ -6021,6 +6936,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.index).toEqual(index);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getGeoTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getGeoTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getGeoTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -6071,7 +7001,7 @@ describe('CloudantV1', () => {
   });
   describe('getGeoAsStream', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getGeoAsStreamTest() {
         // Construct the params object for operation getGeoAsStream
         const db = 'testString';
         const ddoc = 'testString';
@@ -6145,6 +7075,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.index).toEqual(index);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getGeoAsStreamTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getGeoAsStreamTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getGeoAsStreamTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -6195,7 +7140,7 @@ describe('CloudantV1', () => {
   });
   describe('postGeoCleanup', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postGeoCleanupTest() {
         // Construct the params object for operation postGeoCleanup
         const db = 'testString';
         const params = {
@@ -6217,6 +7162,21 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postGeoCleanupTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postGeoCleanupTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postGeoCleanupTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -6263,7 +7223,7 @@ describe('CloudantV1', () => {
   });
   describe('getGeoIndexInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getGeoIndexInformationTest() {
         // Construct the params object for operation getGeoIndexInformation
         const db = 'testString';
         const ddoc = 'testString';
@@ -6291,6 +7251,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.index).toEqual(index);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getGeoIndexInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getGeoIndexInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getGeoIndexInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -6341,7 +7316,7 @@ describe('CloudantV1', () => {
   });
   describe('headReplicationDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __headReplicationDocumentTest() {
         // Construct the params object for operation headReplicationDocument
         const docId = 'testString';
         const ifNoneMatch = 'testString';
@@ -6366,6 +7341,21 @@ describe('CloudantV1', () => {
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __headReplicationDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __headReplicationDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __headReplicationDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -6412,7 +7402,7 @@ describe('CloudantV1', () => {
   });
   describe('headSchedulerDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __headSchedulerDocumentTest() {
         // Construct the params object for operation headSchedulerDocument
         const docId = 'testString';
         const params = {
@@ -6434,6 +7424,21 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __headSchedulerDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __headSchedulerDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __headSchedulerDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -6480,7 +7485,7 @@ describe('CloudantV1', () => {
   });
   describe('headSchedulerJob', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __headSchedulerJobTest() {
         // Construct the params object for operation headSchedulerJob
         const jobId = 'testString';
         const params = {
@@ -6502,6 +7507,21 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.job_id).toEqual(jobId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __headSchedulerJobTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __headSchedulerJobTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __headSchedulerJobTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -6548,7 +7568,7 @@ describe('CloudantV1', () => {
   });
   describe('deleteReplicationDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __deleteReplicationDocumentTest() {
         // Construct the params object for operation deleteReplicationDocument
         const docId = 'testString';
         const ifMatch = 'testString';
@@ -6579,6 +7599,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.batch).toEqual(batch);
         expect(mockRequestOptions.qs.rev).toEqual(rev);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __deleteReplicationDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __deleteReplicationDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __deleteReplicationDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -6625,7 +7660,7 @@ describe('CloudantV1', () => {
   });
   describe('getReplicationDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getReplicationDocumentTest() {
         // Construct the params object for operation getReplicationDocument
         const docId = 'testString';
         const ifNoneMatch = 'testString';
@@ -6680,6 +7715,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.revs).toEqual(revs);
         expect(mockRequestOptions.qs.revs_info).toEqual(revsInfo);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getReplicationDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getReplicationDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getReplicationDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -6827,7 +7877,7 @@ describe('CloudantV1', () => {
         foo: 'testString',
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __putReplicationDocumentTest() {
         // Construct the params object for operation putReplicationDocument
         const docId = 'testString';
         const replicationDocument = replicationDocumentModel;
@@ -6864,6 +7914,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.new_edits).toEqual(newEdits);
         expect(mockRequestOptions.qs.rev).toEqual(rev);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __putReplicationDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __putReplicationDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __putReplicationDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -6912,7 +7977,7 @@ describe('CloudantV1', () => {
   });
   describe('getSchedulerDocs', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getSchedulerDocsTest() {
         // Construct the params object for operation getSchedulerDocs
         const limit = 0;
         const skip = 0;
@@ -6940,6 +8005,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.limit).toEqual(limit);
         expect(mockRequestOptions.qs.skip).toEqual(skip);
         expect(mockRequestOptions.qs.states).toEqual(states);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getSchedulerDocsTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getSchedulerDocsTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getSchedulerDocsTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -6966,7 +8046,7 @@ describe('CloudantV1', () => {
   });
   describe('getSchedulerDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getSchedulerDocumentTest() {
         // Construct the params object for operation getSchedulerDocument
         const docId = 'testString';
         const params = {
@@ -6988,6 +8068,21 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getSchedulerDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getSchedulerDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getSchedulerDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7034,7 +8129,7 @@ describe('CloudantV1', () => {
   });
   describe('getSchedulerJobs', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getSchedulerJobsTest() {
         // Construct the params object for operation getSchedulerJobs
         const limit = 0;
         const skip = 0;
@@ -7059,6 +8154,21 @@ describe('CloudantV1', () => {
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.qs.limit).toEqual(limit);
         expect(mockRequestOptions.qs.skip).toEqual(skip);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getSchedulerJobsTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getSchedulerJobsTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getSchedulerJobsTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7085,7 +8195,7 @@ describe('CloudantV1', () => {
   });
   describe('getSchedulerJob', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getSchedulerJobTest() {
         // Construct the params object for operation getSchedulerJob
         const jobId = 'testString';
         const params = {
@@ -7107,6 +8217,21 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.job_id).toEqual(jobId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getSchedulerJobTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getSchedulerJobTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getSchedulerJobTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7153,7 +8278,7 @@ describe('CloudantV1', () => {
   });
   describe('getSessionInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getSessionInformationTest() {
         // Construct the params object for operation getSessionInformation
         const params = {};
 
@@ -7171,6 +8296,21 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getSessionInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getSessionInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getSessionInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7197,7 +8337,7 @@ describe('CloudantV1', () => {
   });
   describe('getSecurity', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getSecurityTest() {
         // Construct the params object for operation getSecurity
         const db = 'testString';
         const params = {
@@ -7219,6 +8359,21 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getSecurityTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getSecurityTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getSecurityTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7273,7 +8428,7 @@ describe('CloudantV1', () => {
         roles: ['testString'],
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __putSecurityTest() {
         // Construct the params object for operation putSecurity
         const db = 'testString';
         const admins = securityObjectModel;
@@ -7307,6 +8462,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.cloudant).toEqual(cloudant);
         expect(mockRequestOptions.body.couchdb_auth_only).toEqual(couchdbAuthOnly);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __putSecurityTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __putSecurityTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __putSecurityTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7353,7 +8523,7 @@ describe('CloudantV1', () => {
   });
   describe('postApiKeys', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postApiKeysTest() {
         // Construct the params object for operation postApiKeys
         const params = {};
 
@@ -7371,6 +8541,21 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postApiKeysTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postApiKeysTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postApiKeysTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7405,7 +8590,7 @@ describe('CloudantV1', () => {
         roles: ['testString'],
       };
 
-      test('should pass the right params to createRequest', () => {
+      function __putCloudantSecurityConfigurationTest() {
         // Construct the params object for operation putCloudantSecurityConfiguration
         const db = 'testString';
         const cloudant = { 'key1': ['_reader'] };
@@ -7439,6 +8624,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.members).toEqual(members);
         expect(mockRequestOptions.body.couchdb_auth_only).toEqual(couchdbAuthOnly);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __putCloudantSecurityConfigurationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __putCloudantSecurityConfigurationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __putCloudantSecurityConfigurationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7487,7 +8687,7 @@ describe('CloudantV1', () => {
   });
   describe('getCorsInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getCorsInformationTest() {
         // Construct the params object for operation getCorsInformation
         const params = {};
 
@@ -7505,6 +8705,21 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getCorsInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getCorsInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getCorsInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7531,7 +8746,7 @@ describe('CloudantV1', () => {
   });
   describe('putCorsConfiguration', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __putCorsConfigurationTest() {
         // Construct the params object for operation putCorsConfiguration
         const origins = ['testString'];
         const allowCredentials = true;
@@ -7559,6 +8774,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.origins).toEqual(origins);
         expect(mockRequestOptions.body.allow_credentials).toEqual(allowCredentials);
         expect(mockRequestOptions.body.enable_cors).toEqual(enableCors);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __putCorsConfigurationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __putCorsConfigurationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __putCorsConfigurationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7605,7 +8835,7 @@ describe('CloudantV1', () => {
   });
   describe('headAttachment', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __headAttachmentTest() {
         // Construct the params object for operation headAttachment
         const db = 'testString';
         const docId = 'testString';
@@ -7642,6 +8872,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
         expect(mockRequestOptions.path.attachment_name).toEqual(attachmentName);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __headAttachmentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __headAttachmentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __headAttachmentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7692,7 +8937,7 @@ describe('CloudantV1', () => {
   });
   describe('deleteAttachment', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __deleteAttachmentTest() {
         // Construct the params object for operation deleteAttachment
         const db = 'testString';
         const docId = 'testString';
@@ -7729,6 +8974,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
         expect(mockRequestOptions.path.attachment_name).toEqual(attachmentName);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __deleteAttachmentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __deleteAttachmentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __deleteAttachmentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7779,7 +9039,7 @@ describe('CloudantV1', () => {
   });
   describe('getAttachment', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getAttachmentTest() {
         // Construct the params object for operation getAttachment
         const db = 'testString';
         const docId = 'testString';
@@ -7823,6 +9083,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
         expect(mockRequestOptions.path.attachment_name).toEqual(attachmentName);
         expect(mockRequestOptions.responseType).toBe('stream');
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getAttachmentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getAttachmentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getAttachmentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7873,7 +9148,7 @@ describe('CloudantV1', () => {
   });
   describe('putAttachment', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __putAttachmentTest() {
         // Construct the params object for operation putAttachment
         const db = 'testString';
         const docId = 'testString';
@@ -7913,6 +9188,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
         expect(mockRequestOptions.path.attachment_name).toEqual(attachmentName);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __putAttachmentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __putAttachmentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __putAttachmentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -7967,7 +9257,7 @@ describe('CloudantV1', () => {
   });
   describe('headLocalDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __headLocalDocumentTest() {
         // Construct the params object for operation headLocalDocument
         const db = 'testString';
         const docId = 'testString';
@@ -7995,6 +9285,21 @@ describe('CloudantV1', () => {
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __headLocalDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __headLocalDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __headLocalDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -8043,7 +9348,7 @@ describe('CloudantV1', () => {
   });
   describe('deleteLocalDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __deleteLocalDocumentTest() {
         // Construct the params object for operation deleteLocalDocument
         const db = 'testString';
         const docId = 'testString';
@@ -8071,6 +9376,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.batch).toEqual(batch);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __deleteLocalDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __deleteLocalDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __deleteLocalDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -8119,7 +9439,7 @@ describe('CloudantV1', () => {
   });
   describe('getLocalDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getLocalDocumentTest() {
         // Construct the params object for operation getLocalDocument
         const db = 'testString';
         const docId = 'testString';
@@ -8159,6 +9479,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getLocalDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getLocalDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getLocalDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -8207,7 +9542,7 @@ describe('CloudantV1', () => {
   });
   describe('putLocalDocument', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __putLocalDocumentTest() {
         // Construct the params object for operation putLocalDocument
         const db = 'testString';
         const docId = 'testString';
@@ -8241,6 +9576,21 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.qs.batch).toEqual(batch);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __putLocalDocumentTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __putLocalDocumentTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __putLocalDocumentTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -8291,7 +9641,7 @@ describe('CloudantV1', () => {
   });
   describe('postRevsDiff', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postRevsDiffTest() {
         // Construct the params object for operation postRevsDiff
         const db = 'testString';
         const documentRevisions = { 'key1': ['testString'] };
@@ -8316,6 +9666,21 @@ describe('CloudantV1', () => {
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body).toEqual(documentRevisions);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postRevsDiffTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postRevsDiffTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postRevsDiffTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -8364,7 +9729,7 @@ describe('CloudantV1', () => {
   });
   describe('getShardsInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getShardsInformationTest() {
         // Construct the params object for operation getShardsInformation
         const db = 'testString';
         const params = {
@@ -8386,6 +9751,21 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getShardsInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getShardsInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getShardsInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -8432,7 +9812,7 @@ describe('CloudantV1', () => {
   });
   describe('getDocumentShardsInfo', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getDocumentShardsInfoTest() {
         // Construct the params object for operation getDocumentShardsInfo
         const db = 'testString';
         const docId = 'testString';
@@ -8457,6 +9837,21 @@ describe('CloudantV1', () => {
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getDocumentShardsInfoTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getDocumentShardsInfoTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getDocumentShardsInfoTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -8505,7 +9900,7 @@ describe('CloudantV1', () => {
   });
   describe('headUpInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __headUpInformationTest() {
         // Construct the params object for operation headUpInformation
         const params = {};
 
@@ -8523,6 +9918,21 @@ describe('CloudantV1', () => {
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __headUpInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __headUpInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __headUpInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -8549,7 +9959,7 @@ describe('CloudantV1', () => {
   });
   describe('getActiveTasks', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getActiveTasksTest() {
         // Construct the params object for operation getActiveTasks
         const params = {};
 
@@ -8567,6 +9977,21 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getActiveTasksTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getActiveTasksTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getActiveTasksTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -8593,7 +10018,7 @@ describe('CloudantV1', () => {
   });
   describe('getUpInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getUpInformationTest() {
         // Construct the params object for operation getUpInformation
         const params = {};
 
@@ -8611,6 +10036,21 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getUpInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getUpInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getUpInformationTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -8637,7 +10077,7 @@ describe('CloudantV1', () => {
   });
   describe('getActivityTrackerEvents', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getActivityTrackerEventsTest() {
         // Construct the params object for operation getActivityTrackerEvents
         const params = {};
 
@@ -8655,6 +10095,21 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getActivityTrackerEventsTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getActivityTrackerEventsTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getActivityTrackerEventsTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -8681,7 +10136,7 @@ describe('CloudantV1', () => {
   });
   describe('postActivityTrackerEvents', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __postActivityTrackerEventsTest() {
         // Construct the params object for operation postActivityTrackerEvents
         const types = ['management'];
         const params = {
@@ -8703,6 +10158,21 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.types).toEqual(types);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postActivityTrackerEventsTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postActivityTrackerEventsTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postActivityTrackerEventsTest();
       });
 
       test('should prioritize user-given headers', () => {
@@ -8749,7 +10219,7 @@ describe('CloudantV1', () => {
   });
   describe('getCurrentThroughputInformation', () => {
     describe('positive tests', () => {
-      test('should pass the right params to createRequest', () => {
+      function __getCurrentThroughputInformationTest() {
         // Construct the params object for operation getCurrentThroughputInformation
         const params = {};
 
@@ -8767,6 +10237,21 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getCurrentThroughputInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getCurrentThroughputInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getCurrentThroughputInformationTest();
       });
 
       test('should prioritize user-given headers', () => {

@@ -15,7 +15,7 @@
  */
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 3.37.1-66e80f2e-20210813-202232
+ * IBM OpenAPI SDK Code Generator Version: 3.40.0-910cf8c2-20211006-154754
  */
 
 import * as extend from 'extend';
@@ -33,6 +33,9 @@ import { getAuthenticatorFromEnvCloudantExtension } from '../lib/getAuthenticato
 
 /**
  * NoSQL database based on Apache CouchDB
+ *
+ * API Version: 1.0.0-dev0.0.40
+ * See: https://cloud.ibm.com/docs/services/Cloudant/
  */
 
 class CloudantV1 extends CloudantBaseService {
@@ -624,11 +627,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.view] - Query parameter to specify a view function as a filter. Documents pass the filter
    * if the view's map function emits at least one record for them.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postChangesAsStream(
     params: CloudantV1.PostChangesAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db'];
 
@@ -1289,11 +1292,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string[]} [params.keys] - Schema for a list of document IDs.
    * @param {string} [params.startkey] - Schema for a document ID.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postAllDocsAsStream(
     params: CloudantV1.PostAllDocsAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db'];
 
@@ -1428,11 +1431,11 @@ class CloudantV1 extends CloudantBaseService {
    * individual view query to be executed. The field names and their meaning are the same as the query parameters of a
    * regular `/_all_docs` request.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postAllDocsQueriesAsStream(
     params: CloudantV1.PostAllDocsQueriesAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'queries'];
 
@@ -1629,11 +1632,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
    * revisions.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postBulkGetAsMixed(
     params: CloudantV1.PostBulkGetAsMixedParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'docs'];
 
@@ -1705,11 +1708,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
    * revisions.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postBulkGetAsRelated(
     params: CloudantV1.PostBulkGetAsRelatedParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'docs'];
 
@@ -1781,11 +1784,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
    * revisions.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postBulkGetAsStream(
     params: CloudantV1.PostBulkGetAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'docs'];
 
@@ -2030,11 +2033,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.revsInfo] - Query parameter to specify whether to includes detailed information for all
    * known document revisions.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public getDocumentAsMixed(
     params: CloudantV1.GetDocumentAsMixedParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
@@ -2122,11 +2125,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.revsInfo] - Query parameter to specify whether to includes detailed information for all
    * known document revisions.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public getDocumentAsRelated(
     params: CloudantV1.GetDocumentAsRelatedParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
@@ -2214,11 +2217,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.revsInfo] - Query parameter to specify whether to includes detailed information for all
    * known document revisions.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public getDocumentAsStream(
     params: CloudantV1.GetDocumentAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'docId'];
 
@@ -3027,11 +3030,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
    * to responding to the user.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postViewAsStream(
     params: CloudantV1.PostViewAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'view'];
 
@@ -3179,11 +3182,11 @@ class CloudantV1 extends CloudantBaseService {
    * view query to be executed. The field names and their meaning are the same as the query parameters of a regular view
    * request.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postViewQueriesAsStream(
     params: CloudantV1.PostViewQueriesAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'view', 'queries'];
 
@@ -3414,11 +3417,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string[]} [params.keys] - Schema for a list of document IDs.
    * @param {string} [params.startkey] - Schema for a document ID.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postPartitionAllDocsAsStream(
     params: CloudantV1.PostPartitionAllDocsAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'partitionKey'];
 
@@ -3616,11 +3619,11 @@ class CloudantV1 extends CloudantBaseService {
    * Fields that are used for sorting must be indexed by the same indexer that is used for the search query.
    * @param {string} [params.stale] - Do not wait for the index to finish building to return results.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postPartitionSearchAsStream(
     params: CloudantV1.PostPartitionSearchAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'partitionKey', 'ddoc', 'index', 'query'];
 
@@ -3845,11 +3848,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
    * to responding to the user.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postPartitionViewAsStream(
     params: CloudantV1.PostPartitionViewAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
 
@@ -4081,11 +4084,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string[]} [params.useIndex] - Use this option to identify a specific index for query to run against, rather
    * than by using the IBM Cloudant Query algorithm to find the best index.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postPartitionFindAsStream(
     params: CloudantV1.PostPartitionFindAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'partitionKey', 'selector'];
 
@@ -4430,11 +4433,11 @@ class CloudantV1 extends CloudantBaseService {
    * that many replicas before it is returned in the results. The request will take more time than using only the
    * document that is stored locally with the index.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postFindAsStream(
     params: CloudantV1.PostFindAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'selector'];
 
@@ -4923,11 +4926,11 @@ class CloudantV1 extends CloudantBaseService {
    * objects. The field names of the JSON objects are names for ranges. The values are strings that describe the range,
    * for example "[0 TO 10]". This option is only available when making global queries.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public postSearchAsStream(
     params: CloudantV1.PostSearchAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'index', 'query'];
 
@@ -5210,11 +5213,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.stale] - Query parameter to specify to not wait for the index to finish building before
    * returning results.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public getGeoAsStream(
     params: CloudantV1.GetGeoAsStreamParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'ddoc', 'index'];
 
@@ -6527,11 +6530,11 @@ class CloudantV1 extends CloudantBaseService {
    * implementation of resumable downloads and skippable streams. This is available for all attachments inside CouchDB.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>>}
+   * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
   public getAttachment(
     params: CloudantV1.GetAttachmentParams
-  ): Promise<CloudantV1.Response<NodeJS.ReadableStream | Buffer>> {
+  ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const requiredParams = ['db', 'docId', 'attachmentName'];
 
