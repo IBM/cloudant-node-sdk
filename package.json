@@ -36,7 +36,7 @@
   "dependencies": {
     "@types/node": "16.11.0",
     "extend": "3.0.2",
-    "ibm-cloud-sdk-core": "2.14.4",
+    "ibm-cloud-sdk-core": "2.15.1",
     "tough-cookie": "4.0.0"
   },
   "devDependencies": {
