@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/**
- * IBM OpenAPI SDK Code Generator Version: 3.40.0-910cf8c2-20211006-154754
- */
-
 import * as extend from 'extend';
 import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
 import {
@@ -34,7 +30,6 @@ import { getAuthenticatorFromEnvCloudantExtension } from '../lib/getAuthenticato
 /**
  * NoSQL database based on Apache CouchDB
  *
- * API Version: 1.0.0-dev0.0.40
  * See: https://cloud.ibm.com/docs/services/Cloudant/
  */
 
