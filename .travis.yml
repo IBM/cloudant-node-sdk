@@ -16,6 +16,7 @@ node_js:
 - 12
 - 14
 - 16
+- 17
 
 script:
 - npm run build
