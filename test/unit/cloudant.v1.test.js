@@ -410,7 +410,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.putCapacityThroughputConfiguration({});
@@ -419,17 +419,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const putCapacityThroughputConfigurationPromise = cloudantService.putCapacityThroughputConfiguration();
-        expectToBePromise(putCapacityThroughputConfigurationPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.putCapacityThroughputConfiguration();
+        } catch (e) {
+          err = e;
+        }
 
-        putCapacityThroughputConfigurationPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -619,7 +619,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postChanges({});
@@ -628,17 +628,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postChangesPromise = cloudantService.postChanges();
-        expectToBePromise(postChangesPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postChanges();
+        } catch (e) {
+          err = e;
+        }
 
-        postChangesPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -757,7 +757,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postChangesAsStream({});
@@ -766,17 +766,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postChangesAsStreamPromise = cloudantService.postChangesAsStream();
-        expectToBePromise(postChangesAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postChangesAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        postChangesAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -840,7 +840,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.headDatabase({});
@@ -849,17 +849,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const headDatabasePromise = cloudantService.headDatabase();
-        expectToBePromise(headDatabasePromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.headDatabase();
+        } catch (e) {
+          err = e;
+        }
 
-        headDatabasePromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -998,7 +998,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postDbsInfo({});
@@ -1007,17 +1007,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postDbsInfoPromise = cloudantService.postDbsInfo();
-        expectToBePromise(postDbsInfoPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postDbsInfo();
+        } catch (e) {
+          err = e;
+        }
 
-        postDbsInfoPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -1081,7 +1081,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.deleteDatabase({});
@@ -1090,17 +1090,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const deleteDatabasePromise = cloudantService.deleteDatabase();
-        expectToBePromise(deleteDatabasePromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.deleteDatabase();
+        } catch (e) {
+          err = e;
+        }
 
-        deleteDatabasePromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -1164,7 +1164,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getDatabaseInformation({});
@@ -1173,17 +1173,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getDatabaseInformationPromise = cloudantService.getDatabaseInformation();
-        expectToBePromise(getDatabaseInformationPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getDatabaseInformation();
+        } catch (e) {
+          err = e;
+        }
 
-        getDatabaseInformationPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -1253,7 +1253,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.putDatabase({});
@@ -1262,17 +1262,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const putDatabasePromise = cloudantService.putDatabase();
-        expectToBePromise(putDatabasePromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.putDatabase();
+        } catch (e) {
+          err = e;
+        }
 
-        putDatabasePromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -1350,7 +1350,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.headDocument({});
@@ -1359,17 +1359,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const headDocumentPromise = cloudantService.headDocument();
-        expectToBePromise(headDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.headDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        headDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -1444,7 +1444,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postDocument({});
@@ -1453,17 +1453,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postDocumentPromise = cloudantService.postDocument();
-        expectToBePromise(postDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        postDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -1566,7 +1566,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postAllDocs({});
@@ -1575,17 +1575,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postAllDocsPromise = cloudantService.postAllDocs();
-        expectToBePromise(postAllDocsPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postAllDocs();
+        } catch (e) {
+          err = e;
+        }
 
-        postAllDocsPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -1689,7 +1689,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postAllDocsAsStream({});
@@ -1698,17 +1698,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postAllDocsAsStreamPromise = cloudantService.postAllDocsAsStream();
-        expectToBePromise(postAllDocsAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postAllDocsAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        postAllDocsAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -1796,7 +1796,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postAllDocsQueries({});
@@ -1805,17 +1805,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postAllDocsQueriesPromise = cloudantService.postAllDocsQueries();
-        expectToBePromise(postAllDocsQueriesPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postAllDocsQueries();
+        } catch (e) {
+          err = e;
+        }
 
-        postAllDocsQueriesPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -1904,7 +1904,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postAllDocsQueriesAsStream({});
@@ -1913,17 +1913,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postAllDocsQueriesAsStreamPromise = cloudantService.postAllDocsQueriesAsStream();
-        expectToBePromise(postAllDocsQueriesAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postAllDocsQueriesAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        postAllDocsQueriesAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -1992,7 +1992,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postBulkDocs({});
@@ -2001,17 +2001,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postBulkDocsPromise = cloudantService.postBulkDocs();
-        expectToBePromise(postBulkDocsPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postBulkDocs();
+        } catch (e) {
+          err = e;
+        }
 
-        postBulkDocsPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -2101,7 +2101,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postBulkGet({});
@@ -2110,17 +2110,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postBulkGetPromise = cloudantService.postBulkGet();
-        expectToBePromise(postBulkGetPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postBulkGet();
+        } catch (e) {
+          err = e;
+        }
 
-        postBulkGetPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -2211,7 +2211,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postBulkGetAsMixed({});
@@ -2220,17 +2220,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postBulkGetAsMixedPromise = cloudantService.postBulkGetAsMixed();
-        expectToBePromise(postBulkGetAsMixedPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postBulkGetAsMixed();
+        } catch (e) {
+          err = e;
+        }
 
-        postBulkGetAsMixedPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -2321,7 +2321,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postBulkGetAsRelated({});
@@ -2330,17 +2330,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postBulkGetAsRelatedPromise = cloudantService.postBulkGetAsRelated();
-        expectToBePromise(postBulkGetAsRelatedPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postBulkGetAsRelated();
+        } catch (e) {
+          err = e;
+        }
 
-        postBulkGetAsRelatedPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -2431,7 +2431,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postBulkGetAsStream({});
@@ -2440,17 +2440,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postBulkGetAsStreamPromise = cloudantService.postBulkGetAsStream();
-        expectToBePromise(postBulkGetAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postBulkGetAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        postBulkGetAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -2528,7 +2528,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.deleteDocument({});
@@ -2537,17 +2537,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const deleteDocumentPromise = cloudantService.deleteDocument();
-        expectToBePromise(deleteDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.deleteDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        deleteDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -2649,7 +2649,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getDocument({});
@@ -2658,17 +2658,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getDocumentPromise = cloudantService.getDocument();
-        expectToBePromise(getDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        getDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -2771,7 +2771,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getDocumentAsMixed({});
@@ -2780,17 +2780,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getDocumentAsMixedPromise = cloudantService.getDocumentAsMixed();
-        expectToBePromise(getDocumentAsMixedPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getDocumentAsMixed();
+        } catch (e) {
+          err = e;
+        }
 
-        getDocumentAsMixedPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -2893,7 +2893,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getDocumentAsRelated({});
@@ -2902,17 +2902,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getDocumentAsRelatedPromise = cloudantService.getDocumentAsRelated();
-        expectToBePromise(getDocumentAsRelatedPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getDocumentAsRelated();
+        } catch (e) {
+          err = e;
+        }
 
-        getDocumentAsRelatedPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -3015,7 +3015,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getDocumentAsStream({});
@@ -3024,17 +3024,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getDocumentAsStreamPromise = cloudantService.getDocumentAsStream();
-        expectToBePromise(getDocumentAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getDocumentAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        getDocumentAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -3123,7 +3123,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.putDocument({});
@@ -3132,17 +3132,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const putDocumentPromise = cloudantService.putDocument();
-        expectToBePromise(putDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.putDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        putDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -3214,7 +3214,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.headDesignDocument({});
@@ -3223,17 +3223,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const headDesignDocumentPromise = cloudantService.headDesignDocument();
-        expectToBePromise(headDesignDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.headDesignDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        headDesignDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -3311,7 +3311,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.deleteDesignDocument({});
@@ -3320,17 +3320,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const deleteDesignDocumentPromise = cloudantService.deleteDesignDocument();
-        expectToBePromise(deleteDesignDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.deleteDesignDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        deleteDesignDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -3432,7 +3432,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getDesignDocument({});
@@ -3441,17 +3441,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getDesignDocumentPromise = cloudantService.getDesignDocument();
-        expectToBePromise(getDesignDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getDesignDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        getDesignDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -3621,7 +3621,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.putDesignDocument({});
@@ -3630,17 +3630,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const putDesignDocumentPromise = cloudantService.putDesignDocument();
-        expectToBePromise(putDesignDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.putDesignDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        putDesignDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -3709,7 +3709,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getDesignDocumentInformation({});
@@ -3718,17 +3718,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getDesignDocumentInformationPromise = cloudantService.getDesignDocumentInformation();
-        expectToBePromise(getDesignDocumentInformationPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getDesignDocumentInformation();
+        } catch (e) {
+          err = e;
+        }
 
-        getDesignDocumentInformationPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -3834,7 +3834,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postDesignDocs({});
@@ -3843,17 +3843,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postDesignDocsPromise = cloudantService.postDesignDocs();
-        expectToBePromise(postDesignDocsPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postDesignDocs();
+        } catch (e) {
+          err = e;
+        }
 
-        postDesignDocsPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -3944,7 +3944,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postDesignDocsQueries({});
@@ -3953,17 +3953,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postDesignDocsQueriesPromise = cloudantService.postDesignDocsQueries();
-        expectToBePromise(postDesignDocsQueriesPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postDesignDocsQueries();
+        } catch (e) {
+          err = e;
+        }
 
-        postDesignDocsQueriesPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -4097,7 +4097,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postView({});
@@ -4106,17 +4106,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postViewPromise = cloudantService.postView();
-        expectToBePromise(postViewPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postView();
+        } catch (e) {
+          err = e;
+        }
 
-        postViewPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -4251,7 +4251,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postViewAsStream({});
@@ -4260,17 +4260,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postViewAsStreamPromise = cloudantService.postViewAsStream();
-        expectToBePromise(postViewAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postViewAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        postViewAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -4375,7 +4375,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postViewQueries({});
@@ -4384,17 +4384,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postViewQueriesPromise = cloudantService.postViewQueries();
-        expectToBePromise(postViewQueriesPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postViewQueries();
+        } catch (e) {
+          err = e;
+        }
 
-        postViewQueriesPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -4500,7 +4500,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postViewQueriesAsStream({});
@@ -4509,17 +4509,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postViewQueriesAsStreamPromise = cloudantService.postViewQueriesAsStream();
-        expectToBePromise(postViewQueriesAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postViewQueriesAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        postViewQueriesAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -4588,7 +4588,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getPartitionInformation({});
@@ -4597,17 +4597,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getPartitionInformationPromise = cloudantService.getPartitionInformation();
-        expectToBePromise(getPartitionInformationPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getPartitionInformation();
+        } catch (e) {
+          err = e;
+        }
 
-        getPartitionInformationPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -4715,7 +4715,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postPartitionAllDocs({});
@@ -4724,17 +4724,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postPartitionAllDocsPromise = cloudantService.postPartitionAllDocs();
-        expectToBePromise(postPartitionAllDocsPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postPartitionAllDocs();
+        } catch (e) {
+          err = e;
+        }
 
-        postPartitionAllDocsPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -4843,7 +4843,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postPartitionAllDocsAsStream({});
@@ -4852,17 +4852,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postPartitionAllDocsAsStreamPromise = cloudantService.postPartitionAllDocsAsStream();
-        expectToBePromise(postPartitionAllDocsAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postPartitionAllDocsAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        postPartitionAllDocsAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -4979,7 +4979,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postPartitionSearch({});
@@ -4988,17 +4988,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postPartitionSearchPromise = cloudantService.postPartitionSearch();
-        expectToBePromise(postPartitionSearchPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postPartitionSearch();
+        } catch (e) {
+          err = e;
+        }
 
-        postPartitionSearchPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -5116,7 +5116,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postPartitionSearchAsStream({});
@@ -5125,17 +5125,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postPartitionSearchAsStreamPromise = cloudantService.postPartitionSearchAsStream();
-        expectToBePromise(postPartitionSearchAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postPartitionSearchAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        postPartitionSearchAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -5274,7 +5274,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postPartitionView({});
@@ -5283,17 +5283,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postPartitionViewPromise = cloudantService.postPartitionView();
-        expectToBePromise(postPartitionViewPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postPartitionView();
+        } catch (e) {
+          err = e;
+        }
 
-        postPartitionViewPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -5433,7 +5433,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postPartitionViewAsStream({});
@@ -5442,17 +5442,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postPartitionViewAsStreamPromise = cloudantService.postPartitionViewAsStream();
-        expectToBePromise(postPartitionViewAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postPartitionViewAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        postPartitionViewAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -5556,7 +5556,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postPartitionFind({});
@@ -5565,17 +5565,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postPartitionFindPromise = cloudantService.postPartitionFind();
-        expectToBePromise(postPartitionFindPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postPartitionFind();
+        } catch (e) {
+          err = e;
+        }
 
-        postPartitionFindPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -5680,7 +5680,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postPartitionFindAsStream({});
@@ -5689,17 +5689,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postPartitionFindAsStreamPromise = cloudantService.postPartitionFindAsStream();
-        expectToBePromise(postPartitionFindAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postPartitionFindAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        postPartitionFindAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -5801,7 +5801,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postExplain({});
@@ -5810,17 +5810,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postExplainPromise = cloudantService.postExplain();
-        expectToBePromise(postExplainPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postExplain();
+        } catch (e) {
+          err = e;
+        }
 
-        postExplainPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -5922,7 +5922,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postFind({});
@@ -5931,17 +5931,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postFindPromise = cloudantService.postFind();
-        expectToBePromise(postFindPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postFind();
+        } catch (e) {
+          err = e;
+        }
 
-        postFindPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -6044,7 +6044,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postFindAsStream({});
@@ -6053,17 +6053,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postFindAsStreamPromise = cloudantService.postFindAsStream();
-        expectToBePromise(postFindAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postFindAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        postFindAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -6127,7 +6127,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getIndexesInformation({});
@@ -6136,17 +6136,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getIndexesInformationPromise = cloudantService.getIndexesInformation();
-        expectToBePromise(getIndexesInformationPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getIndexesInformation();
+        } catch (e) {
+          err = e;
+        }
 
-        getIndexesInformationPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -6260,7 +6260,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postIndex({});
@@ -6269,17 +6269,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postIndexPromise = cloudantService.postIndex();
-        expectToBePromise(postIndexPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postIndex();
+        } catch (e) {
+          err = e;
+        }
 
-        postIndexPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -6358,7 +6358,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.deleteIndex({});
@@ -6367,17 +6367,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const deleteIndexPromise = cloudantService.deleteIndex();
-        expectToBePromise(deleteIndexPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.deleteIndex();
+        } catch (e) {
+          err = e;
+        }
 
-        deleteIndexPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -6446,7 +6446,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postSearchAnalyze({});
@@ -6455,17 +6455,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postSearchAnalyzePromise = cloudantService.postSearchAnalyze();
-        expectToBePromise(postSearchAnalyzePromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postSearchAnalyze();
+        } catch (e) {
+          err = e;
+        }
 
-        postSearchAnalyzePromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -6595,7 +6595,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postSearch({});
@@ -6604,17 +6604,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postSearchPromise = cloudantService.postSearch();
-        expectToBePromise(postSearchPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postSearch();
+        } catch (e) {
+          err = e;
+        }
 
-        postSearchPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -6745,7 +6745,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postSearchAsStream({});
@@ -6754,17 +6754,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postSearchAsStreamPromise = cloudantService.postSearchAsStream();
-        expectToBePromise(postSearchAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postSearchAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        postSearchAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -6838,7 +6838,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getSearchInfo({});
@@ -6847,17 +6847,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getSearchInfoPromise = cloudantService.getSearchInfo();
-        expectToBePromise(getSearchInfoPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getSearchInfo();
+        } catch (e) {
+          err = e;
+        }
 
-        getSearchInfoPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -6976,7 +6976,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getGeo({});
@@ -6985,17 +6985,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getGeoPromise = cloudantService.getGeo();
-        expectToBePromise(getGeoPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getGeo();
+        } catch (e) {
+          err = e;
+        }
 
-        getGeoPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -7115,7 +7115,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getGeoAsStream({});
@@ -7124,17 +7124,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getGeoAsStreamPromise = cloudantService.getGeoAsStream();
-        expectToBePromise(getGeoAsStreamPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getGeoAsStream();
+        } catch (e) {
+          err = e;
+        }
 
-        getGeoAsStreamPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -7198,7 +7198,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postGeoCleanup({});
@@ -7207,17 +7207,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postGeoCleanupPromise = cloudantService.postGeoCleanup();
-        expectToBePromise(postGeoCleanupPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postGeoCleanup();
+        } catch (e) {
+          err = e;
+        }
 
-        postGeoCleanupPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -7291,7 +7291,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getGeoIndexInformation({});
@@ -7300,17 +7300,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getGeoIndexInformationPromise = cloudantService.getGeoIndexInformation();
-        expectToBePromise(getGeoIndexInformationPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getGeoIndexInformation();
+        } catch (e) {
+          err = e;
+        }
 
-        getGeoIndexInformationPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -7377,7 +7377,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.headReplicationDocument({});
@@ -7386,17 +7386,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const headReplicationDocumentPromise = cloudantService.headReplicationDocument();
-        expectToBePromise(headReplicationDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.headReplicationDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        headReplicationDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -7460,7 +7460,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.headSchedulerDocument({});
@@ -7469,17 +7469,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const headSchedulerDocumentPromise = cloudantService.headSchedulerDocument();
-        expectToBePromise(headSchedulerDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.headSchedulerDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        headSchedulerDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -7543,7 +7543,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.headSchedulerJob({});
@@ -7552,17 +7552,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const headSchedulerJobPromise = cloudantService.headSchedulerJob();
-        expectToBePromise(headSchedulerJobPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.headSchedulerJob();
+        } catch (e) {
+          err = e;
+        }
 
-        headSchedulerJobPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -7635,7 +7635,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.deleteReplicationDocument({});
@@ -7644,17 +7644,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const deleteReplicationDocumentPromise = cloudantService.deleteReplicationDocument();
-        expectToBePromise(deleteReplicationDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.deleteReplicationDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        deleteReplicationDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -7751,7 +7751,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getReplicationDocument({});
@@ -7760,17 +7760,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getReplicationDocumentPromise = cloudantService.getReplicationDocument();
-        expectToBePromise(getReplicationDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getReplicationDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        getReplicationDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -7952,7 +7952,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.putReplicationDocument({});
@@ -7961,17 +7961,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const putReplicationDocumentPromise = cloudantService.putReplicationDocument();
-        expectToBePromise(putReplicationDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.putReplicationDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        putReplicationDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -8104,7 +8104,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getSchedulerDocument({});
@@ -8113,17 +8113,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getSchedulerDocumentPromise = cloudantService.getSchedulerDocument();
-        expectToBePromise(getSchedulerDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getSchedulerDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        getSchedulerDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -8253,7 +8253,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getSchedulerJob({});
@@ -8262,17 +8262,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getSchedulerJobPromise = cloudantService.getSchedulerJob();
-        expectToBePromise(getSchedulerJobPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getSchedulerJob();
+        } catch (e) {
+          err = e;
+        }
 
-        getSchedulerJobPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -8395,7 +8395,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getSecurity({});
@@ -8404,17 +8404,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getSecurityPromise = cloudantService.getSecurity();
-        expectToBePromise(getSecurityPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getSecurity();
+        } catch (e) {
+          err = e;
+        }
 
-        getSecurityPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -8498,7 +8498,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.putSecurity({});
@@ -8507,17 +8507,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const putSecurityPromise = cloudantService.putSecurity();
-        expectToBePromise(putSecurityPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.putSecurity();
+        } catch (e) {
+          err = e;
+        }
 
-        putSecurityPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -8662,7 +8662,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.putCloudantSecurityConfiguration({});
@@ -8671,17 +8671,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const putCloudantSecurityConfigurationPromise = cloudantService.putCloudantSecurityConfiguration();
-        expectToBePromise(putCloudantSecurityConfigurationPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.putCloudantSecurityConfiguration();
+        } catch (e) {
+          err = e;
+        }
 
-        putCloudantSecurityConfigurationPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -8810,7 +8810,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.putCorsConfiguration({});
@@ -8819,17 +8819,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const putCorsConfigurationPromise = cloudantService.putCorsConfiguration();
-        expectToBePromise(putCorsConfigurationPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.putCorsConfiguration();
+        } catch (e) {
+          err = e;
+        }
 
-        putCorsConfigurationPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -8912,7 +8912,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.headAttachment({});
@@ -8921,17 +8921,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const headAttachmentPromise = cloudantService.headAttachment();
-        expectToBePromise(headAttachmentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.headAttachment();
+        } catch (e) {
+          err = e;
+        }
 
-        headAttachmentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -9014,7 +9014,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.deleteAttachment({});
@@ -9023,17 +9023,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const deleteAttachmentPromise = cloudantService.deleteAttachment();
-        expectToBePromise(deleteAttachmentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.deleteAttachment();
+        } catch (e) {
+          err = e;
+        }
 
-        deleteAttachmentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -9123,7 +9123,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getAttachment({});
@@ -9132,17 +9132,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getAttachmentPromise = cloudantService.getAttachment();
-        expectToBePromise(getAttachmentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getAttachment();
+        } catch (e) {
+          err = e;
+        }
 
-        getAttachmentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -9232,7 +9232,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.putAttachment({});
@@ -9241,17 +9241,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const putAttachmentPromise = cloudantService.putAttachment();
-        expectToBePromise(putAttachmentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.putAttachment();
+        } catch (e) {
+          err = e;
+        }
 
-        putAttachmentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -9323,7 +9323,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.headLocalDocument({});
@@ -9332,17 +9332,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const headLocalDocumentPromise = cloudantService.headLocalDocument();
-        expectToBePromise(headLocalDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.headLocalDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        headLocalDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -9414,7 +9414,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.deleteLocalDocument({});
@@ -9423,17 +9423,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const deleteLocalDocumentPromise = cloudantService.deleteLocalDocument();
-        expectToBePromise(deleteLocalDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.deleteLocalDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        deleteLocalDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -9517,7 +9517,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getLocalDocument({});
@@ -9526,17 +9526,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getLocalDocumentPromise = cloudantService.getLocalDocument();
-        expectToBePromise(getLocalDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getLocalDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        getLocalDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -9616,7 +9616,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.putLocalDocument({});
@@ -9625,17 +9625,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const putLocalDocumentPromise = cloudantService.putLocalDocument();
-        expectToBePromise(putLocalDocumentPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.putLocalDocument();
+        } catch (e) {
+          err = e;
+        }
 
-        putLocalDocumentPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -9704,7 +9704,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postRevsDiff({});
@@ -9713,17 +9713,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postRevsDiffPromise = cloudantService.postRevsDiff();
-        expectToBePromise(postRevsDiffPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postRevsDiff();
+        } catch (e) {
+          err = e;
+        }
 
-        postRevsDiffPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -9787,7 +9787,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getShardsInformation({});
@@ -9796,17 +9796,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getShardsInformationPromise = cloudantService.getShardsInformation();
-        expectToBePromise(getShardsInformationPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getShardsInformation();
+        } catch (e) {
+          err = e;
+        }
 
-        getShardsInformationPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -9875,7 +9875,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.getDocumentShardsInfo({});
@@ -9884,17 +9884,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const getDocumentShardsInfoPromise = cloudantService.getDocumentShardsInfo();
-        expectToBePromise(getDocumentShardsInfoPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getDocumentShardsInfo();
+        } catch (e) {
+          err = e;
+        }
 
-        getDocumentShardsInfoPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
@@ -10194,7 +10194,7 @@ describe('CloudantV1', () => {
     });
 
     describe('negative tests', () => {
-      test('should enforce required parameters', async (done) => {
+      test('should enforce required parameters', async () => {
         let err;
         try {
           await cloudantService.postActivityTrackerEvents({});
@@ -10203,17 +10203,17 @@ describe('CloudantV1', () => {
         }
 
         expect(err.message).toMatch(/Missing required parameters/);
-        done();
       });
 
-      test('should reject promise when required params are not given', (done) => {
-        const postActivityTrackerEventsPromise = cloudantService.postActivityTrackerEvents();
-        expectToBePromise(postActivityTrackerEventsPromise);
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postActivityTrackerEvents();
+        } catch (e) {
+          err = e;
+        }
 
-        postActivityTrackerEventsPromise.catch((err) => {
-          expect(err.message).toMatch(/Missing required parameters/);
-          done();
-        });
+        expect(err.message).toMatch(/Missing required parameters/);
       });
     });
   });
