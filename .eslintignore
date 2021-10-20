@@ -1,14 +1,14 @@
 # http://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories
-jsdoc/
-doc/
+apidocs/
 coverage/
 dist/
+gh-pages/
+junitreports/
 node_modules/
-examples/**/node_modules/
-
-test/resources/auth.js
-# ignore emitted js
-**/*v*.js
-!test/**/*.js
-lib/*.js
 scripts/typedoc/
+stubs
+
+# ignore emitted js
+auth/*.js
+cloudant/v1.js
+lib/*.js
