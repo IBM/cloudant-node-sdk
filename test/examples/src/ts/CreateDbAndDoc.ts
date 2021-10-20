@@ -40,7 +40,7 @@ const createDb = client
   .catch((err) => {
     if (err.code === 412) {
       console.log(
-        'Cannot create "' + exampleDbName + '" database, it already exists.'
+        `Cannot create "${exampleDbName}" database, it already exists.`
       );
     }
   });
@@ -67,8 +67,11 @@ createDb.then(() => {
       // Keep track with the revision number of the document object
       exampleDocument._rev = createDocumentResponse.result.rev;
       console.log(
-        'You have created the document:\n' +
-          JSON.stringify(exampleDocument, null, 2)
+        `You have created the document:\n${JSON.stringify(
+          exampleDocument,
+          null,
+          2
+        )}`
       );
     });
 });

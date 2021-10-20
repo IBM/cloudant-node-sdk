@@ -22,7 +22,7 @@ const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
 // 2. Get server information ==================================================
 // call service without parameters:
 client.getServerInformation().then((serverInformation) => {
-  const version = serverInformation.result.version;
+  const { version } = serverInformation.result;
   console.log(`Server version ${version}`);
 });
 
@@ -36,7 +36,7 @@ client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
 
   // 4. Show document count in database =================================
   console.log(
-    `Document count in "${dbNameResult}" database is ` + documentCount + '.'
+    `Document count in "${dbNameResult}" database is ${documentCount}.`
   );
 });
 
@@ -49,8 +49,8 @@ const getDocParams: CloudantV1.GetDocumentParams = {
 // call service with predefined parameters:
 client.getDocument(getDocParams).then((documentAboutZebra) => {
   // result object is defined as a Document here:
-  const result: CloudantV1.Document = documentAboutZebra.result;
+  const { result } = documentAboutZebra;
   console.log(
-    'Document retrieved from database:\n' + JSON.stringify(result, null, 2)
+    `Document retrieved from database:\n${JSON.stringify(result, null, 2)}`
   );
 });

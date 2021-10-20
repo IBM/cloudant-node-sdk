@@ -43,7 +43,9 @@ export class SessionTokenManager extends TokenManager {
     'serviceUrl',
     'jar',
   ];
+
   private tokenName: string;
+
   private options: SessionTokenManagerOptions;
 
   /**
@@ -96,7 +98,7 @@ export class SessionTokenManager extends TokenManager {
     const parameters = {
       options: {
         headers: this.options.headers,
-        url: this.options.serviceUrl + '/_session',
+        url: `${this.options.serviceUrl}/_session`,
         method: 'POST',
         body: {
           username: this.options.username,

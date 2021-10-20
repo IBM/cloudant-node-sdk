@@ -16,9 +16,9 @@
 const assert = require('assert');
 const sinon = require('sinon');
 const { CookieJar } = require('tough-cookie');
+const { promisify } = require('util');
 const { CouchdbSessionAuthenticator } = require('../../index.ts');
 const { SessionTokenManager } = require('../../auth/sessionTokenManager.ts');
-const { promisify } = require('util');
 
 describe('CouchdbSessionAutheticator tests', () => {
   it('Constructor input validation check', () => {
@@ -74,11 +74,10 @@ describe('CouchdbSessionAutheticator tests', () => {
     getCookie.bind(options.jar);
 
     // Setup of test header responses
-    const makeCookieHeader = (token, elapasedTime) => {
-      return `AuthSession=${token}; Expires=${new Date(
+    const makeCookieHeader = (token, elapasedTime) =>
+      `AuthSession=${token}; Expires=${new Date(
         Date.now() + 1000 * (elapasedTime + 3600)
       )} ${useMaxAge ? '; Max-Age=3600' : ''}`;
-    };
     const headers = [
       makeCookieHeader('01234', 0),
       makeCookieHeader('56789', firstElapsedSeconds),
@@ -86,13 +85,12 @@ describe('CouchdbSessionAutheticator tests', () => {
     const auth = new CouchdbSessionAuthenticator(options);
     auth.configure({});
 
-    const fakeTokenRequest = (index) => {
-      return sinon.fake.resolves({
+    const fakeTokenRequest = (index) =>
+      sinon.fake.resolves({
         'headers': {
           'set-cookie': [headers[index]],
         },
       });
-    };
 
     // Fake requestToken for part 1 token request
     let requestFake = sinon.replace(
@@ -112,13 +110,11 @@ describe('CouchdbSessionAutheticator tests', () => {
           );
           return setCookie(headers[0], options.serviceUrl, {});
         })
-        .then(() => {
-          return getCookie(options.serviceUrl);
-        })
+        .then(() => getCookie(options.serviceUrl))
         .then((cookieFromJar) => {
           assert.strictEqual(cookieFromJar, 'AuthSession=01234');
         })
-        /* End of part 1*/
+        /* End of part 1 */
         .then(() => {
           // Re-fake requestToken for part 2 token request
           sinon.restore();
@@ -132,9 +128,7 @@ describe('CouchdbSessionAutheticator tests', () => {
           clock.tick(1000 * firstElapsedSeconds);
         })
         /* Start of part 2 */
-        .then(() => {
-          return auth.authenticate();
-        })
+        .then(() => auth.authenticate())
         .then(() => {
           assert.ok(
             requestFake.calledOnce,
@@ -142,9 +136,7 @@ describe('CouchdbSessionAutheticator tests', () => {
           );
           return setCookie(headers[1], options.serviceUrl, {});
         })
-        .then(() => {
-          return getCookie(options.serviceUrl);
-        })
+        .then(() => getCookie(options.serviceUrl))
         .then((cookieFromJar) => {
           assert.strictEqual(
             cookieFromJar,
@@ -159,9 +151,7 @@ describe('CouchdbSessionAutheticator tests', () => {
           clock.tick(1000 * (secondElapsedSeconds - firstElapsedSeconds));
         })
         /* Start of part 3 */
-        .then(() => {
-          return getCookie(options.serviceUrl);
-        })
+        .then(() => getCookie(options.serviceUrl))
         .then((cookieFromJar) => {
           assert.strictEqual(
             cookieFromJar,
@@ -176,31 +166,27 @@ describe('CouchdbSessionAutheticator tests', () => {
     );
   }
 
-  it('Renews pre-emptively correctly (Max-Age)', () => {
+  it('Renews pre-emptively correctly (Max-Age)', () =>
     // Test after an elapsed time of
     // 2880 seconds (48 minutes i.e. 80% of the 1 hour lifetime)
     // 3601 seconds (i.e. after the 1 hour lifetime of the original session has passed)
-    return renewalTest(true, 2880, 3601);
-  });
+    renewalTest(true, 2880, 3601));
 
-  it('Renews after expiration correctly (Max-Age)', () => {
+  it('Renews after expiration correctly (Max-Age)', () =>
     // Test after an elapsed time of
     // 3601 seconds (i.e. after the 1 hour lifetime has passed)
     // 7199 seconds (i.e. before the end of the second session)
-    return renewalTest(true, 3601, 7199);
-  });
+    renewalTest(true, 3601, 7199));
 
-  it('Renews pre-emptively correctly (Expires)', () => {
+  it('Renews pre-emptively correctly (Expires)', () =>
     // Test after an elapsed time of
     // 2880 seconds (48 minutes i.e. 80% of the 1 hour lifetime)
     // 3601 seconds (i.e. after the 1 hour lifetime of the original session has passed)
-    return renewalTest(false, 2880, 3601);
-  });
+    renewalTest(false, 2880, 3601));
 
-  it('Renews after expiration correctly (Expires)', () => {
+  it('Renews after expiration correctly (Expires)', () =>
     // Test after an elapsed time of
     // 3601 seconds (i.e. after the 1 hour lifetime has passed)
     // 7199 seconds (i.e. before the end of the second session)
-    return renewalTest(false, 3601, 7199);
-  });
+    renewalTest(false, 3601, 7199));
 });

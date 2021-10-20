@@ -172,10 +172,10 @@ export abstract class CloudantBaseService extends BaseService {
    */
   protected createRequest(parameters: any): Promise<any> {
     let operationId = null;
-    if ('X-IBMCloud-SDK-Analytics' in parameters['defaultOptions']['headers']) {
+    if ('X-IBMCloud-SDK-Analytics' in parameters.defaultOptions.headers) {
       // Extract operation id
       const analyticsHeader =
-        parameters['defaultOptions']['headers']['X-IBMCloud-SDK-Analytics'];
+        parameters.defaultOptions.headers['X-IBMCloud-SDK-Analytics'];
       for (const element of analyticsHeader.split(';')) {
         if (element.startsWith('operation_id')) {
           operationId = element.split('=')[1];
@@ -189,11 +189,10 @@ export abstract class CloudantBaseService extends BaseService {
         for (const rule of rulesByOperation[operationId]) {
           // get the path segment e.g. doc_id from the response's path object
           if (
-            'path' in parameters['options'] &&
-            rule.pathSegment in parameters['options']['path']
+            'path' in parameters.options &&
+            rule.pathSegment in parameters.options.path
           ) {
-            const segmentToValidate =
-              parameters['options']['path'][rule.pathSegment];
+            const segmentToValidate = parameters.options.path[rule.pathSegment];
             if (segmentToValidate.startsWith('_')) {
               const err = new InvalidArgumentValueError(
                 `${rule.errorParameterName} ${segmentToValidate} starts with the invalid _ character.`

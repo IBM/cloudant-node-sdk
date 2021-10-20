@@ -26,7 +26,7 @@ const getInfoFromExistingDatabase = async () => {
 
   // 2. Get server information ==================================================
   // call service without parameters:
-  const version = (await client.getServerInformation()).result.version;
+  const { version } = (await client.getServerInformation()).result;
   console.log(`Server version ${version}`);
 
   // 3. Get database information for "animaldb" =================================
@@ -39,7 +39,7 @@ const getInfoFromExistingDatabase = async () => {
 
   // 4. Show document count in database =================================
   console.log(
-    `Document count in "${dbNameResult}" database is ` + documentCount + '.'
+    `Document count in "${dbNameResult}" database is ${documentCount}.`
   );
 
   // 5. Get zebra document out of the database by document id ===================
@@ -49,10 +49,10 @@ const getInfoFromExistingDatabase = async () => {
   const documentAboutZebra = await client.getDocument(getDocParams);
 
   // result object is defined as a Document here:
-  const result = documentAboutZebra.result;
+  const { result } = documentAboutZebra;
 
   console.log(
-    'Document retrieved from database:\n' + JSON.stringify(result, null, 2)
+    `Document retrieved from database:\n${JSON.stringify(result, null, 2)}`
   );
 };
 

@@ -19,13 +19,13 @@
 const assert = require('assert');
 const sinon = require('sinon');
 
-const { CloudantV1 } = require('../../index.ts');
-const { CouchdbSessionAuthenticator } = require('../../index.ts');
 const {
   BasicAuthenticator,
   IamAuthenticator,
   NoAuthAuthenticator,
 } = require('ibm-cloud-sdk-core');
+const { CloudantV1 } = require('../../index.ts');
+const { CouchdbSessionAuthenticator } = require('../../index.ts');
 
 const DEFAULT_TIMEOUT = 150000; // (2.5m=150s)
 const CUSTOM_TIMEOUT = 30000; // (30s)

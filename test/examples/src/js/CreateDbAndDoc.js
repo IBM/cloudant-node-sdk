@@ -40,7 +40,7 @@ const createDbAndDoc = async () => {
   } catch (err) {
     if (err.code === 412) {
       console.log(
-        'Cannot create "' + exampleDbName + '" database, it already exists.'
+        `Cannot create "${exampleDbName}" database, it already exists.`
       );
     }
   }
@@ -52,7 +52,7 @@ const createDbAndDoc = async () => {
   const exampleDocument = { _id: exampleDocId };
 
   // Add "name" and "joined" fields to the document
-  exampleDocument['name'] = 'Bob Smith';
+  exampleDocument.name = 'Bob Smith';
   exampleDocument.joined = '2019-01-24T10:42:99.000Z';
 
   // Save the document in the database
@@ -64,8 +64,11 @@ const createDbAndDoc = async () => {
   // Keep track with the revision number of the document object
   exampleDocument._rev = createDocumentResponse.result.rev;
   console.log(
-    'You have created the document:\n' +
-      JSON.stringify(exampleDocument, null, 2)
+    `You have created the document:\n${JSON.stringify(
+      exampleDocument,
+      null,
+      2
+    )}`
   );
 };
 

@@ -16,8 +16,8 @@
 
 const assert = require('assert');
 const sinon = require('sinon');
-const { SessionTokenManager } = require('../../auth/sessionTokenManager.ts');
 const { CookieJar } = require('tough-cookie');
+const { SessionTokenManager } = require('../../auth/sessionTokenManager.ts');
 
 const OPTIONS = Object.freeze({
   username: 'username',
@@ -70,7 +70,7 @@ describe('SessionTokenManager tests', () => {
         },
       };
 
-      const manager = new SessionTokenManager(Object.assign({}, OPTIONS));
+      const manager = new SessionTokenManager({ ...OPTIONS });
       const sendRequestStubFn = sinon.stub(
         manager.requestWrapperInstance,
         'sendRequest'
@@ -150,7 +150,7 @@ describe('SessionTokenManager tests', () => {
       const expireDate = new Date(dateNow + 10000);
       const response = {
         'headers': {
-          'set-cookie': ['AuthSession=123456; Expires=' + expireDate + ';'],
+          'set-cookie': [`AuthSession=123456; Expires=${expireDate};`],
         },
       };
 

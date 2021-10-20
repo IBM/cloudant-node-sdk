@@ -42,7 +42,9 @@ export type CouchdbSessionAuthenticatorOptions = {
  */
 export class CouchdbSessionAuthenticator extends Authenticator {
   protected tokenManager: SessionTokenManager;
+
   protected requiredOptions: ['username', 'password'];
+
   private tokenOptions: SessionTokenManagerOptions;
   static readonly AUTHTYPE_COUCHDB_SESSION = 'COUCHDB_SESSION';
 
@@ -57,7 +59,7 @@ export class CouchdbSessionAuthenticator extends Authenticator {
   constructor(options: CouchdbSessionAuthenticatorOptions) {
     super();
     validateInput(options, this.requiredOptions);
-    this.tokenOptions = Object.assign({}, options);
+    this.tokenOptions = { ...options };
   }
 
   /**

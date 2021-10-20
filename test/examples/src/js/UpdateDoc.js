@@ -48,13 +48,13 @@ const updateDoc = async () => {
     document.address = '19 Front Street, Darlington, DL5 1TY';
 
     // Remove the joined property from document object
-    delete document['joined'];
+    delete document.joined;
 
     // Keeping track with the revision number of the document object:
     document._rev = (
       await client.postDocument({
         db: exampleDbName,
-        document: document,
+        document,
       })
     ).result.rev;
 
@@ -67,15 +67,13 @@ const updateDoc = async () => {
     // ).result.rev;
 
     console.log(
-      'You have updated the document:\n' + JSON.stringify(document, null, 2)
+      `You have updated the document:\n${JSON.stringify(document, null, 2)}`
     );
   } catch (err) {
     if (err.code === 404) {
       console.log(
-        'Cannot update document because either "' +
-          exampleDbName +
-          '" database or the "example" ' +
-          'document was not found.'
+        `Cannot update document because either "${exampleDbName}" database or the "example" ` +
+          `document was not found.`
       );
     }
   }

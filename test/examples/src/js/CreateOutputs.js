@@ -28,7 +28,7 @@ const { updateDoc } = require('./UpdateDoc.js');
 const { deleteDoc } = require('./DeleteDoc.js');
 
 let consoleOutput = ''; // flush consoleOutput
-const mockedLog = (output) => (consoleOutput = consoleOutput + '\n' + output);
+const mockedLog = (output) => (consoleOutput = `${consoleOutput}\n${output}`);
 global.console.log = mockedLog; // Mock console.log
 
 const run = async () => {

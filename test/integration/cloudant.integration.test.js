@@ -30,6 +30,7 @@ const configFile = 'cloudant.env';
 const describe = authHelper.prepareTests(configFile);
 
 const assert = require('assert');
+
 const cloudant = CloudantV1.newInstance({
   serviceName: 'server',
 });
@@ -38,36 +39,33 @@ const dbName = process.env.DATABASE_NAME || 'stores';
 describe('validate', () => {
   jest.setTimeout(timeout);
 
-  it('server information', () => {
-    return cloudant.getServerInformation().then((response) => {
+  it('server information', () =>
+    cloudant.getServerInformation().then((response) => {
       assert.ok(response);
-      const result = response.result;
+      const { result } = response;
       assert.ok(result);
       assert.ok(result.couchdb);
       assert.ok(result.version);
-    });
-  });
+    }));
 
-  it('db exists', () => {
-    return cloudant.headDatabase({ db: dbName }).then((response) => {
+  it('db exists', () =>
+    cloudant.headDatabase({ db: dbName }).then((response) => {
       assert.ok(response);
       assert.ok(response.headers);
       assert.ok(Object.keys(response.headers).length > 0);
-    });
-  });
+    }));
 
-  it('all docs', () => {
-    return cloudant.postAllDocs({ db: dbName }).then((response) => {
+  it('all docs', () =>
+    cloudant.postAllDocs({ db: dbName }).then((response) => {
       assert.ok(response);
-      const result = response.result;
+      const { result } = response;
       assert.ok(result);
       assert.ok(result.rows);
       assert.ok(result.rows.length > 0);
-    });
-  });
+    }));
 
-  it('delete invalid _design', () => {
-    return cloudant
+  it('delete invalid _design', () =>
+    cloudant
       .deleteDocument({
         db: dbName,
         docId: '_design',
@@ -79,11 +77,10 @@ describe('validate', () => {
         expect(err.message).toEqual(
           'Document ID _design starts with the invalid _ character.'
         );
-      });
-  });
+      }));
 
-  it('get invalid _design document ID', () => {
-    return cloudant
+  it('get invalid _design document ID', () =>
+    cloudant
       .getDocument({
         db: dbName,
         docId: '_design',
@@ -95,11 +92,10 @@ describe('validate', () => {
         expect(err.message).toEqual(
           'Document ID _design starts with the invalid _ character.'
         );
-      });
-  });
+      }));
 
-  it('get invalid _att1 attachment name', () => {
-    return cloudant
+  it('get invalid _att1 attachment name', () =>
+    cloudant
       .getAttachment({
         db: dbName,
         docId: 'doc1',
@@ -112,11 +108,10 @@ describe('validate', () => {
         expect(err.message).toEqual(
           'Attachment name _att1 starts with the invalid _ character.'
         );
-      });
-  });
+      }));
 
-  it('head invalid _design document ID', () => {
-    return cloudant
+  it('head invalid _design document ID', () =>
+    cloudant
       .headDocument({
         db: dbName,
         docId: '_design',
@@ -128,11 +123,10 @@ describe('validate', () => {
         expect(err.message).toEqual(
           'Document ID _design starts with the invalid _ character.'
         );
-      });
-  });
+      }));
 
-  it('put invalid _design document ID', () => {
-    return cloudant
+  it('put invalid _design document ID', () =>
+    cloudant
       .putDocument({ db: dbName, docId: '_design', document: {} })
       .then(() => {
         assert.fail('should not have response');
@@ -141,6 +135,5 @@ describe('validate', () => {
         expect(err.message).toEqual(
           'Document ID _design starts with the invalid _ character.'
         );
-      });
-  });
+      }));
 });

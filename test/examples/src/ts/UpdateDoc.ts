@@ -58,7 +58,7 @@ client
 
     // Update the document in the database
     client
-      .postDocument({ db: exampleDbName, document: document })
+      .postDocument({ db: exampleDbName, document })
       // Note: for request byte stream use:
       // .postDocument(
       //   {db: exampleDbName, document: documentAsByteStream}
@@ -67,17 +67,15 @@ client
         // Keeping track with the revision number of the document object:
         document._rev = res.result.rev;
         console.log(
-          'You have updated the document:\n' + JSON.stringify(document, null, 2)
+          `You have updated the document:\n${JSON.stringify(document, null, 2)}`
         );
       });
   })
   .catch((err) => {
     if (err.code === 404) {
       console.log(
-        'Cannot update document because either "' +
-          exampleDbName +
-          '" database or the "example" ' +
-          'document was not found.'
+        `Cannot update document because either "${exampleDbName}" database or the "example" ` +
+          `document was not found.`
       );
     }
   });
