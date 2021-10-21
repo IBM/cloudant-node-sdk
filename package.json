@@ -34,7 +34,7 @@
     "node": "^12 || ^14 || ^16 || ^17"
   },
   "dependencies": {
-    "@types/node": "16.11.1",
+    "@types/node": "16.11.2",
     "extend": "3.0.2",
     "ibm-cloud-sdk-core": "2.15.1",
     "tough-cookie": "4.0.0"
