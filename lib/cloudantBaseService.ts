@@ -88,7 +88,7 @@ class InvalidArgumentValueError extends Error {
  * Cloudant Service make it available to use CouchDB specific Session authentication
  * during service requests.
  */
-export abstract class CloudantBaseService extends BaseService {
+export default abstract class CloudantBaseService extends BaseService {
   /**
    * Configuration values to use Cloudant service.
    * @param {Authenticator} userOptions.authenticator CouchdbSessionAuthenticator object can be used

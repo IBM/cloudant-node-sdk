@@ -15,9 +15,8 @@
  */
 const { BasicAuthenticator } = require('ibm-cloud-sdk-core');
 const assert = require('assert');
-const {
-  getAuthenticatorFromEnvCloudantExtension,
-} = require('../../lib/getAuthenticatorFromEnvCloudantExtension.ts');
+const getAuthenticatorFromEnvCloudantExtension =
+  require('../../lib/getAuthenticatorFromEnvCloudantExtension.ts').default;
 const { CouchdbSessionAuthenticator } = require('../../index.ts');
 
 describe('Test getAuthenticatorFromEnvCloudantExtension', () => {

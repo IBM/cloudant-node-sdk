@@ -17,7 +17,7 @@
 const { IamAuthenticator } = require('ibm-cloud-sdk-core');
 const assert = require('assert');
 const sinon = require('sinon');
-const { CloudantBaseService } = require('../../lib/cloudantBaseService.ts');
+const CloudantBaseService = require('../../lib/cloudantBaseService.ts').default;
 const { CouchdbSessionAuthenticator } = require('../../index.ts');
 
 describe('Test CloudantBaseService', () => {
