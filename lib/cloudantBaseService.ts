@@ -61,14 +61,14 @@ const attIdRule = {
 
 const validationRules = [docIdRule, attIdRule];
 const rulesByOperation = {};
-for (const rule of validationRules) {
-  for (const operationId of rule.operationIds) {
+validationRules.forEach((rule) => {
+  rule.operationIds.forEach((operationId) => {
     if (!(operationId in rulesByOperation)) {
       rulesByOperation[operationId] = [];
     }
     rulesByOperation[operationId].push(rule);
-  }
-}
+  });
+});
 Object.freeze(rulesByOperation);
 
 /**
@@ -177,31 +177,33 @@ export default abstract class CloudantBaseService extends BaseService {
       // Extract operation id
       const analyticsHeader =
         parameters.defaultOptions.headers['X-IBMCloud-SDK-Analytics'];
-      for (const element of analyticsHeader.split(';')) {
-        if (element.startsWith('operation_id')) {
-          [, operationId] = element.split('=');
-        }
-      }
+      [, operationId] = analyticsHeader
+        .split(';')
+        .find((element) => element.startsWith('operation_id'))
+        .split('=');
       // Check if operation id exists in rulesByOperation object
       if (
         operationId != null &&
         Object.keys(rulesByOperation).includes(operationId)
       ) {
-        for (const rule of rulesByOperation[operationId]) {
-          // get the path segment e.g. doc_id from the response's path object
+        const violatedRules = rulesByOperation[operationId].filter((rule) => {
           if (
             'path' in parameters.options &&
             rule.pathSegment in parameters.options.path
           ) {
             const segmentToValidate = parameters.options.path[rule.pathSegment];
-            if (segmentToValidate.startsWith('_')) {
-              const err = new InvalidArgumentValueError(
-                `${rule.errorParameterName} ${segmentToValidate} starts with the invalid _ character.`
-              );
-              err.code = 'ERR_INVALID_ARG_VALUE';
-              return Promise.reject(err);
-            }
+            return segmentToValidate.startsWith('_');
           }
+          return false;
+        });
+        if (violatedRules.length > 0) {
+          const err = new InvalidArgumentValueError(
+            `${violatedRules[0].errorParameterName} ${
+              parameters.options.path[violatedRules[0].pathSegment]
+            } starts with the invalid _ character.`
+          );
+          err.code = 'ERR_INVALID_ARG_VALUE';
+          return Promise.reject(err);
         }
       }
     }
