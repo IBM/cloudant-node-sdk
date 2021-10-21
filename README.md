@@ -96,7 +96,7 @@ project:
   service instance or a
   [CouchDB](https://docs.couchdb.org/en/latest/install/index.html)
   server.
-- Node.js 12, 14, 16 or 17.
+- Node.js 12, 14 or 16.
 
 ## Installation
 
