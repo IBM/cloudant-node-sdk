@@ -139,15 +139,15 @@ describe('Default timeout config tests', () => {
   }
 
   it('newInstance - IamAuth', () => {
-    const iamAuth = new IamAuthenticator({
-      apikey: 'apikey',
-    });
     testCases.forEach((tc) => {
+      const iamAuth = new IamAuthenticator({
+        apikey: 'apikey',
+      });
       const myService = new CloudantV1({
         authenticator: iamAuth,
         ...tc.options,
       });
-      assertBaseTimeoutOptions(myService, DEFAULT_TIMEOUT);
+      assertBaseTimeoutOptions(myService, tc.expTimeout);
       return assertIamAuthRequestTimeout(myService, tc.expTimeout);
     });
   });
