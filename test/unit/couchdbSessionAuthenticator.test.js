@@ -23,6 +23,7 @@ const { SessionTokenManager } = require('../../auth/sessionTokenManager.ts');
 describe('CouchdbSessionAutheticator tests', () => {
   it('Constructor input validation check', () => {
     try {
+      // eslint-disable-next-line no-new
       new CouchdbSessionAuthenticator({});
     } catch (err) {
       assert.strictEqual(

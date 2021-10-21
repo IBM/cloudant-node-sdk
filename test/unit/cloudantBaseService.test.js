@@ -129,6 +129,7 @@ describe('Test CloudantBaseService', () => {
     });
     class MockV1 extends CloudantBaseService {}
     MockV1.DEFAULT_SERVICE_NAME = 'cloudant';
+    // eslint-disable-next-line no-new
     new MockV1({
       authenticator: auth,
       serviceUrl: 'http://example.invalid',

@@ -35,6 +35,7 @@ describe('SessionTokenManager tests', () => {
       };
 
       try {
+        // eslint-disable-next-line no-new
         new SessionTokenManager(optionsWithoutCredentials);
       } catch (error) {
         assert.strictEqual(
