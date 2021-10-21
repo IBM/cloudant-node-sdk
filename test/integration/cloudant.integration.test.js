@@ -16,20 +16,18 @@
 
 'use strict';
 
+const assert = require('assert');
 const { CloudantV1 } = require('../../index.ts');
 const authHelper = require('../resources/auth-helper.js');
-
-// Use this to retrieve test-specific config properties from your credentials file.
 
 // testcase timeout value (10s).
 const timeout = 10000;
 
+// Use this to retrieve test-specific config properties from your credentials file.
 const configFile = 'cloudant.env';
 // Use authHelper to skip tests if our configFile is not available
 // This step also sets env var IBM_CREDENTIALS_FILE=<configFile>
 const describe = authHelper.prepareTests(configFile);
-
-const assert = require('assert');
 
 const cloudant = CloudantV1.newInstance({
   serviceName: 'server',

@@ -178,7 +178,7 @@ export abstract class CloudantBaseService extends BaseService {
         parameters.defaultOptions.headers['X-IBMCloud-SDK-Analytics'];
       for (const element of analyticsHeader.split(';')) {
         if (element.startsWith('operation_id')) {
-          operationId = element.split('=')[1];
+          [, operationId] = element.split('=');
         }
       }
       // Check if operation id exists in rulesByOperation object

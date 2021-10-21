@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 const axios = require('axios');
+const fs = require('fs');
+const sinon = require('sinon');
 const {
   getInfoFromExistingDatabase,
 } = require('../examples/src/js/GetInfoFromExistingDatabase.js');
@@ -22,9 +24,6 @@ const { updateDoc } = require('../examples/src/js/UpdateDoc.js');
 const { deleteDoc } = require('../examples/src/js/DeleteDoc.js');
 
 axios.defaults.adapter = require('axios/lib/adapters/http'); // workaround from https://stackoverflow.com/a/57320262
-
-const fs = require('fs');
-const sinon = require('sinon');
 
 const setAuthentication = () => {
   process.env.CLOUDANT_AUTH_TYPE = 'basic';
