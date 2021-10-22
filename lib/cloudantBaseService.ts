@@ -16,7 +16,6 @@
 
 // eslint-disable-next-line max-classes-per-file
 import { Authenticator, BaseService, UserOptions } from 'ibm-cloud-sdk-core';
-// eslint-disable-next-line node/no-unpublished-import
 import { CookieJar } from 'tough-cookie';
 import { CouchdbSessionAuthenticator } from '../auth';
 import { getSdkHeaders } from './common';
