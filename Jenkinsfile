@@ -177,7 +177,7 @@ void applyCustomizations() {
     // Update to the next patch version
     sh "npm version ${isDevRelease ? '--no-git-tag-version' : '-m "Update version -> %s"'} patch"
     // Set env variable version from package.json
-    env.NEW_SDK_VERSION = sh returnStdout: true, script: 'jq -r .version package.json'
+    env.NEW_SDK_VERSION = sh returnStdout: true, script: 'jq -j .version package.json'
     if (isDevRelease) {
       // For a dev release append the metadata
       devRelease = getNewVersion(isDevRelease, "${env.NEW_SDK_VERSION}")
