@@ -44,6 +44,7 @@ export class CouchdbSessionAuthenticator extends Authenticator {
   protected tokenManager: SessionTokenManager;
   protected requiredOptions: ['username', 'password'];
   private tokenOptions: SessionTokenManagerOptions;
+  static readonly AUTHTYPE_COUCHDB_SESSION = 'COUCHDB_SESSION';
 
   /**
    * Create a new CouchdbSessionAuthenticator instance.
@@ -127,5 +128,14 @@ export class CouchdbSessionAuthenticator extends Authenticator {
 
     // Set the token manager
     this.tokenManager = new SessionTokenManager(this.tokenOptions);
+  }
+
+  /**
+   * Returns the authenticator's type ('COUCHDB_SESSION').
+   *
+   * @returns a string that indicates the authenticator's type
+   */
+  public authenticationType(): string {
+    return CouchdbSessionAuthenticator.AUTHTYPE_COUCHDB_SESSION;
   }
 }

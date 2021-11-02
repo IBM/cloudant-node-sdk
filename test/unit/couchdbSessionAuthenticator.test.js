@@ -44,6 +44,7 @@ describe('CouchdbSessionAutheticator tests', () => {
     assert.ok(auth);
     assert.ok(auth.tokenManager);
     assert.ok(auth.tokenManager instanceof SessionTokenManager);
+    assert.strictEqual('COUCHDB_SESSION', auth.authenticationType());
 
     const getTokenStubFn = sinon.stub(auth.tokenManager, 'getToken');
     auth.authenticate();
