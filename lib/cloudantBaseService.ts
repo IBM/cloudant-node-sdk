@@ -186,6 +186,7 @@ export default abstract class CloudantBaseService extends BaseService {
         Object.keys(rulesByOperation).includes(operationId)
       ) {
         const violatedRules = rulesByOperation[operationId].filter((rule) => {
+          // get the path segment e.g. doc_id from the response's path object
           if (
             'path' in parameters.options &&
             rule.pathSegment in parameters.options.path
