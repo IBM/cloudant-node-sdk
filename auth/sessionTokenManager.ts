@@ -79,7 +79,8 @@ export class SessionTokenManager extends TokenManager {
    * @param {OutgoingHttpHeaders} headers - the new set of headers as an object
    * @returns {Error}
    */
-  public static setHeaders(headers: OutgoingHttpHeaders): void {
+  // eslint-disable-next-line class-methods-use-this
+  public setHeaders(headers: OutgoingHttpHeaders): void {
     const errMsg =
       'During CouchDB Session Authentication only `request` service headers are in use';
     throw new Error(errMsg);
