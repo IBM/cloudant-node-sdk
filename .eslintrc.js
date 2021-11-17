@@ -19,6 +19,7 @@ module.exports = {
     'node': true,
   },
   'plugins': ['header'],
+  'extends': ['plugin:import/recommended'],
   'rules': {
     'header/header': [
       2,
@@ -53,7 +54,6 @@ module.exports = {
       'plugins': ['node', 'jest', 'prettier'],
       'extends': [
         'airbnb-base',
-        'plugin:import/recommended',
         'plugin:jest/recommended',
         'plugin:jest/style',
         'prettier',
@@ -96,7 +96,6 @@ module.exports = {
       'files': ['**/*.ts'],
       'extends': [
         'airbnb-typescript/base',
-        'plugin:import/recommended',
         'plugin:import/typescript',
         'prettier',
       ],
