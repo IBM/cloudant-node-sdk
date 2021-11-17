@@ -60,7 +60,6 @@ module.exports = {
       ],
       'rules': {
         'camelcase': 'off',
-        'no-console': 'off',
         'strict': 0,
         'import/extensions': 'off',
         'no-template-curly-in-string': 'off',
@@ -84,6 +83,12 @@ module.exports = {
       'rules': {
         'prettier/prettier': 'off',
         'object-shorthand': 'off',
+      },
+    },
+    {
+      'files': ['test/**/readme.integration.test.js'],
+      'rules': {
+        'no-console': 'off',
       },
     },
     // TypeScript specific rules
