@@ -127,7 +127,7 @@ module.exports = {
       },
     },
     {
-      'files': ['test/**/*.ts'],
+      'files': ['test/examples/src/ts/*.ts'],
       'rules': {
         'no-console': 'off',
       },
