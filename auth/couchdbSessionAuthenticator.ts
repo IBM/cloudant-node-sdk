@@ -46,6 +46,7 @@ export class CouchdbSessionAuthenticator extends Authenticator {
   protected requiredOptions: ['username', 'password'];
 
   private tokenOptions: SessionTokenManagerOptions;
+
   static readonly AUTHTYPE_COUCHDB_SESSION = 'COUCHDB_SESSION';
 
   /**
@@ -93,13 +94,17 @@ export class CouchdbSessionAuthenticator extends Authenticator {
       cookieJar.cloudantPatch = true;
       // Replace the store's updateCookie function with one that applies a patch to newCookie
       const originalUpdateCookieFn = cookieJar.store.updateCookie;
-      cookieJar.store.updateCookie = function (oldCookie, newCookie, cb) {
+      cookieJar.store.updateCookie = function updateCookie(
+        oldCookie,
+        newCookie,
+        cb
+      ) {
         // Add current time as an update timestamp to the newCookie
         newCookie.cloudantPatchUpdateTime = new Date();
         // Replace the cookie's expiryTime function with one that uses cloudantPatchUpdateTime
         // in place of creation time to check the expiry.
         const originalExpiryTimeFn = newCookie.expiryTime;
-        newCookie.expiryTime = function (now) {
+        newCookie.expiryTime = function expiryTime(now) {
           // The original expiryTime check is relative to a time in this order:
           // 1. supplied now argument
           // 2. this.creation (original cookie creation time)
@@ -137,6 +142,7 @@ export class CouchdbSessionAuthenticator extends Authenticator {
    *
    * @returns a string that indicates the authenticator's type
    */
+  // eslint-disable-next-line class-methods-use-this
   public authenticationType(): string {
     return CouchdbSessionAuthenticator.AUTHTYPE_COUCHDB_SESSION;
   }
