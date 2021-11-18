@@ -23,6 +23,5 @@
     /* Module Resolution Options */
     "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
     "types": ["node"]                      /* Type declaration files to be included in compilation. */
-  },
-  "include": ["./**/*.ts"]
+  }
 }
