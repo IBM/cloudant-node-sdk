@@ -64,8 +64,8 @@ const createDbAndDoc = async () => {
   // Keep track with the revision number of the document object
   exampleDocument._rev = createDocumentResponse.result.rev;
   console.log(
-    `You have created the document:\n` +
-      `${JSON.stringify(exampleDocument, null, 2)}`
+    'You have created the document:\n' +
+      JSON.stringify(exampleDocument, null, 2)
   );
 };
 

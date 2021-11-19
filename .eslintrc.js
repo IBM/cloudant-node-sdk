@@ -140,5 +140,14 @@ module.exports = {
         'dot-notation': 'off',
       },
     },
+    {
+      'files': [
+        'test/examples/src/js/CreateDbAndDoc.js',
+        'test/examples/src/ts/CreateDbAndDoc.ts',
+      ],
+      'rules': {
+        'prefer-template': 'off',
+      },
+    },
   ],
 };
