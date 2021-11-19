@@ -52,7 +52,7 @@ const createDbAndDoc = async () => {
   const exampleDocument = { _id: exampleDocId };
 
   // Add "name" and "joined" fields to the document
-  exampleDocument.name = 'Bob Smith';
+  exampleDocument['name'] = 'Bob Smith';
   exampleDocument.joined = '2019-01-24T10:42:99.000Z';
 
   // Save the document in the database

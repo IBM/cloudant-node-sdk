@@ -134,5 +134,11 @@ module.exports = {
         'no-console': 'off',
       },
     },
+    {
+      'files': ['test/examples/src/js/*.js'],
+      'rules': {
+        'dot-notation': 'off',
+      },
+    },
   ],
 };

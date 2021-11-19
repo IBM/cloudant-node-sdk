@@ -48,7 +48,7 @@ const updateDoc = async () => {
     document.address = '19 Front Street, Darlington, DL5 1TY';
 
     // Remove the joined property from document object
-    delete document.joined;
+    delete document['joined'];
 
     // Keeping track with the revision number of the document object:
     document._rev = (
