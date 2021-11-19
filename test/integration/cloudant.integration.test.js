@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 const assert = require('assert');
 const { CloudantV1 } = require('../../index.ts');
 const authHelper = require('../resources/auth-helper.js');

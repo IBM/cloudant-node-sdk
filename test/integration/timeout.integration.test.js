@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 const assert = require('assert');
 const sinon = require('sinon');
 

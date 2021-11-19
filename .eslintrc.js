@@ -56,7 +56,6 @@ module.exports = {
       'extends': ['airbnb-base', 'prettier'],
       'rules': {
         'camelcase': 'off',
-        'strict': 0,
         'import/extensions': 'off',
         'no-template-curly-in-string': 'off',
         'no-underscore-dangle': 'off',

@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 const common = require('../../lib/common.ts');
 
 const { getSdkHeaders } = common;
