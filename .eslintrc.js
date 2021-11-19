@@ -49,15 +49,11 @@ module.exports = {
     'max-len': ['error', { 'code': 100 }],
   },
   'overrides': [
+    // JavaScript specific rules
     {
       'files': ['**/*.js'],
-      'plugins': ['node', 'jest', 'prettier'],
-      'extends': [
-        'airbnb-base',
-        'plugin:jest/recommended',
-        'plugin:jest/style',
-        'prettier',
-      ],
+      'plugins': ['node', 'prettier'],
+      'extends': ['airbnb-base', 'prettier'],
       'rules': {
         'camelcase': 'off',
         'strict': 0,
@@ -66,29 +62,6 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'prefer-const': 'error',
         'prettier/prettier': 'error',
-      },
-    },
-    {
-      'files': ['test/**/*.test.js'],
-      'rules': {
-        'jest/expect-expect': 'off',
-        'jest/no-conditional-expect': 'off',
-        'jest/no-done-callback': 'off',
-        'jest/no-standalone-expect': 'off',
-        'jest/no-try-expect': 'off',
-      },
-    },
-    {
-      'files': ['test/**/cloudant.v1.test.js'],
-      'rules': {
-        'prettier/prettier': 'off',
-        'object-shorthand': 'off',
-      },
-    },
-    {
-      'files': ['test/**/readme.integration.test.js'],
-      'rules': {
-        'no-console': 'off',
       },
     },
     // TypeScript specific rules
@@ -126,8 +99,38 @@ module.exports = {
         'max-len': 'off',
       },
     },
+    // Test folder specific rules
     {
-      'files': ['test/examples/src/ts/*.ts'],
+      'files': ['test/**/*.*'],
+      'env': {
+        'jest': true,
+        'es6': true,
+      },
+      'plugins': ['jest'],
+      'extends': ['plugin:jest/recommended', 'plugin:jest/style'],
+    },
+    {
+      'files': ['test/**/*.test.js'],
+      'rules': {
+        'jest/expect-expect': 'off',
+        'jest/no-conditional-expect': 'off',
+        'jest/no-done-callback': 'off',
+        'jest/no-standalone-expect': 'off',
+        'jest/no-try-expect': 'off',
+      },
+    },
+    {
+      'files': ['test/**/cloudant.v1.test.js'],
+      'rules': {
+        'prettier/prettier': 'off',
+        'object-shorthand': 'off',
+      },
+    },
+    {
+      'files': [
+        'test/**/readme.integration.test.js',
+        'test/examples/src/ts/*.ts',
+      ],
       'rules': {
         'no-console': 'off',
       },
