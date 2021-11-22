@@ -40,7 +40,7 @@ const createDbAndDoc = async () => {
   } catch (err) {
     if (err.code === 412) {
       console.log(
-        'Cannot create "' + exampleDbName + '" database, it already exists.'
+        `Cannot create "${exampleDbName}" database, it already exists.`
       );
     }
   }

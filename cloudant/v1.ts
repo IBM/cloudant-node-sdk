@@ -24,8 +24,8 @@ import {
   UserOptions,
 } from 'ibm-cloud-sdk-core';
 import { getSdkHeaders } from '../lib/common';
-import { CloudantBaseService } from '../lib/cloudantBaseService';
-import { getAuthenticatorFromEnvCloudantExtension } from '../lib/getAuthenticatorFromEnvCloudantExtension';
+import CloudantBaseService from '../lib/cloudantBaseService';
+import getAuthenticatorFromEnvCloudantExtension from '../lib/getAuthenticatorFromEnvCloudantExtension';
 
 /**
  * NoSQL database based on Apache CouchDB

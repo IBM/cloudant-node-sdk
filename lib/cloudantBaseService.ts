@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+// eslint-disable-next-line max-classes-per-file
 import { Authenticator, BaseService, UserOptions } from 'ibm-cloud-sdk-core';
-// eslint-disable-next-line node/no-unpublished-import
 import { CookieJar } from 'tough-cookie';
 import { CouchdbSessionAuthenticator } from '../auth';
 import { getSdkHeaders } from './common';
@@ -60,14 +60,14 @@ const attIdRule = {
 
 const validationRules = [docIdRule, attIdRule];
 const rulesByOperation = {};
-for (const rule of validationRules) {
-  for (const operationId of rule.operationIds) {
+validationRules.forEach((rule) => {
+  rule.operationIds.forEach((operationId) => {
     if (!(operationId in rulesByOperation)) {
       rulesByOperation[operationId] = [];
     }
     rulesByOperation[operationId].push(rule);
-  }
-}
+  });
+});
 Object.freeze(rulesByOperation);
 
 /**
@@ -87,7 +87,7 @@ class InvalidArgumentValueError extends Error {
  * Cloudant Service make it available to use CouchDB specific Session authentication
  * during service requests.
  */
-export abstract class CloudantBaseService extends BaseService {
+export default abstract class CloudantBaseService extends BaseService {
   /**
    * Configuration values to use Cloudant service.
    * @param {Authenticator} userOptions.authenticator CouchdbSessionAuthenticator object can be used
@@ -172,36 +172,38 @@ export abstract class CloudantBaseService extends BaseService {
    */
   protected createRequest(parameters: any): Promise<any> {
     let operationId = null;
-    if ('X-IBMCloud-SDK-Analytics' in parameters['defaultOptions']['headers']) {
+    if ('X-IBMCloud-SDK-Analytics' in parameters.defaultOptions.headers) {
       // Extract operation id
       const analyticsHeader =
-        parameters['defaultOptions']['headers']['X-IBMCloud-SDK-Analytics'];
-      for (const element of analyticsHeader.split(';')) {
-        if (element.startsWith('operation_id')) {
-          operationId = element.split('=')[1];
-        }
-      }
+        parameters.defaultOptions.headers['X-IBMCloud-SDK-Analytics'];
+      [, operationId] = analyticsHeader
+        .split(';')
+        .find((element) => element.startsWith('operation_id'))
+        .split('=');
       // Check if operation id exists in rulesByOperation object
       if (
         operationId != null &&
         Object.keys(rulesByOperation).includes(operationId)
       ) {
-        for (const rule of rulesByOperation[operationId]) {
+        const violatedRules = rulesByOperation[operationId].filter((rule) => {
           // get the path segment e.g. doc_id from the response's path object
           if (
-            'path' in parameters['options'] &&
-            rule.pathSegment in parameters['options']['path']
+            'path' in parameters.options &&
+            rule.pathSegment in parameters.options.path
           ) {
-            const segmentToValidate =
-              parameters['options']['path'][rule.pathSegment];
-            if (segmentToValidate.startsWith('_')) {
-              const err = new InvalidArgumentValueError(
-                `${rule.errorParameterName} ${segmentToValidate} starts with the invalid _ character.`
-              );
-              err.code = 'ERR_INVALID_ARG_VALUE';
-              return Promise.reject(err);
-            }
+            const segmentToValidate = parameters.options.path[rule.pathSegment];
+            return segmentToValidate.startsWith('_');
           }
+          return false;
+        });
+        if (violatedRules.length > 0) {
+          const err = new InvalidArgumentValueError(
+            `${violatedRules[0].errorParameterName} ${
+              parameters.options.path[violatedRules[0].pathSegment]
+            } starts with the invalid _ character.`
+          );
+          err.code = 'ERR_INVALID_ARG_VALUE';
+          return Promise.reject(err);
         }
       }
     }

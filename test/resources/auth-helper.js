@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 const fs = require('fs');
 const dotenv = require('dotenv');
 
@@ -50,9 +48,7 @@ module.exports.prepareTests = (filename) => {
   return describeToUse;
 };
 
-module.exports.getDescribe = () => {
-  return describeToUse;
-};
+module.exports.getDescribe = () => describeToUse;
 
 // This function will load the contents of "configFilename" and
 // set the properties as environment variables.

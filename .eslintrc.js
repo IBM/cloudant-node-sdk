@@ -14,33 +14,13 @@
  * limitations under the License.
  */
 module.exports = {
+  'root': true,
   'env': {
     'node': true,
   },
-  parser: '@typescript-eslint/parser',
-  'plugins': ['node', 'prettier', 'header', '@typescript-eslint'],
-  'extends': [
-    'eslint:recommended',
-    'google',
-    'plugin:node/recommended',
-    'prettier',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
-  ],
+  'plugins': ['header'],
+  'extends': ['plugin:import/recommended'],
   'rules': {
-    'node/no-unsupported-features/es-syntax': [
-      'error',
-      { 'ignores': ['modules'] },
-    ],
-    'prettier/prettier': ['error', { 'singleQuote': true, 'printWidth': 80 }],
-    'prefer-const': 'error',
-    'prefer-rest-params': 'off', // https://github.com/mysticatea/eslint-plugin-node/issues/63
-    // The rest of these override rules that are enabled by one of the configs we extend but not compatible with current codebase
-    // todo: fix issues and then remove overrides here
-    'valid-jsdoc': 'off', // too many issues; drowns out everything else
-    'camelcase': 'off', // todo: determine if we should keep this off globally, or disable it on a per-line basis
-    'import/extensions': 'off',
     'header/header': [
       2,
       'block',
@@ -66,43 +46,108 @@ module.exports = {
         ' ',
       ],
     ],
+    'max-len': ['error', { 'code': 100 }],
   },
-  overrides: [
+  'overrides': [
+    // JavaScript specific rules
     {
-      files: ['test/unit/cloudant.v1.test.js'],
-      rules: {
-        'node/no-missing-require': 'off',
-        'prettier/prettier': 'off',
+      'files': ['**/*.js'],
+      'plugins': ['node', 'prettier'],
+      'extends': ['airbnb-base', 'prettier'],
+      'rules': {
+        'camelcase': 'off',
+        'import/extensions': 'off',
+        'no-template-curly-in-string': 'off',
+        'no-underscore-dangle': 'off',
+        'prefer-const': 'error',
+        'prettier/prettier': 'error',
+      },
+    },
+    // TypeScript specific rules
+    {
+      'files': ['**/*.ts'],
+      'extends': [
+        'airbnb-typescript/base',
+        'plugin:import/typescript',
+        'prettier',
+      ],
+      'parser': '@typescript-eslint/parser',
+      'parserOptions': {
+        'project': 'tsconfig.json',
+        'sourceType': 'module',
+      },
+      'plugins': [
+        'eslint-plugin-jsdoc',
+        'eslint-plugin-import',
+        '@typescript-eslint',
+        'prettier',
+      ],
+      'rules': {
+        '@typescript-eslint/naming-convention': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
+        'no-param-reassign': 'off',
+        'no-underscore-dangle': 'off',
+        'prettier/prettier': 'error',
+        'spaced-comment': ['error', 'always', { 'exceptions': ['*'] }],
       },
     },
     {
-      files: ['cloudant/v1.ts'],
-      rules: {
-        '@typescript-eslint/no-empty-interface': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/no-namespace': 'off',
-        '@typescript-eslint/no-unused-vars': 'off',
-        'no-redeclare': 'off',
-        'no-undef': 'off',
-        'no-unused-vars': 'off',
-        'node/no-missing-import': 'off',
-        'node/no-unsupported-features/es-syntax': 'off',
-        'prettier': 'off',
+      'files': ['cloudant/v1.ts'],
+      'rules': {
         'prettier/prettier': 'off',
-        'require-jsdoc': 'off',
-        'spaced-comment': 'off',
+        'max-len': 'off',
+      },
+    },
+    // Test folder specific rules
+    {
+      'files': ['test/**/*.*'],
+      'env': {
+        'jest': true,
+        'es6': true,
+      },
+      'plugins': ['jest'],
+      'extends': ['plugin:jest/recommended', 'plugin:jest/style'],
+    },
+    {
+      'files': ['test/**/*.test.js'],
+      'rules': {
+        'jest/expect-expect': 'off',
+        'jest/no-conditional-expect': 'off',
+        'jest/no-done-callback': 'off',
+        'jest/no-standalone-expect': 'off',
+        'jest/no-try-expect': 'off',
+      },
+    },
+    {
+      'files': ['test/**/cloudant.v1.test.js'],
+      'rules': {
+        'prettier/prettier': 'off',
+        'object-shorthand': 'off',
+      },
+    },
+    {
+      'files': [
+        'test/**/readme.integration.test.js',
+        'test/examples/src/ts/*.ts',
+      ],
+      'rules': {
+        'no-console': 'off',
+      },
+    },
+    {
+      'files': ['test/examples/src/js/*.js'],
+      'rules': {
+        'dot-notation': 'off',
+      },
+    },
+    {
+      'files': [
+        'test/examples/src/js/CreateDbAndDoc.js',
+        'test/examples/src/ts/CreateDbAndDoc.ts',
+      ],
+      'rules': {
+        'prefer-template': 'off',
       },
     },
   ],
-  settings: {
-    node: {
-      tryExtensions: ['.js', '.json', '.ts', '.d.ts'],
-    },
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.ts'],
-        moduleDirectory: ['node_modules'],
-      },
-    },
-  },
 };

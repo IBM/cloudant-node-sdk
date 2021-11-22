@@ -38,6 +38,7 @@ const errors = {
   test: [],
 };
 
+// eslint-disable-next-line array-callback-return
 failed_suits.map((suite) => {
   const failed_tests = suite.assertionResults.filter(
     (test) => test.status === 'failed'
@@ -48,6 +49,7 @@ failed_suits.map((suite) => {
     test: [],
   };
 
+  // eslint-disable-next-line array-callback-return
   failed_tests.map((result) => {
     const message_clean = result.failureMessages
       .join('\n')
@@ -79,7 +81,7 @@ if (
     .post(
       `https://api.github.com/repos/${process.env.TRAVIS_REPO_SLUG}/issues/${process.env.TRAVIS_PULL_REQUEST}/comments`,
       {
-        body: body,
+        body,
       },
       {
         headers: {

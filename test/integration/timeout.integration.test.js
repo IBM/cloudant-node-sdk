@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-'use strict';
-
 const assert = require('assert');
 const sinon = require('sinon');
 
-const { CloudantV1 } = require('../../index.ts');
-const { CouchdbSessionAuthenticator } = require('../../index.ts');
 const {
   BasicAuthenticator,
   IamAuthenticator,
   NoAuthAuthenticator,
 } = require('ibm-cloud-sdk-core');
+const { CloudantV1 } = require('../../index.ts');
+const { CouchdbSessionAuthenticator } = require('../../index.ts');
 
 const DEFAULT_TIMEOUT = 150000; // (2.5m=150s)
 const CUSTOM_TIMEOUT = 30000; // (30s)
@@ -36,15 +34,12 @@ describe('Default timeout config tests', () => {
   const testCases = [
     // 1. case: check default timeout value
     {
-      options: {
-        authenticator: {},
-      },
+      options: {},
       expTimeout: DEFAULT_TIMEOUT,
     },
     // 2. case: check custom timeout overwrite
     {
       options: {
-        authenticator: {},
         timeout: CUSTOM_TIMEOUT,
       },
       expTimeout: CUSTOM_TIMEOUT,
@@ -61,21 +56,24 @@ describe('Default timeout config tests', () => {
       username: 'user',
       password: 'pwd',
     });
-
-    for (const tc of testCases) {
-      tc.options.authenticator = basicAuth;
-      const myService = new CloudantV1(tc.options);
+    testCases.forEach((tc) => {
+      const myService = new CloudantV1({
+        authenticator: basicAuth,
+        ...tc.options,
+      });
       assertBaseTimeoutOptions(myService, tc.expTimeout);
-    }
+    });
   });
 
   it('newInstance - NoAuth', () => {
     const noAuth = new NoAuthAuthenticator();
-    for (const tc of testCases) {
-      tc.options.authenticator = noAuth;
-      const myService = CloudantV1.newInstance(tc.options);
+    testCases.forEach((tc) => {
+      const myService = new CloudantV1({
+        authenticator: noAuth,
+        ...tc.options,
+      });
       assertBaseTimeoutOptions(myService, tc.expTimeout);
-    }
+    });
   });
 
   function assertAuthTokenTimeoutOptions(myService, expTimeoutValue) {
@@ -89,12 +87,14 @@ describe('Default timeout config tests', () => {
       username: 'name',
       password: 'pwd',
     });
-    for (const tc of testCases) {
-      tc.options.authenticator = sessionAuth;
-      const myService = new CloudantV1(tc.options);
+    testCases.forEach((tc) => {
+      const myService = new CloudantV1({
+        authenticator: sessionAuth,
+        ...tc.options,
+      });
       assertBaseTimeoutOptions(myService, tc.expTimeout);
       assertAuthTokenTimeoutOptions(myService, tc.expTimeout);
-    }
+    });
   });
 
   function assertIamAuthRequestTimeout(myService, expValue) {
@@ -137,14 +137,16 @@ describe('Default timeout config tests', () => {
   }
 
   it('newInstance - IamAuth', () => {
-    const iamAuth = new IamAuthenticator({
-      apikey: 'apikey',
-    });
-    for (const tc of testCases) {
-      tc.options.authenticator = iamAuth;
-      const myService = CloudantV1.newInstance(tc.options);
-      assertBaseTimeoutOptions(myService, DEFAULT_TIMEOUT);
+    testCases.forEach((tc) => {
+      const iamAuth = new IamAuthenticator({
+        apikey: 'apikey',
+      });
+      const myService = new CloudantV1({
+        authenticator: iamAuth,
+        ...tc.options,
+      });
+      assertBaseTimeoutOptions(myService, tc.expTimeout);
       return assertIamAuthRequestTimeout(myService, tc.expTimeout);
-    }
+    });
   });
 });

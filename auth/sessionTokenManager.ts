@@ -43,7 +43,9 @@ export class SessionTokenManager extends TokenManager {
     'serviceUrl',
     'jar',
   ];
+
   private tokenName: string;
+
   private options: SessionTokenManagerOptions;
 
   /**
@@ -77,6 +79,7 @@ export class SessionTokenManager extends TokenManager {
    * @param {OutgoingHttpHeaders} headers - the new set of headers as an object
    * @returns {Error}
    */
+  // eslint-disable-next-line class-methods-use-this
   public setHeaders(headers: OutgoingHttpHeaders): void {
     const errMsg =
       'During CouchDB Session Authentication only `request` service headers are in use';
@@ -96,7 +99,7 @@ export class SessionTokenManager extends TokenManager {
     const parameters = {
       options: {
         headers: this.options.headers,
-        url: this.options.serviceUrl + '/_session',
+        url: `${this.options.serviceUrl}/_session`,
         method: 'POST',
         body: {
           username: this.options.username,
@@ -125,7 +128,7 @@ export class SessionTokenManager extends TokenManager {
     let sessionToken = null;
     let expireTime = null;
     let refreshTime = null;
-    for (let i = 0; i < sessionCookie.length && sessionToken == null; i++) {
+    for (let i = 0; i < sessionCookie.length && sessionToken == null; i += 1) {
       sessionToken = new RegExp('AuthSession=([^;]*);').exec(sessionCookie[i]);
       if (sessionToken != null) {
         expireTime = new RegExp('.*Expires=([^;]*);').exec(sessionCookie[i]);
@@ -136,7 +139,7 @@ export class SessionTokenManager extends TokenManager {
       const err = 'Session token not present in response';
       throw new Error(err);
     }
-    this.accessToken = sessionToken[1];
+    [, this.accessToken] = sessionToken;
     const fractionOfTtl = 0.8;
     if (expireTime == null) {
       if (refreshTime == null) {

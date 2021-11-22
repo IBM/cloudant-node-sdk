@@ -17,7 +17,7 @@
 /**
  * @module cloudant-node-sdk
  */
-// eslint-disable-next-line no-unused-vars
+
 export import CloudantV1 = require('./cloudant/v1');
 
 export {

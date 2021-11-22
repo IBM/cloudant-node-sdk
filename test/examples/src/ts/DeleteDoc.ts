@@ -56,10 +56,8 @@ client
   .catch((err) => {
     if (err.code === 404) {
       console.log(
-        'Cannot delete document because either "' +
-          exampleDbName +
-          '" database or the "example" ' +
-          'document was not found.'
+        `Cannot delete document because either "${exampleDbName}" database or the "example" ` +
+          `document was not found.`
       );
     }
   });

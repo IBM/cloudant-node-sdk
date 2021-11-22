@@ -15,10 +15,10 @@
  */
 
 const { IamAuthenticator } = require('ibm-cloud-sdk-core');
-const { CloudantBaseService } = require('../../lib/cloudantBaseService.ts');
-const { CouchdbSessionAuthenticator } = require('../../index.ts');
 const assert = require('assert');
 const sinon = require('sinon');
+const CloudantBaseService = require('../../lib/cloudantBaseService.ts').default;
+const { CouchdbSessionAuthenticator } = require('../../index.ts');
 
 describe('Test CloudantBaseService', () => {
   const newUrl = 'something.new/';
@@ -117,7 +117,7 @@ describe('Test CloudantBaseService', () => {
       serviceUrl: appleUrl,
     });
 
-    const tokenManager = auth.tokenManager;
+    const { tokenManager } = auth;
     service.setServiceUrl(newUrl); // setServiceUrl actually replaces the SessionTokenManager instance of `auth`
     assert.notDeepStrictEqual(auth.tokenManager, tokenManager);
   });
@@ -129,6 +129,7 @@ describe('Test CloudantBaseService', () => {
     });
     class MockV1 extends CloudantBaseService {}
     MockV1.DEFAULT_SERVICE_NAME = 'cloudant';
+    // eslint-disable-next-line no-new
     new MockV1({
       authenticator: auth,
       serviceUrl: 'http://example.invalid',
@@ -142,9 +143,8 @@ describe('Test CloudantBaseService', () => {
     assert.ok(auth.tokenManager.requestWrapperInstance.sendRequest.calledOnce);
 
     assert.strictEqual(
-      auth.tokenManager.requestWrapperInstance.sendRequest.getCall(-1).args[0][
-        'options'
-      ]['headers']['X-IBMCloud-SDK-Analytics'],
+      auth.tokenManager.requestWrapperInstance.sendRequest.getCall(-1).args[0]
+        .options.headers['X-IBMCloud-SDK-Analytics'],
       'service_name=cloudant;service_version=v1;operation_id=authenticatorPostSession'
     );
   });

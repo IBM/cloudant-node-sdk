@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+const axios = require('axios');
+const fs = require('fs');
+const sinon = require('sinon');
 const {
   getInfoFromExistingDatabase,
 } = require('../examples/src/js/GetInfoFromExistingDatabase.js');
@@ -20,11 +23,7 @@ const { createDbAndDoc } = require('../examples/src/js/CreateDbAndDoc.js');
 const { updateDoc } = require('../examples/src/js/UpdateDoc.js');
 const { deleteDoc } = require('../examples/src/js/DeleteDoc.js');
 
-const axios = require('axios');
 axios.defaults.adapter = require('axios/lib/adapters/http'); // workaround from https://stackoverflow.com/a/57320262
-
-const fs = require('fs');
-const sinon = require('sinon');
 
 const setAuthentication = () => {
   process.env.CLOUDANT_AUTH_TYPE = 'basic';
@@ -41,7 +40,7 @@ describe('Readme integration tests', () => {
 
   // jest --runInBand should be set to run the test cases in order
   beforeAll(async () => {
-    await axios.post(process.env.WIREMOCK_URL + '/__admin/scenarios/reset'); // Reset Wiremock states
+    await axios.post(`${process.env.WIREMOCK_URL}/__admin/scenarios/reset`); // Reset Wiremock states
     setAuthentication();
   });
 
