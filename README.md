@@ -258,7 +258,7 @@ const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
 // 2. Get server information ==================================================
 // call service without parameters:
 client.getServerInformation().then((serverInformation) => {
-  const version = serverInformation.result.version;
+  const { version } = serverInformation.result;
   console.log(`Server version ${version}`);
 });
 
@@ -272,7 +272,7 @@ client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
 
   // 4. Show document count in database =================================
   console.log(
-    `Document count in "${dbNameResult}" database is ` + documentCount + '.'
+    `Document count in "${dbNameResult}" database is ${documentCount}.`
   );
 });
 
@@ -285,9 +285,9 @@ const getDocParams: CloudantV1.GetDocumentParams = {
 // call service with predefined parameters:
 client.getDocument(getDocParams).then((documentAboutZebra) => {
   // result object is defined as a Document here:
-  const result: CloudantV1.Document = documentAboutZebra.result;
+  const { result } = documentAboutZebra;
   console.log(
-    'Document retrieved from database:\n' + JSON.stringify(result, null, 2)
+    `Document retrieved from database:\n${JSON.stringify(result, null, 2)}`
   );
 });
 ```
@@ -307,7 +307,7 @@ const getInfoFromExistingDatabase = async () => {
 
   // 2. Get server information ==================================================
   // call service without parameters:
-  const version = (await client.getServerInformation()).result.version;
+  const { version } = (await client.getServerInformation()).result;
   console.log(`Server version ${version}`);
 
   // 3. Get database information for "animaldb" =================================
@@ -320,7 +320,7 @@ const getInfoFromExistingDatabase = async () => {
 
   // 4. Show document count in database =================================
   console.log(
-    `Document count in "${dbNameResult}" database is ` + documentCount + '.'
+    `Document count in "${dbNameResult}" database is ${documentCount}.`
   );
 
   // 5. Get zebra document out of the database by document id ===================
@@ -330,10 +330,10 @@ const getInfoFromExistingDatabase = async () => {
   const documentAboutZebra = await client.getDocument(getDocParams);
 
   // result object is defined as a Document here:
-  const result = documentAboutZebra.result;
+  const { result } = documentAboutZebra;
 
   console.log(
-    'Document retrieved from database:\n' + JSON.stringify(result, null, 2)
+    `Document retrieved from database:\n${JSON.stringify(result, null, 2)}`
   );
 };
 
@@ -406,7 +406,7 @@ const createDb = client
   .catch((err) => {
     if (err.code === 412) {
       console.log(
-        'Cannot create "' + exampleDbName + '" database, it already exists.'
+        `Cannot create "${exampleDbName}" database, it already exists.`
       );
     }
   });
@@ -469,7 +469,7 @@ const createDbAndDoc = async () => {
   } catch (err) {
     if (err.code === 412) {
       console.log(
-        'Cannot create "' + exampleDbName + '" database, it already exists.'
+        `Cannot create "${exampleDbName}" database, it already exists.`
       );
     }
   }
@@ -581,7 +581,7 @@ client
 
     // Update the document in the database
     client
-      .postDocument({ db: exampleDbName, document: document })
+      .postDocument({ db: exampleDbName, document })
       // Note: for request byte stream use:
       // .postDocument(
       //   {db: exampleDbName, document: documentAsByteStream}
@@ -590,17 +590,15 @@ client
         // Keeping track with the revision number of the document object:
         document._rev = res.result.rev;
         console.log(
-          'You have updated the document:\n' + JSON.stringify(document, null, 2)
+          `You have updated the document:\n${JSON.stringify(document, null, 2)}`
         );
       });
   })
   .catch((err) => {
     if (err.code === 404) {
       console.log(
-        'Cannot update document because either "' +
-          exampleDbName +
-          '" database or the "example" ' +
-          'document was not found.'
+        `Cannot update document because either "${exampleDbName}" database or the "example" ` +
+          `document was not found.`
       );
     }
   });
@@ -649,7 +647,7 @@ const updateDoc = async () => {
     document._rev = (
       await client.postDocument({
         db: exampleDbName,
-        document: document,
+        document,
       })
     ).result.rev;
 
@@ -662,15 +660,13 @@ const updateDoc = async () => {
     // ).result.rev;
 
     console.log(
-      'You have updated the document:\n' + JSON.stringify(document, null, 2)
+      `You have updated the document:\n${JSON.stringify(document, null, 2)}`
     );
   } catch (err) {
     if (err.code === 404) {
       console.log(
-        'Cannot update document because either "' +
-          exampleDbName +
-          '" database or the "example" ' +
-          'document was not found.'
+        `Cannot update document because either "${exampleDbName}" database or the "example" ` +
+          `document was not found.`
       );
     }
   }
@@ -756,10 +752,8 @@ client
   .catch((err) => {
     if (err.code === 404) {
       console.log(
-        'Cannot delete document because either "' +
-          exampleDbName +
-          '" database or the "example" ' +
-          'document was not found.'
+        `Cannot delete document because either "${exampleDbName}" database or the "example" ` +
+          `document was not found.`
       );
     }
   });
@@ -801,10 +795,8 @@ const deleteDoc = async () => {
   } catch (err) {
     if (err.code === 404) {
       console.log(
-        'Cannot delete document because either "' +
-          exampleDbName +
-          '" database or the "example" ' +
-          'document was not found.'
+        `Cannot delete document because either "${exampleDbName}" database or the "example" ` +
+          `document was not found.`
       );
     }
   }
