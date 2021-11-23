@@ -70,7 +70,7 @@ describe('validate', () => {
         assert.fail('should not have response');
       })
       .catch((err) => {
-        expect(err.message).toEqual(
+        expect(err.message).toBe(
           'Document ID _design starts with the invalid _ character.'
         );
       }));
@@ -85,7 +85,7 @@ describe('validate', () => {
         assert.fail('should not have response');
       })
       .catch((err) => {
-        expect(err.message).toEqual(
+        expect(err.message).toBe(
           'Document ID _design starts with the invalid _ character.'
         );
       }));
@@ -101,7 +101,7 @@ describe('validate', () => {
         assert.fail('should not have response');
       })
       .catch((err) => {
-        expect(err.message).toEqual(
+        expect(err.message).toBe(
           'Attachment name _att1 starts with the invalid _ character.'
         );
       }));
@@ -116,7 +116,7 @@ describe('validate', () => {
         assert.fail('should not have response');
       })
       .catch((err) => {
-        expect(err.message).toEqual(
+        expect(err.message).toBe(
           'Document ID _design starts with the invalid _ character.'
         );
       }));
@@ -128,7 +128,7 @@ describe('validate', () => {
         assert.fail('should not have response');
       })
       .catch((err) => {
-        expect(err.message).toEqual(
+        expect(err.message).toBe(
           'Document ID _design starts with the invalid _ character.'
         );
       }));
