@@ -195,7 +195,7 @@ void runTests() {
 void publishStaging() {
   withCredentials([usernamePassword(credentialsId: 'artifactory', passwordVariable: 'NPM_PASS', usernameVariable: 'NPM_USER')]) {
     // For local artifactory the email is the same as the user
-    withEnv(["NPM_EMAIL=${env.NPM_USER}", "NPM_REGISTRY=${env.STAGE_ROOT}npm/cloudant-sdks-npm-virtual"]) {
+    withEnv(['NPM_EMAIL=${NPM_USER}', 'NPM_REGISTRY=${STAGE_ROOT}npm/cloudant-sdks-npm-virtual']) {
       sh """
         npm install --no-save npm-cli-login
         ./node_modules/.bin/npm-cli-login
