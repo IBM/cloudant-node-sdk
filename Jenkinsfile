@@ -9,6 +9,8 @@ pipeline {
   }
   environment {
     GH_CREDS = credentials('gh-sdks-automation')
+    STAGE_ROOT = 'https://na.artifactory.swg-devops.com/artifactory/api/'
+    buildType = ''
   }
   stages {
     stage('Checkout') {
@@ -56,12 +58,10 @@ pipeline {
       }
     }
     stage('Publish[staging]') {
-      environment {
-        STAGE_ROOT = 'https://na.artifactory.swg-devops.com/artifactory/api/'
-      }
       steps {
         bumpVersion(true)
         publishStaging()
+        publishArtifactoryBuildInfo()
       }
     }
     stage('Run Gauge tests') {
@@ -123,6 +123,12 @@ def commitHash
 def bumpVersion
 def customizeVersion
 def prefixSdkVersion
+def customizePublishingInfo
+def publishArtifactoryBuildInfo
+def artifactUrl = ''
+def moduleId = ''
+def buildName = ''
+def buildType = ''
 
 void defaultInit() {
   // Default to using bump2version
@@ -147,6 +153,40 @@ void defaultInit() {
   // Default no-op implementation to use semverFormatVersion
   customizeVersion = { semverFormatVersion ->
     semverFormatVersion
+  }
+
+  // Default no-op, may be overridden
+  customizePublishingInfo = {}
+
+  publishArtifactoryBuildInfo = {
+    // create custom build name e.g. SDKs::cloudant-node-sdk::generated-branch
+    buildName = "${env.JOB_NAME}".replaceAll('/', '::')
+    buildType = 'GENERIC' // default, may be overridden
+    customizePublishingInfo()
+    withEnv(["LIB_NAME=${libName}",
+      "TYPE=${buildType}",
+      "ARTIFACT_URL=${artifactUrl}",
+      "MODULE_ID=${moduleId}",
+      "BUILD_NAME=${buildName}"]) {
+      withCredentials([usernamePassword(credentialsId: 'artifactory', passwordVariable: 'ARTIFACTORY_APIKEY', usernameVariable: 'ARTIFACTORY_USER')]) {
+        // create base build info
+        rtBuildInfo (
+          buildName: "${env.BUILD_NAME}",
+          buildNumber: "${env.BUILD_NUMBER}",
+          includeEnvPatterns: ['BRANCH_NAME'],
+          maxDays: 90,
+          deleteBuildArtifacts: true,
+          asyncBuildRetention: true
+        )
+        rtPublishBuildInfo (
+          buildName: "${env.BUILD_NAME}",
+          buildNumber: "${env.BUILD_NUMBER}",
+          serverId: 'taas-artifactory-upload'
+        )
+        // put build info on module/artifacts then overwrite and publish artifactory build
+        sh './scripts/publish_buildinfo.sh'
+      }
+    }
   }
 }
 
@@ -182,8 +222,13 @@ void applyCustomizations() {
       // For a dev release append the metadata
       devRelease = getNewVersion(isDevRelease, "${env.NEW_SDK_VERSION}")
       sh "npm version --allow-same-version --no-git-tag-version ${devRelease}"
-      env.NEW_SDK_VERSION = sh returnStdout: true, script: 'jq -r .version package.json'
+      env.NEW_SDK_VERSION = sh returnStdout: true, script: 'jq -j .version package.json'
     }
+  }
+  customizePublishingInfo = {
+    // Set the publishing names and types
+    artifactUrl = "${STAGE_ROOT}storage/cloudant-sdks-npm-virtual/@ibm-cloud/cloudant/-/@ibm-cloud/cloudant-${env.NEW_SDK_VERSION}.tgz"
+    moduleId = "com.ibm.cloud:cloudant:${env.NEW_SDK_VERSION}"
   }
 }
 
