@@ -28,6 +28,13 @@ echo $CURRENT_BUILD_INFO | tee $file
 
 # put build name, number, and url on published artifacts
 URL_WITH_PROPS="$ARTIFACT_URL?properties=build.name=$BUILD_NAME;build.number=$BUILD_NUMBER;build.url=$BUILD_URL"
+
+artifact_status_code=$(curl --head -o /dev/null -s -w "%{http_code}" -H "X-JFrog-Art-Api:$ARTIFACTORY_APIKEY" "$ARTIFACT_URL")
+while [ $artifact_status_code != "200" ]
+  artifact_status_code=$(curl --head -o /dev/null -s -w "%{http_code}" -H "X-JFrog-Art-Api:$ARTIFACTORY_APIKEY" "$ARTIFACT_URL")
+do
+done
+
 curl -i -X PUT -H "X-JFrog-Art-Api:$ARTIFACTORY_APIKEY" "$URL_WITH_PROPS"
 
 # add artifact type and module id to build info file
