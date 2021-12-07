@@ -30,9 +30,9 @@ echo $CURRENT_BUILD_INFO | tee $file
 URL_WITH_PROPS="$ARTIFACT_URL?properties=build.name=$BUILD_NAME;build.number=$BUILD_NUMBER;build.url=$BUILD_URL"
 
 artifact_status_code=$(curl --head -o /dev/null -s -w "%{http_code}" -H "X-JFrog-Art-Api:$ARTIFACTORY_APIKEY" "$ARTIFACT_URL")
-while [ $artifact_status_code != "200" ]
+while [ $artifact_status_code != "200" ]; do
   artifact_status_code=$(curl --head -o /dev/null -s -w "%{http_code}" -H "X-JFrog-Art-Api:$ARTIFACTORY_APIKEY" "$ARTIFACT_URL")
-do
+  printf "$artifact_status_code"
 done
 
 curl -i -X PUT -H "X-JFrog-Art-Api:$ARTIFACTORY_APIKEY" "$URL_WITH_PROPS"
