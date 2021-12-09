@@ -37,14 +37,22 @@ jq --arg type "$TYPE" '.type = $type' $file > "tmp" && mv "tmp" $file
 jq --arg id "$MODULE_ID" '.modules[0].id = $id' $file > "tmp" && mv "tmp" $file
 
 # get md5 and sha1 from each artifact and add to build info file
-for artifact in $ARTIFACTS_URI; do
-  ARTIFACT_INFO_URL="$ARTIFACT_URL$artifact"
+if [[ "$HAS_CHILDREN_RESULT" == "false" ]]; then
   GET_ARTIFACT=$(curl -H "X-JFrog-Art-Api:$ARTIFACTORY_APIKEY" $ARTIFACT_INFO_URL | jq -r .checksums)
   MD5=$(echo $GET_ARTIFACT | jq -r .md5)
   SHA1=$(echo $GET_ARTIFACT | jq -r .sha1)
-  NAME="${artifact#*/}"
+  NAME="cloudant-$NEW_SDK_VERSION.tgz"
   jq --arg name "$NAME" --arg md5 "$MD5" --arg sha1 "$SHA1" '.modules[0].artifacts += [{"name": $name, "md5": $md5, "sha1": $sha1}]' $file > "tmp" && mv "tmp" $file
-done
+else
+  for artifact in $ARTIFACTS_URI; do
+    ARTIFACT_INFO_URL="$ARTIFACT_URL$artifact"
+    GET_ARTIFACT=$(curl -H "X-JFrog-Art-Api:$ARTIFACTORY_APIKEY" $ARTIFACT_INFO_URL | jq -r .checksums)
+    MD5=$(echo $GET_ARTIFACT | jq -r .md5)
+    SHA1=$(echo $GET_ARTIFACT | jq -r .sha1)
+    NAME="${artifact#*/}"
+    jq --arg name "$NAME" --arg md5 "$MD5" --arg sha1 "$SHA1" '.modules[0].artifacts += [{"name": $name, "md5": $md5, "sha1": $sha1}]' $file > "tmp" && mv "tmp" $file
+  done
+fi
 
 if jq empty $file 2>/dev/null; then
   echo "JSON in $file is valid"
