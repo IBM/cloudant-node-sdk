@@ -227,7 +227,7 @@ void applyCustomizations() {
   }
   customizePublishingInfo = {
     // Set the publishing names and types
-    artifactUrl = "${STAGE_ROOT}storage/cloudant-sdks-npm-virtual/@ibm-cloud/cloudant/-/@ibm-cloud/cloudant-${env.NEW_SDK_VERSION}.tgz"
+    artifactUrl = "${STAGE_ROOT}storage/cloudant-sdks-npm-local/@ibm-cloud/cloudant/-/@ibm-cloud/cloudant-${env.NEW_SDK_VERSION}.tgz"
     moduleId = "com.ibm.cloud:cloudant:${env.NEW_SDK_VERSION}"
   }
 }
