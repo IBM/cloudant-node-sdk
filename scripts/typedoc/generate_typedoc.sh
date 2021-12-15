@@ -5,5 +5,5 @@
 #    --out ./service-name/v1.ts --target "ES5"
 
 # List the commands for each service here:
-npx typedoc --theme default --excludeExternals --tsconfig tsconfig.json \
-    --out apidocs auth cloudant --includeVersion
+npx typedoc --theme default --entryPointStrategy expand --excludeExternals \
+    --tsconfig tsconfig.json --out apidocs auth cloudant --includeVersion
