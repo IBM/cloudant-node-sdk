@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2021. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,10 @@ const { CouchdbSessionAuthenticator } = require('../../index.ts');
 
 describe('Test getAuthenticatorFromEnvCloudantExtension', () => {
   it('Create couchdb_session authenticator', () => {
-    process.env.TEST_AUTH_TYPE = 'couchdb_session';
-    process.env.TEST_USERNAME = 'username';
-    process.env.TEST_PASSWORD = 'password';
-    const auth = getAuthenticatorFromEnvCloudantExtension('test');
+    process.env.TEST1_AUTH_TYPE = 'couchdb_session';
+    process.env.TEST1_USERNAME = 'username';
+    process.env.TEST1_PASSWORD = 'password';
+    const auth = getAuthenticatorFromEnvCloudantExtension('test1');
 
     assert.ok(auth instanceof CouchdbSessionAuthenticator);
     assert.strictEqual(auth.tokenOptions.username, 'username');
@@ -32,19 +32,19 @@ describe('Test getAuthenticatorFromEnvCloudantExtension', () => {
   });
 
   it('Create couchdb_session authenticator with non-standard casing', () => {
-    process.env.TEST_AUTH_TYPE = 'coucHdb_seSsion';
-    process.env.TEST_USERNAME = 'username';
-    process.env.TEST_PASSWORD = 'password';
-    const auth = getAuthenticatorFromEnvCloudantExtension('test');
+    process.env.TEST2_AUTH_TYPE = 'coucHdb_seSsion';
+    process.env.TEST2_USERNAME = 'username';
+    process.env.TEST2_PASSWORD = 'password';
+    const auth = getAuthenticatorFromEnvCloudantExtension('test2');
 
     assert.ok(auth instanceof CouchdbSessionAuthenticator);
   });
 
   it('Use invalid authenticator type', () => {
-    process.env.TEST_AUTH_TYPE = 'basic';
-    process.env.TEST_USERNAME = 'username';
-    process.env.TEST_PASSWORD = 'password';
-    const auth = getAuthenticatorFromEnvCloudantExtension('test');
+    process.env.TEST3_AUTH_TYPE = 'basic';
+    process.env.TEST3_USERNAME = 'username';
+    process.env.TEST3_PASSWORD = 'password';
+    const auth = getAuthenticatorFromEnvCloudantExtension('test3');
     assert.ok(auth instanceof BasicAuthenticator);
   });
 });
