@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2021. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,9 +35,13 @@ export default function getAuthenticatorFromEnvCloudantExtension(
 ): Authenticator {
   let auth;
   const credentials = readExternalSources(serviceName);
-  if (
-    (credentials.authType || '').toLowerCase() === COUCHDB_SESSION_AUTH_TYPE
-  ) {
+  let { authType } = credentials;
+  if (!authType) {
+    // this is the alternative "AUTHTYPE" config property
+    authType = credentials.authtype || '';
+  }
+
+  if (authType.toLowerCase() === COUCHDB_SESSION_AUTH_TYPE) {
     auth = new CouchdbSessionAuthenticator(credentials);
   } else {
     auth = getAuthenticatorFromEnvironment(serviceName);

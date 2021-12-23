@@ -47,4 +47,15 @@ describe('Test getAuthenticatorFromEnvCloudantExtension', () => {
     const auth = getAuthenticatorFromEnvCloudantExtension('test3');
     assert.ok(auth instanceof BasicAuthenticator);
   });
+
+  it('Create couchdb_session authenticator with env auth type alias', () => {
+    process.env.TEST4_AUTHTYPE = 'couchdb_session';
+    process.env.TEST4_USERNAME = 'username';
+    process.env.TEST4_PASSWORD = 'password';
+    const auth = getAuthenticatorFromEnvCloudantExtension('test4');
+
+    assert.ok(auth instanceof CouchdbSessionAuthenticator);
+    assert.strictEqual(auth.tokenOptions.username, 'username');
+    assert.strictEqual(auth.tokenOptions.password, 'password');
+  });
 });
