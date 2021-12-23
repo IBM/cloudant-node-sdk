@@ -73,12 +73,11 @@ describe('CouchdbSessionAutheticator tests', () => {
     const getCookie = promisify(options.jar.getCookieString.bind(options.jar));
     setCookie.bind(options.jar);
     getCookie.bind(options.jar);
-
     // Setup of test header responses
     const makeCookieHeader = (token, elapasedTime) =>
       `AuthSession=${token}; Expires=${new Date(
         Date.now() + 1000 * (elapasedTime + 3600)
-      )} ${useMaxAge ? '; Max-Age=3600' : ''}`;
+      ).toUTCString()}${useMaxAge ? '; Max-Age=3600' : ''}`;
     const headers = [
       makeCookieHeader('01234', 0),
       makeCookieHeader('56789', firstElapsedSeconds),
