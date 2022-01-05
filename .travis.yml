@@ -10,6 +10,8 @@ before_install:
   - bash scripts/setup_couch.sh
   - bash scripts/setup_wiremock.sh
 
+install: npm ci --no-audit
+
 sudo: false
 
 node_js:
