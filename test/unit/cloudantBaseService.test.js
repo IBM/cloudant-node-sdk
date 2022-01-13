@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-const { IamAuthenticator } = require('ibm-cloud-sdk-core');
+const { IamAuthenticator, NoAuthAuthenticator } = require('ibm-cloud-sdk-core');
 const assert = require('assert');
+const http = require('http');
+const https = require('https');
 const sinon = require('sinon');
 const CloudantBaseService = require('../../lib/cloudantBaseService.ts').default;
 const { CouchdbSessionAuthenticator } = require('../../index.ts');
@@ -165,5 +167,63 @@ describe('Test CloudantBaseService', () => {
     // no new jar and url were set
     assert.ok(service.baseOptions.jar === undefined);
     assert.strictEqual(service.getAuthenticator().tokenManager.url, iamUrl);
+  });
+
+  describe('Check keepAlive', () => {
+    const auth = new NoAuthAuthenticator();
+
+    it('Set default agents when no custom agent is set', () => {
+      const service = new CloudantBaseService({
+        authenticator: auth,
+        disableSslVerification: true,
+      });
+      assert.strictEqual(service.baseOptions.httpAgent.keepAlive, true);
+      assert.strictEqual(service.baseOptions.httpsAgent.keepAlive, true);
+      assert.strictEqual(
+        service.baseOptions.httpsAgent.options.rejectUnauthorized,
+        false
+      );
+    });
+    it('Custom https agent', () => {
+      const service = new CloudantBaseService({
+        authenticator: auth,
+        httpsAgent: new https.Agent({ keepAlive: false }),
+      });
+      assert.strictEqual(service.baseOptions.httpAgent.keepAlive, true);
+      assert.strictEqual(service.baseOptions.httpsAgent.keepAlive, false);
+    });
+
+    it('Custom http agent', () => {
+      const service = new CloudantBaseService({
+        authenticator: auth,
+        httpAgent: new http.Agent({ keepAlive: false }),
+      });
+      assert.strictEqual(service.baseOptions.httpAgent.keepAlive, false);
+      assert.strictEqual(service.baseOptions.httpsAgent.keepAlive, true);
+    });
+
+    it('Custom http and https agent', () => {
+      const service = new CloudantBaseService({
+        authenticator: auth,
+        httpAgent: new https.Agent({ keepAlive: false }),
+        httpsAgent: new https.Agent({ keepAlive: false }),
+      });
+      assert.strictEqual(service.baseOptions.httpAgent.keepAlive, false);
+      assert.strictEqual(service.baseOptions.httpsAgent.keepAlive, false);
+    });
+
+    it('Custom http agent with disableSslVerification', () => {
+      const service = new CloudantBaseService({
+        authenticator: auth,
+        httpAgent: new https.Agent({ keepAlive: false }),
+        disableSslVerification: true,
+      });
+      assert.strictEqual(service.baseOptions.httpAgent.keepAlive, false);
+      assert.strictEqual(
+        service.baseOptions.httpsAgent.options.rejectUnauthorized,
+        false
+      );
+      assert.strictEqual(service.baseOptions.httpsAgent.keepAlive, true);
+    });
   });
 });

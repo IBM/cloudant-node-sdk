@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ import { Authenticator, BaseService, UserOptions } from 'ibm-cloud-sdk-core';
 import { CookieJar } from 'tough-cookie';
 import { CouchdbSessionAuthenticator } from '../auth';
 import { getSdkHeaders } from './common';
+import { Agent as HttpsAgent } from 'https';
+import { Agent as HttpAgent } from 'http';
 
 /**
  * Set default timeout to 2.5 minutes (= 150000ms)
@@ -102,6 +104,9 @@ export default abstract class CloudantBaseService extends BaseService {
     if (!('timeout' in userOptions)) {
       userOptions.timeout = READ_TIMEOUT;
     }
+
+    CloudantBaseService.setDefaultAgentsIfUnset(userOptions);
+
     super(userOptions);
     this.configureSessionAuthenticator();
   }
@@ -208,5 +213,17 @@ export default abstract class CloudantBaseService extends BaseService {
       }
     }
     return super.createRequest(parameters);
+  }
+
+  private static setDefaultAgentsIfUnset(options: UserOptions) {
+    const cloudantDefaultAgentOptions = {
+      keepAlive: true,
+    };
+    if (!options.httpAgent) {
+      options.httpAgent = new HttpAgent(cloudantDefaultAgentOptions);
+    }
+    if (!options.httpsAgent) {
+      options.httpsAgent = new HttpsAgent(cloudantDefaultAgentOptions);
+    }
   }
 }
