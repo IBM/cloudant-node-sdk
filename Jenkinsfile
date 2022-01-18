@@ -214,7 +214,7 @@ void applyCustomizations() {
   libName = 'node'
   bumpVersion = { isDevRelease ->
     // Get the dependencies
-    sh 'npm ci'
+    sh 'npm ci --no-audit'
     // Update to the next patch version
     sh "npm version ${isDevRelease ? '--no-git-tag-version' : '-m "Update version -> %s"'} patch"
     // Set env variable version from package.json
@@ -234,7 +234,7 @@ void applyCustomizations() {
 }
 
 void runTests() {
-  sh 'npm ci'
+  sh 'npm ci --no-audit'
   sh 'npm test'
 }
 
