@@ -1193,7 +1193,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation putDatabase
         const db = 'testString';
         const partitioned = false;
-        const q = 1;
+        const q = 26;
         const putDatabaseParams = {
           db: db,
           partitioned: partitioned,
@@ -7807,7 +7807,7 @@ describe('CloudantV1', () => {
       const replicationCreateTargetParametersModel = {
         n: 1,
         partitioned: false,
-        q: 1,
+        q: 26,
       };
 
       // ReplicationDatabaseAuthBasic

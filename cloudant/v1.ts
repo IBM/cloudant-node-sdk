@@ -1009,7 +1009,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.partitioned] - Query parameter to specify whether to enable database partitions when
    * creating a database.
    * @param {number} [params.q] - The number of shards in the database. Each shard is a partition of the hash value
-   * range. Default is 8, unless overridden in the `cluster config`.
+   * range. Its value is set by the service. For more information about modifying database configuration, contact IBM
+   * Cloudant support.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
@@ -3995,8 +3996,14 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
-   * @param {JsonObject[]} [params.sort] - JSON array of sort syntax elements to determine the sort order of the
-   * results.
+   * @param {JsonObject[]} [params.sort] - The sort field contains a list of pairs, each mapping a field name to a sort
+   * direction (asc or desc). The first field name and direction pair is the topmost level of sort. The second pair, if
+   * provided, is the next level of sort. The field can be any field, using dotted notation if desired for sub-document
+   * fields.
+   *
+   * For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+   *
+   * When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
@@ -4107,8 +4114,14 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
-   * @param {JsonObject[]} [params.sort] - JSON array of sort syntax elements to determine the sort order of the
-   * results.
+   * @param {JsonObject[]} [params.sort] - The sort field contains a list of pairs, each mapping a field name to a sort
+   * direction (asc or desc). The first field name and direction pair is the topmost level of sort. The second pair, if
+   * provided, is the next level of sort. The field can be any field, using dotted notation if desired for sub-document
+   * fields.
+   *
+   * For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+   *
+   * When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
@@ -4222,8 +4235,14 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
-   * @param {JsonObject[]} [params.sort] - JSON array of sort syntax elements to determine the sort order of the
-   * results.
+   * @param {JsonObject[]} [params.sort] - The sort field contains a list of pairs, each mapping a field name to a sort
+   * direction (asc or desc). The first field name and direction pair is the topmost level of sort. The second pair, if
+   * provided, is the next level of sort. The field can be any field, using dotted notation if desired for sub-document
+   * fields.
+   *
+   * For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+   *
+   * When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
@@ -4337,8 +4356,14 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
-   * @param {JsonObject[]} [params.sort] - JSON array of sort syntax elements to determine the sort order of the
-   * results.
+   * @param {JsonObject[]} [params.sort] - The sort field contains a list of pairs, each mapping a field name to a sort
+   * direction (asc or desc). The first field name and direction pair is the topmost level of sort. The second pair, if
+   * provided, is the next level of sort. The field can be any field, using dotted notation if desired for sub-document
+   * fields.
+   *
+   * For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+   *
+   * When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
@@ -4452,8 +4477,14 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
-   * @param {JsonObject[]} [params.sort] - JSON array of sort syntax elements to determine the sort order of the
-   * results.
+   * @param {JsonObject[]} [params.sort] - The sort field contains a list of pairs, each mapping a field name to a sort
+   * direction (asc or desc). The first field name and direction pair is the topmost level of sort. The second pair, if
+   * provided, is the next level of sort. The field can be any field, using dotted notation if desired for sub-document
+   * fields.
+   *
+   * For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+   *
+   * When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
@@ -6145,6 +6176,12 @@ class CloudantV1 extends CloudantBaseService {
    * and CouchDB related permissions. Be careful: by removing a Cloudant API key, a member or an admin from the list of
    * users that have access permissions, you remove it from the list of users that have access to the database.
    *
+   * ### Note about nobody role
+   *
+   * The `nobody` username applies to all unauthenticated connection attempts. For example, if an application tries to
+   * read data from a database, but did not identify itself, the task can continue only if the `nobody` user has the
+   * role `_reader`.
+   *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {SecurityObject} [params.admins] - Schema for names and roles to map to a database permission.
@@ -6258,6 +6295,12 @@ class CloudantV1 extends CloudantBaseService {
    *
    * Modify only Cloudant related permissions to database. Be careful: by removing an API key from the list, you remove
    * the API key from the list of users that have access to the database.
+   *
+   * ### Note about nobody role
+   *
+   * The `nobody` username applies to all unauthenticated connection attempts. For example, if an application tries to
+   * read data from a database, but did not identify itself, the task can continue only if the `nobody` user has the
+   * role `_reader`.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -7821,8 +7864,8 @@ namespace CloudantV1 {
     db: string;
     /** Query parameter to specify whether to enable database partitions when creating a database. */
     partitioned?: boolean;
-    /** The number of shards in the database. Each shard is a partition of the hash value range. Default is 8,
-     *  unless overridden in the `cluster config`.
+    /** The number of shards in the database. Each shard is a partition of the hash value range. Its value is set by
+     *  the service. For more information about modifying database configuration, contact IBM Cloudant support.
      */
     q?: number;
     headers?: OutgoingHttpHeaders;
@@ -9097,7 +9140,14 @@ namespace CloudantV1 {
     limit?: number;
     /** Skip the first 'n' results, where 'n' is the value that is specified. */
     skip?: number;
-    /** JSON array of sort syntax elements to determine the sort order of the results. */
+    /** The sort field contains a list of pairs, each mapping a field name to a sort direction (asc or desc). The
+     *  first field name and direction pair is the topmost level of sort. The second pair, if provided, is the next
+     *  level of sort. The field can be any field, using dotted notation if desired for sub-document fields.
+     *
+     *  For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+     *
+     *  When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+     */
     sort?: JsonObject[];
     /** Whether or not the view results should be returned from a "stable" set of shards. */
     stable?: boolean;
@@ -9175,7 +9225,14 @@ namespace CloudantV1 {
     limit?: number;
     /** Skip the first 'n' results, where 'n' is the value that is specified. */
     skip?: number;
-    /** JSON array of sort syntax elements to determine the sort order of the results. */
+    /** The sort field contains a list of pairs, each mapping a field name to a sort direction (asc or desc). The
+     *  first field name and direction pair is the topmost level of sort. The second pair, if provided, is the next
+     *  level of sort. The field can be any field, using dotted notation if desired for sub-document fields.
+     *
+     *  For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+     *
+     *  When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+     */
     sort?: JsonObject[];
     /** Whether or not the view results should be returned from a "stable" set of shards. */
     stable?: boolean;
@@ -9251,7 +9308,14 @@ namespace CloudantV1 {
     limit?: number;
     /** Skip the first 'n' results, where 'n' is the value that is specified. */
     skip?: number;
-    /** JSON array of sort syntax elements to determine the sort order of the results. */
+    /** The sort field contains a list of pairs, each mapping a field name to a sort direction (asc or desc). The
+     *  first field name and direction pair is the topmost level of sort. The second pair, if provided, is the next
+     *  level of sort. The field can be any field, using dotted notation if desired for sub-document fields.
+     *
+     *  For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+     *
+     *  When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+     */
     sort?: JsonObject[];
     /** Whether or not the view results should be returned from a "stable" set of shards. */
     stable?: boolean;
@@ -9333,7 +9397,14 @@ namespace CloudantV1 {
     limit?: number;
     /** Skip the first 'n' results, where 'n' is the value that is specified. */
     skip?: number;
-    /** JSON array of sort syntax elements to determine the sort order of the results. */
+    /** The sort field contains a list of pairs, each mapping a field name to a sort direction (asc or desc). The
+     *  first field name and direction pair is the topmost level of sort. The second pair, if provided, is the next
+     *  level of sort. The field can be any field, using dotted notation if desired for sub-document fields.
+     *
+     *  For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+     *
+     *  When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+     */
     sort?: JsonObject[];
     /** Whether or not the view results should be returned from a "stable" set of shards. */
     stable?: boolean;
@@ -9415,7 +9486,14 @@ namespace CloudantV1 {
     limit?: number;
     /** Skip the first 'n' results, where 'n' is the value that is specified. */
     skip?: number;
-    /** JSON array of sort syntax elements to determine the sort order of the results. */
+    /** The sort field contains a list of pairs, each mapping a field name to a sort direction (asc or desc). The
+     *  first field name and direction pair is the topmost level of sort. The second pair, if provided, is the next
+     *  level of sort. The field can be any field, using dotted notation if desired for sub-document fields.
+     *
+     *  For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+     *
+     *  When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+     */
     sort?: JsonObject[];
     /** Whether or not the view results should be returned from a "stable" set of shards. */
     stable?: boolean;
@@ -11244,7 +11322,13 @@ namespace CloudantV1 {
      *  fields within a document for use with the `$text` operator.
      */
     default_field?: IndexTextOperatorDefaultField;
-    /** List of fields to index. */
+    /** List of field objects to index.  Nested fields are also allowed, e.g. `person.name`.
+     *
+     *  For "json" type indexes each object is a mapping of field name to sort direction (asc or desc).
+     *
+     *  For "text" type indexes each object has a `name` property of the field name and a `type` property of the field
+     *  type (string, number, or boolean).
+     */
     fields?: IndexField[];
     /** Whether to scan every document for arrays and store the length for each array found. Set the
      *  index_array_lengths field to false if:
