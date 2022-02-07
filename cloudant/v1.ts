@@ -20,7 +20,7 @@ import {
   Authenticator,
   BaseService,
   getAuthenticatorFromEnvironment,
-  getMissingParams,
+  validateParams,
   UserOptions,
 } from 'ibm-cloud-sdk-core';
 import { getSdkHeaders } from '../lib/common';
@@ -111,6 +111,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetServerInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.ServerInformation>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const sdkHeaders = getSdkHeaders(
       CloudantV1.DEFAULT_SERVICE_NAME,
@@ -153,6 +159,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetMembershipInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.MembershipInformation>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const sdkHeaders = getSdkHeaders(
       CloudantV1.DEFAULT_SERVICE_NAME,
@@ -195,6 +207,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetUuidsParams
   ): Promise<CloudantV1.Response<CloudantV1.UuidsResult>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['count', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const query = {
       'count': _params.count,
@@ -241,6 +259,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetCapacityThroughputInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const sdkHeaders = getSdkHeaders(
       CloudantV1.DEFAULT_SERVICE_NAME,
@@ -284,11 +308,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PutCapacityThroughputConfigurationParams
   ): Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>> {
     const _params = { ...params };
-    const requiredParams = ['blocks'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['blocks'];
+    const _validParams = ['blocks', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -352,6 +376,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetDbUpdatesParams
   ): Promise<CloudantV1.Response<CloudantV1.DbUpdates>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['feed', 'heartbeat', 'timeout', 'since', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const query = {
       'feed': _params.feed,
@@ -475,11 +505,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostChangesParams
   ): Promise<CloudantV1.Response<CloudantV1.ChangesResult>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'docIds', 'fields', 'selector', 'lastEventId', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'feed', 'filter', 'heartbeat', 'includeDocs', 'limit', 'seqInterval', 'since', 'style', 'timeout', 'view', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -628,11 +658,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostChangesAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'docIds', 'fields', 'selector', 'lastEventId', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'feed', 'filter', 'heartbeat', 'includeDocs', 'limit', 'seqInterval', 'since', 'style', 'timeout', 'view', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -712,11 +742,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.HeadDatabaseParams
   ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -770,6 +800,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetAllDbsParams
   ): Promise<CloudantV1.Response<string[]>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['descending', 'endkey', 'limit', 'skip', 'startkey', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const query = {
       'descending': _params.descending,
@@ -822,11 +858,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostDbsInfoParams
   ): Promise<CloudantV1.Response<CloudantV1.DbsInfoResult[]>> {
     const _params = { ...params };
-    const requiredParams = ['keys'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['keys'];
+    const _validParams = ['keys', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -877,11 +913,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.DeleteDatabaseParams
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -927,11 +963,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetDatabaseInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.DatabaseInformation>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -981,11 +1017,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PutDatabaseParams
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'partitioned', 'q', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -1051,11 +1087,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.HeadDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId'];
+    const _validParams = ['db', 'docId', 'ifNoneMatch', 'latest', 'rev', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -1119,11 +1155,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'document'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'document'];
+    const _validParams = ['db', 'document', 'contentType', 'batch', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = _params.document;
@@ -1201,11 +1237,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostAllDocsParams
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'key', 'keys', 'startkey', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -1293,11 +1329,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostAllDocsAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'key', 'keys', 'startkey', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -1369,11 +1405,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostAllDocsQueriesParams
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'queries'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'queries'];
+    const _validParams = ['db', 'queries', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -1432,11 +1468,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostAllDocsQueriesAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'queries'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'queries'];
+    const _validParams = ['db', 'queries', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -1494,11 +1530,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostBulkDocsParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult[]>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'bulkDocs'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'bulkDocs'];
+    const _validParams = ['db', 'bulkDocs', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = _params.bulkDocs;
@@ -1558,11 +1594,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostBulkGetParams
   ): Promise<CloudantV1.Response<CloudantV1.BulkGetResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docs'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docs'];
+    const _validParams = ['db', 'docs', 'attachments', 'attEncodingInfo', 'latest', 'revs', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -1633,11 +1669,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostBulkGetAsMixedParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docs'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docs'];
+    const _validParams = ['db', 'docs', 'attachments', 'attEncodingInfo', 'latest', 'revs', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -1709,11 +1745,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostBulkGetAsRelatedParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docs'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docs'];
+    const _validParams = ['db', 'docs', 'attachments', 'attEncodingInfo', 'latest', 'revs', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -1785,11 +1821,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostBulkGetAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docs'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docs'];
+    const _validParams = ['db', 'docs', 'attachments', 'attEncodingInfo', 'latest', 'revs', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -1860,11 +1896,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.DeleteDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId'];
+    const _validParams = ['db', 'docId', 'ifMatch', 'batch', 'rev', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -1943,11 +1979,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.Document>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId'];
+    const _validParams = ['db', 'docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -2034,11 +2070,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetDocumentAsMixedParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId'];
+    const _validParams = ['db', 'docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -2126,11 +2162,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetDocumentAsRelatedParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId'];
+    const _validParams = ['db', 'docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -2218,11 +2254,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetDocumentAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId'];
+    const _validParams = ['db', 'docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -2299,11 +2335,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PutDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId', 'document'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId', 'document'];
+    const _validParams = ['db', 'docId', 'document', 'contentType', 'ifMatch', 'batch', 'newEdits', 'rev', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = _params.document;
@@ -2374,11 +2410,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.HeadDesignDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc'];
+    const _validParams = ['db', 'ddoc', 'ifNoneMatch', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -2436,11 +2472,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.DeleteDesignDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc'];
+    const _validParams = ['db', 'ddoc', 'ifMatch', 'batch', 'rev', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -2520,11 +2556,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetDesignDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.DesignDocument>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc'];
+    const _validParams = ['db', 'ddoc', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -2599,11 +2635,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PutDesignDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc', 'designDocument'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc', 'designDocument'];
+    const _validParams = ['db', 'ddoc', 'designDocument', 'ifMatch', 'batch', 'newEdits', 'rev', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = _params.designDocument;
@@ -2666,11 +2702,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetDesignDocumentInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.DesignDocumentInformation>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc'];
+    const _validParams = ['db', 'ddoc', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -2742,11 +2778,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostDesignDocsParams
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'key', 'keys', 'startkey', 'accept', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -2817,11 +2853,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostDesignDocsQueriesParams
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'queries'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'queries'];
+    const _validParams = ['db', 'queries', 'accept', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -2915,11 +2951,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostViewParams
   ): Promise<CloudantV1.Response<CloudantV1.ViewResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc', 'view'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc', 'view'];
+    const _validParams = ['db', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'endkeyDocid', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startkey', 'startkeyDocid', 'update', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -3031,11 +3067,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostViewAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc', 'view'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc', 'view'];
+    const _validParams = ['db', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'endkeyDocid', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startkey', 'startkeyDocid', 'update', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -3117,11 +3153,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostViewQueriesParams
   ): Promise<CloudantV1.Response<CloudantV1.ViewQueriesResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc', 'view', 'queries'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc', 'view', 'queries'];
+    const _validParams = ['db', 'ddoc', 'view', 'queries', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -3183,11 +3219,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostViewQueriesAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc', 'view', 'queries'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc', 'view', 'queries'];
+    const _validParams = ['db', 'ddoc', 'view', 'queries', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -3248,11 +3284,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetPartitionInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.PartitionInformation>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'partitionKey'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'partitionKey'];
+    const _validParams = ['db', 'partitionKey', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -3324,11 +3360,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostPartitionAllDocsParams
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'partitionKey'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'partitionKey'];
+    const _validParams = ['db', 'partitionKey', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'key', 'keys', 'startkey', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -3418,11 +3454,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostPartitionAllDocsAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'partitionKey'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'partitionKey'];
+    const _validParams = ['db', 'partitionKey', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'key', 'keys', 'startkey', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -3519,11 +3555,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostPartitionSearchParams
   ): Promise<CloudantV1.Response<CloudantV1.SearchResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'partitionKey', 'ddoc', 'index', 'query'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'partitionKey', 'ddoc', 'index', 'query'];
+    const _validParams = ['db', 'partitionKey', 'ddoc', 'index', 'query', 'bookmark', 'highlightFields', 'highlightNumber', 'highlightPostTag', 'highlightPreTag', 'highlightSize', 'includeDocs', 'includeFields', 'limit', 'sort', 'stale', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -3620,11 +3656,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostPartitionSearchAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'partitionKey', 'ddoc', 'index', 'query'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'partitionKey', 'ddoc', 'index', 'query'];
+    const _validParams = ['db', 'partitionKey', 'ddoc', 'index', 'query', 'bookmark', 'highlightFields', 'highlightNumber', 'highlightPostTag', 'highlightPreTag', 'highlightSize', 'includeDocs', 'includeFields', 'limit', 'sort', 'stale', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -3731,11 +3767,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostPartitionViewParams
   ): Promise<CloudantV1.Response<CloudantV1.ViewResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
+    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'endkeyDocid', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startkey', 'startkeyDocid', 'update', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -3849,11 +3885,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostPartitionViewAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
+    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'endkeyDocid', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startkey', 'startkeyDocid', 'update', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -3973,11 +4009,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostPartitionFindParams
   ): Promise<CloudantV1.Response<CloudantV1.FindResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'partitionKey', 'selector'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'partitionKey', 'selector'];
+    const _validParams = ['db', 'partitionKey', 'selector', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -4085,11 +4121,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostPartitionFindAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'partitionKey', 'selector'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'partitionKey', 'selector'];
+    const _validParams = ['db', 'partitionKey', 'selector', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -4204,11 +4240,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostExplainParams
   ): Promise<CloudantV1.Response<CloudantV1.ExplainResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'selector'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'selector'];
+    const _validParams = ['db', 'selector', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -4319,11 +4355,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostFindParams
   ): Promise<CloudantV1.Response<CloudantV1.FindResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'selector'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'selector'];
+    const _validParams = ['db', 'selector', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -4434,11 +4470,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostFindAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'selector'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'selector'];
+    const _validParams = ['db', 'selector', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -4506,11 +4542,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetIndexesInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.IndexesInformation>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -4571,11 +4607,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostIndexParams
   ): Promise<CloudantV1.Response<CloudantV1.IndexResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'index'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'index'];
+    const _validParams = ['db', 'index', 'ddoc', 'def', 'name', 'partitioned', 'type', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -4636,11 +4672,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.DeleteIndexParams
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc', 'type', 'index'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc', 'type', 'index'];
+    const _validParams = ['db', 'ddoc', 'type', 'index', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -4696,11 +4732,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostSearchAnalyzeParams
   ): Promise<CloudantV1.Response<CloudantV1.SearchAnalyzeResult>> {
     const _params = { ...params };
-    const requiredParams = ['analyzer', 'text'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['analyzer', 'text'];
+    const _validParams = ['analyzer', 'text', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -4800,11 +4836,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostSearchParams
   ): Promise<CloudantV1.Response<CloudantV1.SearchResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc', 'index', 'query'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc', 'index', 'query'];
+    const _validParams = ['db', 'ddoc', 'index', 'query', 'bookmark', 'highlightFields', 'highlightNumber', 'highlightPostTag', 'highlightPreTag', 'highlightSize', 'includeDocs', 'includeFields', 'limit', 'sort', 'stale', 'counts', 'drilldown', 'groupField', 'groupLimit', 'groupSort', 'ranges', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -4927,11 +4963,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostSearchAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc', 'index', 'query'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc', 'index', 'query'];
+    const _validParams = ['db', 'ddoc', 'index', 'query', 'bookmark', 'highlightFields', 'highlightNumber', 'highlightPostTag', 'highlightPreTag', 'highlightSize', 'includeDocs', 'includeFields', 'limit', 'sort', 'stale', 'counts', 'drilldown', 'groupField', 'groupLimit', 'groupSort', 'ranges', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -5008,11 +5044,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetSearchInfoParams
   ): Promise<CloudantV1.Response<CloudantV1.SearchInfoResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc', 'index'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc', 'index'];
+    const _validParams = ['db', 'ddoc', 'index', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -5103,11 +5139,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetGeoParams
   ): Promise<CloudantV1.Response<CloudantV1.GeoResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc', 'index'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc', 'index'];
+    const _validParams = ['db', 'ddoc', 'index', 'bbox', 'bookmark', 'format', 'g', 'includeDocs', 'lat', 'limit', 'lon', 'nearest', 'radius', 'rangex', 'rangey', 'relation', 'skip', 'stale', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -5214,11 +5250,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetGeoAsStreamParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc', 'index'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc', 'index'];
+    const _validParams = ['db', 'ddoc', 'index', 'bbox', 'bookmark', 'format', 'g', 'includeDocs', 'lat', 'limit', 'lon', 'nearest', 'radius', 'rangex', 'rangey', 'relation', 'skip', 'stale', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -5288,11 +5324,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostGeoCleanupParams
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -5341,11 +5377,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetGeoIndexInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.GeoIndexInformation>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'ddoc', 'index'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'ddoc', 'index'];
+    const _validParams = ['db', 'ddoc', 'index', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -5402,11 +5438,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.HeadReplicationDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
     const _params = { ...params };
-    const requiredParams = ['docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['docId'];
+    const _validParams = ['docId', 'ifNoneMatch', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -5456,11 +5492,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.HeadSchedulerDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
     const _params = { ...params };
-    const requiredParams = ['docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['docId'];
+    const _validParams = ['docId', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -5508,11 +5544,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.HeadSchedulerJobParams
   ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
     const _params = { ...params };
-    const requiredParams = ['jobId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['jobId'];
+    const _validParams = ['jobId', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -5564,11 +5600,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.DeleteReplicationDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
-    const requiredParams = ['docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['docId'];
+    const _validParams = ['docId', 'ifMatch', 'batch', 'rev', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -5645,11 +5681,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetReplicationDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.ReplicationDocument>> {
     const _params = { ...params };
-    const requiredParams = ['docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['docId'];
+    const _validParams = ['docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -5722,11 +5758,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PutReplicationDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
-    const requiredParams = ['docId', 'replicationDocument'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['docId', 'replicationDocument'];
+    const _validParams = ['docId', 'replicationDocument', 'ifMatch', 'batch', 'newEdits', 'rev', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = _params.replicationDocument;
@@ -5792,6 +5828,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetSchedulerDocsParams
   ): Promise<CloudantV1.Response<CloudantV1.SchedulerDocsResult>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['limit', 'skip', 'states', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const query = {
       'limit': _params.limit,
@@ -5841,11 +5883,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetSchedulerDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.SchedulerDocument>> {
     const _params = { ...params };
-    const requiredParams = ['docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['docId'];
+    const _validParams = ['docId', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -5899,6 +5941,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetSchedulerJobsParams
   ): Promise<CloudantV1.Response<CloudantV1.SchedulerJobsResult>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['limit', 'skip', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const query = {
       'limit': _params.limit,
@@ -5946,11 +5994,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetSchedulerJobParams
   ): Promise<CloudantV1.Response<CloudantV1.SchedulerJob>> {
     const _params = { ...params };
-    const requiredParams = ['jobId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['jobId'];
+    const _validParams = ['jobId', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -6000,6 +6048,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetSessionInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.SessionInformation>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const sdkHeaders = getSdkHeaders(
       CloudantV1.DEFAULT_SERVICE_NAME,
@@ -6046,11 +6100,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetSecurityParams
   ): Promise<CloudantV1.Response<CloudantV1.Security>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -6104,11 +6158,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PutSecurityParams
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'admins', 'members', 'cloudant', 'couchdbAuthOnly', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -6166,6 +6220,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.PostApiKeysParams
   ): Promise<CloudantV1.Response<CloudantV1.ApiKeysResult>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const sdkHeaders = getSdkHeaders(
       CloudantV1.DEFAULT_SERVICE_NAME,
@@ -6212,11 +6272,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PutCloudantSecurityConfigurationParams
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'cloudant'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'cloudant'];
+    const _validParams = ['db', 'cloudant', 'admins', 'members', 'couchdbAuthOnly', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -6276,6 +6336,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetCorsInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.CorsInformation>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const sdkHeaders = getSdkHeaders(
       CloudantV1.DEFAULT_SERVICE_NAME,
@@ -6323,11 +6389,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PutCorsConfigurationParams
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
-    const requiredParams = ['origins'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['origins'];
+    const _validParams = ['origins', 'allowCredentials', 'enableCors', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -6390,11 +6456,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.HeadAttachmentParams
   ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId', 'attachmentName'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId', 'attachmentName'];
+    const _validParams = ['db', 'docId', 'attachmentName', 'ifMatch', 'ifNoneMatch', 'rev', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -6458,11 +6524,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.DeleteAttachmentParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId', 'attachmentName'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId', 'attachmentName'];
+    const _validParams = ['db', 'docId', 'attachmentName', 'ifMatch', 'rev', 'batch', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -6531,11 +6597,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetAttachmentParams
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId', 'attachmentName'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId', 'attachmentName'];
+    const _validParams = ['db', 'docId', 'attachmentName', 'accept', 'ifMatch', 'ifNoneMatch', 'range', 'rev', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -6607,11 +6673,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PutAttachmentParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId', 'attachmentName', 'attachment', 'contentType'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId', 'attachmentName', 'attachment', 'contentType'];
+    const _validParams = ['db', 'docId', 'attachmentName', 'attachment', 'contentType', 'ifMatch', 'rev', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = _params.attachment;
@@ -6677,11 +6743,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.HeadLocalDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId'];
+    const _validParams = ['db', 'docId', 'ifNoneMatch', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -6734,11 +6800,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.DeleteLocalDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId'];
+    const _validParams = ['db', 'docId', 'batch', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -6804,11 +6870,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetLocalDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.Document>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId'];
+    const _validParams = ['db', 'docId', 'accept', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'localSeq', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const query = {
@@ -6871,11 +6937,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PutLocalDocumentParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId', 'document'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId', 'document'];
+    const _validParams = ['db', 'docId', 'document', 'contentType', 'batch', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = _params.document;
@@ -6938,11 +7004,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostRevsDiffParams
   ): Promise<CloudantV1.Response<CloudantV1.JsonObject>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'documentRevisions'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'documentRevisions'];
+    const _validParams = ['db', 'documentRevisions', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = _params.documentRevisions;
@@ -6993,11 +7059,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetShardsInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.ShardsInformation>> {
     const _params = { ...params };
-    const requiredParams = ['db'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -7047,11 +7113,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.GetDocumentShardsInfoParams
   ): Promise<CloudantV1.Response<CloudantV1.DocumentShardInfo>> {
     const _params = { ...params };
-    const requiredParams = ['db', 'docId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['db', 'docId'];
+    const _validParams = ['db', 'docId', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const path = {
@@ -7102,6 +7168,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.HeadUpInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const sdkHeaders = getSdkHeaders(
       CloudantV1.DEFAULT_SERVICE_NAME,
@@ -7143,6 +7215,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetActiveTasksParams
   ): Promise<CloudantV1.Response<CloudantV1.ActiveTask[]>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const sdkHeaders = getSdkHeaders(
       CloudantV1.DEFAULT_SERVICE_NAME,
@@ -7184,6 +7262,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetUpInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.UpInformation>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const sdkHeaders = getSdkHeaders(
       CloudantV1.DEFAULT_SERVICE_NAME,
@@ -7224,6 +7308,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetActivityTrackerEventsParams
   ): Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEvents>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const sdkHeaders = getSdkHeaders(
       CloudantV1.DEFAULT_SERVICE_NAME,
@@ -7266,11 +7356,11 @@ class CloudantV1 extends CloudantBaseService {
     params: CloudantV1.PostActivityTrackerEventsParams
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
-    const requiredParams = ['types'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
+    const _requiredParams = ['types'];
+    const _validParams = ['types', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
     }
 
     const body = {
@@ -7320,6 +7410,12 @@ class CloudantV1 extends CloudantBaseService {
     params?: CloudantV1.GetCurrentThroughputInformationParams
   ): Promise<CloudantV1.Response<CloudantV1.CurrentThroughputInformation>> {
     const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
 
     const sdkHeaders = getSdkHeaders(
       CloudantV1.DEFAULT_SERVICE_NAME,

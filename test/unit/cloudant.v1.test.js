@@ -114,9 +114,9 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __getServerInformationTest() {
         // Construct the params object for operation getServerInformation
-        const params = {};
+        const getServerInformationParams = {};
 
-        const getServerInformationResult = cloudantService.getServerInformation(params);
+        const getServerInformationResult = cloudantService.getServerInformation(getServerInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getServerInformationResult);
@@ -151,14 +151,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getServerInformationParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getServerInformation(params);
+        cloudantService.getServerInformation(getServerInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -173,9 +173,9 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __getMembershipInformationTest() {
         // Construct the params object for operation getMembershipInformation
-        const params = {};
+        const getMembershipInformationParams = {};
 
-        const getMembershipInformationResult = cloudantService.getMembershipInformation(params);
+        const getMembershipInformationResult = cloudantService.getMembershipInformation(getMembershipInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getMembershipInformationResult);
@@ -210,14 +210,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getMembershipInformationParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getMembershipInformation(params);
+        cloudantService.getMembershipInformation(getMembershipInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -233,11 +233,11 @@ describe('CloudantV1', () => {
       function __getUuidsTest() {
         // Construct the params object for operation getUuids
         const count = 1;
-        const params = {
+        const getUuidsParams = {
           count: count,
         };
 
-        const getUuidsResult = cloudantService.getUuids(params);
+        const getUuidsResult = cloudantService.getUuids(getUuidsParams);
 
         // all methods should return a Promise
         expectToBePromise(getUuidsResult);
@@ -273,14 +273,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getUuidsParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getUuids(params);
+        cloudantService.getUuids(getUuidsParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -295,9 +295,9 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __getCapacityThroughputInformationTest() {
         // Construct the params object for operation getCapacityThroughputInformation
-        const params = {};
+        const getCapacityThroughputInformationParams = {};
 
-        const getCapacityThroughputInformationResult = cloudantService.getCapacityThroughputInformation(params);
+        const getCapacityThroughputInformationResult = cloudantService.getCapacityThroughputInformation(getCapacityThroughputInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getCapacityThroughputInformationResult);
@@ -332,14 +332,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getCapacityThroughputInformationParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getCapacityThroughputInformation(params);
+        cloudantService.getCapacityThroughputInformation(getCapacityThroughputInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -355,11 +355,11 @@ describe('CloudantV1', () => {
       function __putCapacityThroughputConfigurationTest() {
         // Construct the params object for operation putCapacityThroughputConfiguration
         const blocks = 0;
-        const params = {
+        const putCapacityThroughputConfigurationParams = {
           blocks: blocks,
         };
 
-        const putCapacityThroughputConfigurationResult = cloudantService.putCapacityThroughputConfiguration(params);
+        const putCapacityThroughputConfigurationResult = cloudantService.putCapacityThroughputConfiguration(putCapacityThroughputConfigurationParams);
 
         // all methods should return a Promise
         expectToBePromise(putCapacityThroughputConfigurationResult);
@@ -396,7 +396,7 @@ describe('CloudantV1', () => {
         const blocks = 0;
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const putCapacityThroughputConfigurationParams = {
           blocks,
           headers: {
             Accept: userAccept,
@@ -404,7 +404,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putCapacityThroughputConfiguration(params);
+        cloudantService.putCapacityThroughputConfiguration(putCapacityThroughputConfigurationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -441,14 +441,14 @@ describe('CloudantV1', () => {
         const heartbeat = 0;
         const timeout = 0;
         const since = '0';
-        const params = {
+        const getDbUpdatesParams = {
           feed: feed,
           heartbeat: heartbeat,
           timeout: timeout,
           since: since,
         };
 
-        const getDbUpdatesResult = cloudantService.getDbUpdates(params);
+        const getDbUpdatesResult = cloudantService.getDbUpdates(getDbUpdatesParams);
 
         // all methods should return a Promise
         expectToBePromise(getDbUpdatesResult);
@@ -487,14 +487,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getDbUpdatesParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getDbUpdates(params);
+        cloudantService.getDbUpdates(getDbUpdatesParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -528,7 +528,7 @@ describe('CloudantV1', () => {
         const style = 'main_only';
         const timeout = 0;
         const view = 'testString';
-        const params = {
+        const postChangesParams = {
           db: db,
           docIds: docIds,
           fields: fields,
@@ -550,7 +550,7 @@ describe('CloudantV1', () => {
           view: view,
         };
 
-        const postChangesResult = cloudantService.postChanges(params);
+        const postChangesResult = cloudantService.postChanges(postChangesParams);
 
         // all methods should return a Promise
         expectToBePromise(postChangesResult);
@@ -605,7 +605,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postChangesParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -613,7 +613,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postChanges(params);
+        cloudantService.postChanges(postChangesParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -665,7 +665,7 @@ describe('CloudantV1', () => {
         const style = 'main_only';
         const timeout = 0;
         const view = 'testString';
-        const params = {
+        const postChangesAsStreamParams = {
           db: db,
           docIds: docIds,
           fields: fields,
@@ -687,7 +687,7 @@ describe('CloudantV1', () => {
           view: view,
         };
 
-        const postChangesAsStreamResult = cloudantService.postChangesAsStream(params);
+        const postChangesAsStreamResult = cloudantService.postChangesAsStream(postChangesAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postChangesAsStreamResult);
@@ -743,7 +743,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postChangesAsStreamParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -751,7 +751,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postChangesAsStream(params);
+        cloudantService.postChangesAsStream(postChangesAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -785,11 +785,11 @@ describe('CloudantV1', () => {
       function __headDatabaseTest() {
         // Construct the params object for operation headDatabase
         const db = 'testString';
-        const params = {
+        const headDatabaseParams = {
           db: db,
         };
 
-        const headDatabaseResult = cloudantService.headDatabase(params);
+        const headDatabaseResult = cloudantService.headDatabase(headDatabaseParams);
 
         // all methods should return a Promise
         expectToBePromise(headDatabaseResult);
@@ -826,7 +826,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const headDatabaseParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -834,7 +834,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.headDatabase(params);
+        cloudantService.headDatabase(headDatabaseParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -872,7 +872,7 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const startkey = 'testString';
-        const params = {
+        const getAllDbsParams = {
           descending: descending,
           endkey: endkey,
           limit: limit,
@@ -880,7 +880,7 @@ describe('CloudantV1', () => {
           startkey: startkey,
         };
 
-        const getAllDbsResult = cloudantService.getAllDbs(params);
+        const getAllDbsResult = cloudantService.getAllDbs(getAllDbsParams);
 
         // all methods should return a Promise
         expectToBePromise(getAllDbsResult);
@@ -920,14 +920,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getAllDbsParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getAllDbs(params);
+        cloudantService.getAllDbs(getAllDbsParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -943,11 +943,11 @@ describe('CloudantV1', () => {
       function __postDbsInfoTest() {
         // Construct the params object for operation postDbsInfo
         const keys = ['testString'];
-        const params = {
+        const postDbsInfoParams = {
           keys: keys,
         };
 
-        const postDbsInfoResult = cloudantService.postDbsInfo(params);
+        const postDbsInfoResult = cloudantService.postDbsInfo(postDbsInfoParams);
 
         // all methods should return a Promise
         expectToBePromise(postDbsInfoResult);
@@ -984,7 +984,7 @@ describe('CloudantV1', () => {
         const keys = ['testString'];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postDbsInfoParams = {
           keys,
           headers: {
             Accept: userAccept,
@@ -992,7 +992,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postDbsInfo(params);
+        cloudantService.postDbsInfo(postDbsInfoParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -1026,11 +1026,11 @@ describe('CloudantV1', () => {
       function __deleteDatabaseTest() {
         // Construct the params object for operation deleteDatabase
         const db = 'testString';
-        const params = {
+        const deleteDatabaseParams = {
           db: db,
         };
 
-        const deleteDatabaseResult = cloudantService.deleteDatabase(params);
+        const deleteDatabaseResult = cloudantService.deleteDatabase(deleteDatabaseParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteDatabaseResult);
@@ -1067,7 +1067,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const deleteDatabaseParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -1075,7 +1075,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.deleteDatabase(params);
+        cloudantService.deleteDatabase(deleteDatabaseParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -1109,11 +1109,11 @@ describe('CloudantV1', () => {
       function __getDatabaseInformationTest() {
         // Construct the params object for operation getDatabaseInformation
         const db = 'testString';
-        const params = {
+        const getDatabaseInformationParams = {
           db: db,
         };
 
-        const getDatabaseInformationResult = cloudantService.getDatabaseInformation(params);
+        const getDatabaseInformationResult = cloudantService.getDatabaseInformation(getDatabaseInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getDatabaseInformationResult);
@@ -1150,7 +1150,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getDatabaseInformationParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -1158,7 +1158,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getDatabaseInformation(params);
+        cloudantService.getDatabaseInformation(getDatabaseInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -1194,13 +1194,13 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const partitioned = false;
         const q = 1;
-        const params = {
+        const putDatabaseParams = {
           db: db,
           partitioned: partitioned,
           q: q,
         };
 
-        const putDatabaseResult = cloudantService.putDatabase(params);
+        const putDatabaseResult = cloudantService.putDatabase(putDatabaseParams);
 
         // all methods should return a Promise
         expectToBePromise(putDatabaseResult);
@@ -1239,7 +1239,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const putDatabaseParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -1247,7 +1247,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putDatabase(params);
+        cloudantService.putDatabase(putDatabaseParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -1285,7 +1285,7 @@ describe('CloudantV1', () => {
         const ifNoneMatch = 'testString';
         const latest = false;
         const rev = 'testString';
-        const params = {
+        const headDocumentParams = {
           db: db,
           docId: docId,
           ifNoneMatch: ifNoneMatch,
@@ -1293,7 +1293,7 @@ describe('CloudantV1', () => {
           rev: rev,
         };
 
-        const headDocumentResult = cloudantService.headDocument(params);
+        const headDocumentResult = cloudantService.headDocument(headDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(headDocumentResult);
@@ -1335,7 +1335,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const headDocumentParams = {
           db,
           docId,
           headers: {
@@ -1344,7 +1344,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.headDocument(params);
+        cloudantService.headDocument(headDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -1381,14 +1381,14 @@ describe('CloudantV1', () => {
         const document = {};
         const contentType = 'application/json';
         const batch = 'ok';
-        const params = {
+        const postDocumentParams = {
           db: db,
           document: document,
           contentType: contentType,
           batch: batch,
         };
 
-        const postDocumentResult = cloudantService.postDocument(params);
+        const postDocumentResult = cloudantService.postDocument(postDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(postDocumentResult);
@@ -1429,7 +1429,7 @@ describe('CloudantV1', () => {
         const document = {};
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postDocumentParams = {
           db,
           document,
           headers: {
@@ -1438,7 +1438,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postDocument(params);
+        cloudantService.postDocument(postDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -1485,7 +1485,7 @@ describe('CloudantV1', () => {
         const key = 'testString';
         const keys = ['testString'];
         const startkey = 'testString';
-        const params = {
+        const postAllDocsParams = {
           db: db,
           attEncodingInfo: attEncodingInfo,
           attachments: attachments,
@@ -1502,7 +1502,7 @@ describe('CloudantV1', () => {
           startkey: startkey,
         };
 
-        const postAllDocsResult = cloudantService.postAllDocs(params);
+        const postAllDocsResult = cloudantService.postAllDocs(postAllDocsParams);
 
         // all methods should return a Promise
         expectToBePromise(postAllDocsResult);
@@ -1552,7 +1552,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postAllDocsParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -1560,7 +1560,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postAllDocs(params);
+        cloudantService.postAllDocs(postAllDocsParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -1607,7 +1607,7 @@ describe('CloudantV1', () => {
         const key = 'testString';
         const keys = ['testString'];
         const startkey = '0007741142412418284';
-        const params = {
+        const postAllDocsAsStreamParams = {
           db: db,
           attEncodingInfo: attEncodingInfo,
           attachments: attachments,
@@ -1624,7 +1624,7 @@ describe('CloudantV1', () => {
           startkey: startkey,
         };
 
-        const postAllDocsAsStreamResult = cloudantService.postAllDocsAsStream(params);
+        const postAllDocsAsStreamResult = cloudantService.postAllDocsAsStream(postAllDocsAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postAllDocsAsStreamResult);
@@ -1675,7 +1675,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postAllDocsAsStreamParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -1683,7 +1683,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postAllDocsAsStream(params);
+        cloudantService.postAllDocsAsStream(postAllDocsAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -1737,12 +1737,12 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postAllDocsQueries
         const db = 'testString';
         const queries = [allDocsQueryModel];
-        const params = {
+        const postAllDocsQueriesParams = {
           db: db,
           queries: queries,
         };
 
-        const postAllDocsQueriesResult = cloudantService.postAllDocsQueries(params);
+        const postAllDocsQueriesResult = cloudantService.postAllDocsQueries(postAllDocsQueriesParams);
 
         // all methods should return a Promise
         expectToBePromise(postAllDocsQueriesResult);
@@ -1781,7 +1781,7 @@ describe('CloudantV1', () => {
         const queries = [allDocsQueryModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postAllDocsQueriesParams = {
           db,
           queries,
           headers: {
@@ -1790,7 +1790,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postAllDocsQueries(params);
+        cloudantService.postAllDocsQueries(postAllDocsQueriesParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -1844,12 +1844,12 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postAllDocsQueriesAsStream
         const db = 'testString';
         const queries = [allDocsQueryModel];
-        const params = {
+        const postAllDocsQueriesAsStreamParams = {
           db: db,
           queries: queries,
         };
 
-        const postAllDocsQueriesAsStreamResult = cloudantService.postAllDocsQueriesAsStream(params);
+        const postAllDocsQueriesAsStreamResult = cloudantService.postAllDocsQueriesAsStream(postAllDocsQueriesAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postAllDocsQueriesAsStreamResult);
@@ -1889,7 +1889,7 @@ describe('CloudantV1', () => {
         const queries = [allDocsQueryModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postAllDocsQueriesAsStreamParams = {
           db,
           queries,
           headers: {
@@ -1898,7 +1898,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postAllDocsQueriesAsStream(params);
+        cloudantService.postAllDocsQueriesAsStream(postAllDocsQueriesAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -1933,12 +1933,12 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postBulkDocs
         const db = 'testString';
         const bulkDocs = {};
-        const params = {
+        const postBulkDocsParams = {
           db: db,
           bulkDocs: bulkDocs,
         };
 
-        const postBulkDocsResult = cloudantService.postBulkDocs(params);
+        const postBulkDocsResult = cloudantService.postBulkDocs(postBulkDocsParams);
 
         // all methods should return a Promise
         expectToBePromise(postBulkDocsResult);
@@ -1977,7 +1977,7 @@ describe('CloudantV1', () => {
         const bulkDocs = {};
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postBulkDocsParams = {
           db,
           bulkDocs,
           headers: {
@@ -1986,7 +1986,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postBulkDocs(params);
+        cloudantService.postBulkDocs(postBulkDocsParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -2034,7 +2034,7 @@ describe('CloudantV1', () => {
         const attEncodingInfo = false;
         const latest = false;
         const revs = false;
-        const params = {
+        const postBulkGetParams = {
           db: db,
           docs: docs,
           attachments: attachments,
@@ -2043,7 +2043,7 @@ describe('CloudantV1', () => {
           revs: revs,
         };
 
-        const postBulkGetResult = cloudantService.postBulkGet(params);
+        const postBulkGetResult = cloudantService.postBulkGet(postBulkGetParams);
 
         // all methods should return a Promise
         expectToBePromise(postBulkGetResult);
@@ -2086,7 +2086,7 @@ describe('CloudantV1', () => {
         const docs = [bulkGetQueryDocumentModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postBulkGetParams = {
           db,
           docs,
           headers: {
@@ -2095,7 +2095,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postBulkGet(params);
+        cloudantService.postBulkGet(postBulkGetParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -2143,7 +2143,7 @@ describe('CloudantV1', () => {
         const attEncodingInfo = false;
         const latest = false;
         const revs = false;
-        const params = {
+        const postBulkGetAsMixedParams = {
           db: db,
           docs: docs,
           attachments: attachments,
@@ -2152,7 +2152,7 @@ describe('CloudantV1', () => {
           revs: revs,
         };
 
-        const postBulkGetAsMixedResult = cloudantService.postBulkGetAsMixed(params);
+        const postBulkGetAsMixedResult = cloudantService.postBulkGetAsMixed(postBulkGetAsMixedParams);
 
         // all methods should return a Promise
         expectToBePromise(postBulkGetAsMixedResult);
@@ -2196,7 +2196,7 @@ describe('CloudantV1', () => {
         const docs = [bulkGetQueryDocumentModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postBulkGetAsMixedParams = {
           db,
           docs,
           headers: {
@@ -2205,7 +2205,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postBulkGetAsMixed(params);
+        cloudantService.postBulkGetAsMixed(postBulkGetAsMixedParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -2253,7 +2253,7 @@ describe('CloudantV1', () => {
         const attEncodingInfo = false;
         const latest = false;
         const revs = false;
-        const params = {
+        const postBulkGetAsRelatedParams = {
           db: db,
           docs: docs,
           attachments: attachments,
@@ -2262,7 +2262,7 @@ describe('CloudantV1', () => {
           revs: revs,
         };
 
-        const postBulkGetAsRelatedResult = cloudantService.postBulkGetAsRelated(params);
+        const postBulkGetAsRelatedResult = cloudantService.postBulkGetAsRelated(postBulkGetAsRelatedParams);
 
         // all methods should return a Promise
         expectToBePromise(postBulkGetAsRelatedResult);
@@ -2306,7 +2306,7 @@ describe('CloudantV1', () => {
         const docs = [bulkGetQueryDocumentModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postBulkGetAsRelatedParams = {
           db,
           docs,
           headers: {
@@ -2315,7 +2315,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postBulkGetAsRelated(params);
+        cloudantService.postBulkGetAsRelated(postBulkGetAsRelatedParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -2363,7 +2363,7 @@ describe('CloudantV1', () => {
         const attEncodingInfo = false;
         const latest = false;
         const revs = false;
-        const params = {
+        const postBulkGetAsStreamParams = {
           db: db,
           docs: docs,
           attachments: attachments,
@@ -2372,7 +2372,7 @@ describe('CloudantV1', () => {
           revs: revs,
         };
 
-        const postBulkGetAsStreamResult = cloudantService.postBulkGetAsStream(params);
+        const postBulkGetAsStreamResult = cloudantService.postBulkGetAsStream(postBulkGetAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postBulkGetAsStreamResult);
@@ -2416,7 +2416,7 @@ describe('CloudantV1', () => {
         const docs = [bulkGetQueryDocumentModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postBulkGetAsStreamParams = {
           db,
           docs,
           headers: {
@@ -2425,7 +2425,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postBulkGetAsStream(params);
+        cloudantService.postBulkGetAsStream(postBulkGetAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -2463,7 +2463,7 @@ describe('CloudantV1', () => {
         const ifMatch = 'testString';
         const batch = 'ok';
         const rev = 'testString';
-        const params = {
+        const deleteDocumentParams = {
           db: db,
           docId: docId,
           ifMatch: ifMatch,
@@ -2471,7 +2471,7 @@ describe('CloudantV1', () => {
           rev: rev,
         };
 
-        const deleteDocumentResult = cloudantService.deleteDocument(params);
+        const deleteDocumentResult = cloudantService.deleteDocument(deleteDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteDocumentResult);
@@ -2513,7 +2513,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const deleteDocumentParams = {
           db,
           docId,
           headers: {
@@ -2522,7 +2522,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.deleteDocument(params);
+        cloudantService.deleteDocument(deleteDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -2568,7 +2568,7 @@ describe('CloudantV1', () => {
         const rev = 'testString';
         const revs = false;
         const revsInfo = false;
-        const params = {
+        const getDocumentParams = {
           db: db,
           docId: docId,
           ifNoneMatch: ifNoneMatch,
@@ -2584,7 +2584,7 @@ describe('CloudantV1', () => {
           revsInfo: revsInfo,
         };
 
-        const getDocumentResult = cloudantService.getDocument(params);
+        const getDocumentResult = cloudantService.getDocument(getDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(getDocumentResult);
@@ -2634,7 +2634,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getDocumentParams = {
           db,
           docId,
           headers: {
@@ -2643,7 +2643,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getDocument(params);
+        cloudantService.getDocument(getDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -2689,7 +2689,7 @@ describe('CloudantV1', () => {
         const rev = 'testString';
         const revs = false;
         const revsInfo = false;
-        const params = {
+        const getDocumentAsMixedParams = {
           db: db,
           docId: docId,
           ifNoneMatch: ifNoneMatch,
@@ -2705,7 +2705,7 @@ describe('CloudantV1', () => {
           revsInfo: revsInfo,
         };
 
-        const getDocumentAsMixedResult = cloudantService.getDocumentAsMixed(params);
+        const getDocumentAsMixedResult = cloudantService.getDocumentAsMixed(getDocumentAsMixedParams);
 
         // all methods should return a Promise
         expectToBePromise(getDocumentAsMixedResult);
@@ -2756,7 +2756,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getDocumentAsMixedParams = {
           db,
           docId,
           headers: {
@@ -2765,7 +2765,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getDocumentAsMixed(params);
+        cloudantService.getDocumentAsMixed(getDocumentAsMixedParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -2811,7 +2811,7 @@ describe('CloudantV1', () => {
         const rev = 'testString';
         const revs = false;
         const revsInfo = false;
-        const params = {
+        const getDocumentAsRelatedParams = {
           db: db,
           docId: docId,
           ifNoneMatch: ifNoneMatch,
@@ -2827,7 +2827,7 @@ describe('CloudantV1', () => {
           revsInfo: revsInfo,
         };
 
-        const getDocumentAsRelatedResult = cloudantService.getDocumentAsRelated(params);
+        const getDocumentAsRelatedResult = cloudantService.getDocumentAsRelated(getDocumentAsRelatedParams);
 
         // all methods should return a Promise
         expectToBePromise(getDocumentAsRelatedResult);
@@ -2878,7 +2878,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getDocumentAsRelatedParams = {
           db,
           docId,
           headers: {
@@ -2887,7 +2887,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getDocumentAsRelated(params);
+        cloudantService.getDocumentAsRelated(getDocumentAsRelatedParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -2933,7 +2933,7 @@ describe('CloudantV1', () => {
         const rev = 'testString';
         const revs = false;
         const revsInfo = false;
-        const params = {
+        const getDocumentAsStreamParams = {
           db: db,
           docId: docId,
           ifNoneMatch: ifNoneMatch,
@@ -2949,7 +2949,7 @@ describe('CloudantV1', () => {
           revsInfo: revsInfo,
         };
 
-        const getDocumentAsStreamResult = cloudantService.getDocumentAsStream(params);
+        const getDocumentAsStreamResult = cloudantService.getDocumentAsStream(getDocumentAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(getDocumentAsStreamResult);
@@ -3000,7 +3000,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getDocumentAsStreamParams = {
           db,
           docId,
           headers: {
@@ -3009,7 +3009,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getDocumentAsStream(params);
+        cloudantService.getDocumentAsStream(getDocumentAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -3050,7 +3050,7 @@ describe('CloudantV1', () => {
         const batch = 'ok';
         const newEdits = false;
         const rev = 'testString';
-        const params = {
+        const putDocumentParams = {
           db: db,
           docId: docId,
           document: document,
@@ -3061,7 +3061,7 @@ describe('CloudantV1', () => {
           rev: rev,
         };
 
-        const putDocumentResult = cloudantService.putDocument(params);
+        const putDocumentResult = cloudantService.putDocument(putDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(putDocumentResult);
@@ -3107,7 +3107,7 @@ describe('CloudantV1', () => {
         const document = {};
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const putDocumentParams = {
           db,
           docId,
           document,
@@ -3117,7 +3117,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putDocument(params);
+        cloudantService.putDocument(putDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -3153,13 +3153,13 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const ifNoneMatch = 'testString';
-        const params = {
+        const headDesignDocumentParams = {
           db: db,
           ddoc: ddoc,
           ifNoneMatch: ifNoneMatch,
         };
 
-        const headDesignDocumentResult = cloudantService.headDesignDocument(params);
+        const headDesignDocumentResult = cloudantService.headDesignDocument(headDesignDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(headDesignDocumentResult);
@@ -3199,7 +3199,7 @@ describe('CloudantV1', () => {
         const ddoc = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const headDesignDocumentParams = {
           db,
           ddoc,
           headers: {
@@ -3208,7 +3208,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.headDesignDocument(params);
+        cloudantService.headDesignDocument(headDesignDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -3246,7 +3246,7 @@ describe('CloudantV1', () => {
         const ifMatch = 'testString';
         const batch = 'ok';
         const rev = 'testString';
-        const params = {
+        const deleteDesignDocumentParams = {
           db: db,
           ddoc: ddoc,
           ifMatch: ifMatch,
@@ -3254,7 +3254,7 @@ describe('CloudantV1', () => {
           rev: rev,
         };
 
-        const deleteDesignDocumentResult = cloudantService.deleteDesignDocument(params);
+        const deleteDesignDocumentResult = cloudantService.deleteDesignDocument(deleteDesignDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteDesignDocumentResult);
@@ -3296,7 +3296,7 @@ describe('CloudantV1', () => {
         const ddoc = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const deleteDesignDocumentParams = {
           db,
           ddoc,
           headers: {
@@ -3305,7 +3305,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.deleteDesignDocument(params);
+        cloudantService.deleteDesignDocument(deleteDesignDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -3351,7 +3351,7 @@ describe('CloudantV1', () => {
         const rev = 'testString';
         const revs = false;
         const revsInfo = false;
-        const params = {
+        const getDesignDocumentParams = {
           db: db,
           ddoc: ddoc,
           ifNoneMatch: ifNoneMatch,
@@ -3367,7 +3367,7 @@ describe('CloudantV1', () => {
           revsInfo: revsInfo,
         };
 
-        const getDesignDocumentResult = cloudantService.getDesignDocument(params);
+        const getDesignDocumentResult = cloudantService.getDesignDocument(getDesignDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(getDesignDocumentResult);
@@ -3417,7 +3417,7 @@ describe('CloudantV1', () => {
         const ddoc = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getDesignDocumentParams = {
           db,
           ddoc,
           headers: {
@@ -3426,7 +3426,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getDesignDocument(params);
+        cloudantService.getDesignDocument(getDesignDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -3550,7 +3550,7 @@ describe('CloudantV1', () => {
         const batch = 'ok';
         const newEdits = false;
         const rev = 'testString';
-        const params = {
+        const putDesignDocumentParams = {
           db: db,
           ddoc: ddoc,
           designDocument: designDocument,
@@ -3560,7 +3560,7 @@ describe('CloudantV1', () => {
           rev: rev,
         };
 
-        const putDesignDocumentResult = cloudantService.putDesignDocument(params);
+        const putDesignDocumentResult = cloudantService.putDesignDocument(putDesignDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(putDesignDocumentResult);
@@ -3605,7 +3605,7 @@ describe('CloudantV1', () => {
         const designDocument = designDocumentModel;
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const putDesignDocumentParams = {
           db,
           ddoc,
           designDocument,
@@ -3615,7 +3615,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putDesignDocument(params);
+        cloudantService.putDesignDocument(putDesignDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -3650,12 +3650,12 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getDesignDocumentInformation
         const db = 'testString';
         const ddoc = 'testString';
-        const params = {
+        const getDesignDocumentInformationParams = {
           db: db,
           ddoc: ddoc,
         };
 
-        const getDesignDocumentInformationResult = cloudantService.getDesignDocumentInformation(params);
+        const getDesignDocumentInformationResult = cloudantService.getDesignDocumentInformation(getDesignDocumentInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getDesignDocumentInformationResult);
@@ -3694,7 +3694,7 @@ describe('CloudantV1', () => {
         const ddoc = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getDesignDocumentInformationParams = {
           db,
           ddoc,
           headers: {
@@ -3703,7 +3703,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getDesignDocumentInformation(params);
+        cloudantService.getDesignDocumentInformation(getDesignDocumentInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -3751,7 +3751,7 @@ describe('CloudantV1', () => {
         const keys = ['testString'];
         const startkey = '0007741142412418284';
         const accept = 'application/json';
-        const params = {
+        const postDesignDocsParams = {
           db: db,
           attEncodingInfo: attEncodingInfo,
           attachments: attachments,
@@ -3769,7 +3769,7 @@ describe('CloudantV1', () => {
           accept: accept,
         };
 
-        const postDesignDocsResult = cloudantService.postDesignDocs(params);
+        const postDesignDocsResult = cloudantService.postDesignDocs(postDesignDocsParams);
 
         // all methods should return a Promise
         expectToBePromise(postDesignDocsResult);
@@ -3820,7 +3820,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postDesignDocsParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -3828,7 +3828,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postDesignDocs(params);
+        cloudantService.postDesignDocs(postDesignDocsParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -3883,13 +3883,13 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const queries = [allDocsQueryModel];
         const accept = 'application/json';
-        const params = {
+        const postDesignDocsQueriesParams = {
           db: db,
           queries: queries,
           accept: accept,
         };
 
-        const postDesignDocsQueriesResult = cloudantService.postDesignDocsQueries(params);
+        const postDesignDocsQueriesResult = cloudantService.postDesignDocsQueries(postDesignDocsQueriesParams);
 
         // all methods should return a Promise
         expectToBePromise(postDesignDocsQueriesResult);
@@ -3929,7 +3929,7 @@ describe('CloudantV1', () => {
         const queries = [allDocsQueryModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postDesignDocsQueriesParams = {
           db,
           queries,
           headers: {
@@ -3938,7 +3938,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postDesignDocsQueries(params);
+        cloudantService.postDesignDocsQueries(postDesignDocsQueriesParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -3994,7 +3994,7 @@ describe('CloudantV1', () => {
         const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
-        const params = {
+        const postViewParams = {
           db: db,
           ddoc: ddoc,
           view: view,
@@ -4020,7 +4020,7 @@ describe('CloudantV1', () => {
           update: update,
         };
 
-        const postViewResult = cloudantService.postView(params);
+        const postViewResult = cloudantService.postView(postViewParams);
 
         // all methods should return a Promise
         expectToBePromise(postViewResult);
@@ -4081,7 +4081,7 @@ describe('CloudantV1', () => {
         const view = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postViewParams = {
           db,
           ddoc,
           view,
@@ -4091,7 +4091,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postView(params);
+        cloudantService.postView(postViewParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -4147,7 +4147,7 @@ describe('CloudantV1', () => {
         const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
-        const params = {
+        const postViewAsStreamParams = {
           db: db,
           ddoc: ddoc,
           view: view,
@@ -4173,7 +4173,7 @@ describe('CloudantV1', () => {
           update: update,
         };
 
-        const postViewAsStreamResult = cloudantService.postViewAsStream(params);
+        const postViewAsStreamResult = cloudantService.postViewAsStream(postViewAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postViewAsStreamResult);
@@ -4235,7 +4235,7 @@ describe('CloudantV1', () => {
         const view = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postViewAsStreamParams = {
           db,
           ddoc,
           view,
@@ -4245,7 +4245,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postViewAsStream(params);
+        cloudantService.postViewAsStream(postViewAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -4308,14 +4308,14 @@ describe('CloudantV1', () => {
         const ddoc = 'testString';
         const view = 'testString';
         const queries = [viewQueryModel];
-        const params = {
+        const postViewQueriesParams = {
           db: db,
           ddoc: ddoc,
           view: view,
           queries: queries,
         };
 
-        const postViewQueriesResult = cloudantService.postViewQueries(params);
+        const postViewQueriesResult = cloudantService.postViewQueries(postViewQueriesParams);
 
         // all methods should return a Promise
         expectToBePromise(postViewQueriesResult);
@@ -4358,7 +4358,7 @@ describe('CloudantV1', () => {
         const queries = [viewQueryModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postViewQueriesParams = {
           db,
           ddoc,
           view,
@@ -4369,7 +4369,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postViewQueries(params);
+        cloudantService.postViewQueries(postViewQueriesParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -4432,14 +4432,14 @@ describe('CloudantV1', () => {
         const ddoc = 'testString';
         const view = 'testString';
         const queries = [viewQueryModel];
-        const params = {
+        const postViewQueriesAsStreamParams = {
           db: db,
           ddoc: ddoc,
           view: view,
           queries: queries,
         };
 
-        const postViewQueriesAsStreamResult = cloudantService.postViewQueriesAsStream(params);
+        const postViewQueriesAsStreamResult = cloudantService.postViewQueriesAsStream(postViewQueriesAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postViewQueriesAsStreamResult);
@@ -4483,7 +4483,7 @@ describe('CloudantV1', () => {
         const queries = [viewQueryModel];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postViewQueriesAsStreamParams = {
           db,
           ddoc,
           view,
@@ -4494,7 +4494,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postViewQueriesAsStream(params);
+        cloudantService.postViewQueriesAsStream(postViewQueriesAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -4529,12 +4529,12 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getPartitionInformation
         const db = 'testString';
         const partitionKey = 'testString';
-        const params = {
+        const getPartitionInformationParams = {
           db: db,
           partitionKey: partitionKey,
         };
 
-        const getPartitionInformationResult = cloudantService.getPartitionInformation(params);
+        const getPartitionInformationResult = cloudantService.getPartitionInformation(getPartitionInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getPartitionInformationResult);
@@ -4573,7 +4573,7 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getPartitionInformationParams = {
           db,
           partitionKey,
           headers: {
@@ -4582,7 +4582,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getPartitionInformation(params);
+        cloudantService.getPartitionInformation(getPartitionInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -4630,7 +4630,7 @@ describe('CloudantV1', () => {
         const key = 'testString';
         const keys = ['testString'];
         const startkey = '0007741142412418284';
-        const params = {
+        const postPartitionAllDocsParams = {
           db: db,
           partitionKey: partitionKey,
           attEncodingInfo: attEncodingInfo,
@@ -4648,7 +4648,7 @@ describe('CloudantV1', () => {
           startkey: startkey,
         };
 
-        const postPartitionAllDocsResult = cloudantService.postPartitionAllDocs(params);
+        const postPartitionAllDocsResult = cloudantService.postPartitionAllDocs(postPartitionAllDocsParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionAllDocsResult);
@@ -4700,7 +4700,7 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postPartitionAllDocsParams = {
           db,
           partitionKey,
           headers: {
@@ -4709,7 +4709,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postPartitionAllDocs(params);
+        cloudantService.postPartitionAllDocs(postPartitionAllDocsParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -4757,7 +4757,7 @@ describe('CloudantV1', () => {
         const key = 'testString';
         const keys = ['testString'];
         const startkey = '0007741142412418284';
-        const params = {
+        const postPartitionAllDocsAsStreamParams = {
           db: db,
           partitionKey: partitionKey,
           attEncodingInfo: attEncodingInfo,
@@ -4775,7 +4775,7 @@ describe('CloudantV1', () => {
           startkey: startkey,
         };
 
-        const postPartitionAllDocsAsStreamResult = cloudantService.postPartitionAllDocsAsStream(params);
+        const postPartitionAllDocsAsStreamResult = cloudantService.postPartitionAllDocsAsStream(postPartitionAllDocsAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionAllDocsAsStreamResult);
@@ -4828,7 +4828,7 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postPartitionAllDocsAsStreamParams = {
           db,
           partitionKey,
           headers: {
@@ -4837,7 +4837,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postPartitionAllDocsAsStream(params);
+        cloudantService.postPartitionAllDocsAsStream(postPartitionAllDocsAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -4886,7 +4886,7 @@ describe('CloudantV1', () => {
         const limit = 0;
         const sort = ['testString'];
         const stale = 'ok';
-        const params = {
+        const postPartitionSearchParams = {
           db: db,
           partitionKey: partitionKey,
           ddoc: ddoc,
@@ -4905,7 +4905,7 @@ describe('CloudantV1', () => {
           stale: stale,
         };
 
-        const postPartitionSearchResult = cloudantService.postPartitionSearch(params);
+        const postPartitionSearchResult = cloudantService.postPartitionSearch(postPartitionSearchParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionSearchResult);
@@ -4961,7 +4961,7 @@ describe('CloudantV1', () => {
         const query = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postPartitionSearchParams = {
           db,
           partitionKey,
           ddoc,
@@ -4973,7 +4973,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postPartitionSearch(params);
+        cloudantService.postPartitionSearch(postPartitionSearchParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -5022,7 +5022,7 @@ describe('CloudantV1', () => {
         const limit = 3;
         const sort = ['testString'];
         const stale = 'ok';
-        const params = {
+        const postPartitionSearchAsStreamParams = {
           db: db,
           partitionKey: partitionKey,
           ddoc: ddoc,
@@ -5041,7 +5041,7 @@ describe('CloudantV1', () => {
           stale: stale,
         };
 
-        const postPartitionSearchAsStreamResult = cloudantService.postPartitionSearchAsStream(params);
+        const postPartitionSearchAsStreamResult = cloudantService.postPartitionSearchAsStream(postPartitionSearchAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionSearchAsStreamResult);
@@ -5098,7 +5098,7 @@ describe('CloudantV1', () => {
         const query = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postPartitionSearchAsStreamParams = {
           db,
           partitionKey,
           ddoc,
@@ -5110,7 +5110,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postPartitionSearchAsStream(params);
+        cloudantService.postPartitionSearchAsStream(postPartitionSearchAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -5167,7 +5167,7 @@ describe('CloudantV1', () => {
         const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
-        const params = {
+        const postPartitionViewParams = {
           db: db,
           partitionKey: partitionKey,
           ddoc: ddoc,
@@ -5194,7 +5194,7 @@ describe('CloudantV1', () => {
           update: update,
         };
 
-        const postPartitionViewResult = cloudantService.postPartitionView(params);
+        const postPartitionViewResult = cloudantService.postPartitionView(postPartitionViewParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionViewResult);
@@ -5257,7 +5257,7 @@ describe('CloudantV1', () => {
         const view = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postPartitionViewParams = {
           db,
           partitionKey,
           ddoc,
@@ -5268,7 +5268,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postPartitionView(params);
+        cloudantService.postPartitionView(postPartitionViewParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -5325,7 +5325,7 @@ describe('CloudantV1', () => {
         const startkey = 'testString';
         const startkeyDocid = 'testString';
         const update = 'true';
-        const params = {
+        const postPartitionViewAsStreamParams = {
           db: db,
           partitionKey: partitionKey,
           ddoc: ddoc,
@@ -5352,7 +5352,7 @@ describe('CloudantV1', () => {
           update: update,
         };
 
-        const postPartitionViewAsStreamResult = cloudantService.postPartitionViewAsStream(params);
+        const postPartitionViewAsStreamResult = cloudantService.postPartitionViewAsStream(postPartitionViewAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionViewAsStreamResult);
@@ -5416,7 +5416,7 @@ describe('CloudantV1', () => {
         const view = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postPartitionViewAsStreamParams = {
           db,
           partitionKey,
           ddoc,
@@ -5427,7 +5427,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postPartitionViewAsStream(params);
+        cloudantService.postPartitionViewAsStream(postPartitionViewAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -5473,7 +5473,7 @@ describe('CloudantV1', () => {
         const stable = true;
         const update = 'true';
         const useIndex = ['testString'];
-        const params = {
+        const postPartitionFindParams = {
           db: db,
           partitionKey: partitionKey,
           selector: selector,
@@ -5489,7 +5489,7 @@ describe('CloudantV1', () => {
           useIndex: useIndex,
         };
 
-        const postPartitionFindResult = cloudantService.postPartitionFind(params);
+        const postPartitionFindResult = cloudantService.postPartitionFind(postPartitionFindParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionFindResult);
@@ -5540,7 +5540,7 @@ describe('CloudantV1', () => {
         const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postPartitionFindParams = {
           db,
           partitionKey,
           selector,
@@ -5550,7 +5550,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postPartitionFind(params);
+        cloudantService.postPartitionFind(postPartitionFindParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -5596,7 +5596,7 @@ describe('CloudantV1', () => {
         const stable = true;
         const update = 'true';
         const useIndex = ['testString'];
-        const params = {
+        const postPartitionFindAsStreamParams = {
           db: db,
           partitionKey: partitionKey,
           selector: selector,
@@ -5612,7 +5612,7 @@ describe('CloudantV1', () => {
           useIndex: useIndex,
         };
 
-        const postPartitionFindAsStreamResult = cloudantService.postPartitionFindAsStream(params);
+        const postPartitionFindAsStreamResult = cloudantService.postPartitionFindAsStream(postPartitionFindAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionFindAsStreamResult);
@@ -5664,7 +5664,7 @@ describe('CloudantV1', () => {
         const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postPartitionFindAsStreamParams = {
           db,
           partitionKey,
           selector,
@@ -5674,7 +5674,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postPartitionFindAsStream(params);
+        cloudantService.postPartitionFindAsStream(postPartitionFindAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -5720,7 +5720,7 @@ describe('CloudantV1', () => {
         const update = 'true';
         const useIndex = ['testString'];
         const r = 1;
-        const params = {
+        const postExplainParams = {
           db: db,
           selector: selector,
           bookmark: bookmark,
@@ -5736,7 +5736,7 @@ describe('CloudantV1', () => {
           r: r,
         };
 
-        const postExplainResult = cloudantService.postExplain(params);
+        const postExplainResult = cloudantService.postExplain(postExplainParams);
 
         // all methods should return a Promise
         expectToBePromise(postExplainResult);
@@ -5786,7 +5786,7 @@ describe('CloudantV1', () => {
         const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postExplainParams = {
           db,
           selector,
           headers: {
@@ -5795,7 +5795,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postExplain(params);
+        cloudantService.postExplain(postExplainParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -5841,7 +5841,7 @@ describe('CloudantV1', () => {
         const update = 'true';
         const useIndex = ['testString'];
         const r = 1;
-        const params = {
+        const postFindParams = {
           db: db,
           selector: selector,
           bookmark: bookmark,
@@ -5857,7 +5857,7 @@ describe('CloudantV1', () => {
           r: r,
         };
 
-        const postFindResult = cloudantService.postFind(params);
+        const postFindResult = cloudantService.postFind(postFindParams);
 
         // all methods should return a Promise
         expectToBePromise(postFindResult);
@@ -5907,7 +5907,7 @@ describe('CloudantV1', () => {
         const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postFindParams = {
           db,
           selector,
           headers: {
@@ -5916,7 +5916,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postFind(params);
+        cloudantService.postFind(postFindParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -5962,7 +5962,7 @@ describe('CloudantV1', () => {
         const update = 'true';
         const useIndex = ['testString'];
         const r = 1;
-        const params = {
+        const postFindAsStreamParams = {
           db: db,
           selector: selector,
           bookmark: bookmark,
@@ -5978,7 +5978,7 @@ describe('CloudantV1', () => {
           r: r,
         };
 
-        const postFindAsStreamResult = cloudantService.postFindAsStream(params);
+        const postFindAsStreamResult = cloudantService.postFindAsStream(postFindAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postFindAsStreamResult);
@@ -6029,7 +6029,7 @@ describe('CloudantV1', () => {
         const selector = { 'key1': 'testString' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postFindAsStreamParams = {
           db,
           selector,
           headers: {
@@ -6038,7 +6038,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postFindAsStream(params);
+        cloudantService.postFindAsStream(postFindAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -6072,11 +6072,11 @@ describe('CloudantV1', () => {
       function __getIndexesInformationTest() {
         // Construct the params object for operation getIndexesInformation
         const db = 'testString';
-        const params = {
+        const getIndexesInformationParams = {
           db: db,
         };
 
-        const getIndexesInformationResult = cloudantService.getIndexesInformation(params);
+        const getIndexesInformationResult = cloudantService.getIndexesInformation(getIndexesInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getIndexesInformationResult);
@@ -6113,7 +6113,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getIndexesInformationParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -6121,7 +6121,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getIndexesInformation(params);
+        cloudantService.getIndexesInformation(getIndexesInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -6191,7 +6191,7 @@ describe('CloudantV1', () => {
         const name = 'testString';
         const partitioned = true;
         const type = 'json';
-        const params = {
+        const postIndexParams = {
           db: db,
           index: index,
           ddoc: ddoc,
@@ -6201,7 +6201,7 @@ describe('CloudantV1', () => {
           type: type,
         };
 
-        const postIndexResult = cloudantService.postIndex(params);
+        const postIndexResult = cloudantService.postIndex(postIndexParams);
 
         // all methods should return a Promise
         expectToBePromise(postIndexResult);
@@ -6245,7 +6245,7 @@ describe('CloudantV1', () => {
         const index = indexDefinitionModel;
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postIndexParams = {
           db,
           index,
           headers: {
@@ -6254,7 +6254,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postIndex(params);
+        cloudantService.postIndex(postIndexParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -6291,14 +6291,14 @@ describe('CloudantV1', () => {
         const ddoc = 'testString';
         const type = 'json';
         const index = 'testString';
-        const params = {
+        const deleteIndexParams = {
           db: db,
           ddoc: ddoc,
           type: type,
           index: index,
         };
 
-        const deleteIndexResult = cloudantService.deleteIndex(params);
+        const deleteIndexResult = cloudantService.deleteIndex(deleteIndexParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteIndexResult);
@@ -6341,7 +6341,7 @@ describe('CloudantV1', () => {
         const index = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const deleteIndexParams = {
           db,
           ddoc,
           type,
@@ -6352,7 +6352,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.deleteIndex(params);
+        cloudantService.deleteIndex(deleteIndexParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -6387,12 +6387,12 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postSearchAnalyze
         const analyzer = 'arabic';
         const text = 'testString';
-        const params = {
+        const postSearchAnalyzeParams = {
           analyzer: analyzer,
           text: text,
         };
 
-        const postSearchAnalyzeResult = cloudantService.postSearchAnalyze(params);
+        const postSearchAnalyzeResult = cloudantService.postSearchAnalyze(postSearchAnalyzeParams);
 
         // all methods should return a Promise
         expectToBePromise(postSearchAnalyzeResult);
@@ -6431,7 +6431,7 @@ describe('CloudantV1', () => {
         const text = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postSearchAnalyzeParams = {
           analyzer,
           text,
           headers: {
@@ -6440,7 +6440,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postSearchAnalyze(params);
+        cloudantService.postSearchAnalyze(postSearchAnalyzeParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -6494,7 +6494,7 @@ describe('CloudantV1', () => {
         const groupLimit = 1;
         const groupSort = ['testString'];
         const ranges = { 'key1': { 'key1': { 'key1': 'testString' } } };
-        const params = {
+        const postSearchParams = {
           db: db,
           ddoc: ddoc,
           index: index,
@@ -6518,7 +6518,7 @@ describe('CloudantV1', () => {
           ranges: ranges,
         };
 
-        const postSearchResult = cloudantService.postSearch(params);
+        const postSearchResult = cloudantService.postSearch(postSearchParams);
 
         // all methods should return a Promise
         expectToBePromise(postSearchResult);
@@ -6578,7 +6578,7 @@ describe('CloudantV1', () => {
         const query = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postSearchParams = {
           db,
           ddoc,
           index,
@@ -6589,7 +6589,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postSearch(params);
+        cloudantService.postSearch(postSearchParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -6643,7 +6643,7 @@ describe('CloudantV1', () => {
         const groupLimit = 1;
         const groupSort = ['testString'];
         const ranges = { 'key1': { 'key1': { 'key1': 'testString' } } };
-        const params = {
+        const postSearchAsStreamParams = {
           db: db,
           ddoc: ddoc,
           index: index,
@@ -6667,7 +6667,7 @@ describe('CloudantV1', () => {
           ranges: ranges,
         };
 
-        const postSearchAsStreamResult = cloudantService.postSearchAsStream(params);
+        const postSearchAsStreamResult = cloudantService.postSearchAsStream(postSearchAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postSearchAsStreamResult);
@@ -6728,7 +6728,7 @@ describe('CloudantV1', () => {
         const query = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postSearchAsStreamParams = {
           db,
           ddoc,
           index,
@@ -6739,7 +6739,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postSearchAsStream(params);
+        cloudantService.postSearchAsStream(postSearchAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -6775,13 +6775,13 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
-        const params = {
+        const getSearchInfoParams = {
           db: db,
           ddoc: ddoc,
           index: index,
         };
 
-        const getSearchInfoResult = cloudantService.getSearchInfo(params);
+        const getSearchInfoResult = cloudantService.getSearchInfo(getSearchInfoParams);
 
         // all methods should return a Promise
         expectToBePromise(getSearchInfoResult);
@@ -6822,7 +6822,7 @@ describe('CloudantV1', () => {
         const index = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getSearchInfoParams = {
           db,
           ddoc,
           index,
@@ -6832,7 +6832,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getSearchInfo(params);
+        cloudantService.getSearchInfo(getSearchInfoParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -6883,7 +6883,7 @@ describe('CloudantV1', () => {
         const relation = 'intersects';
         const skip = 0;
         const stale = 'ok';
-        const params = {
+        const getGeoParams = {
           db: db,
           ddoc: ddoc,
           index: index,
@@ -6904,7 +6904,7 @@ describe('CloudantV1', () => {
           stale: stale,
         };
 
-        const getGeoResult = cloudantService.getGeo(params);
+        const getGeoResult = cloudantService.getGeo(getGeoParams);
 
         // all methods should return a Promise
         expectToBePromise(getGeoResult);
@@ -6960,7 +6960,7 @@ describe('CloudantV1', () => {
         const index = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getGeoParams = {
           db,
           ddoc,
           index,
@@ -6970,7 +6970,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getGeo(params);
+        cloudantService.getGeo(getGeoParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -7021,7 +7021,7 @@ describe('CloudantV1', () => {
         const relation = 'intersects';
         const skip = 0;
         const stale = 'ok';
-        const params = {
+        const getGeoAsStreamParams = {
           db: db,
           ddoc: ddoc,
           index: index,
@@ -7042,7 +7042,7 @@ describe('CloudantV1', () => {
           stale: stale,
         };
 
-        const getGeoAsStreamResult = cloudantService.getGeoAsStream(params);
+        const getGeoAsStreamResult = cloudantService.getGeoAsStream(getGeoAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(getGeoAsStreamResult);
@@ -7099,7 +7099,7 @@ describe('CloudantV1', () => {
         const index = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getGeoAsStreamParams = {
           db,
           ddoc,
           index,
@@ -7109,7 +7109,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getGeoAsStream(params);
+        cloudantService.getGeoAsStream(getGeoAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -7143,11 +7143,11 @@ describe('CloudantV1', () => {
       function __postGeoCleanupTest() {
         // Construct the params object for operation postGeoCleanup
         const db = 'testString';
-        const params = {
+        const postGeoCleanupParams = {
           db: db,
         };
 
-        const postGeoCleanupResult = cloudantService.postGeoCleanup(params);
+        const postGeoCleanupResult = cloudantService.postGeoCleanup(postGeoCleanupParams);
 
         // all methods should return a Promise
         expectToBePromise(postGeoCleanupResult);
@@ -7184,7 +7184,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postGeoCleanupParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -7192,7 +7192,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postGeoCleanup(params);
+        cloudantService.postGeoCleanup(postGeoCleanupParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -7228,13 +7228,13 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
-        const params = {
+        const getGeoIndexInformationParams = {
           db: db,
           ddoc: ddoc,
           index: index,
         };
 
-        const getGeoIndexInformationResult = cloudantService.getGeoIndexInformation(params);
+        const getGeoIndexInformationResult = cloudantService.getGeoIndexInformation(getGeoIndexInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getGeoIndexInformationResult);
@@ -7275,7 +7275,7 @@ describe('CloudantV1', () => {
         const index = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getGeoIndexInformationParams = {
           db,
           ddoc,
           index,
@@ -7285,7 +7285,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getGeoIndexInformation(params);
+        cloudantService.getGeoIndexInformation(getGeoIndexInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -7320,12 +7320,12 @@ describe('CloudantV1', () => {
         // Construct the params object for operation headReplicationDocument
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const params = {
+        const headReplicationDocumentParams = {
           docId: docId,
           ifNoneMatch: ifNoneMatch,
         };
 
-        const headReplicationDocumentResult = cloudantService.headReplicationDocument(params);
+        const headReplicationDocumentResult = cloudantService.headReplicationDocument(headReplicationDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(headReplicationDocumentResult);
@@ -7363,7 +7363,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const headReplicationDocumentParams = {
           docId,
           headers: {
             Accept: userAccept,
@@ -7371,7 +7371,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.headReplicationDocument(params);
+        cloudantService.headReplicationDocument(headReplicationDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -7405,11 +7405,11 @@ describe('CloudantV1', () => {
       function __headSchedulerDocumentTest() {
         // Construct the params object for operation headSchedulerDocument
         const docId = 'testString';
-        const params = {
+        const headSchedulerDocumentParams = {
           docId: docId,
         };
 
-        const headSchedulerDocumentResult = cloudantService.headSchedulerDocument(params);
+        const headSchedulerDocumentResult = cloudantService.headSchedulerDocument(headSchedulerDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(headSchedulerDocumentResult);
@@ -7446,7 +7446,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const headSchedulerDocumentParams = {
           docId,
           headers: {
             Accept: userAccept,
@@ -7454,7 +7454,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.headSchedulerDocument(params);
+        cloudantService.headSchedulerDocument(headSchedulerDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -7488,11 +7488,11 @@ describe('CloudantV1', () => {
       function __headSchedulerJobTest() {
         // Construct the params object for operation headSchedulerJob
         const jobId = 'testString';
-        const params = {
+        const headSchedulerJobParams = {
           jobId: jobId,
         };
 
-        const headSchedulerJobResult = cloudantService.headSchedulerJob(params);
+        const headSchedulerJobResult = cloudantService.headSchedulerJob(headSchedulerJobParams);
 
         // all methods should return a Promise
         expectToBePromise(headSchedulerJobResult);
@@ -7529,7 +7529,7 @@ describe('CloudantV1', () => {
         const jobId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const headSchedulerJobParams = {
           jobId,
           headers: {
             Accept: userAccept,
@@ -7537,7 +7537,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.headSchedulerJob(params);
+        cloudantService.headSchedulerJob(headSchedulerJobParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -7574,14 +7574,14 @@ describe('CloudantV1', () => {
         const ifMatch = 'testString';
         const batch = 'ok';
         const rev = 'testString';
-        const params = {
+        const deleteReplicationDocumentParams = {
           docId: docId,
           ifMatch: ifMatch,
           batch: batch,
           rev: rev,
         };
 
-        const deleteReplicationDocumentResult = cloudantService.deleteReplicationDocument(params);
+        const deleteReplicationDocumentResult = cloudantService.deleteReplicationDocument(deleteReplicationDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteReplicationDocumentResult);
@@ -7621,7 +7621,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const deleteReplicationDocumentParams = {
           docId,
           headers: {
             Accept: userAccept,
@@ -7629,7 +7629,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.deleteReplicationDocument(params);
+        cloudantService.deleteReplicationDocument(deleteReplicationDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -7674,7 +7674,7 @@ describe('CloudantV1', () => {
         const rev = 'testString';
         const revs = false;
         const revsInfo = false;
-        const params = {
+        const getReplicationDocumentParams = {
           docId: docId,
           ifNoneMatch: ifNoneMatch,
           attachments: attachments,
@@ -7689,7 +7689,7 @@ describe('CloudantV1', () => {
           revsInfo: revsInfo,
         };
 
-        const getReplicationDocumentResult = cloudantService.getReplicationDocument(params);
+        const getReplicationDocumentResult = cloudantService.getReplicationDocument(getReplicationDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(getReplicationDocumentResult);
@@ -7737,7 +7737,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getReplicationDocumentParams = {
           docId,
           headers: {
             Accept: userAccept,
@@ -7745,7 +7745,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getReplicationDocument(params);
+        cloudantService.getReplicationDocument(getReplicationDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -7885,7 +7885,7 @@ describe('CloudantV1', () => {
         const batch = 'ok';
         const newEdits = false;
         const rev = 'testString';
-        const params = {
+        const putReplicationDocumentParams = {
           docId: docId,
           replicationDocument: replicationDocument,
           ifMatch: ifMatch,
@@ -7894,7 +7894,7 @@ describe('CloudantV1', () => {
           rev: rev,
         };
 
-        const putReplicationDocumentResult = cloudantService.putReplicationDocument(params);
+        const putReplicationDocumentResult = cloudantService.putReplicationDocument(putReplicationDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(putReplicationDocumentResult);
@@ -7937,7 +7937,7 @@ describe('CloudantV1', () => {
         const replicationDocument = replicationDocumentModel;
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const putReplicationDocumentParams = {
           docId,
           replicationDocument,
           headers: {
@@ -7946,7 +7946,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putReplicationDocument(params);
+        cloudantService.putReplicationDocument(putReplicationDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -7982,13 +7982,13 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const states = ['initializing'];
-        const params = {
+        const getSchedulerDocsParams = {
           limit: limit,
           skip: skip,
           states: states,
         };
 
-        const getSchedulerDocsResult = cloudantService.getSchedulerDocs(params);
+        const getSchedulerDocsResult = cloudantService.getSchedulerDocs(getSchedulerDocsParams);
 
         // all methods should return a Promise
         expectToBePromise(getSchedulerDocsResult);
@@ -8026,14 +8026,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getSchedulerDocsParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getSchedulerDocs(params);
+        cloudantService.getSchedulerDocs(getSchedulerDocsParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -8049,11 +8049,11 @@ describe('CloudantV1', () => {
       function __getSchedulerDocumentTest() {
         // Construct the params object for operation getSchedulerDocument
         const docId = 'testString';
-        const params = {
+        const getSchedulerDocumentParams = {
           docId: docId,
         };
 
-        const getSchedulerDocumentResult = cloudantService.getSchedulerDocument(params);
+        const getSchedulerDocumentResult = cloudantService.getSchedulerDocument(getSchedulerDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(getSchedulerDocumentResult);
@@ -8090,7 +8090,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getSchedulerDocumentParams = {
           docId,
           headers: {
             Accept: userAccept,
@@ -8098,7 +8098,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getSchedulerDocument(params);
+        cloudantService.getSchedulerDocument(getSchedulerDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -8133,12 +8133,12 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getSchedulerJobs
         const limit = 0;
         const skip = 0;
-        const params = {
+        const getSchedulerJobsParams = {
           limit: limit,
           skip: skip,
         };
 
-        const getSchedulerJobsResult = cloudantService.getSchedulerJobs(params);
+        const getSchedulerJobsResult = cloudantService.getSchedulerJobs(getSchedulerJobsParams);
 
         // all methods should return a Promise
         expectToBePromise(getSchedulerJobsResult);
@@ -8175,14 +8175,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getSchedulerJobsParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getSchedulerJobs(params);
+        cloudantService.getSchedulerJobs(getSchedulerJobsParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -8198,11 +8198,11 @@ describe('CloudantV1', () => {
       function __getSchedulerJobTest() {
         // Construct the params object for operation getSchedulerJob
         const jobId = 'testString';
-        const params = {
+        const getSchedulerJobParams = {
           jobId: jobId,
         };
 
-        const getSchedulerJobResult = cloudantService.getSchedulerJob(params);
+        const getSchedulerJobResult = cloudantService.getSchedulerJob(getSchedulerJobParams);
 
         // all methods should return a Promise
         expectToBePromise(getSchedulerJobResult);
@@ -8239,7 +8239,7 @@ describe('CloudantV1', () => {
         const jobId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getSchedulerJobParams = {
           jobId,
           headers: {
             Accept: userAccept,
@@ -8247,7 +8247,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getSchedulerJob(params);
+        cloudantService.getSchedulerJob(getSchedulerJobParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -8280,9 +8280,9 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __getSessionInformationTest() {
         // Construct the params object for operation getSessionInformation
-        const params = {};
+        const getSessionInformationParams = {};
 
-        const getSessionInformationResult = cloudantService.getSessionInformation(params);
+        const getSessionInformationResult = cloudantService.getSessionInformation(getSessionInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getSessionInformationResult);
@@ -8317,14 +8317,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getSessionInformationParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getSessionInformation(params);
+        cloudantService.getSessionInformation(getSessionInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -8340,11 +8340,11 @@ describe('CloudantV1', () => {
       function __getSecurityTest() {
         // Construct the params object for operation getSecurity
         const db = 'testString';
-        const params = {
+        const getSecurityParams = {
           db: db,
         };
 
-        const getSecurityResult = cloudantService.getSecurity(params);
+        const getSecurityResult = cloudantService.getSecurity(getSecurityParams);
 
         // all methods should return a Promise
         expectToBePromise(getSecurityResult);
@@ -8381,7 +8381,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getSecurityParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -8389,7 +8389,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getSecurity(params);
+        cloudantService.getSecurity(getSecurityParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -8435,7 +8435,7 @@ describe('CloudantV1', () => {
         const members = securityObjectModel;
         const cloudant = { 'key1': ['_reader'] };
         const couchdbAuthOnly = true;
-        const params = {
+        const putSecurityParams = {
           db: db,
           admins: admins,
           members: members,
@@ -8443,7 +8443,7 @@ describe('CloudantV1', () => {
           couchdbAuthOnly: couchdbAuthOnly,
         };
 
-        const putSecurityResult = cloudantService.putSecurity(params);
+        const putSecurityResult = cloudantService.putSecurity(putSecurityParams);
 
         // all methods should return a Promise
         expectToBePromise(putSecurityResult);
@@ -8484,7 +8484,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const putSecurityParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -8492,7 +8492,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putSecurity(params);
+        cloudantService.putSecurity(putSecurityParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -8525,9 +8525,9 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __postApiKeysTest() {
         // Construct the params object for operation postApiKeys
-        const params = {};
+        const postApiKeysParams = {};
 
-        const postApiKeysResult = cloudantService.postApiKeys(params);
+        const postApiKeysResult = cloudantService.postApiKeys(postApiKeysParams);
 
         // all methods should return a Promise
         expectToBePromise(postApiKeysResult);
@@ -8562,14 +8562,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postApiKeysParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.postApiKeys(params);
+        cloudantService.postApiKeys(postApiKeysParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -8597,7 +8597,7 @@ describe('CloudantV1', () => {
         const admins = securityObjectModel;
         const members = securityObjectModel;
         const couchdbAuthOnly = true;
-        const params = {
+        const putCloudantSecurityConfigurationParams = {
           db: db,
           cloudant: cloudant,
           admins: admins,
@@ -8605,7 +8605,7 @@ describe('CloudantV1', () => {
           couchdbAuthOnly: couchdbAuthOnly,
         };
 
-        const putCloudantSecurityConfigurationResult = cloudantService.putCloudantSecurityConfiguration(params);
+        const putCloudantSecurityConfigurationResult = cloudantService.putCloudantSecurityConfiguration(putCloudantSecurityConfigurationParams);
 
         // all methods should return a Promise
         expectToBePromise(putCloudantSecurityConfigurationResult);
@@ -8647,7 +8647,7 @@ describe('CloudantV1', () => {
         const cloudant = { 'key1': ['_reader'] };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const putCloudantSecurityConfigurationParams = {
           db,
           cloudant,
           headers: {
@@ -8656,7 +8656,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putCloudantSecurityConfiguration(params);
+        cloudantService.putCloudantSecurityConfiguration(putCloudantSecurityConfigurationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -8689,9 +8689,9 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __getCorsInformationTest() {
         // Construct the params object for operation getCorsInformation
-        const params = {};
+        const getCorsInformationParams = {};
 
-        const getCorsInformationResult = cloudantService.getCorsInformation(params);
+        const getCorsInformationResult = cloudantService.getCorsInformation(getCorsInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getCorsInformationResult);
@@ -8726,14 +8726,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getCorsInformationParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getCorsInformation(params);
+        cloudantService.getCorsInformation(getCorsInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -8751,13 +8751,13 @@ describe('CloudantV1', () => {
         const origins = ['testString'];
         const allowCredentials = true;
         const enableCors = true;
-        const params = {
+        const putCorsConfigurationParams = {
           origins: origins,
           allowCredentials: allowCredentials,
           enableCors: enableCors,
         };
 
-        const putCorsConfigurationResult = cloudantService.putCorsConfiguration(params);
+        const putCorsConfigurationResult = cloudantService.putCorsConfiguration(putCorsConfigurationParams);
 
         // all methods should return a Promise
         expectToBePromise(putCorsConfigurationResult);
@@ -8796,7 +8796,7 @@ describe('CloudantV1', () => {
         const origins = ['testString'];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const putCorsConfigurationParams = {
           origins,
           headers: {
             Accept: userAccept,
@@ -8804,7 +8804,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putCorsConfiguration(params);
+        cloudantService.putCorsConfiguration(putCorsConfigurationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -8843,7 +8843,7 @@ describe('CloudantV1', () => {
         const ifMatch = 'testString';
         const ifNoneMatch = 'testString';
         const rev = 'testString';
-        const params = {
+        const headAttachmentParams = {
           db: db,
           docId: docId,
           attachmentName: attachmentName,
@@ -8852,7 +8852,7 @@ describe('CloudantV1', () => {
           rev: rev,
         };
 
-        const headAttachmentResult = cloudantService.headAttachment(params);
+        const headAttachmentResult = cloudantService.headAttachment(headAttachmentParams);
 
         // all methods should return a Promise
         expectToBePromise(headAttachmentResult);
@@ -8896,7 +8896,7 @@ describe('CloudantV1', () => {
         const attachmentName = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const headAttachmentParams = {
           db,
           docId,
           attachmentName,
@@ -8906,7 +8906,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.headAttachment(params);
+        cloudantService.headAttachment(headAttachmentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -8945,7 +8945,7 @@ describe('CloudantV1', () => {
         const ifMatch = 'testString';
         const rev = 'testString';
         const batch = 'ok';
-        const params = {
+        const deleteAttachmentParams = {
           db: db,
           docId: docId,
           attachmentName: attachmentName,
@@ -8954,7 +8954,7 @@ describe('CloudantV1', () => {
           batch: batch,
         };
 
-        const deleteAttachmentResult = cloudantService.deleteAttachment(params);
+        const deleteAttachmentResult = cloudantService.deleteAttachment(deleteAttachmentParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteAttachmentResult);
@@ -8998,7 +8998,7 @@ describe('CloudantV1', () => {
         const attachmentName = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const deleteAttachmentParams = {
           db,
           docId,
           attachmentName,
@@ -9008,7 +9008,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.deleteAttachment(params);
+        cloudantService.deleteAttachment(deleteAttachmentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -9049,7 +9049,7 @@ describe('CloudantV1', () => {
         const ifNoneMatch = 'testString';
         const range = 'testString';
         const rev = 'testString';
-        const params = {
+        const getAttachmentParams = {
           db: db,
           docId: docId,
           attachmentName: attachmentName,
@@ -9060,7 +9060,7 @@ describe('CloudantV1', () => {
           rev: rev,
         };
 
-        const getAttachmentResult = cloudantService.getAttachment(params);
+        const getAttachmentResult = cloudantService.getAttachment(getAttachmentParams);
 
         // all methods should return a Promise
         expectToBePromise(getAttachmentResult);
@@ -9107,7 +9107,7 @@ describe('CloudantV1', () => {
         const attachmentName = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getAttachmentParams = {
           db,
           docId,
           attachmentName,
@@ -9117,7 +9117,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getAttachment(params);
+        cloudantService.getAttachment(getAttachmentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -9157,7 +9157,7 @@ describe('CloudantV1', () => {
         const contentType = 'application/octet-stream';
         const ifMatch = 'testString';
         const rev = 'testString';
-        const params = {
+        const putAttachmentParams = {
           db: db,
           docId: docId,
           attachmentName: attachmentName,
@@ -9167,7 +9167,7 @@ describe('CloudantV1', () => {
           rev: rev,
         };
 
-        const putAttachmentResult = cloudantService.putAttachment(params);
+        const putAttachmentResult = cloudantService.putAttachment(putAttachmentParams);
 
         // all methods should return a Promise
         expectToBePromise(putAttachmentResult);
@@ -9214,7 +9214,7 @@ describe('CloudantV1', () => {
         const contentType = 'application/octet-stream';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const putAttachmentParams = {
           db,
           docId,
           attachmentName,
@@ -9226,7 +9226,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putAttachment(params);
+        cloudantService.putAttachment(putAttachmentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -9262,13 +9262,13 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const ifNoneMatch = 'testString';
-        const params = {
+        const headLocalDocumentParams = {
           db: db,
           docId: docId,
           ifNoneMatch: ifNoneMatch,
         };
 
-        const headLocalDocumentResult = cloudantService.headLocalDocument(params);
+        const headLocalDocumentResult = cloudantService.headLocalDocument(headLocalDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(headLocalDocumentResult);
@@ -9308,7 +9308,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const headLocalDocumentParams = {
           db,
           docId,
           headers: {
@@ -9317,7 +9317,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.headLocalDocument(params);
+        cloudantService.headLocalDocument(headLocalDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -9353,13 +9353,13 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const batch = 'ok';
-        const params = {
+        const deleteLocalDocumentParams = {
           db: db,
           docId: docId,
           batch: batch,
         };
 
-        const deleteLocalDocumentResult = cloudantService.deleteLocalDocument(params);
+        const deleteLocalDocumentResult = cloudantService.deleteLocalDocument(deleteLocalDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteLocalDocumentResult);
@@ -9399,7 +9399,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const deleteLocalDocumentParams = {
           db,
           docId,
           headers: {
@@ -9408,7 +9408,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.deleteLocalDocument(params);
+        cloudantService.deleteLocalDocument(deleteLocalDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -9448,7 +9448,7 @@ describe('CloudantV1', () => {
         const attachments = false;
         const attEncodingInfo = false;
         const localSeq = false;
-        const params = {
+        const getLocalDocumentParams = {
           db: db,
           docId: docId,
           accept: accept,
@@ -9458,7 +9458,7 @@ describe('CloudantV1', () => {
           localSeq: localSeq,
         };
 
-        const getLocalDocumentResult = cloudantService.getLocalDocument(params);
+        const getLocalDocumentResult = cloudantService.getLocalDocument(getLocalDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(getLocalDocumentResult);
@@ -9502,7 +9502,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getLocalDocumentParams = {
           db,
           docId,
           headers: {
@@ -9511,7 +9511,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getLocalDocument(params);
+        cloudantService.getLocalDocument(getLocalDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -9549,7 +9549,7 @@ describe('CloudantV1', () => {
         const document = {};
         const contentType = 'application/json';
         const batch = 'ok';
-        const params = {
+        const putLocalDocumentParams = {
           db: db,
           docId: docId,
           document: document,
@@ -9557,7 +9557,7 @@ describe('CloudantV1', () => {
           batch: batch,
         };
 
-        const putLocalDocumentResult = cloudantService.putLocalDocument(params);
+        const putLocalDocumentResult = cloudantService.putLocalDocument(putLocalDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(putLocalDocumentResult);
@@ -9600,7 +9600,7 @@ describe('CloudantV1', () => {
         const document = {};
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const putLocalDocumentParams = {
           db,
           docId,
           document,
@@ -9610,7 +9610,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putLocalDocument(params);
+        cloudantService.putLocalDocument(putLocalDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -9645,12 +9645,12 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postRevsDiff
         const db = 'testString';
         const documentRevisions = { 'key1': ['testString'] };
-        const params = {
+        const postRevsDiffParams = {
           db: db,
           documentRevisions: documentRevisions,
         };
 
-        const postRevsDiffResult = cloudantService.postRevsDiff(params);
+        const postRevsDiffResult = cloudantService.postRevsDiff(postRevsDiffParams);
 
         // all methods should return a Promise
         expectToBePromise(postRevsDiffResult);
@@ -9689,7 +9689,7 @@ describe('CloudantV1', () => {
         const documentRevisions = { 'key1': ['testString'] };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postRevsDiffParams = {
           db,
           documentRevisions,
           headers: {
@@ -9698,7 +9698,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postRevsDiff(params);
+        cloudantService.postRevsDiff(postRevsDiffParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -9732,11 +9732,11 @@ describe('CloudantV1', () => {
       function __getShardsInformationTest() {
         // Construct the params object for operation getShardsInformation
         const db = 'testString';
-        const params = {
+        const getShardsInformationParams = {
           db: db,
         };
 
-        const getShardsInformationResult = cloudantService.getShardsInformation(params);
+        const getShardsInformationResult = cloudantService.getShardsInformation(getShardsInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getShardsInformationResult);
@@ -9773,7 +9773,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getShardsInformationParams = {
           db,
           headers: {
             Accept: userAccept,
@@ -9781,7 +9781,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getShardsInformation(params);
+        cloudantService.getShardsInformation(getShardsInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -9816,12 +9816,12 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getDocumentShardsInfo
         const db = 'testString';
         const docId = 'testString';
-        const params = {
+        const getDocumentShardsInfoParams = {
           db: db,
           docId: docId,
         };
 
-        const getDocumentShardsInfoResult = cloudantService.getDocumentShardsInfo(params);
+        const getDocumentShardsInfoResult = cloudantService.getDocumentShardsInfo(getDocumentShardsInfoParams);
 
         // all methods should return a Promise
         expectToBePromise(getDocumentShardsInfoResult);
@@ -9860,7 +9860,7 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getDocumentShardsInfoParams = {
           db,
           docId,
           headers: {
@@ -9869,7 +9869,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getDocumentShardsInfo(params);
+        cloudantService.getDocumentShardsInfo(getDocumentShardsInfoParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -9902,9 +9902,9 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __headUpInformationTest() {
         // Construct the params object for operation headUpInformation
-        const params = {};
+        const headUpInformationParams = {};
 
-        const headUpInformationResult = cloudantService.headUpInformation(params);
+        const headUpInformationResult = cloudantService.headUpInformation(headUpInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(headUpInformationResult);
@@ -9939,14 +9939,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const headUpInformationParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.headUpInformation(params);
+        cloudantService.headUpInformation(headUpInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -9961,9 +9961,9 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __getActiveTasksTest() {
         // Construct the params object for operation getActiveTasks
-        const params = {};
+        const getActiveTasksParams = {};
 
-        const getActiveTasksResult = cloudantService.getActiveTasks(params);
+        const getActiveTasksResult = cloudantService.getActiveTasks(getActiveTasksParams);
 
         // all methods should return a Promise
         expectToBePromise(getActiveTasksResult);
@@ -9998,14 +9998,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getActiveTasksParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getActiveTasks(params);
+        cloudantService.getActiveTasks(getActiveTasksParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -10020,9 +10020,9 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __getUpInformationTest() {
         // Construct the params object for operation getUpInformation
-        const params = {};
+        const getUpInformationParams = {};
 
-        const getUpInformationResult = cloudantService.getUpInformation(params);
+        const getUpInformationResult = cloudantService.getUpInformation(getUpInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getUpInformationResult);
@@ -10057,14 +10057,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getUpInformationParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getUpInformation(params);
+        cloudantService.getUpInformation(getUpInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -10079,9 +10079,9 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __getActivityTrackerEventsTest() {
         // Construct the params object for operation getActivityTrackerEvents
-        const params = {};
+        const getActivityTrackerEventsParams = {};
 
-        const getActivityTrackerEventsResult = cloudantService.getActivityTrackerEvents(params);
+        const getActivityTrackerEventsResult = cloudantService.getActivityTrackerEvents(getActivityTrackerEventsParams);
 
         // all methods should return a Promise
         expectToBePromise(getActivityTrackerEventsResult);
@@ -10116,14 +10116,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getActivityTrackerEventsParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getActivityTrackerEvents(params);
+        cloudantService.getActivityTrackerEvents(getActivityTrackerEventsParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -10139,11 +10139,11 @@ describe('CloudantV1', () => {
       function __postActivityTrackerEventsTest() {
         // Construct the params object for operation postActivityTrackerEvents
         const types = ['management'];
-        const params = {
+        const postActivityTrackerEventsParams = {
           types: types,
         };
 
-        const postActivityTrackerEventsResult = cloudantService.postActivityTrackerEvents(params);
+        const postActivityTrackerEventsResult = cloudantService.postActivityTrackerEvents(postActivityTrackerEventsParams);
 
         // all methods should return a Promise
         expectToBePromise(postActivityTrackerEventsResult);
@@ -10180,7 +10180,7 @@ describe('CloudantV1', () => {
         const types = ['management'];
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const postActivityTrackerEventsParams = {
           types,
           headers: {
             Accept: userAccept,
@@ -10188,7 +10188,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postActivityTrackerEvents(params);
+        cloudantService.postActivityTrackerEvents(postActivityTrackerEventsParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -10221,9 +10221,9 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __getCurrentThroughputInformationTest() {
         // Construct the params object for operation getCurrentThroughputInformation
-        const params = {};
+        const getCurrentThroughputInformationParams = {};
 
-        const getCurrentThroughputInformationResult = cloudantService.getCurrentThroughputInformation(params);
+        const getCurrentThroughputInformationResult = cloudantService.getCurrentThroughputInformation(getCurrentThroughputInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getCurrentThroughputInformationResult);
@@ -10258,14 +10258,14 @@ describe('CloudantV1', () => {
         // parameters
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
-        const params = {
+        const getCurrentThroughputInformationParams = {
           headers: {
             Accept: userAccept,
             'Content-Type': userContentType,
           },
         };
 
-        cloudantService.getCurrentThroughputInformation(params);
+        cloudantService.getCurrentThroughputInformation(getCurrentThroughputInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
