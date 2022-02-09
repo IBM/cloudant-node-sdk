@@ -77,9 +77,6 @@ typings/
 .idea
 .vscode/
 
-# secrets.tar produced by scripts/update-auth-file.sh
-secrets.tar
-
 .project
 .classpath
 
