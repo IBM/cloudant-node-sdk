@@ -18,6 +18,7 @@
     "lint": "npm run eslint:check",
     "lint-fix": "npm run eslint:fix",
     "build": "tsc",
+    "postbuild": "[ -d 'dist' ] && cp package.json LICENSE README.md dist/",
     "version": "bump2version --allow-dirty --new-version $npm_package_version patch && git add README.md .bumpversion.cfg",
     "postversion": "tsc-publish --no-checks --dry-run",
     "jest": "jest",
