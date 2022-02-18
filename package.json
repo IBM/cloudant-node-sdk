@@ -66,6 +66,7 @@
     "typescript": "4.5.5"
   },
   "peerDependencies": {
+    "@types/tough-cookie": "*",
     "extend": "*",
     "tough-cookie": "*"
   },
