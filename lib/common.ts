@@ -39,7 +39,7 @@ export function getSdkHeaders(
   const nodeVersion = process.version;
 
   const headers = {
-    'User-Agent': `${sdkName}/${sdkVersion} (node.version=${nodeVersion}; os.name=${osName}; os.version=${osVersion}; os.arch=${osArch}; lang=node.js;)`,
+    'User-Agent': `${sdkName}/${sdkVersion} (node.version=${nodeVersion}; os.name=${osName}; os.version=${osVersion}; os.arch=${osArch}; lang=Node.js;)`,
     'X-IBMCloud-SDK-Analytics': `service_name=${serviceName};service_version=${serviceVersion};operation_id=${operationId}`,
   };
 
