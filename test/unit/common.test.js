@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,18 @@ const { getSdkHeaders } = common;
 
 describe('Tests of Common Library', () => {
   describe('getSdkHeaders', () => {
-    test('should return correct User-Agent header', () => {
-      const headers = getSdkHeaders('service1', 'v1', 'operation1');
+    test('should return correct X-IBMCloud-SDK-Analytics and User-Agent headers', () => {
+      const serviceName = 'service';
+      const serviceVersion = 'v1';
+      const operationId = 'operation1';
+      const headers = getSdkHeaders(serviceName, serviceVersion, operationId);
       expect(headers).not.toBeNull();
-      expect(headers['User-Agent']).toMatch(/^cloudant-node-sdk.*/);
+      expect(headers['X-IBMCloud-SDK-Analytics']).toBe(
+        `service_name=${serviceName};service_version=${serviceVersion};operation_id=${operationId}`
+      );
+      expect(headers['User-Agent']).toMatch(
+        /^cloudant-node-sdk\/[0-9.]+ \(.+\)$/
+      );
     });
   });
 });

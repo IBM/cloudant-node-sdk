@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,10 +35,11 @@ export function getSdkHeaders(
   const sdkVersion = pkg.version;
   const osName = os.platform();
   const osVersion = os.release();
+  const osArch = os.arch();
   const nodeVersion = process.version;
 
   const headers = {
-    'User-Agent': `${sdkName}-${sdkVersion} ${osName} ${osVersion} ${nodeVersion}`,
+    'User-Agent': `${sdkName}/${sdkVersion} (node.version=${nodeVersion}; os.name=${osName}; os.version=${osVersion}; os.arch=${osArch}; lang=Node.js;)`,
     'X-IBMCloud-SDK-Analytics': `service_name=${serviceName};service_version=${serviceVersion};operation_id=${operationId}`,
   };
 
