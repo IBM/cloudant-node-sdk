@@ -20,7 +20,7 @@ const { getSdkHeaders } = common;
 
 describe('Tests of Common Library', () => {
   describe('getSdkHeaders', () => {
-    test('should return correct X-IBMCloud-SDK-Analytics header', () => {
+    test('should return correct X-IBMCloud-SDK-Analytics and User-Agent headers', () => {
       const serviceName = 'service';
       const serviceVersion = 'v1';
       const operationId = 'operation1';
