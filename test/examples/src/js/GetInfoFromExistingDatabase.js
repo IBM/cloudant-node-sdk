@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ const getInfoFromExistingDatabase = async () => {
   const documentCount = dbInfo.result.doc_count;
   const dbNameResult = dbInfo.result.db_name;
 
-  // 4. Show document count in database =================================
+  // 4. Show document count in database =========================================
   console.log(
     `Document count in "${dbNameResult}" database is ${documentCount}.`
   );

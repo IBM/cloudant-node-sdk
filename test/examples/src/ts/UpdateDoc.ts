@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,9 @@ interface OrderDocument extends CloudantV1.Document {
   _rev?: string;
 }
 
-// 1. Create a client with `CLOUDANT` default service name ================
+// 1. Create a client with `CLOUDANT` default service name ======================
 const client = CloudantV1.newInstance({});
-// 2. Update the document =====================================================
+// 2. Update the document =======================================================
 // Set the options to get the document out of the database if it exists
 const exampleDbName = 'orders';
 
@@ -35,14 +35,18 @@ const getDocParams: CloudantV1.GetDocumentParams = {
   db: exampleDbName,
 };
 
-// Note: for response byte stream use:
-// const getdocAsStreamParam: CloudantV1.GetDocumentAsStreamParams = {
-//   docId: 'example',
-//   db: exampleDbName,
-// };
-// client
-//   .getDocumentAsStream(getdocAsStreamParam)
-//   .then((documentAsByteStream) => {});
+// ==============================================================================
+// Note : for response byte stream use:
+/*
+const getdocAsStreamParam: CloudantV1.GetDocumentAsStreamParams = {
+  docId: 'example',
+  db: exampleDbName,
+};
+client
+  .getDocumentAsStream(getdocAsStreamParam)
+  .then((documentAsByteStream) => {...});
+*/
+// ==============================================================================
 
 client
   .getDocument(getDocParams)
@@ -59,12 +63,29 @@ client
     // Update the document in the database
     client
       .postDocument({ db: exampleDbName, document })
-      // Note: for request byte stream use:
+      // ========================================================================
+      // Note 1: for request byte stream use:
       // .postDocument(
       //   {db: exampleDbName, document: documentAsByteStream}
       // )
+      // ========================================================================
+
+      // ========================================================================
+      // Note 2: updating the document can also be done with the "putDocument" function.
+      // `docId` and `rev` are required for an UPDATE operation,
+      // but `rev` can be provided in the document object as `_rev` too:
+      /*
+      .putDocument({
+        db: exampleDbName,
+        docId: document._id, // docId is a required parameter
+        rev: document._rev,
+        document, // _rev in the document object CAN replace above `rev` parameter
+      })
+      */
+      // ========================================================================
       .then((res) => {
-        // Keeping track with the revision number of the document object:
+        // Keeping track of the latest revision number of the document object
+        // is necessary for further UPDATE/DELETE operations:
         document._rev = res.result.rev;
         console.log(
           `You have updated the document:\n${JSON.stringify(document, null, 2)}`

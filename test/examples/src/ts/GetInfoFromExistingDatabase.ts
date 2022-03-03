@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,17 @@
 
 import { CloudantV1 } from '../../../../index';
 
-// 1. Create a Cloudant client with "EXAMPLES" service name ===================
+// 1. Create a Cloudant client with "EXAMPLES" service name =====================
 const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
 
-// 2. Get server information ==================================================
+// 2. Get server information ====================================================
 // call service without parameters:
 client.getServerInformation().then((serverInformation) => {
   const { version } = serverInformation.result;
   console.log(`Server version ${version}`);
 });
 
-// 3. Get database information for "animaldb" =================================
+// 3. Get database information for "animaldb" ===================================
 const dbName = 'animaldb';
 
 // call service with embedded parameters:
@@ -34,13 +34,13 @@ client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
   const documentCount = dbInfo.result.doc_count;
   const dbNameResult = dbInfo.result.db_name;
 
-  // 4. Show document count in database =================================
+  // 4. Show document count in database =========================================
   console.log(
     `Document count in "${dbNameResult}" database is ${documentCount}.`
   );
 });
 
-// 5. Get zebra document out of the database by document id ===================
+// 5. Get zebra document out of the database by document id =====================
 const getDocParams: CloudantV1.GetDocumentParams = {
   db: dbName,
   docId: 'zebra',

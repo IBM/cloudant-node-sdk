@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ const { CloudantV1 } = require('../../../../index.ts');
 // when you change this file, please run test/examples/src/js/CreateOutputs.js so that the output files are updated
 
 const updateDoc = async () => {
-  // 1. Create a client with `CLOUDANT` default service name ================
+  // 1. Create a client with `CLOUDANT` default service name ====================
   const client = CloudantV1.newInstance({});
   // 2. Update the document =====================================================
   // Set the options to get the document out of the database if it exists
@@ -36,13 +36,17 @@ const updateDoc = async () => {
       })
     ).result;
 
+    // ==========================================================================
     // Note: for response byte stream use:
-    // const documentAsByteStream = (
-    //     await client.getDocumentAsStream({
-    //       docId: 'example',
-    //       db: exampleDbName,
-    //     })
-    // ).result;
+    /*
+    const documentAsByteStream = (
+      await client.getDocumentAsStream({
+        docId: 'example',
+        db: exampleDbName,
+      })
+    ).result;
+    */
+    // ==========================================================================
 
     // Add Bob Smith's address to the document
     document.address = '19 Front Street, Darlington, DL5 1TY';
@@ -50,21 +54,42 @@ const updateDoc = async () => {
     // Remove the joined property from document object
     delete document['joined'];
 
-    // Keeping track with the revision number of the document object:
+    // Keeping track of the latest revision number of the document object
+    // is necessary for further UPDATE/DELETE operations:
     document._rev = (
       await client.postDocument({
         db: exampleDbName,
-        document,
+        document, // _id and _rev MUST be inside the document object
       })
     ).result.rev;
 
-    // Note: for request byte stream use:
-    // document._rev = (
-    //     await client.postDocument({
-    //       db: exampleDbName,
-    //       document: documentAsByteStream,
-    //     })
-    // ).result.rev;
+    // ==========================================================================
+    // Note 1: for request byte stream use:
+    /*
+    document._rev = (
+      await client.postDocument({
+        db: exampleDbName,
+        document: documentAsByteStream,
+      })
+    ).result.rev;
+     */
+    // ==========================================================================
+
+    // ==========================================================================
+    // Note 2: updating the document can also be done with the "putDocument" function.
+    // `docId` and `rev` are required for an UPDATE operation,
+    // but `rev` can be provided in the document object as `_rev` too:
+    /*
+    document._rev = (
+      await client.putDocument({
+        db: exampleDbName,
+        docId: document._id, // docId is a required parameter
+        rev: document._rev,
+        document // _rev in the document object CAN replace above `rev` parameter
+      })
+    ).result.rev;
+    */
+    // ==========================================================================
 
     console.log(
       `You have updated the document:\n${JSON.stringify(document, null, 2)}`

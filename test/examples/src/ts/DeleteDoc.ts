@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,10 +24,10 @@ interface OrderDocument extends CloudantV1.Document {
   _rev?: string;
 }
 
-// 1. Create a client with `CLOUDANT` default service name ================
+// 1. Create a client with `CLOUDANT` default service name ======================
 const client = CloudantV1.newInstance({});
 
-// 2. Delete the document =============================================
+// 2. Delete the document =======================================================
 // Set the options to get the document out of the database if it exists
 const exampleDbName = 'orders';
 const exampleDocId = 'example';
@@ -46,8 +46,8 @@ client
     client
       .deleteDocument({
         db: exampleDbName,
-        docId: document._id,
-        rev: document._rev,
+        docId: document._id, // `docId` is required for DELETE
+        rev: document._rev, // `rev` is required for DELETE
       })
       .then(() => {
         console.log('You have deleted the document.');
