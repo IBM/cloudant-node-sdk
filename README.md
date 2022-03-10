@@ -252,17 +252,17 @@ import {CloudantV1} from "@ibm-cloud/cloudant";
 ```
 [embedmd]:# (test/examples/src/ts/GetInfoFromExistingDatabase.ts /\/\/ 1./ $)
 ```ts
-// 1. Create a Cloudant client with "EXAMPLES" service name ===================
+// 1. Create a Cloudant client with "EXAMPLES" service name =====================
 const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
 
-// 2. Get server information ==================================================
+// 2. Get server information ====================================================
 // call service without parameters:
 client.getServerInformation().then((serverInformation) => {
   const { version } = serverInformation.result;
   console.log(`Server version ${version}`);
 });
 
-// 3. Get database information for "animaldb" =================================
+// 3. Get database information for "animaldb" ===================================
 const dbName = 'animaldb';
 
 // call service with embedded parameters:
@@ -270,13 +270,13 @@ client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
   const documentCount = dbInfo.result.doc_count;
   const dbNameResult = dbInfo.result.db_name;
 
-  // 4. Show document count in database =================================
+  // 4. Show document count in database =========================================
   console.log(
     `Document count in "${dbNameResult}" database is ${documentCount}.`
   );
 });
 
-// 5. Get zebra document out of the database by document id ===================
+// 5. Get zebra document out of the database by document id =====================
 const getDocParams: CloudantV1.GetDocumentParams = {
   db: dbName,
   docId: 'zebra',
@@ -318,7 +318,7 @@ const getInfoFromExistingDatabase = async () => {
   const documentCount = dbInfo.result.doc_count;
   const dbNameResult = dbInfo.result.db_name;
 
-  // 4. Show document count in database =================================
+  // 4. Show document count in database =========================================
   console.log(
     `Document count in "${dbNameResult}" database is ${documentCount}.`
   );
@@ -389,10 +389,10 @@ interface OrderDocument extends CloudantV1.Document {
   _rev?: string;
 }
 
-// 1. Create a client with `CLOUDANT` default service name ================
+// 1. Create a client with `CLOUDANT` default service name ======================
 const client = CloudantV1.newInstance({});
 
-// 2. Create a database =======================================================
+// 2. Create a database =========================================================
 const exampleDbName = 'orders';
 
 // Try to create database if it doesn't exist
@@ -411,26 +411,39 @@ const createDb = client
     }
   });
 
-// 3. Create a document =======================================================
+// 3. Create a document =========================================================
 // Create a document object with "example" id
 const exampleDocId = 'example';
 
-// set required _id property on exampleDocument:
+// Setting `_id` for the document is optional when postDocument function is used for CREATE.
+// When `_id` is not provided the server will generate one for your document.
 const exampleDocument: OrderDocument = { _id: exampleDocId };
 
 // Add "name" and "joined" fields to the document
 exampleDocument.name = 'Bob Smith';
 exampleDocument.joined = '2019-01-24T10:42:99.000Z';
 
-// Save the document in the database
+// Save the document in the database with "postDocument" function
 createDb.then(() => {
   client
     .postDocument({
       db: exampleDbName,
       document: exampleDocument,
     })
+    // ==========================================================================
+    // Note: saving the document can also be done with the "putDocument"
+    // function. In this case `docId` is required for a CREATE operation:
+    /*
+    .putDocument({
+      db: exampleDbName,
+      docId: exampleDocId,
+      document: exampleDocument,
+    })
+    */
+    // ==========================================================================
     .then((createDocumentResponse) => {
-      // Keep track with the revision number of the document object
+      // Keeping track of the revision number of the document object
+      // is necessary for further UPDATE/DELETE operations:
       exampleDocument._rev = createDocumentResponse.result.rev;
       console.log(
         'You have created the document:\n' +
@@ -450,7 +463,7 @@ const { CloudantV1 } = require('@ibm-cloud/cloudant');
 [embedmd]:# (test/examples/src/js/CreateDbAndDoc.js /const createDbAndDoc/ /createDbAndDoc\(\);\n\}/)
 ```js
 const createDbAndDoc = async () => {
-  // 1. Create a client with `CLOUDANT` default service name ================
+  // 1. Create a client with `CLOUDANT` default service name ====================
   const client = CloudantV1.newInstance({});
 
   // 2. Create a database =======================================================
@@ -478,19 +491,32 @@ const createDbAndDoc = async () => {
   // Create a document object with "example" id
   const exampleDocId = 'example';
 
+  // Setting `_id` for the document is optional when "postDocument" function is used for CREATE.
+  // When `_id` is not provided the server will generate one for your document.
   const exampleDocument = { _id: exampleDocId };
 
   // Add "name" and "joined" fields to the document
   exampleDocument['name'] = 'Bob Smith';
   exampleDocument.joined = '2019-01-24T10:42:99.000Z';
 
-  // Save the document in the database
+  // Save the document in the database with "postDocument" function
   const createDocumentResponse = await client.postDocument({
     db: exampleDbName,
     document: exampleDocument,
   });
 
-  // Keep track with the revision number of the document object
+  // ==========================================================================
+  // Note: saving the document can also be done with the "putDocument"
+  // function. In this case `docId` is required for a CREATE operation:
+  /* const createDocumentResponse = await client.putDocument({
+       db: exampleDbName,
+       docId: exampleDocId,
+       document: exampleDocument,
+  }); */
+  // ==========================================================================
+
+  // Keeping track of the revision number of the document object
+  // is necessary for further UPDATE/DELETE operations:
   exampleDocument._rev = createDocumentResponse.result.rev;
   console.log(
     'You have created the document:\n' +
@@ -546,9 +572,9 @@ interface OrderDocument extends CloudantV1.Document {
   _rev?: string;
 }
 
-// 1. Create a client with `CLOUDANT` default service name ================
+// 1. Create a client with `CLOUDANT` default service name ======================
 const client = CloudantV1.newInstance({});
-// 2. Update the document =====================================================
+// 2. Update the document =======================================================
 // Set the options to get the document out of the database if it exists
 const exampleDbName = 'orders';
 
@@ -558,14 +584,18 @@ const getDocParams: CloudantV1.GetDocumentParams = {
   db: exampleDbName,
 };
 
-// Note: for response byte stream use:
-// const getdocAsStreamParam: CloudantV1.GetDocumentAsStreamParams = {
-//   docId: 'example',
-//   db: exampleDbName,
-// };
-// client
-//   .getDocumentAsStream(getdocAsStreamParam)
-//   .then((documentAsByteStream) => {});
+// ==============================================================================
+// Note : for response byte stream use:
+/*
+const getdocAsStreamParam: CloudantV1.GetDocumentAsStreamParams = {
+  docId: 'example',
+  db: exampleDbName,
+};
+client
+  .getDocumentAsStream(getdocAsStreamParam)
+  .then((documentAsByteStream) => {...});
+*/
+// ==============================================================================
 
 client
   .getDocument(getDocParams)
@@ -582,12 +612,29 @@ client
     // Update the document in the database
     client
       .postDocument({ db: exampleDbName, document })
-      // Note: for request byte stream use:
+      // ========================================================================
+      // Note 1: for request byte stream use:
       // .postDocument(
       //   {db: exampleDbName, document: documentAsByteStream}
       // )
+      // ========================================================================
+
+      // ========================================================================
+      // Note 2: updating the document can also be done with the "putDocument" function.
+      // `docId` and `rev` are required for an UPDATE operation,
+      // but `rev` can be provided in the document object as `_rev` too:
+      /*
+      .putDocument({
+        db: exampleDbName,
+        docId: document._id, // docId is a required parameter
+        rev: document._rev,
+        document, // _rev in the document object CAN replace above `rev` parameter
+      })
+      */
+      // ========================================================================
       .then((res) => {
-        // Keeping track with the revision number of the document object:
+        // Keeping track of the latest revision number of the document object
+        // is necessary for further UPDATE/DELETE operations:
         document._rev = res.result.rev;
         console.log(
           `You have updated the document:\n${JSON.stringify(document, null, 2)}`
@@ -614,7 +661,7 @@ const { CloudantV1 } = require('@ibm-cloud/cloudant');
 [embedmd]:# (test/examples/src/js/UpdateDoc.js /const updateDoc/ /updateDoc\(\);\n\}/)
 ```js
 const updateDoc = async () => {
-  // 1. Create a client with `CLOUDANT` default service name ================
+  // 1. Create a client with `CLOUDANT` default service name ====================
   const client = CloudantV1.newInstance({});
   // 2. Update the document =====================================================
   // Set the options to get the document out of the database if it exists
@@ -629,13 +676,17 @@ const updateDoc = async () => {
       })
     ).result;
 
+    // ==========================================================================
     // Note: for response byte stream use:
-    // const documentAsByteStream = (
-    //     await client.getDocumentAsStream({
-    //       docId: 'example',
-    //       db: exampleDbName,
-    //     })
-    // ).result;
+    /*
+    const documentAsByteStream = (
+      await client.getDocumentAsStream({
+        docId: 'example',
+        db: exampleDbName,
+      })
+    ).result;
+    */
+    // ==========================================================================
 
     // Add Bob Smith's address to the document
     document.address = '19 Front Street, Darlington, DL5 1TY';
@@ -643,21 +694,42 @@ const updateDoc = async () => {
     // Remove the joined property from document object
     delete document['joined'];
 
-    // Keeping track with the revision number of the document object:
+    // Keeping track of the latest revision number of the document object
+    // is necessary for further UPDATE/DELETE operations:
     document._rev = (
       await client.postDocument({
         db: exampleDbName,
-        document,
+        document, // _id and _rev MUST be inside the document object
       })
     ).result.rev;
 
-    // Note: for request byte stream use:
-    // document._rev = (
-    //     await client.postDocument({
-    //       db: exampleDbName,
-    //       document: documentAsByteStream,
-    //     })
-    // ).result.rev;
+    // ==========================================================================
+    // Note 1: for request byte stream use:
+    /*
+    document._rev = (
+      await client.postDocument({
+        db: exampleDbName,
+        document: documentAsByteStream,
+      })
+    ).result.rev;
+     */
+    // ==========================================================================
+
+    // ==========================================================================
+    // Note 2: updating the document can also be done with the "putDocument" function.
+    // `docId` and `rev` are required for an UPDATE operation,
+    // but `rev` can be provided in the document object as `_rev` too:
+    /*
+    document._rev = (
+      await client.putDocument({
+        db: exampleDbName,
+        docId: document._id, // docId is a required parameter
+        rev: document._rev,
+        document // _rev in the document object CAN replace above `rev` parameter
+      })
+    ).result.rev;
+    */
+    // ==========================================================================
 
     console.log(
       `You have updated the document:\n${JSON.stringify(document, null, 2)}`
@@ -720,10 +792,10 @@ interface OrderDocument extends CloudantV1.Document {
   _rev?: string;
 }
 
-// 1. Create a client with `CLOUDANT` default service name ================
+// 1. Create a client with `CLOUDANT` default service name ======================
 const client = CloudantV1.newInstance({});
 
-// 2. Delete the document =============================================
+// 2. Delete the document =======================================================
 // Set the options to get the document out of the database if it exists
 const exampleDbName = 'orders';
 const exampleDocId = 'example';
@@ -742,8 +814,8 @@ client
     client
       .deleteDocument({
         db: exampleDbName,
-        docId: document._id,
-        rev: document._rev,
+        docId: document._id, // `docId` is required for DELETE
+        rev: document._rev, // `rev` is required for DELETE
       })
       .then(() => {
         console.log('You have deleted the document.');
@@ -769,10 +841,10 @@ const { CloudantV1 } = require('@ibm-cloud/cloudant');
 [embedmd]:# (test/examples/src/js/DeleteDoc.js /const deleteDoc/ /deleteDoc\(\);\n\}/)
 ```js
 const deleteDoc = async () => {
-  // 1. Create a client with `CLOUDANT` default service name ================
+  // 1. Create a client with `CLOUDANT` default service name ====================
   const client = CloudantV1.newInstance({});
 
-  // 2. Delete the document =============================================
+  // 2. Delete the document =====================================================
   // Set the options to get the document out of the database if it exists
   const exampleDbName = 'orders';
   const exampleDocId = 'example';
@@ -788,8 +860,8 @@ const deleteDoc = async () => {
 
     await client.deleteDocument({
       db: exampleDbName,
-      docId: document._id,
-      rev: document._rev,
+      docId: document._id, // `docId` is required for DELETE
+      rev: document._rev, // `rev` is required for DELETE
     });
     console.log('You have deleted the document.');
   } catch (err) {
