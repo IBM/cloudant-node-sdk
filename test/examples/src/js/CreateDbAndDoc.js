@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ const { CloudantV1 } = require('../../../../index.ts');
 // when you change this file, please run test/examples/src/js/CreateOutputs.js so that the output files are updated
 
 const createDbAndDoc = async () => {
-  // 1. Create a client with `CLOUDANT` default service name ================
+  // 1. Create a client with `CLOUDANT` default service name ====================
   const client = CloudantV1.newInstance({});
 
   // 2. Create a database =======================================================
@@ -49,19 +49,32 @@ const createDbAndDoc = async () => {
   // Create a document object with "example" id
   const exampleDocId = 'example';
 
+  // Setting `_id` for the document is optional when "postDocument" function is used for CREATE.
+  // When `_id` is not provided the server will generate one for your document.
   const exampleDocument = { _id: exampleDocId };
 
   // Add "name" and "joined" fields to the document
   exampleDocument['name'] = 'Bob Smith';
   exampleDocument.joined = '2019-01-24T10:42:99.000Z';
 
-  // Save the document in the database
+  // Save the document in the database with "postDocument" function
   const createDocumentResponse = await client.postDocument({
     db: exampleDbName,
     document: exampleDocument,
   });
 
-  // Keep track with the revision number of the document object
+  // ==========================================================================
+  // Note: saving the document can also be done with the "putDocument"
+  // function. In this case `docId` is required for a CREATE operation:
+  /* const createDocumentResponse = await client.putDocument({
+       db: exampleDbName,
+       docId: exampleDocId,
+       document: exampleDocument,
+  }); */
+  // ==========================================================================
+
+  // Keeping track of the revision number of the document object
+  // is necessary for further UPDATE/DELETE operations:
   exampleDocument._rev = createDocumentResponse.result.rev;
   console.log(
     'You have created the document:\n' +
