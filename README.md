@@ -421,7 +421,7 @@ const exampleDocument: OrderDocument = { _id: exampleDocId };
 
 // Add "name" and "joined" fields to the document
 exampleDocument.name = 'Bob Smith';
-exampleDocument.joined = '2019-01-24T10:42:99.000Z';
+exampleDocument.joined = '2019-01-24T10:42:59.000Z';
 
 // Save the document in the database with "postDocument" function
 createDb.then(() => {
@@ -497,7 +497,7 @@ const createDbAndDoc = async () => {
 
   // Add "name" and "joined" fields to the document
   exampleDocument['name'] = 'Bob Smith';
-  exampleDocument.joined = '2019-01-24T10:42:99.000Z';
+  exampleDocument.joined = '2019-01-24T10:42:59.000Z';
 
   // Save the document in the database with "postDocument" function
   const createDocumentResponse = await client.postDocument({
@@ -541,7 +541,7 @@ You have created the document:
 {
   "_id": "example",
   "name": "Bob Smith",
-  "joined": "2019-01-24T10:42:99.000Z",
+  "joined": "2019-01-24T10:42:59.000Z",
   "_rev": "1-1b403633540686aa32d013fda9041a5d"
 }
 ```
