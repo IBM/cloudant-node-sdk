@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2021. All Rights Reserved.
+ * © Copyright IBM Corporation 2021, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,16 @@ import {
   SessionTokenManager,
   SessionTokenManagerOptions,
 } from './sessionTokenManager';
+import { Cookie, CookieJar, Store } from 'tough-cookie';
+
+interface SessionCookieJar extends CookieJar {
+  cloudantPatch: boolean;
+  store: Store;
+}
+
+interface SessionCookie extends Cookie {
+  cloudantPatchUpdateTime: Date;
+}
 
 /** Configuration options for CouchDB session authentication. */
 export type CouchdbSessionAuthenticatorOptions = {
@@ -88,7 +98,7 @@ export class CouchdbSessionAuthenticator extends Authenticator {
 
     // START monkey patch for https://github.com/salesforce/tough-cookie/issues/154
     // Check if we've already patched the jar
-    const cookieJar = this.tokenOptions.jar;
+    const cookieJar = this.tokenOptions.jar as SessionCookieJar;
     if (cookieJar && !cookieJar.cloudantPatch) {
       // Set the patching flag
       cookieJar.cloudantPatch = true;
@@ -96,7 +106,7 @@ export class CouchdbSessionAuthenticator extends Authenticator {
       const originalUpdateCookieFn = cookieJar.store.updateCookie;
       cookieJar.store.updateCookie = function updateCookie(
         oldCookie,
-        newCookie,
+        newCookie: SessionCookie,
         cb
       ) {
         // Add current time as an update timestamp to the newCookie
@@ -116,7 +126,7 @@ export class CouchdbSessionAuthenticator extends Authenticator {
             newCookie.cloudantPatchUpdateTime || now
           );
         };
-        // Finally delegate back to the original update function or the fallback put (which is set by Cookie
+        // Finally, delegate back to the original update function or the fallback put (which is set by Cookie
         // when an update function is not present on the store). Since we always set an update function for our
         // patch we need to also provide that fallback.
         if (originalUpdateCookieFn) {
