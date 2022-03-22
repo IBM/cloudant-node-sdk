@@ -647,7 +647,7 @@ describe('CloudantV1', () => {
       function __postChangesAsStreamTest() {
         // Construct the params object for operation postChangesAsStream
         const db = 'testString';
-        const docIds = ['0007741142412418284'];
+        const docIds = ['testString'];
         const fields = ['testString'];
         const selector = { 'key1': 'testString' };
         const lastEventId = 'testString';
@@ -1600,13 +1600,13 @@ describe('CloudantV1', () => {
         const descending = false;
         const includeDocs = false;
         const inclusiveEnd = true;
-        const limit = 10;
+        const limit = 0;
         const skip = 0;
         const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = '0007741142412418284';
+        const startkey = 'testString';
         const postAllDocsAsStreamParams = {
           db: db,
           attEncodingInfo: attEncodingInfo,
@@ -1836,7 +1836,7 @@ describe('CloudantV1', () => {
         update_seq: false,
         endkey: 'testString',
         key: 'testString',
-        keys: ['small-appliances:1000042', 'small-appliances:1000043'],
+        keys: ['testString'],
         startkey: 'testString',
       };
 
@@ -2131,8 +2131,8 @@ describe('CloudantV1', () => {
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
         atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
-        id: 'order00067',
-        rev: '3-917fa2381192822767f010b95b45325b',
+        id: 'testString',
+        rev: 'testString',
       };
 
       function __postBulkGetAsMixedTest() {
@@ -2241,8 +2241,8 @@ describe('CloudantV1', () => {
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
         atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
-        id: 'order00067',
-        rev: '3-917fa2381192822767f010b95b45325b',
+        id: 'testString',
+        rev: 'testString',
       };
 
       function __postBulkGetAsRelatedTest() {
@@ -2351,8 +2351,8 @@ describe('CloudantV1', () => {
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
         atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
-        id: 'order00067',
-        rev: '3-917fa2381192822767f010b95b45325b',
+        id: 'testString',
+        rev: 'testString',
       };
 
       function __postBulkGetAsStreamTest() {
@@ -3743,13 +3743,13 @@ describe('CloudantV1', () => {
         const descending = false;
         const includeDocs = false;
         const inclusiveEnd = true;
-        const limit = 10;
+        const limit = 0;
         const skip = 0;
         const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = '0007741142412418284';
+        const startkey = 'testString';
         const accept = 'application/json';
         const postDesignDocsParams = {
           db: db,
@@ -3874,7 +3874,7 @@ describe('CloudantV1', () => {
         update_seq: false,
         endkey: 'testString',
         key: 'testString',
-        keys: ['small-appliances:1000042', 'small-appliances:1000043'],
+        keys: ['testString'],
         startkey: 'testString',
       };
 
@@ -4131,9 +4131,9 @@ describe('CloudantV1', () => {
         const attachments = false;
         const conflicts = false;
         const descending = false;
-        const includeDocs = true;
+        const includeDocs = false;
         const inclusiveEnd = true;
-        const limit = 10;
+        const limit = 0;
         const skip = 0;
         const updateSeq = false;
         const endkey = 'testString';
@@ -4141,7 +4141,7 @@ describe('CloudantV1', () => {
         const group = false;
         const groupLevel = 1;
         const key = 'testString';
-        const keys = ['examplekey'];
+        const keys = ['testString'];
         const reduce = true;
         const stable = false;
         const startkey = 'testString';
@@ -4408,9 +4408,9 @@ describe('CloudantV1', () => {
         attachments: false,
         conflicts: false,
         descending: false,
-        include_docs: true,
+        include_docs: false,
         inclusive_end: true,
-        limit: 5,
+        limit: 0,
         skip: 0,
         update_seq: false,
         endkey: 'testString',
@@ -4623,13 +4623,13 @@ describe('CloudantV1', () => {
         const descending = false;
         const includeDocs = false;
         const inclusiveEnd = true;
-        const limit = 10;
+        const limit = 0;
         const skip = 0;
         const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = '0007741142412418284';
+        const startkey = 'testString';
         const postPartitionAllDocsParams = {
           db: db,
           partitionKey: partitionKey,
@@ -4750,13 +4750,13 @@ describe('CloudantV1', () => {
         const descending = false;
         const includeDocs = false;
         const inclusiveEnd = true;
-        const limit = 10;
+        const limit = 0;
         const skip = 0;
         const updateSeq = false;
         const endkey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = '0007741142412418284';
+        const startkey = 'testString';
         const postPartitionAllDocsAsStreamParams = {
           db: db,
           partitionKey: partitionKey,
@@ -5019,7 +5019,7 @@ describe('CloudantV1', () => {
         const highlightSize = 1;
         const includeDocs = false;
         const includeFields = ['testString'];
-        const limit = 3;
+        const limit = 0;
         const sort = ['testString'];
         const stale = 'ok';
         const postPartitionSearchAsStreamParams = {
@@ -5151,9 +5151,9 @@ describe('CloudantV1', () => {
         const attachments = false;
         const conflicts = false;
         const descending = false;
-        const includeDocs = true;
+        const includeDocs = false;
         const inclusiveEnd = true;
-        const limit = 10;
+        const limit = 0;
         const skip = 0;
         const updateSeq = false;
         const endkey = 'testString';
@@ -5161,7 +5161,7 @@ describe('CloudantV1', () => {
         const group = false;
         const groupLevel = 1;
         const key = 'testString';
-        const keys = ['examplekey'];
+        const keys = ['testString'];
         const reduce = true;
         const stable = false;
         const startkey = 'testString';
@@ -5309,9 +5309,9 @@ describe('CloudantV1', () => {
         const attachments = false;
         const conflicts = false;
         const descending = false;
-        const includeDocs = true;
+        const includeDocs = false;
         const inclusiveEnd = true;
-        const limit = 10;
+        const limit = 0;
         const skip = 0;
         const updateSeq = false;
         const endkey = 'testString';
@@ -5319,7 +5319,7 @@ describe('CloudantV1', () => {
         const group = false;
         const groupLevel = 1;
         const key = 'testString';
-        const keys = ['examplekey'];
+        const keys = ['testString'];
         const reduce = true;
         const stable = false;
         const startkey = 'testString';
@@ -5589,7 +5589,7 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
-        const fields = ['productid', 'name', 'description'];
+        const fields = ['testString'];
         const limit = 0;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
@@ -5833,8 +5833,8 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
-        const fields = ['_id', 'type', 'name', 'email'];
-        const limit = 3;
+        const fields = ['testString'];
+        const limit = 0;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
@@ -5954,8 +5954,8 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
-        const fields = ['_id', 'type', 'name', 'email'];
-        const limit = 3;
+        const fields = ['testString'];
+        const limit = 0;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
@@ -6634,7 +6634,7 @@ describe('CloudantV1', () => {
         const highlightSize = 1;
         const includeDocs = false;
         const includeFields = ['testString'];
-        const limit = 3;
+        const limit = 0;
         const sort = ['testString'];
         const stale = 'ok';
         const counts = ['testString'];
