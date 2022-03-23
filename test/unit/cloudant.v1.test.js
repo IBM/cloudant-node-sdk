@@ -868,16 +868,16 @@ describe('CloudantV1', () => {
       function __getAllDbsTest() {
         // Construct the params object for operation getAllDbs
         const descending = false;
-        const endkey = 'testString';
+        const endKey = 'testString';
         const limit = 0;
         const skip = 0;
-        const startkey = 'testString';
+        const startKey = 'testString';
         const getAllDbsParams = {
           descending: descending,
-          endkey: endkey,
+          endKey: endKey,
           limit: limit,
           skip: skip,
-          startkey: startkey,
+          startKey: startKey,
         };
 
         const getAllDbsResult = cloudantService.getAllDbs(getAllDbsParams);
@@ -895,10 +895,10 @@ describe('CloudantV1', () => {
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.qs.descending).toEqual(descending);
-        expect(mockRequestOptions.qs.endkey).toEqual(endkey);
+        expect(mockRequestOptions.qs.end_key).toEqual(endKey);
         expect(mockRequestOptions.qs.limit).toEqual(limit);
         expect(mockRequestOptions.qs.skip).toEqual(skip);
-        expect(mockRequestOptions.qs.startkey).toEqual(startkey);
+        expect(mockRequestOptions.qs.start_key).toEqual(startKey);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -1481,10 +1481,10 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = false;
-        const endkey = 'testString';
+        const endKey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = 'testString';
+        const startKey = 'testString';
         const postAllDocsParams = {
           db: db,
           attEncodingInfo: attEncodingInfo,
@@ -1496,10 +1496,10 @@ describe('CloudantV1', () => {
           limit: limit,
           skip: skip,
           updateSeq: updateSeq,
-          endkey: endkey,
+          endKey: endKey,
           key: key,
           keys: keys,
-          startkey: startkey,
+          startKey: startKey,
         };
 
         const postAllDocsResult = cloudantService.postAllDocs(postAllDocsParams);
@@ -1525,10 +1525,10 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.limit).toEqual(limit);
         expect(mockRequestOptions.body.skip).toEqual(skip);
         expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
-        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.end_key).toEqual(endKey);
         expect(mockRequestOptions.body.key).toEqual(key);
         expect(mockRequestOptions.body.keys).toEqual(keys);
-        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.body.start_key).toEqual(startKey);
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -1603,10 +1603,10 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = false;
-        const endkey = 'testString';
+        const endKey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = 'testString';
+        const startKey = 'testString';
         const postAllDocsAsStreamParams = {
           db: db,
           attEncodingInfo: attEncodingInfo,
@@ -1618,10 +1618,10 @@ describe('CloudantV1', () => {
           limit: limit,
           skip: skip,
           updateSeq: updateSeq,
-          endkey: endkey,
+          endKey: endKey,
           key: key,
           keys: keys,
-          startkey: startkey,
+          startKey: startKey,
         };
 
         const postAllDocsAsStreamResult = cloudantService.postAllDocsAsStream(postAllDocsAsStreamParams);
@@ -1647,10 +1647,10 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.limit).toEqual(limit);
         expect(mockRequestOptions.body.skip).toEqual(skip);
         expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
-        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.end_key).toEqual(endKey);
         expect(mockRequestOptions.body.key).toEqual(key);
         expect(mockRequestOptions.body.keys).toEqual(keys);
-        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.body.start_key).toEqual(startKey);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.responseType).toBe('stream');
       }
@@ -1727,10 +1727,10 @@ describe('CloudantV1', () => {
         limit: 0,
         skip: 0,
         update_seq: false,
-        endkey: 'testString',
+        end_key: 'testString',
         key: 'testString',
         keys: ['testString'],
-        startkey: 'testString',
+        start_key: 'testString',
       };
 
       function __postAllDocsQueriesTest() {
@@ -1834,10 +1834,10 @@ describe('CloudantV1', () => {
         limit: 0,
         skip: 0,
         update_seq: false,
-        endkey: 'testString',
+        end_key: 'testString',
         key: 'testString',
         keys: ['testString'],
-        startkey: 'testString',
+        start_key: 'testString',
       };
 
       function __postAllDocsQueriesAsStreamTest() {
@@ -3746,10 +3746,10 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = false;
-        const endkey = 'testString';
+        const endKey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = 'testString';
+        const startKey = 'testString';
         const accept = 'application/json';
         const postDesignDocsParams = {
           db: db,
@@ -3762,10 +3762,10 @@ describe('CloudantV1', () => {
           limit: limit,
           skip: skip,
           updateSeq: updateSeq,
-          endkey: endkey,
+          endKey: endKey,
           key: key,
           keys: keys,
-          startkey: startkey,
+          startKey: startKey,
           accept: accept,
         };
 
@@ -3793,10 +3793,10 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.limit).toEqual(limit);
         expect(mockRequestOptions.body.skip).toEqual(skip);
         expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
-        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.end_key).toEqual(endKey);
         expect(mockRequestOptions.body.key).toEqual(key);
         expect(mockRequestOptions.body.keys).toEqual(keys);
-        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.body.start_key).toEqual(startKey);
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -3872,10 +3872,10 @@ describe('CloudantV1', () => {
         limit: 0,
         skip: 0,
         update_seq: false,
-        endkey: 'testString',
+        end_key: 'testString',
         key: 'testString',
         keys: ['testString'],
-        startkey: 'testString',
+        start_key: 'testString',
       };
 
       function __postDesignDocsQueriesTest() {
@@ -3983,16 +3983,16 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = false;
-        const endkey = 'testString';
-        const endkeyDocid = 'testString';
+        const endKey = 'testString';
+        const endKeyDocId = 'testString';
         const group = false;
         const groupLevel = 1;
         const key = 'testString';
         const keys = ['testString'];
         const reduce = true;
         const stable = false;
-        const startkey = 'testString';
-        const startkeyDocid = 'testString';
+        const startKey = 'testString';
+        const startKeyDocId = 'testString';
         const update = 'true';
         const postViewParams = {
           db: db,
@@ -4007,16 +4007,16 @@ describe('CloudantV1', () => {
           limit: limit,
           skip: skip,
           updateSeq: updateSeq,
-          endkey: endkey,
-          endkeyDocid: endkeyDocid,
+          endKey: endKey,
+          endKeyDocId: endKeyDocId,
           group: group,
           groupLevel: groupLevel,
           key: key,
           keys: keys,
           reduce: reduce,
           stable: stable,
-          startkey: startkey,
-          startkeyDocid: startkeyDocid,
+          startKey: startKey,
+          startKeyDocId: startKeyDocId,
           update: update,
         };
 
@@ -4043,16 +4043,16 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.limit).toEqual(limit);
         expect(mockRequestOptions.body.skip).toEqual(skip);
         expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
-        expect(mockRequestOptions.body.endkey).toEqual(endkey);
-        expect(mockRequestOptions.body.endkey_docid).toEqual(endkeyDocid);
+        expect(mockRequestOptions.body.end_key).toEqual(endKey);
+        expect(mockRequestOptions.body.end_key_doc_id).toEqual(endKeyDocId);
         expect(mockRequestOptions.body.group).toEqual(group);
         expect(mockRequestOptions.body.group_level).toEqual(groupLevel);
         expect(mockRequestOptions.body.key).toEqual(key);
         expect(mockRequestOptions.body.keys).toEqual(keys);
         expect(mockRequestOptions.body.reduce).toEqual(reduce);
         expect(mockRequestOptions.body.stable).toEqual(stable);
-        expect(mockRequestOptions.body.startkey).toEqual(startkey);
-        expect(mockRequestOptions.body.startkey_docid).toEqual(startkeyDocid);
+        expect(mockRequestOptions.body.start_key).toEqual(startKey);
+        expect(mockRequestOptions.body.start_key_doc_id).toEqual(startKeyDocId);
         expect(mockRequestOptions.body.update).toEqual(update);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
@@ -4136,16 +4136,16 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = false;
-        const endkey = 'testString';
-        const endkeyDocid = 'testString';
+        const endKey = 'testString';
+        const endKeyDocId = 'testString';
         const group = false;
         const groupLevel = 1;
         const key = 'testString';
         const keys = ['testString'];
         const reduce = true;
         const stable = false;
-        const startkey = 'testString';
-        const startkeyDocid = 'testString';
+        const startKey = 'testString';
+        const startKeyDocId = 'testString';
         const update = 'true';
         const postViewAsStreamParams = {
           db: db,
@@ -4160,16 +4160,16 @@ describe('CloudantV1', () => {
           limit: limit,
           skip: skip,
           updateSeq: updateSeq,
-          endkey: endkey,
-          endkeyDocid: endkeyDocid,
+          endKey: endKey,
+          endKeyDocId: endKeyDocId,
           group: group,
           groupLevel: groupLevel,
           key: key,
           keys: keys,
           reduce: reduce,
           stable: stable,
-          startkey: startkey,
-          startkeyDocid: startkeyDocid,
+          startKey: startKey,
+          startKeyDocId: startKeyDocId,
           update: update,
         };
 
@@ -4196,16 +4196,16 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.limit).toEqual(limit);
         expect(mockRequestOptions.body.skip).toEqual(skip);
         expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
-        expect(mockRequestOptions.body.endkey).toEqual(endkey);
-        expect(mockRequestOptions.body.endkey_docid).toEqual(endkeyDocid);
+        expect(mockRequestOptions.body.end_key).toEqual(endKey);
+        expect(mockRequestOptions.body.end_key_doc_id).toEqual(endKeyDocId);
         expect(mockRequestOptions.body.group).toEqual(group);
         expect(mockRequestOptions.body.group_level).toEqual(groupLevel);
         expect(mockRequestOptions.body.key).toEqual(key);
         expect(mockRequestOptions.body.keys).toEqual(keys);
         expect(mockRequestOptions.body.reduce).toEqual(reduce);
         expect(mockRequestOptions.body.stable).toEqual(stable);
-        expect(mockRequestOptions.body.startkey).toEqual(startkey);
-        expect(mockRequestOptions.body.startkey_docid).toEqual(startkeyDocid);
+        expect(mockRequestOptions.body.start_key).toEqual(startKey);
+        expect(mockRequestOptions.body.start_key_doc_id).toEqual(startKeyDocId);
         expect(mockRequestOptions.body.update).toEqual(update);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
@@ -4289,16 +4289,16 @@ describe('CloudantV1', () => {
         limit: 0,
         skip: 0,
         update_seq: false,
-        endkey: 'testString',
-        endkey_docid: 'testString',
+        end_key: 'testString',
+        end_key_doc_id: 'testString',
         group: false,
         group_level: 1,
         key: 'testString',
         keys: ['testString'],
         reduce: true,
         stable: false,
-        startkey: 'testString',
-        startkey_docid: 'testString',
+        start_key: 'testString',
+        start_key_doc_id: 'testString',
         update: 'true',
       };
 
@@ -4413,16 +4413,16 @@ describe('CloudantV1', () => {
         limit: 0,
         skip: 0,
         update_seq: false,
-        endkey: 'testString',
-        endkey_docid: 'testString',
+        end_key: 'testString',
+        end_key_doc_id: 'testString',
         group: false,
         group_level: 1,
         key: 'testString',
         keys: ['testString'],
         reduce: true,
         stable: false,
-        startkey: 'testString',
-        startkey_docid: 'testString',
+        start_key: 'testString',
+        start_key_doc_id: 'testString',
         update: 'true',
       };
 
@@ -4626,10 +4626,10 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = false;
-        const endkey = 'testString';
+        const endKey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = 'testString';
+        const startKey = 'testString';
         const postPartitionAllDocsParams = {
           db: db,
           partitionKey: partitionKey,
@@ -4642,10 +4642,10 @@ describe('CloudantV1', () => {
           limit: limit,
           skip: skip,
           updateSeq: updateSeq,
-          endkey: endkey,
+          endKey: endKey,
           key: key,
           keys: keys,
-          startkey: startkey,
+          startKey: startKey,
         };
 
         const postPartitionAllDocsResult = cloudantService.postPartitionAllDocs(postPartitionAllDocsParams);
@@ -4671,10 +4671,10 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.limit).toEqual(limit);
         expect(mockRequestOptions.body.skip).toEqual(skip);
         expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
-        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.end_key).toEqual(endKey);
         expect(mockRequestOptions.body.key).toEqual(key);
         expect(mockRequestOptions.body.keys).toEqual(keys);
-        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.body.start_key).toEqual(startKey);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
       }
@@ -4753,10 +4753,10 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = false;
-        const endkey = 'testString';
+        const endKey = 'testString';
         const key = 'testString';
         const keys = ['testString'];
-        const startkey = 'testString';
+        const startKey = 'testString';
         const postPartitionAllDocsAsStreamParams = {
           db: db,
           partitionKey: partitionKey,
@@ -4769,10 +4769,10 @@ describe('CloudantV1', () => {
           limit: limit,
           skip: skip,
           updateSeq: updateSeq,
-          endkey: endkey,
+          endKey: endKey,
           key: key,
           keys: keys,
-          startkey: startkey,
+          startKey: startKey,
         };
 
         const postPartitionAllDocsAsStreamResult = cloudantService.postPartitionAllDocsAsStream(postPartitionAllDocsAsStreamParams);
@@ -4798,10 +4798,10 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.limit).toEqual(limit);
         expect(mockRequestOptions.body.skip).toEqual(skip);
         expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
-        expect(mockRequestOptions.body.endkey).toEqual(endkey);
+        expect(mockRequestOptions.body.end_key).toEqual(endKey);
         expect(mockRequestOptions.body.key).toEqual(key);
         expect(mockRequestOptions.body.keys).toEqual(keys);
-        expect(mockRequestOptions.body.startkey).toEqual(startkey);
+        expect(mockRequestOptions.body.start_key).toEqual(startKey);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
         expect(mockRequestOptions.responseType).toBe('stream');
@@ -5156,16 +5156,16 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = false;
-        const endkey = 'testString';
-        const endkeyDocid = 'testString';
+        const endKey = 'testString';
+        const endKeyDocId = 'testString';
         const group = false;
         const groupLevel = 1;
         const key = 'testString';
         const keys = ['testString'];
         const reduce = true;
         const stable = false;
-        const startkey = 'testString';
-        const startkeyDocid = 'testString';
+        const startKey = 'testString';
+        const startKeyDocId = 'testString';
         const update = 'true';
         const postPartitionViewParams = {
           db: db,
@@ -5181,16 +5181,16 @@ describe('CloudantV1', () => {
           limit: limit,
           skip: skip,
           updateSeq: updateSeq,
-          endkey: endkey,
-          endkeyDocid: endkeyDocid,
+          endKey: endKey,
+          endKeyDocId: endKeyDocId,
           group: group,
           groupLevel: groupLevel,
           key: key,
           keys: keys,
           reduce: reduce,
           stable: stable,
-          startkey: startkey,
-          startkeyDocid: startkeyDocid,
+          startKey: startKey,
+          startKeyDocId: startKeyDocId,
           update: update,
         };
 
@@ -5217,16 +5217,16 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.limit).toEqual(limit);
         expect(mockRequestOptions.body.skip).toEqual(skip);
         expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
-        expect(mockRequestOptions.body.endkey).toEqual(endkey);
-        expect(mockRequestOptions.body.endkey_docid).toEqual(endkeyDocid);
+        expect(mockRequestOptions.body.end_key).toEqual(endKey);
+        expect(mockRequestOptions.body.end_key_doc_id).toEqual(endKeyDocId);
         expect(mockRequestOptions.body.group).toEqual(group);
         expect(mockRequestOptions.body.group_level).toEqual(groupLevel);
         expect(mockRequestOptions.body.key).toEqual(key);
         expect(mockRequestOptions.body.keys).toEqual(keys);
         expect(mockRequestOptions.body.reduce).toEqual(reduce);
         expect(mockRequestOptions.body.stable).toEqual(stable);
-        expect(mockRequestOptions.body.startkey).toEqual(startkey);
-        expect(mockRequestOptions.body.startkey_docid).toEqual(startkeyDocid);
+        expect(mockRequestOptions.body.start_key).toEqual(startKey);
+        expect(mockRequestOptions.body.start_key_doc_id).toEqual(startKeyDocId);
         expect(mockRequestOptions.body.update).toEqual(update);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
@@ -5314,16 +5314,16 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const updateSeq = false;
-        const endkey = 'testString';
-        const endkeyDocid = 'testString';
+        const endKey = 'testString';
+        const endKeyDocId = 'testString';
         const group = false;
         const groupLevel = 1;
         const key = 'testString';
         const keys = ['testString'];
         const reduce = true;
         const stable = false;
-        const startkey = 'testString';
-        const startkeyDocid = 'testString';
+        const startKey = 'testString';
+        const startKeyDocId = 'testString';
         const update = 'true';
         const postPartitionViewAsStreamParams = {
           db: db,
@@ -5339,16 +5339,16 @@ describe('CloudantV1', () => {
           limit: limit,
           skip: skip,
           updateSeq: updateSeq,
-          endkey: endkey,
-          endkeyDocid: endkeyDocid,
+          endKey: endKey,
+          endKeyDocId: endKeyDocId,
           group: group,
           groupLevel: groupLevel,
           key: key,
           keys: keys,
           reduce: reduce,
           stable: stable,
-          startkey: startkey,
-          startkeyDocid: startkeyDocid,
+          startKey: startKey,
+          startKeyDocId: startKeyDocId,
           update: update,
         };
 
@@ -5375,16 +5375,16 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.limit).toEqual(limit);
         expect(mockRequestOptions.body.skip).toEqual(skip);
         expect(mockRequestOptions.body.update_seq).toEqual(updateSeq);
-        expect(mockRequestOptions.body.endkey).toEqual(endkey);
-        expect(mockRequestOptions.body.endkey_docid).toEqual(endkeyDocid);
+        expect(mockRequestOptions.body.end_key).toEqual(endKey);
+        expect(mockRequestOptions.body.end_key_doc_id).toEqual(endKeyDocId);
         expect(mockRequestOptions.body.group).toEqual(group);
         expect(mockRequestOptions.body.group_level).toEqual(groupLevel);
         expect(mockRequestOptions.body.key).toEqual(key);
         expect(mockRequestOptions.body.keys).toEqual(keys);
         expect(mockRequestOptions.body.reduce).toEqual(reduce);
         expect(mockRequestOptions.body.stable).toEqual(stable);
-        expect(mockRequestOptions.body.startkey).toEqual(startkey);
-        expect(mockRequestOptions.body.startkey_docid).toEqual(startkeyDocid);
+        expect(mockRequestOptions.body.start_key).toEqual(startKey);
+        expect(mockRequestOptions.body.start_key_doc_id).toEqual(startKeyDocId);
         expect(mockRequestOptions.body.update).toEqual(update);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
