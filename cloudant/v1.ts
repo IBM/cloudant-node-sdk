@@ -423,6 +423,12 @@ class CloudantV1 extends CloudantBaseService {
    * Requests the database changes feed in the same way as `GET /{db}/_changes` does. It is widely used with the
    * `filter` query parameter because it allows one to pass more information to the filter.
    *
+   * ### Note
+   *
+   * Before using the changes feed we recommend reading the
+   * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-changes-feed) to understand the limitations and
+   * appropriate use cases.".
+   *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string[]} [params.docIds] - Schema for a list of document IDs.
@@ -451,6 +457,11 @@ class CloudantV1 extends CloudantBaseService {
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
    * argument.
+   * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
+   * of a query. You should include at least one of these in a selector.
+   *
+   * For further reference see
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
    * @param {string} [params.lastEventId] - Header parameter to specify the ID of the last events received by the server
    * on a previous connection. Overrides `since` query parameter.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -576,6 +587,12 @@ class CloudantV1 extends CloudantBaseService {
    * Requests the database changes feed in the same way as `GET /{db}/_changes` does. It is widely used with the
    * `filter` query parameter because it allows one to pass more information to the filter.
    *
+   * ### Note
+   *
+   * Before using the changes feed we recommend reading the
+   * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-changes-feed) to understand the limitations and
+   * appropriate use cases.".
+   *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string[]} [params.docIds] - Schema for a list of document IDs.
@@ -604,6 +621,11 @@ class CloudantV1 extends CloudantBaseService {
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
    * argument.
+   * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
+   * of a query. You should include at least one of these in a selector.
+   *
+   * For further reference see
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
    * @param {string} [params.lastEventId] - Header parameter to specify the ID of the last events received by the server
    * on a previous connection. Overrides `since` query parameter.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -785,13 +807,13 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} [params] - The parameters to send to the service.
    * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
    * key order.
-   * @param {string} [params.endkey] - Query parameter to specify to stop returning records when the specified key is
+   * @param {string} [params.endKey] - Query parameter to specify to stop returning records when the specified key is
    * reached. String representation of any JSON type that matches the key type emitted by the view function.
    * @param {number} [params.limit] - Query parameter to specify the number of returned documents to limit the result
    * to.
    * @param {number} [params.skip] - Query parameter to specify the number of records before starting to return the
    * results.
-   * @param {string} [params.startkey] - Query parameter to specify to start returning records from the specified key.
+   * @param {string} [params.startKey] - Query parameter to specify to start returning records from the specified key.
    * String representation of any JSON type that matches the key type emitted by the view function.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<string[]>>}
@@ -801,7 +823,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<string[]>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['descending', 'endkey', 'limit', 'skip', 'startkey', 'headers'];
+    const _validParams = ['descending', 'endKey', 'limit', 'skip', 'startKey', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -809,10 +831,10 @@ class CloudantV1 extends CloudantBaseService {
 
     const query = {
       'descending': _params.descending,
-      'endkey': _params.endkey,
+      'end_key': _params.endKey,
       'limit': _params.limit,
       'skip': _params.skip,
-      'startkey': _params.startkey,
+      'start_key': _params.startKey,
     };
 
     const sdkHeaders = getSdkHeaders(
@@ -1136,12 +1158,15 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Create or modify a document in a database.
    *
-   * Creates or modifies a document in the specified database by using the supplied JSON document. If the JSON document
-   * doesn't specify an `_id` field, then the document is created with a new unique ID generated by the UUID algorithm
-   * that is configured for the server. If the document includes the `_id` field, then it is created with that `_id` or
-   * updated if the `_id` already exists, and an appropriate `_rev` is included in the JSON document. If the `_id`
-   * includes the `_local` or `_design` prefix, then this operation is used to create or modify local or design
-   * documents respectively.
+   * Creates or modifies a document in the specified database by using the supplied JSON document.
+   *
+   * For creation, you may specify the document ID but you should not specify the revision. If you don't specify the
+   * document ID, then the server generates an ID for your document.
+   *
+   * For modification, you must specify the document ID and a revision identifier in the JSON document.
+   *
+   * If your document ID includes the `_local/` or `_design/` prefix, then this operation creates or modifies a local or
+   * a design document respectively.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -1227,10 +1252,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
    * indicating the sequence id of the database the view reflects.
-   * @param {string} [params.endkey] - Schema for a document ID.
+   * @param {string} [params.endKey] - Schema for a document ID.
    * @param {string} [params.key] - Schema for a document ID.
    * @param {string[]} [params.keys] - Schema for a list of document IDs.
-   * @param {string} [params.startkey] - Schema for a document ID.
+   * @param {string} [params.startKey] - Schema for a document ID.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsResult>>}
    */
@@ -1239,7 +1264,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'key', 'keys', 'startkey', 'headers'];
+    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1255,10 +1280,10 @@ class CloudantV1 extends CloudantBaseService {
       'limit': _params.limit,
       'skip': _params.skip,
       'update_seq': _params.updateSeq,
-      'endkey': _params.endkey,
+      'end_key': _params.endKey,
       'key': _params.key,
       'keys': _params.keys,
-      'startkey': _params.startkey,
+      'start_key': _params.startKey,
     };
 
     const path = {
@@ -1319,10 +1344,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
    * indicating the sequence id of the database the view reflects.
-   * @param {string} [params.endkey] - Schema for a document ID.
+   * @param {string} [params.endKey] - Schema for a document ID.
    * @param {string} [params.key] - Schema for a document ID.
    * @param {string[]} [params.keys] - Schema for a list of document IDs.
-   * @param {string} [params.startkey] - Schema for a document ID.
+   * @param {string} [params.startKey] - Schema for a document ID.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
@@ -1331,7 +1356,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'key', 'keys', 'startkey', 'headers'];
+    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1347,10 +1372,10 @@ class CloudantV1 extends CloudantBaseService {
       'limit': _params.limit,
       'skip': _params.skip,
       'update_seq': _params.updateSeq,
-      'endkey': _params.endkey,
+      'end_key': _params.endKey,
       'key': _params.key,
       'keys': _params.keys,
-      'startkey': _params.startkey,
+      'start_key': _params.startKey,
     };
 
     const path = {
@@ -1517,9 +1542,9 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Bulk modify multiple documents in a database.
    *
-   * The bulk document API allows you to create and update multiple documents at the same time within a single request.
-   * The basic operation is similar to creating or updating a single document, except that you batch the document
-   * structure and information.
+   * The bulk document API allows you to create, update, and delete multiple documents at the same time within a single
+   * request. The basic operation is similar to creating, updating, or deleting a single document, except that you batch
+   * the document structure and information.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -2313,8 +2338,11 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Create or modify a document.
    *
-   * The PUT method creates a new named document, or creates a new revision of the existing document. Unlike the `POST
-   * /{db}` request, you must specify the document ID in the request URL.
+   * Creates or modifies a document in the specified database.
+   *
+   * For creation, you must specify the document ID but you should not specify the revision.
+   *
+   * For modification, you must specify the document ID and a revision  identifier.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -2767,10 +2795,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
    * indicating the sequence id of the database the view reflects.
-   * @param {string} [params.endkey] - Schema for a document ID.
+   * @param {string} [params.endKey] - Schema for a document ID.
    * @param {string} [params.key] - Schema for a document ID.
    * @param {string[]} [params.keys] - Schema for a list of document IDs.
-   * @param {string} [params.startkey] - Schema for a document ID.
+   * @param {string} [params.startKey] - Schema for a document ID.
    * @param {string} [params.accept] - The type of the response: application/json or application/octet-stream.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsResult>>}
@@ -2780,7 +2808,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'key', 'keys', 'startkey', 'accept', 'headers'];
+    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'accept', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2796,10 +2824,10 @@ class CloudantV1 extends CloudantBaseService {
       'limit': _params.limit,
       'skip': _params.skip,
       'update_seq': _params.updateSeq,
-      'endkey': _params.endkey,
+      'end_key': _params.endKey,
       'key': _params.key,
       'keys': _params.keys,
-      'startkey': _params.startkey,
+      'start_key': _params.startKey,
     };
 
     const path = {
@@ -2929,8 +2957,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
    * indicating the sequence id of the database the view reflects.
-   * @param {any} [params.endkey] - Schema for any JSON type.
-   * @param {string} [params.endkeyDocid] - Schema for a document ID.
+   * @param {any} [params.endKey] - Schema for any JSON type.
+   * @param {string} [params.endKeyDocId] - Schema for a document ID.
    * @param {boolean} [params.group] - Parameter to specify whether to group the results using the reduce function to a
    * group rather than a single row. Implies reduce is true and the maximum group_level.
    * @param {number} [params.groupLevel] - Parameter to specify the group level to be used. Implies group is true.
@@ -2941,8 +2969,8 @@ class CloudantV1 extends CloudantBaseService {
    * Default is true when a reduce function is defined.
    * @param {boolean} [params.stable] - Parameter to specify whether view results should be returned from a stable set
    * of shards.
-   * @param {any} [params.startkey] - Schema for any JSON type.
-   * @param {string} [params.startkeyDocid] - Schema for a document ID.
+   * @param {any} [params.startKey] - Schema for any JSON type.
+   * @param {string} [params.startKeyDocId] - Schema for a document ID.
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
    * to responding to the user.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -2953,7 +2981,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ViewResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc', 'view'];
-    const _validParams = ['db', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'endkeyDocid', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startkey', 'startkeyDocid', 'update', 'headers'];
+    const _validParams = ['db', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startKey', 'startKeyDocId', 'update', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2969,16 +2997,16 @@ class CloudantV1 extends CloudantBaseService {
       'limit': _params.limit,
       'skip': _params.skip,
       'update_seq': _params.updateSeq,
-      'endkey': _params.endkey,
-      'endkey_docid': _params.endkeyDocid,
+      'end_key': _params.endKey,
+      'end_key_doc_id': _params.endKeyDocId,
       'group': _params.group,
       'group_level': _params.groupLevel,
       'key': _params.key,
       'keys': _params.keys,
       'reduce': _params.reduce,
       'stable': _params.stable,
-      'startkey': _params.startkey,
-      'startkey_docid': _params.startkeyDocid,
+      'start_key': _params.startKey,
+      'start_key_doc_id': _params.startKeyDocId,
       'update': _params.update,
     };
 
@@ -3045,8 +3073,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
    * indicating the sequence id of the database the view reflects.
-   * @param {any} [params.endkey] - Schema for any JSON type.
-   * @param {string} [params.endkeyDocid] - Schema for a document ID.
+   * @param {any} [params.endKey] - Schema for any JSON type.
+   * @param {string} [params.endKeyDocId] - Schema for a document ID.
    * @param {boolean} [params.group] - Parameter to specify whether to group the results using the reduce function to a
    * group rather than a single row. Implies reduce is true and the maximum group_level.
    * @param {number} [params.groupLevel] - Parameter to specify the group level to be used. Implies group is true.
@@ -3057,8 +3085,8 @@ class CloudantV1 extends CloudantBaseService {
    * Default is true when a reduce function is defined.
    * @param {boolean} [params.stable] - Parameter to specify whether view results should be returned from a stable set
    * of shards.
-   * @param {any} [params.startkey] - Schema for any JSON type.
-   * @param {string} [params.startkeyDocid] - Schema for a document ID.
+   * @param {any} [params.startKey] - Schema for any JSON type.
+   * @param {string} [params.startKeyDocId] - Schema for a document ID.
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
    * to responding to the user.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -3069,7 +3097,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc', 'view'];
-    const _validParams = ['db', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'endkeyDocid', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startkey', 'startkeyDocid', 'update', 'headers'];
+    const _validParams = ['db', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startKey', 'startKeyDocId', 'update', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3085,16 +3113,16 @@ class CloudantV1 extends CloudantBaseService {
       'limit': _params.limit,
       'skip': _params.skip,
       'update_seq': _params.updateSeq,
-      'endkey': _params.endkey,
-      'endkey_docid': _params.endkeyDocid,
+      'end_key': _params.endKey,
+      'end_key_doc_id': _params.endKeyDocId,
       'group': _params.group,
       'group_level': _params.groupLevel,
       'key': _params.key,
       'keys': _params.keys,
       'reduce': _params.reduce,
       'stable': _params.stable,
-      'startkey': _params.startkey,
-      'startkey_docid': _params.startkeyDocid,
+      'start_key': _params.startKey,
+      'start_key_doc_id': _params.startKeyDocId,
       'update': _params.update,
     };
 
@@ -3350,10 +3378,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
    * indicating the sequence id of the database the view reflects.
-   * @param {string} [params.endkey] - Schema for a document ID.
+   * @param {string} [params.endKey] - Schema for a document ID.
    * @param {string} [params.key] - Schema for a document ID.
    * @param {string[]} [params.keys] - Schema for a list of document IDs.
-   * @param {string} [params.startkey] - Schema for a document ID.
+   * @param {string} [params.startKey] - Schema for a document ID.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsResult>>}
    */
@@ -3362,7 +3390,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey'];
-    const _validParams = ['db', 'partitionKey', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'key', 'keys', 'startkey', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3378,10 +3406,10 @@ class CloudantV1 extends CloudantBaseService {
       'limit': _params.limit,
       'skip': _params.skip,
       'update_seq': _params.updateSeq,
-      'endkey': _params.endkey,
+      'end_key': _params.endKey,
       'key': _params.key,
       'keys': _params.keys,
-      'startkey': _params.startkey,
+      'start_key': _params.startKey,
     };
 
     const path = {
@@ -3444,10 +3472,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
    * indicating the sequence id of the database the view reflects.
-   * @param {string} [params.endkey] - Schema for a document ID.
+   * @param {string} [params.endKey] - Schema for a document ID.
    * @param {string} [params.key] - Schema for a document ID.
    * @param {string[]} [params.keys] - Schema for a list of document IDs.
-   * @param {string} [params.startkey] - Schema for a document ID.
+   * @param {string} [params.startKey] - Schema for a document ID.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
@@ -3456,7 +3484,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey'];
-    const _validParams = ['db', 'partitionKey', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'key', 'keys', 'startkey', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3472,10 +3500,10 @@ class CloudantV1 extends CloudantBaseService {
       'limit': _params.limit,
       'skip': _params.skip,
       'update_seq': _params.updateSeq,
-      'endkey': _params.endkey,
+      'end_key': _params.endKey,
       'key': _params.key,
       'keys': _params.keys,
-      'startkey': _params.startkey,
+      'start_key': _params.startKey,
     };
 
     const path = {
@@ -3745,8 +3773,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
    * indicating the sequence id of the database the view reflects.
-   * @param {any} [params.endkey] - Schema for any JSON type.
-   * @param {string} [params.endkeyDocid] - Schema for a document ID.
+   * @param {any} [params.endKey] - Schema for any JSON type.
+   * @param {string} [params.endKeyDocId] - Schema for a document ID.
    * @param {boolean} [params.group] - Parameter to specify whether to group the results using the reduce function to a
    * group rather than a single row. Implies reduce is true and the maximum group_level.
    * @param {number} [params.groupLevel] - Parameter to specify the group level to be used. Implies group is true.
@@ -3757,8 +3785,8 @@ class CloudantV1 extends CloudantBaseService {
    * Default is true when a reduce function is defined.
    * @param {boolean} [params.stable] - Parameter to specify whether view results should be returned from a stable set
    * of shards.
-   * @param {any} [params.startkey] - Schema for any JSON type.
-   * @param {string} [params.startkeyDocid] - Schema for a document ID.
+   * @param {any} [params.startKey] - Schema for any JSON type.
+   * @param {string} [params.startKeyDocId] - Schema for a document ID.
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
    * to responding to the user.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -3769,7 +3797,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ViewResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
-    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'endkeyDocid', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startkey', 'startkeyDocid', 'update', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startKey', 'startKeyDocId', 'update', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3785,16 +3813,16 @@ class CloudantV1 extends CloudantBaseService {
       'limit': _params.limit,
       'skip': _params.skip,
       'update_seq': _params.updateSeq,
-      'endkey': _params.endkey,
-      'endkey_docid': _params.endkeyDocid,
+      'end_key': _params.endKey,
+      'end_key_doc_id': _params.endKeyDocId,
       'group': _params.group,
       'group_level': _params.groupLevel,
       'key': _params.key,
       'keys': _params.keys,
       'reduce': _params.reduce,
       'stable': _params.stable,
-      'startkey': _params.startkey,
-      'startkey_docid': _params.startkeyDocid,
+      'start_key': _params.startKey,
+      'start_key_doc_id': _params.startKeyDocId,
       'update': _params.update,
     };
 
@@ -3863,8 +3891,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
    * indicating the sequence id of the database the view reflects.
-   * @param {any} [params.endkey] - Schema for any JSON type.
-   * @param {string} [params.endkeyDocid] - Schema for a document ID.
+   * @param {any} [params.endKey] - Schema for any JSON type.
+   * @param {string} [params.endKeyDocId] - Schema for a document ID.
    * @param {boolean} [params.group] - Parameter to specify whether to group the results using the reduce function to a
    * group rather than a single row. Implies reduce is true and the maximum group_level.
    * @param {number} [params.groupLevel] - Parameter to specify the group level to be used. Implies group is true.
@@ -3875,8 +3903,8 @@ class CloudantV1 extends CloudantBaseService {
    * Default is true when a reduce function is defined.
    * @param {boolean} [params.stable] - Parameter to specify whether view results should be returned from a stable set
    * of shards.
-   * @param {any} [params.startkey] - Schema for any JSON type.
-   * @param {string} [params.startkeyDocid] - Schema for a document ID.
+   * @param {any} [params.startKey] - Schema for any JSON type.
+   * @param {string} [params.startKeyDocId] - Schema for a document ID.
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
    * to responding to the user.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -3887,7 +3915,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
-    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endkey', 'endkeyDocid', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startkey', 'startkeyDocid', 'update', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startKey', 'startKeyDocId', 'update', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3903,16 +3931,16 @@ class CloudantV1 extends CloudantBaseService {
       'limit': _params.limit,
       'skip': _params.skip,
       'update_seq': _params.updateSeq,
-      'endkey': _params.endkey,
-      'endkey_docid': _params.endkeyDocid,
+      'end_key': _params.endKey,
+      'end_key_doc_id': _params.endKeyDocId,
       'group': _params.group,
       'group_level': _params.groupLevel,
       'key': _params.key,
       'keys': _params.keys,
       'reduce': _params.reduce,
       'stable': _params.stable,
-      'startkey': _params.startkey,
-      'startkey_docid': _params.startkeyDocid,
+      'start_key': _params.startKey,
+      'start_key_doc_id': _params.startKeyDocId,
       'update': _params.update,
     };
 
@@ -3954,10 +3982,14 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Query a database partition index by using selector syntax (POST).
+   * Query a database partition index by using selector syntax.
    *
-   * Query documents by using a declarative JSON querying syntax. Queries can use the built-in `_all_docs` index or
-   * custom indices, specified by using the `_index` endpoint.
+   * Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
+   * all fields in selector by using the `_index` endpoint.
+   *
+   * Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
+   * recommended because it has a noticeable performance impact causing a full scan of the partition with each request.
+   * In this case the response body will include a warning field recommending that an index is created.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -3985,6 +4017,11 @@ class CloudantV1 extends CloudantBaseService {
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
    * argument.
+   * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
+   * of a query. You should include at least one of these in a selector.
+   *
+   * For further reference see
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4003,7 +4040,9 @@ class CloudantV1 extends CloudantBaseService {
    *
    * For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
    *
-   * When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+   * When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+   * same order and each object in the sort array has a single key or at least one of the sort fields is included in the
+   * selector. All sorting fields must use the same sort direction, either all ascending or all descending.
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
@@ -4072,10 +4111,14 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Query a database partition index by using selector syntax (POST) as stream.
+   * Query a database partition index by using selector syntax as stream.
    *
-   * Query documents by using a declarative JSON querying syntax. Queries can use the built-in `_all_docs` index or
-   * custom indices, specified by using the `_index` endpoint.
+   * Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
+   * all fields in selector by using the `_index` endpoint.
+   *
+   * Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
+   * recommended because it has a noticeable performance impact causing a full scan of the partition with each request.
+   * In this case the response body will include a warning field recommending that an index is created.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -4103,6 +4146,11 @@ class CloudantV1 extends CloudantBaseService {
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
    * argument.
+   * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
+   * of a query. You should include at least one of these in a selector.
+   *
+   * For further reference see
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4121,7 +4169,9 @@ class CloudantV1 extends CloudantBaseService {
    *
    * For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
    *
-   * When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+   * When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+   * same order and each object in the sort array has a single key or at least one of the sort fields is included in the
+   * selector. All sorting fields must use the same sort direction, either all ascending or all descending.
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
@@ -4224,6 +4274,11 @@ class CloudantV1 extends CloudantBaseService {
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
    * argument.
+   * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
+   * of a query. You should include at least one of these in a selector.
+   *
+   * For further reference see
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4242,7 +4297,9 @@ class CloudantV1 extends CloudantBaseService {
    *
    * For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
    *
-   * When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+   * When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+   * same order and each object in the sort array has a single key or at least one of the sort fields is included in the
+   * selector. All sorting fields must use the same sort direction, either all ascending or all descending.
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
@@ -4317,8 +4374,12 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Query an index by using selector syntax.
    *
-   * Query documents by using a declarative JSON querying syntax. Queries can use the built-in `_all_docs` index or
-   * custom indices, specified by using the `_index` endpoint.
+   * Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
+   * all fields in selector by using the `_index` endpoint.
+   *
+   * Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
+   * recommended because it has a significant performance impact causing a full scan of the database with each request.
+   * In this case the response body will include a warning field recommending that an index is created.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -4345,6 +4406,11 @@ class CloudantV1 extends CloudantBaseService {
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
    * argument.
+   * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
+   * of a query. You should include at least one of these in a selector.
+   *
+   * For further reference see
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4363,7 +4429,9 @@ class CloudantV1 extends CloudantBaseService {
    *
    * For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
    *
-   * When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+   * When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+   * same order and each object in the sort array has a single key or at least one of the sort fields is included in the
+   * selector. All sorting fields must use the same sort direction, either all ascending or all descending.
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
@@ -4438,8 +4506,12 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Query an index by using selector syntax as stream.
    *
-   * Query documents by using a declarative JSON querying syntax. Queries can use the built-in `_all_docs` index or
-   * custom indices, specified by using the `_index` endpoint.
+   * Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
+   * all fields in selector by using the `_index` endpoint.
+   *
+   * Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
+   * recommended because it has a significant performance impact causing a full scan of the database with each request.
+   * In this case the response body will include a warning field recommending that an index is created.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -4466,6 +4538,11 @@ class CloudantV1 extends CloudantBaseService {
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
    * argument.
+   * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
+   * of a query. You should include at least one of these in a selector.
+   *
+   * For further reference see
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4484,7 +4561,9 @@ class CloudantV1 extends CloudantBaseService {
    *
    * For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
    *
-   * When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+   * When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+   * same order and each object in the sort array has a single key or at least one of the sort fields is included in the
+   * selector. All sorting fields must use the same sort direction, either all ascending or all descending.
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
@@ -7612,6 +7691,11 @@ namespace CloudantV1 {
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
+     *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
+     *  basis of a query. You should include at least one of these in a selector.
+     *
+     *  For further reference see
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
      */
     selector?: JsonObject;
     /** Header parameter to specify the ID of the last events received by the server on a previous connection.
@@ -7728,6 +7812,11 @@ namespace CloudantV1 {
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
+     *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
+     *  basis of a query. You should include at least one of these in a selector.
+     *
+     *  For further reference see
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
      */
     selector?: JsonObject;
     /** Header parameter to specify the ID of the last events received by the server on a previous connection.
@@ -7825,7 +7914,7 @@ namespace CloudantV1 {
     /** Query parameter to specify to stop returning records when the specified key is reached. String
      *  representation of any JSON type that matches the key type emitted by the view function.
      */
-    endkey?: string;
+    endKey?: string;
     /** Query parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
     /** Query parameter to specify the number of records before starting to return the results. */
@@ -7833,7 +7922,7 @@ namespace CloudantV1 {
     /** Query parameter to specify to start returning records from the specified key. String representation of any
      *  JSON type that matches the key type emitted by the view function.
      */
-    startkey?: string;
+    startKey?: string;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -7947,13 +8036,13 @@ namespace CloudantV1 {
      */
     updateSeq?: boolean;
     /** Schema for a document ID. */
-    endkey?: string;
+    endKey?: string;
     /** Schema for a document ID. */
     key?: string;
     /** Schema for a list of document IDs. */
     keys?: string[];
     /** Schema for a document ID. */
-    startkey?: string;
+    startKey?: string;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -7986,13 +8075,13 @@ namespace CloudantV1 {
      */
     updateSeq?: boolean;
     /** Schema for a document ID. */
-    endkey?: string;
+    endKey?: string;
     /** Schema for a document ID. */
     key?: string;
     /** Schema for a list of document IDs. */
     keys?: string[];
     /** Schema for a document ID. */
-    startkey?: string;
+    startKey?: string;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -8498,13 +8587,13 @@ namespace CloudantV1 {
      */
     updateSeq?: boolean;
     /** Schema for a document ID. */
-    endkey?: string;
+    endKey?: string;
     /** Schema for a document ID. */
     key?: string;
     /** Schema for a list of document IDs. */
     keys?: string[];
     /** Schema for a document ID. */
-    startkey?: string;
+    startKey?: string;
     /** The type of the response: application/json or application/octet-stream. */
     accept?: PostDesignDocsConstants.Accept | string;
     headers?: OutgoingHttpHeaders;
@@ -8576,9 +8665,9 @@ namespace CloudantV1 {
      */
     updateSeq?: boolean;
     /** Schema for any JSON type. */
-    endkey?: any;
+    endKey?: any;
     /** Schema for a document ID. */
-    endkeyDocid?: string;
+    endKeyDocId?: string;
     /** Parameter to specify whether to group the results using the reduce function to a group rather than a single
      *  row. Implies reduce is true and the maximum group_level.
      */
@@ -8598,9 +8687,9 @@ namespace CloudantV1 {
     /** Parameter to specify whether view results should be returned from a stable set of shards. */
     stable?: boolean;
     /** Schema for any JSON type. */
-    startkey?: any;
+    startKey?: any;
     /** Schema for a document ID. */
-    startkeyDocid?: string;
+    startKeyDocId?: string;
     /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
     update?: PostViewConstants.Update | string;
     headers?: OutgoingHttpHeaders;
@@ -8651,9 +8740,9 @@ namespace CloudantV1 {
      */
     updateSeq?: boolean;
     /** Schema for any JSON type. */
-    endkey?: any;
+    endKey?: any;
     /** Schema for a document ID. */
-    endkeyDocid?: string;
+    endKeyDocId?: string;
     /** Parameter to specify whether to group the results using the reduce function to a group rather than a single
      *  row. Implies reduce is true and the maximum group_level.
      */
@@ -8673,9 +8762,9 @@ namespace CloudantV1 {
     /** Parameter to specify whether view results should be returned from a stable set of shards. */
     stable?: boolean;
     /** Schema for any JSON type. */
-    startkey?: any;
+    startKey?: any;
     /** Schema for a document ID. */
-    startkeyDocid?: string;
+    startKeyDocId?: string;
     /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
     update?: PostViewAsStreamConstants.Update | string;
     headers?: OutgoingHttpHeaders;
@@ -8765,13 +8854,13 @@ namespace CloudantV1 {
      */
     updateSeq?: boolean;
     /** Schema for a document ID. */
-    endkey?: string;
+    endKey?: string;
     /** Schema for a document ID. */
     key?: string;
     /** Schema for a list of document IDs. */
     keys?: string[];
     /** Schema for a document ID. */
-    startkey?: string;
+    startKey?: string;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -8806,13 +8895,13 @@ namespace CloudantV1 {
      */
     updateSeq?: boolean;
     /** Schema for a document ID. */
-    endkey?: string;
+    endKey?: string;
     /** Schema for a document ID. */
     key?: string;
     /** Schema for a list of document IDs. */
     keys?: string[];
     /** Schema for a document ID. */
-    startkey?: string;
+    startKey?: string;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -8973,9 +9062,9 @@ namespace CloudantV1 {
      */
     updateSeq?: boolean;
     /** Schema for any JSON type. */
-    endkey?: any;
+    endKey?: any;
     /** Schema for a document ID. */
-    endkeyDocid?: string;
+    endKeyDocId?: string;
     /** Parameter to specify whether to group the results using the reduce function to a group rather than a single
      *  row. Implies reduce is true and the maximum group_level.
      */
@@ -8995,9 +9084,9 @@ namespace CloudantV1 {
     /** Parameter to specify whether view results should be returned from a stable set of shards. */
     stable?: boolean;
     /** Schema for any JSON type. */
-    startkey?: any;
+    startKey?: any;
     /** Schema for a document ID. */
-    startkeyDocid?: string;
+    startKeyDocId?: string;
     /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
     update?: PostPartitionViewConstants.Update | string;
     headers?: OutgoingHttpHeaders;
@@ -9050,9 +9139,9 @@ namespace CloudantV1 {
      */
     updateSeq?: boolean;
     /** Schema for any JSON type. */
-    endkey?: any;
+    endKey?: any;
     /** Schema for a document ID. */
-    endkeyDocid?: string;
+    endKeyDocId?: string;
     /** Parameter to specify whether to group the results using the reduce function to a group rather than a single
      *  row. Implies reduce is true and the maximum group_level.
      */
@@ -9072,9 +9161,9 @@ namespace CloudantV1 {
     /** Parameter to specify whether view results should be returned from a stable set of shards. */
     stable?: boolean;
     /** Schema for any JSON type. */
-    startkey?: any;
+    startKey?: any;
     /** Schema for a document ID. */
-    startkeyDocid?: string;
+    startKeyDocId?: string;
     /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
     update?: PostPartitionViewAsStreamConstants.Update | string;
     headers?: OutgoingHttpHeaders;
@@ -9119,6 +9208,11 @@ namespace CloudantV1 {
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
+     *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
+     *  basis of a query. You should include at least one of these in a selector.
+     *
+     *  For further reference see
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -9146,7 +9240,9 @@ namespace CloudantV1 {
      *
      *  For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
      *
-     *  When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+     *  When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+     *  same order and each object in the sort array has a single key or at least one of the sort fields is included in
+     *  the selector. All sorting fields must use the same sort direction, either all ascending or all descending.
      */
     sort?: JsonObject[];
     /** Whether or not the view results should be returned from a "stable" set of shards. */
@@ -9204,6 +9300,11 @@ namespace CloudantV1 {
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
+     *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
+     *  basis of a query. You should include at least one of these in a selector.
+     *
+     *  For further reference see
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -9231,7 +9332,9 @@ namespace CloudantV1 {
      *
      *  For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
      *
-     *  When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+     *  When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+     *  same order and each object in the sort array has a single key or at least one of the sort fields is included in
+     *  the selector. All sorting fields must use the same sort direction, either all ascending or all descending.
      */
     sort?: JsonObject[];
     /** Whether or not the view results should be returned from a "stable" set of shards. */
@@ -9287,6 +9390,11 @@ namespace CloudantV1 {
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
+     *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
+     *  basis of a query. You should include at least one of these in a selector.
+     *
+     *  For further reference see
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -9314,7 +9422,9 @@ namespace CloudantV1 {
      *
      *  For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
      *
-     *  When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+     *  When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+     *  same order and each object in the sort array has a single key or at least one of the sort fields is included in
+     *  the selector. All sorting fields must use the same sort direction, either all ascending or all descending.
      */
     sort?: JsonObject[];
     /** Whether or not the view results should be returned from a "stable" set of shards. */
@@ -9376,6 +9486,11 @@ namespace CloudantV1 {
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
+     *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
+     *  basis of a query. You should include at least one of these in a selector.
+     *
+     *  For further reference see
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -9403,7 +9518,9 @@ namespace CloudantV1 {
      *
      *  For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
      *
-     *  When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+     *  When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+     *  same order and each object in the sort array has a single key or at least one of the sort fields is included in
+     *  the selector. All sorting fields must use the same sort direction, either all ascending or all descending.
      */
     sort?: JsonObject[];
     /** Whether or not the view results should be returned from a "stable" set of shards. */
@@ -9465,6 +9582,11 @@ namespace CloudantV1 {
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
+     *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
+     *  basis of a query. You should include at least one of these in a selector.
+     *
+     *  For further reference see
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -9492,7 +9614,9 @@ namespace CloudantV1 {
      *
      *  For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
      *
-     *  When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
+     *  When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+     *  same order and each object in the sort array has a single key or at least one of the sort fields is included in
+     *  the selector. All sorting fields must use the same sort direction, either all ascending or all descending.
      */
     sort?: JsonObject[];
     /** Whether or not the view results should be returned from a "stable" set of shards. */
@@ -10633,13 +10757,13 @@ namespace CloudantV1 {
      */
     update_seq?: boolean;
     /** Schema for a document ID. */
-    endkey?: string;
+    end_key?: string;
     /** Schema for a document ID. */
     key?: string;
     /** Schema for a list of document IDs. */
     keys?: string[];
     /** Schema for a document ID. */
-    startkey?: string;
+    start_key?: string;
   }
 
   /** Schema for the result of an all documents operation. */
@@ -10908,8 +11032,6 @@ namespace CloudantV1 {
 
   /** Schema for a database change event. */
   export interface DbEvent {
-    /** Account name. */
-    account?: string;
     /** Database name. */
     db_name: string;
     /** Sequence number. */
@@ -11058,6 +11180,10 @@ namespace CloudantV1 {
 
   /** View index information. */
   export interface DesignDocumentViewIndex {
+    /** List of collator versions. If there are multiple entries this implies a libicu upgrade has occurred but
+     *  compaction has not run yet.
+     */
+    collator_versions: string[];
     /** Indicates whether a compaction routine is currently running on the view. */
     compact_running: boolean;
     /** Language for the defined views. */
@@ -11215,6 +11341,11 @@ namespace CloudantV1 {
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
+     *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
+     *  basis of a query. You should include at least one of these in a selector.
+     *
+     *  For further reference see
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
      */
     selector: JsonObject;
     /** skip. */
@@ -11360,6 +11491,11 @@ namespace CloudantV1 {
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
+     *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
+     *  basis of a query. You should include at least one of these in a selector.
+     *
+     *  For further reference see
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
      */
     partial_filter_selector?: JsonObject;
   }
@@ -11586,6 +11722,11 @@ namespace CloudantV1 {
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
      *  supplied argument.
+     *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
+     *  basis of a query. You should include at least one of these in a selector.
+     *
+     *  For further reference see
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
      */
     selector?: JsonObject;
     /** Start the replication at a specific sequence value. */
@@ -11800,6 +11941,8 @@ namespace CloudantV1 {
     doc_del_count: number;
     /** The pending sequence identifier. */
     pending_seq: number;
+    /** Unique signature of the search index. */
+    signature: string;
   }
 
   /** Schema for search index information. */
@@ -12005,9 +12148,9 @@ namespace CloudantV1 {
      */
     update_seq?: boolean;
     /** Schema for any JSON type. */
-    endkey?: any;
+    end_key?: any;
     /** Schema for a document ID. */
-    endkey_docid?: string;
+    end_key_doc_id?: string;
     /** Parameter to specify whether to group the results using the reduce function to a group rather than a single
      *  row. Implies reduce is true and the maximum group_level.
      */
@@ -12027,9 +12170,9 @@ namespace CloudantV1 {
     /** Parameter to specify whether view results should be returned from a stable set of shards. */
     stable?: boolean;
     /** Schema for any JSON type. */
-    startkey?: any;
+    start_key?: any;
     /** Schema for a document ID. */
-    startkey_docid?: string;
+    start_key_doc_id?: string;
     /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
     update?: string;
   }
