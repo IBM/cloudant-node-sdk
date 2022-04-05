@@ -57,7 +57,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.0.0",
     "jest": "27.5.1",
-    "jest-junit": "13.0.0",
+    "jest-junit": "13.1.0",
     "prettier": "2.6.2",
     "semantic-release": "19.0.2",
     "sinon": "13.0.1",
