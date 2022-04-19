@@ -15,7 +15,6 @@ install: npm ci --no-audit
 sudo: false
 
 node_js:
-- 12
 - 14
 - 16
 - 17
