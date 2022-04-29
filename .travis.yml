@@ -1,4 +1,5 @@
 language: node_js
+dist: focal
 
 services:
   - docker
@@ -17,7 +18,7 @@ sudo: false
 node_js:
 - 14
 - 16
-- 17
+- 18
 
 script:
 - npm run build
