@@ -118,16 +118,4 @@ consult the Cloudant documentation for further information.
 
 <!-- Template substitution for language specific content -->
 <!-- ## SPLIT MARKER ## -->
-## Cloudant SDK for Node.js
 
-### Session authentication
-
-Session authentication does not work with compressed request bodies when the server is CouchDB < 3.2.0 or Cloudant <= 8192. [Disabling gzip compression](#disabling-request-body-compression) for requests is required when using session authentication with these server versions
-
-### Disabling request body compression
-```js
-const { CloudantV1 } = require('@ibm-cloud/cloudant');
-const client = CloudantV1.newInstance({ serviceName: 'YOUR_SERVICE_NAME' });
-client.setEnableGzipCompression(false);
-...
-```
