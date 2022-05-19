@@ -2,6 +2,7 @@
 apidocs/
 coverage/
 dist/
+examples/
 gh-pages/
 junitreports/
 node_modules/
