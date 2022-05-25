@@ -28,4 +28,8 @@ test/unit/cloudant.v1.test.js @IBM/cloudant-sdks
 package-lock.json @IBM/cloudant-sdks
 package.json @IBM/cloudant-sdks
 
+# Examples files:
+
+/examples/ @IBM/cloudant-sdks
+
 .bumpversion.cfg @IBM/cloudant-sdks
