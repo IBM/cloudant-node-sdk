@@ -37,20 +37,31 @@ const cloudantServiceOptions = {
 
 const cloudantService = new CloudantV1(cloudantServiceOptions);
 
-// dont actually create a request
-const createRequestMock = jest.spyOn(cloudantService, 'createRequest');
-createRequestMock.mockImplementation(() => Promise.resolve());
+let createRequestMock = null;
+function mock_createRequest() {
+  if (!createRequestMock) {
+    createRequestMock = jest.spyOn(cloudantService, 'createRequest');
+    createRequestMock.mockImplementation(() => Promise.resolve());
+  }
+}
 
 // dont actually construct an authenticator
 const getAuthenticatorMock = jest.spyOn(core, 'getAuthenticatorFromEnvironment');
 getAuthenticatorMock.mockImplementation(() => new NoAuthAuthenticator());
 
-afterEach(() => {
-  createRequestMock.mockClear();
-  getAuthenticatorMock.mockClear();
-});
-
 describe('CloudantV1', () => {
+
+  beforeEach(() => {
+    mock_createRequest();
+  });
+
+  afterEach(() => {
+    if (createRequestMock) {
+      createRequestMock.mockClear();
+    }
+    getAuthenticatorMock.mockClear();
+  });
+  
   describe('the newInstance method', () => {
     test('should use defaults when options not provided', () => {
       const testInstance = CloudantV1.newInstance();
@@ -78,6 +89,7 @@ describe('CloudantV1', () => {
       expect(testInstance).toBeInstanceOf(CloudantV1);
     });
   });
+
   describe('the constructor', () => {
     test('use user-given service url', () => {
       const options = {
@@ -110,6 +122,7 @@ describe('CloudantV1', () => {
       expect(testInstance.baseOptions.enableGzipCompression).toBe(true);
     });
   });
+
   describe('getServerInformation', () => {
     describe('positive tests', () => {
       function __getServerInformationTest() {
@@ -169,6 +182,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getMembershipInformation', () => {
     describe('positive tests', () => {
       function __getMembershipInformationTest() {
@@ -228,6 +242,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getUuids', () => {
     describe('positive tests', () => {
       function __getUuidsTest() {
@@ -291,6 +306,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getCapacityThroughputInformation', () => {
     describe('positive tests', () => {
       function __getCapacityThroughputInformationTest() {
@@ -350,6 +366,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('putCapacityThroughputConfiguration', () => {
     describe('positive tests', () => {
       function __putCapacityThroughputConfigurationTest() {
@@ -433,6 +450,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getDbUpdates', () => {
     describe('positive tests', () => {
       function __getDbUpdatesTest() {
@@ -505,6 +523,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postChanges', () => {
     describe('positive tests', () => {
       function __postChangesTest() {
@@ -642,6 +661,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postChangesAsStream', () => {
     describe('positive tests', () => {
       function __postChangesAsStreamTest() {
@@ -780,6 +800,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('headDatabase', () => {
     describe('positive tests', () => {
       function __headDatabaseTest() {
@@ -863,6 +884,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getAllDbs', () => {
     describe('positive tests', () => {
       function __getAllDbsTest() {
@@ -938,6 +960,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postDbsInfo', () => {
     describe('positive tests', () => {
       function __postDbsInfoTest() {
@@ -1021,6 +1044,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('deleteDatabase', () => {
     describe('positive tests', () => {
       function __deleteDatabaseTest() {
@@ -1104,6 +1128,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getDatabaseInformation', () => {
     describe('positive tests', () => {
       function __getDatabaseInformationTest() {
@@ -1187,6 +1212,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('putDatabase', () => {
     describe('positive tests', () => {
       function __putDatabaseTest() {
@@ -1276,6 +1302,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('headDocument', () => {
     describe('positive tests', () => {
       function __headDocumentTest() {
@@ -1373,6 +1400,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postDocument', () => {
     describe('positive tests', () => {
       function __postDocumentTest() {
@@ -1467,6 +1495,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postAllDocs', () => {
     describe('positive tests', () => {
       function __postAllDocsTest() {
@@ -1589,6 +1618,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postAllDocsAsStream', () => {
     describe('positive tests', () => {
       function __postAllDocsAsStreamTest() {
@@ -1712,6 +1742,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postAllDocsQueries', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -1819,6 +1850,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postAllDocsQueriesAsStream', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -1927,6 +1959,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postBulkDocs', () => {
     describe('positive tests', () => {
       function __postBulkDocsTest() {
@@ -2015,6 +2048,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postBulkGet', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -2124,6 +2158,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postBulkGetAsMixed', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -2234,6 +2269,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postBulkGetAsRelated', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -2344,6 +2380,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postBulkGetAsStream', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -2454,6 +2491,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('deleteDocument', () => {
     describe('positive tests', () => {
       function __deleteDocumentTest() {
@@ -2551,6 +2589,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getDocument', () => {
     describe('positive tests', () => {
       function __getDocumentTest() {
@@ -2672,6 +2711,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getDocumentAsMixed', () => {
     describe('positive tests', () => {
       function __getDocumentAsMixedTest() {
@@ -2794,6 +2834,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getDocumentAsRelated', () => {
     describe('positive tests', () => {
       function __getDocumentAsRelatedTest() {
@@ -2916,6 +2957,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getDocumentAsStream', () => {
     describe('positive tests', () => {
       function __getDocumentAsStreamTest() {
@@ -3038,6 +3080,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('putDocument', () => {
     describe('positive tests', () => {
       function __putDocumentTest() {
@@ -3146,6 +3189,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('headDesignDocument', () => {
     describe('positive tests', () => {
       function __headDesignDocumentTest() {
@@ -3237,6 +3281,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('deleteDesignDocument', () => {
     describe('positive tests', () => {
       function __deleteDesignDocumentTest() {
@@ -3334,6 +3379,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getDesignDocument', () => {
     describe('positive tests', () => {
       function __getDesignDocumentTest() {
@@ -3455,6 +3501,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('putDesignDocument', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -3644,6 +3691,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getDesignDocumentInformation', () => {
     describe('positive tests', () => {
       function __getDesignDocumentInformationTest() {
@@ -3732,6 +3780,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postDesignDocs', () => {
     describe('positive tests', () => {
       function __postDesignDocsTest() {
@@ -3857,6 +3906,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postDesignDocsQueries', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -3967,6 +4017,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postView', () => {
     describe('positive tests', () => {
       function __postViewTest() {
@@ -4120,6 +4171,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postViewAsStream', () => {
     describe('positive tests', () => {
       function __postViewAsStreamTest() {
@@ -4274,6 +4326,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postViewQueries', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -4398,6 +4451,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postViewQueriesAsStream', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -4523,6 +4577,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getPartitionInformation', () => {
     describe('positive tests', () => {
       function __getPartitionInformationTest() {
@@ -4611,6 +4666,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postPartitionAllDocs', () => {
     describe('positive tests', () => {
       function __postPartitionAllDocsTest() {
@@ -4738,6 +4794,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postPartitionAllDocsAsStream', () => {
     describe('positive tests', () => {
       function __postPartitionAllDocsAsStreamTest() {
@@ -4866,6 +4923,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postPartitionSearch', () => {
     describe('positive tests', () => {
       function __postPartitionSearchTest() {
@@ -5002,6 +5060,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postPartitionSearchAsStream', () => {
     describe('positive tests', () => {
       function __postPartitionSearchAsStreamTest() {
@@ -5139,6 +5198,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postPartitionView', () => {
     describe('positive tests', () => {
       function __postPartitionViewTest() {
@@ -5297,6 +5357,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postPartitionViewAsStream', () => {
     describe('positive tests', () => {
       function __postPartitionViewAsStreamTest() {
@@ -5456,6 +5517,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postPartitionFind', () => {
     describe('positive tests', () => {
       function __postPartitionFindTest() {
@@ -5579,6 +5641,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postPartitionFindAsStream', () => {
     describe('positive tests', () => {
       function __postPartitionFindAsStreamTest() {
@@ -5703,6 +5766,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postExplain', () => {
     describe('positive tests', () => {
       function __postExplainTest() {
@@ -5824,6 +5888,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postFind', () => {
     describe('positive tests', () => {
       function __postFindTest() {
@@ -5945,6 +6010,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postFindAsStream', () => {
     describe('positive tests', () => {
       function __postFindAsStreamTest() {
@@ -6067,6 +6133,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getIndexesInformation', () => {
     describe('positive tests', () => {
       function __getIndexesInformationTest() {
@@ -6150,6 +6217,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postIndex', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -6283,6 +6351,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('deleteIndex', () => {
     describe('positive tests', () => {
       function __deleteIndexTest() {
@@ -6381,6 +6450,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postSearchAnalyze', () => {
     describe('positive tests', () => {
       function __postSearchAnalyzeTest() {
@@ -6469,6 +6539,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postSearch', () => {
     describe('positive tests', () => {
       function __postSearchTest() {
@@ -6618,6 +6689,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postSearchAsStream', () => {
     describe('positive tests', () => {
       function __postSearchAsStreamTest() {
@@ -6768,6 +6840,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getSearchInfo', () => {
     describe('positive tests', () => {
       function __getSearchInfoTest() {
@@ -6861,6 +6934,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getGeo', () => {
     describe('positive tests', () => {
       function __getGeoTest() {
@@ -6999,6 +7073,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getGeoAsStream', () => {
     describe('positive tests', () => {
       function __getGeoAsStreamTest() {
@@ -7138,6 +7213,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postGeoCleanup', () => {
     describe('positive tests', () => {
       function __postGeoCleanupTest() {
@@ -7221,6 +7297,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getGeoIndexInformation', () => {
     describe('positive tests', () => {
       function __getGeoIndexInformationTest() {
@@ -7314,6 +7391,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('headReplicationDocument', () => {
     describe('positive tests', () => {
       function __headReplicationDocumentTest() {
@@ -7400,6 +7478,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('headSchedulerDocument', () => {
     describe('positive tests', () => {
       function __headSchedulerDocumentTest() {
@@ -7483,6 +7562,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('headSchedulerJob', () => {
     describe('positive tests', () => {
       function __headSchedulerJobTest() {
@@ -7566,6 +7646,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('deleteReplicationDocument', () => {
     describe('positive tests', () => {
       function __deleteReplicationDocumentTest() {
@@ -7658,6 +7739,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getReplicationDocument', () => {
     describe('positive tests', () => {
       function __getReplicationDocumentTest() {
@@ -7774,6 +7856,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('putReplicationDocument', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -7975,6 +8058,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getSchedulerDocs', () => {
     describe('positive tests', () => {
       function __getSchedulerDocsTest() {
@@ -8044,6 +8128,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getSchedulerDocument', () => {
     describe('positive tests', () => {
       function __getSchedulerDocumentTest() {
@@ -8127,6 +8212,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getSchedulerJobs', () => {
     describe('positive tests', () => {
       function __getSchedulerJobsTest() {
@@ -8193,6 +8279,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getSchedulerJob', () => {
     describe('positive tests', () => {
       function __getSchedulerJobTest() {
@@ -8276,6 +8363,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getSessionInformation', () => {
     describe('positive tests', () => {
       function __getSessionInformationTest() {
@@ -8335,6 +8423,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getSecurity', () => {
     describe('positive tests', () => {
       function __getSecurityTest() {
@@ -8418,6 +8507,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('putSecurity', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -8521,6 +8611,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postApiKeys', () => {
     describe('positive tests', () => {
       function __postApiKeysTest() {
@@ -8580,6 +8671,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('putCloudantSecurityConfiguration', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
@@ -8685,6 +8777,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getCorsInformation', () => {
     describe('positive tests', () => {
       function __getCorsInformationTest() {
@@ -8744,6 +8837,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('putCorsConfiguration', () => {
     describe('positive tests', () => {
       function __putCorsConfigurationTest() {
@@ -8833,6 +8927,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('headAttachment', () => {
     describe('positive tests', () => {
       function __headAttachmentTest() {
@@ -8935,6 +9030,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('deleteAttachment', () => {
     describe('positive tests', () => {
       function __deleteAttachmentTest() {
@@ -9037,6 +9133,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getAttachment', () => {
     describe('positive tests', () => {
       function __getAttachmentTest() {
@@ -9146,6 +9243,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('putAttachment', () => {
     describe('positive tests', () => {
       function __putAttachmentTest() {
@@ -9255,6 +9353,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('headLocalDocument', () => {
     describe('positive tests', () => {
       function __headLocalDocumentTest() {
@@ -9346,6 +9445,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('deleteLocalDocument', () => {
     describe('positive tests', () => {
       function __deleteLocalDocumentTest() {
@@ -9437,6 +9537,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getLocalDocument', () => {
     describe('positive tests', () => {
       function __getLocalDocumentTest() {
@@ -9540,6 +9641,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('putLocalDocument', () => {
     describe('positive tests', () => {
       function __putLocalDocumentTest() {
@@ -9639,6 +9741,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postRevsDiff', () => {
     describe('positive tests', () => {
       function __postRevsDiffTest() {
@@ -9727,6 +9830,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getShardsInformation', () => {
     describe('positive tests', () => {
       function __getShardsInformationTest() {
@@ -9810,6 +9914,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getDocumentShardsInfo', () => {
     describe('positive tests', () => {
       function __getDocumentShardsInfoTest() {
@@ -9898,6 +10003,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('headUpInformation', () => {
     describe('positive tests', () => {
       function __headUpInformationTest() {
@@ -9957,6 +10063,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getActiveTasks', () => {
     describe('positive tests', () => {
       function __getActiveTasksTest() {
@@ -10016,6 +10123,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getUpInformation', () => {
     describe('positive tests', () => {
       function __getUpInformationTest() {
@@ -10075,6 +10183,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getActivityTrackerEvents', () => {
     describe('positive tests', () => {
       function __getActivityTrackerEventsTest() {
@@ -10134,6 +10243,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('postActivityTrackerEvents', () => {
     describe('positive tests', () => {
       function __postActivityTrackerEventsTest() {
@@ -10217,6 +10327,7 @@ describe('CloudantV1', () => {
       });
     });
   });
+
   describe('getCurrentThroughputInformation', () => {
     describe('positive tests', () => {
       function __getCurrentThroughputInformationTest() {
