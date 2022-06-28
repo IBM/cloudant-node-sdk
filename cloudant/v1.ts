@@ -469,7 +469,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * in each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
    * key order.
    * @param {string} [params.feed] - Query parameter to specify the changes feed type.
@@ -633,7 +633,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * in each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
    * key order.
    * @param {string} [params.feed] - Query parameter to specify the changes feed type.
@@ -1240,8 +1240,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
    * attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
-   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in the
-   * `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
+   * each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
@@ -1332,8 +1332,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
    * attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
-   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in the
-   * `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
+   * each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
@@ -1984,7 +1984,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * in each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
    * conflicted revisions in the `_deleted_conflicts` property of the returned document.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
@@ -2075,7 +2075,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * in each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
    * conflicted revisions in the `_deleted_conflicts` property of the returned document.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
@@ -2167,7 +2167,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * in each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
    * conflicted revisions in the `_deleted_conflicts` property of the returned document.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
@@ -2259,7 +2259,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * in each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
    * conflicted revisions in the `_deleted_conflicts` property of the returned document.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
@@ -2564,7 +2564,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * in each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
    * conflicted revisions in the `_deleted_conflicts` property of the returned document.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
@@ -2783,8 +2783,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
    * attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
-   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in the
-   * `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
+   * each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
@@ -2945,8 +2945,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
    * attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
-   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in the
-   * `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
+   * each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
@@ -2959,20 +2959,33 @@ class CloudantV1 extends CloudantBaseService {
    * indicating the sequence id of the database the view reflects.
    * @param {any} [params.endKey] - Schema for any JSON type.
    * @param {string} [params.endKeyDocId] - Schema for a document ID.
-   * @param {boolean} [params.group] - Parameter to specify whether to group the results using the reduce function to a
-   * group rather than a single row. Implies reduce is true and the maximum group_level.
-   * @param {number} [params.groupLevel] - Parameter to specify the group level to be used. Implies group is true.
+   * @param {boolean} [params.group] - Parameter to specify whether to group reduced results by key. Valid only if a
+   * reduce function defined in the view. If the view emits key in JSON array format, then it is possible to reduce
+   * groups further based on the number of array elements with the `group_level` parameter.
+   * @param {number} [params.groupLevel] - Parameter to specify a group level to be used. Only applicable if the view
+   * uses keys that are JSON arrays. Implies group is `true`. Group level groups the reduced results by the specified
+   * number of array elements. If unset, results are grouped by the entire array key, returning a reduced value for each
+   * complete key.
    * @param {any} [params.key] - Schema for any JSON type.
-   * @param {any[]} [params.keys] - Parameter to specify to return only documents that match the specified keys. String
-   * representation of a JSON array containing elements that match the key type emitted by the view function.
+   * @param {any[]} [params.keys] - Parameter to specify returning only documents that match any of the specified keys.
+   * A JSON array of keys that match the key type emitted by the view function.
    * @param {boolean} [params.reduce] - Parameter to specify whether to use the reduce function in a map-reduce view.
    * Default is true when a reduce function is defined.
-   * @param {boolean} [params.stable] - Parameter to specify whether view results should be returned from a stable set
-   * of shards.
+   * @param {boolean} [params.stable] - Query parameter to specify whether use the same replica of  the index on each
+   * request. The default value `false` contacts all  replicas and returns the result from the first, fastest,
+   * responder. Setting it to `true` when used in conjunction with `update=false`  may improve consistency at the
+   * expense of increased latency and decreased throughput if the selected replica is not the fastest of the available
+   * replicas.
+   *
+   * **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
    * @param {any} [params.startKey] - Schema for any JSON type.
    * @param {string} [params.startKeyDocId] - Schema for a document ID.
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
    * to responding to the user.
+   *
+   * * `true` - Return results after the view is updated.
+   * * `false` - Return results without updating the view.
+   * * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ViewResult>>}
    */
@@ -3061,8 +3074,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
    * attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
-   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in the
-   * `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
+   * each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
@@ -3075,20 +3088,33 @@ class CloudantV1 extends CloudantBaseService {
    * indicating the sequence id of the database the view reflects.
    * @param {any} [params.endKey] - Schema for any JSON type.
    * @param {string} [params.endKeyDocId] - Schema for a document ID.
-   * @param {boolean} [params.group] - Parameter to specify whether to group the results using the reduce function to a
-   * group rather than a single row. Implies reduce is true and the maximum group_level.
-   * @param {number} [params.groupLevel] - Parameter to specify the group level to be used. Implies group is true.
+   * @param {boolean} [params.group] - Parameter to specify whether to group reduced results by key. Valid only if a
+   * reduce function defined in the view. If the view emits key in JSON array format, then it is possible to reduce
+   * groups further based on the number of array elements with the `group_level` parameter.
+   * @param {number} [params.groupLevel] - Parameter to specify a group level to be used. Only applicable if the view
+   * uses keys that are JSON arrays. Implies group is `true`. Group level groups the reduced results by the specified
+   * number of array elements. If unset, results are grouped by the entire array key, returning a reduced value for each
+   * complete key.
    * @param {any} [params.key] - Schema for any JSON type.
-   * @param {any[]} [params.keys] - Parameter to specify to return only documents that match the specified keys. String
-   * representation of a JSON array containing elements that match the key type emitted by the view function.
+   * @param {any[]} [params.keys] - Parameter to specify returning only documents that match any of the specified keys.
+   * A JSON array of keys that match the key type emitted by the view function.
    * @param {boolean} [params.reduce] - Parameter to specify whether to use the reduce function in a map-reduce view.
    * Default is true when a reduce function is defined.
-   * @param {boolean} [params.stable] - Parameter to specify whether view results should be returned from a stable set
-   * of shards.
+   * @param {boolean} [params.stable] - Query parameter to specify whether use the same replica of  the index on each
+   * request. The default value `false` contacts all  replicas and returns the result from the first, fastest,
+   * responder. Setting it to `true` when used in conjunction with `update=false`  may improve consistency at the
+   * expense of increased latency and decreased throughput if the selected replica is not the fastest of the available
+   * replicas.
+   *
+   * **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
    * @param {any} [params.startKey] - Schema for any JSON type.
    * @param {string} [params.startKeyDocId] - Schema for a document ID.
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
    * to responding to the user.
+   *
+   * * `true` - Return results after the view is updated.
+   * * `false` - Return results without updating the view.
+   * * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
@@ -3366,8 +3392,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
    * attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
-   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in the
-   * `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
+   * each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
@@ -3460,8 +3486,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
    * attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
-   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in the
-   * `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
+   * each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
@@ -3761,8 +3787,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
    * attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
-   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in the
-   * `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
+   * each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
@@ -3775,20 +3801,33 @@ class CloudantV1 extends CloudantBaseService {
    * indicating the sequence id of the database the view reflects.
    * @param {any} [params.endKey] - Schema for any JSON type.
    * @param {string} [params.endKeyDocId] - Schema for a document ID.
-   * @param {boolean} [params.group] - Parameter to specify whether to group the results using the reduce function to a
-   * group rather than a single row. Implies reduce is true and the maximum group_level.
-   * @param {number} [params.groupLevel] - Parameter to specify the group level to be used. Implies group is true.
+   * @param {boolean} [params.group] - Parameter to specify whether to group reduced results by key. Valid only if a
+   * reduce function defined in the view. If the view emits key in JSON array format, then it is possible to reduce
+   * groups further based on the number of array elements with the `group_level` parameter.
+   * @param {number} [params.groupLevel] - Parameter to specify a group level to be used. Only applicable if the view
+   * uses keys that are JSON arrays. Implies group is `true`. Group level groups the reduced results by the specified
+   * number of array elements. If unset, results are grouped by the entire array key, returning a reduced value for each
+   * complete key.
    * @param {any} [params.key] - Schema for any JSON type.
-   * @param {any[]} [params.keys] - Parameter to specify to return only documents that match the specified keys. String
-   * representation of a JSON array containing elements that match the key type emitted by the view function.
+   * @param {any[]} [params.keys] - Parameter to specify returning only documents that match any of the specified keys.
+   * A JSON array of keys that match the key type emitted by the view function.
    * @param {boolean} [params.reduce] - Parameter to specify whether to use the reduce function in a map-reduce view.
    * Default is true when a reduce function is defined.
-   * @param {boolean} [params.stable] - Parameter to specify whether view results should be returned from a stable set
-   * of shards.
+   * @param {boolean} [params.stable] - Query parameter to specify whether use the same replica of  the index on each
+   * request. The default value `false` contacts all  replicas and returns the result from the first, fastest,
+   * responder. Setting it to `true` when used in conjunction with `update=false`  may improve consistency at the
+   * expense of increased latency and decreased throughput if the selected replica is not the fastest of the available
+   * replicas.
+   *
+   * **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
    * @param {any} [params.startKey] - Schema for any JSON type.
    * @param {string} [params.startKeyDocId] - Schema for a document ID.
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
    * to responding to the user.
+   *
+   * * `true` - Return results after the view is updated.
+   * * `false` - Return results without updating the view.
+   * * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ViewResult>>}
    */
@@ -3879,8 +3918,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
    * attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
-   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in the
-   * `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
+   * each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
@@ -3893,20 +3932,33 @@ class CloudantV1 extends CloudantBaseService {
    * indicating the sequence id of the database the view reflects.
    * @param {any} [params.endKey] - Schema for any JSON type.
    * @param {string} [params.endKeyDocId] - Schema for a document ID.
-   * @param {boolean} [params.group] - Parameter to specify whether to group the results using the reduce function to a
-   * group rather than a single row. Implies reduce is true and the maximum group_level.
-   * @param {number} [params.groupLevel] - Parameter to specify the group level to be used. Implies group is true.
+   * @param {boolean} [params.group] - Parameter to specify whether to group reduced results by key. Valid only if a
+   * reduce function defined in the view. If the view emits key in JSON array format, then it is possible to reduce
+   * groups further based on the number of array elements with the `group_level` parameter.
+   * @param {number} [params.groupLevel] - Parameter to specify a group level to be used. Only applicable if the view
+   * uses keys that are JSON arrays. Implies group is `true`. Group level groups the reduced results by the specified
+   * number of array elements. If unset, results are grouped by the entire array key, returning a reduced value for each
+   * complete key.
    * @param {any} [params.key] - Schema for any JSON type.
-   * @param {any[]} [params.keys] - Parameter to specify to return only documents that match the specified keys. String
-   * representation of a JSON array containing elements that match the key type emitted by the view function.
+   * @param {any[]} [params.keys] - Parameter to specify returning only documents that match any of the specified keys.
+   * A JSON array of keys that match the key type emitted by the view function.
    * @param {boolean} [params.reduce] - Parameter to specify whether to use the reduce function in a map-reduce view.
    * Default is true when a reduce function is defined.
-   * @param {boolean} [params.stable] - Parameter to specify whether view results should be returned from a stable set
-   * of shards.
+   * @param {boolean} [params.stable] - Query parameter to specify whether use the same replica of  the index on each
+   * request. The default value `false` contacts all  replicas and returns the result from the first, fastest,
+   * responder. Setting it to `true` when used in conjunction with `update=false`  may improve consistency at the
+   * expense of increased latency and decreased throughput if the selected replica is not the fastest of the available
+   * replicas.
+   *
+   * **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
    * @param {any} [params.startKey] - Schema for any JSON type.
    * @param {string} [params.startKeyDocId] - Schema for a document ID.
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
    * to responding to the user.
+   *
+   * * `true` - Return results after the view is updated.
+   * * `false` - Return results without updating the view.
+   * * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
@@ -5770,7 +5822,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
    * in attachment stubs if the particular attachment is compressed.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in the `_conflicts` property of the returned document. Ignored if `include_docs` isn't `true`.
+   * in each returned document. Active only when `include_docs` is `true`.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
    * conflicted revisions in the `_deleted_conflicts` property of the returned document.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
@@ -7708,8 +7760,8 @@ namespace CloudantV1 {
     attEncodingInfo?: boolean;
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
-     *  the returned document. Ignored if `include_docs` isn't `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
+     *  Active only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to return the documents in descending by key order. */
@@ -7829,8 +7881,8 @@ namespace CloudantV1 {
     attEncodingInfo?: boolean;
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
-     *  the returned document. Ignored if `include_docs` isn't `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
+     *  Active only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to return the documents in descending by key order. */
@@ -8017,8 +8069,8 @@ namespace CloudantV1 {
     attEncodingInfo?: boolean;
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-     *  returned document. Ignored if `include_docs` isn't `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
+     *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
@@ -8056,8 +8108,8 @@ namespace CloudantV1 {
     attEncodingInfo?: boolean;
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-     *  returned document. Ignored if `include_docs` isn't `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
+     *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
@@ -8239,8 +8291,8 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
-     *  the returned document. Ignored if `include_docs` isn't `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
+     *  Active only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to include a list of deleted conflicted revisions in the
@@ -8280,8 +8332,8 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
-     *  the returned document. Ignored if `include_docs` isn't `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
+     *  Active only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to include a list of deleted conflicted revisions in the
@@ -8321,8 +8373,8 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
-     *  the returned document. Ignored if `include_docs` isn't `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
+     *  Active only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to include a list of deleted conflicted revisions in the
@@ -8362,8 +8414,8 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
-     *  the returned document. Ignored if `include_docs` isn't `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
+     *  Active only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to include a list of deleted conflicted revisions in the
@@ -8486,8 +8538,8 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
-     *  the returned document. Ignored if `include_docs` isn't `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
+     *  Active only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to include a list of deleted conflicted revisions in the
@@ -8568,8 +8620,8 @@ namespace CloudantV1 {
     attEncodingInfo?: boolean;
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-     *  returned document. Ignored if `include_docs` isn't `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
+     *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
@@ -8646,8 +8698,8 @@ namespace CloudantV1 {
     attEncodingInfo?: boolean;
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-     *  returned document. Ignored if `include_docs` isn't `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
+     *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
@@ -8668,36 +8720,51 @@ namespace CloudantV1 {
     endKey?: any;
     /** Schema for a document ID. */
     endKeyDocId?: string;
-    /** Parameter to specify whether to group the results using the reduce function to a group rather than a single
-     *  row. Implies reduce is true and the maximum group_level.
+    /** Parameter to specify whether to group reduced results by key. Valid only if a reduce function defined in the
+     *  view. If the view emits key in JSON array format, then it is possible to reduce groups further based on the
+     *  number of array elements with the `group_level` parameter.
      */
     group?: boolean;
-    /** Parameter to specify the group level to be used. Implies group is true. */
+    /** Parameter to specify a group level to be used. Only applicable if the view uses keys that are JSON arrays.
+     *  Implies group is `true`. Group level groups the reduced results by the specified number of array elements. If
+     *  unset, results are grouped by the entire array key, returning a reduced value for each complete key.
+     */
     groupLevel?: number;
     /** Schema for any JSON type. */
     key?: any;
-    /** Parameter to specify to return only documents that match the specified keys. String representation of a JSON
-     *  array containing elements that match the key type emitted by the view function.
+    /** Parameter to specify returning only documents that match any of the specified keys. A JSON array of keys
+     *  that match the key type emitted by the view function.
      */
     keys?: any[];
     /** Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce
      *  function is defined.
      */
     reduce?: boolean;
-    /** Parameter to specify whether view results should be returned from a stable set of shards. */
+    /** Query parameter to specify whether use the same replica of  the index on each request. The default value
+     *  `false` contacts all  replicas and returns the result from the first, fastest, responder. Setting it to `true`
+     *  when used in conjunction with `update=false`  may improve consistency at the expense of increased latency and
+     *  decreased throughput if the selected replica is not the fastest of the available  replicas.
+     *
+     *  **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
+     */
     stable?: boolean;
     /** Schema for any JSON type. */
     startKey?: any;
     /** Schema for a document ID. */
     startKeyDocId?: string;
-    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
+    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user.
+     *
+     *  * `true` - Return results after the view is updated.
+     *  * `false` - Return results without updating the view.
+     *  * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
+     */
     update?: PostViewConstants.Update | string;
     headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postView` operation. */
   export namespace PostViewConstants {
-    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
+    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. * `true` - Return results after the view is updated. * `false` - Return results without updating the view. * `lazy` - Return the view results without waiting for an update, but update them immediately after the request. */
     export enum Update {
       TRUE = 'true',
       FALSE = 'false',
@@ -8721,8 +8788,8 @@ namespace CloudantV1 {
     attEncodingInfo?: boolean;
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-     *  returned document. Ignored if `include_docs` isn't `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
+     *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
@@ -8743,36 +8810,51 @@ namespace CloudantV1 {
     endKey?: any;
     /** Schema for a document ID. */
     endKeyDocId?: string;
-    /** Parameter to specify whether to group the results using the reduce function to a group rather than a single
-     *  row. Implies reduce is true and the maximum group_level.
+    /** Parameter to specify whether to group reduced results by key. Valid only if a reduce function defined in the
+     *  view. If the view emits key in JSON array format, then it is possible to reduce groups further based on the
+     *  number of array elements with the `group_level` parameter.
      */
     group?: boolean;
-    /** Parameter to specify the group level to be used. Implies group is true. */
+    /** Parameter to specify a group level to be used. Only applicable if the view uses keys that are JSON arrays.
+     *  Implies group is `true`. Group level groups the reduced results by the specified number of array elements. If
+     *  unset, results are grouped by the entire array key, returning a reduced value for each complete key.
+     */
     groupLevel?: number;
     /** Schema for any JSON type. */
     key?: any;
-    /** Parameter to specify to return only documents that match the specified keys. String representation of a JSON
-     *  array containing elements that match the key type emitted by the view function.
+    /** Parameter to specify returning only documents that match any of the specified keys. A JSON array of keys
+     *  that match the key type emitted by the view function.
      */
     keys?: any[];
     /** Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce
      *  function is defined.
      */
     reduce?: boolean;
-    /** Parameter to specify whether view results should be returned from a stable set of shards. */
+    /** Query parameter to specify whether use the same replica of  the index on each request. The default value
+     *  `false` contacts all  replicas and returns the result from the first, fastest, responder. Setting it to `true`
+     *  when used in conjunction with `update=false`  may improve consistency at the expense of increased latency and
+     *  decreased throughput if the selected replica is not the fastest of the available  replicas.
+     *
+     *  **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
+     */
     stable?: boolean;
     /** Schema for any JSON type. */
     startKey?: any;
     /** Schema for a document ID. */
     startKeyDocId?: string;
-    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
+    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user.
+     *
+     *  * `true` - Return results after the view is updated.
+     *  * `false` - Return results without updating the view.
+     *  * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
+     */
     update?: PostViewAsStreamConstants.Update | string;
     headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postViewAsStream` operation. */
   export namespace PostViewAsStreamConstants {
-    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
+    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. * `true` - Return results after the view is updated. * `false` - Return results without updating the view. * `lazy` - Return the view results without waiting for an update, but update them immediately after the request. */
     export enum Update {
       TRUE = 'true',
       FALSE = 'false',
@@ -8835,8 +8917,8 @@ namespace CloudantV1 {
     attEncodingInfo?: boolean;
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-     *  returned document. Ignored if `include_docs` isn't `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
+     *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
@@ -8876,8 +8958,8 @@ namespace CloudantV1 {
     attEncodingInfo?: boolean;
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-     *  returned document. Ignored if `include_docs` isn't `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
+     *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
@@ -9043,8 +9125,8 @@ namespace CloudantV1 {
     attEncodingInfo?: boolean;
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-     *  returned document. Ignored if `include_docs` isn't `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
+     *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
@@ -9065,36 +9147,51 @@ namespace CloudantV1 {
     endKey?: any;
     /** Schema for a document ID. */
     endKeyDocId?: string;
-    /** Parameter to specify whether to group the results using the reduce function to a group rather than a single
-     *  row. Implies reduce is true and the maximum group_level.
+    /** Parameter to specify whether to group reduced results by key. Valid only if a reduce function defined in the
+     *  view. If the view emits key in JSON array format, then it is possible to reduce groups further based on the
+     *  number of array elements with the `group_level` parameter.
      */
     group?: boolean;
-    /** Parameter to specify the group level to be used. Implies group is true. */
+    /** Parameter to specify a group level to be used. Only applicable if the view uses keys that are JSON arrays.
+     *  Implies group is `true`. Group level groups the reduced results by the specified number of array elements. If
+     *  unset, results are grouped by the entire array key, returning a reduced value for each complete key.
+     */
     groupLevel?: number;
     /** Schema for any JSON type. */
     key?: any;
-    /** Parameter to specify to return only documents that match the specified keys. String representation of a JSON
-     *  array containing elements that match the key type emitted by the view function.
+    /** Parameter to specify returning only documents that match any of the specified keys. A JSON array of keys
+     *  that match the key type emitted by the view function.
      */
     keys?: any[];
     /** Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce
      *  function is defined.
      */
     reduce?: boolean;
-    /** Parameter to specify whether view results should be returned from a stable set of shards. */
+    /** Query parameter to specify whether use the same replica of  the index on each request. The default value
+     *  `false` contacts all  replicas and returns the result from the first, fastest, responder. Setting it to `true`
+     *  when used in conjunction with `update=false`  may improve consistency at the expense of increased latency and
+     *  decreased throughput if the selected replica is not the fastest of the available  replicas.
+     *
+     *  **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
+     */
     stable?: boolean;
     /** Schema for any JSON type. */
     startKey?: any;
     /** Schema for a document ID. */
     startKeyDocId?: string;
-    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
+    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user.
+     *
+     *  * `true` - Return results after the view is updated.
+     *  * `false` - Return results without updating the view.
+     *  * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
+     */
     update?: PostPartitionViewConstants.Update | string;
     headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postPartitionView` operation. */
   export namespace PostPartitionViewConstants {
-    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
+    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. * `true` - Return results after the view is updated. * `false` - Return results without updating the view. * `lazy` - Return the view results without waiting for an update, but update them immediately after the request. */
     export enum Update {
       TRUE = 'true',
       FALSE = 'false',
@@ -9120,8 +9217,8 @@ namespace CloudantV1 {
     attEncodingInfo?: boolean;
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-     *  returned document. Ignored if `include_docs` isn't `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
+     *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
@@ -9142,36 +9239,51 @@ namespace CloudantV1 {
     endKey?: any;
     /** Schema for a document ID. */
     endKeyDocId?: string;
-    /** Parameter to specify whether to group the results using the reduce function to a group rather than a single
-     *  row. Implies reduce is true and the maximum group_level.
+    /** Parameter to specify whether to group reduced results by key. Valid only if a reduce function defined in the
+     *  view. If the view emits key in JSON array format, then it is possible to reduce groups further based on the
+     *  number of array elements with the `group_level` parameter.
      */
     group?: boolean;
-    /** Parameter to specify the group level to be used. Implies group is true. */
+    /** Parameter to specify a group level to be used. Only applicable if the view uses keys that are JSON arrays.
+     *  Implies group is `true`. Group level groups the reduced results by the specified number of array elements. If
+     *  unset, results are grouped by the entire array key, returning a reduced value for each complete key.
+     */
     groupLevel?: number;
     /** Schema for any JSON type. */
     key?: any;
-    /** Parameter to specify to return only documents that match the specified keys. String representation of a JSON
-     *  array containing elements that match the key type emitted by the view function.
+    /** Parameter to specify returning only documents that match any of the specified keys. A JSON array of keys
+     *  that match the key type emitted by the view function.
      */
     keys?: any[];
     /** Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce
      *  function is defined.
      */
     reduce?: boolean;
-    /** Parameter to specify whether view results should be returned from a stable set of shards. */
+    /** Query parameter to specify whether use the same replica of  the index on each request. The default value
+     *  `false` contacts all  replicas and returns the result from the first, fastest, responder. Setting it to `true`
+     *  when used in conjunction with `update=false`  may improve consistency at the expense of increased latency and
+     *  decreased throughput if the selected replica is not the fastest of the available  replicas.
+     *
+     *  **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
+     */
     stable?: boolean;
     /** Schema for any JSON type. */
     startKey?: any;
     /** Schema for a document ID. */
     startKeyDocId?: string;
-    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
+    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user.
+     *
+     *  * `true` - Return results after the view is updated.
+     *  * `false` - Return results without updating the view.
+     *  * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
+     */
     update?: PostPartitionViewAsStreamConstants.Update | string;
     headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postPartitionViewAsStream` operation. */
   export namespace PostPartitionViewAsStreamConstants {
-    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
+    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. * `true` - Return results after the view is updated. * `false` - Return results without updating the view. * `lazy` - Return the view results without waiting for an update, but update them immediately after the request. */
     export enum Update {
       TRUE = 'true',
       FALSE = 'false',
@@ -10229,8 +10341,8 @@ namespace CloudantV1 {
      *  attachment is compressed.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of
-     *  the returned document. Ignored if `include_docs` isn't `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
+     *  Active only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to include a list of deleted conflicted revisions in the
@@ -10738,8 +10850,8 @@ namespace CloudantV1 {
     att_encoding_info?: boolean;
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-     *  returned document. Ignored if `include_docs` isn't `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
+     *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
@@ -12129,8 +12241,8 @@ namespace CloudantV1 {
     att_encoding_info?: boolean;
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-     *  returned document. Ignored if `include_docs` isn't `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
+     *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
@@ -12151,29 +12263,44 @@ namespace CloudantV1 {
     end_key?: any;
     /** Schema for a document ID. */
     end_key_doc_id?: string;
-    /** Parameter to specify whether to group the results using the reduce function to a group rather than a single
-     *  row. Implies reduce is true and the maximum group_level.
+    /** Parameter to specify whether to group reduced results by key. Valid only if a reduce function defined in the
+     *  view. If the view emits key in JSON array format, then it is possible to reduce groups further based on the
+     *  number of array elements with the `group_level` parameter.
      */
     group?: boolean;
-    /** Parameter to specify the group level to be used. Implies group is true. */
+    /** Parameter to specify a group level to be used. Only applicable if the view uses keys that are JSON arrays.
+     *  Implies group is `true`. Group level groups the reduced results by the specified number of array elements. If
+     *  unset, results are grouped by the entire array key, returning a reduced value for each complete key.
+     */
     group_level?: number;
     /** Schema for any JSON type. */
     key?: any;
-    /** Parameter to specify to return only documents that match the specified keys. String representation of a JSON
-     *  array containing elements that match the key type emitted by the view function.
+    /** Parameter to specify returning only documents that match any of the specified keys. A JSON array of keys
+     *  that match the key type emitted by the view function.
      */
     keys?: any[];
     /** Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce
      *  function is defined.
      */
     reduce?: boolean;
-    /** Parameter to specify whether view results should be returned from a stable set of shards. */
+    /** Query parameter to specify whether use the same replica of  the index on each request. The default value
+     *  `false` contacts all  replicas and returns the result from the first, fastest, responder. Setting it to `true`
+     *  when used in conjunction with `update=false`  may improve consistency at the expense of increased latency and
+     *  decreased throughput if the selected replica is not the fastest of the available  replicas.
+     *
+     *  **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
+     */
     stable?: boolean;
     /** Schema for any JSON type. */
     start_key?: any;
     /** Schema for a document ID. */
     start_key_doc_id?: string;
-    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. */
+    /** Parameter to specify whether or not the view in question should be updated prior to responding to the user.
+     *
+     *  * `true` - Return results after the view is updated.
+     *  * `false` - Return results without updating the view.
+     *  * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
+     */
     update?: string;
   }
 
