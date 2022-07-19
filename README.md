@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/IBM/cloudant-node-sdk.svg?branch=master)](https://travis-ci.com/IBM/cloudant-node-sdk)
+[![Build Status](https://github.com/IBM/cloudant-node-sdk/actions/workflows/test.yml/badge.svg?branch=master&event=push)](https://github.com/IBM/cloudant-node-sdk/actions/workflows/test.yml)
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-node-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-node-sdk/releases/latest)
 [![Docs](https://img.shields.io/static/v1?label=TypeDoc&message=latest&color=blue)](https://ibm.github.io/cloudant-node-sdk/)
 
