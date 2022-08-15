@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/IBM/cloudant-node-sdk/actions/workflows/test.yml/badge.svg?branch=master&event=push)](https://github.com/IBM/cloudant-node-sdk/actions/workflows/test.yml)
+[![Build Status](https://github.com/IBM/cloudant-node-sdk/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/IBM/cloudant-node-sdk/actions/workflows/test.yml)
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-node-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-node-sdk/releases/latest)
 [![Docs](https://img.shields.io/static/v1?label=TypeDoc&message=latest&color=blue)](https://ibm.github.io/cloudant-node-sdk/)
 
@@ -202,16 +202,16 @@ To learn more about how to use programmatic authentication, see the related
 documentation in the
 [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=node#programmatic-authentication)
 or in the
-[Node.js SDK Core document](https://github.com/IBM/node-sdk-core/blob/master/Authentication.md) about authentication.
+[Node.js SDK Core document](https://github.com/IBM/node-sdk-core/blob/main/Authentication.md) about authentication.
 
 ## Using the SDK
 
-For fundamental SDK usage information and config options, please see the common [IBM Cloud SDK](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md) documentation.
+For fundamental SDK usage information and config options, please see the common [IBM Cloud SDK](https://github.com/IBM/ibm-cloud-sdk-common/blob/main/README.md) documentation.
 
 ### Request timeout configuration
 
 No request timeout is defined, but a 2.5m connect and 2.5m read timeout is set by default. Be sure to set a request timeout appropriate to your application usage and environment.
-The [request timeout](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md) section contains details on how to change the value.
+The [request timeout](https://github.com/IBM/ibm-cloud-sdk-common/blob/main/README.md) section contains details on how to change the value.
 
 **Note:** System settings may take precedence over configured timeout values.
 
