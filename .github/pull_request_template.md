@@ -4,7 +4,7 @@
 
 Fixes: <! -- link to issue -->
 
-**Note: An existing issue is [required](https://github.com/IBM/cloudant-node-sdk/blob/master/CONTRIBUTING.md#PRs) before opening a PR.**
+**Note: An existing issue is [required](https://github.com/IBM/cloudant-node-sdk/blob/main/CONTRIBUTING.md#PRs) before opening a PR.**
 
 ## PR Checklist
 
