@@ -4,7 +4,7 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 const sourceDb: CloudantV1.ReplicationDatabase = {
-  url: 'https://examples.cloudant.com/animaldb'
+  url: '<your-source-service-url>/animaldb'
 };
 
 const targetDb: CloudantV1.ReplicationDatabase = {
@@ -13,7 +13,7 @@ const targetDb: CloudantV1.ReplicationDatabase = {
       'api_key': '<your-iam-api-key>'
     }
   },
-  url: '<your-service-url>' + '/' + 'animaldb-target'
+  url: '<your-target-service-url>' + '/' + 'animaldb-target'
 };
 
 const replDocument: CloudantV1.ReplicationDocument = {
