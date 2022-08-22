@@ -28,9 +28,6 @@ const setAuthentication = () => {
   process.env.CLOUDANT_USERNAME = 'admin';
   process.env.CLOUDANT_PASSWORD = 'pass';
   process.env.CLOUDANT_URL = process.env.WIREMOCK_URL;
-
-  process.env.EXAMPLES_AUTH_TYPE = 'noauth';
-  process.env.EXAMPLES_URL = process.env.WIREMOCK_URL;
 };
 
 describe('Readme integration tests', () => {
@@ -67,25 +64,6 @@ describe('Readme integration tests', () => {
     consoleLogSpy.restore();
   });
 
-  it('Get document from example database', async () => {
-    const expectedJoinedConsoleOutput = fs.readFileSync(
-      'test/examples/output/GetInfoFromExistingDatabase.txt',
-      'utf8',
-      (err, data) => {
-        if (err) {
-          return console.log(err);
-        }
-        return data;
-      }
-    );
-    await getInfoFromExistingDatabase();
-    const consoleOutput = consoleLogSpy
-      .getCalls()
-      .map((a) => a.args[0])
-      .join('\n');
-    expect(consoleOutput).toStrictEqual(expectedJoinedConsoleOutput);
-  });
-
   it('Create db and doc for the first time', async () => {
     const expectedJoinedConsoleOutput = fs.readFileSync(
       'test/examples/output/CreateDbAndDoc.txt',
@@ -98,6 +76,25 @@ describe('Readme integration tests', () => {
       }
     );
     await createDbAndDoc();
+    const consoleOutput = consoleLogSpy
+      .getCalls()
+      .map((a) => a.args[0])
+      .join('\n');
+    expect(consoleOutput).toStrictEqual(expectedJoinedConsoleOutput);
+  });
+
+  it('Get document from orders database', async () => {
+    const expectedJoinedConsoleOutput = fs.readFileSync(
+      'test/examples/output/GetInfoFromExistingDatabase.txt',
+      'utf8',
+      (err, data) => {
+        if (err) {
+          return console.log(err);
+        }
+        return data;
+      }
+    );
+    await getInfoFromExistingDatabase();
     const consoleOutput = consoleLogSpy
       .getCalls()
       .map((a) => a.args[0])
