@@ -21,16 +21,16 @@ const { CloudantV1 } = require('../../../../index.ts');
 // when you change this file, please run test/examples/src/js/CreateOutputs.js so that the output files are updated
 
 const getInfoFromExistingDatabase = async () => {
-  // 1. Create a Cloudant client with "EXAMPLES" service name ===================
-  const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
+  // 1. Create a client with `CLOUDANT` default service name  ===================
+  const client = CloudantV1.newInstance({});
 
   // 2. Get server information ==================================================
   // call service without parameters:
   const { version } = (await client.getServerInformation()).result;
   console.log(`Server version ${version}`);
 
-  // 3. Get database information for "animaldb" =================================
-  const dbName = 'animaldb';
+  // 3. Get database information for "orders" =================================
+  const dbName = 'orders';
 
   // call service with embedded parameters:
   const dbInfo = await client.getDatabaseInformation({ db: dbName });
@@ -42,14 +42,14 @@ const getInfoFromExistingDatabase = async () => {
     `Document count in "${dbNameResult}" database is ${documentCount}.`
   );
 
-  // 5. Get zebra document out of the database by document id ===================
-  const getDocParams = { db: dbName, docId: 'zebra' };
+  // 5. Get "example" document out of the database by document id ===================
+  const getDocParams = { db: dbName, docId: 'example' };
 
   // call service with predefined parameters:
-  const documentAboutZebra = await client.getDocument(getDocParams);
+  const documentExample = await client.getDocument(getDocParams);
 
   // result object is defined as a Document here:
-  const { result } = documentAboutZebra;
+  const { result } = documentExample;
 
   console.log(
     `Document retrieved from database:\n${JSON.stringify(result, null, 2)}`
