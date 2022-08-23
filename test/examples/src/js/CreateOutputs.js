@@ -34,10 +34,10 @@ const mockedLog = (output) => {
 global.console.log = mockedLog; // Mock console.log
 
 const run = async () => {
-  await getInfoFromExistingDatabase();
+  await createDbAndDoc();
 
   fs.writeFile(
-    'test/examples/output/GetInfoFromExistingDatabase.txt',
+    'test/examples/output/CreateDbAndDoc.txt',
     consoleOutput.trim(),
     (err) => {
       if (err) throw err;
@@ -46,10 +46,10 @@ const run = async () => {
 
   consoleOutput = ''; // flush consoleOutput
 
-  await createDbAndDoc();
+  await getInfoFromExistingDatabase();
 
   fs.writeFile(
-    'test/examples/output/CreateDbAndDoc.txt',
+    'test/examples/output/GetInfoFromExistingDatabase.txt',
     consoleOutput.trim(),
     (err) => {
       if (err) throw err;
