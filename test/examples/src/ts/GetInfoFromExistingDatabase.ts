@@ -16,8 +16,8 @@
 
 import { CloudantV1 } from '../../../../index';
 
-// 1. Create a Cloudant client with "EXAMPLES" service name =====================
-const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
+// 1. Create a client with `CLOUDANT` default service name =====================
+const client = CloudantV1.newInstance({});
 
 // 2. Get server information ====================================================
 // call service without parameters:
@@ -26,8 +26,8 @@ client.getServerInformation().then((serverInformation) => {
   console.log(`Server version ${version}`);
 });
 
-// 3. Get database information for "animaldb" ===================================
-const dbName = 'animaldb';
+// 3. Get database information for "orders" ===================================
+const dbName = 'orders';
 
 // call service with embedded parameters:
 client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
@@ -40,16 +40,16 @@ client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
   );
 });
 
-// 5. Get zebra document out of the database by document id =====================
+// 5. Get "example" document out of the database by document id =====================
 const getDocParams: CloudantV1.GetDocumentParams = {
   db: dbName,
-  docId: 'zebra',
+  docId: 'example',
 };
 
 // call service with predefined parameters:
-client.getDocument(getDocParams).then((documentAboutZebra) => {
+client.getDocument(getDocParams).then((documentExample) => {
   // result object is defined as a Document here:
-  const { result } = documentAboutZebra;
+  const { result } = documentExample;
   console.log(
     `Document retrieved from database:\n${JSON.stringify(result, null, 2)}`
   );
