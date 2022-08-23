@@ -19,8 +19,7 @@
     }
   },
   "uuid" : "9fa984ad-62e6-4e74-a0ee-a531711f5dbc",
-  "persistent" : true,
-  "insertionIndex" : 16
+  "persistent" : true
 },{
   "id" : "75821ec1-cfed-41f0-bdef-cf3524a0ec4a",
   "name" : "orders_example",
@@ -43,8 +42,7 @@
   "uuid" : "75821ec1-cfed-41f0-bdef-cf3524a0ec4a",
   "persistent" : true,
   "scenarioName" : "scenario-2-orders-example",
-  "requiredScenarioState" : "scenario-2-orders-example-6",
-  "insertionIndex" : 15
+  "requiredScenarioState" : "scenario-2-orders-example-6"
 },{
   "id" : "9fa984ad-62e6-4e74-a0ee-a531711f5dba",
   "name" : "orders_example",
@@ -66,8 +64,7 @@
     }
   },
   "uuid" : "9fa984ad-62e6-4e74-a0ee-a531711f5dba",
-  "persistent" : true,
-  "insertionIndex" : 14
+  "persistent" : true
 },{
   "id" : "777d45f4-fdb3-43c4-835f-1fcafcbfd26b",
   "name" : "orders_example",
@@ -92,8 +89,7 @@
   "persistent" : true,
   "scenarioName" : "scenario-2-orders-example",
   "requiredScenarioState" : "scenario-2-orders-example-5",
-  "newScenarioState" : "scenario-2-orders-example-6",
-  "insertionIndex" : 13
+  "newScenarioState" : "scenario-2-orders-example-6"
 },{
   "id" : "9d0f096d-1d43-414f-8831-5e6e6abe7659",
   "name" : "orders",
@@ -120,8 +116,7 @@
     }
   },
   "uuid" : "9d0f096d-1d43-414f-8831-5e6e6abe7659",
-  "persistent" : true,
-  "insertionIndex" : 12
+  "persistent" : true
 },{
   "id" : "232b9d9d-1506-44a9-a11a-66639eb9250e",
   "name" : "orders_example",
@@ -146,8 +141,7 @@
   "persistent" : true,
   "scenarioName" : "scenario-2-orders-example",
   "requiredScenarioState" : "scenario-2-orders-example-4",
-  "newScenarioState" : "scenario-2-orders-example-5",
-  "insertionIndex" : 11
+  "newScenarioState" : "scenario-2-orders-example-5"
 },{
   "id" : "d2d672a9-90d5-4959-b7c6-cef7538fd233",
   "name" : "orders",
@@ -174,8 +168,7 @@
     }
   },
   "uuid" : "d2d672a9-90d5-4959-b7c6-cef7538fd233",
-  "persistent" : true,
-  "insertionIndex" : 10
+  "persistent" : true
 },{
   "id" : "b19304eb-3f50-4af2-b692-23847652a661",
   "name" : "orders_example",
@@ -200,8 +193,7 @@
   "persistent" : true,
   "scenarioName" : "scenario-2-orders-example",
   "requiredScenarioState" : "scenario-2-orders-example-3",
-  "newScenarioState" : "scenario-2-orders-example-4",
-  "insertionIndex" : 9
+  "newScenarioState" : "scenario-2-orders-example-4"
 },{
   "id" : "61d277cc-c7e5-4390-8845-4276000c224e",
   "name" : "orders",
@@ -228,8 +220,7 @@
     }
   },
   "uuid" : "61d277cc-c7e5-4390-8845-4276000c224e",
-  "persistent" : true,
-  "insertionIndex" : 8
+  "persistent" : true
 },{
   "id" : "c8ad5e93-3d1c-4fd4-a6ed-92f28a683a23",
   "name" : "orders_example",
@@ -254,8 +245,7 @@
   "persistent" : true,
   "scenarioName" : "scenario-2-orders-example",
   "requiredScenarioState" : "scenario-2-orders-example-1",
-  "newScenarioState" : "scenario-2-orders-example-3",
-  "insertionIndex" : 7
+  "newScenarioState" : "scenario-2-orders-example-3"
 },{
   "id" : "af927fc5-341a-4f9d-9c48-83a57aa7b505",
   "name" : "orders_example",
@@ -280,8 +270,7 @@
   "persistent" : true,
   "scenarioName" : "scenario-2-orders-example",
   "requiredScenarioState" : "Started",
-  "newScenarioState" : "scenario-2-orders-example-1",
-  "insertionIndex" : 6
+  "newScenarioState" : "scenario-2-orders-example-1"
 },{
   "id" : "b6d3f5e3-8689-4740-8a5a-273c9ed9f5a7",
   "name" : "orders",
@@ -304,8 +293,7 @@
   "uuid" : "b6d3f5e3-8689-4740-8a5a-273c9ed9f5a7",
   "persistent" : true,
   "scenarioName" : "scenario-1-orders",
-  "requiredScenarioState" : "scenario-1-orders-2",
-  "insertionIndex" : 5
+  "requiredScenarioState" : "scenario-1-orders-2"
 },{
   "id" : "666242fb-0be6-4e5d-8e68-fbfa863f3f3a",
   "name" : "orders",
@@ -332,8 +320,7 @@
     }
   },
   "uuid" : "666242fb-0be6-4e5d-8e68-fbfa863f3f3a",
-  "persistent" : true,
-  "insertionIndex" : 4
+  "persistent" : true
 },{
   "id" : "05def288-5864-48e7-87ff-f7552a9dd1c2",
   "name" : "orders",
@@ -358,8 +345,7 @@
   "persistent" : true,
   "scenarioName" : "scenario-1-orders",
   "requiredScenarioState" : "Started",
-  "newScenarioState" : "scenario-1-orders-2",
-  "insertionIndex" : 3
+  "newScenarioState" : "scenario-1-orders-2"
 },{
   "id" : "e8a4edcf-8d9d-431b-8a99-76f5d9ad8a7b",
   "name" : "orders",
@@ -380,8 +366,7 @@
     }
   },
   "uuid" : "e8a4edcf-8d9d-431b-8a99-76f5d9ad8a7b",
-  "persistent" : true,
-  "insertionIndex" : 2
+  "persistent" : true
 },{
   "id" : "50eb71a6-e709-4d04-aba8-861a4135cdb8",
   "name" : "",
@@ -402,6 +387,5 @@
     }
   },
   "uuid" : "50eb71a6-e709-4d04-aba8-861a4135cdb8",
-  "persistent" : true,
-  "insertionIndex" : 1
+  "persistent" : true
 }]}
