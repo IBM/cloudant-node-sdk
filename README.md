@@ -254,8 +254,8 @@ import {CloudantV1} from "@ibm-cloud/cloudant";
 ```
 [embedmd]:# (test/examples/src/ts/GetInfoFromExistingDatabase.ts /\/\/ 1./ $)
 ```ts
-// 1. Create a Cloudant client with "EXAMPLES" service name =====================
-const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
+// 1. Create a client with `CLOUDANT` default service name =====================
+const client = CloudantV1.newInstance({});
 
 // 2. Get server information ====================================================
 // call service without parameters:
@@ -264,8 +264,8 @@ client.getServerInformation().then((serverInformation) => {
   console.log(`Server version ${version}`);
 });
 
-// 3. Get database information for "animaldb" ===================================
-const dbName = 'animaldb';
+// 3. Get database information for "orders" ===================================
+const dbName = 'orders';
 
 // call service with embedded parameters:
 client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
@@ -278,16 +278,16 @@ client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
   );
 });
 
-// 5. Get zebra document out of the database by document id =====================
+// 5. Get "example" document out of the database by document id =====================
 const getDocParams: CloudantV1.GetDocumentParams = {
   db: dbName,
-  docId: 'zebra',
+  docId: 'example',
 };
 
 // call service with predefined parameters:
-client.getDocument(getDocParams).then((documentAboutZebra) => {
+client.getDocument(getDocParams).then((documentExample) => {
   // result object is defined as a Document here:
-  const { result } = documentAboutZebra;
+  const { result } = documentExample;
   console.log(
     `Document retrieved from database:\n${JSON.stringify(result, null, 2)}`
   );
@@ -304,16 +304,16 @@ const { CloudantV1 } = require('@ibm-cloud/cloudant');
 [embedmd]:# (test/examples/src/js/GetInfoFromExistingDatabase.js /const getInfoFromExistingDatabase/ /getInfoFromExistingDatabase\(\);\n\}/)
 ```js
 const getInfoFromExistingDatabase = async () => {
-  // 1. Create a Cloudant client with "EXAMPLES" service name ===================
-  const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
+  // 1. Create a client with `CLOUDANT` default service name  ===================
+  const client = CloudantV1.newInstance({});
 
   // 2. Get server information ==================================================
   // call service without parameters:
   const { version } = (await client.getServerInformation()).result;
   console.log(`Server version ${version}`);
 
-  // 3. Get database information for "animaldb" =================================
-  const dbName = 'animaldb';
+  // 3. Get database information for "orders" =================================
+  const dbName = 'orders';
 
   // call service with embedded parameters:
   const dbInfo = await client.getDatabaseInformation({ db: dbName });
@@ -325,14 +325,14 @@ const getInfoFromExistingDatabase = async () => {
     `Document count in "${dbNameResult}" database is ${documentCount}.`
   );
 
-  // 5. Get zebra document out of the database by document id ===================
-  const getDocParams = { db: dbName, docId: 'zebra' };
+  // 5. Get "example" document out of the database by document id ===================
+  const getDocParams = { db: dbName, docId: 'example' };
 
   // call service with predefined parameters:
-  const documentAboutZebra = await client.getDocument(getDocParams);
+  const documentExample = await client.getDocument(getDocParams);
 
   // result object is defined as a Document here:
-  const { result } = documentAboutZebra;
+  const { result } = documentExample;
 
   console.log(
     `Document retrieved from database:\n${JSON.stringify(result, null, 2)}`
@@ -351,18 +351,13 @@ When you run the code, you see a result similar to the following output.
 [embedmd]:# (test/examples/output/GetInfoFromExistingDatabase.txt)
 ```txt
 Server version 2.1.1
-Document count in "animaldb" database is 11.
+Document count in "orders" database is 1.
 Document retrieved from database:
 {
-  "_id": "zebra",
-  "_rev": "3-750dac460a6cc41e6999f8943b8e603e",
-  "wiki_page": "http://en.wikipedia.org/wiki/Plains_zebra",
-  "min_length": 2,
-  "max_length": 2.5,
-  "min_weight": 175,
-  "max_weight": 387,
-  "class": "mammal",
-  "diet": "herbivore"
+  "_id": "example",
+  "_rev": "1-1b403633540686aa32d013fda9041a5d",
+  "name": "Bob Smith",
+  "joined": "2019-01-24T10:42:59.000Z"
 }
 ```
 
