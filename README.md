@@ -42,8 +42,8 @@ to avoid surprises.
 - [Using the SDK](#using-the-sdk)
   * [Request timeout configuration](#request-timeout-configuration)
   * [Code examples](#code-examples)
-    + [1. Retrieve information from an existing database](#1-retrieve-information-from-an-existing-database)
-    + [2. Create your own database and add a document](#2-create-your-own-database-and-add-a-document)
+    + [1. Create a database and add a document](#1-create-a-database-and-add-a-document)
+    + [2. Retrieve information from an existing database](#2-retrieve-information-from-an-existing-database)
     + [3. Update your previously created document](#3-update-your-previously-created-document)
     + [4. Delete your previously created document](#4-delete-your-previously-created-document)
     + [Further code examples](#further-code-examples)
@@ -220,16 +220,14 @@ The [request timeout](https://github.com/IBM/ibm-cloud-sdk-common/blob/main/READ
 The following code examples
 [authenticate with the environment variables](#authenticate-with-environment-variables).
 
-#### 1. Retrieve information from an existing database
+#### 1. Create a database and add a document
 
-**Note:** This example code assumes that `animaldb` database does not exist in your account.
+**Note:** This example code assumes that `orders` database does not exist in your account.
 
-This example code gathers information about an existing database hosted on
-the https://examples.cloudant.com/ service `url`. To connect, you must
-extend your environment variables with the *service url* and *authentication
-type* to use `NOAUTH` authentication while you connect to the `animaldb` database.
-This step is necessary for the SDK to distinguish the `EXAMPLES` custom service
-name from the default service name which is `CLOUDANT`.
+This example code creates `orders` database and adds a new document "example"
+into it. To connect, you must set your environment variables with 
+the *service url*, *authentication type* and *authentication credentials*
+of your Cloudant service. 
 
 Cloudant environment variable naming starts with a *service name* prefix that identifies your service.
 By default this is `CLOUDANT`, see the settings in the
@@ -237,144 +235,8 @@ By default this is `CLOUDANT`, see the settings in the
 
 If you would like to rename your Cloudant service from `CLOUDANT`,
 you must use your defined service name as the prefix for all Cloudant related environment variables.
-The code block below provides an example of instantiating a user-defined `EXAMPLES` service name.
-
-```bash
-EXAMPLES_URL=https://examples.cloudant.com
-EXAMPLES_AUTH_TYPE=NOAUTH
-```
 
 Once the environment variables are set, you can try out the code examples.
-
-<details open>
-<summary>TypeScript:</summary>
-
-```ts
-import {CloudantV1} from "@ibm-cloud/cloudant";
-```
-[embedmd]:# (test/examples/src/ts/GetInfoFromExistingDatabase.ts /\/\/ 1./ $)
-```ts
-// 1. Create a Cloudant client with "EXAMPLES" service name =====================
-const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
-
-// 2. Get server information ====================================================
-// call service without parameters:
-client.getServerInformation().then((serverInformation) => {
-  const { version } = serverInformation.result;
-  console.log(`Server version ${version}`);
-});
-
-// 3. Get database information for "animaldb" ===================================
-const dbName = 'animaldb';
-
-// call service with embedded parameters:
-client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
-  const documentCount = dbInfo.result.doc_count;
-  const dbNameResult = dbInfo.result.db_name;
-
-  // 4. Show document count in database =========================================
-  console.log(
-    `Document count in "${dbNameResult}" database is ${documentCount}.`
-  );
-});
-
-// 5. Get zebra document out of the database by document id =====================
-const getDocParams: CloudantV1.GetDocumentParams = {
-  db: dbName,
-  docId: 'zebra',
-};
-
-// call service with predefined parameters:
-client.getDocument(getDocParams).then((documentAboutZebra) => {
-  // result object is defined as a Document here:
-  const { result } = documentAboutZebra;
-  console.log(
-    `Document retrieved from database:\n${JSON.stringify(result, null, 2)}`
-  );
-});
-```
-</details>
-
-<details>
-<summary>JavaScript:</summary>
-
-```js
-const { CloudantV1 } = require('@ibm-cloud/cloudant');
-```
-[embedmd]:# (test/examples/src/js/GetInfoFromExistingDatabase.js /const getInfoFromExistingDatabase/ /getInfoFromExistingDatabase\(\);\n\}/)
-```js
-const getInfoFromExistingDatabase = async () => {
-  // 1. Create a Cloudant client with "EXAMPLES" service name ===================
-  const client = CloudantV1.newInstance({ serviceName: 'EXAMPLES' });
-
-  // 2. Get server information ==================================================
-  // call service without parameters:
-  const { version } = (await client.getServerInformation()).result;
-  console.log(`Server version ${version}`);
-
-  // 3. Get database information for "animaldb" =================================
-  const dbName = 'animaldb';
-
-  // call service with embedded parameters:
-  const dbInfo = await client.getDatabaseInformation({ db: dbName });
-  const documentCount = dbInfo.result.doc_count;
-  const dbNameResult = dbInfo.result.db_name;
-
-  // 4. Show document count in database =========================================
-  console.log(
-    `Document count in "${dbNameResult}" database is ${documentCount}.`
-  );
-
-  // 5. Get zebra document out of the database by document id ===================
-  const getDocParams = { db: dbName, docId: 'zebra' };
-
-  // call service with predefined parameters:
-  const documentAboutZebra = await client.getDocument(getDocParams);
-
-  // result object is defined as a Document here:
-  const { result } = documentAboutZebra;
-
-  console.log(
-    `Document retrieved from database:\n${JSON.stringify(result, null, 2)}`
-  );
-};
-
-if (require.main === module) {
-  getInfoFromExistingDatabase();
-}
-```
-
-</details>
-
-When you run the code, you see a result similar to the following output.
-
-[embedmd]:# (test/examples/output/GetInfoFromExistingDatabase.txt)
-```txt
-Server version 2.1.1
-Document count in "animaldb" database is 11.
-Document retrieved from database:
-{
-  "_id": "zebra",
-  "_rev": "3-750dac460a6cc41e6999f8943b8e603e",
-  "wiki_page": "http://en.wikipedia.org/wiki/Plains_zebra",
-  "min_length": 2,
-  "max_length": 2.5,
-  "min_weight": 175,
-  "max_weight": 387,
-  "class": "mammal",
-  "diet": "herbivore"
-}
-```
-
-#### 2. Create your own database and add a document
-
-**Note:** This example code assumes that `orders` database does not exist in your account.
-
-Now comes the exciting part, you create your own `orders` database and add a document about *Bob Smith* with your own [IAM](#iam-authentication) or
-[Basic](#basic-authentication) service credentials.
-
-<details>
-<summary>Create code example</summary>
 
 <details open>
 <summary>TypeScript:</summary>
@@ -532,8 +394,6 @@ if (require.main === module) {
 ```
 </details>
 
-
-</details>
 When you run the code, you see a result similar to the following output.
 
 [embedmd]:# (test/examples/output/CreateDbAndDoc.txt)
@@ -548,11 +408,139 @@ You have created the document:
 }
 ```
 
+#### 2. Retrieve information from an existing database
+
+**Note**: This example code assumes that you have created both the `orders`
+database and the `example` document by
+[running the previous example code](#1-create-a-database-and-add-a-document)
+successfully. Otherwise, the following error message occurs, "Cannot delete document because either 'orders'
+database or 'example' document was not found."
+
+<details>
+<summary>Gather database information example</summary>
+
+<details open>
+<summary>TypeScript:</summary>
+
+```ts
+import {CloudantV1} from "@ibm-cloud/cloudant";
+```
+[embedmd]:# (test/examples/src/ts/GetInfoFromExistingDatabase.ts /\/\/ 1./ $)
+```ts
+// 1. Create a client with `CLOUDANT` default service name =====================
+const client = CloudantV1.newInstance({});
+
+// 2. Get server information ====================================================
+// call service without parameters:
+client.getServerInformation().then((serverInformation) => {
+  const { version } = serverInformation.result;
+  console.log(`Server version ${version}`);
+});
+
+// 3. Get database information for "orders" ===================================
+const dbName = 'orders';
+
+// call service with embedded parameters:
+client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
+  const documentCount = dbInfo.result.doc_count;
+  const dbNameResult = dbInfo.result.db_name;
+
+  // 4. Show document count in database =========================================
+  console.log(
+    `Document count in "${dbNameResult}" database is ${documentCount}.`
+  );
+});
+
+// 5. Get "example" document out of the database by document id =====================
+const getDocParams: CloudantV1.GetDocumentParams = {
+  db: dbName,
+  docId: 'example',
+};
+
+// call service with predefined parameters:
+client.getDocument(getDocParams).then((documentExample) => {
+  // result object is defined as a Document here:
+  const { result } = documentExample;
+  console.log(
+    `Document retrieved from database:\n${JSON.stringify(result, null, 2)}`
+  );
+});
+```
+</details>
+
+<details>
+<summary>JavaScript:</summary>
+
+```js
+const { CloudantV1 } = require('@ibm-cloud/cloudant');
+```
+[embedmd]:# (test/examples/src/js/GetInfoFromExistingDatabase.js /const getInfoFromExistingDatabase/ /getInfoFromExistingDatabase\(\);\n\}/)
+```js
+const getInfoFromExistingDatabase = async () => {
+  // 1. Create a client with `CLOUDANT` default service name  ===================
+  const client = CloudantV1.newInstance({});
+
+  // 2. Get server information ==================================================
+  // call service without parameters:
+  const { version } = (await client.getServerInformation()).result;
+  console.log(`Server version ${version}`);
+
+  // 3. Get database information for "orders" =================================
+  const dbName = 'orders';
+
+  // call service with embedded parameters:
+  const dbInfo = await client.getDatabaseInformation({ db: dbName });
+  const documentCount = dbInfo.result.doc_count;
+  const dbNameResult = dbInfo.result.db_name;
+
+  // 4. Show document count in database =========================================
+  console.log(
+    `Document count in "${dbNameResult}" database is ${documentCount}.`
+  );
+
+  // 5. Get "example" document out of the database by document id ===================
+  const getDocParams = { db: dbName, docId: 'example' };
+
+  // call service with predefined parameters:
+  const documentExample = await client.getDocument(getDocParams);
+
+  // result object is defined as a Document here:
+  const { result } = documentExample;
+
+  console.log(
+    `Document retrieved from database:\n${JSON.stringify(result, null, 2)}`
+  );
+};
+
+if (require.main === module) {
+  getInfoFromExistingDatabase();
+}
+```
+
+</details>
+
+
+</details>
+When you run the code, you see a result similar to the following output.
+
+[embedmd]:# (test/examples/output/GetInfoFromExistingDatabase.txt)
+```txt
+Server version 2.1.1
+Document count in "orders" database is 1.
+Document retrieved from database:
+{
+  "_id": "example",
+  "_rev": "1-1b403633540686aa32d013fda9041a5d",
+  "name": "Bob Smith",
+  "joined": "2019-01-24T10:42:59.000Z"
+}
+```
+
 #### 3. Update your previously created document
 
 **Note**: This example code assumes that you have created both the `orders`
 database and the `example` document by
-[running the previous example code](#2-create-your-own-database-and-add-a-document)
+[running the previous example code](#1-create-a-database-and-add-a-document)
 successfully. Otherwise, the following error message occurs, "Cannot update document because either 'orders'
 database or 'example' document was not found."
 
@@ -771,7 +759,7 @@ You have updated the document:
 
 **Note**: This example code assumes that you have created both the `orders`
 database and the `example` document by
-[running the previous example code](#2-create-your-own-database-and-add-a-document)
+[running the previous example code](#1-create-a-database-and-add-a-document)
 successfully. Otherwise, the following error message occurs, "Cannot delete document because either 'orders'
 database or 'example' document was not found."
 
