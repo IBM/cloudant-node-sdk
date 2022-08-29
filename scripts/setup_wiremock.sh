@@ -4,7 +4,7 @@ set -ev
 
 printenv | grep "^WIREMOCK_" > wiremock.env
 # setup env file for gen ITs
-printenv | grep "^CLOUDANT_" > cloudant_v1.env
+printenv | grep "^SERVER_" > cloudant_v1.env
 
 docker start wiremock || docker run --name wiremock --rm -d -p "$WIREMOCK_PORT":8080 wiremock/wiremock:latest
 timeout 120 bash -c 'while [[ "$(curl -s --location -o /dev/null -w ''%{http_code}'' ${WIREMOCK_URL}/__admin)" != "200" ]]; do sleep 2; done' || false
