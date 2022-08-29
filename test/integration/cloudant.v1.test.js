@@ -35,7 +35,7 @@ describe('CloudantV1_integration', () => {
   let cloudantService;
 
   test('Initialise service', async() => {
-    cloudantService = CloudantV1.newInstance();
+    cloudantService = CloudantV1.newInstance({serviceName: 'server'});
 
     expect(cloudantService).not.toBeNull();
 
