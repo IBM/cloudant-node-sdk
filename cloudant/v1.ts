@@ -758,11 +758,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
+   * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
    */
   public headDatabase(
     params: CloudantV1.HeadDatabaseParams
-  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+  ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
     const _validParams = ['db', 'headers'];
@@ -1104,11 +1104,11 @@ class CloudantV1 extends CloudantBaseService {
    * matter what rev was requested.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
+   * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
    */
   public headDocument(
     params: CloudantV1.HeadDocumentParams
-  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+  ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId'];
     const _validParams = ['db', 'docId', 'ifNoneMatch', 'latest', 'rev', 'headers'];
@@ -2433,11 +2433,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
    * cache control.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
+   * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
    */
   public headDesignDocument(
     params: CloudantV1.HeadDesignDocumentParams
-  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+  ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc'];
     const _validParams = ['db', 'ddoc', 'ifNoneMatch', 'headers'];
@@ -5261,11 +5261,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
    * cache control.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
+   * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
    */
   public headReplicationDocument(
     params: CloudantV1.HeadReplicationDocumentParams
-  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+  ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['docId'];
     const _validParams = ['docId', 'ifNoneMatch', 'headers'];
@@ -5315,11 +5315,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
+   * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
    */
   public headSchedulerDocument(
     params: CloudantV1.HeadSchedulerDocumentParams
-  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+  ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['docId'];
     const _validParams = ['docId', 'headers'];
@@ -5367,11 +5367,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.jobId - Path parameter to specify the replication job id.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
+   * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
    */
   public headSchedulerJob(
     params: CloudantV1.HeadSchedulerJobParams
-  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+  ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['jobId'];
     const _validParams = ['jobId', 'headers'];
@@ -6291,11 +6291,11 @@ class CloudantV1 extends CloudantBaseService {
    * cache control.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
+   * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
    */
   public headAttachment(
     params: CloudantV1.HeadAttachmentParams
-  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+  ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId', 'attachmentName'];
     const _validParams = ['db', 'docId', 'attachmentName', 'ifMatch', 'ifNoneMatch', 'rev', 'headers'];
@@ -6578,11 +6578,11 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
    * cache control.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
+   * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
    */
   public headLocalDocument(
     params: CloudantV1.HeadLocalDocumentParams
-  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+  ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId'];
     const _validParams = ['db', 'docId', 'ifNoneMatch', 'headers'];
@@ -7003,11 +7003,11 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} [params] - The parameters to send to the service.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Empty>>}
+   * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
    */
   public headUpInformation(
     params?: CloudantV1.HeadUpInformationParams
-  ): Promise<CloudantV1.Response<CloudantV1.Empty>> {
+  ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = [];
     const _validParams = ['headers'];
@@ -7302,7 +7302,7 @@ namespace CloudantV1 {
   export type Callback<T> = (error: any, response?: Response<T>) => void;
 
   /** The body of a service request that returns no response data. */
-  export interface Empty {}
+  export interface EmptyObject {}
 
   /** A standard JS object, defined to avoid the limitations of `Object` and `object` */
   export interface JsonObject {
