@@ -531,7 +531,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docIds = ['testString'];
         const fields = ['testString'];
-        const selector = { 'key1': 'testString' };
+        const selector = { foo: 'bar' };
         const lastEventId = 'testString';
         const attEncodingInfo = false;
         const attachments = false;
@@ -669,7 +669,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docIds = ['testString'];
         const fields = ['testString'];
-        const selector = { 'key1': 'testString' };
+        const selector = { foo: 'bar' };
         const lastEventId = 'testString';
         const attEncodingInfo = false;
         const attachments = false;
@@ -5518,7 +5518,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postPartitionFind
         const db = 'testString';
         const partitionKey = 'testString';
-        const selector = { 'key1': 'testString' };
+        const selector = { foo: 'bar' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5593,7 +5593,7 @@ describe('CloudantV1', () => {
         // parameters
         const db = 'testString';
         const partitionKey = 'testString';
-        const selector = { 'key1': 'testString' };
+        const selector = { foo: 'bar' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postPartitionFindParams = {
@@ -5642,7 +5642,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postPartitionFindAsStream
         const db = 'testString';
         const partitionKey = 'testString';
-        const selector = { 'key1': 'testString' };
+        const selector = { foo: 'bar' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5718,7 +5718,7 @@ describe('CloudantV1', () => {
         // parameters
         const db = 'testString';
         const partitionKey = 'testString';
-        const selector = { 'key1': 'testString' };
+        const selector = { foo: 'bar' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postPartitionFindAsStreamParams = {
@@ -5766,7 +5766,7 @@ describe('CloudantV1', () => {
       function __postExplainTest() {
         // Construct the params object for operation postExplain
         const db = 'testString';
-        const selector = { 'key1': 'testString' };
+        const selector = { foo: 'bar' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5841,7 +5841,7 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { 'key1': 'testString' };
+        const selector = { foo: 'bar' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postExplainParams = {
@@ -5888,7 +5888,7 @@ describe('CloudantV1', () => {
       function __postFindTest() {
         // Construct the params object for operation postFind
         const db = 'testString';
-        const selector = { 'key1': 'testString' };
+        const selector = { foo: 'bar' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5963,7 +5963,7 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { 'key1': 'testString' };
+        const selector = { foo: 'bar' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postFindParams = {
@@ -6010,7 +6010,7 @@ describe('CloudantV1', () => {
       function __postFindAsStreamTest() {
         // Construct the params object for operation postFindAsStream
         const db = 'testString';
-        const selector = { 'key1': 'testString' };
+        const selector = { foo: 'bar' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -6086,7 +6086,7 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { 'key1': 'testString' };
+        const selector = { foo: 'bar' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postFindAsStreamParams = {
@@ -6241,7 +6241,7 @@ describe('CloudantV1', () => {
         default_field: indexTextOperatorDefaultFieldModel,
         fields: [indexFieldModel],
         index_array_lengths: true,
-        partial_filter_selector: { 'key1': 'testString' },
+        partial_filter_selector: { foo: 'bar' },
       };
 
       function __postIndexTest() {
@@ -7483,7 +7483,7 @@ describe('CloudantV1', () => {
         http_connections: 1,
         query_params: { 'key1': 'testString' },
         retries_per_request: 0,
-        selector: { 'key1': 'testString' },
+        selector: { foo: 'bar' },
         since_seq: 'testString',
         socket_options: 'testString',
         source: replicationDatabaseModel,
