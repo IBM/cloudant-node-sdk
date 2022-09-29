@@ -5759,8 +5759,7 @@ class CloudantV1 extends CloudantBaseService {
    * recent events, and other information.
    *
    * @param {Object} [params] - The parameters to send to the service.
-   * @param {number} [params.limit] - Query parameter to specify the number of returned documents to limit the result
-   * to.
+   * @param {number} [params.limit] - Query parameter to specify the number of returned jobs to limit the result to.
    * @param {number} [params.skip] - Query parameter to specify the number of records before starting to return the
    * results.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -9899,7 +9898,7 @@ namespace CloudantV1 {
 
   /** Parameters for the `getSchedulerJobs` operation. */
   export interface GetSchedulerJobsParams {
-    /** Query parameter to specify the number of returned documents to limit the result to. */
+    /** Query parameter to specify the number of returned jobs to limit the result to. */
     limit?: number;
     /** Query parameter to specify the number of records before starting to return the results. */
     skip?: number;
