@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,6 +78,21 @@ describe('validate', () => {
   it('get invalid _design document ID', () =>
     cloudant
       .getDocument({
+        db: dbName,
+        docId: '_design',
+      })
+      .then(() => {
+        assert.fail('should not have response');
+      })
+      .catch((err) => {
+        expect(err.message).toBe(
+          'Document ID _design starts with the invalid _ character.'
+        );
+      }));
+
+  it('get invalid _design document ID as stream', () =>
+    cloudant
+      .getDocumentAsStream({
         db: dbName,
         docId: '_design',
       })
