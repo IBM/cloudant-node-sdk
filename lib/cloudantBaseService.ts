@@ -33,6 +33,9 @@ const READ_TIMEOUT = 150000;
 const DocumentOperations = [
   'deleteDocument',
   'getDocument',
+  'getDocumentAsMixed',
+  'getDocumentAsRelated',
+  'getDocumentAsStream',
   'headDocument',
   'putDocument',
   'deleteAttachment',
