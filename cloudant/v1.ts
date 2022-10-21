@@ -427,7 +427,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * Before using the changes feed we recommend reading the
    * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-changes-feed) to understand the limitations and
-   * appropriate use cases.".
+   * appropriate use cases.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -591,7 +591,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * Before using the changes feed we recommend reading the
    * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-changes-feed) to understand the limitations and
-   * appropriate use cases.".
+   * appropriate use cases.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -10802,6 +10802,8 @@ namespace CloudantV1 {
 
   /** Value of built-in `/_all_docs` style view. */
   export interface DocsResultRowValue {
+    /** If `true` then the document is deleted. Not present for undeleted documents. */
+    deleted?: boolean;
     /** Schema for a document revision identifier. */
     rev: string;
   }
@@ -11246,6 +11248,10 @@ namespace CloudantV1 {
      *  should occur.
      */
     target_proxy?: string;
+    /** Specify whether to use _bulk_get for fetching documents from the source. If unset, the server configured
+     *  default will be used.
+     */
+    use_bulk_get?: boolean;
     /** Specify if checkpoints should be saved during replication. Using checkpoints means a replication can be
      *  efficiently resumed.
      */
