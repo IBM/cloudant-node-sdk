@@ -7490,6 +7490,7 @@ describe('CloudantV1', () => {
         source_proxy: 'testString',
         target: replicationDatabaseModel,
         target_proxy: 'testString',
+        use_bulk_get: true,
         use_checkpoints: true,
         user_ctx: userContextModel,
         winning_revs_only: false,
