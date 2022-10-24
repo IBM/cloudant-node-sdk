@@ -249,7 +249,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getUuids
         const count = 1;
         const getUuidsParams = {
-          count: count,
+          count,
         };
 
         const getUuidsResult = cloudantService.getUuids(getUuidsParams);
@@ -373,7 +373,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation putCapacityThroughputConfiguration
         const blocks = 0;
         const putCapacityThroughputConfigurationParams = {
-          blocks: blocks,
+          blocks,
         };
 
         const putCapacityThroughputConfigurationResult = cloudantService.putCapacityThroughputConfiguration(putCapacityThroughputConfigurationParams);
@@ -460,10 +460,10 @@ describe('CloudantV1', () => {
         const timeout = 0;
         const since = '0';
         const getDbUpdatesParams = {
-          feed: feed,
-          heartbeat: heartbeat,
-          timeout: timeout,
-          since: since,
+          feed,
+          heartbeat,
+          timeout,
+          since,
         };
 
         const getDbUpdatesResult = cloudantService.getDbUpdates(getDbUpdatesParams);
@@ -548,25 +548,25 @@ describe('CloudantV1', () => {
         const timeout = 0;
         const view = 'testString';
         const postChangesParams = {
-          db: db,
-          docIds: docIds,
-          fields: fields,
-          selector: selector,
-          lastEventId: lastEventId,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          feed: feed,
-          filter: filter,
-          heartbeat: heartbeat,
-          includeDocs: includeDocs,
-          limit: limit,
-          seqInterval: seqInterval,
-          since: since,
-          style: style,
-          timeout: timeout,
-          view: view,
+          db,
+          docIds,
+          fields,
+          selector,
+          lastEventId,
+          attEncodingInfo,
+          attachments,
+          conflicts,
+          descending,
+          feed,
+          filter,
+          heartbeat,
+          includeDocs,
+          limit,
+          seqInterval,
+          since,
+          style,
+          timeout,
+          view,
         };
 
         const postChangesResult = cloudantService.postChanges(postChangesParams);
@@ -686,25 +686,25 @@ describe('CloudantV1', () => {
         const timeout = 0;
         const view = 'testString';
         const postChangesAsStreamParams = {
-          db: db,
-          docIds: docIds,
-          fields: fields,
-          selector: selector,
-          lastEventId: lastEventId,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          feed: feed,
-          filter: filter,
-          heartbeat: heartbeat,
-          includeDocs: includeDocs,
-          limit: limit,
-          seqInterval: seqInterval,
-          since: since,
-          style: style,
-          timeout: timeout,
-          view: view,
+          db,
+          docIds,
+          fields,
+          selector,
+          lastEventId,
+          attEncodingInfo,
+          attachments,
+          conflicts,
+          descending,
+          feed,
+          filter,
+          heartbeat,
+          includeDocs,
+          limit,
+          seqInterval,
+          since,
+          style,
+          timeout,
+          view,
         };
 
         const postChangesAsStreamResult = cloudantService.postChangesAsStream(postChangesAsStreamParams);
@@ -807,7 +807,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation headDatabase
         const db = 'testString';
         const headDatabaseParams = {
-          db: db,
+          db,
         };
 
         const headDatabaseResult = cloudantService.headDatabase(headDatabaseParams);
@@ -895,11 +895,11 @@ describe('CloudantV1', () => {
         const skip = 0;
         const startKey = 'testString';
         const getAllDbsParams = {
-          descending: descending,
-          endKey: endKey,
-          limit: limit,
-          skip: skip,
-          startKey: startKey,
+          descending,
+          endKey,
+          limit,
+          skip,
+          startKey,
         };
 
         const getAllDbsResult = cloudantService.getAllDbs(getAllDbsParams);
@@ -967,7 +967,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postDbsInfo
         const keys = ['testString'];
         const postDbsInfoParams = {
-          keys: keys,
+          keys,
         };
 
         const postDbsInfoResult = cloudantService.postDbsInfo(postDbsInfoParams);
@@ -1051,7 +1051,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation deleteDatabase
         const db = 'testString';
         const deleteDatabaseParams = {
-          db: db,
+          db,
         };
 
         const deleteDatabaseResult = cloudantService.deleteDatabase(deleteDatabaseParams);
@@ -1135,7 +1135,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getDatabaseInformation
         const db = 'testString';
         const getDatabaseInformationParams = {
-          db: db,
+          db,
         };
 
         const getDatabaseInformationResult = cloudantService.getDatabaseInformation(getDatabaseInformationParams);
@@ -1221,9 +1221,9 @@ describe('CloudantV1', () => {
         const partitioned = false;
         const q = 26;
         const putDatabaseParams = {
-          db: db,
-          partitioned: partitioned,
-          q: q,
+          db,
+          partitioned,
+          q,
         };
 
         const putDatabaseResult = cloudantService.putDatabase(putDatabaseParams);
@@ -1313,11 +1313,11 @@ describe('CloudantV1', () => {
         const latest = false;
         const rev = 'testString';
         const headDocumentParams = {
-          db: db,
-          docId: docId,
-          ifNoneMatch: ifNoneMatch,
-          latest: latest,
-          rev: rev,
+          db,
+          docId,
+          ifNoneMatch,
+          latest,
+          rev,
         };
 
         const headDocumentResult = cloudantService.headDocument(headDocumentParams);
@@ -1410,10 +1410,10 @@ describe('CloudantV1', () => {
         const contentType = 'application/json';
         const batch = 'ok';
         const postDocumentParams = {
-          db: db,
-          document: document,
-          contentType: contentType,
-          batch: batch,
+          db,
+          document,
+          contentType,
+          batch,
         };
 
         const postDocumentResult = cloudantService.postDocument(postDocumentParams);
@@ -1515,20 +1515,20 @@ describe('CloudantV1', () => {
         const keys = ['testString'];
         const startKey = 'testString';
         const postAllDocsParams = {
-          db: db,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          includeDocs: includeDocs,
-          inclusiveEnd: inclusiveEnd,
-          limit: limit,
-          skip: skip,
-          updateSeq: updateSeq,
-          endKey: endKey,
-          key: key,
-          keys: keys,
-          startKey: startKey,
+          db,
+          attEncodingInfo,
+          attachments,
+          conflicts,
+          descending,
+          includeDocs,
+          inclusiveEnd,
+          limit,
+          skip,
+          updateSeq,
+          endKey,
+          key,
+          keys,
+          startKey,
         };
 
         const postAllDocsResult = cloudantService.postAllDocs(postAllDocsParams);
@@ -1638,20 +1638,20 @@ describe('CloudantV1', () => {
         const keys = ['testString'];
         const startKey = 'testString';
         const postAllDocsAsStreamParams = {
-          db: db,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          includeDocs: includeDocs,
-          inclusiveEnd: inclusiveEnd,
-          limit: limit,
-          skip: skip,
-          updateSeq: updateSeq,
-          endKey: endKey,
-          key: key,
-          keys: keys,
-          startKey: startKey,
+          db,
+          attEncodingInfo,
+          attachments,
+          conflicts,
+          descending,
+          includeDocs,
+          inclusiveEnd,
+          limit,
+          skip,
+          updateSeq,
+          endKey,
+          key,
+          keys,
+          startKey,
         };
 
         const postAllDocsAsStreamResult = cloudantService.postAllDocsAsStream(postAllDocsAsStreamParams);
@@ -1769,8 +1769,8 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const queries = [allDocsQueryModel];
         const postAllDocsQueriesParams = {
-          db: db,
-          queries: queries,
+          db,
+          queries,
         };
 
         const postAllDocsQueriesResult = cloudantService.postAllDocsQueries(postAllDocsQueriesParams);
@@ -1877,8 +1877,8 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const queries = [allDocsQueryModel];
         const postAllDocsQueriesAsStreamParams = {
-          db: db,
-          queries: queries,
+          db,
+          queries,
         };
 
         const postAllDocsQueriesAsStreamResult = cloudantService.postAllDocsQueriesAsStream(postAllDocsQueriesAsStreamParams);
@@ -1967,8 +1967,8 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const bulkDocs = {};
         const postBulkDocsParams = {
-          db: db,
-          bulkDocs: bulkDocs,
+          db,
+          bulkDocs,
         };
 
         const postBulkDocsResult = cloudantService.postBulkDocs(postBulkDocsParams);
@@ -2069,12 +2069,12 @@ describe('CloudantV1', () => {
         const latest = false;
         const revs = false;
         const postBulkGetParams = {
-          db: db,
-          docs: docs,
-          attachments: attachments,
-          attEncodingInfo: attEncodingInfo,
-          latest: latest,
-          revs: revs,
+          db,
+          docs,
+          attachments,
+          attEncodingInfo,
+          latest,
+          revs,
         };
 
         const postBulkGetResult = cloudantService.postBulkGet(postBulkGetParams);
@@ -2179,12 +2179,12 @@ describe('CloudantV1', () => {
         const latest = false;
         const revs = false;
         const postBulkGetAsMixedParams = {
-          db: db,
-          docs: docs,
-          attachments: attachments,
-          attEncodingInfo: attEncodingInfo,
-          latest: latest,
-          revs: revs,
+          db,
+          docs,
+          attachments,
+          attEncodingInfo,
+          latest,
+          revs,
         };
 
         const postBulkGetAsMixedResult = cloudantService.postBulkGetAsMixed(postBulkGetAsMixedParams);
@@ -2290,12 +2290,12 @@ describe('CloudantV1', () => {
         const latest = false;
         const revs = false;
         const postBulkGetAsRelatedParams = {
-          db: db,
-          docs: docs,
-          attachments: attachments,
-          attEncodingInfo: attEncodingInfo,
-          latest: latest,
-          revs: revs,
+          db,
+          docs,
+          attachments,
+          attEncodingInfo,
+          latest,
+          revs,
         };
 
         const postBulkGetAsRelatedResult = cloudantService.postBulkGetAsRelated(postBulkGetAsRelatedParams);
@@ -2401,12 +2401,12 @@ describe('CloudantV1', () => {
         const latest = false;
         const revs = false;
         const postBulkGetAsStreamParams = {
-          db: db,
-          docs: docs,
-          attachments: attachments,
-          attEncodingInfo: attEncodingInfo,
-          latest: latest,
-          revs: revs,
+          db,
+          docs,
+          attachments,
+          attEncodingInfo,
+          latest,
+          revs,
         };
 
         const postBulkGetAsStreamResult = cloudantService.postBulkGetAsStream(postBulkGetAsStreamParams);
@@ -2502,11 +2502,11 @@ describe('CloudantV1', () => {
         const batch = 'ok';
         const rev = 'testString';
         const deleteDocumentParams = {
-          db: db,
-          docId: docId,
-          ifMatch: ifMatch,
-          batch: batch,
-          rev: rev,
+          db,
+          docId,
+          ifMatch,
+          batch,
+          rev,
         };
 
         const deleteDocumentResult = cloudantService.deleteDocument(deleteDocumentParams);
@@ -2608,19 +2608,19 @@ describe('CloudantV1', () => {
         const revs = false;
         const revsInfo = false;
         const getDocumentParams = {
-          db: db,
-          docId: docId,
-          ifNoneMatch: ifNoneMatch,
-          attachments: attachments,
-          attEncodingInfo: attEncodingInfo,
-          conflicts: conflicts,
-          deletedConflicts: deletedConflicts,
-          latest: latest,
-          localSeq: localSeq,
-          meta: meta,
-          rev: rev,
-          revs: revs,
-          revsInfo: revsInfo,
+          db,
+          docId,
+          ifNoneMatch,
+          attachments,
+          attEncodingInfo,
+          conflicts,
+          deletedConflicts,
+          latest,
+          localSeq,
+          meta,
+          rev,
+          revs,
+          revsInfo,
         };
 
         const getDocumentResult = cloudantService.getDocument(getDocumentParams);
@@ -2730,19 +2730,19 @@ describe('CloudantV1', () => {
         const revs = false;
         const revsInfo = false;
         const getDocumentAsMixedParams = {
-          db: db,
-          docId: docId,
-          ifNoneMatch: ifNoneMatch,
-          attachments: attachments,
-          attEncodingInfo: attEncodingInfo,
-          conflicts: conflicts,
-          deletedConflicts: deletedConflicts,
-          latest: latest,
-          localSeq: localSeq,
-          meta: meta,
-          rev: rev,
-          revs: revs,
-          revsInfo: revsInfo,
+          db,
+          docId,
+          ifNoneMatch,
+          attachments,
+          attEncodingInfo,
+          conflicts,
+          deletedConflicts,
+          latest,
+          localSeq,
+          meta,
+          rev,
+          revs,
+          revsInfo,
         };
 
         const getDocumentAsMixedResult = cloudantService.getDocumentAsMixed(getDocumentAsMixedParams);
@@ -2853,19 +2853,19 @@ describe('CloudantV1', () => {
         const revs = false;
         const revsInfo = false;
         const getDocumentAsRelatedParams = {
-          db: db,
-          docId: docId,
-          ifNoneMatch: ifNoneMatch,
-          attachments: attachments,
-          attEncodingInfo: attEncodingInfo,
-          conflicts: conflicts,
-          deletedConflicts: deletedConflicts,
-          latest: latest,
-          localSeq: localSeq,
-          meta: meta,
-          rev: rev,
-          revs: revs,
-          revsInfo: revsInfo,
+          db,
+          docId,
+          ifNoneMatch,
+          attachments,
+          attEncodingInfo,
+          conflicts,
+          deletedConflicts,
+          latest,
+          localSeq,
+          meta,
+          rev,
+          revs,
+          revsInfo,
         };
 
         const getDocumentAsRelatedResult = cloudantService.getDocumentAsRelated(getDocumentAsRelatedParams);
@@ -2976,19 +2976,19 @@ describe('CloudantV1', () => {
         const revs = false;
         const revsInfo = false;
         const getDocumentAsStreamParams = {
-          db: db,
-          docId: docId,
-          ifNoneMatch: ifNoneMatch,
-          attachments: attachments,
-          attEncodingInfo: attEncodingInfo,
-          conflicts: conflicts,
-          deletedConflicts: deletedConflicts,
-          latest: latest,
-          localSeq: localSeq,
-          meta: meta,
-          rev: rev,
-          revs: revs,
-          revsInfo: revsInfo,
+          db,
+          docId,
+          ifNoneMatch,
+          attachments,
+          attEncodingInfo,
+          conflicts,
+          deletedConflicts,
+          latest,
+          localSeq,
+          meta,
+          rev,
+          revs,
+          revsInfo,
         };
 
         const getDocumentAsStreamResult = cloudantService.getDocumentAsStream(getDocumentAsStreamParams);
@@ -3094,14 +3094,14 @@ describe('CloudantV1', () => {
         const newEdits = false;
         const rev = 'testString';
         const putDocumentParams = {
-          db: db,
-          docId: docId,
-          document: document,
-          contentType: contentType,
-          ifMatch: ifMatch,
-          batch: batch,
-          newEdits: newEdits,
-          rev: rev,
+          db,
+          docId,
+          document,
+          contentType,
+          ifMatch,
+          batch,
+          newEdits,
+          rev,
         };
 
         const putDocumentResult = cloudantService.putDocument(putDocumentParams);
@@ -3198,9 +3198,9 @@ describe('CloudantV1', () => {
         const ddoc = 'testString';
         const ifNoneMatch = 'testString';
         const headDesignDocumentParams = {
-          db: db,
-          ddoc: ddoc,
-          ifNoneMatch: ifNoneMatch,
+          db,
+          ddoc,
+          ifNoneMatch,
         };
 
         const headDesignDocumentResult = cloudantService.headDesignDocument(headDesignDocumentParams);
@@ -3292,11 +3292,11 @@ describe('CloudantV1', () => {
         const batch = 'ok';
         const rev = 'testString';
         const deleteDesignDocumentParams = {
-          db: db,
-          ddoc: ddoc,
-          ifMatch: ifMatch,
-          batch: batch,
-          rev: rev,
+          db,
+          ddoc,
+          ifMatch,
+          batch,
+          rev,
         };
 
         const deleteDesignDocumentResult = cloudantService.deleteDesignDocument(deleteDesignDocumentParams);
@@ -3398,19 +3398,19 @@ describe('CloudantV1', () => {
         const revs = false;
         const revsInfo = false;
         const getDesignDocumentParams = {
-          db: db,
-          ddoc: ddoc,
-          ifNoneMatch: ifNoneMatch,
-          attachments: attachments,
-          attEncodingInfo: attEncodingInfo,
-          conflicts: conflicts,
-          deletedConflicts: deletedConflicts,
-          latest: latest,
-          localSeq: localSeq,
-          meta: meta,
-          rev: rev,
-          revs: revs,
-          revsInfo: revsInfo,
+          db,
+          ddoc,
+          ifNoneMatch,
+          attachments,
+          attEncodingInfo,
+          conflicts,
+          deletedConflicts,
+          latest,
+          localSeq,
+          meta,
+          rev,
+          revs,
+          revsInfo,
         };
 
         const getDesignDocumentResult = cloudantService.getDesignDocument(getDesignDocumentParams);
@@ -3592,13 +3592,13 @@ describe('CloudantV1', () => {
         const newEdits = false;
         const rev = 'testString';
         const putDesignDocumentParams = {
-          db: db,
-          ddoc: ddoc,
-          designDocument: designDocument,
-          ifMatch: ifMatch,
-          batch: batch,
-          newEdits: newEdits,
-          rev: rev,
+          db,
+          ddoc,
+          designDocument,
+          ifMatch,
+          batch,
+          newEdits,
+          rev,
         };
 
         const putDesignDocumentResult = cloudantService.putDesignDocument(putDesignDocumentParams);
@@ -3693,8 +3693,8 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const getDesignDocumentInformationParams = {
-          db: db,
-          ddoc: ddoc,
+          db,
+          ddoc,
         };
 
         const getDesignDocumentInformationResult = cloudantService.getDesignDocumentInformation(getDesignDocumentInformationParams);
@@ -3795,21 +3795,21 @@ describe('CloudantV1', () => {
         const startKey = 'testString';
         const accept = 'application/json';
         const postDesignDocsParams = {
-          db: db,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          includeDocs: includeDocs,
-          inclusiveEnd: inclusiveEnd,
-          limit: limit,
-          skip: skip,
-          updateSeq: updateSeq,
-          endKey: endKey,
-          key: key,
-          keys: keys,
-          startKey: startKey,
-          accept: accept,
+          db,
+          attEncodingInfo,
+          attachments,
+          conflicts,
+          descending,
+          includeDocs,
+          inclusiveEnd,
+          limit,
+          skip,
+          updateSeq,
+          endKey,
+          key,
+          keys,
+          startKey,
+          accept,
         };
 
         const postDesignDocsResult = cloudantService.postDesignDocs(postDesignDocsParams);
@@ -3928,9 +3928,9 @@ describe('CloudantV1', () => {
         const queries = [allDocsQueryModel];
         const accept = 'application/json';
         const postDesignDocsQueriesParams = {
-          db: db,
-          queries: queries,
-          accept: accept,
+          db,
+          queries,
+          accept,
         };
 
         const postDesignDocsQueriesResult = cloudantService.postDesignDocsQueries(postDesignDocsQueriesParams);
@@ -4040,29 +4040,29 @@ describe('CloudantV1', () => {
         const startKeyDocId = 'testString';
         const update = 'true';
         const postViewParams = {
-          db: db,
-          ddoc: ddoc,
-          view: view,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          includeDocs: includeDocs,
-          inclusiveEnd: inclusiveEnd,
-          limit: limit,
-          skip: skip,
-          updateSeq: updateSeq,
-          endKey: endKey,
-          endKeyDocId: endKeyDocId,
-          group: group,
-          groupLevel: groupLevel,
-          key: key,
-          keys: keys,
-          reduce: reduce,
-          stable: stable,
-          startKey: startKey,
-          startKeyDocId: startKeyDocId,
-          update: update,
+          db,
+          ddoc,
+          view,
+          attEncodingInfo,
+          attachments,
+          conflicts,
+          descending,
+          includeDocs,
+          inclusiveEnd,
+          limit,
+          skip,
+          updateSeq,
+          endKey,
+          endKeyDocId,
+          group,
+          groupLevel,
+          key,
+          keys,
+          reduce,
+          stable,
+          startKey,
+          startKeyDocId,
+          update,
         };
 
         const postViewResult = cloudantService.postView(postViewParams);
@@ -4194,29 +4194,29 @@ describe('CloudantV1', () => {
         const startKeyDocId = 'testString';
         const update = 'true';
         const postViewAsStreamParams = {
-          db: db,
-          ddoc: ddoc,
-          view: view,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          includeDocs: includeDocs,
-          inclusiveEnd: inclusiveEnd,
-          limit: limit,
-          skip: skip,
-          updateSeq: updateSeq,
-          endKey: endKey,
-          endKeyDocId: endKeyDocId,
-          group: group,
-          groupLevel: groupLevel,
-          key: key,
-          keys: keys,
-          reduce: reduce,
-          stable: stable,
-          startKey: startKey,
-          startKeyDocId: startKeyDocId,
-          update: update,
+          db,
+          ddoc,
+          view,
+          attEncodingInfo,
+          attachments,
+          conflicts,
+          descending,
+          includeDocs,
+          inclusiveEnd,
+          limit,
+          skip,
+          updateSeq,
+          endKey,
+          endKeyDocId,
+          group,
+          groupLevel,
+          key,
+          keys,
+          reduce,
+          stable,
+          startKey,
+          startKeyDocId,
+          update,
         };
 
         const postViewAsStreamResult = cloudantService.postViewAsStream(postViewAsStreamParams);
@@ -4356,10 +4356,10 @@ describe('CloudantV1', () => {
         const view = 'testString';
         const queries = [viewQueryModel];
         const postViewQueriesParams = {
-          db: db,
-          ddoc: ddoc,
-          view: view,
-          queries: queries,
+          db,
+          ddoc,
+          view,
+          queries,
         };
 
         const postViewQueriesResult = cloudantService.postViewQueries(postViewQueriesParams);
@@ -4481,10 +4481,10 @@ describe('CloudantV1', () => {
         const view = 'testString';
         const queries = [viewQueryModel];
         const postViewQueriesAsStreamParams = {
-          db: db,
-          ddoc: ddoc,
-          view: view,
-          queries: queries,
+          db,
+          ddoc,
+          view,
+          queries,
         };
 
         const postViewQueriesAsStreamResult = cloudantService.postViewQueriesAsStream(postViewQueriesAsStreamParams);
@@ -4579,8 +4579,8 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const partitionKey = 'testString';
         const getPartitionInformationParams = {
-          db: db,
-          partitionKey: partitionKey,
+          db,
+          partitionKey,
         };
 
         const getPartitionInformationResult = cloudantService.getPartitionInformation(getPartitionInformationParams);
@@ -4681,21 +4681,21 @@ describe('CloudantV1', () => {
         const keys = ['testString'];
         const startKey = 'testString';
         const postPartitionAllDocsParams = {
-          db: db,
-          partitionKey: partitionKey,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          includeDocs: includeDocs,
-          inclusiveEnd: inclusiveEnd,
-          limit: limit,
-          skip: skip,
-          updateSeq: updateSeq,
-          endKey: endKey,
-          key: key,
-          keys: keys,
-          startKey: startKey,
+          db,
+          partitionKey,
+          attEncodingInfo,
+          attachments,
+          conflicts,
+          descending,
+          includeDocs,
+          inclusiveEnd,
+          limit,
+          skip,
+          updateSeq,
+          endKey,
+          key,
+          keys,
+          startKey,
         };
 
         const postPartitionAllDocsResult = cloudantService.postPartitionAllDocs(postPartitionAllDocsParams);
@@ -4809,21 +4809,21 @@ describe('CloudantV1', () => {
         const keys = ['testString'];
         const startKey = 'testString';
         const postPartitionAllDocsAsStreamParams = {
-          db: db,
-          partitionKey: partitionKey,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          includeDocs: includeDocs,
-          inclusiveEnd: inclusiveEnd,
-          limit: limit,
-          skip: skip,
-          updateSeq: updateSeq,
-          endKey: endKey,
-          key: key,
-          keys: keys,
-          startKey: startKey,
+          db,
+          partitionKey,
+          attEncodingInfo,
+          attachments,
+          conflicts,
+          descending,
+          includeDocs,
+          inclusiveEnd,
+          limit,
+          skip,
+          updateSeq,
+          endKey,
+          key,
+          keys,
+          startKey,
         };
 
         const postPartitionAllDocsAsStreamResult = cloudantService.postPartitionAllDocsAsStream(postPartitionAllDocsAsStreamParams);
@@ -4939,22 +4939,22 @@ describe('CloudantV1', () => {
         const sort = ['testString'];
         const stale = 'ok';
         const postPartitionSearchParams = {
-          db: db,
-          partitionKey: partitionKey,
-          ddoc: ddoc,
-          index: index,
-          query: query,
-          bookmark: bookmark,
-          highlightFields: highlightFields,
-          highlightNumber: highlightNumber,
-          highlightPostTag: highlightPostTag,
-          highlightPreTag: highlightPreTag,
-          highlightSize: highlightSize,
-          includeDocs: includeDocs,
-          includeFields: includeFields,
-          limit: limit,
-          sort: sort,
-          stale: stale,
+          db,
+          partitionKey,
+          ddoc,
+          index,
+          query,
+          bookmark,
+          highlightFields,
+          highlightNumber,
+          highlightPostTag,
+          highlightPreTag,
+          highlightSize,
+          includeDocs,
+          includeFields,
+          limit,
+          sort,
+          stale,
         };
 
         const postPartitionSearchResult = cloudantService.postPartitionSearch(postPartitionSearchParams);
@@ -5076,22 +5076,22 @@ describe('CloudantV1', () => {
         const sort = ['testString'];
         const stale = 'ok';
         const postPartitionSearchAsStreamParams = {
-          db: db,
-          partitionKey: partitionKey,
-          ddoc: ddoc,
-          index: index,
-          query: query,
-          bookmark: bookmark,
-          highlightFields: highlightFields,
-          highlightNumber: highlightNumber,
-          highlightPostTag: highlightPostTag,
-          highlightPreTag: highlightPreTag,
-          highlightSize: highlightSize,
-          includeDocs: includeDocs,
-          includeFields: includeFields,
-          limit: limit,
-          sort: sort,
-          stale: stale,
+          db,
+          partitionKey,
+          ddoc,
+          index,
+          query,
+          bookmark,
+          highlightFields,
+          highlightNumber,
+          highlightPostTag,
+          highlightPreTag,
+          highlightSize,
+          includeDocs,
+          includeFields,
+          limit,
+          sort,
+          stale,
         };
 
         const postPartitionSearchAsStreamResult = cloudantService.postPartitionSearchAsStream(postPartitionSearchAsStreamParams);
@@ -5222,30 +5222,30 @@ describe('CloudantV1', () => {
         const startKeyDocId = 'testString';
         const update = 'true';
         const postPartitionViewParams = {
-          db: db,
-          partitionKey: partitionKey,
-          ddoc: ddoc,
-          view: view,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          includeDocs: includeDocs,
-          inclusiveEnd: inclusiveEnd,
-          limit: limit,
-          skip: skip,
-          updateSeq: updateSeq,
-          endKey: endKey,
-          endKeyDocId: endKeyDocId,
-          group: group,
-          groupLevel: groupLevel,
-          key: key,
-          keys: keys,
-          reduce: reduce,
-          stable: stable,
-          startKey: startKey,
-          startKeyDocId: startKeyDocId,
-          update: update,
+          db,
+          partitionKey,
+          ddoc,
+          view,
+          attEncodingInfo,
+          attachments,
+          conflicts,
+          descending,
+          includeDocs,
+          inclusiveEnd,
+          limit,
+          skip,
+          updateSeq,
+          endKey,
+          endKeyDocId,
+          group,
+          groupLevel,
+          key,
+          keys,
+          reduce,
+          stable,
+          startKey,
+          startKeyDocId,
+          update,
         };
 
         const postPartitionViewResult = cloudantService.postPartitionView(postPartitionViewParams);
@@ -5381,30 +5381,30 @@ describe('CloudantV1', () => {
         const startKeyDocId = 'testString';
         const update = 'true';
         const postPartitionViewAsStreamParams = {
-          db: db,
-          partitionKey: partitionKey,
-          ddoc: ddoc,
-          view: view,
-          attEncodingInfo: attEncodingInfo,
-          attachments: attachments,
-          conflicts: conflicts,
-          descending: descending,
-          includeDocs: includeDocs,
-          inclusiveEnd: inclusiveEnd,
-          limit: limit,
-          skip: skip,
-          updateSeq: updateSeq,
-          endKey: endKey,
-          endKeyDocId: endKeyDocId,
-          group: group,
-          groupLevel: groupLevel,
-          key: key,
-          keys: keys,
-          reduce: reduce,
-          stable: stable,
-          startKey: startKey,
-          startKeyDocId: startKeyDocId,
-          update: update,
+          db,
+          partitionKey,
+          ddoc,
+          view,
+          attEncodingInfo,
+          attachments,
+          conflicts,
+          descending,
+          includeDocs,
+          inclusiveEnd,
+          limit,
+          skip,
+          updateSeq,
+          endKey,
+          endKeyDocId,
+          group,
+          groupLevel,
+          key,
+          keys,
+          reduce,
+          stable,
+          startKey,
+          startKeyDocId,
+          update,
         };
 
         const postPartitionViewAsStreamResult = cloudantService.postPartitionViewAsStream(postPartitionViewAsStreamParams);
@@ -5530,19 +5530,19 @@ describe('CloudantV1', () => {
         const update = 'true';
         const useIndex = ['testString'];
         const postPartitionFindParams = {
-          db: db,
-          partitionKey: partitionKey,
-          selector: selector,
-          bookmark: bookmark,
-          conflicts: conflicts,
-          executionStats: executionStats,
-          fields: fields,
-          limit: limit,
-          skip: skip,
-          sort: sort,
-          stable: stable,
-          update: update,
-          useIndex: useIndex,
+          db,
+          partitionKey,
+          selector,
+          bookmark,
+          conflicts,
+          executionStats,
+          fields,
+          limit,
+          skip,
+          sort,
+          stable,
+          update,
+          useIndex,
         };
 
         const postPartitionFindResult = cloudantService.postPartitionFind(postPartitionFindParams);
@@ -5654,19 +5654,19 @@ describe('CloudantV1', () => {
         const update = 'true';
         const useIndex = ['testString'];
         const postPartitionFindAsStreamParams = {
-          db: db,
-          partitionKey: partitionKey,
-          selector: selector,
-          bookmark: bookmark,
-          conflicts: conflicts,
-          executionStats: executionStats,
-          fields: fields,
-          limit: limit,
-          skip: skip,
-          sort: sort,
-          stable: stable,
-          update: update,
-          useIndex: useIndex,
+          db,
+          partitionKey,
+          selector,
+          bookmark,
+          conflicts,
+          executionStats,
+          fields,
+          limit,
+          skip,
+          sort,
+          stable,
+          update,
+          useIndex,
         };
 
         const postPartitionFindAsStreamResult = cloudantService.postPartitionFindAsStream(postPartitionFindAsStreamParams);
@@ -5779,19 +5779,19 @@ describe('CloudantV1', () => {
         const useIndex = ['testString'];
         const r = 1;
         const postExplainParams = {
-          db: db,
-          selector: selector,
-          bookmark: bookmark,
-          conflicts: conflicts,
-          executionStats: executionStats,
-          fields: fields,
-          limit: limit,
-          skip: skip,
-          sort: sort,
-          stable: stable,
-          update: update,
-          useIndex: useIndex,
-          r: r,
+          db,
+          selector,
+          bookmark,
+          conflicts,
+          executionStats,
+          fields,
+          limit,
+          skip,
+          sort,
+          stable,
+          update,
+          useIndex,
+          r,
         };
 
         const postExplainResult = cloudantService.postExplain(postExplainParams);
@@ -5901,19 +5901,19 @@ describe('CloudantV1', () => {
         const useIndex = ['testString'];
         const r = 1;
         const postFindParams = {
-          db: db,
-          selector: selector,
-          bookmark: bookmark,
-          conflicts: conflicts,
-          executionStats: executionStats,
-          fields: fields,
-          limit: limit,
-          skip: skip,
-          sort: sort,
-          stable: stable,
-          update: update,
-          useIndex: useIndex,
-          r: r,
+          db,
+          selector,
+          bookmark,
+          conflicts,
+          executionStats,
+          fields,
+          limit,
+          skip,
+          sort,
+          stable,
+          update,
+          useIndex,
+          r,
         };
 
         const postFindResult = cloudantService.postFind(postFindParams);
@@ -6023,19 +6023,19 @@ describe('CloudantV1', () => {
         const useIndex = ['testString'];
         const r = 1;
         const postFindAsStreamParams = {
-          db: db,
-          selector: selector,
-          bookmark: bookmark,
-          conflicts: conflicts,
-          executionStats: executionStats,
-          fields: fields,
-          limit: limit,
-          skip: skip,
-          sort: sort,
-          stable: stable,
-          update: update,
-          useIndex: useIndex,
-          r: r,
+          db,
+          selector,
+          bookmark,
+          conflicts,
+          executionStats,
+          fields,
+          limit,
+          skip,
+          sort,
+          stable,
+          update,
+          useIndex,
+          r,
         };
 
         const postFindAsStreamResult = cloudantService.postFindAsStream(postFindAsStreamParams);
@@ -6134,7 +6134,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getIndexesInformation
         const db = 'testString';
         const getIndexesInformationParams = {
-          db: db,
+          db,
         };
 
         const getIndexesInformationResult = cloudantService.getIndexesInformation(getIndexesInformationParams);
@@ -6254,13 +6254,13 @@ describe('CloudantV1', () => {
         const partitioned = true;
         const type = 'json';
         const postIndexParams = {
-          db: db,
-          index: index,
-          ddoc: ddoc,
-          def: def,
-          name: name,
-          partitioned: partitioned,
-          type: type,
+          db,
+          index,
+          ddoc,
+          def,
+          name,
+          partitioned,
+          type,
         };
 
         const postIndexResult = cloudantService.postIndex(postIndexParams);
@@ -6355,10 +6355,10 @@ describe('CloudantV1', () => {
         const type = 'json';
         const index = 'testString';
         const deleteIndexParams = {
-          db: db,
-          ddoc: ddoc,
-          type: type,
-          index: index,
+          db,
+          ddoc,
+          type,
+          index,
         };
 
         const deleteIndexResult = cloudantService.deleteIndex(deleteIndexParams);
@@ -6452,8 +6452,8 @@ describe('CloudantV1', () => {
         const analyzer = 'arabic';
         const text = 'testString';
         const postSearchAnalyzeParams = {
-          analyzer: analyzer,
-          text: text,
+          analyzer,
+          text,
         };
 
         const postSearchAnalyzeResult = cloudantService.postSearchAnalyze(postSearchAnalyzeParams);
@@ -6560,27 +6560,27 @@ describe('CloudantV1', () => {
         const groupSort = ['testString'];
         const ranges = { 'key1': { 'key1': { 'key1': 'testString' } } };
         const postSearchParams = {
-          db: db,
-          ddoc: ddoc,
-          index: index,
-          query: query,
-          bookmark: bookmark,
-          highlightFields: highlightFields,
-          highlightNumber: highlightNumber,
-          highlightPostTag: highlightPostTag,
-          highlightPreTag: highlightPreTag,
-          highlightSize: highlightSize,
-          includeDocs: includeDocs,
-          includeFields: includeFields,
-          limit: limit,
-          sort: sort,
-          stale: stale,
-          counts: counts,
-          drilldown: drilldown,
-          groupField: groupField,
-          groupLimit: groupLimit,
-          groupSort: groupSort,
-          ranges: ranges,
+          db,
+          ddoc,
+          index,
+          query,
+          bookmark,
+          highlightFields,
+          highlightNumber,
+          highlightPostTag,
+          highlightPreTag,
+          highlightSize,
+          includeDocs,
+          includeFields,
+          limit,
+          sort,
+          stale,
+          counts,
+          drilldown,
+          groupField,
+          groupLimit,
+          groupSort,
+          ranges,
         };
 
         const postSearchResult = cloudantService.postSearch(postSearchParams);
@@ -6710,27 +6710,27 @@ describe('CloudantV1', () => {
         const groupSort = ['testString'];
         const ranges = { 'key1': { 'key1': { 'key1': 'testString' } } };
         const postSearchAsStreamParams = {
-          db: db,
-          ddoc: ddoc,
-          index: index,
-          query: query,
-          bookmark: bookmark,
-          highlightFields: highlightFields,
-          highlightNumber: highlightNumber,
-          highlightPostTag: highlightPostTag,
-          highlightPreTag: highlightPreTag,
-          highlightSize: highlightSize,
-          includeDocs: includeDocs,
-          includeFields: includeFields,
-          limit: limit,
-          sort: sort,
-          stale: stale,
-          counts: counts,
-          drilldown: drilldown,
-          groupField: groupField,
-          groupLimit: groupLimit,
-          groupSort: groupSort,
-          ranges: ranges,
+          db,
+          ddoc,
+          index,
+          query,
+          bookmark,
+          highlightFields,
+          highlightNumber,
+          highlightPostTag,
+          highlightPreTag,
+          highlightSize,
+          includeDocs,
+          includeFields,
+          limit,
+          sort,
+          stale,
+          counts,
+          drilldown,
+          groupField,
+          groupLimit,
+          groupSort,
+          ranges,
         };
 
         const postSearchAsStreamResult = cloudantService.postSearchAsStream(postSearchAsStreamParams);
@@ -6843,9 +6843,9 @@ describe('CloudantV1', () => {
         const ddoc = 'testString';
         const index = 'testString';
         const getSearchInfoParams = {
-          db: db,
-          ddoc: ddoc,
-          index: index,
+          db,
+          ddoc,
+          index,
         };
 
         const getSearchInfoResult = cloudantService.getSearchInfo(getSearchInfoParams);
@@ -6936,8 +6936,8 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const ifNoneMatch = 'testString';
         const headReplicationDocumentParams = {
-          docId: docId,
-          ifNoneMatch: ifNoneMatch,
+          docId,
+          ifNoneMatch,
         };
 
         const headReplicationDocumentResult = cloudantService.headReplicationDocument(headReplicationDocumentParams);
@@ -7022,7 +7022,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation headSchedulerDocument
         const docId = 'testString';
         const headSchedulerDocumentParams = {
-          docId: docId,
+          docId,
         };
 
         const headSchedulerDocumentResult = cloudantService.headSchedulerDocument(headSchedulerDocumentParams);
@@ -7106,7 +7106,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation headSchedulerJob
         const jobId = 'testString';
         const headSchedulerJobParams = {
-          jobId: jobId,
+          jobId,
         };
 
         const headSchedulerJobResult = cloudantService.headSchedulerJob(headSchedulerJobParams);
@@ -7193,10 +7193,10 @@ describe('CloudantV1', () => {
         const batch = 'ok';
         const rev = 'testString';
         const deleteReplicationDocumentParams = {
-          docId: docId,
-          ifMatch: ifMatch,
-          batch: batch,
-          rev: rev,
+          docId,
+          ifMatch,
+          batch,
+          rev,
         };
 
         const deleteReplicationDocumentResult = cloudantService.deleteReplicationDocument(deleteReplicationDocumentParams);
@@ -7294,18 +7294,18 @@ describe('CloudantV1', () => {
         const revs = false;
         const revsInfo = false;
         const getReplicationDocumentParams = {
-          docId: docId,
-          ifNoneMatch: ifNoneMatch,
-          attachments: attachments,
-          attEncodingInfo: attEncodingInfo,
-          conflicts: conflicts,
-          deletedConflicts: deletedConflicts,
-          latest: latest,
-          localSeq: localSeq,
-          meta: meta,
-          rev: rev,
-          revs: revs,
-          revsInfo: revsInfo,
+          docId,
+          ifNoneMatch,
+          attachments,
+          attEncodingInfo,
+          conflicts,
+          deletedConflicts,
+          latest,
+          localSeq,
+          meta,
+          rev,
+          revs,
+          revsInfo,
         };
 
         const getReplicationDocumentResult = cloudantService.getReplicationDocument(getReplicationDocumentParams);
@@ -7508,12 +7508,12 @@ describe('CloudantV1', () => {
         const newEdits = false;
         const rev = 'testString';
         const putReplicationDocumentParams = {
-          docId: docId,
-          replicationDocument: replicationDocument,
-          ifMatch: ifMatch,
-          batch: batch,
-          newEdits: newEdits,
-          rev: rev,
+          docId,
+          replicationDocument,
+          ifMatch,
+          batch,
+          newEdits,
+          rev,
         };
 
         const putReplicationDocumentResult = cloudantService.putReplicationDocument(putReplicationDocumentParams);
@@ -7606,9 +7606,9 @@ describe('CloudantV1', () => {
         const skip = 0;
         const states = ['initializing'];
         const getSchedulerDocsParams = {
-          limit: limit,
-          skip: skip,
-          states: states,
+          limit,
+          skip,
+          states,
         };
 
         const getSchedulerDocsResult = cloudantService.getSchedulerDocs(getSchedulerDocsParams);
@@ -7674,7 +7674,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getSchedulerDocument
         const docId = 'testString';
         const getSchedulerDocumentParams = {
-          docId: docId,
+          docId,
         };
 
         const getSchedulerDocumentResult = cloudantService.getSchedulerDocument(getSchedulerDocumentParams);
@@ -7759,8 +7759,8 @@ describe('CloudantV1', () => {
         const limit = 0;
         const skip = 0;
         const getSchedulerJobsParams = {
-          limit: limit,
-          skip: skip,
+          limit,
+          skip,
         };
 
         const getSchedulerJobsResult = cloudantService.getSchedulerJobs(getSchedulerJobsParams);
@@ -7825,7 +7825,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getSchedulerJob
         const jobId = 'testString';
         const getSchedulerJobParams = {
-          jobId: jobId,
+          jobId,
         };
 
         const getSchedulerJobResult = cloudantService.getSchedulerJob(getSchedulerJobParams);
@@ -7969,7 +7969,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getSecurity
         const db = 'testString';
         const getSecurityParams = {
-          db: db,
+          db,
         };
 
         const getSecurityResult = cloudantService.getSecurity(getSecurityParams);
@@ -8065,11 +8065,11 @@ describe('CloudantV1', () => {
         const cloudant = { 'key1': ['_reader'] };
         const couchdbAuthOnly = true;
         const putSecurityParams = {
-          db: db,
-          admins: admins,
-          members: members,
-          cloudant: cloudant,
-          couchdbAuthOnly: couchdbAuthOnly,
+          db,
+          admins,
+          members,
+          cloudant,
+          couchdbAuthOnly,
         };
 
         const putSecurityResult = cloudantService.putSecurity(putSecurityParams);
@@ -8229,11 +8229,11 @@ describe('CloudantV1', () => {
         const members = securityObjectModel;
         const couchdbAuthOnly = true;
         const putCloudantSecurityConfigurationParams = {
-          db: db,
-          cloudant: cloudant,
-          admins: admins,
-          members: members,
-          couchdbAuthOnly: couchdbAuthOnly,
+          db,
+          cloudant,
+          admins,
+          members,
+          couchdbAuthOnly,
         };
 
         const putCloudantSecurityConfigurationResult = cloudantService.putCloudantSecurityConfiguration(putCloudantSecurityConfigurationParams);
@@ -8385,9 +8385,9 @@ describe('CloudantV1', () => {
         const allowCredentials = true;
         const enableCors = true;
         const putCorsConfigurationParams = {
-          origins: origins,
-          allowCredentials: allowCredentials,
-          enableCors: enableCors,
+          origins,
+          allowCredentials,
+          enableCors,
         };
 
         const putCorsConfigurationResult = cloudantService.putCorsConfiguration(putCorsConfigurationParams);
@@ -8478,12 +8478,12 @@ describe('CloudantV1', () => {
         const ifNoneMatch = 'testString';
         const rev = 'testString';
         const headAttachmentParams = {
-          db: db,
-          docId: docId,
-          attachmentName: attachmentName,
-          ifMatch: ifMatch,
-          ifNoneMatch: ifNoneMatch,
-          rev: rev,
+          db,
+          docId,
+          attachmentName,
+          ifMatch,
+          ifNoneMatch,
+          rev,
         };
 
         const headAttachmentResult = cloudantService.headAttachment(headAttachmentParams);
@@ -8581,12 +8581,12 @@ describe('CloudantV1', () => {
         const rev = 'testString';
         const batch = 'ok';
         const deleteAttachmentParams = {
-          db: db,
-          docId: docId,
-          attachmentName: attachmentName,
-          ifMatch: ifMatch,
-          rev: rev,
-          batch: batch,
+          db,
+          docId,
+          attachmentName,
+          ifMatch,
+          rev,
+          batch,
         };
 
         const deleteAttachmentResult = cloudantService.deleteAttachment(deleteAttachmentParams);
@@ -8686,14 +8686,14 @@ describe('CloudantV1', () => {
         const range = 'testString';
         const rev = 'testString';
         const getAttachmentParams = {
-          db: db,
-          docId: docId,
-          attachmentName: attachmentName,
-          accept: accept,
-          ifMatch: ifMatch,
-          ifNoneMatch: ifNoneMatch,
-          range: range,
-          rev: rev,
+          db,
+          docId,
+          attachmentName,
+          accept,
+          ifMatch,
+          ifNoneMatch,
+          range,
+          rev,
         };
 
         const getAttachmentResult = cloudantService.getAttachment(getAttachmentParams);
@@ -8795,13 +8795,13 @@ describe('CloudantV1', () => {
         const ifMatch = 'testString';
         const rev = 'testString';
         const putAttachmentParams = {
-          db: db,
-          docId: docId,
-          attachmentName: attachmentName,
-          attachment: attachment,
-          contentType: contentType,
-          ifMatch: ifMatch,
-          rev: rev,
+          db,
+          docId,
+          attachmentName,
+          attachment,
+          contentType,
+          ifMatch,
+          rev,
         };
 
         const putAttachmentResult = cloudantService.putAttachment(putAttachmentParams);
@@ -8901,9 +8901,9 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const ifNoneMatch = 'testString';
         const headLocalDocumentParams = {
-          db: db,
-          docId: docId,
-          ifNoneMatch: ifNoneMatch,
+          db,
+          docId,
+          ifNoneMatch,
         };
 
         const headLocalDocumentResult = cloudantService.headLocalDocument(headLocalDocumentParams);
@@ -8993,9 +8993,9 @@ describe('CloudantV1', () => {
         const docId = 'testString';
         const batch = 'ok';
         const deleteLocalDocumentParams = {
-          db: db,
-          docId: docId,
-          batch: batch,
+          db,
+          docId,
+          batch,
         };
 
         const deleteLocalDocumentResult = cloudantService.deleteLocalDocument(deleteLocalDocumentParams);
@@ -9089,13 +9089,13 @@ describe('CloudantV1', () => {
         const attEncodingInfo = false;
         const localSeq = false;
         const getLocalDocumentParams = {
-          db: db,
-          docId: docId,
-          accept: accept,
-          ifNoneMatch: ifNoneMatch,
-          attachments: attachments,
-          attEncodingInfo: attEncodingInfo,
-          localSeq: localSeq,
+          db,
+          docId,
+          accept,
+          ifNoneMatch,
+          attachments,
+          attEncodingInfo,
+          localSeq,
         };
 
         const getLocalDocumentResult = cloudantService.getLocalDocument(getLocalDocumentParams);
@@ -9191,11 +9191,11 @@ describe('CloudantV1', () => {
         const contentType = 'application/json';
         const batch = 'ok';
         const putLocalDocumentParams = {
-          db: db,
-          docId: docId,
-          document: document,
-          contentType: contentType,
-          batch: batch,
+          db,
+          docId,
+          document,
+          contentType,
+          batch,
         };
 
         const putLocalDocumentResult = cloudantService.putLocalDocument(putLocalDocumentParams);
@@ -9288,8 +9288,8 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const documentRevisions = { 'key1': ['testString'] };
         const postRevsDiffParams = {
-          db: db,
-          documentRevisions: documentRevisions,
+          db,
+          documentRevisions,
         };
 
         const postRevsDiffResult = cloudantService.postRevsDiff(postRevsDiffParams);
@@ -9376,7 +9376,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getShardsInformation
         const db = 'testString';
         const getShardsInformationParams = {
-          db: db,
+          db,
         };
 
         const getShardsInformationResult = cloudantService.getShardsInformation(getShardsInformationParams);
@@ -9461,8 +9461,8 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docId = 'testString';
         const getDocumentShardsInfoParams = {
-          db: db,
-          docId: docId,
+          db,
+          docId,
         };
 
         const getDocumentShardsInfoResult = cloudantService.getDocumentShardsInfo(getDocumentShardsInfoParams);
@@ -9789,7 +9789,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postActivityTrackerEvents
         const types = ['management'];
         const postActivityTrackerEventsParams = {
-          types: types,
+          types,
         };
 
         const postActivityTrackerEventsResult = cloudantService.postActivityTrackerEvents(postActivityTrackerEventsParams);
