@@ -35,7 +35,7 @@
     "node": "^14 || ^16 || ^18"
   },
   "dependencies": {
-    "@types/node": "14.18.32",
+    "@types/node": "14.18.33",
     "ibm-cloud-sdk-core": "3.2.1"
   },
   "devDependencies": {
