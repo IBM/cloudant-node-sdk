@@ -2,464 +2,1871 @@
 
 ## getServerInformation
 
-### get `/`
+_GET `/`_
 
-- [Example request](./getServerInformation/example_request.js)
+### [Example request](./snippets/getServerInformation/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getServerInformation().then(response => {
+    console.log(response.result);
+});
+```
 
 ## getActiveTasks
 
-### get `/_active_tasks`
+_GET `/_active_tasks`_
 
-- [Example request](./getActiveTasks/example_request.js)
+### [Example request](./snippets/getActiveTasks/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getActiveTasks().then(response => {
+  console.log(response.result);
+});
+```
 
 ## getAllDbs
 
-### get `/_all_dbs`
+_GET `/_all_dbs`_
 
-- [Example request](./getAllDbs/example_request.js)
+### [Example request](./snippets/getAllDbs/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getAllDbs().then(response => {
+  console.log(response.result);
+});
+```
 
 ## postApiKeys
 
-### post `/_api/v2/api_keys`
+_POST `/_api/v2/api_keys`_
 
-- [Example request](./postApiKeys/example_request.js)
+### [Example request](./snippets/postApiKeys/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postApiKeys().then(response => {
+  console.log(response.result);
+});
+```
 
 ## putCloudantSecurity
 
-### put `/_api/v2/db/{db}/_security`
+_PUT `/_api/v2/db/{db}/_security`_
 
-- [Example request](./putCloudantSecurity/example_request.js)
+### [Example request](./snippets/putCloudantSecurity/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.putCloudantSecurityConfiguration({
+  db: 'products',
+  cloudant: {'nobody': ['_reader']}
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+The `nobody` username applies to all unauthenticated connection attempts. For example, if an application tries to read data from a database, but didn't identify itself, the task can continue only if the `nobody` user has the role `_reader`.
+
+If instead of using Cloudant's security model for managing permissions you opt to use the Apache CouchDB `_users` database (that is using legacy credentials _and_ the `couchdb_auth_only:true` option) then be aware that the user must already exist in `_users` database before adding permissions. For information on the `_users` database, see <a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-work-with-your-account#using-the-users-database-with-cloudant-nosql-db" target="_blank">Using the `_users` database with Cloudant</a>.
 
 ## getActivityTrackerEvents
 
-### get `/_api/v2/user/activity_tracker/events`
+_GET `/_api/v2/user/activity_tracker/events`_
 
-- [Example request](./getActivityTrackerEvents/example_request.js)
+### [Example request](./snippets/getActivityTrackerEvents/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getActivityTrackerEvents().then(response => {
+  console.log(response.result);
+});
+```
 
 ## postActivityTrackerEvents
 
-### post `/_api/v2/user/activity_tracker/events`
+_POST `/_api/v2/user/activity_tracker/events`_
 
-- [Example request](./postActivityTrackerEvents/example_request.js)
+### [Example request](./snippets/postActivityTrackerEvents/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postActivityTrackerEvents({
+  types: ['management'],
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getCapacityThroughputInformation
 
-### get `/_api/v2/user/capacity/throughput`
+_GET `/_api/v2/user/capacity/throughput`_
 
-- [Example request](./getCapacityThroughputInformation/example_request.js)
+### [Example request](./snippets/getCapacityThroughputInformation/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getCapacityThroughputInformation().then(response => {
+  console.log(response.result);
+});
+```
 
 ## putCapacityThroughputConfiguration
 
-### put `/_api/v2/user/capacity/throughput`
+_PUT `/_api/v2/user/capacity/throughput`_
 
-- [Example request](./putCapacityThroughputConfiguration/example_request.js)
+### [Example request](./snippets/putCapacityThroughputConfiguration/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.putCapacityThroughputConfiguration({
+  blocks: 1,
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getCorsInformation
 
-### get `/_api/v2/user/config/cors`
+_GET `/_api/v2/user/config/cors`_
 
-- [Example request](./getCorsInformation/example_request.js)
+### [Example request](./snippets/getCorsInformation/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getCorsInformation().then(response => {
+  console.log(response.result);
+});
+```
 
 ## putCorsConfiguration
 
-### put `/_api/v2/user/config/cors`
+_PUT `/_api/v2/user/config/cors`_
 
-- [Example request](./putCorsConfiguration/example_request.js)
+### [Example request](./snippets/putCorsConfiguration/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.putCorsConfiguration({
+  enableCors: true,
+  origins: ['https://example.com']
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getCurrentThroughputInformation
 
-### get `/_api/v2/user/current/throughput`
+_GET `/_api/v2/user/current/throughput`_
 
-- [Example request](./getCurrentThroughputInformation/example_request.js)
+### [Example request](./snippets/getCurrentThroughputInformation/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getCurrentThroughputInformation().then(response => {
+  console.log(response.result);
+});
+```
 
 ## getDbUpdates
 
-### get `/_db_updates`
+_GET `/_db_updates`_
 
-- [Example request](./getDbUpdates/example_request.js)
+### [Example request](./snippets/getDbUpdates/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getDbUpdates({
+  feed: 'normal',
+  heartbeat: 10000,
+  since: 'now'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+This request requires `server_admin` access.
 
 ## postDbsInfo
 
-### post `/_dbs_info`
+_POST `/_dbs_info`_
 
-- [Example request](./postDbsInfo/example_request.js)
+### [Example request](./snippets/postDbsInfo/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postDbsInfo({
+  keys: ['products', 'users', 'orders']
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getMembershipInformation
 
-### get `/_membership`
+_GET `/_membership`_
 
-- [Example request](./getMembershipInformation/example_request.js)
+### [Example request](./snippets/getMembershipInformation/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getMembershipInformation().then(response => {
+  console.log(response.result);
+});
+```
 
 ## deleteReplicationDocument
 
-### delete `/_replicator/{doc_id}`
+_DELETE `/_replicator/{doc_id}`_
 
-- [Example request](./deleteReplicationDocument/example_request.js)
+### [Example request](./snippets/deleteReplicationDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.deleteReplicationDocument({
+  docId: 'repldoc-example',
+  rev: '3-a0ccbdc6fe95b4184f9031d086034d85'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getReplicationDocument
 
-### get `/_replicator/{doc_id}`
+_GET `/_replicator/{doc_id}`_
 
-- [Example request](./getReplicationDocument/example_request.js)
+### [Example request](./snippets/getReplicationDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getReplicationDocument({
+  docId: 'repldoc-example'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## headReplicationDocument
 
-### head `/_replicator/{doc_id}`
+_HEAD `/_replicator/{doc_id}`_
 
-- [Example request](./headReplicationDocument/example_request.js)
+### [Example request](./snippets/headReplicationDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.headReplicationDocument({
+  docId: 'repldoc-example'
+}).then(response => {
+  console.log(response.status);
+  console.log(response.headers['etag']);
+});
+```
 
 ## putReplicationDocument
 
-### put `/_replicator/{doc_id}`
+_PUT `/_replicator/{doc_id}`_
 
-- [Example request](./putReplicationDocument/example_request.js)
+### [Example request](./snippets/putReplicationDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const sourceDb: CloudantV1.ReplicationDatabase = {
+  url: '<your-source-service-url>/animaldb'
+};
+
+const targetDb: CloudantV1.ReplicationDatabase = {
+  auth: {
+    iam: {
+      'api_key': '<your-iam-api-key>'
+    }
+  },
+  url: '<your-target-service-url>' + '/' + 'animaldb-target'
+};
+
+const replDocument: CloudantV1.ReplicationDocument = {
+  id: 'repldoc-example',
+  create_target: true,
+  source: sourceDb,
+  target: targetDb
+}
+
+service.putReplicationDocument({
+  docId: 'repldoc-example',
+  replicationDocument: replDocument
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getSchedulerDocs
 
-### get `/_scheduler/docs`
+_GET `/_scheduler/docs`_
 
-- [Example request](./getSchedulerDocs/example_request.js)
+### [Example request](./snippets/getSchedulerDocs/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+const service = CloudantV1.newInstance({});
+
+service.getSchedulerDocs({
+  limit: 100,
+  states: ['completed']
+}).then(response => {
+  console.log(response.result);
+})
+```
 
 ## getSchedulerDocument
 
-### get `/_scheduler/docs/_replicator/{doc_id}`
+_GET `/_scheduler/docs/_replicator/{doc_id}`_
 
-- [Example request](./getSchedulerDocument/example_request.js)
+### [Example request](./snippets/getSchedulerDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getSchedulerDocument({
+  docId: 'repldoc-example'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getSchedulerJobs
 
-### get `/_scheduler/jobs`
+_GET `/_scheduler/jobs`_
 
-- [Example request](./getSchedulerJobs/example_request.js)
+### [Example request](./snippets/getSchedulerJobs/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getSchedulerJobs({
+  limit: 100
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getSchedulerJob
 
-### get `/_scheduler/jobs/{job_id}`
+_GET `/_scheduler/jobs/{job_id}`_
 
-- [Example request](./getSchedulerJob/example_request.js)
+### [Example request](./snippets/getSchedulerJob/example_request.js)
+
+```node
+const { CloudantV1 } = require('@ibm-cloud/cloudant');
+
+const service = CloudantV1.newInstance({});
+
+service.getSchedulerJob({
+  jobId: '7b94915cd8c4a0173c77c55cd0443939+continuous'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## headSchedulerJob
 
-### head `/_scheduler/jobs/{job_id}`
+_HEAD `/_scheduler/jobs/{job_id}`_
 
-- [Example request](./headSchedulerJob/example_request.js)
+### [Example request](./snippets/headSchedulerJob/example_request.js)
+
+```node
+const { CloudantV1 } = require('@ibm-cloud/cloudant');
+
+const service = CloudantV1.newInstance({});
+
+service.headSchedulerJob({
+  jobId: '7b94915cd8c4a0173c77c55cd0443939+continuous'
+}).then(response => {
+  console.log(response.status);
+});
+```
 
 ## postSearchAnalyze
 
-### post `/_search_analyze`
+_POST `/_search_analyze`_
 
-- [Example request](./postSearchAnalyze/example_request.js)
+### [Example request](./snippets/postSearchAnalyze/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postSearchAnalyze({
+  analyzer: 'english',
+  text: 'running is fun',
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getSessionInformation
 
-### get `/_session`
+_GET `/_session`_
 
-- [Example request](./getSessionInformation/example_request.js)
+### [Example request](./snippets/getSessionInformation/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getSessionInformation().then(response => {
+  console.log(response.result);
+});
+```
+
+For more details on Session Authentication, see [Authentication.](#authentication)
 
 ## getUpInformation
 
-### get `/_up`
+_GET `/_up`_
 
-- [Example request](./getUpInformation/example_request.js)
+### [Example request](./snippets/getUpInformation/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getUpInformation().then(response => {
+  console.log(response.result);
+});
+```
 
 ## getUuids
 
-### get `/_uuids`
+_GET `/_uuids`_
 
-- [Example request](./getUuids/example_request.js)
+### [Example request](./snippets/getUuids/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const uuidsParams: CloudantV1.GetUuidsParams = {
+  count: 10
+};
+
+service.getUuids(uuidsParams).then(response => {
+  console.log(response.result);
+});
+```
 
 ## deleteDatabase
 
-### delete `/{db}`
+_DELETE `/{db}`_
 
-- [Example request](./deleteDatabase/example_request.js)
+### [Example request](./snippets/deleteDatabase/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.deleteDatabase({db: '<db-name>'}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getDatabaseInformation
 
-### get `/{db}`
+_GET `/{db}`_
 
-- [Example request](./getDatabaseInformation/example_request.js)
+### [Example request](./snippets/getDatabaseInformation/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getDatabaseInformation({db: 'products'}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## headDatabase
 
-### head `/{db}`
+_HEAD `/{db}`_
 
-- [Example request](./headDatabase/example_request.js)
+### [Example request](./snippets/headDatabase/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.headDatabase({db: 'products'}).then(response => {
+  console.log(response.status);
+});
+```
 
 ## postDocument
 
-### post `/{db}`
+_POST `/{db}`_
 
-- [Example request](./postDocument/example_request.js)
+### [Example request](./snippets/postDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const productsDoc: CloudantV1.Document = {
+  _id: 'small-appliances:1000042',
+  type: 'product',
+  productid: '1000042',
+  brand: 'Salter',
+  name: 'Digital Kitchen Scales',
+  description: 'Slim Colourful Design Electronic Cooking Appliance for Home / Kitchen, Weigh up to 5kg + Aquatronic for Liquids ml + fl. oz. 15Yr Guarantee - Green',
+  price: 14.99,
+  image: 'assets/img/0gmsnghhew.jpg'
+};
+
+service.postDocument({
+  db: 'products',
+  document: productsDoc
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## putDatabase
 
-### put `/{db}`
+_PUT `/{db}`_
 
-- [Example request](./putDatabase/example_request.js)
+### [Example request](./snippets/putDatabase/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.putDatabase({
+  db: 'products',
+  partitioned: true
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## postAllDocs
 
-### post `/{db}/_all_docs`
+_POST `/{db}/_all_docs`_
 
-- [Example request](./postAllDocs/example_request.js)
-- [Example request as a stream](./postAllDocs/example_request_as_a_stream.js)
+### [Example request](./snippets/postAllDocs/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postAllDocs({
+  db: 'orders',
+  includeDocs: true,
+  startKey: 'abc',
+  limit: 10
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+### [Example request as a stream](./snippets/postAllDocs/example_request_as_a_stream.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postAllDocsAsStream({
+  db: 'orders',
+  includeDocs: true,
+  startKey: 'abc',
+  limit: 10
+}).then(response => {
+  let stream = fs.createWriteStream("result.json");
+  response.result.pipe(stream);
+  response.result.on('end', () => stream.end());
+});
+```
 
 ## postAllDocsQueries
 
-### post `/{db}/_all_docs/queries`
+_POST `/{db}/_all_docs/queries`_
 
-- [Example request](./postAllDocsQueries/example_request.js)
+### [Example request](./snippets/postAllDocsQueries/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const allDocsQueries: CloudantV1.AllDocsQuery[] = [{
+    keys: ['small-appliances:1000042', 'small-appliances:1000043'],
+  },
+  {
+    limit: 3,
+    skip: 2
+}];
+
+service.postAllDocsQueries({
+  db: 'products',
+  queries: allDocsQueries
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## postBulkDocs
 
-### post `/{db}/_bulk_docs`
+_POST `/{db}/_bulk_docs`_
 
-- [Example request: create documents](./postBulkDocs/example_request_create_documents.js)
-- [Example request: delete documents](./postBulkDocs/example_request_delete_documents.js)
-- [Example request as a stream](./postBulkDocs/example_request_as_a_stream.js)
+### [Example request: create documents](./snippets/postBulkDocs/example_request_create_documents.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const eventDoc1: CloudantV1.Document = {
+  _id: '0007241142412418284',
+  type: 'event',
+  userid: 'abc123',
+  eventType:'addedToBasket',
+  productId: '1000042',
+  date: '2019-01-28T10:44:22.000Z'
+}
+const eventDoc2: CloudantV1.Document = {
+  _id: '0007241142412418285',
+  type: 'event',
+  userid: 'abc234',
+  eventType: 'addedToBasket',
+  productId: '1000050',
+  date: '2019-01-25T20:00:00.000Z'
+}
+
+const bulkDocs: CloudantV1.BulkDocs = {  docs: [eventDoc1, eventDoc2]
+}
+
+service.postBulkDocs({
+  db: 'events',
+  bulkDocs: bulkDocs
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+### [Example request: delete documents](./snippets/postBulkDocs/example_request_delete_documents.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const eventDoc1: CloudantV1.Document = {
+  _id: '0007241142412418284',
+  _rev: '1-5005d65514fe9e90f8eccf174af5dd64',
+  _deleted: true,
+}
+const eventDoc2: CloudantV1.Document = {
+  _id: '0007241142412418285',
+  _rev: '1-2d7810b054babeda4812b3924428d6d6',
+  _deleted: true,
+}
+
+const bulkDocs: CloudantV1.BulkDocs = {  docs: [eventDoc1, eventDoc2]
+}
+
+service.postBulkDocs({
+  db: 'events',
+  bulkDocs: bulkDocs
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+### [Example request as a stream](./snippets/postBulkDocs/example_request_as_a_stream.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+let stream = fs.createReadStream("upload.json");
+
+service.postBulkDocs({
+  db: 'events',
+  bulkDocs: stream
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+Content of upload.json
+```node
+{
+  "docs": [
+    {
+      "_id": "0007241142412418284",
+      "type": "event",
+      "userid": "abc123",
+      "eventType": "addedToBasket",
+      "productId": "1000042",
+      "date": "2019-01-28T10:44:22.000Z"
+    },
+    {
+      "_id": "0007241142412418285",
+      "type": "event",
+      "userid": "abc123",
+      "eventType": "addedToBasket",
+      "productId": "1000050",
+      "date": "2019-01-25T20:00:00.000Z"
+    }
+  ]
+}
+```
 
 ## postBulkGet
 
-### post `/{db}/_bulk_get`
+_POST `/{db}/_bulk_get`_
 
-- [Example request](./postBulkGet/example_request.js)
-- [Alternative example request for `open_revs=all`](./postBulkGet/alternative_example_request_for_open_revs_all.js)
-- [Alternative example request for `atts_since`](./postBulkGet/alternative_example_request_for_atts_since.js)
+### [Example request](./snippets/postBulkGet/example_request.js)
+
+```node
+const service = CloudantV1.newInstance({});
+
+const docId = 'order00067';
+
+const bulkGetDoc1: CloudantV1.BulkGetQueryDocument = {
+  id: docId,
+  rev: '3-917fa2381192822767f010b95b45325b'
+};
+const bulkGetDoc2: CloudantV1.BulkGetQueryDocument = {
+  id: docId,
+  rev: '4-a5be949eeb7296747cc271766e9a498b'
+};
+
+const bulkGetDocs: CloudantV1.BulkGetQueryDocument[] = [bulkGetDoc1, bulkGetDoc2];
+
+const postBulkGetParams: CloudantV1.PostBulkGetParams = {
+  db: 'orders',
+  docs: bulkGetDocs,
+};
+
+service.postBulkGet(postBulkGetParams)
+  .then(response => {
+    console.log(response.result);
+  });
+```
+
+### [Alternative example request for `open_revs=all`](./snippets/postBulkGet/alternative_example_request_for_open_revs_all.js)
+
+```node
+const service = CloudantV1.newInstance({});
+
+const bulkGetDocs: CloudantV1.BulkGetQueryDocument[] = [
+  {
+    id: 'order00067',
+  },
+];
+
+const postBulkGetParams: CloudantV1.PostBulkGetParams = {
+  db: 'orders',
+  docs: bulkGetDocs,
+};
+
+service.postBulkGet(postBulkGetParams)
+  .then(response => {
+    console.log(response.result);
+});
+```
+
+### [Alternative example request for `atts_since`](./snippets/postBulkGet/alternative_example_request_for_atts_since.js)
+
+```node
+const service = CloudantV1.newInstance({});
+
+const bulkGetQueryDocuments: CloudantV1.BulkGetQueryDocument[] = [
+  {
+    id: 'order00058',
+    atts_since: ['1-99b02e08da151943c2dcb40090160bb8']
+  },
+];
+
+const postBulkGetParams: CloudantV1.PostBulkGetParams = {
+  db: 'orders',
+  docs: bulkGetQueryDocuments,
+};
+
+service.postBulkGet(postBulkGetParams)
+  .then(response => {
+    console.log(response.result);
+});
+```
 
 ## postChanges
 
-### post `/{db}/_changes`
+_POST `/{db}/_changes`_
 
-- [Example request](./postChanges/example_request.js)
-- [Example request as a stream](./postChanges/example_request_as_a_stream.js)
+### [Example request](./snippets/postChanges/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postChanges({
+  db: 'orders'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+### [Example request as a stream](./snippets/postChanges/example_request_as_a_stream.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postChangesAsStream({
+  db: 'orders'
+}).then(response => {
+  let stream = fs.createWriteStream("result.json");
+  response.result.pipe(stream);
+  response.result.on('end', () => stream.end());
+});
+```
 
 ## deleteDesignDocument
 
-### delete `/{db}/_design/{ddoc}`
+_DELETE `/{db}/_design/{ddoc}`_
 
-- [Example request](./deleteDesignDocument/example_request.js)
+### [Example request](./snippets/deleteDesignDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.deleteDesignDocument({
+  db: 'products',
+  ddoc: 'appliances',
+  rev: '1-98e6a25b3b45df62e7d47095ac15b16a'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getDesignDocument
 
-### get `/{db}/_design/{ddoc}`
+_GET `/{db}/_design/{ddoc}`_
 
-- [Example request](./getDesignDocument/example_request.js)
+### [Example request](./snippets/getDesignDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getDesignDocument({
+  db: 'products',
+  ddoc: 'appliances',
+  latest: true
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## headDesignDocument
 
-### head `/{db}/_design/{ddoc}`
+_HEAD `/{db}/_design/{ddoc}`_
 
-- [Example request](./headDesignDocument/example_request.js)
+### [Example request](./snippets/headDesignDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.headDesignDocument({
+  db: 'products',
+  ddoc: 'appliances'
+}).then(response => {
+  console.log(response.status);
+  console.log(response.headers['etag']);
+});
+```
 
 ## putDesignDocument
 
-### put `/{db}/_design/{ddoc}`
+_PUT `/{db}/_design/{ddoc}`_
 
-- [Example request](./putDesignDocument/example_request.js)
+### [Example request](./snippets/putDesignDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const emailViewMapReduce: CloudantV1.DesignDocumentViewsMapReduce = {
+  map: 'function(doc) { if(doc.email_verified  === true){\n  emit(doc.email, [doc.name, doc.email_verified, doc.joined]) }}'
+}
+
+const userIndex: CloudantV1.SearchIndexDefinition = {
+  index: 'function (doc) {  index("name", doc.name);  index("active", doc.active);}'
+}
+
+const designDocument: CloudantV1.DesignDocument = {
+  views: {'getVerifiedEmails': emailViewMapReduce},
+  indexes: {'activeUsers': userIndex}}
+
+service.putDesignDocument({
+  db: 'users',
+  designDocument: designDocument,
+  ddoc: 'allusers'
+}).then(response => {
+  console.log(response.result);
+});
+
+const productMap: CloudantV1.DesignDocumentViewsMapReduce = {
+  map: 'function(doc) { emit(doc.productid, [doc.brand, doc.name, doc.description]) }'
+}
+
+const priceIndex: CloudantV1.SearchIndexDefinition = {
+  index: 'function (doc) {  index(\"price\", doc.price);}'
+}
+
+const partitionedDesignDoc: CloudantV1.DesignDocument = {
+  views: {'byApplianceProdId': productMap},
+  indexes: {'findByPrice': priceIndex}}
+
+service.putDesignDocument({
+  db: 'products',
+  designDocument: partitionedDesignDoc,
+  ddoc: 'appliances'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+This example creates `allusers` design document in the `users` database and `appliances` design document in the partitioned `products` database.
 
 ## getDesignDocumentInformation
 
-### get `/{db}/_design/{ddoc}/_info`
+_GET `/{db}/_design/{ddoc}/_info`_
 
-- [Example request](./getDesignDocumentInformation/example_request.js)
+### [Example request](./snippets/getDesignDocumentInformation/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getDesignDocumentInformation({
+  db: 'products',
+  ddoc: 'appliances'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## postSearch
 
-### post `/{db}/_design/{ddoc}/_search/{index}`
+_POST `/{db}/_design/{ddoc}/_search/{index}`_
 
-- [Example request](./postSearch/example_request.js)
+### [Example request](./snippets/postSearch/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postSearch({
+  db: 'users',
+  ddoc: 'allusers',
+  index: 'activeUsers',
+  query: 'name:Jane* AND active:True'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+This example requires the `activeUsers` Cloudant Search index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 
 ## getSearchInfo
 
-### get `/{db}/_design/{ddoc}/_search_info/{index}`
+_GET `/{db}/_design/{ddoc}/_search_info/{index}`_
 
-- [Example request](./getSearchInfo/example_request.js)
+### [Example request](./snippets/getSearchInfo/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getSearchInfo({
+  db: 'products',
+  ddoc: 'appliances',
+  index: 'findByPrice'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+This example requires the `findByPrice` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 
 ## postView
 
-### post `/{db}/_design/{ddoc}/_view/{view}`
+_POST `/{db}/_design/{ddoc}/_view/{view}`_
 
-- [Example request](./postView/example_request.js)
+### [Example request](./snippets/postView/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postView({
+  db: 'users',
+  ddoc: 'allusers',
+  view: 'getVerifiedEmails'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+This example requires the `getVerifiedEmails` view to exist. To create the design document with this view, see [Create or modify a design document.](#putdesigndocument)
 
 ## postViewQueries
 
-### post `/{db}/_design/{ddoc}/_view/{view}/queries`
+_POST `/{db}/_design/{ddoc}/_view/{view}/queries`_
 
-- [Example request](./postViewQueries/example_request.js)
+### [Example request](./snippets/postViewQueries/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const viewQueries: CloudantV1.ViewQuery[] = [
+  {
+    include_docs: true,
+    limit: 5
+  },
+  {
+    descending: true,
+    skip: 1
+  }
+];
+service.postViewQueries({
+  db: 'users',
+  ddoc: 'allusers',
+  queries: viewQueries,
+  view: 'getVerifiedEmails'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+This example requires the `getVerifiedEmails` view to exist. To create the design document with this view, see [Create or modify a design document.](#putdesigndocument)
 
 ## postDesignDocs
 
-### post `/{db}/_design_docs`
+_POST `/{db}/_design_docs`_
 
-- [Example request](./postDesignDocs/example_request.js)
+### [Example request](./snippets/postDesignDocs/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postDesignDocs({
+  attachments: true,
+  db: 'users'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## postDesignDocsQueries
 
-### post `/{db}/_design_docs/queries`
+_POST `/{db}/_design_docs/queries`_
 
-- [Example request](./postDesignDocsQueries/example_request.js)
+### [Example request](./snippets/postDesignDocsQueries/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const doc1: CloudantV1.AllDocsQuery = {
+  descending: true,
+  include_docs: true,
+  limit: 10
+};
+const doc2: CloudantV1.AllDocsQuery = {
+  inclusive_end: true,
+  key: '_design/allusers',
+  skip: 1
+};
+
+const allDocsQueries: CloudantV1.AllDocsQuery[] = [doc1, doc2];
+
+service.postDesignDocsQueries({
+  db: 'users',
+  queries: allDocsQueries
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## postExplain
 
-### post `/{db}/_explain`
+_POST `/{db}/_explain`_
 
-- [Example request](./postExplain/example_request.js)
+### [Example request](./snippets/postExplain/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const selector: CloudantV1.Selector = {
+  type: {
+    "$eq": "user"
+  }
+};
+
+service.postExplain({
+  db: 'users',
+  executionStats: true,
+  limit: 10,
+  selector: selector
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## postFind
 
-### post `/{db}/_find`
+_POST `/{db}/_find`_
 
-- [Example request for "json" index type](./postFind/example_request_for_json_index_type.js)
-- [Example request for "text" index type](./postFind/example_request_for_text_index_type.js)
+### [Example request for "json" index type](./snippets/postFind/example_request_for_json_index_type.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+const service = CloudantV1.newInstance({});
+
+const selector: CloudantV1.JsonObject = {
+  email_verified: {
+    '$eq': true
+  }
+};
+
+const sort: CloudantV1.JsonObject = {
+  email: 'desc'
+};
+
+service.postFind({
+  db: 'users',
+  selector: selector,
+  fields: ['_id', 'type', 'name', 'email'],
+  sort: [sort],
+  limit: 3
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+This example requires the `getUserByEmail` Cloudant Query "json" index to exist. To create the index, see [Create a new index on a database.](#postindex)
+
+### [Example request for "text" index type](./snippets/postFind/example_request_for_text_index_type.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+const service = CloudantV1.newInstance({});
+
+const selector: CloudantV1.JsonObject = {
+  address: {
+    '$regex': 'Street'
+  }
+};
+
+service.postFind({
+  db: 'users',
+  selector: selector,
+  fields: ['_id', 'type', 'name', 'email', 'address'],
+  limit: 3
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+This example requires the `getUserByAddress` Cloudant Query "text" index to exist. To create the index, see [Create a new index on a database.](#postindex)
 
 ## getIndexesInformation
 
-### get `/{db}/_index`
+_GET `/{db}/_index`_
 
-- [Example request](./getIndexesInformation/example_request.js)
+### [Example request](./snippets/getIndexesInformation/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getIndexesInformation({
+  db: 'users'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## postIndex
 
-### post `/{db}/_index`
+_POST `/{db}/_index`_
 
-- [Example request using "json" type index](./postIndex/example_request_using_json_type_index.js)
-- [Example request using "text" type index](./postIndex/example_request_using_text_type_index.js)
+### [Example request using "json" type index](./snippets/postIndex/example_request_using_json_type_index.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+// Type "json" index fields require an object that maps the name of a field to a sort direction.
+const indexField: CloudantV1.IndexField = {
+  email: 'asc'
+}
+
+const index: CloudantV1.IndexDefinition = {
+  fields: [indexField]
+}
+
+service.postIndex({
+  db: 'users',
+  ddoc: 'json-index',
+  name: 'getUserByEmail',
+  index: index,
+  type: 'json'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+### [Example request using "text" type index](./snippets/postIndex/example_request_using_text_type_index.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+// Type "text" index fields require an object with a name and type properties for the field.
+const indexField: CloudantV1.IndexField = {
+  name: 'address',
+  type: 'string'
+}
+
+const index: CloudantV1.IndexDefinition = {
+  fields: [indexField]
+}
+
+service.postIndex({
+  db: 'users',
+  ddoc: 'text-index',
+  name: 'getUserByAddress',
+  index: index,
+  type: 'text'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## deleteIndex
 
-### delete `/{db}/_index/_design/{ddoc}/{type}/{index}`
+_DELETE `/{db}/_index/_design/{ddoc}/{type}/{index}`_
 
-- [Example request](./deleteIndex/example_request.js)
+### [Example request](./snippets/deleteIndex/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.deleteIndex({
+  db: 'users',
+  ddoc: 'json-index',
+  index: 'getUserByName',
+  type: 'json'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+This example will fail if `getUserByName` index doesn't exist. To create the index, see [Create a new index on a database.](#postindex)
 
 ## deleteLocalDocument
 
-### delete `/{db}/_local/{doc_id}`
+_DELETE `/{db}/_local/{doc_id}`_
 
-- [Example request](./deleteLocalDocument/example_request.js)
+### [Example request](./snippets/deleteLocalDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.deleteLocalDocument({
+  db: 'orders',
+  docId: 'local-0007741142412418284'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getLocalDocument
 
-### get `/{db}/_local/{doc_id}`
+_GET `/{db}/_local/{doc_id}`_
 
-- [Example request](./getLocalDocument/example_request.js)
+### [Example request](./snippets/getLocalDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getLocalDocument({
+  db: 'orders',
+  docId: 'local-0007741142412418284'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## putLocalDocument
 
-### put `/{db}/_local/{doc_id}`
+_PUT `/{db}/_local/{doc_id}`_
 
-- [Example request](./putLocalDocument/example_request.js)
+### [Example request](./snippets/putLocalDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const localDocument: CloudantV1.Document = {
+  type: 'order',
+  user: 'Bob Smith',
+  orderid: '0007741142412418284',
+  userid: 'abc123',
+  total: 214.98,
+  deliveryAddress: '19 Front Street, Darlington, DL5 1TY',
+  delivered: 'true',
+  courier: 'UPS',
+  courierid: '15125425151261289',
+  date: '2019-01-28T10:44:22.000Z'
+}
+
+service.putLocalDocument({
+  db: 'orders',
+  docId: 'local-0007741142412418284',
+  document: localDocument
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## postMissingRevs
 
-### post `/{db}/_missing_revs`
+_POST `/{db}/_missing_revs`_
 
-- [Example request](./postMissingRevs/example_request.js)
+### [Example request](./snippets/postMissingRevs/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const revs: CloudantV1.DocumentRevisions = {
+  order00077: ['<order00077-existing-revision>', '<2-missing-revision>']
+};
+
+service.postMissingRevs({
+  db: 'orders',
+  missingRevs: revs
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getPartitionInformation
 
-### get `/{db}/_partition/{partition_key}`
+_GET `/{db}/_partition/{partition_key}`_
 
-- [Example request](./getPartitionInformation/example_request.js)
+### [Example request](./snippets/getPartitionInformation/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getPartitionInformation({
+  db: 'products',
+  partitionKey: 'small-appliances'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## postPartitionAllDocs
 
-### post `/{db}/_partition/{partition_key}/_all_docs`
+_POST `/{db}/_partition/{partition_key}/_all_docs`_
 
-- [Example request](./postPartitionAllDocs/example_request.js)
+### [Example request](./snippets/postPartitionAllDocs/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postPartitionAllDocs({
+  db: 'products',
+  partitionKey: 'small-appliances',
+  includeDocs: true
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## postPartitionSearch
 
-### post `/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}`
+_POST `/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}`_
 
-- [Example request](./postPartitionSearch/example_request.js)
+### [Example request](./snippets/postPartitionSearch/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postPartitionSearch({
+  db: 'products',
+  partitionKey: 'small-appliances',
+  ddoc: 'appliances',
+  index: 'findByPrice',
+  query: 'price:[14 TO 20]'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+This example requires the `findByPrice` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 
 ## postPartitionView
 
-### post `/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}`
+_POST `/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}`_
 
-- [Example request](./postPartitionView/example_request.js)
+### [Example request](./snippets/postPartitionView/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postPartitionView({
+  db: 'products',
+  ddoc: 'appliances',
+  includeDocs: true,
+  limit: 10,
+  partitionKey: 'small-appliances',
+  view: 'byApplianceProdId'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+This example requires the `byApplianceProdId` partitioned view to exist. To create the design document with this view, see [Create or modify a design document.](#putdesigndocument)
 
 ## postPartitionFind
 
-### post `/{db}/_partition/{partition_key}/_find`
+_POST `/{db}/_partition/{partition_key}/_find`_
 
-- [Example request](./postPartitionFind/example_request.js)
+### [Example request](./snippets/postPartitionFind/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const selector: CloudantV1.Selector = {
+  type: {'$eq': 'product'}
+}
+service.postPartitionFind({
+  db: 'products',
+  partitionKey: 'small-appliances',
+  fields: ['productid', 'name', 'description'],
+  selector: selector
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## postRevsDiff
 
-### post `/{db}/_revs_diff`
+_POST `/{db}/_revs_diff`_
 
-- [Example request](./postRevsDiff/example_request.js)
+### [Example request](./snippets/postRevsDiff/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const revsDiff: CloudantV1.DocumentRevisions = {
+  order00077: [
+    "<1-missing-revision>",
+    "<2-missing-revision>",
+    "<3-possible-ancestor-revision>"
+  ]
+}
+
+service.postRevsDiff({
+  db: 'orders',
+  revsDiffRequest: revsDiff
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getSecurity
 
-### get `/{db}/_security`
+_GET `/{db}/_security`_
 
-- [Example request](./getSecurity/example_request.js)
+### [Example request](./snippets/getSecurity/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getSecurity({
+  db: 'products'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## putSecurity
 
-### put `/{db}/_security`
+_PUT `/{db}/_security`_
 
-- [Example request](./putSecurity/example_request.js)
+### [Example request](./snippets/putSecurity/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const members: CloudantV1.SecurityObject = {
+  names: ['user1', 'user2'],
+  roles: ['developers']
+};
+
+service.putSecurity({
+  db: 'products',
+  members: members
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+The `nobody` username applies to all unauthenticated connection attempts. For example, if an application tries to read data from a database, but didn't identify itself, the task can continue only if the `nobody` user has the role `_reader`.
+
+If instead of using Cloudant's security model for managing permissions you opt to use the Apache CouchDB `_users` database (that is using legacy credentials _and_ the `couchdb_auth_only:true` option) then be aware that the user must already exist in `_users` database before adding permissions. For information on the `_users` database, see <a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-work-with-your-account#using-the-users-database-with-cloudant-nosql-db" target="_blank">Using the `_users` database with Cloudant</a>.
 
 ## getShardsInformation
 
-### get `/{db}/_shards`
+_GET `/{db}/_shards`_
 
-- [Example request](./getShardsInformation/example_request.js)
+### [Example request](./snippets/getShardsInformation/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getShardsInformation({
+  db: 'products'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getDocumentShardsInfo
 
-### get `/{db}/_shards/{doc_id}`
+_GET `/{db}/_shards/{doc_id}`_
 
-- [Example request](./getDocumentShardsInfo/example_request.js)
+### [Example request](./snippets/getDocumentShardsInfo/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getDocumentShardsInfo({
+  db: 'products',
+  docId: 'small-appliances:1000042'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## deleteDocument
 
-### delete `/{db}/{doc_id}`
+_DELETE `/{db}/{doc_id}`_
 
-- [Example request](./deleteDocument/example_request.js)
+### [Example request](./snippets/deleteDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+const service = CloudantV1.newInstance({});
+
+service.deleteDocument({
+  db: 'events',
+  docId: '0007241142412418284',
+  rev: '2-9a0d1cd9f40472509e9aac6461837367'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## getDocument
 
-### get `/{db}/{doc_id}`
+_GET `/{db}/{doc_id}`_
 
-- [Example request](./getDocument/example_request.js)
+### [Example request](./snippets/getDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getDocument({
+  db: 'products',
+  docId: 'small-appliances:1000042'
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## headDocument
 
-### head `/{db}/{doc_id}`
+_HEAD `/{db}/{doc_id}`_
 
-- [Example request](./headDocument/example_request.js)
+### [Example request](./snippets/headDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.headDocument({
+  db: 'events',
+  docId: '0007241142412418284'
+}).then(response => {
+  console.log(response.status);
+  console.log(response.headers['etag']);
+});
+```
 
 ## putDocument
 
-### put `/{db}/{doc_id}`
+_PUT `/{db}/{doc_id}`_
 
-- [Example request](./putDocument/example_request.js)
+### [Example request](./snippets/putDocument/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const eventDoc: CloudantV1.Document = {
+  type: 'event',
+  userid: 'abc123',
+  eventType: 'addedToBasket',
+  productId: '1000042',
+  date: '2019-01-28T10:44:22.000Z'
+};
+
+service.putDocument({
+  db: 'events',
+  docId: '0007241142412418284',
+  document: eventDoc
+}).then(response => {
+  console.log(response.result);
+});
+```
 
 ## deleteAttachment
 
-### delete `/{db}/{doc_id}/{attachment_name}`
+_DELETE `/{db}/{doc_id}/{attachment_name}`_
 
-- [Example request](./deleteAttachment/example_request.js)
+### [Example request](./snippets/deleteAttachment/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.deleteAttachment({
+  db: 'products',
+  docId: 'small-appliances:100001',
+  attachmentName: 'product_details.txt',
+  rev: '4-1a0d1cd6f40472509e9aac646183736a'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 
 ## getAttachment
 
-### get `/{db}/{doc_id}/{attachment_name}`
+_GET `/{db}/{doc_id}/{attachment_name}`_
 
-- [Example request](./getAttachment/example_request.js)
+### [Example request](./snippets/getAttachment/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.getAttachment({
+  db: 'products',
+  docId: 'small-appliances:100001',
+  attachmentName: 'product_details.txt'
+}).then(response => {
+  let attachment = response.result as Readable;
+  attachment.pipe(process.stdout);
+});
+```
+
+This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 
 ## headAttachment
 
-### head `/{db}/{doc_id}/{attachment_name}`
+_HEAD `/{db}/{doc_id}/{attachment_name}`_
 
-- [Example request](./headAttachment/example_request.js)
+### [Example request](./snippets/headAttachment/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.headAttachment({
+  db: 'products',
+  docId: 'small-appliances:100001',
+  attachmentName: 'product_details.txt'
+}).then(response => {
+  console.log(response.status);
+  console.log(response.headers['content-length']);
+  console.log(response.headers['content-type']);
+});
+```
+
+This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 
 ## putAttachment
 
-### put `/{db}/{doc_id}/{attachment_name}`
+_PUT `/{db}/{doc_id}/{attachment_name}`_
 
-- [Example request](./putAttachment/example_request.js)
+### [Example request](./snippets/putAttachment/example_request.js)
+
+```node
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+const stream = new Readable();
+stream.push('This appliance includes...');
+stream.push(null);
+
+service.putAttachment({
+  db: 'products',
+  docId: 'small-appliances:100001',
+  attachmentName: 'product_details.txt',
+  attachment: stream,
+  contentType: 'text/plain'
+}).then(response => {
+  console.log(response.result);
+});
+```
