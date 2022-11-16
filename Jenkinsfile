@@ -336,14 +336,8 @@ void publishPublic() {
 }
 
 void publishNpm() {
-  withEnv(["NPM_REGISTRY=${registryDown}",
-           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryDown)}"]) {
-    sh 'npm run build'
-  }
-  withEnv(["NPM_REGISTRY=${registryPublic}",
-           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryUpPublic)}"]) {
-    sh "npm publish ./dist"
-  }
+  sh 'npm run build'
+  sh "npm publish ./dist"
 }
 
 void publishDocs() {
