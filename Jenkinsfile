@@ -260,6 +260,8 @@ void defaultInit() {
 // + other customizations
 void applyCustomizations() {
   libName = 'node'
+  // always want to do this
+  createNpmrc()
   bumpVersion = { isDevRelease ->
     // Get the dependencies
     sh 'npm ci --no-audit'
@@ -277,19 +279,43 @@ void applyCustomizations() {
   }
 }
 
+void createNpmrc() {
+    // TODO use a here-doc or something
+    sh "echo 'registry=\\\${NPM_REGISTRY}' >> .npmrc"
+    sh "echo 'email=\\\${NPM_EMAIL}' >> .npmrc"
+    sh "echo '\\\${NPM_REGISTRY_NO_SCHEME}:/_authToken=\\\${NPM_TOKEN}' >> .npmrc"
+}
+
+def getRegistryStaging() {
+    return "https://registry.npmjs.org"
+}
+
+def getRegistryPublic() {
+    return "${env.STAGE_ROOT}npm/cloudant-sdks-npm-virtual"
+}
+
+def noScheme(str) {
+    return str.substring(str.indexOf(':') + 1)
+}
+
 void runTests() {
-  sh 'npm ci --no-audit'
-  sh 'npm test'
+  withEnv(['NPM_USER=' + env.ARTIFACTORY_CREDS_USR,
+           'NPM_PASS=' + env.ARTIFACTORY_CREDS_PSW,
+           'NPM_EMAIL=' + env.ARTIFACTORY_CREDS_USR,
+           "NPM_REGISTRY=${registryPublic}",
+           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryPublic)}]) {
+    sh 'npm ci --no-audit'
+    sh 'npm test'
+  }
 }
 
 void publishStaging() {
   // For local artifactory the email is the same as the user
-  withEnv(['NPM_USER='+ env.ARTIFACTORY_CREDS_USR, 'NPM_PASS=' + env.ARTIFACTORY_CREDS_PSW, 'NPM_EMAIL=' + env.ARTIFACTORY_CREDS_USR,
-            "NPM_REGISTRY=${env.STAGE_ROOT}npm/cloudant-sdks-npm-virtual"]) {
-    sh """
-      npm install --no-save npm-cli-login
-      ./node_modules/.bin/npm-cli-login
-    """
+  withEnv(['NPM_USER=' + env.ARTIFACTORY_CREDS_USR,
+           'NPM_PASS=' + env.ARTIFACTORY_CREDS_PSW,
+           'NPM_EMAIL=' + env.ARTIFACTORY_CREDS_USR,
+           "NPM_REGISTRY=${registryPublic}",
+           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryPublic)}]) {
     publishNpm()
   }
 }
@@ -298,8 +324,6 @@ void publishPublic() {
   withEnv(['NPM_REGISTRY=https://registry.npmjs.org']) {
     withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
                    usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPM_TOKEN', usernameVariable: 'NPM_USER')]) {
-      // Create an .npmrc file
-      sh "echo '//registry.npmjs.org/:_authToken=\${NPM_TOKEN}' > .npmrc"
       publishNpm()
     }
   }
