@@ -329,9 +329,12 @@ void publishStaging() {
 }
 
 void publishPublic() {
-  withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
-                   usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPM_TOKEN', usernameVariable: 'NPM_USER')]) {
-    publishNpm()
+  withEnv(["NPM_REGISTRY=${registryUpPublic}",
+           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryUpPublic)}"]) {
+    withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
+                     usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPM_TOKEN', usernameVariable: 'NPM_USER')]) {
+      publishNpm()
+    }
   }
 }
 
