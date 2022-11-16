@@ -307,7 +307,7 @@ def noScheme(str) {
 
 void runTests() {
   withEnv(['NPM_USER=' + env.ARTIFACTORY_CREDS_USR,
-           'NPM_PASS=' + env.ARTIFACTORY_CREDS_PSW,
+           'NPM_TOKEN=' + env.ARTIFACTORY_CREDS_PSW,
            'NPM_EMAIL=' + env.ARTIFACTORY_CREDS_USR,
            "NPM_REGISTRY=${registryDown}",
            "NPM_REGISTRY_NO_SCHEME=${noScheme(registryDown)}"]) {
@@ -319,7 +319,7 @@ void runTests() {
 void publishStaging() {
   // For local artifactory the email is the same as the user
   withEnv(['NPM_USER=' + env.ARTIFACTORY_CREDS_USR,
-           'NPM_PASS=' + env.ARTIFACTORY_CREDS_PSW,
+           'NPM_TOKEN=' + env.ARTIFACTORY_CREDS_PSW,
            'NPM_EMAIL=' + env.ARTIFACTORY_CREDS_USR,
            "NPM_REGISTRY=${registryUpStaging}",
            "NPM_REGISTRY_NO_SCHEME=${noScheme(registryUpStaging)}"]) {
@@ -327,7 +327,6 @@ void publishStaging() {
   }
 }
 
-// TODO build should use artifactory down and npm up
 void publishPublic() {
   withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
                    usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPM_TOKEN', usernameVariable: 'NPM_USER')]) {
