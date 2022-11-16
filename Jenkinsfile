@@ -303,7 +303,7 @@ void runTests() {
            'NPM_PASS=' + env.ARTIFACTORY_CREDS_PSW,
            'NPM_EMAIL=' + env.ARTIFACTORY_CREDS_USR,
            "NPM_REGISTRY=${registryPublic}",
-           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryPublic)}]) {
+           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryPublic)}"]) {
     sh 'npm ci --no-audit'
     sh 'npm test'
   }
@@ -315,7 +315,7 @@ void publishStaging() {
            'NPM_PASS=' + env.ARTIFACTORY_CREDS_PSW,
            'NPM_EMAIL=' + env.ARTIFACTORY_CREDS_USR,
            "NPM_REGISTRY=${registryPublic}",
-           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryPublic)}]) {
+           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryPublic)}"]) {
     publishNpm()
   }
 }
