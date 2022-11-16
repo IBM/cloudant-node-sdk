@@ -289,7 +289,7 @@ void createNpmrc() {
 
 // url of registry for staging uploads
 def getRegistryUpStaging() {
-    return "${env.ARTIFACTORY_URL_UP}/api/npm/cloudant-sdks-npm-virtual"
+    return "${env.ARTIFACTORY_URL_UP}/api/npm/cloudant-sdks-npm-local"
 }
 
 // url of registry for public uploads
