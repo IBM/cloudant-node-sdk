@@ -283,7 +283,7 @@ void createNpmrc() {
     // TODO use a here-doc or something
     sh "echo 'registry=\\\${NPM_REGISTRY}/' >> .npmrc"
     sh "echo 'email=\\\${NPM_EMAIL}' >> .npmrc"
-    sh "echo '\\\${NPM_REGISTRY_NO_SCHEME}:/_authToken=\\\${NPM_TOKEN}' >> .npmrc"
+    sh "echo '\\\${NPM_REGISTRY_NO_SCHEME}/:_authToken=\\\${NPM_TOKEN}' >> .npmrc"
 }
 
 // url of registry for staging uploads
