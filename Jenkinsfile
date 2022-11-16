@@ -286,12 +286,19 @@ void createNpmrc() {
     sh "echo '\\\${NPM_REGISTRY_NO_SCHEME}:/_authToken=\\\${NPM_TOKEN}' >> .npmrc"
 }
 
-def getRegistryStaging() {
+// url of registry for staging uploads
+def getRegistryUpStaging() {
+    return "${env.ARTIFACTORY_URL_UP}/api/npm/cloudant-sdks-npm-virtual"
+}
+
+// url of registry for public uploads
+def getRegistryUpPublic() {
     return "https://registry.npmjs.org"
 }
 
-def getRegistryPublic() {
-    return "${env.STAGE_ROOT}npm/cloudant-sdks-npm-virtual"
+// url of registry for _all_ downloads
+def getRegistryDown() {
+    return "${env.ARTIFACTORY_URL_DOWN}/api/npm/cloudant-sdks-npm-virtual"
 }
 
 def noScheme(str) {
@@ -302,8 +309,8 @@ void runTests() {
   withEnv(['NPM_USER=' + env.ARTIFACTORY_CREDS_USR,
            'NPM_PASS=' + env.ARTIFACTORY_CREDS_PSW,
            'NPM_EMAIL=' + env.ARTIFACTORY_CREDS_USR,
-           "NPM_REGISTRY=${registryPublic}",
-           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryPublic)}"]) {
+           "NPM_REGISTRY=${registryDown}",
+           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryDown)}"]) {
     sh 'npm ci --no-audit'
     sh 'npm test'
   }
@@ -314,26 +321,29 @@ void publishStaging() {
   withEnv(['NPM_USER=' + env.ARTIFACTORY_CREDS_USR,
            'NPM_PASS=' + env.ARTIFACTORY_CREDS_PSW,
            'NPM_EMAIL=' + env.ARTIFACTORY_CREDS_USR,
-           "NPM_REGISTRY=${registryPublic}",
-           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryPublic)}"]) {
+           "NPM_REGISTRY=${registryUpStaging}",
+           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryUpStaging)}"]) {
     publishNpm()
   }
 }
 
+// TODO build should use artifactory down and npm up
 void publishPublic() {
-  withEnv(['NPM_REGISTRY=https://registry.npmjs.org']) {
-    withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
+  withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
                    usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPM_TOKEN', usernameVariable: 'NPM_USER')]) {
-      publishNpm()
-    }
+    publishNpm()
   }
 }
 
 void publishNpm() {
-  sh 'npm run build'
-  // Note trailing slash is important for matching .npmrc entries
-  // npm-cli-login always adds a trailing slash, so we don't use one in the NPM_REGISTRY var
-  sh "npm publish ./dist --registry ${env.NPM_REGISTRY}/"
+  withEnv(["NPM_REGISTRY=${registryDown}",
+           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryDown)}"]) {
+    sh 'npm run build'
+  }
+  withEnv(["NPM_REGISTRY=${registryPublic}",
+           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryUpPublic)}"]) {
+    sh "npm publish ./dist"
+  }
 }
 
 void publishDocs() {
