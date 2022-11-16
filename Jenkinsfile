@@ -14,6 +14,7 @@ pipeline {
   environment {
     GH_CREDS = credentials('gh-sdks-automation')
     ARTIFACTORY_CREDS = credentials('artifactory')
+    ARTIFACTORY_TOKEN = credentials('artifactory-id-token')
     ARTIFACTORY_URL_UP = "${Artifactory.server('taas-artifactory-upload').getUrl()}"
     ARTIFACTORY_URL_DOWN = "${Artifactory.server('taas-artifactory').getUrl()}"
   }
@@ -306,9 +307,9 @@ def noScheme(str) {
 }
 
 void runTests() {
-  withEnv(['NPM_USER=' + env.ARTIFACTORY_CREDS_USR,
-           'NPM_TOKEN=' + env.ARTIFACTORY_CREDS_PSW,
-           'NPM_EMAIL=' + env.ARTIFACTORY_CREDS_USR,
+  withEnv(['NPM_USER=' + env.ARTIFACTORY_TOKEN_USR,
+           'NPM_TOKEN=' + env.ARTIFACTORY_TOKEN_PSW,
+           'NPM_EMAIL=' + env.ARTIFACTORY_TOKEN_USR,
            "NPM_REGISTRY=${registryDown}",
            "NPM_REGISTRY_NO_SCHEME=${noScheme(registryDown)}"]) {
     sh 'npm ci --no-audit'
@@ -318,9 +319,9 @@ void runTests() {
 
 void publishStaging() {
   // For local artifactory the email is the same as the user
-  withEnv(['NPM_USER=' + env.ARTIFACTORY_CREDS_USR,
-           'NPM_TOKEN=' + env.ARTIFACTORY_CREDS_PSW,
-           'NPM_EMAIL=' + env.ARTIFACTORY_CREDS_USR,
+  withEnv(['NPM_USER=' + env.ARTIFACTORY_TOKEN_USR,
+           'NPM_TOKEN=' + env.ARTIFACTORY_TOKEN_PSW,
+           'NPM_EMAIL=' + env.ARTIFACTORY_TOKEN_USR,
            "NPM_REGISTRY=${registryUpStaging}",
            "NPM_REGISTRY_NO_SCHEME=${noScheme(registryUpStaging)}"]) {
     publishNpm()
