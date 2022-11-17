@@ -308,7 +308,7 @@ def noScheme(str) {
 }
 
 def withNpmEnv(varName, registry, closure) {
-  withEnv([varName + '=' + noScheme(registry)]) {
+  withEnv([varName + '=' + noScheme(registry), 'NPM_CONFIG_USERCONFIG=.npmrc-jenkins']) {
     closure()
   }
 }
