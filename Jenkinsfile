@@ -264,12 +264,9 @@ void applyCustomizations() {
   // always want to do this
   createNpmrc()
   bumpVersion = { isDevRelease ->
-    withNpmEnv(env.ARTIFACTORY_TOKEN_USR,
-           env.ARTIFACTORY_TOKEN_PSW,
-           env.ARTIFACTORY_TOKEN_USR,
-           registryDown) {
+    withNpmEnv("ARTIFACTORY", registryArtifactory) {
       // Get the dependencies
-      sh 'npm ci --no-audit'
+      sh "npm ci --no-audit --registry $registryArtifactory"
       // Get the target version with no build meta
       newVersion = getNewVersion(isDevRelease, false)
       // Update to the new version, not tagging for dev releases
@@ -286,24 +283,16 @@ void applyCustomizations() {
 }
 
 void createNpmrc() {
-    // TODO use a here-doc or something
-    sh "echo 'registry=\${NPMRC_REGISTRY}/' >> .npmrc"
-    sh "echo 'email=\${NPMRC_EMAIL}' >> .npmrc"
-    sh "echo '\${NPMRC_REGISTRY_NO_SCHEME}/:_authToken=\${NPMRC_TOKEN}' >> .npmrc"
-}
-
-// url of registry for staging uploads
-def getRegistryUpStaging() {
-    return "${env.ARTIFACTORY_URL_UP}/api/npm/cloudant-sdks-npm-local"
+    sh "cp .npmrc-jenkins .npmrc"
 }
 
 // url of registry for public uploads
-def getRegistryUpPublic() {
+def getRegistryPublic() {
     return "https://registry.npmjs.org"
 }
 
-// url of registry for _all_ downloads
-def getRegistryDown() {
+// url of registry for artifactory up and downloads
+def getRegistryArtifactory() {
     return "${env.ARTIFACTORY_URL_DOWN}/api/npm/cloudant-sdks-npm-virtual"
 }
 
@@ -311,47 +300,37 @@ def noScheme(str) {
     return str.substring(str.indexOf(':') + 1)
 }
 
-def withNpmEnv(token, email, registry, closure) {
-  withEnv(['NPMRC_TOKEN=' + token,
-           'NPMRC_EMAIL=' + email,
-           'NPMRC_REGISTRY=' + registry,
-           'NPMRC_REGISTRY_NO_SCHEME=' + noScheme(registry)]) {
+def withNpmEnv(varName, registry, closure) {
+  withEnv([varName + '=' + noScheme(registry)]) {
     closure()
   }
 }
 
 void runTests() {
-  withNpmEnv(env.ARTIFACTORY_TOKEN_PSW,
-             env.ARTIFACTORY_TOKEN_USR,
-             registryDown) {
-    sh 'npm ci --no-audit'
+  withNpmEnv("ARTIFACTORY", registryArtifactory) {
+    sh "npm ci --no-audit --registry $registryArtifactory"
     sh 'npm test'
   }
 }
 
 void publishStaging() {
-  // For local artifactory the email is the same as the user
-  withNpmEnv(env.ARTIFACTORY_TOKEN_PSW,
-             env.ARTIFACTORY_TOKEN_USR,
-             registryUpStaging) {
-    publishNpm()
+  withNpmEnv("ARTIFACTORY", registryArtifactory) {
+    publishNpm(registryArtifactory)
   }
 }
 
 void publishPublic() {
   withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
                    usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPM_TOKEN', usernameVariable: 'NPM_USER')]) {
-    withNpmEnv(env.NPM_TOKEN,
-               env.NPM_EMAIL,
-               registryUp) {
-      publishNpm()
+    withNpmEnv("NPM_REGISTRY", registryPublic) {
+      publishNpm(registryPublic)
     }
   }
 }
 
-void publishNpm() {
-  sh 'npm run build'
-  sh "npm publish ./dist"
+void publishNpm(registry) {
+  sh "npm run build"
+  sh "npm publish ./dist --registry $registry"
 }
 
 void publishDocs() {
