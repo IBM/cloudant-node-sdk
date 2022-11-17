@@ -312,11 +312,11 @@ def noScheme(str) {
 }
 
 def withNpmEnv(user, token, email, registry, closure) {
-  withEnv(["NPM_USER=${user}",
-           "NPM_TOKEN=${token}",
-           "NPM_EMAIL=${email}",
-           "NPM_REGISTRY=${registry}",
-           "NPM_REGISTRY_NO_SCHEME=${noScheme(registry)}"]) {
+  withEnv(['NPM_USER=' + user,
+           'NPM_TOKEN=' + token,
+           'NPM_EMAIL=' + email,
+           'NPM_REGISTRY=' + registry,
+           'NPM_REGISTRY_NO_SCHEME=' + noScheme(registry)]) {
     closure()
   }
 }
@@ -342,10 +342,12 @@ void publishStaging() {
 }
 
 void publishPublic() {
-  withEnv(["NPM_REGISTRY=${registryUpPublic}",
-           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryUpPublic)}"]) {
-    withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
-                     usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPM_TOKEN', usernameVariable: 'NPM_USER')]) {
+  withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
+                   usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPM_TOKEN', usernameVariable: 'NPM_USER')]) {
+    withNpmEnv(env.NPM_USER,
+               env.NPM_TOKEN,
+               env.NPM_EMAIL,
+               registryUp) {
       publishNpm()
     }
   }
