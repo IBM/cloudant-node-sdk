@@ -335,7 +335,7 @@ void publishPublic() {
 
 void publishNpm(registry) {
   sh "npm run build"
-  sh "npm publish ./dist --registry $registry"
+  sh "npm publish ./dist --registry $registry/"
 }
 
 void publishDocs() {
