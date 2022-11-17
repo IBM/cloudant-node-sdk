@@ -287,9 +287,9 @@ void applyCustomizations() {
 
 void createNpmrc() {
     // TODO use a here-doc or something
-    sh "echo 'registry=\${NPM_REGISTRY}/' >> .npmrc"
-    sh "echo 'email=\${NPM_EMAIL}' >> .npmrc"
-    sh "echo '\${NPM_REGISTRY_NO_SCHEME}/:_authToken=\${NPM_TOKEN}' >> .npmrc"
+    sh "echo 'registry=\${NPMRC_REGISTRY}/' >> .npmrc"
+    sh "echo 'email=\${NPMRC_EMAIL}' >> .npmrc"
+    sh "echo '\${NPMRC_REGISTRY_NO_SCHEME}/:_authToken=\${NPM_TOKEN}' >> .npmrc"
 }
 
 // url of registry for staging uploads
@@ -311,19 +311,17 @@ def noScheme(str) {
     return str.substring(str.indexOf(':') + 1)
 }
 
-def withNpmEnv(user, token, email, registry, closure) {
-  withEnv(['NPM_USER=' + user,
-           'NPM_TOKEN=' + token,
-           'NPM_EMAIL=' + email,
-           'NPM_REGISTRY=' + registry,
-           'NPM_REGISTRY_NO_SCHEME=' + noScheme(registry)]) {
+def withNpmEnv(token, email, registry, closure) {
+  withEnv(['NPMRC_TOKEN=' + token,
+           'NPMRC_EMAIL=' + email,
+           'NPMRC_REGISTRY=' + registry,
+           'NPMRC_REGISTRY_NO_SCHEME=' + noScheme(registry)]) {
     closure()
   }
 }
 
 void runTests() {
-  withNpmEnv(env.ARTIFACTORY_TOKEN_USR,
-             env.ARTIFACTORY_TOKEN_PSW,
+  withNpmEnv(env.ARTIFACTORY_TOKEN_PSW,
              env.ARTIFACTORY_TOKEN_USR,
              registryDown) {
     sh 'npm ci --no-audit'
@@ -333,8 +331,7 @@ void runTests() {
 
 void publishStaging() {
   // For local artifactory the email is the same as the user
-  withNpmEnv(env.ARTIFACTORY_TOKEN_USR,
-             env.ARTIFACTORY_TOKEN_PSW,
+  withNpmEnv(env.ARTIFACTORY_TOKEN_PSW,
              env.ARTIFACTORY_TOKEN_USR,
              registryUpStaging) {
     publishNpm()
@@ -344,8 +341,7 @@ void publishStaging() {
 void publishPublic() {
   withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
                    usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPM_TOKEN', usernameVariable: 'NPM_USER')]) {
-    withNpmEnv(env.NPM_USER,
-               env.NPM_TOKEN,
+    withNpmEnv(env.NPM_TOKEN,
                env.NPM_EMAIL,
                registryUp) {
       publishNpm()
