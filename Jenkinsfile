@@ -295,7 +295,7 @@ def getRegistryPublic() {
 
 // url of registry for artifactory up
 def getRegistryArtifactoryUp() {
-    return "${env.ARTIFACTORY_URL_UP}/api/npm/cloudant-sdks-npm-local/"
+    return "${env.ARTIFACTORY_URL_UP}/api/npm/cloudant-sdks-npm-virtual/"
 }
 
 // url of registry for artifactory down
