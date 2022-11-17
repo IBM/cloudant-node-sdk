@@ -264,14 +264,19 @@ void applyCustomizations() {
   // always want to do this
   createNpmrc()
   bumpVersion = { isDevRelease ->
-    // Get the dependencies
-    sh 'npm ci --no-audit'
-    // Get the target version with no build meta
-    newVersion = getNewVersion(isDevRelease, false)
-    // Update to the new version, not tagging for dev releases
-    sh "npm version ${isDevRelease ? '--no-git-tag-version' : '-m "Update version -> %s"'} ${newVersion}"
-    // Set env variable version from updated package.json
-    env.NEW_SDK_VERSION = sh returnStdout: true, script: 'jq -j .version package.json'
+    withNpmEnv(env.ARTIFACTORY_TOKEN_USR,
+           env.ARTIFACTORY_TOKEN_PSW,
+           env.ARTIFACTORY_TOKEN_USR,
+           registryDown) {
+      // Get the dependencies
+      sh 'npm ci --no-audit'
+      // Get the target version with no build meta
+      newVersion = getNewVersion(isDevRelease, false)
+      // Update to the new version, not tagging for dev releases
+      sh "npm version ${isDevRelease ? '--no-git-tag-version' : '-m "Update version -> %s"'} ${newVersion}"
+      // Set env variable version from updated package.json
+      env.NEW_SDK_VERSION = sh returnStdout: true, script: 'jq -j .version package.json'
+    }
   }
   customizePublishingInfo = {
     // Set the publishing names and types
@@ -306,12 +311,21 @@ def noScheme(str) {
     return str.substring(str.indexOf(':') + 1)
 }
 
+def withNpmEnv(user, token, email, registry, closure) {
+  withEnv(["NPM_USER=${user}",
+           "NPM_TOKEN=${token}",
+           "NPM_EMAIL=${email}",
+           "NPM_REGISTRY=${registry}",
+           "NPM_REGISTRY_NO_SCHEME=${noScheme(registry)}"]) {
+    closure()
+  }
+}
+
 void runTests() {
-  withEnv(['NPM_USER=' + env.ARTIFACTORY_TOKEN_USR,
-           'NPM_TOKEN=' + env.ARTIFACTORY_TOKEN_PSW,
-           'NPM_EMAIL=' + env.ARTIFACTORY_TOKEN_USR,
-           "NPM_REGISTRY=${registryDown}",
-           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryDown)}"]) {
+  withNpmEnv(env.ARTIFACTORY_TOKEN_USR,
+             env.ARTIFACTORY_TOKEN_PSW,
+             env.ARTIFACTORY_TOKEN_USR,
+             registryDown) {
     sh 'npm ci --no-audit'
     sh 'npm test'
   }
@@ -319,11 +333,10 @@ void runTests() {
 
 void publishStaging() {
   // For local artifactory the email is the same as the user
-  withEnv(['NPM_USER=' + env.ARTIFACTORY_TOKEN_USR,
-           'NPM_TOKEN=' + env.ARTIFACTORY_TOKEN_PSW,
-           'NPM_EMAIL=' + env.ARTIFACTORY_TOKEN_USR,
-           "NPM_REGISTRY=${registryUpStaging}",
-           "NPM_REGISTRY_NO_SCHEME=${noScheme(registryUpStaging)}"]) {
+  withNpmEnv(env.ARTIFACTORY_TOKEN_USR,
+             env.ARTIFACTORY_TOKEN_PSW,
+             env.ARTIFACTORY_TOKEN_USR,
+             registryUpStaging) {
     publishNpm()
   }
 }
