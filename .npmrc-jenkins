@@ -1,7 +1,7 @@
 ; for npm public releases
 ${NPM_REGISTRY}/:email=${NPM_EMAIL}
-${NPM_REGISTRY}/:_authToken=\${NPM_TOKEN}
+${NPM_REGISTRY}/:_authToken=${NPM_TOKEN}
 
 ; for artifactory virtual (download and upload)
 ${ARTIFACTORY}/:email=${ARTIFACTORY_TOKEN_USR}
-${ARTIFACTORY}/:_authToken=\${ARTIFACTORY_TOKEN_PSW}
+${ARTIFACTORY}/:_authToken=${ARTIFACTORY_TOKEN_PSW}
