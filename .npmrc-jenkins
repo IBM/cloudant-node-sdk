@@ -2,6 +2,8 @@
 ${NPM_REGISTRY}/:email=${NPM_EMAIL}
 ${NPM_REGISTRY}/:_authToken=${NPM_TOKEN}
 
-; for artifactory virtual (download and upload)
-${ARTIFACTORY}/:email=${ARTIFACTORY_TOKEN_USR}
-${ARTIFACTORY}/:_authToken=${ARTIFACTORY_TOKEN_PSW}
+; for artifactory virtual
+${ARTIFACTORY_DOWN}/:email=${ARTIFACTORY_TOKEN_USR}
+${ARTIFACTORY_DOWN}/:_authToken=${ARTIFACTORY_TOKEN_PSW}
+${ARTIFACTORY_UP}/:email=${ARTIFACTORY_TOKEN_USR}
+${ARTIFACTORY_UP}/:_authToken=${ARTIFACTORY_TOKEN_PSW}

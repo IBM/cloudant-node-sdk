@@ -264,9 +264,9 @@ void applyCustomizations() {
   // always want to do this
   createNpmrc()
   bumpVersion = { isDevRelease ->
-    withNpmEnv("ARTIFACTORY", registryArtifactory) {
+    withNpmEnv("ARTIFACTORY_DOWN", registryArtifactoryDown) {
       // Get the dependencies
-      sh "npm ci --no-audit --registry $registryArtifactory"
+      sh "npm ci --no-audit --registry $registryArtifactoryDown"
       // Get the target version with no build meta
       newVersion = getNewVersion(isDevRelease, false)
       // Update to the new version, not tagging for dev releases
@@ -291,8 +291,13 @@ def getRegistryPublic() {
     return "https://registry.npmjs.org"
 }
 
-// url of registry for artifactory up and downloads
-def getRegistryArtifactory() {
+// url of registry for artifactory up
+def getRegistryArtifactoryUp() {
+    return "${env.ARTIFACTORY_URL_UP}/api/npm/cloudant-sdks-npm-virtual"
+}
+
+// url of registry for artifactory down
+def getRegistryArtifactoryDown() {
     return "${env.ARTIFACTORY_URL_DOWN}/api/npm/cloudant-sdks-npm-virtual"
 }
 
@@ -307,15 +312,15 @@ def withNpmEnv(varName, registry, closure) {
 }
 
 void runTests() {
-  withNpmEnv("ARTIFACTORY", registryArtifactory) {
-    sh "npm ci --no-audit --registry $registryArtifactory"
+  withNpmEnv("ARTIFACTORY_DOWN", registryArtifactoryDown) {
+    sh "npm ci --no-audit --registry $registryArtifactoryDown"
     sh 'npm test'
   }
 }
 
 void publishStaging() {
-  withNpmEnv("ARTIFACTORY", registryArtifactory) {
-    publishNpm(registryArtifactory)
+  withNpmEnv("ARTIFACTORY_UP", registryArtifactoryUp) {
+    publishNpm(registryArtifactoryUp)
   }
 }
 
