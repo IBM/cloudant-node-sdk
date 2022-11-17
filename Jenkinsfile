@@ -261,8 +261,6 @@ void defaultInit() {
 // + other customizations
 void applyCustomizations() {
   libName = 'node'
-  // always want to do this
-  createNpmrc()
   bumpVersion = { isDevRelease ->
     withNpmEnv("ARTIFACTORY_DOWN", registryArtifactoryDown) {
       // Get the dependencies
@@ -280,10 +278,6 @@ void applyCustomizations() {
     artifactUrl = "${STAGE_ROOT}storage/cloudant-sdks-npm-local/@ibm-cloud/cloudant/-/@ibm-cloud/cloudant-${env.NEW_SDK_VERSION}.tgz"
     moduleId = "com.ibm.cloud:cloudant:${env.NEW_SDK_VERSION}"
   }
-}
-
-void createNpmrc() {
-    sh "cp .npmrc-jenkins .npmrc"
 }
 
 // NB these registry URLs must have trailing slashes
