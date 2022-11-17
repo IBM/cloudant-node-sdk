@@ -286,19 +286,21 @@ void createNpmrc() {
     sh "cp .npmrc-jenkins .npmrc"
 }
 
+// NB these registry URLs must have trailing slashes
+
 // url of registry for public uploads
 def getRegistryPublic() {
-    return "https://registry.npmjs.org"
+    return "https://registry.npmjs.org/"
 }
 
 // url of registry for artifactory up
 def getRegistryArtifactoryUp() {
-    return "${env.ARTIFACTORY_URL_UP}/api/npm/cloudant-sdks-npm-local"
+    return "${env.ARTIFACTORY_URL_UP}/api/npm/cloudant-sdks-npm-local/"
 }
 
 // url of registry for artifactory down
 def getRegistryArtifactoryDown() {
-    return "${env.ARTIFACTORY_URL_DOWN}/api/npm/cloudant-sdks-npm-virtual"
+    return "${env.ARTIFACTORY_URL_DOWN}/api/npm/cloudant-sdks-npm-virtual/"
 }
 
 def noScheme(str) {
@@ -335,7 +337,7 @@ void publishPublic() {
 
 void publishNpm(registry) {
   sh "npm run build"
-  sh "npm publish ./dist --registry $registry/"
+  sh "npm publish ./dist --registry $registry"
 }
 
 void publishDocs() {
