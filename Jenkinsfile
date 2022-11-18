@@ -261,14 +261,16 @@ void defaultInit() {
 void applyCustomizations() {
   libName = 'node'
   bumpVersion = { isDevRelease ->
-    // Get the dependencies
-    sh 'npm ci --no-audit'
-    // Get the target version with no build meta
-    newVersion = getNewVersion(isDevRelease, false)
-    // Update to the new version, not tagging for dev releases
-    sh "npm version ${isDevRelease ? '--no-git-tag-version' : '-m "Update version -> %s"'} ${newVersion}"
-    // Set env variable version from updated package.json
-    env.NEW_SDK_VERSION = sh returnStdout: true, script: 'jq -j .version package.json'
+    withNpmEnv('ARTIFACTORY_DOWN', registryArtifactoryDown) {
+      // Get the dependencies
+      sh "npm ci --no-audit --registry $registryArtifactoryDown"
+      // Get the target version with no build meta
+      newVersion = getNewVersion(isDevRelease, false)
+      // Update to the new version, not tagging for dev releases
+      sh "npm version ${isDevRelease ? '--no-git-tag-version' : '-m "Update version -> %s"'} ${newVersion}"
+      // Set env variable version from updated package.json
+      env.NEW_SDK_VERSION = sh returnStdout: true, script: 'jq -j .version package.json'
+    }
   }
   customizePublishingInfo = {
     // Set the publishing names and types
@@ -277,39 +279,60 @@ void applyCustomizations() {
   }
 }
 
-void runTests() {
-  sh 'npm ci --no-audit'
-  sh 'npm test'
+// NB these registry URLs must have trailing slashes
+
+// url of registry for public uploads
+def getRegistryPublic() {
+    return 'https://registry.npmjs.org/'
 }
 
-void publishStaging() {
-  // For local artifactory the email is the same as the user
-  withEnv(['NPM_USER='+ env.ARTIFACTORY_CREDS_USR, 'NPM_PASS=' + env.ARTIFACTORY_CREDS_PSW, 'NPM_EMAIL=' + env.ARTIFACTORY_CREDS_USR,
-            "NPM_REGISTRY=${env.STAGE_ROOT}npm/cloudant-sdks-npm-virtual"]) {
-    sh """
-      npm install --no-save npm-cli-login
-      ./node_modules/.bin/npm-cli-login
-    """
-    publishNpm()
-  }
+// url of registry for artifactory up
+def getRegistryArtifactoryUp() {
+    return "${env.ARTIFACTORY_URL_UP}/api/npm/cloudant-sdks-npm-virtual/"
 }
 
-void publishPublic() {
-  withEnv(['NPM_REGISTRY=https://registry.npmjs.org']) {
-    withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
-                   usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPM_TOKEN', usernameVariable: 'NPM_USER')]) {
-      // Create an .npmrc file
-      sh "echo '//registry.npmjs.org/:_authToken=\${NPM_TOKEN}' > .npmrc"
-      publishNpm()
+// url of registry for artifactory down
+def getRegistryArtifactoryDown() {
+    return "${env.ARTIFACTORY_URL_DOWN}/api/npm/cloudant-sdks-npm-virtual/"
+}
+
+def noScheme(str) {
+    return str.substring(str.indexOf(':') + 1)
+}
+
+def withNpmEnv(varName, registry, closure) {
+  withCredentials([usernamePassword(usernameVariable: 'ARTIFACTORY_TOKEN_USR', passwordVariable: 'ARTIFACTORY_TOKEN_PSW', credentialsId: 'artifactory-id-token')]) {
+    withEnv([varName + '=' + noScheme(registry), 'NPM_CONFIG_USERCONFIG=.npmrc-jenkins']) {
+      closure()
     }
   }
 }
 
-void publishNpm() {
+void runTests() {
+  withNpmEnv('ARTIFACTORY_DOWN', registryArtifactoryDown) {
+    sh "npm ci --no-audit --registry $registryArtifactoryDown"
+    sh 'npm test'
+  }
+}
+
+void publishStaging() {
+  withNpmEnv('ARTIFACTORY_UP', registryArtifactoryUp) {
+    publishNpm(registryArtifactoryUp)
+  }
+}
+
+void publishPublic() {
+  withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
+                  usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPM_TOKEN', usernameVariable: 'NPM_USER')]) {
+    withNpmEnv("NPM_REGISTRY", registryPublic) {
+      publishNpm(registryPublic)
+    }
+  }
+}
+
+void publishNpm(registry) {
   sh 'npm run build'
-  // Note trailing slash is important for matching .npmrc entries
-  // npm-cli-login always adds a trailing slash, so we don't use one in the NPM_REGISTRY var
-  sh "npm publish ./dist --registry ${env.NPM_REGISTRY}/"
+  sh "npm publish ./dist --registry $registry"
 }
 
 void publishDocs() {
