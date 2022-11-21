@@ -261,15 +261,19 @@ void defaultInit() {
 void applyCustomizations() {
   libName = 'node'
   bumpVersion = { isDevRelease ->
-    withNpmEnv('ARTIFACTORY_DOWN', registryArtifactoryDown) {
-      // Get the dependencies
-      sh "npm ci --no-audit --registry $registryArtifactoryDown"
-      // Get the target version with no build meta
-      newVersion = getNewVersion(isDevRelease, false)
-      // Update to the new version, not tagging for dev releases
-      sh "npm version ${isDevRelease ? '--no-git-tag-version' : '-m "Update version -> %s"'} ${newVersion}"
-      // Set env variable version from updated package.json
-      env.NEW_SDK_VERSION = sh returnStdout: true, script: 'jq -j .version package.json'
+    withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory-id-token')]) {
+      withEnv(['NPMRC_EMAIL=' + env.NPMRC_USER]) {
+        withNpmEnv(registryArtifactoryDown) {
+          // Get the dependencies
+          sh "npm ci --no-audit"
+          // Get the target version with no build meta
+          newVersion = getNewVersion(isDevRelease, false)
+          // Update to the new version, not tagging for dev releases
+          sh "npm version ${isDevRelease ? '--no-git-tag-version' : '-m "Update version -> %s"'} ${newVersion}"
+          // Set env variable version from updated package.json
+          env.NEW_SDK_VERSION = sh returnStdout: true, script: 'jq -j .version package.json'
+        }
+      }
     }
   }
   customizePublishingInfo = {
@@ -300,31 +304,39 @@ def noScheme(str) {
     return str.substring(str.indexOf(':') + 1)
 }
 
-def withNpmEnv(varName, registry, closure) {
-  withCredentials([usernamePassword(usernameVariable: 'ARTIFACTORY_TOKEN_USR', passwordVariable: 'ARTIFACTORY_TOKEN_PSW', credentialsId: 'artifactory-id-token')]) {
-    withEnv([varName + '=' + noScheme(registry), 'NPM_CONFIG_USERCONFIG=.npmrc-jenkins']) {
-      closure()
-    }
+def withNpmEnv(registry, closure) {
+  withEnv(['NPMRC_REGISTRY=' + noScheme(registry),
+           'NPM_CONFIG_REGISTRY=' + registry,
+           'NPM_CONFIG_USERCONFIG=.npmrc-jenkins']) {
+    closure()
   }
 }
 
 void runTests() {
-  withNpmEnv('ARTIFACTORY_DOWN', registryArtifactoryDown) {
-    sh "npm ci --no-audit --registry $registryArtifactoryDown"
-    sh 'npm test'
+  withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory-id-token')]) {
+    withEnv(['NPMRC_EMAIL=' + env.NPMRC_USER]) {
+      withNpmEnv(registryArtifactoryDown) {
+        sh "npm ci --no-audit"
+        sh 'npm test'
+      }
+    }
   }
 }
 
 void publishStaging() {
-  withNpmEnv('ARTIFACTORY_UP', registryArtifactoryUp) {
-    publishNpm(registryArtifactoryUp)
+  withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory-id-token')]) {
+    withEnv(['NPMRC_EMAIL=' + env.NPMRC_USER]) {
+      withNpmEnv(registryArtifactoryUp) {
+        publishNpm(registryArtifactoryUp)
+      }
+    }
   }
 }
 
 void publishPublic() {
-  withCredentials([string(credentialsId: 'npm-mail', variable: 'NPM_EMAIL'),
-                  usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPM_TOKEN', usernameVariable: 'NPM_USER')]) {
-    withNpmEnv("NPM_REGISTRY", registryPublic) {
+  withCredentials([string(credentialsId: 'npm-mail', variable: 'NPMRC_EMAIL'),
+                  usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPMRC_TOKEN', usernameVariable: 'NPMRC_USER')]) {
+    withNpmEnv(registryPublic) {
       publishNpm(registryPublic)
     }
   }
@@ -332,7 +344,7 @@ void publishPublic() {
 
 void publishNpm(registry) {
   sh 'npm run build'
-  sh "npm publish ./dist --registry $registry"
+  sh "npm publish ./dist"
 }
 
 void publishDocs() {
