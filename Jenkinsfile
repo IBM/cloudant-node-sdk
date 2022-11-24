@@ -261,7 +261,7 @@ void defaultInit() {
 void applyCustomizations() {
   libName = 'node'
   bumpVersion = { isDevRelease ->
-    withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory-id-token')]) {
+    withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory')]) {
       withEnv(['NPMRC_EMAIL=' + env.NPMRC_USER]) {
         withNpmEnv(registryArtifactoryDown) {
           // Get the dependencies
@@ -313,7 +313,7 @@ def withNpmEnv(registry, closure) {
 }
 
 void runTests() {
-  withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory-id-token')]) {
+  withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory')]) {
     withEnv(['NPMRC_EMAIL=' + env.NPMRC_USER]) {
       withNpmEnv(registryArtifactoryDown) {
         sh "npm ci --no-audit"
@@ -324,7 +324,7 @@ void runTests() {
 }
 
 void publishStaging() {
-  withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory-id-token')]) {
+  withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory')]) {
     withEnv(['NPMRC_EMAIL=' + env.NPMRC_USER]) {
       withNpmEnv(registryArtifactoryUp) {
         publishNpm(registryArtifactoryUp)
