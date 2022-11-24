@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
-/**
- * @module cloudant-node-sdk
- */
+import { Transform, TransformOptions } from 'stream';
 
-export import CloudantV1 = require('./cloudant/v1');
+export class Stream<T> extends Transform {
+  constructor(opts?: TransformOptions) {
+    super({
+      ...opts,
+      objectMode: true, // sets readableObjectMode and writableObjectMode to true
+      highWaterMark: 1,
+    });
+  }
 
-export {
-  BasicAuthenticator,
-  IamAuthenticator,
-  CouchdbSessionAuthenticator,
-} from './auth';
+  push(chunk: T, encoding?: BufferEncoding): boolean {
+    return super.push(chunk);
+  }
 
-export { ChangesFollower } from './cloudant/features/changesFollower';
-export { Stream } from './cloudant/features/stream';
+  read(size?: number): T {
+    return super.read(size);
+  }
+}

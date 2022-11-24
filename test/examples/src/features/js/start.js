@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2023. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,18 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+const { ChangesFollower, CloudantV1 } = require('../../../../../index');
 
-/**
- * @module cloudant-node-sdk
- */
-
-export import CloudantV1 = require('./cloudant/v1');
-
-export {
-  BasicAuthenticator,
-  IamAuthenticator,
-  CouchdbSessionAuthenticator,
-} from './auth';
-
-export { ChangesFollower } from './cloudant/features/changesFollower';
-export { Stream } from './cloudant/features/stream';
+const client = CloudantV1.newInstance();
+const changesParams = {
+  db: 'example'
+};
+const changesFollower = new ChangesFollower(client, changesParams);
+const changesItemsStream = changesFollower.start();
+// Create for-async-loop or pipeline to begin the flow of changes
+// e.g. pipeline(changesItemsStream, destinationStream).then(() => { ... }).catch((err) => { ... });

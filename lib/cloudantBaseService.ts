@@ -23,9 +23,9 @@ import { Agent as HttpsAgent } from 'https';
 import { Agent as HttpAgent } from 'http';
 
 /**
- * Set default timeout to 2.5 minutes (= 150000ms)
+ * Set default timeout to 2.5 minutes (= 150 000 ms)
  */
-const READ_TIMEOUT = 150000;
+const READ_TIMEOUT = 150_000;
 
 /**
  * Set Validation rules
@@ -93,6 +93,8 @@ class InvalidArgumentValueError extends Error {
  * during service requests.
  */
 export default abstract class CloudantBaseService extends BaseService {
+  timeout: number;
+
   /**
    * Configuration values to use Cloudant service.
    * @param {Authenticator} userOptions.authenticator CouchdbSessionAuthenticator object can be used
@@ -108,7 +110,12 @@ export default abstract class CloudantBaseService extends BaseService {
     CloudantBaseService.setDefaultAgentsIfUnset(userOptions);
 
     super(userOptions);
+    this.timeout = userOptions.timeout;
     this.configureSessionAuthenticator();
+  }
+
+  public getTimeout() {
+    return this.timeout;
   }
 
   /**
