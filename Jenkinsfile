@@ -67,8 +67,15 @@ pipeline {
       }
       steps {
         bumpVersion(true)
-        publishStaging()
-        publishArtifactoryBuildInfo()
+        customizePublishingInfo()
+        withEnv(["LIB_NAME=${libName}",
+          "TYPE=${buildType}",
+          "ARTIFACT_URL=${artifactUrl}",
+          "MODULE_ID=${moduleId}",
+          "BUILD_NAME=${env.JOB_NAME}"]) {
+            publishStaging()
+            publishArtifactoryBuildInfo()
+        }
       }
       // This post stage resets the temporary version bump used to publish to staging
       post {
@@ -81,16 +88,7 @@ pipeline {
       steps {
         script {
             buildResults = null
-            prefixedSdkVersion = ''
-            if (libName == 'go') {
-              prefixedSdkVersion = "@$commitHash"
-            } else if (libName == 'node') {
-              prefixedSdkVersion = "@${env.NEW_SDK_VERSION}"
-            } else if (libName == 'python') {
-              prefixedSdkVersion = "==${env.NEW_SDK_VERSION}"
-            } else if (libName == 'java') {
-              prefixedSdkVersion = "${env.NEW_SDK_VERSION}"
-            }
+            prefixedSdkVersion = "${testVersionPrefix}${env.NEW_SDK_VERSION}"
 
             // For standard builds attempt to run on a matching env.BRANCH_NAME branch first and if it doesn't exist
             // then fallback to TARGET_GAUGE_RELEASE_BRANCH_NAME if set or env.TARGET_GAUGE_DEFAULT_BRANCH_NAME.
@@ -158,18 +156,19 @@ pipeline {
   }
 }
 
+// Note default values cannot be assigned here.
 def libName
 def commitHash
 def bumpVersion
 def customizeVersion
 def getNewVersion
-// Default no-op, may be overridden
-def customizePublishingInfo = {}
+def testVersionPrefix
+def customizePublishingInfo
 def publishArtifactoryBuildInfo
-def artifactUrl = ''
-def moduleId = ''
-def buildName = ''
-def buildType = ''
+def publishArtifactoryBuildInfoScript
+def artifactUrl
+def moduleId
+def buildType
 
 void defaultInit() {
   // Default to using bump2version
@@ -221,33 +220,27 @@ void defaultInit() {
     semverFormatVersion
   }
 
-  publishArtifactoryBuildInfo = {
-    // create custom build name e.g. cloudant-sdks/cloudant-node-sdk/generated-branch
-    buildName = "${env.JOB_NAME}"
-    buildType = 'GENERIC' // default, may be overridden
-    customizePublishingInfo()
-    withEnv(["LIB_NAME=${libName}",
-      "TYPE=${buildType}",
-      "ARTIFACT_URL=${artifactUrl}",
-      "MODULE_ID=${moduleId}",
-      "BUILD_NAME=${buildName}"]) {
-      // create base build info
-      rtBuildInfo (
-        buildName: "${env.BUILD_NAME}",
-        buildNumber: "${env.BUILD_NUMBER}",
-        includeEnvPatterns: ['BRANCH_NAME'],
-        maxDays: 90,
-        deleteBuildArtifacts: true,
-        asyncBuildRetention: true
-      )
-      rtPublishBuildInfo (
-        buildName: "${env.BUILD_NAME}",
-        buildNumber: "${env.BUILD_NUMBER}",
-        serverId: 'taas-artifactory-upload'
-      )
+  publishArtifactoryBuildInfoScript = {
       // put build info on module/artifacts then overwrite and publish artifactory build
       sh './scripts/publish_buildinfo.sh'
-    }
+  }
+
+  publishArtifactoryBuildInfo = {
+    // create base build info
+    rtBuildInfo (
+      buildName: "${env.BUILD_NAME}",
+      buildNumber: "${env.BUILD_NUMBER}",
+      includeEnvPatterns: ['BRANCH_NAME'],
+      maxDays: 90,
+      deleteBuildArtifacts: true,
+      asyncBuildRetention: true
+    )
+    rtPublishBuildInfo (
+      buildName: "${env.BUILD_NAME}",
+      buildNumber: "${env.BUILD_NUMBER}",
+      serverId: 'taas-artifactory-upload'
+    )
+    publishArtifactoryBuildInfoScript()
   }
 }
 
@@ -260,14 +253,15 @@ void defaultInit() {
 // + other customizations
 void applyCustomizations() {
   libName = 'node'
+  testVersionPrefix = '@'
   bumpVersion = { isDevRelease ->
     withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory')]) {
       withEnv(['NPMRC_EMAIL=' + env.NPMRC_USER]) {
         withNpmEnv(registryArtifactoryDown) {
           // Get the dependencies
           sh "npm ci --no-audit"
-          // Get the target version with no build meta
-          newVersion = getNewVersion(isDevRelease, false)
+          // Get the target version with build meta if needed
+          newVersion = getNewVersion(isDevRelease, true)
           // Update to the new version, not tagging for dev releases
           sh "npm version ${isDevRelease ? '--no-git-tag-version' : '-m "Update version -> %s"'} ${newVersion}"
           // Set env variable version from updated package.json
@@ -276,10 +270,18 @@ void applyCustomizations() {
       }
     }
   }
+
+  customizeVersion = { semverFormatVersion ->
+    // Semver build meta is unacceptable to npm
+    // Make it another pre-release identifier instead
+    semverFormatVersion.replace('+','.')
+  }
+
   customizePublishingInfo = {
     // Set the publishing names and types
+    buildType = 'GENERIC'
     artifactUrl = "${STAGE_ROOT}storage/cloudant-sdks-npm-local/@ibm-cloud/cloudant/-/@ibm-cloud/cloudant-${env.NEW_SDK_VERSION}.tgz"
-    moduleId = "com.ibm.cloud:cloudant:${env.NEW_SDK_VERSION}"
+    moduleId = "ibm-cloud:cloudant:${env.NEW_SDK_VERSION}"
   }
 }
 
