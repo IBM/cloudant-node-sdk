@@ -103,6 +103,8 @@ class CloudantV1 extends CloudantBaseService {
    * includes a JSON structure that contains information about the server, including a welcome message and the server's
    * version.
    *
+   * **Tip:**  The authentication for this endpoint is only enforced when using IAM.
+   *
    * @param {Object} [params] - The parameters to send to the service.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ServerInformation>>}
@@ -197,6 +199,8 @@ class CloudantV1 extends CloudantBaseService {
    *
    * Requests one or more Universally Unique Identifiers (UUIDs) from the instance. The response is a JSON object that
    * provides a list of UUIDs.
+   *
+   * **Tip:**  The authentication for this endpoint is only enforced when using IAM.
    *
    * @param {Object} [params] - The parameters to send to the service.
    * @param {number} [params.count] - Query parameter to specify the number of UUIDs to return.
@@ -7093,6 +7097,8 @@ class CloudantV1 extends CloudantBaseService {
    *
    * Confirms that the server is up, running, and ready to respond to requests. If `maintenance_mode` is `true` or
    * `nolb`, the endpoint returns a 404 response.
+   *
+   * **Tip:**  The authentication for this endpoint is only enforced when using IAM.
    *
    * @param {Object} [params] - The parameters to send to the service.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
