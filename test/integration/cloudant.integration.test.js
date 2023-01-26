@@ -22,7 +22,7 @@ const authHelper = require('../resources/auth-helper.js');
 const timeout = 10000;
 
 // Use this to retrieve test-specific config properties from your credentials file.
-const configFile = 'cloudant.env';
+const configFile = 'cloudant_v1.env';
 // Use authHelper to skip tests if our configFile is not available
 // This step also sets env var IBM_CREDENTIALS_FILE=<configFile>
 const describe = authHelper.prepareTests(configFile);
