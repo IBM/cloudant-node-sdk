@@ -1,0 +1,570 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@ibm-cloud/cloudant - v0.4.1</title><meta name="description" content="Documentation for @ibm-cloud/cloudant - v0.4.1"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base=".">
+<div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<div class="field">
+<div id="tsd-toolbar-links"></div></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@ibm-cloud/cloudant - v0.4.1</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+<div class="container container-main">
+<div class="col-8 col-content">
+<div class="tsd-page-title">
+<h2>@ibm-cloud/cloudant - v0.4.1</h2></div>
+<div class="tsd-panel tsd-typography"><p><a href="https://github.com/IBM/cloudant-node-sdk/actions/workflows/test.yml"><img src="https://github.com/IBM/cloudant-node-sdk/actions/workflows/test.yml/badge.svg?branch=main&event=push" alt="Build Status"></a>
+<a href="https://github.com/IBM/cloudant-node-sdk/releases/latest"><img src="https://img.shields.io/github/v/release/IBM/cloudant-node-sdk?include_prereleases&sort=semver" alt="Release"></a>
+<a href="https://ibm.github.io/cloudant-node-sdk/"><img src="https://img.shields.io/static/v1?label=TypeDoc&message=latest&color=blue" alt="Docs"></a></p>
+
+<a href="#ibm-cloudant-nodejs-sdk-version-041" id="ibm-cloudant-nodejs-sdk-version-041" style="color: inherit; text-decoration: none;">
+  <h1>IBM Cloudant Node.js SDK Version 0.4.1</h1>
+</a>
+<p>IBM Cloudant Node.js SDK is a client library that interacts with the
+<a href="https://cloud.ibm.com/apidocs/cloudant?code=node">IBM Cloudant APIs</a>.</p>
+<p>Disclaimer: This library is still a 0.x release. We do consider this
+library production-ready and capable, but there are still some
+limitations we’re working to resolve, and refinements we want to
+deliver. We are working really hard to minimise the disruption from
+now until the 1.0 release, but there may still be some changes that
+impact applications using this SDK. For now, be sure to pin versions
+to avoid surprises.</p>
+<details>
+<summary>Table of Contents</summary>
+
+<!--
+  The TOC below is generated using the `markdown-toc` node package.
+
+      https://github.com/jonschlinkert/markdown-toc
+
+      npx markdown-toc -i README.md
+  -->
+
+<!-- toc -->
+
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#authentication">Authentication</a><ul>
+<li><a href="#authentication-with-environment-variables">Authentication with environment variables</a><ul>
+<li><a href="#iam-authentication">IAM authentication</a></li>
+<li><a href="#session-cookie-authentication">Session cookie authentication</a></li>
+<li><a href="#basic-authentication">Basic authentication</a></li>
+</ul>
+</li>
+<li><a href="#authentication-with-external-configuration">Authentication with external configuration</a></li>
+<li><a href="#programmatic-authentication">Programmatic authentication</a></li>
+</ul>
+</li>
+<li><a href="#using-the-sdk">Using the SDK</a><ul>
+<li><a href="#request-timeout-configuration">Request timeout configuration</a></li>
+<li><a href="#code-examples">Code examples</a><ul>
+<li><a href="#1-create-a-database-and-add-a-document">1. Create a database and add a document</a></li>
+<li><a href="#2-retrieve-information-from-an-existing-database">2. Retrieve information from an existing database</a></li>
+<li><a href="#3-update-your-previously-created-document">3. Update your previously created document</a></li>
+<li><a href="#4-delete-your-previously-created-document">4. Delete your previously created document</a></li>
+<li><a href="#further-code-examples">Further code examples</a></li>
+</ul>
+</li>
+<li><a href="#error-handling">Error handling</a></li>
+<li><a href="#raw-io">Raw IO</a></li>
+<li><a href="#further-resources">Further resources</a></li>
+</ul>
+</li>
+<li><a href="#questions">Questions</a></li>
+<li><a href="#issues">Issues</a></li>
+<li><a href="#open-source-at-ibm">Open source at IBM</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<!-- tocstop -->
+
+</details>
+
+
+<a href="#overview" id="overview" style="color: inherit; text-decoration: none;">
+  <h2>Overview</h2>
+</a>
+<p>The IBM Cloudant Node.js SDK allows developers to programmatically
+interact with <a href="https://cloud.ibm.com/apidocs/cloudant">IBM Cloudant</a>
+with the help of the <code>@ibm-cloud/cloudant</code> package.</p>
+
+<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+  <h2>Features</h2>
+</a>
+<p>The purpose of this Node.js SDK is to wrap most of the HTTP request APIs
+provided by Cloudant and supply other functions to ease the usage of Cloudant.
+This SDK should make life easier for programmers to do what’s really important
+to them: developing software.</p>
+<p>Reasons why you should consider using Cloudant Node.js SDK in your
+project:</p>
+<ul>
+<li>Supported by IBM Cloudant.</li>
+<li>Server compatibility with:<ul>
+<li>IBM Cloudant.</li>
+<li><a href="https://docs.couchdb.org/en/stable/">Apache CouchDB 3.x</a> for data operations.</li>
+</ul>
+</li>
+<li>Includes all the most popular and latest supported endpoints for
+applications.</li>
+<li>Handles the authentication.</li>
+<li>Familiar user experience with IBM Cloud SDKs.</li>
+<li>Flexibility to use either built-in models or byte-based requests and responses for documents.</li>
+<li><code>Promise</code> based design with asynchronous HTTP requests.</li>
+<li>Use either as native JavaScript or take advantage of TypeScript models.</li>
+<li>Transparently compresses request and response bodies.</li>
+</ul>
+
+<a href="#prerequisites" id="prerequisites" style="color: inherit; text-decoration: none;">
+  <h2>Prerequisites</h2>
+</a>
+<ul>
+<li>A
+<a href="https://cloud.ibm.com/docs/Cloudant/getting-started.html#step-1-connect-to-your-cloudant-nosql-db-service-instance-on-ibm-cloud">Cloudant</a>
+service instance or a
+<a href="https://docs.couchdb.org/en/latest/install/index.html">CouchDB</a>
+server.</li>
+<li>Node.js 14, 16 or 18.</li>
+</ul>
+
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h2>Installation</h2>
+</a>
+<pre><code class="language-sh"><span class="hl-0">npm </span><span class="hl-1">install</span><span class="hl-0"> </span><span class="hl-1">@ibm-cloud/cloudant</span>
+</code></pre>
+
+<a href="#authentication" id="authentication" style="color: inherit; text-decoration: none;">
+  <h2>Authentication</h2>
+</a>
+<p>This library requires some of your
+<a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-locating-your-service-credentials">Cloudant service credentials</a> to authenticate with your
+account.</p>
+<ol>
+<li><code>IAM</code>, <code>COUCHDB_SESSION</code>, <code>BASIC</code> or <code>NOAUTH</code> <strong>authentication type</strong>.<ol>
+<li><a href="#iam-authentication"><em>IAM authentication</em></a> is highly recommended when your
+ back-end database server is <a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-managing-access-for-cloudant#introduction-iam-ai"><strong>Cloudant</strong></a>. This
+ authentication type requires a server-generated <code>apikey</code> instead of a
+ user-given password. You can create one
+ <a href="https://cloud.ibm.com/iam/apikeys">here</a>.</li>
+<li><a href="#session-cookie-authentication"><em>Session cookie (<code>COUCHDB_SESSION</code>) authentication</em></a>
+ is recommended for <a href="https://docs.couchdb.org/en/stable/api/server/authn.html#cookie-authentication">Apache CouchDB</a> or for
+ <a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-work-with-your-account#cookie-authentication">Cloudant</a> when IAM is unavailable. It exchanges username
+ and password credentials for an <code>AuthSession</code> cookie from the <code>/_session</code>
+ endpoint.</li>
+<li><a href="#basic-authentication"><em>Basic</em> (or legacy) <em>authentication</em></a> is a fallback
+ for both <a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-work-with-your-account#basic-authentication">Cloudant</a> and <a href="https://docs.couchdb.org/en/stable/api/server/authn.html#basic-authentication">Apache CouchDB</a>
+ back-end database servers. This authentication type requires the good old
+ <code>username</code> and <code>password</code> credentials.</li>
+<li><em>Noauth</em> authentication does not require credentials. Note that this
+ authentication type only works with queries against a database with read
+ access for everyone.</li>
+</ol>
+</li>
+<li>The service <code>url</code>.</li>
+</ol>
+<p>There are several ways to <strong>set</strong> these properties:</p>
+<ol>
+<li>As <a href="#authentication-with-environment-variables">environment variables</a></li>
+<li>The <a href="#programmatic-authentication">programmatic approach</a></li>
+<li>With an <a href="#authentication-with-external-configuration">external credentials file</a></li>
+</ol>
+
+<a href="#authentication-with-environment-variables" id="authentication-with-environment-variables" style="color: inherit; text-decoration: none;">
+  <h3>Authentication with environment variables</h3>
+</a>
+
+<a href="#iam-authentication" id="iam-authentication" style="color: inherit; text-decoration: none;">
+  <h4>IAM authentication</h4>
+</a>
+<p>For Cloudant <em>IAM authentication</em>, set the following environmental variables by
+replacing the <code>&lt;url&gt;</code> and <code>&lt;apikey&gt;</code> with your proper
+<a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-locating-your-service-credentials">service credentials</a>. There is no need to set
+<code>CLOUDANT_AUTH_TYPE</code> to <code>IAM</code> because it is the default.</p>
+<pre><code class="language-bash"><span class="hl-2">CLOUDANT_URL</span><span class="hl-0">=&lt;</span><span class="hl-1">ur</span><span class="hl-0">l&gt;</span><br/><span class="hl-2">CLOUDANT_APIKEY</span><span class="hl-0">=&lt;</span><span class="hl-1">apike</span><span class="hl-0">y&gt;</span>
+</code></pre>
+
+<a href="#session-cookie-authentication" id="session-cookie-authentication" style="color: inherit; text-decoration: none;">
+  <h4>Session cookie authentication</h4>
+</a>
+<p>For <code>COUCHDB_SESSION</code> authentication, set the following environmental variables
+by replacing the <code>&lt;url&gt;</code>, <code>&lt;username&gt;</code> and <code>&lt;password&gt;</code> with your proper
+<a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-locating-your-service-credentials">service credentials</a>.</p>
+<pre><code class="language-bash"><span class="hl-2">CLOUDANT_AUTH_TYPE</span><span class="hl-0">=</span><span class="hl-1">COUCHDB_SESSION</span><br/><span class="hl-2">CLOUDANT_URL</span><span class="hl-0">=&lt;</span><span class="hl-1">ur</span><span class="hl-0">l&gt;</span><br/><span class="hl-2">CLOUDANT_USERNAME</span><span class="hl-0">=&lt;</span><span class="hl-1">usernam</span><span class="hl-0">e&gt;</span><br/><span class="hl-2">CLOUDANT_PASSWORD</span><span class="hl-0">=&lt;</span><span class="hl-1">passwor</span><span class="hl-0">d&gt;</span>
+</code></pre>
+
+<a href="#basic-authentication" id="basic-authentication" style="color: inherit; text-decoration: none;">
+  <h4>Basic authentication</h4>
+</a>
+<p>For <em>Basic authentication</em>, set the following environmental variables by
+replacing the <code>&lt;url&gt;</code>, <code>&lt;username&gt;</code> and <code>&lt;password&gt;</code> with your proper
+<a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-locating-your-service-credentials">service credentials</a>.</p>
+<pre><code class="language-bash"><span class="hl-2">CLOUDANT_AUTH_TYPE</span><span class="hl-0">=</span><span class="hl-1">BASIC</span><br/><span class="hl-2">CLOUDANT_URL</span><span class="hl-0">=&lt;</span><span class="hl-1">ur</span><span class="hl-0">l&gt;</span><br/><span class="hl-2">CLOUDANT_USERNAME</span><span class="hl-0">=&lt;</span><span class="hl-1">usernam</span><span class="hl-0">e&gt;</span><br/><span class="hl-2">CLOUDANT_PASSWORD</span><span class="hl-0">=&lt;</span><span class="hl-1">passwor</span><span class="hl-0">d&gt;</span>
+</code></pre>
+<p><strong>Note</strong>: There are also additional <a href="https://github.com/IBM/node-sdk-core/blob/main/Authentication.md#bearer-token-authentication"><em>Bearer token</em></a>, <a href="https://github.com/IBM/node-sdk-core/blob/main/Authentication.md#container-authentication"><em>Container</em></a> and <a href="https://github.com/IBM/node-sdk-core/blob/main/Authentication.md#vpc-instance-authentication"><em>VPC Instance</em></a> authentication methods. For more details, please follow the provided links.
+We recommend that you use <a href="#iam-authentication">IAM</a> for Cloudant and
+<a href="#session-cookie-authentication">Session</a> for CouchDB authentication.</p>
+
+<a href="#authentication-with-external-configuration" id="authentication-with-external-configuration" style="color: inherit; text-decoration: none;">
+  <h3>Authentication with external configuration</h3>
+</a>
+<p>To use an external configuration file, the
+<a href="https://cloud.ibm.com/apidocs/cloudant?code=node#authentication-with-external-configuration">Cloudant API docs</a>,
+or the
+<a href="https://github.com/IBM/ibm-cloud-sdk-common#using-external-configuration">general SDK usage information</a>
+will guide you.</p>
+
+<a href="#programmatic-authentication" id="programmatic-authentication" style="color: inherit; text-decoration: none;">
+  <h3>Programmatic authentication</h3>
+</a>
+<p>To learn more about how to use programmatic authentication, see the related
+documentation in the
+<a href="https://cloud.ibm.com/apidocs/cloudant?code=node#programmatic-authentication">Cloudant API docs</a>
+or in the
+<a href="https://github.com/IBM/node-sdk-core/blob/main/Authentication.md">Node.js SDK Core document</a> about authentication.</p>
+
+<a href="#using-the-sdk" id="using-the-sdk" style="color: inherit; text-decoration: none;">
+  <h2>Using the SDK</h2>
+</a>
+<p>For fundamental SDK usage information and config options, please see the common <a href="https://github.com/IBM/ibm-cloud-sdk-common/blob/main/README.md">IBM Cloud SDK</a> documentation.</p>
+
+<a href="#request-timeout-configuration" id="request-timeout-configuration" style="color: inherit; text-decoration: none;">
+  <h3>Request timeout configuration</h3>
+</a>
+<p>No request timeout is defined, but a 2.5m connect and 2.5m read timeout is set by default. Be sure to set a request timeout appropriate to your application usage and environment.
+The <a href="https://github.com/IBM/ibm-cloud-sdk-common/blob/main/README.md">request timeout</a> section contains details on how to change the value.</p>
+<p><strong>Note:</strong> System settings may take precedence over configured timeout values.</p>
+
+<a href="#code-examples" id="code-examples" style="color: inherit; text-decoration: none;">
+  <h3>Code examples</h3>
+</a>
+<p>The following code examples
+<a href="#authenticate-with-environment-variables">authenticate with the environment variables</a>.</p>
+
+<a href="#1-create-a-database-and-add-a-document" id="1-create-a-database-and-add-a-document" style="color: inherit; text-decoration: none;">
+  <h4>1. Create a database and add a document</h4>
+</a>
+<p><strong>Note:</strong> This example code assumes that <code>orders</code> database does not exist in your account.</p>
+<p>This example code creates <code>orders</code> database and adds a new document &quot;example&quot;
+into it. To connect, you must set your environment variables with
+the <em>service url</em>, <em>authentication type</em> and <em>authentication credentials</em>
+of your Cloudant service.</p>
+<p>Cloudant environment variable naming starts with a <em>service name</em> prefix that identifies your service.
+By default this is <code>CLOUDANT</code>, see the settings in the
+<a href="#authentication-with-environment-variables">authentication with environment variables section</a>.</p>
+<p>If you would like to rename your Cloudant service from <code>CLOUDANT</code>,
+you must use your defined service name as the prefix for all Cloudant related environment variables.</p>
+<p>Once the environment variables are set, you can try out the code examples.</p>
+<details open>
+<summary>TypeScript:</summary>
+
+<pre><code class="language-ts"><span class="hl-3">import</span><span class="hl-0"> {</span><span class="hl-2">CloudantV1</span><span class="hl-0">} </span><span class="hl-3">from</span><span class="hl-0"> </span><span class="hl-1">&quot;@ibm-cloud/cloudant&quot;</span><span class="hl-0">;</span>
+</code></pre>
+<pre><code class="language-ts"><span class="hl-4">interface</span><span class="hl-0"> </span><span class="hl-5">OrderDocument</span><span class="hl-0"> </span><span class="hl-4">extends</span><span class="hl-0"> </span><span class="hl-5">CloudantV1</span><span class="hl-0">.</span><span class="hl-5">Document</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-2">name</span><span class="hl-0">?: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">joined</span><span class="hl-0">?: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">_id</span><span class="hl-0">: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">_rev</span><span class="hl-0">?: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">}</span><br/><br/><span class="hl-6">// 1. Create a client with `CLOUDANT` default service name ======================</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">client</span><span class="hl-0"> = </span><span class="hl-2">CloudantV1</span><span class="hl-0">.</span><span class="hl-8">newInstance</span><span class="hl-0">({});</span><br/><br/><span class="hl-6">// 2. Create a database =========================================================</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">exampleDbName</span><span class="hl-0"> = </span><span class="hl-1">&#39;orders&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-6">// Try to create database if it doesn&#39;t exist</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">createDb</span><span class="hl-0"> = </span><span class="hl-2">client</span><br/><span class="hl-0">  .</span><span class="hl-8">putDatabase</span><span class="hl-0">({ </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">exampleDbName</span><span class="hl-0"> })</span><br/><span class="hl-0">  .</span><span class="hl-8">then</span><span class="hl-0">((</span><span class="hl-2">putDatabaseResult</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-3">if</span><span class="hl-0"> (</span><span class="hl-2">putDatabaseResult</span><span class="hl-0">.</span><span class="hl-2">result</span><span class="hl-0">.</span><span class="hl-2">ok</span><span class="hl-0">) {</span><br/><span class="hl-0">      </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><span class="hl-1">`&quot;</span><span class="hl-4">${</span><span class="hl-2">exampleDbName</span><span class="hl-4">}</span><span class="hl-1">&quot; database created.&quot;`</span><span class="hl-0">);</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">  })</span><br/><span class="hl-0">  .</span><span class="hl-8">catch</span><span class="hl-0">((</span><span class="hl-2">err</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-3">if</span><span class="hl-0"> (</span><span class="hl-2">err</span><span class="hl-0">.</span><span class="hl-2">code</span><span class="hl-0"> === </span><span class="hl-9">412</span><span class="hl-0">) {</span><br/><span class="hl-0">      </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">        </span><span class="hl-1">`Cannot create &quot;</span><span class="hl-4">${</span><span class="hl-2">exampleDbName</span><span class="hl-4">}</span><span class="hl-1">&quot; database, it already exists.`</span><br/><span class="hl-0">      );</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">  });</span><br/><br/><span class="hl-6">// 3. Create a document =========================================================</span><br/><span class="hl-6">// Create a document object with &quot;example&quot; id</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">exampleDocId</span><span class="hl-0"> = </span><span class="hl-1">&#39;example&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-6">// Setting `_id` for the document is optional when postDocument function is used for CREATE.</span><br/><span class="hl-6">// When `_id` is not provided the server will generate one for your document.</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">exampleDocument</span><span class="hl-0">: </span><span class="hl-5">OrderDocument</span><span class="hl-0"> = { </span><span class="hl-2">_id:</span><span class="hl-0"> </span><span class="hl-2">exampleDocId</span><span class="hl-0"> };</span><br/><br/><span class="hl-6">// Add &quot;name&quot; and &quot;joined&quot; fields to the document</span><br/><span class="hl-2">exampleDocument</span><span class="hl-0">.</span><span class="hl-2">name</span><span class="hl-0"> = </span><span class="hl-1">&#39;Bob Smith&#39;</span><span class="hl-0">;</span><br/><span class="hl-2">exampleDocument</span><span class="hl-0">.</span><span class="hl-2">joined</span><span class="hl-0"> = </span><span class="hl-1">&#39;2019-01-24T10:42:59.000Z&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-6">// Save the document in the database with &quot;postDocument&quot; function</span><br/><span class="hl-2">createDb</span><span class="hl-0">.</span><span class="hl-8">then</span><span class="hl-0">(() </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-2">client</span><br/><span class="hl-0">    .</span><span class="hl-8">postDocument</span><span class="hl-0">({</span><br/><span class="hl-0">      </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">exampleDbName</span><span class="hl-0">,</span><br/><span class="hl-0">      </span><span class="hl-2">document:</span><span class="hl-0"> </span><span class="hl-2">exampleDocument</span><span class="hl-0">,</span><br/><span class="hl-0">    })</span><br/><span class="hl-0">    </span><span class="hl-6">// ==========================================================================</span><br/><span class="hl-0">    </span><span class="hl-6">// Note: saving the document can also be done with the &quot;putDocument&quot;</span><br/><span class="hl-0">    </span><span class="hl-6">// function. In this case `docId` is required for a CREATE operation:</span><br/><span class="hl-0">    </span><span class="hl-6">/*</span><br/><span class="hl-6">    .putDocument({</span><br/><span class="hl-6">      db: exampleDbName,</span><br/><span class="hl-6">      docId: exampleDocId,</span><br/><span class="hl-6">      document: exampleDocument,</span><br/><span class="hl-6">    })</span><br/><span class="hl-6">    */</span><br/><span class="hl-0">    </span><span class="hl-6">// ==========================================================================</span><br/><span class="hl-0">    .</span><span class="hl-8">then</span><span class="hl-0">((</span><span class="hl-2">createDocumentResponse</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">      </span><span class="hl-6">// Keeping track of the revision number of the document object</span><br/><span class="hl-0">      </span><span class="hl-6">// is necessary for further UPDATE/DELETE operations:</span><br/><span class="hl-0">      </span><span class="hl-2">exampleDocument</span><span class="hl-0">.</span><span class="hl-2">_rev</span><span class="hl-0"> = </span><span class="hl-2">createDocumentResponse</span><span class="hl-0">.</span><span class="hl-2">result</span><span class="hl-0">.</span><span class="hl-2">rev</span><span class="hl-0">;</span><br/><span class="hl-0">      </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">        </span><span class="hl-1">&#39;You have created the document:</span><span class="hl-10">\n</span><span class="hl-1">&#39;</span><span class="hl-0"> +</span><br/><span class="hl-0">          </span><span class="hl-7">JSON</span><span class="hl-0">.</span><span class="hl-8">stringify</span><span class="hl-0">(</span><span class="hl-2">exampleDocument</span><span class="hl-0">, </span><span class="hl-4">null</span><span class="hl-0">, </span><span class="hl-9">2</span><span class="hl-0">)</span><br/><span class="hl-0">      );</span><br/><span class="hl-0">    });</span><br/><span class="hl-0">});</span>
+</code></pre>
+</details>
+
+<details>
+<summary>JavaScript:</summary>
+
+<pre><code class="language-js"><span class="hl-4">const</span><span class="hl-0"> { </span><span class="hl-7">CloudantV1</span><span class="hl-0"> } = </span><span class="hl-8">require</span><span class="hl-0">(</span><span class="hl-1">&#39;@ibm-cloud/cloudant&#39;</span><span class="hl-0">);</span>
+</code></pre>
+<p><a href="#" title="test/examples/src/ts/CreateDbAndDoc.ts /interface/ $">embedmd</a>:# (test/examples/src/js/CreateDbAndDoc.js /const createDbAndDoc/ /createDbAndDoc();\n}/)</p>
+<pre><code class="language-js"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-8">createDbAndDoc</span><span class="hl-0"> = </span><span class="hl-4">async</span><span class="hl-0"> () </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-6">// 1. Create a client with `CLOUDANT` default service name ====================</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">client</span><span class="hl-0"> = </span><span class="hl-2">CloudantV1</span><span class="hl-0">.</span><span class="hl-8">newInstance</span><span class="hl-0">({});</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// 2. Create a database =======================================================</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">exampleDbName</span><span class="hl-0"> = </span><span class="hl-1">&#39;orders&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// Try to create database if it doesn&#39;t exist</span><br/><span class="hl-0">  </span><span class="hl-3">try</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-8">putDatabaseResult</span><span class="hl-0"> = (</span><br/><span class="hl-0">      </span><span class="hl-3">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-8">putDatabase</span><span class="hl-0">({</span><br/><span class="hl-0">        </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">exampleDbName</span><span class="hl-0">,</span><br/><span class="hl-0">      })</span><br/><span class="hl-0">    ).</span><span class="hl-2">result</span><span class="hl-0">;</span><br/><span class="hl-0">    </span><span class="hl-3">if</span><span class="hl-0"> (</span><span class="hl-2">putDatabaseResult</span><span class="hl-0">.</span><span class="hl-2">ok</span><span class="hl-0">) {</span><br/><span class="hl-0">      </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><span class="hl-1">`&quot;</span><span class="hl-4">${</span><span class="hl-2">exampleDbName</span><span class="hl-4">}</span><span class="hl-1">&quot; database created.`</span><span class="hl-0">);</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">  } </span><span class="hl-3">catch</span><span class="hl-0"> (</span><span class="hl-2">err</span><span class="hl-0">) {</span><br/><span class="hl-0">    </span><span class="hl-3">if</span><span class="hl-0"> (</span><span class="hl-2">err</span><span class="hl-0">.</span><span class="hl-2">code</span><span class="hl-0"> === </span><span class="hl-9">412</span><span class="hl-0">) {</span><br/><span class="hl-0">      </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">        </span><span class="hl-1">`Cannot create &quot;</span><span class="hl-4">${</span><span class="hl-2">exampleDbName</span><span class="hl-4">}</span><span class="hl-1">&quot; database, it already exists.`</span><br/><span class="hl-0">      );</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">  }</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// 3. Create a document =======================================================</span><br/><span class="hl-0">  </span><span class="hl-6">// Create a document object with &quot;example&quot; id</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">exampleDocId</span><span class="hl-0"> = </span><span class="hl-1">&#39;example&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// Setting `_id` for the document is optional when &quot;postDocument&quot; function is used for CREATE.</span><br/><span class="hl-0">  </span><span class="hl-6">// When `_id` is not provided the server will generate one for your document.</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">exampleDocument</span><span class="hl-0"> = { </span><span class="hl-2">_id:</span><span class="hl-0"> </span><span class="hl-2">exampleDocId</span><span class="hl-0"> };</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// Add &quot;name&quot; and &quot;joined&quot; fields to the document</span><br/><span class="hl-0">  </span><span class="hl-2">exampleDocument</span><span class="hl-0">[</span><span class="hl-1">&#39;name&#39;</span><span class="hl-0">] = </span><span class="hl-1">&#39;Bob Smith&#39;</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">exampleDocument</span><span class="hl-0">.</span><span class="hl-2">joined</span><span class="hl-0"> = </span><span class="hl-1">&#39;2019-01-24T10:42:59.000Z&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// Save the document in the database with &quot;postDocument&quot; function</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">createDocumentResponse</span><span class="hl-0"> = </span><span class="hl-3">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-8">postDocument</span><span class="hl-0">({</span><br/><span class="hl-0">    </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">exampleDbName</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">document:</span><span class="hl-0"> </span><span class="hl-2">exampleDocument</span><span class="hl-0">,</span><br/><span class="hl-0">  });</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// ==========================================================================</span><br/><span class="hl-0">  </span><span class="hl-6">// Note: saving the document can also be done with the &quot;putDocument&quot;</span><br/><span class="hl-0">  </span><span class="hl-6">// function. In this case `docId` is required for a CREATE operation:</span><br/><span class="hl-0">  </span><span class="hl-6">/* const createDocumentResponse = await client.putDocument({</span><br/><span class="hl-6">       db: exampleDbName,</span><br/><span class="hl-6">       docId: exampleDocId,</span><br/><span class="hl-6">       document: exampleDocument,</span><br/><span class="hl-6">  }); */</span><br/><span class="hl-0">  </span><span class="hl-6">// ==========================================================================</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// Keeping track of the revision number of the document object</span><br/><span class="hl-0">  </span><span class="hl-6">// is necessary for further UPDATE/DELETE operations:</span><br/><span class="hl-0">  </span><span class="hl-2">exampleDocument</span><span class="hl-0">.</span><span class="hl-2">_rev</span><span class="hl-0"> = </span><span class="hl-2">createDocumentResponse</span><span class="hl-0">.</span><span class="hl-2">result</span><span class="hl-0">.</span><span class="hl-2">rev</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">    </span><span class="hl-1">&#39;You have created the document:</span><span class="hl-10">\n</span><span class="hl-1">&#39;</span><span class="hl-0"> +</span><br/><span class="hl-0">      </span><span class="hl-7">JSON</span><span class="hl-0">.</span><span class="hl-8">stringify</span><span class="hl-0">(</span><span class="hl-2">exampleDocument</span><span class="hl-0">, </span><span class="hl-4">null</span><span class="hl-0">, </span><span class="hl-9">2</span><span class="hl-0">)</span><br/><span class="hl-0">  );</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-3">if</span><span class="hl-0"> (</span><span class="hl-2">require</span><span class="hl-0">.</span><span class="hl-2">main</span><span class="hl-0"> === </span><span class="hl-5">module</span><span class="hl-0">) {</span><br/><span class="hl-0">  </span><span class="hl-8">createDbAndDoc</span><span class="hl-0">();</span><br/><span class="hl-0">}</span>
+</code></pre>
+</details>
+
+<p>When you run the code, you see a result similar to the following output.</p>
+<pre><code class="language-txt">&quot;orders&quot; database created.
+You have created the document:
+{
+  &quot;_id&quot;: &quot;example&quot;,
+  &quot;name&quot;: &quot;Bob Smith&quot;,
+  &quot;joined&quot;: &quot;2019-01-24T10:42:59.000Z&quot;,
+  &quot;_rev&quot;: &quot;1-1b403633540686aa32d013fda9041a5d&quot;
+}
+</code></pre>
+
+<a href="#2-retrieve-information-from-an-existing-database" id="2-retrieve-information-from-an-existing-database" style="color: inherit; text-decoration: none;">
+  <h4>2. Retrieve information from an existing database</h4>
+</a>
+<p><strong>Note</strong>: This example code assumes that you have created both the <code>orders</code>
+database and the <code>example</code> document by
+<a href="#1-create-a-database-and-add-a-document">running the previous example code</a>
+successfully. Otherwise, the following error message occurs, &quot;Cannot delete document because either &#39;orders&#39;
+database or &#39;example&#39; document was not found.&quot;</p>
+<details>
+<summary>Gather database information example</summary>
+
+<details open>
+<summary>TypeScript:</summary>
+
+<pre><code class="language-ts"><span class="hl-3">import</span><span class="hl-0"> {</span><span class="hl-2">CloudantV1</span><span class="hl-0">} </span><span class="hl-3">from</span><span class="hl-0"> </span><span class="hl-1">&quot;@ibm-cloud/cloudant&quot;</span><span class="hl-0">;</span>
+</code></pre>
+<pre><code class="language-ts"><span class="hl-6">// 1. Create a client with `CLOUDANT` default service name =====================</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">client</span><span class="hl-0"> = </span><span class="hl-2">CloudantV1</span><span class="hl-0">.</span><span class="hl-8">newInstance</span><span class="hl-0">({});</span><br/><br/><span class="hl-6">// 2. Get server information ====================================================</span><br/><span class="hl-6">// call service without parameters:</span><br/><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-8">getServerInformation</span><span class="hl-0">().</span><span class="hl-8">then</span><span class="hl-0">((</span><span class="hl-2">serverInformation</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> { </span><span class="hl-7">version</span><span class="hl-0"> } = </span><span class="hl-2">serverInformation</span><span class="hl-0">.</span><span class="hl-2">result</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><span class="hl-1">`Server version </span><span class="hl-4">${</span><span class="hl-2">version</span><span class="hl-4">}</span><span class="hl-1">`</span><span class="hl-0">);</span><br/><span class="hl-0">});</span><br/><br/><span class="hl-6">// 3. Get database information for &quot;orders&quot; ===================================</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">dbName</span><span class="hl-0"> = </span><span class="hl-1">&#39;orders&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-6">// call service with embedded parameters:</span><br/><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-8">getDatabaseInformation</span><span class="hl-0">({ </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">dbName</span><span class="hl-0"> }).</span><span class="hl-8">then</span><span class="hl-0">((</span><span class="hl-2">dbInfo</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">documentCount</span><span class="hl-0"> = </span><span class="hl-2">dbInfo</span><span class="hl-0">.</span><span class="hl-2">result</span><span class="hl-0">.</span><span class="hl-2">doc_count</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">dbNameResult</span><span class="hl-0"> = </span><span class="hl-2">dbInfo</span><span class="hl-0">.</span><span class="hl-2">result</span><span class="hl-0">.</span><span class="hl-2">db_name</span><span class="hl-0">;</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// 4. Show document count in database =========================================</span><br/><span class="hl-0">  </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">    </span><span class="hl-1">`Document count in &quot;</span><span class="hl-4">${</span><span class="hl-2">dbNameResult</span><span class="hl-4">}</span><span class="hl-1">&quot; database is </span><span class="hl-4">${</span><span class="hl-2">documentCount</span><span class="hl-4">}</span><span class="hl-1">.`</span><br/><span class="hl-0">  );</span><br/><span class="hl-0">});</span><br/><br/><span class="hl-6">// 5. Get &quot;example&quot; document out of the database by document id =====================</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">getDocParams</span><span class="hl-0">: </span><span class="hl-5">CloudantV1</span><span class="hl-0">.</span><span class="hl-5">GetDocumentParams</span><span class="hl-0"> = {</span><br/><span class="hl-0">  </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">dbName</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">docId:</span><span class="hl-0"> </span><span class="hl-1">&#39;example&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-6">// call service with predefined parameters:</span><br/><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-8">getDocument</span><span class="hl-0">(</span><span class="hl-2">getDocParams</span><span class="hl-0">).</span><span class="hl-8">then</span><span class="hl-0">((</span><span class="hl-2">documentExample</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-6">// result object is defined as a Document here:</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> { </span><span class="hl-7">result</span><span class="hl-0"> } = </span><span class="hl-2">documentExample</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">    </span><span class="hl-1">`Document retrieved from database:</span><span class="hl-10">\n</span><span class="hl-4">${</span><span class="hl-7">JSON</span><span class="hl-11">.</span><span class="hl-8">stringify</span><span class="hl-11">(</span><span class="hl-2">result</span><span class="hl-11">, </span><span class="hl-4">null</span><span class="hl-11">, </span><span class="hl-9">2</span><span class="hl-11">)</span><span class="hl-4">}</span><span class="hl-1">`</span><br/><span class="hl-0">  );</span><br/><span class="hl-0">});</span>
+</code></pre>
+</details>
+
+<details>
+<summary>JavaScript:</summary>
+
+<pre><code class="language-js"><span class="hl-4">const</span><span class="hl-0"> { </span><span class="hl-7">CloudantV1</span><span class="hl-0"> } = </span><span class="hl-8">require</span><span class="hl-0">(</span><span class="hl-1">&#39;@ibm-cloud/cloudant&#39;</span><span class="hl-0">);</span>
+</code></pre>
+<p><a href="#" title="test/examples/src/ts/CreateDbAndDoc.ts /interface/ $">embedmd</a>:# (test/examples/src/js/GetInfoFromExistingDatabase.js /const getInfoFromExistingDatabase/ /getInfoFromExistingDatabase();\n}/)</p>
+<pre><code class="language-js"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-8">getInfoFromExistingDatabase</span><span class="hl-0"> = </span><span class="hl-4">async</span><span class="hl-0"> () </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-6">// 1. Create a client with `CLOUDANT` default service name  ===================</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">client</span><span class="hl-0"> = </span><span class="hl-2">CloudantV1</span><span class="hl-0">.</span><span class="hl-8">newInstance</span><span class="hl-0">({});</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// 2. Get server information ==================================================</span><br/><span class="hl-0">  </span><span class="hl-6">// call service without parameters:</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> { </span><span class="hl-7">version</span><span class="hl-0"> } = (</span><span class="hl-3">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-8">getServerInformation</span><span class="hl-0">()).</span><span class="hl-2">result</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><span class="hl-1">`Server version </span><span class="hl-4">${</span><span class="hl-2">version</span><span class="hl-4">}</span><span class="hl-1">`</span><span class="hl-0">);</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// 3. Get database information for &quot;orders&quot; =================================</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">dbName</span><span class="hl-0"> = </span><span class="hl-1">&#39;orders&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// call service with embedded parameters:</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">dbInfo</span><span class="hl-0"> = </span><span class="hl-3">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-8">getDatabaseInformation</span><span class="hl-0">({ </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">dbName</span><span class="hl-0"> });</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">documentCount</span><span class="hl-0"> = </span><span class="hl-2">dbInfo</span><span class="hl-0">.</span><span class="hl-2">result</span><span class="hl-0">.</span><span class="hl-2">doc_count</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">dbNameResult</span><span class="hl-0"> = </span><span class="hl-2">dbInfo</span><span class="hl-0">.</span><span class="hl-2">result</span><span class="hl-0">.</span><span class="hl-2">db_name</span><span class="hl-0">;</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// 4. Show document count in database =========================================</span><br/><span class="hl-0">  </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">    </span><span class="hl-1">`Document count in &quot;</span><span class="hl-4">${</span><span class="hl-2">dbNameResult</span><span class="hl-4">}</span><span class="hl-1">&quot; database is </span><span class="hl-4">${</span><span class="hl-2">documentCount</span><span class="hl-4">}</span><span class="hl-1">.`</span><br/><span class="hl-0">  );</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// 5. Get &quot;example&quot; document out of the database by document id ===================</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">getDocParams</span><span class="hl-0"> = { </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">dbName</span><span class="hl-0">, </span><span class="hl-2">docId:</span><span class="hl-0"> </span><span class="hl-1">&#39;example&#39;</span><span class="hl-0"> };</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// call service with predefined parameters:</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">documentExample</span><span class="hl-0"> = </span><span class="hl-3">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-8">getDocument</span><span class="hl-0">(</span><span class="hl-2">getDocParams</span><span class="hl-0">);</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// result object is defined as a Document here:</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> { </span><span class="hl-7">result</span><span class="hl-0"> } = </span><span class="hl-2">documentExample</span><span class="hl-0">;</span><br/><br/><span class="hl-0">  </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">    </span><span class="hl-1">`Document retrieved from database:</span><span class="hl-10">\n</span><span class="hl-4">${</span><span class="hl-7">JSON</span><span class="hl-11">.</span><span class="hl-8">stringify</span><span class="hl-11">(</span><span class="hl-2">result</span><span class="hl-11">, </span><span class="hl-4">null</span><span class="hl-11">, </span><span class="hl-9">2</span><span class="hl-11">)</span><span class="hl-4">}</span><span class="hl-1">`</span><br/><span class="hl-0">  );</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-3">if</span><span class="hl-0"> (</span><span class="hl-2">require</span><span class="hl-0">.</span><span class="hl-2">main</span><span class="hl-0"> === </span><span class="hl-5">module</span><span class="hl-0">) {</span><br/><span class="hl-0">  </span><span class="hl-8">getInfoFromExistingDatabase</span><span class="hl-0">();</span><br/><span class="hl-0">}</span>
+</code></pre>
+</details>
+
+
+</details>
+When you run the code, you see a result similar to the following output.
+
+<pre><code class="language-txt">Server version 2.1.1
+Document count in &quot;orders&quot; database is 1.
+Document retrieved from database:
+{
+  &quot;_id&quot;: &quot;example&quot;,
+  &quot;_rev&quot;: &quot;1-1b403633540686aa32d013fda9041a5d&quot;,
+  &quot;name&quot;: &quot;Bob Smith&quot;,
+  &quot;joined&quot;: &quot;2019-01-24T10:42:59.000Z&quot;
+}
+</code></pre>
+
+<a href="#3-update-your-previously-created-document" id="3-update-your-previously-created-document" style="color: inherit; text-decoration: none;">
+  <h4>3. Update your previously created document</h4>
+</a>
+<p><strong>Note</strong>: This example code assumes that you have created both the <code>orders</code>
+database and the <code>example</code> document by
+<a href="#1-create-a-database-and-add-a-document">running the previous example code</a>
+successfully. Otherwise, the following error message occurs, &quot;Cannot update document because either &#39;orders&#39;
+database or &#39;example&#39; document was not found.&quot;</p>
+<details>
+<summary>Update code example</summary>
+
+<details open>
+<summary>TypeScript:</summary>
+
+<pre><code class="language-ts"><span class="hl-3">import</span><span class="hl-0"> {</span><span class="hl-2">CloudantV1</span><span class="hl-0">} </span><span class="hl-3">from</span><span class="hl-0"> </span><span class="hl-1">&quot;@ibm-cloud/cloudant&quot;</span><span class="hl-0">;</span>
+</code></pre>
+<pre><code class="language-ts"><span class="hl-4">interface</span><span class="hl-0"> </span><span class="hl-5">OrderDocument</span><span class="hl-0"> </span><span class="hl-4">extends</span><span class="hl-0"> </span><span class="hl-5">CloudantV1</span><span class="hl-0">.</span><span class="hl-5">Document</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-2">address</span><span class="hl-0">?: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">joined</span><span class="hl-0">?: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">_id</span><span class="hl-0">?: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">_rev</span><span class="hl-0">?: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">}</span><br/><br/><span class="hl-6">// 1. Create a client with `CLOUDANT` default service name ======================</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">client</span><span class="hl-0"> = </span><span class="hl-2">CloudantV1</span><span class="hl-0">.</span><span class="hl-8">newInstance</span><span class="hl-0">({});</span><br/><span class="hl-6">// 2. Update the document =======================================================</span><br/><span class="hl-6">// Set the options to get the document out of the database if it exists</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">exampleDbName</span><span class="hl-0"> = </span><span class="hl-1">&#39;orders&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-6">// Try to get the document if it previously existed in the database</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">getDocParams</span><span class="hl-0">: </span><span class="hl-5">CloudantV1</span><span class="hl-0">.</span><span class="hl-5">GetDocumentParams</span><span class="hl-0"> = {</span><br/><span class="hl-0">  </span><span class="hl-2">docId:</span><span class="hl-0"> </span><span class="hl-1">&#39;example&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">exampleDbName</span><span class="hl-0">,</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-6">// ==============================================================================</span><br/><span class="hl-6">// Note : for response byte stream use:</span><br/><span class="hl-6">/*</span><br/><span class="hl-6">const getdocAsStreamParam: CloudantV1.GetDocumentAsStreamParams = {</span><br/><span class="hl-6">  docId: &#39;example&#39;,</span><br/><span class="hl-6">  db: exampleDbName,</span><br/><span class="hl-6">};</span><br/><span class="hl-6">client</span><br/><span class="hl-6">  .getDocumentAsStream(getdocAsStreamParam)</span><br/><span class="hl-6">  .then((documentAsByteStream) =&gt; {...});</span><br/><span class="hl-6">*/</span><br/><span class="hl-6">// ==============================================================================</span><br/><br/><span class="hl-2">client</span><br/><span class="hl-0">  .</span><span class="hl-8">getDocument</span><span class="hl-0">(</span><span class="hl-2">getDocParams</span><span class="hl-0">)</span><br/><span class="hl-0">  .</span><span class="hl-8">then</span><span class="hl-0">((</span><span class="hl-2">docResult</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-6">// using OrderDocument on getDocument result:</span><br/><span class="hl-0">    </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">document</span><span class="hl-0">: </span><span class="hl-5">OrderDocument</span><span class="hl-0"> = </span><span class="hl-2">docResult</span><span class="hl-0">.</span><span class="hl-2">result</span><span class="hl-0">;</span><br/><br/><span class="hl-0">    </span><span class="hl-6">// Add Bob Smith&#39;s address to the document</span><br/><span class="hl-0">    </span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-2">address</span><span class="hl-0"> = </span><span class="hl-1">&#39;19 Front Street, Darlington, DL5 1TY&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-0">    </span><span class="hl-6">// Remove the joined property from document object</span><br/><span class="hl-0">    </span><span class="hl-4">delete</span><span class="hl-0"> </span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-2">joined</span><span class="hl-0">;</span><br/><br/><span class="hl-0">    </span><span class="hl-6">// Update the document in the database</span><br/><span class="hl-0">    </span><span class="hl-2">client</span><br/><span class="hl-0">      .</span><span class="hl-8">postDocument</span><span class="hl-0">({ </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">exampleDbName</span><span class="hl-0">, </span><span class="hl-2">document</span><span class="hl-0"> })</span><br/><span class="hl-0">      </span><span class="hl-6">// ========================================================================</span><br/><span class="hl-0">      </span><span class="hl-6">// Note 1: for request byte stream use:</span><br/><span class="hl-0">      </span><span class="hl-6">// .postDocument(</span><br/><span class="hl-0">      </span><span class="hl-6">//   {db: exampleDbName, document: documentAsByteStream}</span><br/><span class="hl-0">      </span><span class="hl-6">// )</span><br/><span class="hl-0">      </span><span class="hl-6">// ========================================================================</span><br/><br/><span class="hl-0">      </span><span class="hl-6">// ========================================================================</span><br/><span class="hl-0">      </span><span class="hl-6">// Note 2: updating the document can also be done with the &quot;putDocument&quot; function.</span><br/><span class="hl-0">      </span><span class="hl-6">// `docId` and `rev` are required for an UPDATE operation,</span><br/><span class="hl-0">      </span><span class="hl-6">// but `rev` can be provided in the document object as `_rev` too:</span><br/><span class="hl-0">      </span><span class="hl-6">/*</span><br/><span class="hl-6">      .putDocument({</span><br/><span class="hl-6">        db: exampleDbName,</span><br/><span class="hl-6">        docId: document._id, // docId is a required parameter</span><br/><span class="hl-6">        rev: document._rev,</span><br/><span class="hl-6">        document, // _rev in the document object CAN replace above `rev` parameter</span><br/><span class="hl-6">      })</span><br/><span class="hl-6">      */</span><br/><span class="hl-0">      </span><span class="hl-6">// ========================================================================</span><br/><span class="hl-0">      .</span><span class="hl-8">then</span><span class="hl-0">((</span><span class="hl-2">res</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-6">// Keeping track of the latest revision number of the document object</span><br/><span class="hl-0">        </span><span class="hl-6">// is necessary for further UPDATE/DELETE operations:</span><br/><span class="hl-0">        </span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-2">_rev</span><span class="hl-0"> = </span><span class="hl-2">res</span><span class="hl-0">.</span><span class="hl-2">result</span><span class="hl-0">.</span><span class="hl-2">rev</span><span class="hl-0">;</span><br/><span class="hl-0">        </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">          </span><span class="hl-1">`You have updated the document:</span><span class="hl-10">\n</span><span class="hl-4">${</span><span class="hl-7">JSON</span><span class="hl-11">.</span><span class="hl-8">stringify</span><span class="hl-11">(</span><span class="hl-2">document</span><span class="hl-11">, </span><span class="hl-4">null</span><span class="hl-11">, </span><span class="hl-9">2</span><span class="hl-11">)</span><span class="hl-4">}</span><span class="hl-1">`</span><br/><span class="hl-0">        );</span><br/><span class="hl-0">      });</span><br/><span class="hl-0">  })</span><br/><span class="hl-0">  .</span><span class="hl-8">catch</span><span class="hl-0">((</span><span class="hl-2">err</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-3">if</span><span class="hl-0"> (</span><span class="hl-2">err</span><span class="hl-0">.</span><span class="hl-2">code</span><span class="hl-0"> === </span><span class="hl-9">404</span><span class="hl-0">) {</span><br/><span class="hl-0">      </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">        </span><span class="hl-1">`Cannot update document because either &quot;</span><span class="hl-4">${</span><span class="hl-2">exampleDbName</span><span class="hl-4">}</span><span class="hl-1">&quot; database or the &quot;example&quot; `</span><span class="hl-0"> +</span><br/><span class="hl-0">          </span><span class="hl-1">`document was not found.`</span><br/><span class="hl-0">      );</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">  });</span>
+</code></pre>
+</details>
+
+<details>
+<summary>JavaScript:</summary>
+
+<pre><code class="language-js"><span class="hl-4">const</span><span class="hl-0"> { </span><span class="hl-7">CloudantV1</span><span class="hl-0"> } = </span><span class="hl-8">require</span><span class="hl-0">(</span><span class="hl-1">&#39;@ibm-cloud/cloudant&#39;</span><span class="hl-0">);</span>
+</code></pre>
+<p><a href="#" title="test/examples/src/ts/CreateDbAndDoc.ts /interface/ $">embedmd</a>:# (test/examples/src/js/UpdateDoc.js /const updateDoc/ /updateDoc();\n}/)</p>
+<pre><code class="language-js"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-8">updateDoc</span><span class="hl-0"> = </span><span class="hl-4">async</span><span class="hl-0"> () </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-6">// 1. Create a client with `CLOUDANT` default service name ====================</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">client</span><span class="hl-0"> = </span><span class="hl-2">CloudantV1</span><span class="hl-0">.</span><span class="hl-8">newInstance</span><span class="hl-0">({});</span><br/><span class="hl-0">  </span><span class="hl-6">// 2. Update the document =====================================================</span><br/><span class="hl-0">  </span><span class="hl-6">// Set the options to get the document out of the database if it exists</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">exampleDbName</span><span class="hl-0"> = </span><span class="hl-1">&#39;orders&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// Try to get the document if it previously existed in the database</span><br/><span class="hl-0">  </span><span class="hl-3">try</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-8">document</span><span class="hl-0"> = (</span><br/><span class="hl-0">      </span><span class="hl-3">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-8">getDocument</span><span class="hl-0">({</span><br/><span class="hl-0">        </span><span class="hl-2">docId:</span><span class="hl-0"> </span><span class="hl-1">&#39;example&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">exampleDbName</span><span class="hl-0">,</span><br/><span class="hl-0">      })</span><br/><span class="hl-0">    ).</span><span class="hl-2">result</span><span class="hl-0">;</span><br/><br/><span class="hl-0">    </span><span class="hl-6">// ==========================================================================</span><br/><span class="hl-0">    </span><span class="hl-6">// Note: for response byte stream use:</span><br/><span class="hl-0">    </span><span class="hl-6">/*</span><br/><span class="hl-6">    const documentAsByteStream = (</span><br/><span class="hl-6">      await client.getDocumentAsStream({</span><br/><span class="hl-6">        docId: &#39;example&#39;,</span><br/><span class="hl-6">        db: exampleDbName,</span><br/><span class="hl-6">      })</span><br/><span class="hl-6">    ).result;</span><br/><span class="hl-6">    */</span><br/><span class="hl-0">    </span><span class="hl-6">// ==========================================================================</span><br/><br/><span class="hl-0">    </span><span class="hl-6">// Add Bob Smith&#39;s address to the document</span><br/><span class="hl-0">    </span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-2">address</span><span class="hl-0"> = </span><span class="hl-1">&#39;19 Front Street, Darlington, DL5 1TY&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-0">    </span><span class="hl-6">// Remove the joined property from document object</span><br/><span class="hl-0">    </span><span class="hl-4">delete</span><span class="hl-0"> </span><span class="hl-2">document</span><span class="hl-0">[</span><span class="hl-1">&#39;joined&#39;</span><span class="hl-0">];</span><br/><br/><span class="hl-0">    </span><span class="hl-6">// Keeping track of the latest revision number of the document object</span><br/><span class="hl-0">    </span><span class="hl-6">// is necessary for further UPDATE/DELETE operations:</span><br/><span class="hl-0">    </span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-8">_rev</span><span class="hl-0"> = (</span><br/><span class="hl-0">      </span><span class="hl-3">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-8">postDocument</span><span class="hl-0">({</span><br/><span class="hl-0">        </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">exampleDbName</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-2">document</span><span class="hl-0">, </span><span class="hl-6">// _id and _rev MUST be inside the document object</span><br/><span class="hl-0">      })</span><br/><span class="hl-0">    ).</span><span class="hl-2">result</span><span class="hl-0">.</span><span class="hl-2">rev</span><span class="hl-0">;</span><br/><br/><span class="hl-0">    </span><span class="hl-6">// ==========================================================================</span><br/><span class="hl-0">    </span><span class="hl-6">// Note 1: for request byte stream use:</span><br/><span class="hl-0">    </span><span class="hl-6">/*</span><br/><span class="hl-6">    document._rev = (</span><br/><span class="hl-6">      await client.postDocument({</span><br/><span class="hl-6">        db: exampleDbName,</span><br/><span class="hl-6">        document: documentAsByteStream,</span><br/><span class="hl-6">      })</span><br/><span class="hl-6">    ).result.rev;</span><br/><span class="hl-6">     */</span><br/><span class="hl-0">    </span><span class="hl-6">// ==========================================================================</span><br/><br/><span class="hl-0">    </span><span class="hl-6">// ==========================================================================</span><br/><span class="hl-0">    </span><span class="hl-6">// Note 2: updating the document can also be done with the &quot;putDocument&quot; function.</span><br/><span class="hl-0">    </span><span class="hl-6">// `docId` and `rev` are required for an UPDATE operation,</span><br/><span class="hl-0">    </span><span class="hl-6">// but `rev` can be provided in the document object as `_rev` too:</span><br/><span class="hl-0">    </span><span class="hl-6">/*</span><br/><span class="hl-6">    document._rev = (</span><br/><span class="hl-6">      await client.putDocument({</span><br/><span class="hl-6">        db: exampleDbName,</span><br/><span class="hl-6">        docId: document._id, // docId is a required parameter</span><br/><span class="hl-6">        rev: document._rev,</span><br/><span class="hl-6">        document // _rev in the document object CAN replace above `rev` parameter</span><br/><span class="hl-6">      })</span><br/><span class="hl-6">    ).result.rev;</span><br/><span class="hl-6">    */</span><br/><span class="hl-0">    </span><span class="hl-6">// ==========================================================================</span><br/><br/><span class="hl-0">    </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">      </span><span class="hl-1">`You have updated the document:</span><span class="hl-10">\n</span><span class="hl-4">${</span><span class="hl-7">JSON</span><span class="hl-11">.</span><span class="hl-8">stringify</span><span class="hl-11">(</span><span class="hl-2">document</span><span class="hl-11">, </span><span class="hl-4">null</span><span class="hl-11">, </span><span class="hl-9">2</span><span class="hl-11">)</span><span class="hl-4">}</span><span class="hl-1">`</span><br/><span class="hl-0">    );</span><br/><span class="hl-0">  } </span><span class="hl-3">catch</span><span class="hl-0"> (</span><span class="hl-2">err</span><span class="hl-0">) {</span><br/><span class="hl-0">    </span><span class="hl-3">if</span><span class="hl-0"> (</span><span class="hl-2">err</span><span class="hl-0">.</span><span class="hl-2">code</span><span class="hl-0"> === </span><span class="hl-9">404</span><span class="hl-0">) {</span><br/><span class="hl-0">      </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">        </span><span class="hl-1">`Cannot update document because either &quot;</span><span class="hl-4">${</span><span class="hl-2">exampleDbName</span><span class="hl-4">}</span><span class="hl-1">&quot; database or the &quot;example&quot; `</span><span class="hl-0"> +</span><br/><span class="hl-0">          </span><span class="hl-1">`document was not found.`</span><br/><span class="hl-0">      );</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">  }</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-3">if</span><span class="hl-0"> (</span><span class="hl-2">require</span><span class="hl-0">.</span><span class="hl-2">main</span><span class="hl-0"> === </span><span class="hl-5">module</span><span class="hl-0">) {</span><br/><span class="hl-0">  </span><span class="hl-8">updateDoc</span><span class="hl-0">();</span><br/><span class="hl-0">}</span>
+</code></pre>
+</details>
+
+
+</details>
+When you run the code, you see a result similar to the following output.
+
+<pre><code class="language-txt">You have updated the document:
+{
+  &quot;_id&quot;: &quot;example&quot;,
+  &quot;_rev&quot;: &quot;2-4e2178e85cffb32d38ba4e451f6ca376&quot;,
+  &quot;name&quot;: &quot;Bob Smith&quot;,
+  &quot;address&quot;: &quot;19 Front Street, Darlington, DL5 1TY&quot;
+}
+</code></pre>
+
+<a href="#4-delete-your-previously-created-document" id="4-delete-your-previously-created-document" style="color: inherit; text-decoration: none;">
+  <h4>4. Delete your previously created document</h4>
+</a>
+<p><strong>Note</strong>: This example code assumes that you have created both the <code>orders</code>
+database and the <code>example</code> document by
+<a href="#1-create-a-database-and-add-a-document">running the previous example code</a>
+successfully. Otherwise, the following error message occurs, &quot;Cannot delete document because either &#39;orders&#39;
+database or &#39;example&#39; document was not found.&quot;</p>
+<details>
+<summary>Delete code example</summary>
+
+<details open>
+<summary>TypeScript:</summary>
+
+<pre><code class="language-ts"><span class="hl-3">import</span><span class="hl-0"> {</span><span class="hl-2">CloudantV1</span><span class="hl-0">} </span><span class="hl-3">from</span><span class="hl-0"> </span><span class="hl-1">&quot;@ibm-cloud/cloudant&quot;</span><span class="hl-0">;</span>
+</code></pre>
+<pre><code class="language-ts"><span class="hl-4">interface</span><span class="hl-0"> </span><span class="hl-5">OrderDocument</span><span class="hl-0"> </span><span class="hl-4">extends</span><span class="hl-0"> </span><span class="hl-5">CloudantV1</span><span class="hl-0">.</span><span class="hl-5">Document</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-2">name</span><span class="hl-0">?: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">address</span><span class="hl-0">?: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">joined</span><span class="hl-0">?: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">_id</span><span class="hl-0">?: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">_rev</span><span class="hl-0">?: </span><span class="hl-5">string</span><span class="hl-0">;</span><br/><span class="hl-0">}</span><br/><br/><span class="hl-6">// 1. Create a client with `CLOUDANT` default service name ======================</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">client</span><span class="hl-0"> = </span><span class="hl-2">CloudantV1</span><span class="hl-0">.</span><span class="hl-8">newInstance</span><span class="hl-0">({});</span><br/><br/><span class="hl-6">// 2. Delete the document =======================================================</span><br/><span class="hl-6">// Set the options to get the document out of the database if it exists</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">exampleDbName</span><span class="hl-0"> = </span><span class="hl-1">&#39;orders&#39;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">exampleDocId</span><span class="hl-0"> = </span><span class="hl-1">&#39;example&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-6">// Try to get the document if it previously existed in the database</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">getDocParams</span><span class="hl-0">: </span><span class="hl-5">CloudantV1</span><span class="hl-0">.</span><span class="hl-5">GetDocumentParams</span><span class="hl-0"> = {</span><br/><span class="hl-0">  </span><span class="hl-2">docId:</span><span class="hl-0"> </span><span class="hl-2">exampleDocId</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">exampleDbName</span><span class="hl-0">,</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-2">client</span><br/><span class="hl-0">  .</span><span class="hl-8">getDocument</span><span class="hl-0">(</span><span class="hl-2">getDocParams</span><span class="hl-0">)</span><br/><span class="hl-0">  .</span><span class="hl-8">then</span><span class="hl-0">((</span><span class="hl-2">docResult</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">document</span><span class="hl-0">: </span><span class="hl-5">OrderDocument</span><span class="hl-0"> = </span><span class="hl-2">docResult</span><span class="hl-0">.</span><span class="hl-2">result</span><span class="hl-0">;</span><br/><br/><span class="hl-0">    </span><span class="hl-2">client</span><br/><span class="hl-0">      .</span><span class="hl-8">deleteDocument</span><span class="hl-0">({</span><br/><span class="hl-0">        </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">exampleDbName</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-2">docId:</span><span class="hl-0"> </span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-2">_id</span><span class="hl-0">, </span><span class="hl-6">// `docId` is required for DELETE</span><br/><span class="hl-0">        </span><span class="hl-2">rev:</span><span class="hl-0"> </span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-2">_rev</span><span class="hl-0">, </span><span class="hl-6">// `rev` is required for DELETE</span><br/><span class="hl-0">      })</span><br/><span class="hl-0">      .</span><span class="hl-8">then</span><span class="hl-0">(() </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><span class="hl-1">&#39;You have deleted the document.&#39;</span><span class="hl-0">);</span><br/><span class="hl-0">      });</span><br/><span class="hl-0">  })</span><br/><span class="hl-0">  .</span><span class="hl-8">catch</span><span class="hl-0">((</span><span class="hl-2">err</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-3">if</span><span class="hl-0"> (</span><span class="hl-2">err</span><span class="hl-0">.</span><span class="hl-2">code</span><span class="hl-0"> === </span><span class="hl-9">404</span><span class="hl-0">) {</span><br/><span class="hl-0">      </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">        </span><span class="hl-1">`Cannot delete document because either &quot;</span><span class="hl-4">${</span><span class="hl-2">exampleDbName</span><span class="hl-4">}</span><span class="hl-1">&quot; database or the &quot;example&quot; `</span><span class="hl-0"> +</span><br/><span class="hl-0">          </span><span class="hl-1">`document was not found.`</span><br/><span class="hl-0">      );</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">  });</span>
+</code></pre>
+</details>
+
+<details>
+<summary>JavaScript:</summary>
+
+<pre><code class="language-js"><span class="hl-4">const</span><span class="hl-0"> { </span><span class="hl-7">CloudantV1</span><span class="hl-0"> } = </span><span class="hl-8">require</span><span class="hl-0">(</span><span class="hl-1">&#39;@ibm-cloud/cloudant&#39;</span><span class="hl-0">);</span>
+</code></pre>
+<p><a href="#" title="test/examples/src/ts/CreateDbAndDoc.ts /interface/ $">embedmd</a>:# (test/examples/src/js/DeleteDoc.js /const deleteDoc/ /deleteDoc();\n}/)</p>
+<pre><code class="language-js"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-8">deleteDoc</span><span class="hl-0"> = </span><span class="hl-4">async</span><span class="hl-0"> () </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-6">// 1. Create a client with `CLOUDANT` default service name ====================</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">client</span><span class="hl-0"> = </span><span class="hl-2">CloudantV1</span><span class="hl-0">.</span><span class="hl-8">newInstance</span><span class="hl-0">({});</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// 2. Delete the document =====================================================</span><br/><span class="hl-0">  </span><span class="hl-6">// Set the options to get the document out of the database if it exists</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">exampleDbName</span><span class="hl-0"> = </span><span class="hl-1">&#39;orders&#39;</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-7">exampleDocId</span><span class="hl-0"> = </span><span class="hl-1">&#39;example&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-0">  </span><span class="hl-6">// Try to get the document if it previously existed in the database</span><br/><span class="hl-0">  </span><span class="hl-3">try</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-8">document</span><span class="hl-0"> = (</span><br/><span class="hl-0">      </span><span class="hl-3">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-8">getDocument</span><span class="hl-0">({</span><br/><span class="hl-0">        </span><span class="hl-2">docId:</span><span class="hl-0"> </span><span class="hl-2">exampleDocId</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">exampleDbName</span><span class="hl-0">,</span><br/><span class="hl-0">      })</span><br/><span class="hl-0">    ).</span><span class="hl-2">result</span><span class="hl-0">;</span><br/><br/><span class="hl-0">    </span><span class="hl-3">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-8">deleteDocument</span><span class="hl-0">({</span><br/><span class="hl-0">      </span><span class="hl-2">db:</span><span class="hl-0"> </span><span class="hl-2">exampleDbName</span><span class="hl-0">,</span><br/><span class="hl-0">      </span><span class="hl-2">docId:</span><span class="hl-0"> </span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-2">_id</span><span class="hl-0">, </span><span class="hl-6">// `docId` is required for DELETE</span><br/><span class="hl-0">      </span><span class="hl-2">rev:</span><span class="hl-0"> </span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-2">_rev</span><span class="hl-0">, </span><span class="hl-6">// `rev` is required for DELETE</span><br/><span class="hl-0">    });</span><br/><span class="hl-0">    </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><span class="hl-1">&#39;You have deleted the document.&#39;</span><span class="hl-0">);</span><br/><span class="hl-0">  } </span><span class="hl-3">catch</span><span class="hl-0"> (</span><span class="hl-2">err</span><span class="hl-0">) {</span><br/><span class="hl-0">    </span><span class="hl-3">if</span><span class="hl-0"> (</span><span class="hl-2">err</span><span class="hl-0">.</span><span class="hl-2">code</span><span class="hl-0"> === </span><span class="hl-9">404</span><span class="hl-0">) {</span><br/><span class="hl-0">      </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><br/><span class="hl-0">        </span><span class="hl-1">`Cannot delete document because either &quot;</span><span class="hl-4">${</span><span class="hl-2">exampleDbName</span><span class="hl-4">}</span><span class="hl-1">&quot; database or the &quot;example&quot; `</span><span class="hl-0"> +</span><br/><span class="hl-0">          </span><span class="hl-1">`document was not found.`</span><br/><span class="hl-0">      );</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">  }</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-3">if</span><span class="hl-0"> (</span><span class="hl-2">require</span><span class="hl-0">.</span><span class="hl-2">main</span><span class="hl-0"> === </span><span class="hl-5">module</span><span class="hl-0">) {</span><br/><span class="hl-0">  </span><span class="hl-8">deleteDoc</span><span class="hl-0">();</span><br/><span class="hl-0">}</span>
+</code></pre>
+</details>
+
+
+</details>
+When you run the code, you see the following output.
+
+<pre><code class="language-txt">You have deleted the document.
+</code></pre>
+
+<a href="#further-code-examples" id="further-code-examples" style="color: inherit; text-decoration: none;">
+  <h4>Further code examples</h4>
+</a>
+<p>For a complete list of code examples, see the <a href="examples#examples-for-node">examples directory</a>.</p>
+
+<a href="#error-handling" id="error-handling" style="color: inherit; text-decoration: none;">
+  <h3>Error handling</h3>
+</a>
+<p>For sample code on handling errors, see
+<a href="https://cloud.ibm.com/apidocs/cloudant?code=node#error-handling">Cloudant API docs</a>.</p>
+
+<a href="#raw-io" id="raw-io" style="color: inherit; text-decoration: none;">
+  <h3>Raw IO</h3>
+</a>
+<p>For endpoints that read or write document content it is possible to bypass
+usage of the built-in interface with byte streams.</p>
+<p>Depending on the specific SDK operation it may be possible to:</p>
+<ul>
+<li>accept a user-provided byte stream to send to the server as a request body</li>
+<li>return a byte stream of the server response body to the user</li>
+</ul>
+<p>Request byte stream can be supplied for <code>NodeJS.ReadableStream</code> or <code>Buffer</code> type parameters
+.
+For these cases you can pass this byte stream directly to the HTTP request body.</p>
+<p>Response byte stream is supported in functions with the suffix of <code>AsStream</code>.
+The returned byte stream allows the response body to be consumed
+without triggering JSON unmarshalling that is typically performed by the SDK.</p>
+<p>The <a href="#3-update-your-previously-created-document">update document</a> section
+contains examples for both request and response byte stream cases.</p>
+<p>The API reference contains further examples of using byte streams.
+They are titled &quot;Example request as stream&quot; and are initially collapsed.
+Expand them to see examples of:</p>
+<ul>
+<li><p>Byte requests:</p>
+<ul>
+<li><a href="https://cloud.ibm.com/apidocs/cloudant?code=node#postbulkdocs">Bulk modify multiple documents in a database</a></li>
+</ul>
+</li>
+<li><p>Byte responses:</p>
+<ul>
+<li><a href="https://cloud.ibm.com/apidocs/cloudant?code=node#postalldocs">Query a list of all documents in a database</a></li>
+<li><a href="https://cloud.ibm.com/apidocs/cloudant?code=node#postchanges">Query the database document changes feed</a></li>
+</ul>
+</li>
+</ul>
+
+<a href="#further-resources" id="further-resources" style="color: inherit; text-decoration: none;">
+  <h3>Further resources</h3>
+</a>
+<ul>
+<li><a href="https://cloud.ibm.com/apidocs/cloudant?code=node">Cloudant API docs</a>:
+API reference including usage examples for Cloudant Node.js SDK API.</li>
+<li><a href="https://ibm.github.io/cloudant-node-sdk/">TypeDoc</a>:
+Cloudant Node.js SDK API Documentation.</li>
+<li><a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-getting-started-with-cloudant">Cloudant docs</a>:
+The official documentation page for Cloudant.</li>
+<li><a href="https://blog.cloudant.com/">Cloudant blog</a>:
+Many useful articles about how to optimize Cloudant for common problems.</li>
+</ul>
+
+<a href="#questions" id="questions" style="color: inherit; text-decoration: none;">
+  <h2>Questions</h2>
+</a>
+<p>If you are having difficulties using this SDK or have a question about the
+IBM Cloud services, ask a question on
+<a href="http://stackoverflow.com/questions/ask?tags=ibm-cloud">Stack Overflow</a>.</p>
+
+<a href="#issues" id="issues" style="color: inherit; text-decoration: none;">
+  <h2>Issues</h2>
+</a>
+<p>If you encounter an issue with the project, you are welcome to submit a
+<a href="https://github.com/IBM/cloudant-node-sdk/issues">bug report</a>.</p>
+<p>Before you submit a bug report, search for
+<a href="https://github.com/IBM/cloudant-node-sdk/issues?q=is%3Aissue">similar issues</a> and review the
+<a href="KNOWN_ISSUES.md">KNOWN_ISSUES file</a> to verify that your issue hasn&#39;t been reported yet.</p>
+<p>Please consult the <a href="https://github.com/IBM/cloudant-node-sdk/security/policy">security policy</a> before opening security related issues.</p>
+
+<a href="#open-source-at-ibm" id="open-source-at-ibm" style="color: inherit; text-decoration: none;">
+  <h2>Open source at IBM</h2>
+</a>
+<p>Find more open source projects on the <a href="http://ibm.github.io/">IBM GitHub</a> page.</p>
+
+<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+  <h2>Contributing</h2>
+</a>
+<p>For more information, see <a href="CONTRIBUTING.md">CONTRIBUTING</a>.</p>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h2>License</h2>
+</a>
+<p>This SDK is released under the Apache 2.0 license. To read the full text of the license, see <a href="LICENSE">LICENSE</a>.</p>
+</div></div>
+<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+<div class="tsd-navigation settings">
+<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility">
+<h4 class="uppercase">Member Visibility</h4><form>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></form></div>
+<div class="tsd-theme-toggle">
+<h4 class="uppercase">Theme</h4><select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<nav class="tsd-navigation primary">
+<details class="tsd-index-accordion" open><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
+<div class="tsd-accordion-details">
+<ul>
+<li class="current selected"><a href="modules.html">@ibm-<wbr/>cloud/cloudant -<wbr/> v0.4.1</a>
+<ul>
+<li class="tsd-kind-module"><a href="modules/auth.html">auth</a></li>
+<li class="tsd-kind-module"><a href="modules/auth_couchdbSessionAuthenticator.html">auth/couchdb<wbr/>Session<wbr/>Authenticator</a></li>
+<li class="tsd-kind-module"><a href="modules/auth_sessionTokenManager.html">auth/session<wbr/>Token<wbr/>Manager</a></li>
+<li class="tsd-kind-module"><a href="modules/cloudant_v1.html">cloudant/v1</a>
+<ul>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/cloudant_v1.export_.html">export=</a>
+<ul>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.DeleteAttachmentConstants.html">Delete<wbr/>Attachment<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.DeleteDesignDocumentConstants.html">Delete<wbr/>Design<wbr/>Document<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.DeleteDocumentConstants.html">Delete<wbr/>Document<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.DeleteIndexConstants.html">Delete<wbr/>Index<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.DeleteLocalDocumentConstants.html">Delete<wbr/>Local<wbr/>Document<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.DeleteReplicationDocumentConstants.html">Delete<wbr/>Replication<wbr/>Document<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.GetDbUpdatesConstants.html">Get<wbr/>Db<wbr/>Updates<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.GetLocalDocumentConstants.html">Get<wbr/>Local<wbr/>Document<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.GetSchedulerDocsConstants.html">Get<wbr/>Scheduler<wbr/>Docs<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostActivityTrackerEventsConstants.html">Post<wbr/>Activity<wbr/>Tracker<wbr/>Events<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostChangesAsStreamConstants.html">Post<wbr/>Changes<wbr/>As<wbr/>Stream<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostChangesConstants.html">Post<wbr/>Changes<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostDesignDocsConstants.html">Post<wbr/>Design<wbr/>Docs<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostDesignDocsQueriesConstants.html">Post<wbr/>Design<wbr/>Docs<wbr/>Queries<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostDocumentConstants.html">Post<wbr/>Document<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostExplainConstants.html">Post<wbr/>Explain<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostFindAsStreamConstants.html">Post<wbr/>Find<wbr/>As<wbr/>Stream<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostFindConstants.html">Post<wbr/>Find<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostIndexConstants.html">Post<wbr/>Index<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostPartitionFindAsStreamConstants.html">Post<wbr/>Partition<wbr/>Find<wbr/>As<wbr/>Stream<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostPartitionFindConstants.html">Post<wbr/>Partition<wbr/>Find<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostPartitionSearchAsStreamConstants.html">Post<wbr/>Partition<wbr/>Search<wbr/>As<wbr/>Stream<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostPartitionSearchConstants.html">Post<wbr/>Partition<wbr/>Search<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostPartitionViewAsStreamConstants.html">Post<wbr/>Partition<wbr/>View<wbr/>As<wbr/>Stream<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostPartitionViewConstants.html">Post<wbr/>Partition<wbr/>View<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostSearchAnalyzeConstants.html">Post<wbr/>Search<wbr/>Analyze<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostSearchAsStreamConstants.html">Post<wbr/>Search<wbr/>As<wbr/>Stream<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostSearchConstants.html">Post<wbr/>Search<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostViewAsStreamConstants.html">Post<wbr/>View<wbr/>As<wbr/>Stream<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PostViewConstants.html">Post<wbr/>View<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PutCloudantSecurityConfigurationConstants.html">Put<wbr/>Cloudant<wbr/>Security<wbr/>Configuration<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PutDesignDocumentConstants.html">Put<wbr/>Design<wbr/>Document<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PutDocumentConstants.html">Put<wbr/>Document<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PutLocalDocumentConstants.html">Put<wbr/>Local<wbr/>Document<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PutReplicationDocumentConstants.html">Put<wbr/>Replication<wbr/>Document<wbr/>Constants</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="modules/cloudant_v1.export_.PutSecurityConstants.html">Put<wbr/>Security<wbr/>Constants</a></li></ul></li></ul></li></ul></li></ul></div></details></nav></div></div>
+<div class="container tsd-generator">
+<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
+<div class="overlay"></div><script src="assets/main.js"></script></body></html>
