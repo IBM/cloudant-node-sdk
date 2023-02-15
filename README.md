@@ -524,7 +524,7 @@ When you run the code, you see a result similar to the following output.
 
 [embedmd]:# (test/examples/output/GetInfoFromExistingDatabase.txt)
 ```txt
-Server version 2.1.1
+Server version 3.2.1
 Document count in "orders" database is 1.
 Document retrieved from database:
 {
