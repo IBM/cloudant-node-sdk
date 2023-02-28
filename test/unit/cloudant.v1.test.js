@@ -5217,7 +5217,6 @@ describe('CloudantV1', () => {
         const key = 'testString';
         const keys = ['testString'];
         const reduce = true;
-        const stable = false;
         const startKey = 'testString';
         const startKeyDocId = 'testString';
         const update = 'true';
@@ -5242,7 +5241,6 @@ describe('CloudantV1', () => {
           key,
           keys,
           reduce,
-          stable,
           startKey,
           startKeyDocId,
           update,
@@ -5278,7 +5276,6 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.key).toEqual(key);
         expect(mockRequestOptions.body.keys).toEqual(keys);
         expect(mockRequestOptions.body.reduce).toEqual(reduce);
-        expect(mockRequestOptions.body.stable).toEqual(stable);
         expect(mockRequestOptions.body.start_key).toEqual(startKey);
         expect(mockRequestOptions.body.start_key_doc_id).toEqual(startKeyDocId);
         expect(mockRequestOptions.body.update).toEqual(update);
@@ -5376,7 +5373,6 @@ describe('CloudantV1', () => {
         const key = 'testString';
         const keys = ['testString'];
         const reduce = true;
-        const stable = false;
         const startKey = 'testString';
         const startKeyDocId = 'testString';
         const update = 'true';
@@ -5401,7 +5397,6 @@ describe('CloudantV1', () => {
           key,
           keys,
           reduce,
-          stable,
           startKey,
           startKeyDocId,
           update,
@@ -5437,7 +5432,6 @@ describe('CloudantV1', () => {
         expect(mockRequestOptions.body.key).toEqual(key);
         expect(mockRequestOptions.body.keys).toEqual(keys);
         expect(mockRequestOptions.body.reduce).toEqual(reduce);
-        expect(mockRequestOptions.body.stable).toEqual(stable);
         expect(mockRequestOptions.body.start_key).toEqual(startKey);
         expect(mockRequestOptions.body.start_key_doc_id).toEqual(startKeyDocId);
         expect(mockRequestOptions.body.update).toEqual(update);
