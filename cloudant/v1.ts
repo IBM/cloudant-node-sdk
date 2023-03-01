@@ -3817,13 +3817,6 @@ class CloudantV1 extends CloudantBaseService {
    * A JSON array of keys that match the key type emitted by the view function.
    * @param {boolean} [params.reduce] - Parameter to specify whether to use the reduce function in a map-reduce view.
    * Default is true when a reduce function is defined.
-   * @param {boolean} [params.stable] - Query parameter to specify whether use the same replica of  the index on each
-   * request. The default value `false` contacts all  replicas and returns the result from the first, fastest,
-   * responder. Setting it to `true` when used in conjunction with `update=false`  may improve consistency at the
-   * expense of increased latency and decreased throughput if the selected replica is not the fastest of the available
-   * replicas.
-   *
-   * **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
    * @param {any} [params.startKey] - Schema for any JSON type.
    * @param {string} [params.startKeyDocId] - Schema for a document ID.
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
@@ -3840,7 +3833,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ViewResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
-    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startKey', 'startKeyDocId', 'update', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'startKey', 'startKeyDocId', 'update', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3863,7 +3856,6 @@ class CloudantV1 extends CloudantBaseService {
       'key': _params.key,
       'keys': _params.keys,
       'reduce': _params.reduce,
-      'stable': _params.stable,
       'start_key': _params.startKey,
       'start_key_doc_id': _params.startKeyDocId,
       'update': _params.update,
@@ -3948,13 +3940,6 @@ class CloudantV1 extends CloudantBaseService {
    * A JSON array of keys that match the key type emitted by the view function.
    * @param {boolean} [params.reduce] - Parameter to specify whether to use the reduce function in a map-reduce view.
    * Default is true when a reduce function is defined.
-   * @param {boolean} [params.stable] - Query parameter to specify whether use the same replica of  the index on each
-   * request. The default value `false` contacts all  replicas and returns the result from the first, fastest,
-   * responder. Setting it to `true` when used in conjunction with `update=false`  may improve consistency at the
-   * expense of increased latency and decreased throughput if the selected replica is not the fastest of the available
-   * replicas.
-   *
-   * **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
    * @param {any} [params.startKey] - Schema for any JSON type.
    * @param {string} [params.startKeyDocId] - Schema for a document ID.
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
@@ -3971,7 +3956,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
-    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startKey', 'startKeyDocId', 'update', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'startKey', 'startKeyDocId', 'update', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3994,7 +3979,6 @@ class CloudantV1 extends CloudantBaseService {
       'key': _params.key,
       'keys': _params.keys,
       'reduce': _params.reduce,
-      'stable': _params.stable,
       'start_key': _params.startKey,
       'start_key_doc_id': _params.startKeyDocId,
       'update': _params.update,
@@ -8839,14 +8823,6 @@ namespace CloudantV1 {
      *  function is defined.
      */
     reduce?: boolean;
-    /** Query parameter to specify whether use the same replica of  the index on each request. The default value
-     *  `false` contacts all  replicas and returns the result from the first, fastest, responder. Setting it to `true`
-     *  when used in conjunction with `update=false`  may improve consistency at the expense of increased latency and
-     *  decreased throughput if the selected replica is not the fastest of the available  replicas.
-     *
-     *  **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
-     */
-    stable?: boolean;
     /** Schema for any JSON type. */
     startKey?: any;
     /** Schema for a document ID. */
@@ -8931,14 +8907,6 @@ namespace CloudantV1 {
      *  function is defined.
      */
     reduce?: boolean;
-    /** Query parameter to specify whether use the same replica of  the index on each request. The default value
-     *  `false` contacts all  replicas and returns the result from the first, fastest, responder. Setting it to `true`
-     *  when used in conjunction with `update=false`  may improve consistency at the expense of increased latency and
-     *  decreased throughput if the selected replica is not the fastest of the available  replicas.
-     *
-     *  **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
-     */
-    stable?: boolean;
     /** Schema for any JSON type. */
     startKey?: any;
     /** Schema for a document ID. */
@@ -10272,28 +10240,90 @@ namespace CloudantV1 {
 
   /** Schema for information about a running task. */
   export interface ActiveTask {
-    /** Processed changes. */
+    /** The total count of attempted doc revisions fetched with `_bulk_get`. Available for `replication` type tasks. */
+    bulk_get_attempts?: number;
+    /** The total count of successful docs fetched with `_bulk_get`. Available for `replication` type tasks. */
+    bulk_get_docs?: number;
+    /** Processed changes. Available for `database_compaction`, `indexer`, `search_indexer`, `view_compaction` type
+     *  tasks.
+     */
     changes_done?: number;
+    /** The count of changes not yet replicated. Available for `replication` type tasks. */
+    changes_pending?: number;
+    /** Specifies the checkpoint interval in ms. Available for `replication` type tasks. */
+    checkpoint_interval?: number;
+    /** The source sequence id which was last successfully replicated. Available for `replication` type tasks. */
+    checkpointed_source_seq?: string;
+    /** The replication configured to be continuous. Available for `replication` type tasks. */
+    continuous?: boolean;
     /** Source database. */
     database: string;
+    /** The design document that belongs to this task. Available for `indexer`, `search_indexer`, `view_compaction`
+     *  type tasks.
+     */
+    design_document?: string;
+    /** Replication document ID. Available for `replication` type tasks. */
+    doc_id?: string;
+    /** Number of document write failures. Available for `replication` type tasks. */
+    doc_write_failures?: number;
+    /** Number of documents read. Available for `replication` type tasks. */
+    docs_read?: number;
+    /** Number of documents written to target. Available for `replication` type tasks. */
+    docs_written?: number;
+    /** The search index that belongs to this task. Available for `search_indexer` type tasks. */
+    index?: string;
+    /** Indexer process ID. Available for `indexer` type tasks. */
+    indexer_pid?: string;
+    /** The count of docs which have been read from the source. Available for `replication` type tasks. */
+    missing_revisions_found?: number;
     /** Cluster node where the task is running. */
     node: string;
+    /** The phase the active task is in. `docid_sort`, `docid_copy`, `document_copy` phases are available for
+     *  `database_compaction`, while `ids` and `view` phases are available for `view_compaction` type tasks.
+     */
+    phase?: string;
     /** Process ID. */
     pid: string;
-    /** Current percentage progress. */
+    /** Process status. */
+    process_status?: string;
+    /** Current percentage progress. Available for `database_compaction`, `indexer`, `search_indexer`,
+     *  `view_compaction` type tasks.
+     */
     progress?: number;
+    /** Replication ID. Available for `replication` type tasks. */
+    replication_id?: string;
+    /** Indicates whether a compaction retry is currently running on the database. Available for
+     *  `database_compaction` type tasks.
+     */
+    retry?: boolean;
+    /** The count of revisions which have been checked since this replication began. Available for `replication`
+     *  type tasks.
+     */
+    revisions_checked?: number;
+    /** Replication source. Available for `replication` type tasks. */
+    source?: string;
+    /** The last sequence number obtained from the source database changes feed. Available for `replication` type
+     *  tasks.
+     */
+    source_seq?: string;
     /** Schema for a Unix epoch timestamp. */
     started_on: number;
-    /** Task status message. */
-    status?: string;
-    /** Task name. */
-    task?: string;
-    /** Total changes to process. */
+    /** Replication target. Available for `replication` type tasks. */
+    target?: string;
+    /** The last sequence number processed by the replicator. Available for `replication` type tasks. */
+    through_seq?: string;
+    /** Total changes to process. Available for `database_compaction`, `indexer`, `search_indexer`,
+     *  `view_compaction` type tasks.
+     */
     total_changes?: number;
     /** Operation type. */
     type: string;
     /** Schema for a Unix epoch timestamp. */
     updated_on: number;
+    /** Name of user running replication or owning the indexer. Available for `indexer`, `replication` type tasks. */
+    user?: string;
+    /** Number of view indexes. Available for `view_compaction` type tasks. */
+    view?: number;
   }
 
   /** Schema for Activity Tracker events. */
