@@ -2,7 +2,9 @@
 
 pipeline {
   agent {
-    label 'sdks-executor'
+    kubernetes {
+      yaml kubePodTemplate(name: 'gauge.yaml')
+    }
   }
   parameters {
     validatingString( name: 'TARGET_VERSION',
@@ -47,10 +49,8 @@ pipeline {
                              passwordVariable: 'SERVER_PASSWORD')
             ]) {
               script {
-                docker.withRegistry(env.ARTIFACTORY_DOCKER_REGISTRY,'artifactory') {
                   sh './scripts/setup_couch.sh'
                   sh './scripts/setup_wiremock.sh'
-                }
               }
               runTests()
           }
