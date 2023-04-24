@@ -10804,6 +10804,8 @@ namespace CloudantV1 {
     sizes: ContentInformationSizes;
     /** Indicates if the view is currently being updated. */
     updater_running: boolean;
+    /** Schema for an ability to tell if view is up-to-date without querying it. */
+    updates_pending: UpdatesPending;
     /** Number of clients waiting on views from this design document. */
     waiting_clients: number;
     /** Indicates if there are outstanding commits to the underlying database that need to processed. */
@@ -11643,6 +11645,18 @@ namespace CloudantV1 {
     seeds: JsonObject;
     /** status. */
     status: string;
+  }
+
+  /** Schema for an ability to tell if view is up-to-date without querying it. */
+  export interface UpdatesPending {
+    /** Sum of shard copies with the least amount of work to do. */
+    minimum: number;
+    /** Sum of unique shards. This value is zero when at least one copy of every shard range is up-to-date and the
+     *  view is able to answer a query without index building delays.
+     */
+    preferred: number;
+    /** Sum of all shard copies. */
+    total: number;
   }
 
   /** Schema for the user context of a session. */
