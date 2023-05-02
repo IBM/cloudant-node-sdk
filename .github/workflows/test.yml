@@ -15,7 +15,7 @@ jobs:
   test:
     strategy:
       matrix:
-        node: ['16', '18', '19']
+        node: ['16', '18', '20']
     runs-on: ubuntu-latest
     services:
       couchdb:
