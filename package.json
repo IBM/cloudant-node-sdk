@@ -32,7 +32,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18"
+    "node": "^16 || ^18"
   },
   "dependencies": {
     "@types/node": "14.18.43",
