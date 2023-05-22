@@ -10920,17 +10920,19 @@ namespace CloudantV1 {
 
   /** Schema for information about the index used for a find query. */
   export interface ExplainResult {
-    /** dbname. */
+    /** When `true`, the query is answered using the index only and no documents are fetched. */
+    covered: boolean;
+    /** Name of database. */
     dbname: string;
-    /** fields. */
+    /** Fields to be returned by the query. */
     fields: string[];
     /** Schema for information about an index. */
     index: IndexInformation;
-    /** limit. */
+    /** The used maximum number of results returned. */
     limit: number;
-    /** opts. */
+    /** Query options used. */
     opts: JsonObject;
-    /** range. */
+    /** Range parameters passed to the underlying view. */
     range?: ExplainResultRange;
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
      *  provides an expression to evaluate with the field content or other data.
@@ -10962,15 +10964,15 @@ namespace CloudantV1 {
      *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
      */
     selector: JsonObject;
-    /** skip. */
+    /** Skip parameter used. */
     skip: number;
   }
 
-  /** range. */
+  /** Range parameters passed to the underlying view. */
   export interface ExplainResultRange {
-    /** end_key. */
+    /** End key parameter passed to the underlying view. */
     end_key?: any[];
-    /** start_key. */
+    /** Start key parameter passed to the underlying view. */
     start_key?: any[];
   }
 
