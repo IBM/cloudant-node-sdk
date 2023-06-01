@@ -42,7 +42,7 @@ describe('CloudantV1_integration', () => {
 
     const config = readExternalSources(CloudantV1.DEFAULT_SERVICE_NAME);
     expect(config).not.toBeNull();
-  
+
     cloudantService.enableRetries();
   });
 
@@ -108,7 +108,7 @@ describe('CloudantV1_integration', () => {
       db: 'testString',
       docIds: ['testString'],
       fields: ['testString'],
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       lastEventId: 'testString',
       attEncodingInfo: false,
       attachments: false,
@@ -137,7 +137,7 @@ describe('CloudantV1_integration', () => {
       db: 'testString',
       docIds: ['testString'],
       fields: ['testString'],
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       lastEventId: 'testString',
       attEncodingInfo: false,
       attachments: false,
@@ -364,7 +364,7 @@ describe('CloudantV1_integration', () => {
   test('postBulkDocs()', async () => {
     const params = {
       db: 'testString',
-      bulkDocs: {"docs": [{}]},
+      bulkDocs: {},
     };
 
     const res = await cloudantService.postBulkDocs(params);
@@ -1113,7 +1113,7 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       partitionKey: 'testString',
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
@@ -1136,7 +1136,7 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       partitionKey: 'testString',
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
@@ -1158,7 +1158,7 @@ describe('CloudantV1_integration', () => {
   test('postExplain()', async () => {
     const params = {
       db: 'testString',
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
@@ -1181,7 +1181,7 @@ describe('CloudantV1_integration', () => {
   test('postFind()', async () => {
     const params = {
       db: 'testString',
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
@@ -1204,7 +1204,7 @@ describe('CloudantV1_integration', () => {
   test('postFindAsStream()', async () => {
     const params = {
       db: 'testString',
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
@@ -1263,7 +1263,7 @@ describe('CloudantV1_integration', () => {
       default_field: indexTextOperatorDefaultFieldModel,
       fields: [indexFieldModel],
       index_array_lengths: true,
-      partial_filter_selector: { foo: 'bar' },
+      partial_filter_selector: { anyKey: 'anyValue' },
     };
 
     const params = {
@@ -1513,7 +1513,7 @@ describe('CloudantV1_integration', () => {
       http_connections: 20,
       query_params: { 'key1': 'testString' },
       retries_per_request: 5,
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       since_seq: 'testString',
       socket_options: 'testString',
       source: replicationDatabaseModel,
