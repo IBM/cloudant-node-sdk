@@ -92,8 +92,8 @@ describe('CloudantV1_integration', () => {
   test('getDbUpdates()', async () => {
     const params = {
       feed: 'normal',
-      heartbeat: 0,
-      timeout: 0,
+      heartbeat: 60000,
+      timeout: 60000,
       since: '0',
     };
 
@@ -108,7 +108,7 @@ describe('CloudantV1_integration', () => {
       db: 'testString',
       docIds: ['testString'],
       fields: ['testString'],
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       lastEventId: 'testString',
       attEncodingInfo: false,
       attachments: false,
@@ -116,13 +116,13 @@ describe('CloudantV1_integration', () => {
       descending: false,
       feed: 'normal',
       filter: 'testString',
-      heartbeat: 0,
+      heartbeat: 60000,
       includeDocs: false,
       limit: 0,
       seqInterval: 1,
       since: '0',
       style: 'main_only',
-      timeout: 0,
+      timeout: 60000,
       view: 'testString',
     };
 
@@ -137,7 +137,7 @@ describe('CloudantV1_integration', () => {
       db: 'testString',
       docIds: ['testString'],
       fields: ['testString'],
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       lastEventId: 'testString',
       attEncodingInfo: false,
       attachments: false,
@@ -145,13 +145,13 @@ describe('CloudantV1_integration', () => {
       descending: false,
       feed: 'normal',
       filter: 'testString',
-      heartbeat: 0,
+      heartbeat: 60000,
       includeDocs: false,
       limit: 0,
       seqInterval: 1,
       since: '0',
       style: 'main_only',
-      timeout: 0,
+      timeout: 60000,
       view: 'testString',
     };
 
@@ -1003,7 +1003,7 @@ describe('CloudantV1_integration', () => {
       highlightNumber: 1,
       highlightPostTag: '</em>',
       highlightPreTag: '<em>',
-      highlightSize: 1,
+      highlightSize: 100,
       includeDocs: false,
       includeFields: ['testString'],
       limit: 0,
@@ -1029,7 +1029,7 @@ describe('CloudantV1_integration', () => {
       highlightNumber: 1,
       highlightPostTag: '</em>',
       highlightPreTag: '<em>',
-      highlightSize: 1,
+      highlightSize: 100,
       includeDocs: false,
       includeFields: ['testString'],
       limit: 0,
@@ -1113,12 +1113,12 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       partitionKey: 'testString',
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
       fields: ['testString'],
-      limit: 0,
+      limit: 25,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
       stable: true,
@@ -1136,12 +1136,12 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       partitionKey: 'testString',
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
       fields: ['testString'],
-      limit: 0,
+      limit: 25,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
       stable: true,
@@ -1158,12 +1158,12 @@ describe('CloudantV1_integration', () => {
   test('postExplain()', async () => {
     const params = {
       db: 'testString',
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
       fields: ['testString'],
-      limit: 0,
+      limit: 25,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
       stable: true,
@@ -1181,12 +1181,12 @@ describe('CloudantV1_integration', () => {
   test('postFind()', async () => {
     const params = {
       db: 'testString',
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
       fields: ['testString'],
-      limit: 0,
+      limit: 25,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
       stable: true,
@@ -1204,12 +1204,12 @@ describe('CloudantV1_integration', () => {
   test('postFindAsStream()', async () => {
     const params = {
       db: 'testString',
-      selector: { foo: 'bar' },
+      selector: { anyKey: 'anyValue' },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
       fields: ['testString'],
-      limit: 0,
+      limit: 25,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
       stable: true,
@@ -1263,7 +1263,7 @@ describe('CloudantV1_integration', () => {
       default_field: indexTextOperatorDefaultFieldModel,
       fields: [indexFieldModel],
       index_array_lengths: true,
-      partial_filter_selector: { foo: 'bar' },
+      partial_filter_selector: { anyKey: 'anyValue' },
     };
 
     const params = {
@@ -1305,7 +1305,7 @@ describe('CloudantV1_integration', () => {
       highlightNumber: 1,
       highlightPostTag: '</em>',
       highlightPreTag: '<em>',
-      highlightSize: 1,
+      highlightSize: 100,
       includeDocs: false,
       includeFields: ['testString'],
       limit: 0,
@@ -1336,7 +1336,7 @@ describe('CloudantV1_integration', () => {
       highlightNumber: 1,
       highlightPostTag: '</em>',
       highlightPreTag: '<em>',
-      highlightSize: 1,
+      highlightSize: 100,
       includeDocs: false,
       includeFields: ['testString'],
       limit: 0,
@@ -1455,7 +1455,7 @@ describe('CloudantV1_integration', () => {
 
     // ReplicationCreateTargetParameters
     const replicationCreateTargetParametersModel = {
-      n: 1,
+      n: 3,
       partitioned: false,
       q: 26,
     };
@@ -1503,17 +1503,17 @@ describe('CloudantV1_integration', () => {
       _revisions: revisionsModel,
       _revs_info: [documentRevisionStatusModel],
       cancel: true,
-      checkpoint_interval: 0,
-      connection_timeout: 0,
+      checkpoint_interval: 30000,
+      connection_timeout: 30000,
       continuous: false,
       create_target: false,
       create_target_params: replicationCreateTargetParametersModel,
       doc_ids: ['testString'],
       filter: 'testString',
-      http_connections: 1,
+      http_connections: 20,
       query_params: { 'key1': 'testString' },
-      retries_per_request: 0,
-      selector: { foo: 'bar' },
+      retries_per_request: 5,
+      selector: { anyKey: 'anyValue' },
       since_seq: 'testString',
       socket_options: 'testString',
       source: replicationDatabaseModel,
@@ -1524,8 +1524,8 @@ describe('CloudantV1_integration', () => {
       use_checkpoints: true,
       user_ctx: userContextModel,
       winning_revs_only: false,
-      worker_batch_size: 1,
-      worker_processes: 1,
+      worker_batch_size: 500,
+      worker_processes: 4,
       foo: 'testString',
     };
 
@@ -1570,7 +1570,7 @@ describe('CloudantV1_integration', () => {
 
   test('getSchedulerJobs()', async () => {
     const params = {
-      limit: 0,
+      limit: 25,
       skip: 0,
     };
 

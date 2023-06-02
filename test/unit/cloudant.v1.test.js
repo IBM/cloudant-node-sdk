@@ -456,8 +456,8 @@ describe('CloudantV1', () => {
       function __getDbUpdatesTest() {
         // Construct the params object for operation getDbUpdates
         const feed = 'normal';
-        const heartbeat = 0;
-        const timeout = 0;
+        const heartbeat = 60000;
+        const timeout = 60000;
         const since = '0';
         const getDbUpdatesParams = {
           feed,
@@ -531,7 +531,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docIds = ['testString'];
         const fields = ['testString'];
-        const selector = { foo: 'bar' };
+        const selector = { anyKey: 'anyValue' };
         const lastEventId = 'testString';
         const attEncodingInfo = false;
         const attachments = false;
@@ -539,13 +539,13 @@ describe('CloudantV1', () => {
         const descending = false;
         const feed = 'normal';
         const filter = 'testString';
-        const heartbeat = 0;
+        const heartbeat = 60000;
         const includeDocs = false;
         const limit = 0;
         const seqInterval = 1;
         const since = '0';
         const style = 'main_only';
-        const timeout = 0;
+        const timeout = 60000;
         const view = 'testString';
         const postChangesParams = {
           db,
@@ -669,7 +669,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const docIds = ['testString'];
         const fields = ['testString'];
-        const selector = { foo: 'bar' };
+        const selector = { anyKey: 'anyValue' };
         const lastEventId = 'testString';
         const attEncodingInfo = false;
         const attachments = false;
@@ -677,13 +677,13 @@ describe('CloudantV1', () => {
         const descending = false;
         const feed = 'normal';
         const filter = 'testString';
-        const heartbeat = 0;
+        const heartbeat = 60000;
         const includeDocs = false;
         const limit = 0;
         const seqInterval = 1;
         const since = '0';
         const style = 'main_only';
-        const timeout = 0;
+        const timeout = 60000;
         const view = 'testString';
         const postChangesAsStreamParams = {
           db,
@@ -4932,7 +4932,7 @@ describe('CloudantV1', () => {
         const highlightNumber = 1;
         const highlightPostTag = '</em>';
         const highlightPreTag = '<em>';
-        const highlightSize = 1;
+        const highlightSize = 100;
         const includeDocs = false;
         const includeFields = ['testString'];
         const limit = 0;
@@ -5069,7 +5069,7 @@ describe('CloudantV1', () => {
         const highlightNumber = 1;
         const highlightPostTag = '</em>';
         const highlightPreTag = '<em>';
-        const highlightSize = 1;
+        const highlightSize = 100;
         const includeDocs = false;
         const includeFields = ['testString'];
         const limit = 0;
@@ -5512,12 +5512,12 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postPartitionFind
         const db = 'testString';
         const partitionKey = 'testString';
-        const selector = { foo: 'bar' };
+        const selector = { anyKey: 'anyValue' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
         const fields = ['testString'];
-        const limit = 0;
+        const limit = 25;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
@@ -5587,7 +5587,7 @@ describe('CloudantV1', () => {
         // parameters
         const db = 'testString';
         const partitionKey = 'testString';
-        const selector = { foo: 'bar' };
+        const selector = { anyKey: 'anyValue' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postPartitionFindParams = {
@@ -5636,12 +5636,12 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postPartitionFindAsStream
         const db = 'testString';
         const partitionKey = 'testString';
-        const selector = { foo: 'bar' };
+        const selector = { anyKey: 'anyValue' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
         const fields = ['testString'];
-        const limit = 0;
+        const limit = 25;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
@@ -5712,7 +5712,7 @@ describe('CloudantV1', () => {
         // parameters
         const db = 'testString';
         const partitionKey = 'testString';
-        const selector = { foo: 'bar' };
+        const selector = { anyKey: 'anyValue' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postPartitionFindAsStreamParams = {
@@ -5760,12 +5760,12 @@ describe('CloudantV1', () => {
       function __postExplainTest() {
         // Construct the params object for operation postExplain
         const db = 'testString';
-        const selector = { foo: 'bar' };
+        const selector = { anyKey: 'anyValue' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
         const fields = ['testString'];
-        const limit = 0;
+        const limit = 25;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
@@ -5835,7 +5835,7 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { foo: 'bar' };
+        const selector = { anyKey: 'anyValue' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postExplainParams = {
@@ -5882,12 +5882,12 @@ describe('CloudantV1', () => {
       function __postFindTest() {
         // Construct the params object for operation postFind
         const db = 'testString';
-        const selector = { foo: 'bar' };
+        const selector = { anyKey: 'anyValue' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
         const fields = ['testString'];
-        const limit = 0;
+        const limit = 25;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
@@ -5957,7 +5957,7 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { foo: 'bar' };
+        const selector = { anyKey: 'anyValue' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postFindParams = {
@@ -6004,12 +6004,12 @@ describe('CloudantV1', () => {
       function __postFindAsStreamTest() {
         // Construct the params object for operation postFindAsStream
         const db = 'testString';
-        const selector = { foo: 'bar' };
+        const selector = { anyKey: 'anyValue' };
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
         const fields = ['testString'];
-        const limit = 0;
+        const limit = 25;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
         const stable = true;
@@ -6080,7 +6080,7 @@ describe('CloudantV1', () => {
       test('should prioritize user-given headers', () => {
         // parameters
         const db = 'testString';
-        const selector = { foo: 'bar' };
+        const selector = { anyKey: 'anyValue' };
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postFindAsStreamParams = {
@@ -6235,7 +6235,7 @@ describe('CloudantV1', () => {
         default_field: indexTextOperatorDefaultFieldModel,
         fields: [indexFieldModel],
         index_array_lengths: true,
-        partial_filter_selector: { foo: 'bar' },
+        partial_filter_selector: { anyKey: 'anyValue' },
       };
 
       function __postIndexTest() {
@@ -6541,7 +6541,7 @@ describe('CloudantV1', () => {
         const highlightNumber = 1;
         const highlightPostTag = '</em>';
         const highlightPreTag = '<em>';
-        const highlightSize = 1;
+        const highlightSize = 100;
         const includeDocs = false;
         const includeFields = ['testString'];
         const limit = 0;
@@ -6691,7 +6691,7 @@ describe('CloudantV1', () => {
         const highlightNumber = 1;
         const highlightPostTag = '</em>';
         const highlightPreTag = '<em>';
-        const highlightSize = 1;
+        const highlightSize = 100;
         const includeDocs = false;
         const includeFields = ['testString'];
         const limit = 0;
@@ -7419,7 +7419,7 @@ describe('CloudantV1', () => {
 
       // ReplicationCreateTargetParameters
       const replicationCreateTargetParametersModel = {
-        n: 1,
+        n: 3,
         partitioned: false,
         q: 26,
       };
@@ -7467,17 +7467,17 @@ describe('CloudantV1', () => {
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
         cancel: true,
-        checkpoint_interval: 0,
-        connection_timeout: 0,
+        checkpoint_interval: 30000,
+        connection_timeout: 30000,
         continuous: false,
         create_target: false,
         create_target_params: replicationCreateTargetParametersModel,
         doc_ids: ['testString'],
         filter: 'testString',
-        http_connections: 1,
+        http_connections: 20,
         query_params: { 'key1': 'testString' },
-        retries_per_request: 0,
-        selector: { foo: 'bar' },
+        retries_per_request: 5,
+        selector: { anyKey: 'anyValue' },
         since_seq: 'testString',
         socket_options: 'testString',
         source: replicationDatabaseModel,
@@ -7488,8 +7488,8 @@ describe('CloudantV1', () => {
         use_checkpoints: true,
         user_ctx: userContextModel,
         winning_revs_only: false,
-        worker_batch_size: 1,
-        worker_processes: 1,
+        worker_batch_size: 500,
+        worker_processes: 4,
         foo: 'testString',
       };
 
@@ -7750,7 +7750,7 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __getSchedulerJobsTest() {
         // Construct the params object for operation getSchedulerJobs
-        const limit = 0;
+        const limit = 25;
         const skip = 0;
         const getSchedulerJobsParams = {
           limit,
