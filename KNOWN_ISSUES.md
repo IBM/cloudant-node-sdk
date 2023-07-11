@@ -1,14 +1,15 @@
-<!-- This section applied from common template, do not edit in language specific repository KNOWN_ISSUES file -->
 # Limitations, Restrictions, and Known Issues
 
 ## All Cloudant SDKs
 
 ### Path elements containing the `+` character
 
-Path elements containing the `+` character in the SDKs are not interoperable with Apache CouchDB and Cloudant.
-* This is because standard URL encoding libraries following the [RFC3986 URI specification](https://tools.ietf.org/html/rfc3986#section-3.3) do not encode this character in path elements.
-* Apache CouchDB violates the specification by treating the `+` in path elements as a space character (see https://github.com/apache/couchdb/issues/2235).
-* Path elements include database names, all document names, and index and view names.
+Path elements containing the `+` character in the SDKs are not interoperable with:
+* Cloudant 
+* Apache CouchDB versions older than 3.2.0
+* Apache CouchDB versions 3.2.0 or newer with the setting `decode_plus_to_space = true`
+
+This is because standard URL encoding libraries following the [RFC3986 URI specification](https://tools.ietf.org/html/rfc3986#section-3.3) do not encode the `+` character in path elements.
 * It is possible to workaround for document names with a `+` in the ID (e.g. `docidwith+char`) by using:
     * For reading: use the `post` all docs operation and the `key` or `keys` parameter with a value of the document ID including the `+`.
     * For writing: use the `post` document operation or `post` bulk docs operation with the value of the document ID including the `+`.
@@ -21,23 +22,6 @@ Path elements containing the `+` character in the SDKs are not interoperable wit
 Using JSON objects as keys (e.g. `start_key`, `end_key`, `key`, `keys`)
 can cause inconsistent results because the ordering of the members of the JSON
 object after serialization is not guaranteed.
-
-### Search
-
-#### Cannot use `drilldown` parameters
-
-Drilldown parameters cannot be used for search queries with server versions:
-* CouchDB versions < 3.2.0
-* Cloudant (Classic) <= 8158
-
-### Changes
-
-#### Terminated connections
-
-When using the `post` changes operation the connection may intermittently terminate with an early `EOF` when using
-server versions:
-* CouchDB versions < 3.2.0
-* Cloudant (Classic) <= 8169
 
 ### Documents
 
@@ -82,42 +66,18 @@ Example JSON request body:
 }
 ```
 
-### Monitoring, Authorization, and CORS
-
-The server (Cloudant (Classic) <= 8169) incorrectly processes gzip compressed request bodies for the following endpoints:
-| Endpoint                              | HTTP operation |
-|---------------------------------------|----------------|
-|`/_api/v2/user/activity_tracker/events`|`POST`          |
-|`/_api/v2/user/capacity/throughput`    |`PUT`           |
-|`/_api/v2/api_keys`                    |`POST`          |
-|`/_api/v2/db/{db}/_security`           |`PUT`           |
-|`/_api/v2/user/config/cors`            |`PUT`           |
-
-The workaround is to [disable request body compression](#disabling-request-body-compression).
-
-### Replication
-
-The server (Cloudant (Classic) <= 8169) incorrectly processes gzip compressed request bodies for `_replicate` endpoint.
-The workaround is to [disable request body compression](#disabling-request-body-compression).
-
-The `basic` property of `ReplicationDatabaseAuth` is not available in CouchDB < 3.2.0 and Cloudant <= 8914. For those versions use the `headers` property to add a header with a key of `Authorization` and a value of `Basic <base64 encoded credentials>`.
-
 ### Compression
 
 * Manually setting an `Accept-Encoding` header on requests will disable the transparent gzip decompression of response bodies from the server.
 * Manually setting a `Content-Encoding` header on requests will disable the transparent gzip compression of request bodies to the server.
 
-<!-- End common section -->
-
-<!-- Template substitution for language specific content -->
-<!-- ## SPLIT MARKER ## -->
 ## Cloudant SDK for Node.js
-
-### Session authentication
-
-Session authentication does not work with compressed request bodies when the server is CouchDB < 3.2.0 or Cloudant <= 8192. [Disabling gzip compression](#disabling-request-body-compression) for requests is required when using session authentication with these server versions
-
+<!-- KNOWN_ISSUES specific to Node -->
 ### Disabling request body compression
+
+Some issues with older server versions can be worked around by disabling
+compression of request bodies. This is an example of how to do that.
+
 ```js
 const { CloudantV1 } = require('@ibm-cloud/cloudant');
 const client = CloudantV1.newInstance({ serviceName: 'YOUR_SERVICE_NAME' });
