@@ -29,7 +29,8 @@ module.exports = {
         {
           pattern:
             ' * (© Copyright IBM Corporation 20\\d\\d(?:, 20\\d\\d)?\\. All Rights Reserved\\.|\\(C\\) Copyright IBM Corp\\. 20\\d\\d\\.)',
-          template: ' * © Copyright IBM Corporation 2021. All Rights Reserved.',
+          template:
+            ' * © Copyright IBM Corporation 2021. All Rights Reserved.',
         },
         ' *',
         ' * Licensed under the Apache License, Version 2.0 (the "License");',
