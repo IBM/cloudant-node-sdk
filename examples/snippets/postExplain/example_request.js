@@ -3,7 +3,7 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 
 const service = CloudantV1.newInstance({});
 
-const selector: CloudantV1.Selector = {
+const selector = {
   type: {
     "$eq": "user"
   }
