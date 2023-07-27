@@ -97,13 +97,9 @@ export default abstract class CloudantBaseService extends BaseService {
    * Configuration values to use Cloudant service.
    * @param {Authenticator} userOptions.authenticator CouchdbSessionAuthenticator object can be used
    *   to authenticate requests to the service.
-   * @param {string} [userOptions.jar] When CouchdbSessionAuthenticator is the Authenticator, a Cookie Jar
-   *   must be in use. So a new jar will be created, if there is no custom one.
    */
   constructor(userOptions: UserOptions) {
-    if (userOptions.authenticator instanceof CouchdbSessionAuthenticator) {
-      userOptions.jar = userOptions.jar || new CookieJar();
-    }
+    userOptions.jar = userOptions.jar || new CookieJar();
     if (!('timeout' in userOptions)) {
       userOptions.timeout = READ_TIMEOUT;
     }
