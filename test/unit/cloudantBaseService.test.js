@@ -152,7 +152,7 @@ describe('Test CloudantBaseService', () => {
     );
   });
 
-  it('Use basic authenticator', () => {
+  it('Use IAM authenticator', () => {
     const auth = new IamAuthenticator({
       apikey: '1234',
       clientId: '345',
