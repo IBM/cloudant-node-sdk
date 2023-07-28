@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
-const { IamAuthenticator, NoAuthAuthenticator } = require('ibm-cloud-sdk-core');
+const {
+  BasicAuthenticator,
+  IamAuthenticator,
+  NoAuthAuthenticator,
+} = require('ibm-cloud-sdk-core');
 const assert = require('assert');
 const http = require('http');
 const https = require('https');
 const sinon = require('sinon');
+const { CookieJar, MemoryCookieStore } = require('tough-cookie');
 const CloudantBaseService = require('../../lib/cloudantBaseService.ts').default;
 const { CouchdbSessionAuthenticator } = require('../../index.ts');
 
@@ -160,14 +165,50 @@ describe('Test CloudantBaseService', () => {
     });
     const service = new CloudantBaseService({ authenticator: auth });
     assert.ok(service);
-    // no new jar was generated
-    assert.ok(service.baseOptions.jar === undefined);
+    // cookie jar exists
+    assert.ok(service.baseOptions.jar);
+    assert.strictEqual(
+      service.baseOptions.jar,
+      service.requestWrapperInstance.axiosInstance.defaults.jar
+    );
     service.setServiceUrl(newUrl);
     assert.strictEqual(service.getAuthenticator().tokenManager.url, iamUrl);
     service.configureService('apple');
-    // no new jar and url were set
-    assert.ok(service.baseOptions.jar === undefined);
+    // cookie jar exists
+    assert.ok(service.baseOptions.jar);
+    assert.strictEqual(
+      service.baseOptions.jar,
+      service.requestWrapperInstance.axiosInstance.defaults.jar
+    );
     assert.strictEqual(service.getAuthenticator().tokenManager.url, iamUrl);
+  });
+
+  it('Custom cookie jar with basic authenticator', () => {
+    const auth = new BasicAuthenticator({
+      username: 'test',
+      password: 'user', // pragma: allowlist secret
+    });
+    const testJar = new CookieJar(new MemoryCookieStore(), {
+      rejectPublicSuffixes: false,
+    });
+    const service = new CloudantBaseService({
+      authenticator: auth,
+      jar: testJar,
+    });
+    assert.ok(service);
+    // cookie jar exists
+    assert.ok(service.baseOptions.jar);
+    // cookie jar is the same as expected test jar
+    let axiosJar = service.requestWrapperInstance.axiosInstance.defaults.jar;
+    assert.strictEqual(axiosJar, testJar);
+    assert.strictEqual(axiosJar.rejectPublicSuffixes, false);
+    service.setServiceUrl(newUrl);
+    service.configureService('apple');
+    // cookie jar is the same as expected test jar
+    assert.ok(service.baseOptions.jar);
+    axiosJar = service.requestWrapperInstance.axiosInstance.defaults.jar;
+    assert.strictEqual(axiosJar, testJar);
+    assert.strictEqual(axiosJar.rejectPublicSuffixes, false);
   });
 
   describe('Check keepAlive', () => {
