@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-const { IamAuthenticator, NoAuthAuthenticator } = require('ibm-cloud-sdk-core');
 const assert = require('assert');
 const http = require('http');
 const https = require('https');
+const { IamAuthenticator, NoAuthAuthenticator } = require('ibm-cloud-sdk-core');
 const sinon = require('sinon');
 const CloudantBaseService = require('../../lib/cloudantBaseService.ts').default;
 const { CouchdbSessionAuthenticator } = require('../../index.ts');
