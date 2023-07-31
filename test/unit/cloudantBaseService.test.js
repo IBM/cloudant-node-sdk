@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
+const assert = require('assert');
+const http = require('http');
+const https = require('https');
 const {
   BasicAuthenticator,
   IamAuthenticator,
   NoAuthAuthenticator,
 } = require('ibm-cloud-sdk-core');
-const assert = require('assert');
-const http = require('http');
-const https = require('https');
 const sinon = require('sinon');
 const { CookieJar, MemoryCookieStore } = require('tough-cookie');
 const CloudantBaseService = require('../../lib/cloudantBaseService.ts').default;
