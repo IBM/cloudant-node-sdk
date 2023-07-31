@@ -202,10 +202,13 @@ describe('Test CloudantBaseService', () => {
     let axiosJar = service.requestWrapperInstance.axiosInstance.defaults.jar;
     assert.strictEqual(axiosJar, testJar);
     assert.strictEqual(axiosJar.rejectPublicSuffixes, false);
+    
+    // reconfigure the service
     service.setServiceUrl(newUrl);
     service.configureService('apple');
-    // cookie jar is the same as expected test jar
+    // cookie jar still exists
     assert.ok(service.baseOptions.jar);
+    // cookie jar is still the same as expected test jar
     axiosJar = service.requestWrapperInstance.axiosInstance.defaults.jar;
     assert.strictEqual(axiosJar, testJar);
     assert.strictEqual(axiosJar.rejectPublicSuffixes, false);
