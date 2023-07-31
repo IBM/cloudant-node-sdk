@@ -202,7 +202,6 @@ describe('Test CloudantBaseService', () => {
     let axiosJar = service.requestWrapperInstance.axiosInstance.defaults.jar;
     assert.strictEqual(axiosJar, testJar);
     assert.strictEqual(axiosJar.rejectPublicSuffixes, false);
-    
     // reconfigure the service
     service.setServiceUrl(newUrl);
     service.configureService('apple');
