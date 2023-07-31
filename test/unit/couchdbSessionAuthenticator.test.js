@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 const assert = require('assert');
+const { promisify } = require('util');
 const sinon = require('sinon');
 const { CookieJar } = require('tough-cookie');
-const { promisify } = require('util');
 const { CouchdbSessionAuthenticator } = require('../../index.ts');
 const { SessionTokenManager } = require('../../auth/sessionTokenManager.ts');
 
