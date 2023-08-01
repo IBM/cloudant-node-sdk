@@ -97,6 +97,7 @@ export default abstract class CloudantBaseService extends BaseService {
    * Configuration values to use Cloudant service.
    * @param {Authenticator} userOptions.authenticator CouchdbSessionAuthenticator object can be used
    *   to authenticate requests to the service.
+   * @param {string} [userOptions.jar] A Cookie Jar. Enabled by default if there is no custom one.
    */
   constructor(userOptions: UserOptions) {
     userOptions.jar = userOptions.jar || new CookieJar();
