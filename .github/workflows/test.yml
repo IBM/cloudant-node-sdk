@@ -53,6 +53,6 @@ jobs:
     - name: Build package
       run: npm run build
     - name: Run tests
-      run: npm run test-travis
+      run: npm run test-ci
     - name: Run lint
       run: npm run lint
