@@ -28,7 +28,8 @@
     "test-integration": "npm run build && jest --runInBand test/integration",
     "test-ci": "jest --runInBand --testNamePattern='^((?!@slow).)*$' test/",
     "test-unit-ci": "jest --runInBand test/unit/",
-    "test-integration-ci": "jest --runInBand --no-colors --testNamePattern='^((?!@slow).)*$' --json test/integration > test-output.log"
+    "test-integration-ci": "jest --runInBand --no-colors --testNamePattern='^((?!@slow).)*$' --json test/integration > test-output.log",
+    "typedoc": "typedoc --theme default --entryPointStrategy expand --excludeExternals --tsconfig tsconfig.json --out apidocs auth cloudant --includeVersion"
   },
   "license": "Apache-2.0",
   "engines": {
