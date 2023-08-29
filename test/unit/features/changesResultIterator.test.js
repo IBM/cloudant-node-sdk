@@ -281,14 +281,17 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
     // When we are testing with sequences the retry backoff time comes into play
     // on a first retry this is a max of 100 ms.
     // Our tolerance time needs to be higher than that, add 50% because Node timing is inexact.
-    const DWELL_TIME = 150;
+    const TOLERANCE_TIME = 150;
+    // Dwell time is the length we wait before for an error tolerance to lapse
+    // and must be longer than tolerance time.
+    const DWELL_TIME = 200;
     let testIterator;
     beforeEach(() => {
       testIterator = new ChangesResultIterableIterator(
         service,
         DEFAULT_PARAMS,
         mode,
-        DWELL_TIME
+        TOLERANCE_TIME
       );
     });
     afterEach(() => {
