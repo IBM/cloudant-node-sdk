@@ -8,7 +8,7 @@ GIT_REPO=$(git remote get-url origin)
 
 # Create documentation
 printf ">>>>> Generate new documentation\n"
-./scripts/typedoc/generate_typedoc.sh
+npm run typedoc
 
 # Clone gh-pages branch
 printf ">>>>> Publishing typedoc for release build: repo=%s branch=%s build_num=%s job_name=%s\n" ${GIT_REPO} ${BRANCH_NAME} ${BUILD_NUMBER} ${JOB_NAME}
