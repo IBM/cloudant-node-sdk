@@ -92,7 +92,7 @@ describe('CloudantV1_integration', () => {
   test('getDbUpdates()', async () => {
     const params = {
       feed: 'normal',
-      heartbeat: 60000,
+      heartbeat: 0,
       timeout: 60000,
       since: '0',
     };
@@ -116,7 +116,7 @@ describe('CloudantV1_integration', () => {
       descending: false,
       feed: 'normal',
       filter: 'testString',
-      heartbeat: 60000,
+      heartbeat: 0,
       includeDocs: false,
       limit: 0,
       seqInterval: 1,
@@ -145,7 +145,7 @@ describe('CloudantV1_integration', () => {
       descending: false,
       feed: 'normal',
       filter: 'testString',
-      heartbeat: 60000,
+      heartbeat: 0,
       includeDocs: false,
       limit: 0,
       seqInterval: 1,
@@ -1109,6 +1109,52 @@ describe('CloudantV1_integration', () => {
     expect(res.result).toBeDefined();
   });
 
+  test('postPartitionExplain()', async () => {
+    const params = {
+      db: 'testString',
+      partitionKey: 'testString',
+      selector: { anyKey: 'anyValue' },
+      bookmark: 'testString',
+      conflicts: true,
+      executionStats: true,
+      fields: ['testString'],
+      limit: 25,
+      skip: 0,
+      sort: [{ 'key1': 'asc' }],
+      stable: true,
+      update: 'true',
+      useIndex: ['testString'],
+    };
+
+    const res = await cloudantService.postPartitionExplain(params);
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('postPartitionExplainAsStream()', async () => {
+    const params = {
+      db: 'testString',
+      partitionKey: 'testString',
+      selector: { anyKey: 'anyValue' },
+      bookmark: 'testString',
+      conflicts: true,
+      executionStats: true,
+      fields: ['testString'],
+      limit: 25,
+      skip: 0,
+      sort: [{ 'key1': 'asc' }],
+      stable: true,
+      update: 'true',
+      useIndex: ['testString'],
+    };
+
+    const res = await cloudantService.postPartitionExplainAsStream(params);
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
   test('postPartitionFind()', async () => {
     const params = {
       db: 'testString',
@@ -1170,6 +1216,7 @@ describe('CloudantV1_integration', () => {
       update: 'true',
       useIndex: ['testString'],
       r: 1,
+      accept: 'application/json',
     };
 
     const res = await cloudantService.postExplain(params);
