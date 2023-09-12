@@ -18,7 +18,6 @@
 const sdkCorePackage = require('ibm-cloud-sdk-core');
 
 const { NoAuthAuthenticator, unitTestUtils } = sdkCorePackage;
-
 const CloudantV1 = require('../../dist/cloudant/v1');
 
 const {
@@ -50,7 +49,6 @@ const getAuthenticatorMock = jest.spyOn(sdkCorePackage, 'getAuthenticatorFromEnv
 getAuthenticatorMock.mockImplementation(() => new NoAuthAuthenticator());
 
 describe('CloudantV1', () => {
-
   beforeEach(() => {
     mock_createRequest();
   });
@@ -61,7 +59,7 @@ describe('CloudantV1', () => {
     }
     getAuthenticatorMock.mockClear();
   });
-  
+
   describe('the newInstance method', () => {
     test('should use defaults when options not provided', () => {
       const testInstance = CloudantV1.newInstance();

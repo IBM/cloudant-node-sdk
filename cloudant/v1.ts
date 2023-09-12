@@ -19,9 +19,9 @@ import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
 import {
   Authenticator,
   BaseService,
+  UserOptions,
   getAuthenticatorFromEnvironment,
   validateParams,
-  UserOptions,
 } from 'ibm-cloud-sdk-core';
 import { getSdkHeaders } from '../lib/common';
 import CloudantBaseService from '../lib/cloudantBaseService';
@@ -120,11 +120,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getServerInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getServerInformation');
 
     const parameters = {
       options: {
@@ -168,11 +164,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getMembershipInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getMembershipInformation');
 
     const parameters = {
       options: {
@@ -222,11 +214,7 @@ class CloudantV1 extends CloudantBaseService {
       'count': _params.count,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getUuids'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getUuids');
 
     const parameters = {
       options: {
@@ -270,11 +258,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getCapacityThroughputInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCapacityThroughputInformation');
 
     const parameters = {
       options: {
@@ -323,11 +307,7 @@ class CloudantV1 extends CloudantBaseService {
       'blocks': _params.blocks,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'putCapacityThroughputConfiguration'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCapacityThroughputConfiguration');
 
     const parameters = {
       options: {
@@ -394,11 +374,7 @@ class CloudantV1 extends CloudantBaseService {
       'since': _params.since,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getDbUpdates'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDbUpdates');
 
     const parameters = {
       options: {
@@ -554,11 +530,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postChanges'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postChanges');
 
     const parameters = {
       options: {
@@ -718,11 +690,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postChangesAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postChangesAsStream');
 
     const parameters = {
       options: {
@@ -779,11 +747,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'headDatabase'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headDatabase');
 
     const parameters = {
       options: {
@@ -841,11 +805,7 @@ class CloudantV1 extends CloudantBaseService {
       'start_key': _params.startKey,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getAllDbs'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getAllDbs');
 
     const parameters = {
       options: {
@@ -895,11 +855,7 @@ class CloudantV1 extends CloudantBaseService {
       'keys': _params.keys,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postDbsInfo'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postDbsInfo');
 
     const parameters = {
       options: {
@@ -950,11 +906,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deleteDatabase'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteDatabase');
 
     const parameters = {
       options: {
@@ -1000,11 +952,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getDatabaseInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDatabaseInformation');
 
     const parameters = {
       options: {
@@ -1060,11 +1008,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'putDatabase'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putDatabase');
 
     const parameters = {
       options: {
@@ -1131,11 +1075,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'headDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headDocument');
 
     const parameters = {
       options: {
@@ -1201,11 +1141,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postDocument');
 
     const parameters = {
       options: {
@@ -1294,11 +1230,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postAllDocs'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postAllDocs');
 
     const parameters = {
       options: {
@@ -1386,11 +1318,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postAllDocsAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postAllDocsAsStream');
 
     const parameters = {
       options: {
@@ -1450,11 +1378,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postAllDocsQueries'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postAllDocsQueries');
 
     const parameters = {
       options: {
@@ -1513,11 +1437,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postAllDocsQueriesAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postAllDocsQueriesAsStream');
 
     const parameters = {
       options: {
@@ -1572,11 +1492,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postBulkDocs'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postBulkDocs');
 
     const parameters = {
       options: {
@@ -1646,11 +1562,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postBulkGet'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postBulkGet');
 
     const parameters = {
       options: {
@@ -1721,11 +1633,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postBulkGetAsMixed'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postBulkGetAsMixed');
 
     const parameters = {
       options: {
@@ -1797,11 +1705,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postBulkGetAsRelated'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postBulkGetAsRelated');
 
     const parameters = {
       options: {
@@ -1873,11 +1777,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postBulkGetAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postBulkGetAsStream');
 
     const parameters = {
       options: {
@@ -1943,11 +1843,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deleteDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteDocument');
 
     const parameters = {
       options: {
@@ -2034,11 +1930,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDocument');
 
     const parameters = {
       options: {
@@ -2125,11 +2017,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getDocumentAsMixed'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDocumentAsMixed');
 
     const parameters = {
       options: {
@@ -2217,11 +2105,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getDocumentAsRelated'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDocumentAsRelated');
 
     const parameters = {
       options: {
@@ -2309,11 +2193,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getDocumentAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDocumentAsStream');
 
     const parameters = {
       options: {
@@ -2387,11 +2267,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'putDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putDocument');
 
     const parameters = {
       options: {
@@ -2455,11 +2331,7 @@ class CloudantV1 extends CloudantBaseService {
       'ddoc': _params.ddoc,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'headDesignDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headDesignDocument');
 
     const parameters = {
       options: {
@@ -2522,11 +2394,7 @@ class CloudantV1 extends CloudantBaseService {
       'ddoc': _params.ddoc,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deleteDesignDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteDesignDocument');
 
     const parameters = {
       options: {
@@ -2614,11 +2482,7 @@ class CloudantV1 extends CloudantBaseService {
       'ddoc': _params.ddoc,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getDesignDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDesignDocument');
 
     const parameters = {
       options: {
@@ -2687,11 +2551,7 @@ class CloudantV1 extends CloudantBaseService {
       'ddoc': _params.ddoc,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'putDesignDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putDesignDocument');
 
     const parameters = {
       options: {
@@ -2747,11 +2607,7 @@ class CloudantV1 extends CloudantBaseService {
       'ddoc': _params.ddoc,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getDesignDocumentInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDesignDocumentInformation');
 
     const parameters = {
       options: {
@@ -2838,11 +2694,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postDesignDocs'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postDesignDocs');
 
     const parameters = {
       options: {
@@ -2901,11 +2753,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postDesignDocsQueries'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postDesignDocsQueries');
 
     const parameters = {
       options: {
@@ -3033,11 +2881,7 @@ class CloudantV1 extends CloudantBaseService {
       'view': _params.view,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postView'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postView');
 
     const parameters = {
       options: {
@@ -3162,11 +3006,7 @@ class CloudantV1 extends CloudantBaseService {
       'view': _params.view,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postViewAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postViewAsStream');
 
     const parameters = {
       options: {
@@ -3229,11 +3069,7 @@ class CloudantV1 extends CloudantBaseService {
       'view': _params.view,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postViewQueries'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postViewQueries');
 
     const parameters = {
       options: {
@@ -3295,11 +3131,7 @@ class CloudantV1 extends CloudantBaseService {
       'view': _params.view,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postViewQueriesAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postViewQueriesAsStream');
 
     const parameters = {
       options: {
@@ -3355,11 +3187,7 @@ class CloudantV1 extends CloudantBaseService {
       'partition_key': _params.partitionKey,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getPartitionInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getPartitionInformation');
 
     const parameters = {
       options: {
@@ -3447,11 +3275,7 @@ class CloudantV1 extends CloudantBaseService {
       'partition_key': _params.partitionKey,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postPartitionAllDocs'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionAllDocs');
 
     const parameters = {
       options: {
@@ -3541,11 +3365,7 @@ class CloudantV1 extends CloudantBaseService {
       'partition_key': _params.partitionKey,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postPartitionAllDocsAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionAllDocsAsStream');
 
     const parameters = {
       options: {
@@ -3643,11 +3463,7 @@ class CloudantV1 extends CloudantBaseService {
       'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postPartitionSearch'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionSearch');
 
     const parameters = {
       options: {
@@ -3744,11 +3560,7 @@ class CloudantV1 extends CloudantBaseService {
       'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postPartitionSearchAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionSearchAsStream');
 
     const parameters = {
       options: {
@@ -3868,11 +3680,7 @@ class CloudantV1 extends CloudantBaseService {
       'view': _params.view,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postPartitionView'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionView');
 
     const parameters = {
       options: {
@@ -3991,11 +3799,7 @@ class CloudantV1 extends CloudantBaseService {
       'view': _params.view,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postPartitionViewAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionViewAsStream');
 
     const parameters = {
       options: {
@@ -4121,11 +3925,7 @@ class CloudantV1 extends CloudantBaseService {
       'partition_key': _params.partitionKey,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postPartitionFind'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionFind');
 
     const parameters = {
       options: {
@@ -4250,11 +4050,7 @@ class CloudantV1 extends CloudantBaseService {
       'partition_key': _params.partitionKey,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postPartitionFindAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionFindAsStream');
 
     const parameters = {
       options: {
@@ -4382,11 +4178,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postExplain'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postExplain');
 
     const parameters = {
       options: {
@@ -4514,11 +4306,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postFind'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postFind');
 
     const parameters = {
       options: {
@@ -4646,11 +4434,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postFindAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postFindAsStream');
 
     const parameters = {
       options: {
@@ -4703,11 +4487,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getIndexesInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getIndexesInformation');
 
     const parameters = {
       options: {
@@ -4777,11 +4557,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postIndex'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postIndex');
 
     const parameters = {
       options: {
@@ -4836,11 +4612,7 @@ class CloudantV1 extends CloudantBaseService {
       'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deleteIndex'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteIndex');
 
     const parameters = {
       options: {
@@ -4894,11 +4666,7 @@ class CloudantV1 extends CloudantBaseService {
       'text': _params.text,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postSearchAnalyze'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postSearchAnalyze');
 
     const parameters = {
       options: {
@@ -5020,11 +4788,7 @@ class CloudantV1 extends CloudantBaseService {
       'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postSearch'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postSearch');
 
     const parameters = {
       options: {
@@ -5147,11 +4911,7 @@ class CloudantV1 extends CloudantBaseService {
       'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postSearchAsStream'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postSearchAsStream');
 
     const parameters = {
       options: {
@@ -5207,11 +4967,7 @@ class CloudantV1 extends CloudantBaseService {
       'index': _params.index,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getSearchInfo'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSearchInfo');
 
     const parameters = {
       options: {
@@ -5266,11 +5022,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'headReplicationDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headReplicationDocument');
 
     const parameters = {
       options: {
@@ -5320,11 +5072,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'headSchedulerDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headSchedulerDocument');
 
     const parameters = {
       options: {
@@ -5372,11 +5120,7 @@ class CloudantV1 extends CloudantBaseService {
       'job_id': _params.jobId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'headSchedulerJob'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headSchedulerJob');
 
     const parameters = {
       options: {
@@ -5433,11 +5177,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deleteReplicationDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteReplicationDocument');
 
     const parameters = {
       options: {
@@ -5522,11 +5262,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getReplicationDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getReplicationDocument');
 
     const parameters = {
       options: {
@@ -5593,11 +5329,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'putReplicationDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putReplicationDocument');
 
     const parameters = {
       options: {
@@ -5658,11 +5390,7 @@ class CloudantV1 extends CloudantBaseService {
       'states': _params.states,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getSchedulerDocs'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSchedulerDocs');
 
     const parameters = {
       options: {
@@ -5711,11 +5439,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getSchedulerDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSchedulerDocument');
 
     const parameters = {
       options: {
@@ -5769,11 +5493,7 @@ class CloudantV1 extends CloudantBaseService {
       'skip': _params.skip,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getSchedulerJobs'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSchedulerJobs');
 
     const parameters = {
       options: {
@@ -5821,11 +5541,7 @@ class CloudantV1 extends CloudantBaseService {
       'job_id': _params.jobId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getSchedulerJob'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSchedulerJob');
 
     const parameters = {
       options: {
@@ -5871,11 +5587,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getSessionInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSessionInformation');
 
     const parameters = {
       options: {
@@ -5927,11 +5639,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getSecurity'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSecurity');
 
     const parameters = {
       options: {
@@ -5998,11 +5706,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'putSecurity'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putSecurity');
 
     const parameters = {
       options: {
@@ -6049,11 +5753,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postApiKeys'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postApiKeys');
 
     const parameters = {
       options: {
@@ -6118,11 +5818,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'putCloudantSecurityConfiguration'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCloudantSecurityConfiguration');
 
     const parameters = {
       options: {
@@ -6171,11 +5867,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getCorsInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCorsInformation');
 
     const parameters = {
       options: {
@@ -6230,11 +5922,7 @@ class CloudantV1 extends CloudantBaseService {
       'enable_cors': _params.enableCors,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'putCorsConfiguration'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCorsConfiguration');
 
     const parameters = {
       options: {
@@ -6301,11 +5989,7 @@ class CloudantV1 extends CloudantBaseService {
       'attachment_name': _params.attachmentName,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'headAttachment'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headAttachment');
 
     const parameters = {
       options: {
@@ -6370,11 +6054,7 @@ class CloudantV1 extends CloudantBaseService {
       'attachment_name': _params.attachmentName,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deleteAttachment'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteAttachment');
 
     const parameters = {
       options: {
@@ -6442,11 +6122,7 @@ class CloudantV1 extends CloudantBaseService {
       'attachment_name': _params.attachmentName,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getAttachment'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getAttachment');
 
     const parameters = {
       options: {
@@ -6519,11 +6195,7 @@ class CloudantV1 extends CloudantBaseService {
       'attachment_name': _params.attachmentName,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'putAttachment'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putAttachment');
 
     const parameters = {
       options: {
@@ -6583,11 +6255,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'headLocalDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headLocalDocument');
 
     const parameters = {
       options: {
@@ -6644,11 +6312,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deleteLocalDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteLocalDocument');
 
     const parameters = {
       options: {
@@ -6716,11 +6380,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getLocalDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getLocalDocument');
 
     const parameters = {
       options: {
@@ -6782,11 +6442,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'putLocalDocument'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putLocalDocument');
 
     const parameters = {
       options: {
@@ -6844,11 +6500,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postRevsDiff'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postRevsDiff');
 
     const parameters = {
       options: {
@@ -6898,11 +6550,7 @@ class CloudantV1 extends CloudantBaseService {
       'db': _params.db,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getShardsInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getShardsInformation');
 
     const parameters = {
       options: {
@@ -6953,11 +6601,7 @@ class CloudantV1 extends CloudantBaseService {
       'doc_id': _params.docId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getDocumentShardsInfo'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getDocumentShardsInfo');
 
     const parameters = {
       options: {
@@ -7003,11 +6647,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'headUpInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headUpInformation');
 
     const parameters = {
       options: {
@@ -7050,11 +6690,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getActiveTasks'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getActiveTasks');
 
     const parameters = {
       options: {
@@ -7099,11 +6735,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getUpInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getUpInformation');
 
     const parameters = {
       options: {
@@ -7145,11 +6777,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getActivityTrackerEvents'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getActivityTrackerEvents');
 
     const parameters = {
       options: {
@@ -7197,11 +6825,7 @@ class CloudantV1 extends CloudantBaseService {
       'types': _params.types,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'postActivityTrackerEvents'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postActivityTrackerEvents');
 
     const parameters = {
       options: {
@@ -7247,11 +6871,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const sdkHeaders = getSdkHeaders(
-      CloudantV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getCurrentThroughputInformation'
-    );
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCurrentThroughputInformation');
 
     const parameters = {
       options: {

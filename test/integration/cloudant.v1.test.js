@@ -16,9 +16,9 @@
 
 /* eslint-disable no-console */
 
+const { readExternalSources } = require('ibm-cloud-sdk-core');
 /* eslint-disable import/order */
 const CloudantV1 = require('../../dist/cloudant/v1');
-const { readExternalSources } = require('ibm-cloud-sdk-core');
 const authHelper = require('../resources/auth-helper.js');
 
 // testcase timeout value (200s).
@@ -42,7 +42,7 @@ describe('CloudantV1_integration', () => {
 
     const config = readExternalSources(CloudantV1.DEFAULT_SERVICE_NAME);
     expect(config).not.toBeNull();
-  
+
     cloudantService.enableRetries();
   });
 
