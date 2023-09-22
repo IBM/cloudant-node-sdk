@@ -454,7 +454,7 @@ describe('CloudantV1', () => {
       function __getDbUpdatesTest() {
         // Construct the params object for operation getDbUpdates
         const feed = 'normal';
-        const heartbeat = 60000;
+        const heartbeat = 0;
         const timeout = 60000;
         const since = '0';
         const getDbUpdatesParams = {
@@ -537,7 +537,7 @@ describe('CloudantV1', () => {
         const descending = false;
         const feed = 'normal';
         const filter = 'testString';
-        const heartbeat = 60000;
+        const heartbeat = 0;
         const includeDocs = false;
         const limit = 0;
         const seqInterval = 1;
@@ -675,7 +675,7 @@ describe('CloudantV1', () => {
         const descending = false;
         const feed = 'normal';
         const filter = 'testString';
-        const heartbeat = 60000;
+        const heartbeat = 0;
         const includeDocs = false;
         const limit = 0;
         const seqInterval = 1;
@@ -5504,6 +5504,130 @@ describe('CloudantV1', () => {
     });
   });
 
+  describe('postPartitionExplain', () => {
+    describe('positive tests', () => {
+      function __postPartitionExplainTest() {
+        // Construct the params object for operation postPartitionExplain
+        const db = 'testString';
+        const partitionKey = 'testString';
+        const selector = { anyKey: 'anyValue' };
+        const bookmark = 'testString';
+        const conflicts = true;
+        const executionStats = true;
+        const fields = ['testString'];
+        const limit = 25;
+        const skip = 0;
+        const sort = [{ 'key1': 'asc' }];
+        const stable = true;
+        const update = 'true';
+        const useIndex = ['testString'];
+        const postPartitionExplainParams = {
+          db,
+          partitionKey,
+          selector,
+          bookmark,
+          conflicts,
+          executionStats,
+          fields,
+          limit,
+          skip,
+          sort,
+          stable,
+          update,
+          useIndex,
+        };
+
+        const postPartitionExplainResult = cloudantService.postPartitionExplain(postPartitionExplainParams);
+
+        // all methods should return a Promise
+        expectToBePromise(postPartitionExplainResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_explain', 'POST');
+        const expectedAccept = 'application/json';
+        const expectedContentType = 'application/json';
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
+        expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
+        expect(mockRequestOptions.body.execution_stats).toEqual(executionStats);
+        expect(mockRequestOptions.body.fields).toEqual(fields);
+        expect(mockRequestOptions.body.limit).toEqual(limit);
+        expect(mockRequestOptions.body.skip).toEqual(skip);
+        expect(mockRequestOptions.body.sort).toEqual(sort);
+        expect(mockRequestOptions.body.stable).toEqual(stable);
+        expect(mockRequestOptions.body.update).toEqual(update);
+        expect(mockRequestOptions.body.use_index).toEqual(useIndex);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postPartitionExplainTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postPartitionExplainTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postPartitionExplainTest();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const db = 'testString';
+        const partitionKey = 'testString';
+        const selector = { anyKey: 'anyValue' };
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const postPartitionExplainParams = {
+          db,
+          partitionKey,
+          selector,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.postPartitionExplain(postPartitionExplainParams);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async () => {
+        let err;
+        try {
+          await cloudantService.postPartitionExplain({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postPartitionExplain();
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+    });
+  });
+
   describe('postPartitionFind', () => {
     describe('positive tests', () => {
       function __postPartitionFindTest() {
@@ -6241,7 +6365,6 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const index = indexDefinitionModel;
         const ddoc = 'testString';
-        const def = indexDefinitionModel;
         const name = 'testString';
         const partitioned = true;
         const type = 'json';
@@ -6249,7 +6372,6 @@ describe('CloudantV1', () => {
           db,
           index,
           ddoc,
-          def,
           name,
           partitioned,
           type,
@@ -6271,7 +6393,6 @@ describe('CloudantV1', () => {
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.index).toEqual(index);
         expect(mockRequestOptions.body.ddoc).toEqual(ddoc);
-        expect(mockRequestOptions.body.def).toEqual(def);
         expect(mockRequestOptions.body.name).toEqual(name);
         expect(mockRequestOptions.body.partitioned).toEqual(partitioned);
         expect(mockRequestOptions.body.type).toEqual(type);
