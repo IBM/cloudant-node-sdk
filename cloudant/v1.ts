@@ -19,8 +19,10 @@ import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
 import {
   Authenticator,
   BaseService,
+  SDKLogger,
   UserOptions,
   getAuthenticatorFromEnvironment,
+  getNewLogger,
   validateParams,
 } from 'ibm-cloud-sdk-core';
 import { getSdkHeaders } from '../lib/common';
@@ -34,6 +36,8 @@ import getAuthenticatorFromEnvCloudantExtension from '../lib/getAuthenticatorFro
  */
 
 class CloudantV1 extends CloudantBaseService {
+  static _logger: SDKLogger = getNewLogger('CloudantV1');
+
   static DEFAULT_SERVICE_URL: string = 'http://localhost:5984';
 
   static DEFAULT_SERVICE_NAME: string = 'cloudant';
@@ -337,16 +341,26 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Retrieve change events for all databases.
    *
+   * **This endpoint is not available in IBM Cloudant.**
+   *
    * Lists changes to databases, like a global changes feed. Types of changes include updating the database and creating
    * or deleting a database. Like the changes feed, the feed is not guaranteed to return changes in the correct order
    * and might repeat changes. Polling modes for this method work like polling modes for the changes feed.
-   * **Note: This endpoint requires _admin or _db_updates role and is only available on dedicated clusters.**.
    *
    * @param {Object} [params] - The parameters to send to the service.
    * @param {string} [params.feed] - Query parameter to specify the changes feed type.
    * @param {number} [params.heartbeat] - Query parameter to specify the period in milliseconds after which an empty
-   * line is sent in the results. Only applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout
-   * to keep the feed alive indefinitely. May also be `true` to use default value of 60000.
+   * line is sent in the results. Off by default and only applicable for
+   * `continuous` and `eventsource` feeds. Overrides any timeout to keep the feed alive indefinitely. May also be `true`
+   * to use a value of `60000`.
+   *
+   * **Note:** Delivery of heartbeats cannot be relied on at specific intervals. If your application runs in an
+   * environment where idle network connections may break, `heartbeat` is not suitable as a keepalive mechanism.
+   * Instead, consider one of the following options:
+   *   * Use the `timeout` parameter with a value that is compatible with your network environment.
+   *   * Switch to scheduled usage of one of the non-continuous changes feed types
+   *     (`normal` or `longpoll`).
+   *   * Use TCP keepalive.
    * @param {number} [params.timeout] - Query parameter to specify the maximum period in milliseconds to wait for a
    * change before the response is sent, even if there are no results. Only applicable for `longpoll` or `continuous`
    * feeds. Default value is specified by `httpd/changes_timeout` configuration option. Note that `60000` value is also
@@ -355,10 +369,12 @@ class CloudantV1 extends CloudantBaseService {
    * the given update sequence. Can be a valid update sequence or `now` value. Default is `0` i.e. all changes.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DbUpdates>>}
+   * @deprecated this method is deprecated and may be removed in a future release
    */
   public getDbUpdates(
     params?: CloudantV1.GetDbUpdatesParams
   ): Promise<CloudantV1.Response<CloudantV1.DbUpdates>> {
+    CloudantV1._logger.warn('A deprecated operation has been invoked: getDbUpdates');
     const _params = { ...params };
     const _requiredParams = [];
     const _validParams = ['feed', 'heartbeat', 'timeout', 'since', 'headers'];
@@ -413,7 +429,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string[]} [params.docIds] - Schema for a list of document IDs.
    * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
-   * fields of a document must be returned. If it is omitted, the entire document is returned.
+   * fields of a document must be returned. If it is omitted or empty, the entire document is returned.
    * @param {JsonObject} [params.selector] - JSON object describing criteria used to select documents. The selector
    * specifies fields in the document, and provides an expression to evaluate with the field content or other data.
    *
@@ -430,18 +446,17 @@ class CloudantV1 extends CloudantBaseService {
    * Operators are identified by the use of a dollar sign `$` prefix in the name field.
    *
    * There are two core types of operators in the selector syntax:
-   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-   * to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-   * `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-   * selector, or an array of selectors.
+   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+   * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument.
+   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+   * available combination and conditional operators.
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
    *
    * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.lastEventId] - Header parameter to specify the ID of the last events received by the server
    * on a previous connection. Overrides `since` query parameter.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -467,8 +482,17 @@ class CloudantV1 extends CloudantBaseService {
    *   * `_view` - Returns changes for documents that match an existing map
    *       function in the view specified by the query parameter `view`.
    * @param {number} [params.heartbeat] - Query parameter to specify the period in milliseconds after which an empty
-   * line is sent in the results. Only applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout
-   * to keep the feed alive indefinitely. May also be `true` to use default value of 60000.
+   * line is sent in the results. Off by default and only applicable for
+   * `continuous` and `eventsource` feeds. Overrides any timeout to keep the feed alive indefinitely. May also be `true`
+   * to use a value of `60000`.
+   *
+   * **Note:** Delivery of heartbeats cannot be relied on at specific intervals. If your application runs in an
+   * environment where idle network connections may break, `heartbeat` is not suitable as a keepalive mechanism.
+   * Instead, consider one of the following options:
+   *   * Use the `timeout` parameter with a value that is compatible with your network environment.
+   *   * Switch to scheduled usage of one of the non-continuous changes feed types
+   *     (`normal` or `longpoll`).
+   *   * Use TCP keepalive.
    * @param {boolean} [params.includeDocs] - Query parameter to specify whether to include the full content of the
    * documents in the response.
    * @param {number} [params.limit] - Query parameter to specify the number of returned documents to limit the result
@@ -573,7 +597,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string[]} [params.docIds] - Schema for a list of document IDs.
    * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
-   * fields of a document must be returned. If it is omitted, the entire document is returned.
+   * fields of a document must be returned. If it is omitted or empty, the entire document is returned.
    * @param {JsonObject} [params.selector] - JSON object describing criteria used to select documents. The selector
    * specifies fields in the document, and provides an expression to evaluate with the field content or other data.
    *
@@ -590,18 +614,17 @@ class CloudantV1 extends CloudantBaseService {
    * Operators are identified by the use of a dollar sign `$` prefix in the name field.
    *
    * There are two core types of operators in the selector syntax:
-   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-   * to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-   * `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-   * selector, or an array of selectors.
+   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+   * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument.
+   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+   * available combination and conditional operators.
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
    *
    * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.lastEventId] - Header parameter to specify the ID of the last events received by the server
    * on a previous connection. Overrides `since` query parameter.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -627,8 +650,17 @@ class CloudantV1 extends CloudantBaseService {
    *   * `_view` - Returns changes for documents that match an existing map
    *       function in the view specified by the query parameter `view`.
    * @param {number} [params.heartbeat] - Query parameter to specify the period in milliseconds after which an empty
-   * line is sent in the results. Only applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout
-   * to keep the feed alive indefinitely. May also be `true` to use default value of 60000.
+   * line is sent in the results. Off by default and only applicable for
+   * `continuous` and `eventsource` feeds. Overrides any timeout to keep the feed alive indefinitely. May also be `true`
+   * to use a value of `60000`.
+   *
+   * **Note:** Delivery of heartbeats cannot be relied on at specific intervals. If your application runs in an
+   * environment where idle network connections may break, `heartbeat` is not suitable as a keepalive mechanism.
+   * Instead, consider one of the following options:
+   *   * Use the `timeout` parameter with a value that is compatible with your network environment.
+   *   * Switch to scheduled usage of one of the non-continuous changes feed types
+   *     (`normal` or `longpoll`).
+   *   * Use TCP keepalive.
    * @param {boolean} [params.includeDocs] - Query parameter to specify whether to include the full content of the
    * documents in the response.
    * @param {number} [params.limit] - Query parameter to specify the number of returned documents to limit the result
@@ -3826,6 +3858,126 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
+   * Retrieve information about which partition index is used for a query.
+   *
+   * Shows which index is being used by the query. Parameters are the same as the
+   * [`/{db}/_partition/{partition_key}/_find` endpoint](#postpartitionfind-queries).
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.db - Path parameter to specify the database name.
+   * @param {string} params.partitionKey - Path parameter to specify the database partition key.
+   * @param {JsonObject} params.selector - JSON object describing criteria used to select documents. The selector
+   * specifies fields in the document, and provides an expression to evaluate with the field content or other data.
+   *
+   * The selector object must:
+   *   * Be structured as valid JSON.
+   *   * Contain a valid query expression.
+   *
+   * Using a selector is significantly more efficient than using a JavaScript filter function, and is the recommended
+   * option if filtering on document attributes only.
+   *
+   * Elementary selector syntax requires you to specify one or more fields, and the corresponding values required for
+   * those fields. You can create more complex selector expressions by combining operators.
+   *
+   * Operators are identified by the use of a dollar sign `$` prefix in the name field.
+   *
+   * There are two core types of operators in the selector syntax:
+   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+   * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
+   * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
+   * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
+   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+   * available combination and conditional operators.
+   * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
+   * of a query. You should include at least one of these in a selector.
+   *
+   * For further reference see
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
+   * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
+   * existing conflicts in the document.
+   * @param {boolean} [params.executionStats] - Use this option to find information about the query that was run. This
+   * information includes total key lookups, total document lookups (when `include_docs=true` is used), and total quorum
+   * document lookups (when each document replica is fetched).
+   * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
+   * fields of a document must be returned. If it is omitted or empty, the entire document is returned.
+   * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
+   * results when queried.
+   * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
+   * @param {JsonObject[]} [params.sort] - The sort field contains a list of pairs, each mapping a field name to a sort
+   * direction (asc or desc). The first field name and direction pair is the topmost level of sort. The second pair, if
+   * provided, is the next level of sort. The field can be any field, using dotted notation if desired for sub-document
+   * fields.
+   *
+   * For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+   *
+   * When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+   * same order and each object in the sort array has a single key or at least one of the sort fields is included in the
+   * selector. All sorting fields must use the same sort direction, either all ascending or all descending.
+   * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
+   * shards.
+   * @param {string} [params.update] - Whether to update the index prior to returning the result.
+   * @param {string[]} [params.useIndex] - Use this option to identify a specific index for query to run against, rather
+   * than by using the IBM Cloudant Query algorithm to find the best index.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.ExplainResult>>}
+   */
+  public postPartitionExplain(
+    params: CloudantV1.PostPartitionExplainParams
+  ): Promise<CloudantV1.Response<CloudantV1.ExplainResult>> {
+    const _params = { ...params };
+    const _requiredParams = ['db', 'partitionKey', 'selector'];
+    const _validParams = ['db', 'partitionKey', 'selector', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const body = {
+      'selector': _params.selector,
+      'bookmark': _params.bookmark,
+      'conflicts': _params.conflicts,
+      'execution_stats': _params.executionStats,
+      'fields': _params.fields,
+      'limit': _params.limit,
+      'skip': _params.skip,
+      'sort': _params.sort,
+      'stable': _params.stable,
+      'update': _params.update,
+      'use_index': _params.useIndex,
+    };
+
+    const path = {
+      'db': _params.db,
+      'partition_key': _params.partitionKey,
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postPartitionExplain');
+
+    const parameters = {
+      options: {
+        url: '/{db}/_partition/{partition_key}/_explain',
+        method: 'POST',
+        body,
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
    * Query a database partition index by using selector syntax.
    *
    * Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
@@ -3854,18 +4006,17 @@ class CloudantV1 extends CloudantBaseService {
    * Operators are identified by the use of a dollar sign `$` prefix in the name field.
    *
    * There are two core types of operators in the selector syntax:
-   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-   * to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-   * `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-   * selector, or an array of selectors.
+   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+   * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument.
+   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+   * available combination and conditional operators.
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
    *
    * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -3873,7 +4024,7 @@ class CloudantV1 extends CloudantBaseService {
    * information includes total key lookups, total document lookups (when `include_docs=true` is used), and total quorum
    * document lookups (when each document replica is fetched).
    * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
-   * fields of a document must be returned. If it is omitted, the entire document is returned.
+   * fields of a document must be returned. If it is omitted or empty, the entire document is returned.
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
@@ -3979,18 +4130,17 @@ class CloudantV1 extends CloudantBaseService {
    * Operators are identified by the use of a dollar sign `$` prefix in the name field.
    *
    * There are two core types of operators in the selector syntax:
-   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-   * to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-   * `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-   * selector, or an array of selectors.
+   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+   * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument.
+   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+   * available combination and conditional operators.
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
    *
    * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -3998,7 +4148,7 @@ class CloudantV1 extends CloudantBaseService {
    * information includes total key lookups, total document lookups (when `include_docs=true` is used), and total quorum
    * document lookups (when each document replica is fetched).
    * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
-   * fields of a document must be returned. If it is omitted, the entire document is returned.
+   * fields of a document must be returned. If it is omitted or empty, the entire document is returned.
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
@@ -4082,8 +4232,7 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Retrieve information about which index is used for a query.
    *
-   * Shows which index is being used by the query. Parameters are the same as the [`_find`
-   * endpoint](#query-an-index-by-using-selector-syntax).
+   * Shows which index is being used by the query. Parameters are the same as the [`_find` endpoint](#postfind).
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -4103,18 +4252,17 @@ class CloudantV1 extends CloudantBaseService {
    * Operators are identified by the use of a dollar sign `$` prefix in the name field.
    *
    * There are two core types of operators in the selector syntax:
-   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-   * to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-   * `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-   * selector, or an array of selectors.
+   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+   * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument.
+   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+   * available combination and conditional operators.
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
    *
    * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4122,7 +4270,7 @@ class CloudantV1 extends CloudantBaseService {
    * information includes total key lookups, total document lookups (when `include_docs=true` is used), and total quorum
    * document lookups (when each document replica is fetched).
    * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
-   * fields of a document must be returned. If it is omitted, the entire document is returned.
+   * fields of a document must be returned. If it is omitted or empty, the entire document is returned.
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
@@ -4231,18 +4379,17 @@ class CloudantV1 extends CloudantBaseService {
    * Operators are identified by the use of a dollar sign `$` prefix in the name field.
    *
    * There are two core types of operators in the selector syntax:
-   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-   * to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-   * `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-   * selector, or an array of selectors.
+   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+   * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument.
+   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+   * available combination and conditional operators.
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
    *
    * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4250,7 +4397,7 @@ class CloudantV1 extends CloudantBaseService {
    * information includes total key lookups, total document lookups (when `include_docs=true` is used), and total quorum
    * document lookups (when each document replica is fetched).
    * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
-   * fields of a document must be returned. If it is omitted, the entire document is returned.
+   * fields of a document must be returned. If it is omitted or empty, the entire document is returned.
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
@@ -4359,18 +4506,17 @@ class CloudantV1 extends CloudantBaseService {
    * Operators are identified by the use of a dollar sign `$` prefix in the name field.
    *
    * There are two core types of operators in the selector syntax:
-   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-   * to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-   * `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-   * selector, or an array of selectors.
+   * * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+   * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument.
+   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+   * available combination and conditional operators.
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
    *
    * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4378,7 +4524,7 @@ class CloudantV1 extends CloudantBaseService {
    * information includes total key lookups, total document lookups (when `include_docs=true` is used), and total quorum
    * document lookups (when each document replica is fetched).
    * @param {string[]} [params.fields] - JSON array that uses the field syntax. Use this parameter to specify which
-   * fields of a document must be returned. If it is omitted, the entire document is returned.
+   * fields of a document must be returned. If it is omitted or empty, the entire document is returned.
    * @param {number} [params.limit] - Maximum number of results returned. The `type: text` indexes are limited to 200
    * results when queried.
    * @param {number} [params.skip] - Skip the first 'n' results, where 'n' is the value that is specified.
@@ -4521,11 +4667,8 @@ class CloudantV1 extends CloudantBaseService {
    * `text` have additional configuration properties that do not apply to `json` indexes, these are:
    * * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
    * document fields and what analyzer to use for that purpose.
-   * @param {string} [params.ddoc] - Name of the design document in which the index will be created.
-   * @param {IndexDefinition} [params.def] - Schema for a `json` or `text` query index definition. Indexes of type
-   * `text` have additional configuration properties that do not apply to `json` indexes, these are:
-   * * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
-   * document fields and what analyzer to use for that purpose.
+   * @param {string} [params.ddoc] - Specifies the design document name in which the index will be created. The design
+   * document name is the design document ID excluding the `_design/` prefix.
    * @param {string} [params.name] - name.
    * @param {boolean} [params.partitioned] - The default value is `true` for databases with `partitioned: true` and
    * `false` otherwise. For databases with `partitioned: false` if this option is specified the value must be `false`.
@@ -4538,7 +4681,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.IndexResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'index'];
-    const _validParams = ['db', 'index', 'ddoc', 'def', 'name', 'partitioned', 'type', 'headers'];
+    const _validParams = ['db', 'index', 'ddoc', 'name', 'partitioned', 'type', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4547,7 +4690,6 @@ class CloudantV1 extends CloudantBaseService {
     const body = {
       'index': _params.index,
       'ddoc': _params.ddoc,
-      'def': _params.def,
       'name': _params.name,
       'partitioned': _params.partitioned,
       'type': _params.type,
@@ -6957,9 +7099,18 @@ namespace CloudantV1 {
   export interface GetDbUpdatesParams {
     /** Query parameter to specify the changes feed type. */
     feed?: GetDbUpdatesConstants.Feed | string;
-    /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Only
-     *  applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout to keep the feed alive
-     *  indefinitely. May also be `true` to use default value of 60000.
+    /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Off
+     *  by default and only applicable for
+     *  `continuous` and `eventsource` feeds. Overrides any timeout to keep the feed alive indefinitely. May also be
+     *  `true` to use a value of `60000`.
+     *
+     *  **Note:** Delivery of heartbeats cannot be relied on at specific intervals. If your application runs in an
+     *  environment where idle network connections may break, `heartbeat` is not suitable as a keepalive mechanism.
+     *  Instead, consider one of the following options:
+     *    * Use the `timeout` parameter with a value that is compatible with your network environment.
+     *    * Switch to scheduled usage of one of the non-continuous changes feed types
+     *      (`normal` or `longpoll`).
+     *    * Use TCP keepalive.
      */
     heartbeat?: number;
     /** Query parameter to specify the maximum period in milliseconds to wait for a change before the response is
@@ -6993,7 +7144,7 @@ namespace CloudantV1 {
     /** Schema for a list of document IDs. */
     docIds?: string[];
     /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
-     *  returned. If it is omitted, the entire document is returned.
+     *  returned. If it is omitted or empty, the entire document is returned.
      */
     fields?: string[];
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
@@ -7012,18 +7163,17 @@ namespace CloudantV1 {
      *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
      *
      *  There are two core types of operators in the selector syntax:
-     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In
-     *  addition to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators:
-     *  `$all`, `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either
-     *  another selector, or an array of selectors.
+     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+     *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument.
+     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
+     *  list of all available combination and conditional operators.
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
      *
      *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector?: JsonObject;
     /** Header parameter to specify the ID of the last events received by the server on a previous connection.
@@ -7059,9 +7209,18 @@ namespace CloudantV1 {
      *        function in the view specified by the query parameter `view`.
      */
     filter?: string;
-    /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Only
-     *  applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout to keep the feed alive
-     *  indefinitely. May also be `true` to use default value of 60000.
+    /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Off
+     *  by default and only applicable for
+     *  `continuous` and `eventsource` feeds. Overrides any timeout to keep the feed alive indefinitely. May also be
+     *  `true` to use a value of `60000`.
+     *
+     *  **Note:** Delivery of heartbeats cannot be relied on at specific intervals. If your application runs in an
+     *  environment where idle network connections may break, `heartbeat` is not suitable as a keepalive mechanism.
+     *  Instead, consider one of the following options:
+     *    * Use the `timeout` parameter with a value that is compatible with your network environment.
+     *    * Switch to scheduled usage of one of the non-continuous changes feed types
+     *      (`normal` or `longpoll`).
+     *    * Use TCP keepalive.
      */
     heartbeat?: number;
     /** Query parameter to specify whether to include the full content of the documents in the response. */
@@ -7114,7 +7273,7 @@ namespace CloudantV1 {
     /** Schema for a list of document IDs. */
     docIds?: string[];
     /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
-     *  returned. If it is omitted, the entire document is returned.
+     *  returned. If it is omitted or empty, the entire document is returned.
      */
     fields?: string[];
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
@@ -7133,18 +7292,17 @@ namespace CloudantV1 {
      *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
      *
      *  There are two core types of operators in the selector syntax:
-     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In
-     *  addition to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators:
-     *  `$all`, `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either
-     *  another selector, or an array of selectors.
+     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+     *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument.
+     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
+     *  list of all available combination and conditional operators.
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
      *
      *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector?: JsonObject;
     /** Header parameter to specify the ID of the last events received by the server on a previous connection.
@@ -7180,9 +7338,18 @@ namespace CloudantV1 {
      *        function in the view specified by the query parameter `view`.
      */
     filter?: string;
-    /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Only
-     *  applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout to keep the feed alive
-     *  indefinitely. May also be `true` to use default value of 60000.
+    /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Off
+     *  by default and only applicable for
+     *  `continuous` and `eventsource` feeds. Overrides any timeout to keep the feed alive indefinitely. May also be
+     *  `true` to use a value of `60000`.
+     *
+     *  **Note:** Delivery of heartbeats cannot be relied on at specific intervals. If your application runs in an
+     *  environment where idle network connections may break, `heartbeat` is not suitable as a keepalive mechanism.
+     *  Instead, consider one of the following options:
+     *    * Use the `timeout` parameter with a value that is compatible with your network environment.
+     *    * Switch to scheduled usage of one of the non-continuous changes feed types
+     *      (`normal` or `longpoll`).
+     *    * Use TCP keepalive.
      */
     heartbeat?: number;
     /** Query parameter to specify whether to include the full content of the documents in the response. */
@@ -8551,6 +8718,97 @@ namespace CloudantV1 {
     }
   }
 
+  /** Parameters for the `postPartitionExplain` operation. */
+  export interface PostPartitionExplainParams {
+    /** Path parameter to specify the database name. */
+    db: string;
+    /** Path parameter to specify the database partition key. */
+    partitionKey: string;
+    /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
+     *  provides an expression to evaluate with the field content or other data.
+     *
+     *  The selector object must:
+     *    * Be structured as valid JSON.
+     *    * Contain a valid query expression.
+     *
+     *  Using a selector is significantly more efficient than using a JavaScript filter function, and is the recommended
+     *  option if filtering on document attributes only.
+     *
+     *  Elementary selector syntax requires you to specify one or more fields, and the corresponding values required for
+     *  those fields. You can create more complex selector expressions by combining operators.
+     *
+     *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
+     *
+     *  There are two core types of operators in the selector syntax:
+     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+     *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
+     *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
+     *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
+     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
+     *  list of all available combination and conditional operators.
+     *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
+     *  basis of a query. You should include at least one of these in a selector.
+     *
+     *  For further reference see
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+     */
+    selector: JsonObject;
+    /** Opaque bookmark token used when paginating results. */
+    bookmark?: string;
+    /** A boolean value that indicates whether or not to include information about existing conflicts in the
+     *  document.
+     */
+    conflicts?: boolean;
+    /** Use this option to find information about the query that was run. This information includes total key
+     *  lookups, total document lookups (when `include_docs=true` is used), and total quorum document lookups (when each
+     *  document replica is fetched).
+     */
+    executionStats?: boolean;
+    /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
+     *  returned. If it is omitted or empty, the entire document is returned.
+     */
+    fields?: string[];
+    /** Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried. */
+    limit?: number;
+    /** Skip the first 'n' results, where 'n' is the value that is specified. */
+    skip?: number;
+    /** The sort field contains a list of pairs, each mapping a field name to a sort direction (asc or desc). The
+     *  first field name and direction pair is the topmost level of sort. The second pair, if provided, is the next
+     *  level of sort. The field can be any field, using dotted notation if desired for sub-document fields.
+     *
+     *  For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+     *
+     *  When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+     *  same order and each object in the sort array has a single key or at least one of the sort fields is included in
+     *  the selector. All sorting fields must use the same sort direction, either all ascending or all descending.
+     */
+    sort?: JsonObject[];
+    /** Whether or not the view results should be returned from a "stable" set of shards. */
+    stable?: boolean;
+    /** Whether to update the index prior to returning the result. */
+    update?: PostPartitionExplainConstants.Update | string;
+    /** Use this option to identify a specific index for query to run against, rather than by using the IBM Cloudant
+     *  Query algorithm to find the best index.
+     */
+    useIndex?: string[];
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Constants for the `postPartitionExplain` operation. */
+  export namespace PostPartitionExplainConstants {
+    /** Schema for a mapping of field name to sort direction. */
+    export enum Sort {
+      ASC = 'asc',
+      DESC = 'desc',
+    }
+    /** Whether to update the index prior to returning the result. */
+    export enum Update {
+      FALSE = 'false',
+      TRUE = 'true',
+      LAZY = 'lazy',
+    }
+  }
+
   /** Parameters for the `postPartitionFind` operation. */
   export interface PostPartitionFindParams {
     /** Path parameter to specify the database name. */
@@ -8573,18 +8831,17 @@ namespace CloudantV1 {
      *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
      *
      *  There are two core types of operators in the selector syntax:
-     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In
-     *  addition to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators:
-     *  `$all`, `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either
-     *  another selector, or an array of selectors.
+     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+     *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument.
+     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
+     *  list of all available combination and conditional operators.
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
      *
      *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -8599,7 +8856,7 @@ namespace CloudantV1 {
      */
     executionStats?: boolean;
     /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
-     *  returned. If it is omitted, the entire document is returned.
+     *  returned. If it is omitted or empty, the entire document is returned.
      */
     fields?: string[];
     /** Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried. */
@@ -8665,18 +8922,17 @@ namespace CloudantV1 {
      *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
      *
      *  There are two core types of operators in the selector syntax:
-     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In
-     *  addition to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators:
-     *  `$all`, `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either
-     *  another selector, or an array of selectors.
+     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+     *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument.
+     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
+     *  list of all available combination and conditional operators.
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
      *
      *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -8691,7 +8947,7 @@ namespace CloudantV1 {
      */
     executionStats?: boolean;
     /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
-     *  returned. If it is omitted, the entire document is returned.
+     *  returned. If it is omitted or empty, the entire document is returned.
      */
     fields?: string[];
     /** Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried. */
@@ -8755,18 +9011,17 @@ namespace CloudantV1 {
      *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
      *
      *  There are two core types of operators in the selector syntax:
-     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In
-     *  addition to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators:
-     *  `$all`, `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either
-     *  another selector, or an array of selectors.
+     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+     *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument.
+     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
+     *  list of all available combination and conditional operators.
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
      *
      *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -8781,7 +9036,7 @@ namespace CloudantV1 {
      */
     executionStats?: boolean;
     /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
-     *  returned. If it is omitted, the entire document is returned.
+     *  returned. If it is omitted or empty, the entire document is returned.
      */
     fields?: string[];
     /** Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried. */
@@ -8851,18 +9106,17 @@ namespace CloudantV1 {
      *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
      *
      *  There are two core types of operators in the selector syntax:
-     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In
-     *  addition to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators:
-     *  `$all`, `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either
-     *  another selector, or an array of selectors.
+     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+     *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument.
+     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
+     *  list of all available combination and conditional operators.
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
      *
      *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -8877,7 +9131,7 @@ namespace CloudantV1 {
      */
     executionStats?: boolean;
     /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
-     *  returned. If it is omitted, the entire document is returned.
+     *  returned. If it is omitted or empty, the entire document is returned.
      */
     fields?: string[];
     /** Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried. */
@@ -8947,18 +9201,17 @@ namespace CloudantV1 {
      *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
      *
      *  There are two core types of operators in the selector syntax:
-     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In
-     *  addition to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators:
-     *  `$all`, `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either
-     *  another selector, or an array of selectors.
+     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+     *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument.
+     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
+     *  list of all available combination and conditional operators.
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
      *
      *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -8973,7 +9226,7 @@ namespace CloudantV1 {
      */
     executionStats?: boolean;
     /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
-     *  returned. If it is omitted, the entire document is returned.
+     *  returned. If it is omitted or empty, the entire document is returned.
      */
     fields?: string[];
     /** Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried. */
@@ -9040,14 +9293,10 @@ namespace CloudantV1 {
      *  document fields and what analyzer to use for that purpose.
      */
     index: IndexDefinition;
-    /** Name of the design document in which the index will be created. */
-    ddoc?: string;
-    /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
-     *  properties that do not apply to `json` indexes, these are:
-     *  * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
-     *  document fields and what analyzer to use for that purpose.
+    /** Specifies the design document name in which the index will be created. The design document name is the
+     *  design document ID excluding the `_design/` prefix.
      */
-    def?: IndexDefinition;
+    ddoc?: string;
     /** name. */
     name?: string;
     /** The default value is `true` for databases with `partitioned: true` and `false` otherwise. For databases with
@@ -10242,6 +10491,8 @@ namespace CloudantV1 {
     update_seq: string;
     /** The UUID of the database. */
     uuid?: string;
+    /** Information about database's partitioned indexes. */
+    partitioned_indexes?: PartitionedIndexesInformation;
   }
 
   /** Schema for database cluster information. */
@@ -10541,19 +10792,23 @@ namespace CloudantV1 {
   /** Schema for information about the index used for a find query. */
   export interface ExplainResult {
     /** When `true`, the query is answered using the index only and no documents are fetched. */
-    covered: boolean;
+    covering: boolean;
     /** Name of database. */
     dbname: string;
-    /** Fields to be returned by the query. */
+    /** Fields that were requested to be projected from the document. If no fields were requested to be projected
+     *  this will be empty and all fields will be returned.
+     */
     fields: string[];
     /** Schema for information about an index. */
     index: IndexInformation;
     /** The used maximum number of results returned. */
     limit: number;
-    /** Query options used. */
-    opts: JsonObject;
-    /** Range parameters passed to the underlying view. */
-    range?: ExplainResultRange;
+    /** Arguments passed to the underlying view. */
+    mrargs?: ExplainResultMrArgs;
+    /** Options used for the request. */
+    opts: ExplainResultOpts;
+    /** Schema for any JSON type. */
+    partitioned?: any;
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
      *  provides an expression to evaluate with the field content or other data.
      *
@@ -10570,30 +10825,85 @@ namespace CloudantV1 {
      *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
      *
      *  There are two core types of operators in the selector syntax:
-     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In
-     *  addition to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators:
-     *  `$all`, `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either
-     *  another selector, or an array of selectors.
+     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+     *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument.
+     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
+     *  list of all available combination and conditional operators.
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
      *
      *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
     /** Skip parameter used. */
     skip: number;
   }
 
-  /** Range parameters passed to the underlying view. */
-  export interface ExplainResultRange {
-    /** End key parameter passed to the underlying view. */
-    end_key?: any[];
-    /** Start key parameter passed to the underlying view. */
-    start_key?: any[];
+  /** Arguments passed to the underlying view. */
+  export interface ExplainResultMrArgs {
+    /** Schema for any JSON type. */
+    conflicts?: any;
+    /** Direction parameter passed to the underlying view. */
+    direction?: string;
+    /** Schema for any JSON type. */
+    end_key?: any;
+    /** A parameter that specifies whether to include the full content of the documents in the response in the
+     *  underlying view.
+     */
+    include_docs?: boolean;
+    /** Partition parameter passed to the underlying view. */
+    partition?: string;
+    /** A parameter that specifies returning only documents that match any of the specified keys in the underlying
+     *  view.
+     */
+    reduce?: boolean;
+    /** A parameter that specifies whether the view results should be returned form a "stable" set of shards passed
+     *  to the underlying view.
+     */
+    stable?: boolean;
+    /** Schema for any JSON type. */
+    start_key?: any;
+    /** Schema for any JSON type. */
+    update?: any;
+    /** The type of the underlying view. */
+    view_type?: string;
+  }
+
+  /** Options used for the request. */
+  export interface ExplainResultOpts {
+    /** Opaque bookmark token used when paginating results. */
+    bookmark: string;
+    /** Conflicts used in the request query. */
+    conflicts: boolean;
+    /** Execution statistics used in the request query. */
+    execution_stats: boolean;
+    /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
+     *  returned. If it is omitted or empty, the entire document is returned.
+     */
+    fields: string[];
+    /** Limit used in the request query. */
+    limit: number;
+    /** On which database partition the request was used. If it was not used on a database partition, it returns
+     *  with `""`.
+     */
+    partition: string;
+    /** The read quorum that is needed for the result. */
+    r: number;
+    /** Skip used in the request query. */
+    skip: number;
+    /** Schema for any JSON type. */
+    sort: any;
+    /** Stable used in the request query. */
+    stable: boolean;
+    /** Deprecated: Stale used in the request query. */
+    stale: boolean;
+    /** Update used in the request query. */
+    update: boolean;
+    /** Use index used in the request query. */
+    use_index: string[];
   }
 
   /** Schema for the result of a query find operation. */
@@ -10647,18 +10957,17 @@ namespace CloudantV1 {
      *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
      *
      *  There are two core types of operators in the selector syntax:
-     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In
-     *  addition to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators:
-     *  `$all`, `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either
-     *  another selector, or an array of selectors.
+     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+     *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument.
+     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
+     *  list of all available combination and conditional operators.
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
      *
      *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     partial_filter_selector?: JsonObject;
   }
@@ -10675,7 +10984,7 @@ namespace CloudantV1 {
 
   /** Schema for information about an index. */
   export interface IndexInformation {
-    /** Design document ID. */
+    /** Design document ID including a `_design/` prefix. */
     ddoc: string;
     /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
      *  properties that do not apply to `json` indexes, these are:
@@ -10685,6 +10994,8 @@ namespace CloudantV1 {
     def: IndexDefinition;
     /** Index name. */
     name: string;
+    /** Indicates if index is partitioned. */
+    partitioned?: boolean;
     /** Schema for the type of an index. */
     type: string;
   }
@@ -10769,6 +11080,24 @@ namespace CloudantV1 {
     active?: number;
     /** The uncompressed size of database contents in bytes. */
     external?: number;
+  }
+
+  /** Number of partitioned indexes by type. */
+  export interface PartitionedIndexesDetailedInformation {
+    /** Number of partitioned indexes of search type. */
+    search?: number;
+    /** Number of partitioned indexes of view type. */
+    view?: number;
+  }
+
+  /** Information about database's partitioned indexes. */
+  export interface PartitionedIndexesInformation {
+    /** Total number of partitioned indexes in the database. */
+    count?: number;
+    /** Number of partitioned indexes by type. */
+    indexes?: PartitionedIndexesDetailedInformation;
+    /** Maximum allowed number of partitioned indexes in the database. */
+    limit?: number;
   }
 
   /** Request parameters to use during target database creation. */
@@ -10878,18 +11207,17 @@ namespace CloudantV1 {
      *  Operators are identified by the use of a dollar sign `$` prefix in the name field.
      *
      *  There are two core types of operators in the selector syntax:
-     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In
-     *  addition to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators:
-     *  `$all`, `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either
-     *  another selector, or an array of selectors.
+     *  * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+     *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument.
+     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
+     *  list of all available combination and conditional operators.
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
      *
      *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector?: JsonObject;
     /** Start the replication at a specific sequence value. */
@@ -10898,14 +11226,20 @@ namespace CloudantV1 {
     socket_options?: string;
     /** Schema for a replication source or target database. */
     source: ReplicationDatabase;
-    /** Address of a (http or socks5 protocol) proxy server through which replication with the source database
-     *  should occur.
+    /** Deprecated: This setting is forbidden in IBM Cloudant replication documents. This setting may be used with
+     *  alternative replication mediators.
+     *
+     *  Address of a (http or socks5 protocol) proxy server through which replication with the source database should
+     *  occur.
      */
     source_proxy?: string;
     /** Schema for a replication source or target database. */
     target: ReplicationDatabase;
-    /** Address of a (http or socks5 protocol) proxy server through which replication with the target database
-     *  should occur.
+    /** Deprecated: This setting is forbidden in IBM Cloudant replication documents. This setting may be used with
+     *  alternative replication mediators.
+     *
+     *  Address of a (http or socks5 protocol) proxy server through which replication with the target database should
+     *  occur.
      */
     target_proxy?: string;
     /** Specify whether to use _bulk_get for fetching documents from the source. If unset, the server configured
@@ -10982,8 +11316,9 @@ namespace CloudantV1 {
     node?: string;
     /** Replication source. */
     source?: string;
-    /** Address of the (http or socks5 protocol) proxy server through which replication with the source database
-     *  occurs.
+    /** Deprecated: Forbidden in IBM Cloudant mediated replications.
+     *
+     *  Address of the (http or socks5 protocol) proxy server through which replication with the source database occurs.
      */
     source_proxy?: string;
     /** Timestamp of when the replication was started. */
@@ -10992,8 +11327,9 @@ namespace CloudantV1 {
     state: string;
     /** Replication target. */
     target?: string;
-    /** Address of the (http or socks5 protocol) proxy server through which replication with the target database
-     *  occurs.
+    /** Deprecated: Forbidden in IBM Cloudant mediated replications.
+     *
+     *  Address of the (http or socks5 protocol) proxy server through which replication with the target database occurs.
      */
     target_proxy?: string;
   }
