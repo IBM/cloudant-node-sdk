@@ -8,6 +8,12 @@ updates:
     pull-request-branch-name:
       separator: "-"
 # Custom settings:
+    groups:
+      eslint:
+        dependency-type: "development"
+        patterns:
+          - "eslint*"
+          - "@typescript-eslint/*"
     ignore:
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
