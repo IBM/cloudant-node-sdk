@@ -1015,8 +1015,9 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.partitioned] - Query parameter to specify whether to enable database partitions when
    * creating a database.
    * @param {number} [params.q] - The number of shards in the database. Each shard is a partition of the hash value
-   * range. Its value is set by the service. For more information about modifying database configuration, contact IBM
-   * Cloudant support.
+   * range. Cloudant recommends using the default value for most databases. However, if your database is expected to be
+   * larger than 250 GB or have a lot of indexes, you may need to adjust the settings. In these cases, it's best to
+   * reach out to IBM Cloudant customer support for guidance on how to meet your specific needs and requirements.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
@@ -7448,8 +7449,10 @@ namespace CloudantV1 {
     db: string;
     /** Query parameter to specify whether to enable database partitions when creating a database. */
     partitioned?: boolean;
-    /** The number of shards in the database. Each shard is a partition of the hash value range. Its value is set by
-     *  the service. For more information about modifying database configuration, contact IBM Cloudant support.
+    /** The number of shards in the database. Each shard is a partition of the hash value range. Cloudant recommends
+     *  using the default value for most databases. However, if your database is expected to be larger than 250 GB or
+     *  have a lot of indexes, you may need to adjust the settings. In these cases, it's best to reach out to IBM
+     *  Cloudant customer support for guidance on how to meet your specific needs and requirements.
      */
     q?: number;
     headers?: OutgoingHttpHeaders;
@@ -10497,7 +10500,9 @@ namespace CloudantV1 {
 
   /** Schema for database cluster information. */
   export interface DatabaseInformationCluster {
-    /** Schema for the number of replicas of a database in a cluster. */
+    /** Schema for the number of replicas of a database in a cluster. The cluster is using the default value and it
+     *  cannot be changed by the user.
+     */
     n: number;
     /** Schema for the number of shards in a database. Each shard is a partition of the hash value range. */
     q: number;
@@ -11102,7 +11107,9 @@ namespace CloudantV1 {
 
   /** Request parameters to use during target database creation. */
   export interface ReplicationCreateTargetParameters {
-    /** Schema for the number of replicas of a database in a cluster. */
+    /** Schema for the number of replicas of a database in a cluster. The cluster is using the default value and it
+     *  cannot be changed by the user.
+     */
     n?: number;
     /** Parameter to specify whether to enable database partitions when creating the target database. */
     partitioned?: boolean;
