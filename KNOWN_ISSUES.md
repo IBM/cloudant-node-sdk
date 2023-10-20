@@ -111,3 +111,5 @@ const client = CloudantV1.newInstance({ serviceName: 'YOUR_SERVICE_NAME' });
 client.setEnableGzipCompression(false);
 ...
 ```
+
+dummy 2
