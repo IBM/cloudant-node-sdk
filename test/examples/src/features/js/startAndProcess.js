@@ -21,7 +21,7 @@ const client = CloudantV1.newInstance();
 // Start from a previously persisted seq
 // Normally this would be read by the app from persistent storage
 // e.g. previouslyPersistedSeq = yourAppPersistenceReadFunc()
-const previouslyPersistedSeq = '3-g1AG3...'
+const previouslyPersistedSeq = '3-g1AG3...';
 const changesParams = {
   db: 'example',
   since: previouslyPersistedSeq
@@ -35,10 +35,10 @@ const destinationStream = new Writable({
     // do something with change item
     console.log(changesItem.id);
     for (const change of changesItem.changes) {
-      console.log(change.rev)
+      console.log(change.rev);
     }
     // when change item processing is complete app can store seq
-    const seq = changesItem.seq
+    const seq = changesItem.seq;
     // write seq to persistent storage for use as since if required to resume later
     // e.g. yourAppPersistenceWriteFunc()
     callback();
