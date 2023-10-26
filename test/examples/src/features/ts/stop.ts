@@ -16,7 +16,7 @@
 import { ChangesFollower, CloudantV1, Stream } from '../../../../../index';
 import { ChangesResultItem, PostChangesParams } from '../../../../../cloudant/v1';
 import { Writable } from 'node:stream';
-import { pipeline } from 'node:stream/promises'
+import { pipeline } from 'node:stream/promises';
 
 
 const client = CloudantV1.newInstance({});
