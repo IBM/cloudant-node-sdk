@@ -1237,7 +1237,7 @@ const changesItemsStream = changesFollower.startOneOff();
 import { ChangesFollower, CloudantV1, Stream } from '@ibm-cloud/cloudant';
 import { ChangesResultItem, PostChangesParams } from '@ibm-cloud/cloudant/cloudant/v1';
 import { Writable } from 'node:stream';
-import { pipeline } from 'node:stream/promises'
+import { pipeline } from 'node:stream/promises';
 ```
 [embedmd]:# (test/examples/src/features/ts/startAndProcess.ts /const client/ $)
 ```ts
@@ -1338,7 +1338,7 @@ pipeline(changesItemsStream, destinationStream)
 import { ChangesFollower, CloudantV1, Stream } from '@ibm-cloud/cloudant';
 import { ChangesResultItem, PostChangesParams } from '@ibm-cloud/cloudant/cloudant/v1';
 import { Writable } from 'node:stream';
-import { pipeline } from 'node:stream/promises'
+import { pipeline } from 'node:stream/promises';
 ```
 [embedmd]:# (test/examples/src/features/ts/startOneOffAndProcess.ts /const client/ $)
 ```ts
@@ -1475,7 +1475,7 @@ async function getChangesFromFollower(changesItemsStream) {
 import { ChangesFollower, CloudantV1, Stream } from '@ibm-cloud/cloudant';
 import { ChangesResultItem, PostChangesParams } from '@ibm-cloud/cloudant/cloudant/v1';
 import { Writable } from 'node:stream';
-import { pipeline } from 'node:stream/promises'
+import { pipeline } from 'node:stream/promises';
 ```
 [embedmd]:# (test/examples/src/features/ts/stop.ts /const client/ $)
 ```ts
