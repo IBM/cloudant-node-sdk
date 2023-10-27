@@ -10153,11 +10153,11 @@ namespace CloudantV1 {
     /** The phase the active task is in. `docid_sort`, `docid_copy`, `document_copy` phases are available for
      *  `database_compaction`, while `ids` and `view` phases are available for `view_compaction` type tasks.
      */
-    phase?: string;
+    phase?: ActiveTask.Constants.Phase | string;
     /** Process ID. */
     pid: string;
     /** Process status. */
-    process_status?: string;
+    process_status?: ActiveTask.Constants.ProcessStatus | string;
     /** Current percentage progress. Available for `database_compaction`, `indexer`, `search_indexer`,
      *  `view_compaction` type tasks.
      */
@@ -10189,7 +10189,7 @@ namespace CloudantV1 {
      */
     total_changes?: number;
     /** Operation type. */
-    type: string;
+    type: ActiveTask.Constants.Type | string;
     /** Schema for a Unix epoch timestamp. */
     updated_on: number;
     /** Name of user running replication or owning the indexer. Available for `indexer`, `replication` type tasks. */
@@ -10197,13 +10197,51 @@ namespace CloudantV1 {
     /** Number of view indexes. Available for `view_compaction` type tasks. */
     view?: number;
   }
+  export namespace ActiveTask {
+    export namespace Constants {
+      /** The phase the active task is in. `docid_sort`, `docid_copy`, `document_copy` phases are available for `database_compaction`, while `ids` and `view` phases are available for `view_compaction` type tasks. */
+      export enum Phase {
+        DOCID_SORT = 'docid_sort',
+        DOCID_COPY = 'docid_copy',
+        DOCUMENT_COPY = 'document_copy',
+        IDS = 'ids',
+        VIEW = 'view',
+      }
+      /** Process status. */
+      export enum ProcessStatus {
+        EXITING = 'exiting',
+        GARBAGE_COLLECTING = 'garbage_collecting',
+        RUNNABLE = 'runnable',
+        RUNNING = 'running',
+        SUSPENDED = 'suspended',
+        WAITING = 'waiting',
+      }
+      /** Operation type. */
+      export enum Type {
+        DATABASE_COMPACTION = 'database_compaction',
+        INDEXER = 'indexer',
+        REPLICATION = 'replication',
+        SEARCH_INDEXER = 'search_indexer',
+        VIEW_COMPACTION = 'view_compaction',
+      }
+    }
+  }
 
   /** Schema for Activity Tracker events. */
   export interface ActivityTrackerEvents {
     /** An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
      *  "management" is a required element of this array.
      */
-    types: string[];
+    types: ActivityTrackerEvents.Constants.Types | string[];
+  }
+  export namespace ActivityTrackerEvents {
+    export namespace Constants {
+      /** An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance. "management" is a required element of this array. */
+      export enum Types {
+        MANAGEMENT = 'management',
+        DATA = 'data',
+      }
+    }
   }
 
   /** Schema for the result of an all documents queries operation. */
@@ -10267,9 +10305,57 @@ namespace CloudantV1 {
      *  * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query
      *  text index default_field the default is `standard`.
      */
-    name?: string;
+    name?: Analyzer.Constants.Name | string;
     /** Custom stopwords to use with the named analyzer. */
     stopwords?: string[];
+  }
+  export namespace Analyzer {
+    export namespace Constants {
+      /** Schema for the name of the Apache Lucene analyzer to use for text indexing. The default value varies depending on the analyzer usage: * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query text index default_field the default is `standard`. */
+      export enum Name {
+        CLASSIC = 'classic',
+        EMAIL = 'email',
+        KEYWORD = 'keyword',
+        SIMPLE = 'simple',
+        STANDARD = 'standard',
+        WHITESPACE = 'whitespace',
+        ARABIC = 'arabic',
+        ARMENIAN = 'armenian',
+        BASQUE = 'basque',
+        BULGARIAN = 'bulgarian',
+        BRAZILIAN = 'brazilian',
+        CATALAN = 'catalan',
+        CJK = 'cjk',
+        CHINESE = 'chinese',
+        CZECH = 'czech',
+        DANISH = 'danish',
+        DUTCH = 'dutch',
+        ENGLISH = 'english',
+        FINNISH = 'finnish',
+        FRENCH = 'french',
+        GERMAN = 'german',
+        GREEK = 'greek',
+        GALICIAN = 'galician',
+        HINDI = 'hindi',
+        HUNGARIAN = 'hungarian',
+        INDONESIAN = 'indonesian',
+        IRISH = 'irish',
+        ITALIAN = 'italian',
+        JAPANESE = 'japanese',
+        LATVIAN = 'latvian',
+        NORWEGIAN = 'norwegian',
+        PERSIAN = 'persian',
+        POLISH = 'polish',
+        PORTUGUESE = 'portuguese',
+        ROMANIAN = 'romanian',
+        RUSSIAN = 'russian',
+        SPANISH = 'spanish',
+        SWEDISH = 'swedish',
+        THAI = 'thai',
+        TURKISH = 'turkish',
+        PERFIELD = 'perfield',
+      }
+    }
   }
 
   /** Schema for a search analyzer configuration. */
@@ -10279,11 +10365,59 @@ namespace CloudantV1 {
      *  * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query
      *  text index default_field the default is `standard`.
      */
-    name?: string;
+    name?: AnalyzerConfiguration.Constants.Name | string;
     /** Custom stopwords to use with the named analyzer. */
     stopwords?: string[];
     /** Schema for mapping a field name to a per field analyzer. */
     fields?: JsonObject;
+  }
+  export namespace AnalyzerConfiguration {
+    export namespace Constants {
+      /** Schema for the name of the Apache Lucene analyzer to use for text indexing. The default value varies depending on the analyzer usage: * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query text index default_field the default is `standard`. */
+      export enum Name {
+        CLASSIC = 'classic',
+        EMAIL = 'email',
+        KEYWORD = 'keyword',
+        SIMPLE = 'simple',
+        STANDARD = 'standard',
+        WHITESPACE = 'whitespace',
+        ARABIC = 'arabic',
+        ARMENIAN = 'armenian',
+        BASQUE = 'basque',
+        BULGARIAN = 'bulgarian',
+        BRAZILIAN = 'brazilian',
+        CATALAN = 'catalan',
+        CJK = 'cjk',
+        CHINESE = 'chinese',
+        CZECH = 'czech',
+        DANISH = 'danish',
+        DUTCH = 'dutch',
+        ENGLISH = 'english',
+        FINNISH = 'finnish',
+        FRENCH = 'french',
+        GERMAN = 'german',
+        GREEK = 'greek',
+        GALICIAN = 'galician',
+        HINDI = 'hindi',
+        HUNGARIAN = 'hungarian',
+        INDONESIAN = 'indonesian',
+        IRISH = 'irish',
+        ITALIAN = 'italian',
+        JAPANESE = 'japanese',
+        LATVIAN = 'latvian',
+        NORWEGIAN = 'norwegian',
+        PERSIAN = 'persian',
+        POLISH = 'polish',
+        PORTUGUESE = 'portuguese',
+        ROMANIAN = 'romanian',
+        RUSSIAN = 'russian',
+        SPANISH = 'spanish',
+        SWEDISH = 'swedish',
+        THAI = 'thai',
+        TURKISH = 'turkish',
+        PERFIELD = 'perfield',
+      }
+    }
   }
 
   /** Schema for api keys. */
@@ -10525,7 +10659,17 @@ namespace CloudantV1 {
     /** Sequence number. */
     seq: string;
     /** A database event. */
-    type: string;
+    type: DbEvent.Constants.Type | string;
+  }
+  export namespace DbEvent {
+    export namespace Constants {
+      /** A database event. */
+      export enum Type {
+        CREATED = 'created',
+        DELETED = 'deleted',
+        UPDATED = 'updated',
+      }
+    }
   }
 
   /** Schema for database updates. */
@@ -10769,7 +10913,17 @@ namespace CloudantV1 {
     /** Status of the revision. May be one of: - `available`: Revision is available for retrieving with rev query
      *  parameter - `missing`: Revision is not available - `deleted`: Revision belongs to deleted document.
      */
-    status: string;
+    status: DocumentRevisionStatus.Constants.Status | string;
+  }
+  export namespace DocumentRevisionStatus {
+    export namespace Constants {
+      /** Status of the revision. May be one of: - `available`: Revision is available for retrieving with rev query parameter - `missing`: Revision is not available - `deleted`: Revision belongs to deleted document. */
+      export enum Status {
+        AVAILABLE = 'available',
+        MISSING = 'missing',
+        DELETED = 'deleted',
+      }
+    }
   }
 
   /** Schema for document shard information. */
@@ -10874,7 +11028,16 @@ namespace CloudantV1 {
     /** Schema for any JSON type. */
     update?: any;
     /** The type of the underlying view. */
-    view_type?: string;
+    view_type?: ExplainResultMrArgs.Constants.ViewType | string;
+  }
+  export namespace ExplainResultMrArgs {
+    export namespace Constants {
+      /** The type of the underlying view. */
+      export enum ViewType {
+        MAP = 'map',
+        REDUCE = 'reduce',
+      }
+    }
   }
 
   /** Options used for the request. */
@@ -10982,9 +11145,19 @@ namespace CloudantV1 {
     /** Name of the field. */
     name?: string;
     /** The type of the named field. */
-    type?: string;
+    type?: IndexField.Constants.Type | string;
     /** IndexField accepts additional properties. */
     [propName: string]: any;
+  }
+  export namespace IndexField {
+    export namespace Constants {
+      /** The type of the named field. */
+      export enum Type {
+        BOOLEAN = 'boolean',
+        NUMBER = 'number',
+        STRING = 'string',
+      }
+    }
   }
 
   /** Schema for information about an index. */
@@ -11002,7 +11175,17 @@ namespace CloudantV1 {
     /** Indicates if index is partitioned. */
     partitioned?: boolean;
     /** Schema for the type of an index. */
-    type: string;
+    type: IndexInformation.Constants.Type | string;
+  }
+  export namespace IndexInformation {
+    export namespace Constants {
+      /** Schema for the type of an index. */
+      export enum Type {
+        JSON = 'json',
+        SPECIAL = 'special',
+        TEXT = 'text',
+      }
+    }
   }
 
   /** Schema for the result of creating an index. */
@@ -11012,7 +11195,16 @@ namespace CloudantV1 {
     /** Name of the index created. */
     name: string;
     /** Flag to show whether the index was created or one already exists. */
-    result: string;
+    result: IndexResult.Constants.Result | string;
+  }
+  export namespace IndexResult {
+    export namespace Constants {
+      /** Flag to show whether the index was created or one already exists. */
+      export enum Result {
+        CREATED = 'created',
+        EXISTS = 'exists',
+      }
+    }
   }
 
   /** Schema for the text index default field configuration. The default field is used to index the text of all fields within a document for use with the `$text` operator. */
@@ -11331,7 +11523,7 @@ namespace CloudantV1 {
     /** Timestamp of when the replication was started. */
     start_time: string;
     /** Schema for replication state. */
-    state: string;
+    state: SchedulerDocument.Constants.State | string;
     /** Replication target. */
     target?: string;
     /** Deprecated: Forbidden in IBM Cloudant mediated replications.
@@ -11339,6 +11531,20 @@ namespace CloudantV1 {
      *  Address of the (http or socks5 protocol) proxy server through which replication with the target database occurs.
      */
     target_proxy?: string;
+  }
+  export namespace SchedulerDocument {
+    export namespace Constants {
+      /** Schema for replication state. */
+      export enum State {
+        INITIALIZING = 'initializing',
+        ERROR = 'error',
+        PENDING = 'pending',
+        RUNNING = 'running',
+        CRASHING = 'crashing',
+        COMPLETED = 'completed',
+        FAILED = 'failed',
+      }
+    }
   }
 
   /** Schema for scheduler document information. A JSON object that may contain additional information about the state. For error states this will contain an error field and string value. */
@@ -11609,7 +11815,17 @@ namespace CloudantV1 {
     /** seeds. */
     seeds: JsonObject;
     /** status. */
-    status: string;
+    status: UpInformation.Constants.Status | string;
+  }
+  export namespace UpInformation {
+    export namespace Constants {
+      /** status. */
+      export enum Status {
+        MAINTENANCE_MODE = 'maintenance_mode',
+        NOLB = 'nolb',
+        OK = 'ok',
+      }
+    }
   }
 
   /** Schema for an ability to tell if view is up-to-date without querying it. */
@@ -11631,7 +11847,22 @@ namespace CloudantV1 {
     /** User name. */
     name: string;
     /** List of user roles. */
-    roles: string[];
+    roles: UserContext.Constants.Roles | string[];
+  }
+  export namespace UserContext {
+    export namespace Constants {
+      /** List of user roles. */
+      export enum Roles {
+        READER = '_reader',
+        WRITER = '_writer',
+        ADMIN = '_admin',
+        REPLICATOR = '_replicator',
+        DB_UPDATES = '_db_updates',
+        DESIGN = '_design',
+        SHARDS = '_shards',
+        SECURITY = '_security',
+      }
+    }
   }
 
   /** Schema for a set of uuids generated by the server. */
@@ -11716,7 +11947,17 @@ namespace CloudantV1 {
      *  * `false` - Return results without updating the view.
      *  * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
      */
-    update?: string;
+    update?: ViewQuery.Constants.Update | string;
+  }
+  export namespace ViewQuery {
+    export namespace Constants {
+      /** Parameter to specify whether or not the view in question should be updated prior to responding to the user. * `true` - Return results after the view is updated. * `false` - Return results without updating the view. * `lazy` - Return the view results without waiting for an update, but update them immediately after the request. */
+      export enum Update {
+        TRUE = 'true',
+        FALSE = 'false',
+        LAZY = 'lazy',
+      }
+    }
   }
 
   /** Schema for the result of a query view operation. */
