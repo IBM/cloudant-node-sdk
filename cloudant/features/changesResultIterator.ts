@@ -31,12 +31,6 @@ enum TransientErrorSuppression {
 export class ChangesResultIterableIterator
   implements AsyncIterableIterator<CloudantV1.ChangesResult>
 {
-  private readonly cancellable: Promise<
-    CloudantV1.Response<CloudantV1.ChangesResult>
-  > = new Promise((_resolve, reject) => {
-    this.cancel = reject;
-  });
-
   private readonly timeoutPromise = promisify(setTimeout);
 
   private readonly cancelToken = 'CloudantChangesIteratorCancel';
@@ -158,7 +152,7 @@ export class ChangesResultIterableIterator
     if (!this.stopped) {
       this.logger.debug('Setting stopped flag.');
       this.stopped = true;
-      if (this.inflight) {
+      if (this.cancel) {
         this.logger.debug('Cancelling inflight requests.');
         this.cancel(new Error(this.cancelToken));
       }
@@ -186,8 +180,16 @@ export class ChangesResultIterableIterator
 
     this.logger.debug('Making next request.');
 
-    this.inflight = Promise.race([
-      this.cancellable,
+    // Make a new cancellable promise that can race with the request
+    // in case the follower is stopped.
+    let resolveCancellable;
+    const cancellable: Promise<CloudantV1.Response<CloudantV1.ChangesResult>> =
+      new Promise((resolve, reject) => {
+        resolveCancellable = resolve;
+        this.cancel = reject;
+      });
+    return Promise.race([
+      cancellable,
       this.client.postChanges(
         ChangesParamsHelper.cloneParams(
           this.params,
@@ -290,8 +292,10 @@ export class ChangesResultIterableIterator
         }
       })
       .finally(() => {
-        this.inflight = null;
+        this.logger.debug('Cleaning up cancellable.');
+        this.cancel = null;
+        // Resolve the cancellable to ensure clean up can happen
+        resolveCancellable();
       });
-    return this.inflight;
   }
 }
