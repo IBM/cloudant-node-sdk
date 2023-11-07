@@ -40,7 +40,7 @@
     "ibm-cloud-sdk-core": "4.1.4"
   },
   "devDependencies": {
-    "@types/jest": "29.5.7",
+    "@types/jest": "29.5.8",
     "@typescript-eslint/eslint-plugin": "6.10.0",
     "@typescript-eslint/parser": "6.10.0",
     "dotenv": "16.3.1",
