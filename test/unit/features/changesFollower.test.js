@@ -126,6 +126,29 @@ describe('Test ChangesFollower', () => {
         );
       }).toThrow('Error tolerance duration must not be negative.');
     });
+    it('testInitializationWithNullErrorTolerance', () => {
+      const changesFollower = new ChangesFollower(
+        service,
+        minimumTestParams,
+        null
+      );
+      expect(changesFollower.errorTolerance).toEqual(Number.MAX_VALUE);
+    });
+    it('testInitializationWithUndefinedErrorTolerance', () => {
+      // implicitly set to undefined
+      const changesFollowerImpl = new ChangesFollower(
+        service,
+        minimumTestParams
+      );
+      expect(changesFollowerImpl.errorTolerance).toEqual(Number.MAX_VALUE);
+      // explicitly set to undefined
+      const changesFollowerExpl = new ChangesFollower(
+        service,
+        minimumTestParams,
+        undefined
+      );
+      expect(changesFollowerExpl.errorTolerance).toEqual(Number.MAX_VALUE);
+    });
     it.each(getInvalidTimeoutClients())(
       'testInitializationInvalidTimeoutClients $timeout',
       (client) => {
