@@ -10088,7 +10088,7 @@ namespace CloudantV1 {
     /** An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
      *  "management" is a required element of this array.
      */
-    types: PostActivityTrackerEventsConstants.Types | string[];
+    types: PostActivityTrackerEventsConstants.Types[] | string[];
     headers?: OutgoingHttpHeaders;
   }
 
@@ -10232,7 +10232,7 @@ namespace CloudantV1 {
     /** An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
      *  "management" is a required element of this array.
      */
-    types: ActivityTrackerEvents.Constants.Types | string[];
+    types: ActivityTrackerEvents.Constants.Types[] | string[];
   }
   export namespace ActivityTrackerEvents {
     export namespace Constants {
@@ -11847,7 +11847,7 @@ namespace CloudantV1 {
     /** User name. */
     name: string;
     /** List of user roles. */
-    roles: UserContext.Constants.Roles | string[];
+    roles: UserContext.Constants.Roles[] | string[];
   }
   export namespace UserContext {
     export namespace Constants {
