@@ -376,7 +376,7 @@ createDb.then(() => {
 <summary>JavaScript:</summary>
 
 ```js
-const { CloudantV1 } = require('@ibm-cloud/cloudant');
+import { CloudantV1 } from "@ibm-cloud/cloudant";
 ```
 [embedmd]:# (test/examples/src/js/CreateDbAndDoc.js /const createDbAndDoc/ /createDbAndDoc\(\);\n\}/)
 ```js
@@ -526,7 +526,7 @@ client.getDocument(getDocParams).then((documentExample) => {
 <summary>JavaScript:</summary>
 
 ```js
-const { CloudantV1 } = require('@ibm-cloud/cloudant');
+import { CloudantV1 } from "@ibm-cloud/cloudant";
 ```
 [embedmd]:# (test/examples/src/js/GetInfoFromExistingDatabase.js /const getInfoFromExistingDatabase/ /getInfoFromExistingDatabase\(\);\n\}/)
 ```js
@@ -700,7 +700,7 @@ client
 <summary>JavaScript:</summary>
 
 ```js
-const { CloudantV1 } = require('@ibm-cloud/cloudant');
+import { CloudantV1 } from "@ibm-cloud/cloudant";
 ```
 [embedmd]:# (test/examples/src/js/UpdateDoc.js /const updateDoc/ /updateDoc\(\);\n\}/)
 ```js
@@ -880,7 +880,7 @@ client
 <summary>JavaScript:</summary>
 
 ```js
-const { CloudantV1 } = require('@ibm-cloud/cloudant');
+import { CloudantV1 } from "@ibm-cloud/cloudant";
 ```
 [embedmd]:# (test/examples/src/js/DeleteDoc.js /const deleteDoc/ /deleteDoc\(\);\n\}/)
 ```js
@@ -1124,7 +1124,7 @@ const changesFollower: ChangesFollower = new ChangesFollower(
 <summary>JavaScript:</summary>
 
 ```js
-const { ChangesFollower, CloudantV1 } = require('@ibm-cloud/cloudant');
+import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
 ```
 [embedmd]:# (test/examples/src/features/js/initialize.js /const client/ $)
 ```js
@@ -1170,7 +1170,7 @@ const changesItemsStream: Stream<ChangesResultItem> = changesFollower.start();
 <summary>JavaScript:</summary>
 
 ```js
-const { ChangesFollower, CloudantV1 } = require('@ibm-cloud/cloudant');
+import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
 ```
 [embedmd]:# (test/examples/src/features/js/start.js /const client/ $)
 ```js
@@ -1211,7 +1211,7 @@ const changesItemsStream: Stream<ChangesResultItem> = changesFollower.startOneOf
 <summary>JavaScript:</summary>
 
 ```js
-const { ChangesFollower, CloudantV1 } = require('@ibm-cloud/cloudant');
+import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
 ```
 [embedmd]:# (test/examples/src/features/js/startOneOff.js /const client/ $)
 ```js
@@ -1284,9 +1284,9 @@ pipeline(changesItemsStream, destinationStream)
 <summary>JavaScript:</summary>
 
 ```js
-const { ChangesFollower, CloudantV1 } = require('@ibm-cloud/cloudant');
-const { Writable } = require('node:stream');
-const { pipeline } = require('node:stream/promises');
+import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
+import { Writable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 ```
 [embedmd]:# (test/examples/src/features/js/startAndProcess.js /const client/ $)
 ```js
@@ -1403,9 +1403,9 @@ async function getChangesFromFollower(changesItemsStream: Stream<CloudantV1.Chan
 <summary>JavaScript:</summary>
 
 ```js
-const { ChangesFollower, CloudantV1 } = require('@ibm-cloud/cloudant');
-const { Writable } = require('node:stream');
-const { pipeline } = require('node:stream/promises');
+import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
+import { Writable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 ```
 [embedmd]:# (test/examples/src/features/js/startOneOffAndProcess.js /const client/ $)
 ```js
@@ -1521,9 +1521,9 @@ setTimeout(() => {
 <summary>JavaScript:</summary>
 
 ```js
-const { ChangesFollower, CloudantV1 } = require('@ibm-cloud/cloudant');
-const { Writable } = require('node:stream');
-const { pipeline } = require('node:stream/promises');
+import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
+import { Writable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 ```
 [embedmd]:# (test/examples/src/features/js/stop.js /const client/ $)
 ```js
