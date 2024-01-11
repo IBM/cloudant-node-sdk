@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
     /* Basic Options */
-    "target": "es2022",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
+    "target": "es2022",                     /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
     "module": "node16",                     /* Specify module code generation: 'none', commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
-    "lib": ["es2023"],
+    "lib": [
+        "es2023",
+        "dom"
+    ],
 
     /* Build source files into a folder called `dist` to maintain clean directories, free of ts-generated files */
     "outDir": "./dist",
@@ -16,9 +19,8 @@
     "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
 
     /* Module Resolution Options */
-    "moduleResolution": "node16",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+    "moduleResolution": "node16",           /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
     "types": ["node"],                      /* Type declaration files to be included in compilation. */
-    "skipLibCheck": true,
     "esModuleInterop": true
   },
   "exclude": [
