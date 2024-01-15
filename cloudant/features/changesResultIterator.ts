@@ -22,7 +22,6 @@ import { promisify } from 'util';
 import CloudantV1 = require('../v1');
 
 enum TransientErrorSuppression {
-  /** @internal */
   ALWAYS,
   NEVER,
   TIMER,

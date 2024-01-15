@@ -21,8 +21,8 @@ import { pipeline, Readable } from 'stream';
 import { ChangesResultIterableIterator } from './changesResultIterator';
 import CloudantV1 = require('../v1');
 
+/** @internal */
 export enum Mode {
-  /** @internal */
   FINITE,
   LISTEN,
 }
@@ -31,18 +31,18 @@ export enum Mode {
  * A helper for using the changes feed.
  *
  * There are two modes of operation:
- *  * {@link #startOneOff()} to fetch the changes from the supplied since sequence
+ *  * {@link startOneOff} to fetch the changes from the supplied since sequence
  *    until there are no further pending changes.
- *  * {@link #start()} to fetch the changes from the supplied since sequence and
+ *  * {@link start} to fetch the changes from the supplied since sequence and
  *    then continuing to listen indefinitely for further new changes.
  *
  * The starting sequence ID can be changed for either mode by using
  * {@link CloudantV1.PostChangesParams.since}. By default when using:
- *  * {@link #startOneOff()} the feed will start from the beginning.
- *  * {@link #start()} the feed will start from "now".
+ *  * {@link startOneOff} the feed will start from the beginning.
+ *  * {@link start} the feed will start from "now".
  *
  * In either mode the {@link Stream} of changes can be terminated early by calling
- * {@link #stop()}.
+ * {@link stop}.
  *
  * By default {@link ChangesFollower} will suppress transient errors indefinitely and
  * endeavour to run to completion or listen forever. For applications where that
@@ -82,6 +82,7 @@ export enum Mode {
  * configuration has sufficiently long timeouts.
  */
 export class ChangesFollower {
+  /** @internal */
   static BATCH_SIZE = 10_000;
 
   // Initialization fields
@@ -93,7 +94,7 @@ export class ChangesFollower {
 
   private limit: number;
 
-  changesResultIterator: ChangesResultIterableIterator;
+  private changesResultIterator: ChangesResultIterableIterator;
 
   /**
    * Create a new {@link ChangesFollower} using the supplied client and params that
@@ -146,13 +147,13 @@ export class ChangesFollower {
    *  * a terminal error (e.g. unauthorized client).
    *  * transient errors occur for longer than the error suppression duration.
    *  * the number of changes received reaches the limit specified in the {@link CloudantV1.PostChangesParams} used to instantiate this {@link ChangesFollower}.
-   *  * {@link ChangesFollower#stop()} is called.
+   *  * {@link stop} is called.
    *
    * The same change may be received more than once.
    *
    * @return {Stream} at least one {@link ChangesResultItem} per change
    * @throws {Error} if:
-   *  * {@link ChangesFollower#start} or {@link ChangesFollower#startOneOff} was already called.
+   *  * {@link start} or {@link startOneOff} was already called.
    *  * a terminal error or unsuppressed transient error is received from the service when fetching changes.
    */
   start(): Stream<ChangesResultItem> {
@@ -167,13 +168,13 @@ export class ChangesFollower {
    *  * a terminal error (e.g. unauthorized client).
    *  * transient errors occur for longer than the error suppression duration.
    *  * the number of changes received reaches the limit specified in the {@link CloudantV1.PostChangesParams} used to instantiate this {@link ChangesFollower}.
-   *  * {@link ChangesFollower#stop} is called.
+   *  * {@link stop} is called.
    *
    * The same change may be received more than once.
    *
    * @return {Stream} at least one {@link ChangesResultItem} per change
    * @throws {Error} if:
-   *  * {@link ChangesFollower#start} or {@link ChangesFollower#startOneOff} was already called.
+   *  * {@link start} or {@link startOneOff} was already called.
    *  * a terminal error or unsuppressed transient error is received from the service when fetching changes.
    */
   startOneOff(): Stream<ChangesResultItem> {
@@ -183,8 +184,8 @@ export class ChangesFollower {
   /**
    * Stop this {@link ChangesFollower}.
    *
-   * @throws {Error} if {@link ChangesFollower#start}
-   * or {@link ChangesFollower#startOneOff} was not called first
+   * @throws {Error} if {@link start}
+   * or {@link startOneOff} was not called first
    */
   stop() {
     if (this.changesResultIterator) {
