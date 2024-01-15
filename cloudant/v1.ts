@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as extend from 'extend';
+import extend from 'extend';
 import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
 import {
   Authenticator,
