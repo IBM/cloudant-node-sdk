@@ -24,6 +24,7 @@ export {
   BasicAuthenticator,
   IamAuthenticator,
   CouchdbSessionAuthenticator,
+  CouchdbSessionAuthenticatorOptions,
 } from './auth';
 
 export { ChangesFollower } from './cloudant/features/changesFollower';
