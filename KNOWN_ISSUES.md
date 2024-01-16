@@ -106,7 +106,7 @@ Some issues with older server versions can be worked around by disabling
 compression of request bodies. This is an example of how to do that.
 
 ```js
-const { CloudantV1 } = require('@ibm-cloud/cloudant');
+import { CloudantV1 } from '@ibm-cloud/cloudant';
 const client = CloudantV1.newInstance({ serviceName: 'YOUR_SERVICE_NAME' });
 client.setEnableGzipCompression(false);
 ...

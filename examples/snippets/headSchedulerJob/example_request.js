@@ -1,5 +1,5 @@
 // section: code
-const { CloudantV1 } = require('@ibm-cloud/cloudant');
+import { CloudantV1 } from '@ibm-cloud/cloudant';
 
 const service = CloudantV1.newInstance({});
 
