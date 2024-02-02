@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@types/node": "18.19.14",
-    "ibm-cloud-sdk-core": "4.2.2"
+    "ibm-cloud-sdk-core": "4.2.3"
   },
   "devDependencies": {
     "@types/extend": "3.0.4",
