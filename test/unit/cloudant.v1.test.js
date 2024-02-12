@@ -453,13 +453,17 @@ describe('CloudantV1', () => {
     describe('positive tests', () => {
       function __getDbUpdatesTest() {
         // Construct the params object for operation getDbUpdates
+        const descending = false;
         const feed = 'normal';
         const heartbeat = 0;
+        const limit = 0;
         const timeout = 60000;
         const since = '0';
         const getDbUpdatesParams = {
+          descending,
           feed,
           heartbeat,
+          limit,
           timeout,
           since,
         };
@@ -478,8 +482,10 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.qs.descending).toEqual(descending);
         expect(mockRequestOptions.qs.feed).toEqual(feed);
         expect(mockRequestOptions.qs.heartbeat).toEqual(heartbeat);
+        expect(mockRequestOptions.qs.limit).toEqual(limit);
         expect(mockRequestOptions.qs.timeout).toEqual(timeout);
         expect(mockRequestOptions.qs.since).toEqual(since);
       }
