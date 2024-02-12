@@ -348,6 +348,8 @@ class CloudantV1 extends CloudantBaseService {
    * and might repeat changes. Polling modes for this method work like polling modes for the changes feed.
    *
    * @param {Object} [params] - The parameters to send to the service.
+   * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
+   * key order.
    * @param {string} [params.feed] - Query parameter to specify the changes feed type.
    * @param {number} [params.heartbeat] - Query parameter to specify the period in milliseconds after which an empty
    * line is sent in the results. Off by default and only applicable for
@@ -361,6 +363,8 @@ class CloudantV1 extends CloudantBaseService {
    *   * Switch to scheduled usage of one of the non-continuous changes feed types
    *     (`normal` or `longpoll`).
    *   * Use TCP keepalive.
+   * @param {number} [params.limit] - Query parameter to specify the number of returned documents to limit the result
+   * to.
    * @param {number} [params.timeout] - Query parameter to specify the maximum period in milliseconds to wait for a
    * change before the response is sent, even if there are no results. Only applicable for `longpoll` or `continuous`
    * feeds. Default value is specified by `httpd/changes_timeout` configuration option. Note that `60000` value is also
@@ -377,15 +381,17 @@ class CloudantV1 extends CloudantBaseService {
     CloudantV1._logger.warn('A deprecated operation has been invoked: getDbUpdates');
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['feed', 'heartbeat', 'timeout', 'since', 'headers'];
+    const _validParams = ['descending', 'feed', 'heartbeat', 'limit', 'timeout', 'since', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
     }
 
     const query = {
+      'descending': _params.descending,
       'feed': _params.feed,
       'heartbeat': _params.heartbeat,
+      'limit': _params.limit,
       'timeout': _params.timeout,
       'since': _params.since,
     };
@@ -7098,6 +7104,8 @@ namespace CloudantV1 {
 
   /** Parameters for the `getDbUpdates` operation. */
   export interface GetDbUpdatesParams {
+    /** Query parameter to specify whether to return the documents in descending by key order. */
+    descending?: boolean;
     /** Query parameter to specify the changes feed type. */
     feed?: GetDbUpdatesConstants.Feed | string;
     /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Off
@@ -7114,6 +7122,8 @@ namespace CloudantV1 {
      *    * Use TCP keepalive.
      */
     heartbeat?: number;
+    /** Query parameter to specify the number of returned documents to limit the result to. */
+    limit?: number;
     /** Query parameter to specify the maximum period in milliseconds to wait for a change before the response is
      *  sent, even if there are no results. Only applicable for `longpoll` or `continuous` feeds. Default value is
      *  specified by `httpd/changes_timeout` configuration option. Note that `60000` value is also the default maximum

@@ -91,8 +91,10 @@ describe('CloudantV1_integration', () => {
 
   test('getDbUpdates()', async () => {
     const params = {
+      descending: false,
       feed: 'normal',
       heartbeat: 0,
+      limit: 0,
       timeout: 60000,
       since: '0',
     };
