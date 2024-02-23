@@ -627,7 +627,7 @@ describe('CloudantV1_integration', () => {
     // Attachment
     const attachmentModel = {
       content_type: 'testString',
-      data: 'This is a mock byte array value.',
+      data: 'VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=',
       digest: 'testString',
       encoded_length: 0,
       encoding: 'testString',
@@ -1455,7 +1455,7 @@ describe('CloudantV1_integration', () => {
     // Attachment
     const attachmentModel = {
       content_type: 'testString',
-      data: 'This is a mock byte array value.',
+      data: 'VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=',
       digest: 'testString',
       encoded_length: 0,
       encoding: 'testString',
