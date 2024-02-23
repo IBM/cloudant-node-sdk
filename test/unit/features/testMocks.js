@@ -71,7 +71,7 @@ function mockRandomChangesResult(numberOfBatches) {
       result: {
         results: changesResultItems,
         pending,
-        last_seq: changesResultItems[changesResultItems.length - 1].seq,
+        lastSeq: changesResultItems[changesResultItems.length - 1].seq,
       },
     });
   }
@@ -98,7 +98,7 @@ function mockAlternatingBatchErrorThenPerpetualSupplier(batches) {
       result: {
         results: [],
         pending: 0,
-        last_seq: generateSeq(512, '1'),
+        lastSeq: generateSeq(512, '1'),
       },
     })
   );
@@ -113,7 +113,7 @@ function getPerpetualSupplierResponse(size = ChangesFollower.BATCH_SIZE) {
     result: {
       results: changesResultItems,
       pending: 5,
-      last_seq: changesResultItems[changesResultItems.length - 1].seq,
+      lastSeq: changesResultItems[changesResultItems.length - 1].seq,
     },
   };
 }

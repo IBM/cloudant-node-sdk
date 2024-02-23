@@ -53,7 +53,7 @@ let DEFAULT_PARAMS;
 describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
   const emptyResult = {
     results: [],
-    last_seq: mode === Mode.LISTEN ? 'now' : '0',
+    lastSeq: mode === Mode.LISTEN ? 'now' : '0',
     pending: Number.MAX_VALUE,
   };
   beforeEach(() => {
@@ -351,11 +351,11 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
             }
             case Action.SUPPRESS:
               // Expected a suppression result, which will have
-              // the pending/last_seq of the previous success
+              // the pending/lastSeq of the previous success
               // response or the empty response if there hasn't
               // been a success.
               expectedResults.push({
-                last_seq: result.last_seq,
+                lastSeq: result.lastSeq,
                 pending: result.pending,
                 results: [],
               });
