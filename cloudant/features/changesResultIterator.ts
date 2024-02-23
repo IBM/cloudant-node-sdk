@@ -121,8 +121,8 @@ export class ChangesResultIterableIterator
         .then((info) => {
           if (
             info.result &&
-            'doc_count' in info.result &&
-            info.result.doc_count > 0 &&
+            'docCount' in info.result &&
+            info.result.docCount > 0 &&
             'sizes' in info.result &&
             'external' in info.result.sizes &&
             info.result.sizes.external > 0
@@ -132,7 +132,7 @@ export class ChangesResultIterableIterator
             this.params.limit =
               Math.floor(
                 (5 * 1024 * 1024) /
-                  (info.result.sizes.external / info.result.doc_count + 500)
+                  (info.result.sizes.external / info.result.docCount + 500)
               ) || 1;
           }
         });
@@ -211,7 +211,7 @@ export class ChangesResultIterableIterator
           this.successTimestamp = Date.now();
         }
 
-        this.since = response.result.last_seq;
+        this.since = response.result.lastSeq;
         this.pending = response.result.pending;
 
         if (this.mode === Mode.FINITE && this.pending === 0) {
@@ -269,7 +269,7 @@ export class ChangesResultIterableIterator
               {
                 done: false,
                 value: {
-                  last_seq: this.since,
+                  lastSeq: this.since,
                   pending: this.pending,
                   results: [],
                 },

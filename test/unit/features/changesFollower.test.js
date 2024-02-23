@@ -326,7 +326,7 @@ describe('Test ChangesFollower', () => {
           result: {
             results: generateChangesResultItems(),
             pending: 5,
-            last_seq: generateSeq(512, '1'),
+            lastSeq: generateSeq(512, '1'),
           },
         })
       );
@@ -605,13 +605,13 @@ describe('Test ChangesFollower', () => {
    * 5 MiB / 1023 bytes = 5125 docs per batch (rounded down)
    */
   it('testBatchSize', (done) => {
-    const doc_count = 500000;
+    const docCount = 500000;
 
     getDatabaseInformationPromiseMock.mockImplementation(() =>
       Promise.resolve({
         result: {
-          doc_count,
-          sizes: { external: doc_count * 523 },
+          docCount,
+          sizes: { external: docCount * 523 },
         },
       })
     );
@@ -646,12 +646,12 @@ describe('Test ChangesFollower', () => {
    *
    */
   it('testBatchSizeMin', (done) => {
-    const doc_count = 1;
+    const docCount = 1;
 
     getDatabaseInformationPromiseMock.mockImplementation(() =>
       Promise.resolve({
         result: {
-          doc_count,
+          docCount,
           sizes: { external: 5 * 1024 * 1024 - 1 },
         },
       })
@@ -680,13 +680,13 @@ describe('Test ChangesFollower', () => {
     });
   });
   it('testBatchSizeLimit', (done) => {
-    const doc_count = 500000;
+    const docCount = 500000;
 
     getDatabaseInformationPromiseMock.mockImplementation(() =>
       Promise.resolve({
         result: {
-          doc_count,
-          sizes: { external: doc_count * 523 },
+          docCount,
+          sizes: { external: docCount * 523 },
         },
       })
     );

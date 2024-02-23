@@ -46,7 +46,7 @@ describe('Test ChangesResultItemStream', () => {
     producerStream.on('close', () => {
       const errorMsg =
         'Parameter validation errors:\n' +
-        '  Missing required parameters: last_seq, pending, results\n' +
+        '  Missing required parameters: lastSeq, pending, results\n' +
         '  Found invalid parameters: not';
       expect(consumerStreamEvents).toEqual({
         closed: true,
@@ -96,7 +96,7 @@ describe('Test ChangesResultItemStream', () => {
     producerStream.emit('data', {
       results: generateChangesResultItems(),
       pending: 5,
-      last_seq: generateSeq(512, '1'),
+      lastSeq: generateSeq(512, '1'),
     });
     producerStream.end();
   });

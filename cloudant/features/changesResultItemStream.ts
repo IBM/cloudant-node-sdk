@@ -37,7 +37,7 @@ export class ChangesResultItemStream extends Stream<CloudantV1.ChangesResultItem
   }
 
   private getValidationError(params) {
-    const requiredParams = ['last_seq', 'pending', 'results'];
+    const requiredParams = ['lastSeq', 'pending', 'results'];
     return validateParams(params, requiredParams, requiredParams);
   }
 }
