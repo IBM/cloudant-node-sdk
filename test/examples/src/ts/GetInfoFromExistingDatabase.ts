@@ -31,8 +31,8 @@ const dbName = 'orders';
 
 // call service with embedded parameters:
 client.getDatabaseInformation({ db: dbName }).then((dbInfo) => {
-  const documentCount = dbInfo.result.doc_count;
-  const dbNameResult = dbInfo.result.db_name;
+  const documentCount = dbInfo.result.docCount;
+  const dbNameResult = dbInfo.result.dbName;
 
   // 4. Show document count in database =========================================
   console.log(
