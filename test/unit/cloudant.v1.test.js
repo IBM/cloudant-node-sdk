@@ -17,7 +17,7 @@
 // need to import the whole package to mock getAuthenticatorFromEnvironment
 const sdkCorePackage = require('ibm-cloud-sdk-core');
 
-const { NoAuthAuthenticator, unitTestUtils } = sdkCorePackage;
+const { BaseService, NoAuthAuthenticator, unitTestUtils } = sdkCorePackage;
 const CloudantV1 = require('../../dist/cloudant/v1');
 
 const {
@@ -1753,19 +1753,19 @@ describe('CloudantV1', () => {
 
       // AllDocsQuery
       const allDocsQueryModel = {
-        att_encoding_info: false,
+        attEncodingInfo: false,
         attachments: false,
         conflicts: false,
         descending: false,
-        include_docs: false,
-        inclusive_end: true,
+        includeDocs: false,
+        inclusiveEnd: true,
         limit: 0,
         skip: 0,
-        update_seq: false,
-        end_key: 'testString',
+        updateSeq: false,
+        endKey: 'testString',
         key: 'testString',
         keys: ['testString'],
-        start_key: 'testString',
+        startKey: 'testString',
       };
 
       function __postAllDocsQueriesTest() {
@@ -1791,7 +1791,12 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(mockRequestOptions.body.queries).toEqual(queries);
+        expect(mockRequestOptions.body.queries).toEqual(
+          BaseService.convertModel(
+            queries,
+            CloudantV1.AllDocsQuery.serialize,
+          )
+        );
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -1861,19 +1866,19 @@ describe('CloudantV1', () => {
 
       // AllDocsQuery
       const allDocsQueryModel = {
-        att_encoding_info: false,
+        attEncodingInfo: false,
         attachments: false,
         conflicts: false,
         descending: false,
-        include_docs: false,
-        inclusive_end: true,
+        includeDocs: false,
+        inclusiveEnd: true,
         limit: 0,
         skip: 0,
-        update_seq: false,
-        end_key: 'testString',
+        updateSeq: false,
+        endKey: 'testString',
         key: 'testString',
         keys: ['testString'],
-        start_key: 'testString',
+        startKey: 'testString',
       };
 
       function __postAllDocsQueriesAsStreamTest() {
@@ -1899,7 +1904,12 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(mockRequestOptions.body.queries).toEqual(queries);
+        expect(mockRequestOptions.body.queries).toEqual(
+          BaseService.convertModel(
+            queries,
+            CloudantV1.AllDocsQuery.serialize,
+          )
+        );
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.responseType).toBe('stream');
       }
@@ -1989,7 +1999,7 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(mockRequestOptions.body).toEqual(bulkDocs);
+        expect(mockRequestOptions.body).toEqual(CloudantV1.BulkDocs.serialize(bulkDocs));
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -2059,7 +2069,7 @@ describe('CloudantV1', () => {
 
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
-        atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
+        attsSince: ['1-99b02e08da151943c2dcb40090160bb8'],
         id: 'testString',
         rev: 'testString',
       };
@@ -2095,7 +2105,12 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(mockRequestOptions.body.docs).toEqual(docs);
+        expect(mockRequestOptions.body.docs).toEqual(
+          BaseService.convertModel(
+            docs,
+            CloudantV1.BulkGetQueryDocument.serialize,
+          )
+        );
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
         expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
@@ -2169,7 +2184,7 @@ describe('CloudantV1', () => {
 
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
-        atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
+        attsSince: ['1-99b02e08da151943c2dcb40090160bb8'],
         id: 'testString',
         rev: 'testString',
       };
@@ -2205,7 +2220,12 @@ describe('CloudantV1', () => {
         const expectedAccept = 'multipart/mixed';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(mockRequestOptions.body.docs).toEqual(docs);
+        expect(mockRequestOptions.body.docs).toEqual(
+          BaseService.convertModel(
+            docs,
+            CloudantV1.BulkGetQueryDocument.serialize,
+          )
+        );
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
         expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
@@ -2280,7 +2300,7 @@ describe('CloudantV1', () => {
 
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
-        atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
+        attsSince: ['1-99b02e08da151943c2dcb40090160bb8'],
         id: 'testString',
         rev: 'testString',
       };
@@ -2316,7 +2336,12 @@ describe('CloudantV1', () => {
         const expectedAccept = 'multipart/related';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(mockRequestOptions.body.docs).toEqual(docs);
+        expect(mockRequestOptions.body.docs).toEqual(
+          BaseService.convertModel(
+            docs,
+            CloudantV1.BulkGetQueryDocument.serialize,
+          )
+        );
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
         expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
@@ -2391,7 +2416,7 @@ describe('CloudantV1', () => {
 
       // BulkGetQueryDocument
       const bulkGetQueryDocumentModel = {
-        atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
+        attsSince: ['1-99b02e08da151943c2dcb40090160bb8'],
         id: 'testString',
         rev: 'testString',
       };
@@ -2427,7 +2452,12 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(mockRequestOptions.body.docs).toEqual(docs);
+        expect(mockRequestOptions.body.docs).toEqual(
+          BaseService.convertModel(
+            docs,
+            CloudantV1.BulkGetQueryDocument.serialize,
+          )
+        );
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
         expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
@@ -3512,10 +3542,10 @@ describe('CloudantV1', () => {
 
       // Attachment
       const attachmentModel = {
-        content_type: 'testString',
+        contentType: 'testString',
         data: 'VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=',
         digest: 'testString',
-        encoded_length: 0,
+        encodedLength: 0,
         encoding: 'testString',
         follows: true,
         length: 0,
@@ -3581,7 +3611,7 @@ describe('CloudantV1', () => {
         indexes: { 'key1': searchIndexDefinitionModel },
         language: 'javascript',
         options: designDocumentOptionsModel,
-        validate_doc_update: 'testString',
+        validateDocUpdate: 'testString',
         views: { 'key1': designDocumentViewsMapReduceModel },
         foo: 'testString',
       };
@@ -3620,7 +3650,7 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
-        expect(mockRequestOptions.body).toEqual(designDocument);
+        expect(mockRequestOptions.body).toEqual(CloudantV1.DesignDocument.serialize(designDocument));
         expect(mockRequestOptions.qs.batch).toEqual(batch);
         expect(mockRequestOptions.qs.new_edits).toEqual(newEdits);
         expect(mockRequestOptions.qs.rev).toEqual(rev);
@@ -3911,19 +3941,19 @@ describe('CloudantV1', () => {
 
       // AllDocsQuery
       const allDocsQueryModel = {
-        att_encoding_info: false,
+        attEncodingInfo: false,
         attachments: false,
         conflicts: false,
         descending: false,
-        include_docs: false,
-        inclusive_end: true,
+        includeDocs: false,
+        inclusiveEnd: true,
         limit: 0,
         skip: 0,
-        update_seq: false,
-        end_key: 'testString',
+        updateSeq: false,
+        endKey: 'testString',
         key: 'testString',
         keys: ['testString'],
-        start_key: 'testString',
+        startKey: 'testString',
       };
 
       function __postDesignDocsQueriesTest() {
@@ -3952,7 +3982,12 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Accept', accept);
-        expect(mockRequestOptions.body.queries).toEqual(queries);
+        expect(mockRequestOptions.body.queries).toEqual(
+          BaseService.convertModel(
+            queries,
+            CloudantV1.AllDocsQuery.serialize,
+          )
+        );
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -4331,25 +4366,25 @@ describe('CloudantV1', () => {
 
       // ViewQuery
       const viewQueryModel = {
-        att_encoding_info: false,
+        attEncodingInfo: false,
         attachments: false,
         conflicts: false,
         descending: false,
-        include_docs: false,
-        inclusive_end: true,
+        includeDocs: false,
+        inclusiveEnd: true,
         limit: 0,
         skip: 0,
-        update_seq: false,
-        end_key: 'testString',
-        end_key_doc_id: 'testString',
+        updateSeq: false,
+        endKey: 'testString',
+        endKeyDocId: 'testString',
         group: false,
-        group_level: 1,
+        groupLevel: 1,
         key: 'testString',
         keys: ['testString'],
         reduce: true,
         stable: false,
-        start_key: 'testString',
-        start_key_doc_id: 'testString',
+        startKey: 'testString',
+        startKeyDocId: 'testString',
         update: 'true',
       };
 
@@ -4380,7 +4415,12 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(mockRequestOptions.body.queries).toEqual(queries);
+        expect(mockRequestOptions.body.queries).toEqual(
+          BaseService.convertModel(
+            queries,
+            CloudantV1.ViewQuery.serialize,
+          )
+        );
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.view).toEqual(view);
@@ -4456,25 +4496,25 @@ describe('CloudantV1', () => {
 
       // ViewQuery
       const viewQueryModel = {
-        att_encoding_info: false,
+        attEncodingInfo: false,
         attachments: false,
         conflicts: false,
         descending: false,
-        include_docs: false,
-        inclusive_end: true,
+        includeDocs: false,
+        inclusiveEnd: true,
         limit: 0,
         skip: 0,
-        update_seq: false,
-        end_key: 'testString',
-        end_key_doc_id: 'testString',
+        updateSeq: false,
+        endKey: 'testString',
+        endKeyDocId: 'testString',
         group: false,
-        group_level: 1,
+        groupLevel: 1,
         key: 'testString',
         keys: ['testString'],
         reduce: true,
         stable: false,
-        start_key: 'testString',
-        start_key_doc_id: 'testString',
+        startKey: 'testString',
+        startKeyDocId: 'testString',
         update: 'true',
       };
 
@@ -4505,7 +4545,12 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(mockRequestOptions.body.queries).toEqual(queries);
+        expect(mockRequestOptions.body.queries).toEqual(
+          BaseService.convertModel(
+            queries,
+            CloudantV1.ViewQuery.serialize,
+          )
+        );
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.view).toEqual(view);
@@ -6359,11 +6404,11 @@ describe('CloudantV1', () => {
 
       // IndexDefinition
       const indexDefinitionModel = {
-        default_analyzer: analyzerModel,
-        default_field: indexTextOperatorDefaultFieldModel,
+        defaultAnalyzer: analyzerModel,
+        defaultField: indexTextOperatorDefaultFieldModel,
         fields: [indexFieldModel],
-        index_array_lengths: true,
-        partial_filter_selector: { anyKey: 'anyValue' },
+        indexArrayLengths: true,
+        partialFilterSelector: { anyKey: 'anyValue' },
       };
 
       function __postIndexTest() {
@@ -6397,7 +6442,7 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(mockRequestOptions.body.index).toEqual(index);
+        expect(mockRequestOptions.body.index).toEqual(CloudantV1.IndexDefinition.serialize(indexDefinitionModel));
         expect(mockRequestOptions.body.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.body.name).toEqual(name);
         expect(mockRequestOptions.body.partitioned).toEqual(partitioned);
@@ -7519,10 +7564,10 @@ describe('CloudantV1', () => {
 
       // Attachment
       const attachmentModel = {
-        content_type: 'testString',
+        contentType: 'testString',
         data: 'VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=',
         digest: 'testString',
-        encoded_length: 0,
+        encodedLength: 0,
         encoding: 'testString',
         follows: true,
         length: 0,
@@ -7557,7 +7602,7 @@ describe('CloudantV1', () => {
 
       // ReplicationDatabaseAuthIam
       const replicationDatabaseAuthIamModel = {
-        api_key: 'testString',
+        apiKey: 'testString',
       };
 
       // ReplicationDatabaseAuth
@@ -7592,29 +7637,29 @@ describe('CloudantV1', () => {
         _revisions: revisionsModel,
         _revs_info: [documentRevisionStatusModel],
         cancel: true,
-        checkpoint_interval: 30000,
-        connection_timeout: 30000,
+        checkpointInterval: 30000,
+        connectionTimeout: 30000,
         continuous: false,
-        create_target: false,
-        create_target_params: replicationCreateTargetParametersModel,
-        doc_ids: ['testString'],
+        createTarget: false,
+        createTargetParams: replicationCreateTargetParametersModel,
+        docIds: ['testString'],
         filter: 'testString',
-        http_connections: 20,
-        query_params: { 'key1': 'testString' },
-        retries_per_request: 5,
+        httpConnections: 20,
+        queryParams: { 'key1': 'testString' },
+        retriesPerRequest: 5,
         selector: { anyKey: 'anyValue' },
-        since_seq: 'testString',
-        socket_options: 'testString',
+        sinceSeq: 'testString',
+        socketOptions: 'testString',
         source: replicationDatabaseModel,
-        source_proxy: 'testString',
+        sourceProxy: 'testString',
         target: replicationDatabaseModel,
-        target_proxy: 'testString',
-        use_bulk_get: true,
-        use_checkpoints: true,
-        user_ctx: userContextModel,
-        winning_revs_only: false,
-        worker_batch_size: 500,
-        worker_processes: 4,
+        targetProxy: 'testString',
+        useBulkGet: true,
+        useCheckpoints: true,
+        userCtx: userContextModel,
+        winningRevsOnly: false,
+        workerBatchSize: 500,
+        workerProcesses: 4,
         foo: 'testString',
       };
 
@@ -7650,7 +7695,7 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
-        expect(mockRequestOptions.body).toEqual(replicationDocument);
+        expect(mockRequestOptions.body).toEqual(CloudantV1.ReplicationDocument.serialize(replicationDocument));
         expect(mockRequestOptions.qs.batch).toEqual(batch);
         expect(mockRequestOptions.qs.new_edits).toEqual(newEdits);
         expect(mockRequestOptions.qs.rev).toEqual(rev);
@@ -8205,8 +8250,8 @@ describe('CloudantV1', () => {
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(mockRequestOptions.body.admins).toEqual(admins);
-        expect(mockRequestOptions.body.members).toEqual(members);
+        expect(mockRequestOptions.body.admins).toEqual(CloudantV1.SecurityObject.serialize(securityObjectModel));
+        expect(mockRequestOptions.body.members).toEqual(CloudantV1.SecurityObject.serialize(securityObjectModel));
         expect(mockRequestOptions.body.cloudant).toEqual(cloudant);
         expect(mockRequestOptions.body.couchdb_auth_only).toEqual(couchdbAuthOnly);
         expect(mockRequestOptions.path.db).toEqual(db);
@@ -8370,8 +8415,8 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.cloudant).toEqual(cloudant);
-        expect(mockRequestOptions.body.admins).toEqual(admins);
-        expect(mockRequestOptions.body.members).toEqual(members);
+        expect(mockRequestOptions.body.admins).toEqual(CloudantV1.SecurityObject.serialize(securityObjectModel));
+        expect(mockRequestOptions.body.members).toEqual(CloudantV1.SecurityObject.serialize(securityObjectModel));
         expect(mockRequestOptions.body.couchdb_auth_only).toEqual(couchdbAuthOnly);
         expect(mockRequestOptions.path.db).toEqual(db);
       }

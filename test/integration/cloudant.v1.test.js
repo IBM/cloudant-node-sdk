@@ -306,19 +306,19 @@ describe('CloudantV1_integration', () => {
 
     // AllDocsQuery
     const allDocsQueryModel = {
-      att_encoding_info: false,
+      attEncodingInfo: false,
       attachments: false,
       conflicts: false,
       descending: false,
-      include_docs: false,
-      inclusive_end: true,
+      includeDocs: false,
+      inclusiveEnd: true,
       limit: 0,
       skip: 0,
-      update_seq: false,
-      end_key: 'testString',
+      updateSeq: false,
+      endKey: 'testString',
       key: 'testString',
       keys: ['testString'],
-      start_key: 'testString',
+      startKey: 'testString',
     };
 
     const params = {
@@ -337,19 +337,19 @@ describe('CloudantV1_integration', () => {
 
     // AllDocsQuery
     const allDocsQueryModel = {
-      att_encoding_info: false,
+      attEncodingInfo: false,
       attachments: false,
       conflicts: false,
       descending: false,
-      include_docs: false,
-      inclusive_end: true,
+      includeDocs: false,
+      inclusiveEnd: true,
       limit: 0,
       skip: 0,
-      update_seq: false,
-      end_key: 'testString',
+      updateSeq: false,
+      endKey: 'testString',
       key: 'testString',
       keys: ['testString'],
-      start_key: 'testString',
+      startKey: 'testString',
     };
 
     const params = {
@@ -380,7 +380,7 @@ describe('CloudantV1_integration', () => {
 
     // BulkGetQueryDocument
     const bulkGetQueryDocumentModel = {
-      atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
+      attsSince: ['1-99b02e08da151943c2dcb40090160bb8'],
       id: 'testString',
       rev: 'testString',
     };
@@ -405,7 +405,7 @@ describe('CloudantV1_integration', () => {
 
     // BulkGetQueryDocument
     const bulkGetQueryDocumentModel = {
-      atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
+      attsSince: ['1-99b02e08da151943c2dcb40090160bb8'],
       id: 'testString',
       rev: 'testString',
     };
@@ -430,7 +430,7 @@ describe('CloudantV1_integration', () => {
 
     // BulkGetQueryDocument
     const bulkGetQueryDocumentModel = {
-      atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
+      attsSince: ['1-99b02e08da151943c2dcb40090160bb8'],
       id: 'testString',
       rev: 'testString',
     };
@@ -455,7 +455,7 @@ describe('CloudantV1_integration', () => {
 
     // BulkGetQueryDocument
     const bulkGetQueryDocumentModel = {
-      atts_since: ['1-99b02e08da151943c2dcb40090160bb8'],
+      attsSince: ['1-99b02e08da151943c2dcb40090160bb8'],
       id: 'testString',
       rev: 'testString',
     };
@@ -626,10 +626,10 @@ describe('CloudantV1_integration', () => {
 
     // Attachment
     const attachmentModel = {
-      content_type: 'testString',
+      contentType: 'testString',
       data: 'VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=',
       digest: 'testString',
-      encoded_length: 0,
+      encodedLength: 0,
       encoding: 'testString',
       follows: true,
       length: 0,
@@ -695,7 +695,7 @@ describe('CloudantV1_integration', () => {
       indexes: { 'key1': searchIndexDefinitionModel },
       language: 'javascript',
       options: designDocumentOptionsModel,
-      validate_doc_update: 'testString',
+      validateDocUpdate: 'testString',
       views: { 'key1': designDocumentViewsMapReduceModel },
       foo: 'testString',
     };
@@ -758,19 +758,19 @@ describe('CloudantV1_integration', () => {
 
     // AllDocsQuery
     const allDocsQueryModel = {
-      att_encoding_info: false,
+      attEncodingInfo: false,
       attachments: false,
       conflicts: false,
       descending: false,
-      include_docs: false,
-      inclusive_end: true,
+      includeDocs: false,
+      inclusiveEnd: true,
       limit: 0,
       skip: 0,
-      update_seq: false,
-      end_key: 'testString',
+      updateSeq: false,
+      endKey: 'testString',
       key: 'testString',
       keys: ['testString'],
-      start_key: 'testString',
+      startKey: 'testString',
     };
 
     const params = {
@@ -856,25 +856,25 @@ describe('CloudantV1_integration', () => {
 
     // ViewQuery
     const viewQueryModel = {
-      att_encoding_info: false,
+      attEncodingInfo: false,
       attachments: false,
       conflicts: false,
       descending: false,
-      include_docs: false,
-      inclusive_end: true,
+      includeDocs: false,
+      inclusiveEnd: true,
       limit: 0,
       skip: 0,
-      update_seq: false,
-      end_key: 'testString',
-      end_key_doc_id: 'testString',
+      updateSeq: false,
+      endKey: 'testString',
+      endKeyDocId: 'testString',
       group: false,
-      group_level: 1,
+      groupLevel: 1,
       key: 'testString',
       keys: ['testString'],
       reduce: true,
       stable: false,
-      start_key: 'testString',
-      start_key_doc_id: 'testString',
+      startKey: 'testString',
+      startKeyDocId: 'testString',
       update: 'true',
     };
 
@@ -896,25 +896,25 @@ describe('CloudantV1_integration', () => {
 
     // ViewQuery
     const viewQueryModel = {
-      att_encoding_info: false,
+      attEncodingInfo: false,
       attachments: false,
       conflicts: false,
       descending: false,
-      include_docs: false,
-      inclusive_end: true,
+      includeDocs: false,
+      inclusiveEnd: true,
       limit: 0,
       skip: 0,
-      update_seq: false,
-      end_key: 'testString',
-      end_key_doc_id: 'testString',
+      updateSeq: false,
+      endKey: 'testString',
+      endKeyDocId: 'testString',
       group: false,
-      group_level: 1,
+      groupLevel: 1,
       key: 'testString',
       keys: ['testString'],
       reduce: true,
       stable: false,
-      start_key: 'testString',
-      start_key_doc_id: 'testString',
+      startKey: 'testString',
+      startKeyDocId: 'testString',
       update: 'true',
     };
 
@@ -1284,11 +1284,11 @@ describe('CloudantV1_integration', () => {
 
     // IndexDefinition
     const indexDefinitionModel = {
-      default_analyzer: analyzerModel,
-      default_field: indexTextOperatorDefaultFieldModel,
+      defaultAnalyzer: analyzerModel,
+      defaultField: indexTextOperatorDefaultFieldModel,
       fields: [indexFieldModel],
-      index_array_lengths: true,
-      partial_filter_selector: { anyKey: 'anyValue' },
+      indexArrayLengths: true,
+      partialFilterSelector: { anyKey: 'anyValue' },
     };
 
     const params = {
@@ -1454,10 +1454,10 @@ describe('CloudantV1_integration', () => {
 
     // Attachment
     const attachmentModel = {
-      content_type: 'testString',
+      contentType: 'testString',
       data: 'VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=',
       digest: 'testString',
-      encoded_length: 0,
+      encodedLength: 0,
       encoding: 'testString',
       follows: true,
       length: 0,
@@ -1492,7 +1492,7 @@ describe('CloudantV1_integration', () => {
 
     // ReplicationDatabaseAuthIam
     const replicationDatabaseAuthIamModel = {
-      api_key: 'testString',
+      apiKey: 'testString',
     };
 
     // ReplicationDatabaseAuth
@@ -1527,29 +1527,29 @@ describe('CloudantV1_integration', () => {
       _revisions: revisionsModel,
       _revs_info: [documentRevisionStatusModel],
       cancel: true,
-      checkpoint_interval: 30000,
-      connection_timeout: 30000,
+      checkpointInterval: 30000,
+      connectionTimeout: 30000,
       continuous: false,
-      create_target: false,
-      create_target_params: replicationCreateTargetParametersModel,
-      doc_ids: ['testString'],
+      createTarget: false,
+      createTargetParams: replicationCreateTargetParametersModel,
+      docIds: ['testString'],
       filter: 'testString',
-      http_connections: 20,
-      query_params: { 'key1': 'testString' },
-      retries_per_request: 5,
+      httpConnections: 20,
+      queryParams: { 'key1': 'testString' },
+      retriesPerRequest: 5,
       selector: { anyKey: 'anyValue' },
-      since_seq: 'testString',
-      socket_options: 'testString',
+      sinceSeq: 'testString',
+      socketOptions: 'testString',
       source: replicationDatabaseModel,
-      source_proxy: 'testString',
+      sourceProxy: 'testString',
       target: replicationDatabaseModel,
-      target_proxy: 'testString',
-      use_bulk_get: true,
-      use_checkpoints: true,
-      user_ctx: userContextModel,
-      winning_revs_only: false,
-      worker_batch_size: 500,
-      worker_processes: 4,
+      targetProxy: 'testString',
+      useBulkGet: true,
+      useCheckpoints: true,
+      userCtx: userContextModel,
+      winningRevsOnly: false,
+      workerBatchSize: 500,
+      workerProcesses: 4,
       foo: 'testString',
     };
 
