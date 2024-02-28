@@ -29,6 +29,9 @@ import { getSdkHeaders } from '../lib/common';
 import CloudantBaseService from '../lib/cloudantBaseService';
 import getAuthenticatorFromEnvCloudantExtension from '../lib/getAuthenticatorFromEnvCloudantExtension';
 
+/* eslint @typescript-eslint/no-use-before-define: 0 */
+/* eslint max-classes-per-file: 0 */
+
 /**
  * NoSQL database based on Apache CouchDB
  *
@@ -143,7 +146,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ServerInformation.deserialize,
+    );
   }
 
   /**
@@ -187,7 +193,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.MembershipInformation.deserialize,
+    );
   }
 
   /**
@@ -238,7 +247,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.UuidsResult.deserialize,
+    );
   }
 
   /**
@@ -281,7 +293,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.CapacityThroughputInformation.deserialize,
+    );
   }
 
   /**
@@ -332,7 +347,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.CapacityThroughputInformation.deserialize,
+    );
   }
   /*************************
    * changes
@@ -416,7 +434,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DbUpdates.deserialize,
+    );
   }
 
   /**
@@ -584,7 +605,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ChangesResult.deserialize,
+    );
   }
 
   /**
@@ -914,7 +938,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DbsInfoResult.deserialize,
+    );
   }
 
   /**
@@ -964,7 +991,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.Ok.deserialize,
+    );
   }
 
   /**
@@ -1010,7 +1040,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DatabaseInformation.deserialize,
+    );
   }
 
   /**
@@ -1068,7 +1101,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.Ok.deserialize,
+    );
   }
   /*************************
    * documents
@@ -1171,7 +1207,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const body = _params.document;
+    const body = CloudantV1.Document.serialize(_params.document);
     const query = {
       'batch': _params.batch,
     };
@@ -1203,7 +1239,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
   }
 
   /**
@@ -1291,7 +1330,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.AllDocsResult.deserialize,
+    );
   }
 
   /**
@@ -1410,7 +1452,7 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'queries': _params.queries,
+      'queries': BaseService.convertModel(_params.queries, CloudantV1.AllDocsQuery.serialize),
     };
 
     const path = {
@@ -1439,7 +1481,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.AllDocsQueriesResult.deserialize,
+    );
   }
 
   /**
@@ -1469,7 +1514,7 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'queries': _params.queries,
+      'queries': BaseService.convertModel(_params.queries, CloudantV1.AllDocsQuery.serialize),
     };
 
     const path = {
@@ -1526,7 +1571,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const body = _params.bulkDocs;
+    const body = CloudantV1.BulkDocs.serialize(_params.bulkDocs);
     const path = {
       'db': _params.db,
     };
@@ -1553,7 +1598,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
   }
 
   /**
@@ -1587,7 +1635,7 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'docs': _params.docs,
+      'docs': BaseService.convertModel(_params.docs, CloudantV1.BulkGetQueryDocument.serialize),
     };
 
     const query = {
@@ -1624,7 +1672,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.BulkGetResult.deserialize,
+    );
   }
 
   /**
@@ -1658,7 +1709,7 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'docs': _params.docs,
+      'docs': BaseService.convertModel(_params.docs, CloudantV1.BulkGetQueryDocument.serialize),
     };
 
     const query = {
@@ -1730,7 +1781,7 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'docs': _params.docs,
+      'docs': BaseService.convertModel(_params.docs, CloudantV1.BulkGetQueryDocument.serialize),
     };
 
     const query = {
@@ -1802,7 +1853,7 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'docs': _params.docs,
+      'docs': BaseService.convertModel(_params.docs, CloudantV1.BulkGetQueryDocument.serialize),
     };
 
     const query = {
@@ -1904,7 +1955,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
   }
 
   /**
@@ -1991,7 +2045,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.Document.deserialize,
+    );
   }
 
   /**
@@ -2294,7 +2351,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const body = _params.document;
+    const body = CloudantV1.Document.serialize(_params.document);
     const query = {
       'batch': _params.batch,
       'new_edits': _params.newEdits,
@@ -2330,7 +2387,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
   }
   /*************************
    * designDocuments
@@ -2455,7 +2515,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
   }
 
   /**
@@ -2543,7 +2606,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DesignDocument.deserialize,
+    );
   }
 
   /**
@@ -2578,7 +2644,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const body = _params.designDocument;
+    const body = CloudantV1.DesignDocument.serialize(_params.designDocument);
     const query = {
       'batch': _params.batch,
       'new_edits': _params.newEdits,
@@ -2614,7 +2680,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
   }
 
   /**
@@ -2666,7 +2735,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DesignDocumentInformation.deserialize,
+    );
   }
 
   /**
@@ -2755,7 +2827,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.AllDocsResult.deserialize,
+    );
   }
 
   /**
@@ -2785,7 +2860,7 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'queries': _params.queries,
+      'queries': BaseService.convertModel(_params.queries, CloudantV1.AllDocsQuery.serialize),
     };
 
     const path = {
@@ -2814,7 +2889,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.AllDocsQueriesResult.deserialize,
+    );
   }
   /*************************
    * views
@@ -2942,7 +3020,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ViewResult.deserialize,
+    );
   }
 
   /**
@@ -3099,7 +3180,7 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'queries': _params.queries,
+      'queries': BaseService.convertModel(_params.queries, CloudantV1.ViewQuery.serialize),
     };
 
     const path = {
@@ -3130,7 +3211,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ViewQueriesResult.deserialize,
+    );
   }
 
   /**
@@ -3161,7 +3245,7 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'queries': _params.queries,
+      'queries': BaseService.convertModel(_params.queries, CloudantV1.ViewQuery.serialize),
     };
 
     const path = {
@@ -3246,7 +3330,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.PartitionInformation.deserialize,
+    );
   }
 
   /**
@@ -3336,7 +3423,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.AllDocsResult.deserialize,
+    );
   }
 
   /**
@@ -3524,7 +3614,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.SearchResult.deserialize,
+    );
   }
 
   /**
@@ -3741,7 +3834,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ViewResult.deserialize,
+    );
   }
 
   /**
@@ -3981,7 +4077,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ExplainResult.deserialize,
+    );
   }
 
   /**
@@ -4105,7 +4204,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.FindResult.deserialize,
+    );
   }
 
   /**
@@ -4355,7 +4457,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ExplainResult.deserialize,
+    );
   }
 
   /**
@@ -4482,7 +4587,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.FindResult.deserialize,
+    );
   }
 
   /**
@@ -4660,7 +4768,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.IndexesInformation.deserialize,
+    );
   }
 
   /**
@@ -4695,7 +4806,7 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'index': _params.index,
+      'index': CloudantV1.IndexDefinition.serialize(_params.index),
       'ddoc': _params.ddoc,
       'name': _params.name,
       'partitioned': _params.partitioned,
@@ -4728,7 +4839,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.IndexResult.deserialize,
+    );
   }
 
   /**
@@ -4781,7 +4895,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.Ok.deserialize,
+    );
   }
   /*************************
    * searches
@@ -4836,7 +4953,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.SearchAnalyzeResult.deserialize,
+    );
   }
 
   /**
@@ -4959,7 +5079,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.SearchResult.deserialize,
+    );
   }
 
   /**
@@ -5136,7 +5259,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.SearchInfoResult.deserialize,
+    );
   }
   /*************************
    * replication
@@ -5348,7 +5474,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
   }
 
   /**
@@ -5433,7 +5562,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ReplicationDocument.deserialize,
+    );
   }
 
   /**
@@ -5467,7 +5599,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const body = _params.replicationDocument;
+    const body = CloudantV1.ReplicationDocument.serialize(_params.replicationDocument);
     const query = {
       'batch': _params.batch,
       'new_edits': _params.newEdits,
@@ -5502,7 +5634,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
   }
 
   /**
@@ -5559,7 +5694,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.SchedulerDocsResult.deserialize,
+    );
   }
 
   /**
@@ -5608,7 +5746,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.SchedulerDocument.deserialize,
+    );
   }
 
   /**
@@ -5662,7 +5803,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.SchedulerJobsResult.deserialize,
+    );
   }
 
   /**
@@ -5710,7 +5854,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.SchedulerJob.deserialize,
+    );
   }
   /*************************
    * authentication
@@ -5755,7 +5902,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.SessionInformation.deserialize,
+    );
   }
   /*************************
    * authorization
@@ -5808,7 +5958,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.Security.deserialize,
+    );
   }
 
   /**
@@ -5845,8 +5998,8 @@ class CloudantV1 extends CloudantBaseService {
     }
 
     const body = {
-      'admins': _params.admins,
-      'members': _params.members,
+      'admins': CloudantV1.SecurityObject.serialize(_params.admins),
+      'members': CloudantV1.SecurityObject.serialize(_params.members),
       'cloudant': _params.cloudant,
       'couchdb_auth_only': _params.couchdbAuthOnly,
     };
@@ -5877,7 +6030,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.Ok.deserialize,
+    );
   }
 
   /**
@@ -5921,7 +6077,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ApiKeysResult.deserialize,
+    );
   }
 
   /**
@@ -5958,8 +6117,8 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = {
       'cloudant': _params.cloudant,
-      'admins': _params.admins,
-      'members': _params.members,
+      'admins': CloudantV1.SecurityObject.serialize(_params.admins),
+      'members': CloudantV1.SecurityObject.serialize(_params.members),
       'couchdb_auth_only': _params.couchdbAuthOnly,
     };
 
@@ -5989,7 +6148,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.Ok.deserialize,
+    );
   }
   /*************************
    * cORS
@@ -6035,7 +6197,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.CorsInformation.deserialize,
+    );
   }
 
   /**
@@ -6092,7 +6257,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.Ok.deserialize,
+    );
   }
   /*************************
    * attachments
@@ -6225,7 +6393,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
   }
 
   /**
@@ -6368,7 +6539,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
   }
   /*************************
    * localDocuments
@@ -6482,7 +6656,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
   }
 
   /**
@@ -6551,7 +6728,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.Document.deserialize,
+    );
   }
 
   /**
@@ -6581,7 +6761,7 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const body = _params.document;
+    const body = CloudantV1.Document.serialize(_params.document);
     const query = {
       'batch': _params.batch,
     };
@@ -6614,7 +6794,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
   }
   /*************************
    * databaseDetails
@@ -6671,7 +6854,11 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.RevsDiff.deserialize,
+      true
+    );
   }
 
   /**
@@ -6719,7 +6906,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ShardsInformation.deserialize,
+    );
   }
 
   /**
@@ -6770,7 +6960,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentShardInfo.deserialize,
+    );
   }
   /*************************
    * monitoring
@@ -6858,7 +7051,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ActiveTask.deserialize,
+    );
   }
 
   /**
@@ -6903,7 +7099,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.UpInformation.deserialize,
+    );
   }
 
   /**
@@ -6945,7 +7144,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ActivityTrackerEvents.deserialize,
+    );
   }
 
   /**
@@ -6995,7 +7197,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.Ok.deserialize,
+    );
   }
 
   /**
@@ -7039,7 +7244,10 @@ class CloudantV1 extends CloudantBaseService {
       }),
     };
 
-    return this.createRequest(parameters);
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.CurrentThroughputInformation.deserialize,
+    );
   }
 }
 
@@ -7063,8 +7271,12 @@ namespace CloudantV1 {
   export interface EmptyObject {}
 
   /** A standard JS object, defined to avoid the limitations of `Object` and `object` */
-  export interface JsonObject {
+  export class JsonObject {
     [key: string]: any;
+
+    static serialize(obj) { return obj; }
+
+    static deserialize(obj) { return obj; }
   }
 
   /*************************
@@ -10121,91 +10333,344 @@ namespace CloudantV1 {
    ************************/
 
   /** Schema for information about a running task. */
-  export interface ActiveTask {
+  export class ActiveTask {
     /** The total count of attempted doc revisions fetched with `_bulk_get`. Available for `replication` type tasks. */
-    bulk_get_attempts?: number;
+    bulkGetAttempts?: number;
+
     /** The total count of successful docs fetched with `_bulk_get`. Available for `replication` type tasks. */
-    bulk_get_docs?: number;
+    bulkGetDocs?: number;
+
     /** Processed changes. Available for `database_compaction`, `indexer`, `search_indexer`, `view_compaction` type
      *  tasks.
      */
-    changes_done?: number;
+    changesDone?: number;
+
     /** The count of changes not yet replicated. Available for `replication` type tasks. */
-    changes_pending?: number;
+    changesPending?: number;
+
     /** Specifies the checkpoint interval in ms. Available for `replication` type tasks. */
-    checkpoint_interval?: number;
+    checkpointInterval?: number;
+
     /** The source sequence id which was last successfully replicated. Available for `replication` type tasks. */
-    checkpointed_source_seq?: string;
+    checkpointedSourceSeq?: string;
+
     /** The replication configured to be continuous. Available for `replication` type tasks. */
     continuous?: boolean;
+
     /** Source database. */
     database: string;
+
     /** The design document that belongs to this task. Available for `indexer`, `search_indexer`, `view_compaction`
      *  type tasks.
      */
-    design_document?: string;
+    designDocument?: string;
+
     /** Replication document ID. Available for `replication` type tasks. */
-    doc_id?: string;
+    docId?: string;
+
     /** Number of document write failures. Available for `replication` type tasks. */
-    doc_write_failures?: number;
+    docWriteFailures?: number;
+
     /** Number of documents read. Available for `replication` type tasks. */
-    docs_read?: number;
+    docsRead?: number;
+
     /** Number of documents written to target. Available for `replication` type tasks. */
-    docs_written?: number;
+    docsWritten?: number;
+
     /** The search index that belongs to this task. Available for `search_indexer` type tasks. */
     index?: string;
+
     /** Indexer process ID. Available for `indexer` type tasks. */
-    indexer_pid?: string;
+    indexerPid?: string;
+
     /** The count of docs which have been read from the source. Available for `replication` type tasks. */
-    missing_revisions_found?: number;
+    missingRevisionsFound?: number;
+
     /** Cluster node where the task is running. */
     node: string;
+
     /** The phase the active task is in. `docid_sort`, `docid_copy`, `document_copy` phases are available for
      *  `database_compaction`, while `ids` and `view` phases are available for `view_compaction` type tasks.
      */
     phase?: ActiveTask.Constants.Phase | string;
+
     /** Process ID. */
     pid: string;
+
     /** Process status. */
-    process_status?: ActiveTask.Constants.ProcessStatus | string;
+    processStatus?: ActiveTask.Constants.ProcessStatus | string;
+
     /** Current percentage progress. Available for `database_compaction`, `indexer`, `search_indexer`,
      *  `view_compaction` type tasks.
      */
     progress?: number;
+
     /** Replication ID. Available for `replication` type tasks. */
-    replication_id?: string;
+    replicationId?: string;
+
     /** Indicates whether a compaction retry is currently running on the database. Available for
      *  `database_compaction` type tasks.
      */
     retry?: boolean;
+
     /** The count of revisions which have been checked since this replication began. Available for `replication`
      *  type tasks.
      */
-    revisions_checked?: number;
+    revisionsChecked?: number;
+
     /** Replication source. Available for `replication` type tasks. */
     source?: string;
+
     /** The last sequence number obtained from the source database changes feed. Available for `replication` type
      *  tasks.
      */
-    source_seq?: string;
+    sourceSeq?: string;
+
     /** Schema for a Unix epoch timestamp. */
-    started_on: number;
+    startedOn: number;
+
     /** Replication target. Available for `replication` type tasks. */
     target?: string;
+
     /** The last sequence number processed by the replicator. Available for `replication` type tasks. */
-    through_seq?: string;
+    throughSeq?: string;
+
     /** Total changes to process. Available for `database_compaction`, `indexer`, `search_indexer`,
      *  `view_compaction` type tasks.
      */
-    total_changes?: number;
+    totalChanges?: number;
+
     /** Operation type. */
     type: ActiveTask.Constants.Type | string;
+
     /** Schema for a Unix epoch timestamp. */
-    updated_on: number;
+    updatedOn: number;
+
     /** Name of user running replication or owning the indexer. Available for `indexer`, `replication` type tasks. */
-    user?: string;
+    user?: string | null;
+
     /** Number of view indexes. Available for `view_compaction` type tasks. */
     view?: number;
+
+    static serialize(obj): ActiveTask.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ActiveTask.Transport = <ActiveTask.Transport>{};
+      if (obj.bulkGetAttempts !== undefined) {
+        copy.bulk_get_attempts = obj.bulkGetAttempts;
+      }
+      if (obj.bulkGetDocs !== undefined) {
+        copy.bulk_get_docs = obj.bulkGetDocs;
+      }
+      if (obj.changesDone !== undefined) {
+        copy.changes_done = obj.changesDone;
+      }
+      if (obj.changesPending !== undefined) {
+        copy.changes_pending = obj.changesPending;
+      }
+      if (obj.checkpointInterval !== undefined) {
+        copy.checkpoint_interval = obj.checkpointInterval;
+      }
+      if (obj.checkpointedSourceSeq !== undefined) {
+        copy.checkpointed_source_seq = obj.checkpointedSourceSeq;
+      }
+      if (obj.continuous !== undefined) {
+        copy.continuous = obj.continuous;
+      }
+      if (obj.database !== undefined) {
+        copy.database = obj.database;
+      }
+      if (obj.designDocument !== undefined) {
+        copy.design_document = obj.designDocument;
+      }
+      if (obj.docId !== undefined) {
+        copy.doc_id = obj.docId;
+      }
+      if (obj.docWriteFailures !== undefined) {
+        copy.doc_write_failures = obj.docWriteFailures;
+      }
+      if (obj.docsRead !== undefined) {
+        copy.docs_read = obj.docsRead;
+      }
+      if (obj.docsWritten !== undefined) {
+        copy.docs_written = obj.docsWritten;
+      }
+      if (obj.index !== undefined) {
+        copy.index = obj.index;
+      }
+      if (obj.indexerPid !== undefined) {
+        copy.indexer_pid = obj.indexerPid;
+      }
+      if (obj.missingRevisionsFound !== undefined) {
+        copy.missing_revisions_found = obj.missingRevisionsFound;
+      }
+      if (obj.node !== undefined) {
+        copy.node = obj.node;
+      }
+      if (obj.phase !== undefined) {
+        copy.phase = obj.phase;
+      }
+      if (obj.pid !== undefined) {
+        copy.pid = obj.pid;
+      }
+      if (obj.processStatus !== undefined) {
+        copy.process_status = obj.processStatus;
+      }
+      if (obj.progress !== undefined) {
+        copy.progress = obj.progress;
+      }
+      if (obj.replicationId !== undefined) {
+        copy.replication_id = obj.replicationId;
+      }
+      if (obj.retry !== undefined) {
+        copy.retry = obj.retry;
+      }
+      if (obj.revisionsChecked !== undefined) {
+        copy.revisions_checked = obj.revisionsChecked;
+      }
+      if (obj.source !== undefined) {
+        copy.source = obj.source;
+      }
+      if (obj.sourceSeq !== undefined) {
+        copy.source_seq = obj.sourceSeq;
+      }
+      if (obj.startedOn !== undefined) {
+        copy.started_on = obj.startedOn;
+      }
+      if (obj.target !== undefined) {
+        copy.target = obj.target;
+      }
+      if (obj.throughSeq !== undefined) {
+        copy.through_seq = obj.throughSeq;
+      }
+      if (obj.totalChanges !== undefined) {
+        copy.total_changes = obj.totalChanges;
+      }
+      if (obj.type !== undefined) {
+        copy.type = obj.type;
+      }
+      if (obj.updatedOn !== undefined) {
+        copy.updated_on = obj.updatedOn;
+      }
+      if (obj.user !== undefined) {
+        copy.user = obj.user;
+      }
+      if (obj.view !== undefined) {
+        copy.view = obj.view;
+      }
+      return copy as unknown as ActiveTask.Transport;
+    }
+
+    static deserialize(obj): ActiveTask {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ActiveTask = <ActiveTask>{};
+      if (obj.bulk_get_attempts !== undefined) {
+        copy.bulkGetAttempts = obj.bulk_get_attempts;
+      }
+      if (obj.bulk_get_docs !== undefined) {
+        copy.bulkGetDocs = obj.bulk_get_docs;
+      }
+      if (obj.changes_done !== undefined) {
+        copy.changesDone = obj.changes_done;
+      }
+      if (obj.changes_pending !== undefined) {
+        copy.changesPending = obj.changes_pending;
+      }
+      if (obj.checkpoint_interval !== undefined) {
+        copy.checkpointInterval = obj.checkpoint_interval;
+      }
+      if (obj.checkpointed_source_seq !== undefined) {
+        copy.checkpointedSourceSeq = obj.checkpointed_source_seq;
+      }
+      if (obj.continuous !== undefined) {
+        copy.continuous = obj.continuous;
+      }
+      if (obj.database !== undefined) {
+        copy.database = obj.database;
+      }
+      if (obj.design_document !== undefined) {
+        copy.designDocument = obj.design_document;
+      }
+      if (obj.doc_id !== undefined) {
+        copy.docId = obj.doc_id;
+      }
+      if (obj.doc_write_failures !== undefined) {
+        copy.docWriteFailures = obj.doc_write_failures;
+      }
+      if (obj.docs_read !== undefined) {
+        copy.docsRead = obj.docs_read;
+      }
+      if (obj.docs_written !== undefined) {
+        copy.docsWritten = obj.docs_written;
+      }
+      if (obj.index !== undefined) {
+        copy.index = obj.index;
+      }
+      if (obj.indexer_pid !== undefined) {
+        copy.indexerPid = obj.indexer_pid;
+      }
+      if (obj.missing_revisions_found !== undefined) {
+        copy.missingRevisionsFound = obj.missing_revisions_found;
+      }
+      if (obj.node !== undefined) {
+        copy.node = obj.node;
+      }
+      if (obj.phase !== undefined) {
+        copy.phase = obj.phase;
+      }
+      if (obj.pid !== undefined) {
+        copy.pid = obj.pid;
+      }
+      if (obj.process_status !== undefined) {
+        copy.processStatus = obj.process_status;
+      }
+      if (obj.progress !== undefined) {
+        copy.progress = obj.progress;
+      }
+      if (obj.replication_id !== undefined) {
+        copy.replicationId = obj.replication_id;
+      }
+      if (obj.retry !== undefined) {
+        copy.retry = obj.retry;
+      }
+      if (obj.revisions_checked !== undefined) {
+        copy.revisionsChecked = obj.revisions_checked;
+      }
+      if (obj.source !== undefined) {
+        copy.source = obj.source;
+      }
+      if (obj.source_seq !== undefined) {
+        copy.sourceSeq = obj.source_seq;
+      }
+      if (obj.started_on !== undefined) {
+        copy.startedOn = obj.started_on;
+      }
+      if (obj.target !== undefined) {
+        copy.target = obj.target;
+      }
+      if (obj.through_seq !== undefined) {
+        copy.throughSeq = obj.through_seq;
+      }
+      if (obj.total_changes !== undefined) {
+        copy.totalChanges = obj.total_changes;
+      }
+      if (obj.type !== undefined) {
+        copy.type = obj.type;
+      }
+      if (obj.updated_on !== undefined) {
+        copy.updatedOn = obj.updated_on;
+      }
+      if (obj.user !== undefined) {
+        copy.user = obj.user;
+      }
+      if (obj.view !== undefined) {
+        copy.view = obj.view;
+      }
+      return copy as unknown as ActiveTask;
+    }
   }
   export namespace ActiveTask {
     export namespace Constants {
@@ -10235,14 +10700,72 @@ namespace CloudantV1 {
         VIEW_COMPACTION = 'view_compaction',
       }
     }
+      export interface Transport {
+        bulk_get_attempts?: number;
+        bulk_get_docs?: number;
+        changes_done?: number;
+        changes_pending?: number;
+        checkpoint_interval?: number;
+        checkpointed_source_seq?: string;
+        continuous?: boolean;
+        database: string;
+        design_document?: string;
+        doc_id?: string;
+        doc_write_failures?: number;
+        docs_read?: number;
+        docs_written?: number;
+        index?: string;
+        indexer_pid?: string;
+        missing_revisions_found?: number;
+        node: string;
+        phase?: string;
+        pid: string;
+        process_status?: string;
+        progress?: number;
+        replication_id?: string;
+        retry?: boolean;
+        revisions_checked?: number;
+        source?: string;
+        source_seq?: string;
+        started_on: number;
+        target?: string;
+        through_seq?: string;
+        total_changes?: number;
+        type: string;
+        updated_on: number;
+        user?: string;
+        view?: number;
+      }
   }
 
   /** Schema for Activity Tracker events. */
-  export interface ActivityTrackerEvents {
+  export class ActivityTrackerEvents {
     /** An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
      *  "management" is a required element of this array.
      */
     types: ActivityTrackerEvents.Constants.Types[] | string[];
+
+    static serialize(obj): ActivityTrackerEvents.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ActivityTrackerEvents.Transport = <ActivityTrackerEvents.Transport>{};
+      if (obj.types !== undefined) {
+        copy.types = obj.types;
+      }
+      return copy as unknown as ActivityTrackerEvents.Transport;
+    }
+
+    static deserialize(obj): ActivityTrackerEvents {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ActivityTrackerEvents = <ActivityTrackerEvents>{};
+      if (obj.types !== undefined) {
+        copy.types = obj.types;
+      }
+      return copy as unknown as ActivityTrackerEvents;
+    }
   }
   export namespace ActivityTrackerEvents {
     export namespace Constants {
@@ -10252,72 +10775,297 @@ namespace CloudantV1 {
         DATA = 'data',
       }
     }
+      export interface Transport {
+        types: string[];
+      }
   }
 
   /** Schema for the result of an all documents queries operation. */
-  export interface AllDocsQueriesResult {
+  export class AllDocsQueriesResult {
     /** An array of result objects - one for each query. Each result object contains the same fields as the response
      *  to a regular `/_all_docs` request.
      */
     results: AllDocsResult[];
+
+    static serialize(obj): AllDocsQueriesResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: AllDocsQueriesResult.Transport = <AllDocsQueriesResult.Transport>{};
+      if (obj.results !== undefined) {
+        copy.results = BaseService.convertModel(obj.results, AllDocsResult.serialize);
+      }
+      return copy as unknown as AllDocsQueriesResult.Transport;
+    }
+
+    static deserialize(obj): AllDocsQueriesResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: AllDocsQueriesResult = <AllDocsQueriesResult>{};
+      if (obj.results !== undefined) {
+        copy.results = BaseService.convertModel(obj.results, AllDocsResult.deserialize);
+      }
+      return copy as unknown as AllDocsQueriesResult;
+    }
+  }
+  export namespace AllDocsQueriesResult {
+      export interface Transport {
+        results: AllDocsResult[];
+      }
   }
 
   /** Schema for an all documents query operation. */
-  export interface AllDocsQuery {
+  export class AllDocsQuery {
     /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
      *  attachment is compressed.
      */
-    att_encoding_info?: boolean;
+    attEncodingInfo?: boolean;
+
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
+
     /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
      *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
+
     /** Parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
+
     /** Parameter to specify whether to include the full content of the documents in the response. */
-    include_docs?: boolean;
+    includeDocs?: boolean;
+
     /** Parameter to specify whether the specified end key should be included in the result. */
-    inclusive_end?: boolean;
+    inclusiveEnd?: boolean;
+
     /** Parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
+
     /** Parameter to specify the number of records before starting to return the results. */
     skip?: number;
+
     /** Parameter to specify whether to include in the response an update_seq value indicating the sequence id of
      *  the database the view reflects.
      */
-    update_seq?: boolean;
+    updateSeq?: boolean;
+
     /** Schema for a document ID. */
-    end_key?: string;
+    endKey?: string;
+
     /** Schema for a document ID. */
     key?: string;
+
     /** Schema for a list of document IDs. */
     keys?: string[];
+
     /** Schema for a document ID. */
-    start_key?: string;
+    startKey?: string;
+
+    static serialize(obj): AllDocsQuery.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: AllDocsQuery.Transport = <AllDocsQuery.Transport>{};
+      if (obj.attEncodingInfo !== undefined) {
+        copy.att_encoding_info = obj.attEncodingInfo;
+      }
+      if (obj.attachments !== undefined) {
+        copy.attachments = obj.attachments;
+      }
+      if (obj.conflicts !== undefined) {
+        copy.conflicts = obj.conflicts;
+      }
+      if (obj.descending !== undefined) {
+        copy.descending = obj.descending;
+      }
+      if (obj.includeDocs !== undefined) {
+        copy.include_docs = obj.includeDocs;
+      }
+      if (obj.inclusiveEnd !== undefined) {
+        copy.inclusive_end = obj.inclusiveEnd;
+      }
+      if (obj.limit !== undefined) {
+        copy.limit = obj.limit;
+      }
+      if (obj.skip !== undefined) {
+        copy.skip = obj.skip;
+      }
+      if (obj.updateSeq !== undefined) {
+        copy.update_seq = obj.updateSeq;
+      }
+      if (obj.endKey !== undefined) {
+        copy.end_key = obj.endKey;
+      }
+      if (obj.key !== undefined) {
+        copy.key = obj.key;
+      }
+      if (obj.keys !== undefined) {
+        copy.keys = obj.keys;
+      }
+      if (obj.startKey !== undefined) {
+        copy.start_key = obj.startKey;
+      }
+      return copy as unknown as AllDocsQuery.Transport;
+    }
+
+    static deserialize(obj): AllDocsQuery {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: AllDocsQuery = <AllDocsQuery>{};
+      if (obj.att_encoding_info !== undefined) {
+        copy.attEncodingInfo = obj.att_encoding_info;
+      }
+      if (obj.attachments !== undefined) {
+        copy.attachments = obj.attachments;
+      }
+      if (obj.conflicts !== undefined) {
+        copy.conflicts = obj.conflicts;
+      }
+      if (obj.descending !== undefined) {
+        copy.descending = obj.descending;
+      }
+      if (obj.include_docs !== undefined) {
+        copy.includeDocs = obj.include_docs;
+      }
+      if (obj.inclusive_end !== undefined) {
+        copy.inclusiveEnd = obj.inclusive_end;
+      }
+      if (obj.limit !== undefined) {
+        copy.limit = obj.limit;
+      }
+      if (obj.skip !== undefined) {
+        copy.skip = obj.skip;
+      }
+      if (obj.update_seq !== undefined) {
+        copy.updateSeq = obj.update_seq;
+      }
+      if (obj.end_key !== undefined) {
+        copy.endKey = obj.end_key;
+      }
+      if (obj.key !== undefined) {
+        copy.key = obj.key;
+      }
+      if (obj.keys !== undefined) {
+        copy.keys = obj.keys;
+      }
+      if (obj.start_key !== undefined) {
+        copy.startKey = obj.start_key;
+      }
+      return copy as unknown as AllDocsQuery;
+    }
+  }
+  export namespace AllDocsQuery {
+      export interface Transport {
+        att_encoding_info?: boolean;
+        attachments?: boolean;
+        conflicts?: boolean;
+        descending?: boolean;
+        include_docs?: boolean;
+        inclusive_end?: boolean;
+        limit?: number;
+        skip?: number;
+        update_seq?: boolean;
+        end_key?: string;
+        key?: string;
+        keys?: string[];
+        start_key?: string;
+      }
   }
 
   /** Schema for the result of an all documents operation. */
-  export interface AllDocsResult {
+  export class AllDocsResult {
     /** Number of total rows. */
-    total_rows: number;
+    totalRows: number | null;
+
     /** List of doc results. */
     rows: DocsResultRow[];
+
     /** Current update sequence for the database. */
-    update_seq?: string;
+    updateSeq?: string;
+
+    static serialize(obj): AllDocsResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: AllDocsResult.Transport = <AllDocsResult.Transport>{};
+      if (obj.totalRows !== undefined) {
+        copy.total_rows = obj.totalRows;
+      }
+      if (obj.rows !== undefined) {
+        copy.rows = BaseService.convertModel(obj.rows, DocsResultRow.serialize);
+      }
+      if (obj.updateSeq !== undefined) {
+        copy.update_seq = obj.updateSeq;
+      }
+      return copy as unknown as AllDocsResult.Transport;
+    }
+
+    static deserialize(obj): AllDocsResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: AllDocsResult = <AllDocsResult>{};
+      if (obj.total_rows !== undefined) {
+        copy.totalRows = obj.total_rows;
+      }
+      if (obj.rows !== undefined) {
+        copy.rows = BaseService.convertModel(obj.rows, DocsResultRow.deserialize);
+      }
+      if (obj.update_seq !== undefined) {
+        copy.updateSeq = obj.update_seq;
+      }
+      return copy as unknown as AllDocsResult;
+    }
+  }
+  export namespace AllDocsResult {
+      export interface Transport {
+        total_rows: number;
+        rows: DocsResultRow[];
+        update_seq?: string;
+      }
   }
 
   /** Schema for a full text search analyzer. */
-  export interface Analyzer {
+  export class Analyzer {
     /** Schema for the name of the Apache Lucene analyzer to use for text indexing. The default value varies
      *  depending on the analyzer usage:
      *  * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query
      *  text index default_field the default is `standard`.
      */
     name?: Analyzer.Constants.Name | string;
+
     /** Custom stopwords to use with the named analyzer. */
     stopwords?: string[];
+
+    static serialize(obj): Analyzer.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Analyzer.Transport = <Analyzer.Transport>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.stopwords !== undefined) {
+        copy.stopwords = obj.stopwords;
+      }
+      return copy as unknown as Analyzer.Transport;
+    }
+
+    static deserialize(obj): Analyzer {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Analyzer = <Analyzer>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.stopwords !== undefined) {
+        copy.stopwords = obj.stopwords;
+      }
+      return copy as unknown as Analyzer;
+    }
   }
   export namespace Analyzer {
     export namespace Constants {
@@ -10366,20 +11114,60 @@ namespace CloudantV1 {
         PERFIELD = 'perfield',
       }
     }
+      export interface Transport {
+        name?: string;
+        stopwords?: string[];
+      }
   }
 
   /** Schema for a search analyzer configuration. */
-  export interface AnalyzerConfiguration {
+  export class AnalyzerConfiguration {
     /** Schema for the name of the Apache Lucene analyzer to use for text indexing. The default value varies
      *  depending on the analyzer usage:
      *  * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query
      *  text index default_field the default is `standard`.
      */
     name?: AnalyzerConfiguration.Constants.Name | string;
+
     /** Custom stopwords to use with the named analyzer. */
     stopwords?: string[];
+
     /** Schema for mapping a field name to a per field analyzer. */
-    fields?: JsonObject;
+    fields?: {[key: string]: Analyzer};
+
+    static serialize(obj): AnalyzerConfiguration.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: AnalyzerConfiguration.Transport = <AnalyzerConfiguration.Transport>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.stopwords !== undefined) {
+        copy.stopwords = obj.stopwords;
+      }
+      if (obj.fields !== undefined) {
+        copy.fields = BaseService.convertModel(obj.fields, Analyzer.serialize, true);
+      }
+      return copy as unknown as AnalyzerConfiguration.Transport;
+    }
+
+    static deserialize(obj): AnalyzerConfiguration {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: AnalyzerConfiguration = <AnalyzerConfiguration>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.stopwords !== undefined) {
+        copy.stopwords = obj.stopwords;
+      }
+      if (obj.fields !== undefined) {
+        copy.fields = BaseService.convertModel(obj.fields, Analyzer.deserialize, true);
+      }
+      return copy as unknown as AnalyzerConfiguration;
+    }
   }
   export namespace AnalyzerConfiguration {
     export namespace Constants {
@@ -10428,248 +11216,1181 @@ namespace CloudantV1 {
         PERFIELD = 'perfield',
       }
     }
+      export interface Transport {
+        name?: string;
+        stopwords?: string[];
+        fields?: {[key: string]: Analyzer.Transport};
+      }
   }
 
   /** Schema for api keys. */
-  export interface ApiKeysResult {
+  export class ApiKeysResult {
     /** ok. */
     ok: boolean;
+
     /** The generated api key. */
     key: string;
+
     /** The password associated with the api key. */
     password: string;
+
+    static serialize(obj): ApiKeysResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ApiKeysResult.Transport = <ApiKeysResult.Transport>{};
+      if (obj.ok !== undefined) {
+        copy.ok = obj.ok;
+      }
+      if (obj.key !== undefined) {
+        copy.key = obj.key;
+      }
+      if (obj.password !== undefined) {
+        copy.password = obj.password;
+      }
+      return copy as unknown as ApiKeysResult.Transport;
+    }
+
+    static deserialize(obj): ApiKeysResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ApiKeysResult = <ApiKeysResult>{};
+      if (obj.ok !== undefined) {
+        copy.ok = obj.ok;
+      }
+      if (obj.key !== undefined) {
+        copy.key = obj.key;
+      }
+      if (obj.password !== undefined) {
+        copy.password = obj.password;
+      }
+      return copy as unknown as ApiKeysResult;
+    }
+  }
+  export namespace ApiKeysResult {
+      export interface Transport {
+        ok: boolean;
+        key: string;
+        password: string;
+      }
   }
 
   /** Schema for an attachment. */
-  export interface Attachment {
+  export class Attachment {
     /** Attachment MIME type. */
-    content_type?: string;
+    contentType?: string;
+
     /** Base64-encoded content. Available if attachment content is requested by using the query parameters
      *  `attachments=true` or `atts_since`. Note that when used with a view or changes feed `include_docs` must also be
      *  `true`.
      */
     data?: string;
+
     /** Content hash digest. It starts with prefix which announce hash type (e.g. `md5-`) and continues with
      *  Base64-encoded hash digest.
      */
     digest?: string;
+
     /** Compressed attachment size in bytes. Available if content_type was in list of compressible types when the
      *  attachment was added and the query parameter `att_encoding_info` is `true`. Note that when used with a view or
      *  changes feed `include_docs` must also be `true`.
      */
-    encoded_length?: number;
+    encodedLength?: number;
+
     /** Compression codec. Available if content_type was in list of compressible types when the attachment was added
      *  and the and the query parameter `att_encoding_info` is `true`. Note that when used with a view or changes feed
      *  `include_docs` must also be `true`.
      */
     encoding?: string;
+
     /** True if the attachment follows in a multipart request or response. */
     follows?: boolean;
+
     /** Real attachment size in bytes. Not available if inline attachment content requested. */
     length?: number;
+
     /** Revision number when attachment was added. */
     revpos?: number;
+
     /** Has `true` value if object contains stub info and no content. Otherwise omitted in response. */
     stub?: boolean;
+
+    static serialize(obj): Attachment.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Attachment.Transport = <Attachment.Transport>{};
+      if (obj.contentType !== undefined) {
+        copy.content_type = obj.contentType;
+      }
+      if (obj.data !== undefined) {
+        copy.data = obj.data;
+      }
+      if (obj.digest !== undefined) {
+        copy.digest = obj.digest;
+      }
+      if (obj.encodedLength !== undefined) {
+        copy.encoded_length = obj.encodedLength;
+      }
+      if (obj.encoding !== undefined) {
+        copy.encoding = obj.encoding;
+      }
+      if (obj.follows !== undefined) {
+        copy.follows = obj.follows;
+      }
+      if (obj.length !== undefined) {
+        copy.length = obj.length;
+      }
+      if (obj.revpos !== undefined) {
+        copy.revpos = obj.revpos;
+      }
+      if (obj.stub !== undefined) {
+        copy.stub = obj.stub;
+      }
+      return copy as unknown as Attachment.Transport;
+    }
+
+    static deserialize(obj): Attachment {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Attachment = <Attachment>{};
+      if (obj.content_type !== undefined) {
+        copy.contentType = obj.content_type;
+      }
+      if (obj.data !== undefined) {
+        copy.data = obj.data;
+      }
+      if (obj.digest !== undefined) {
+        copy.digest = obj.digest;
+      }
+      if (obj.encoded_length !== undefined) {
+        copy.encodedLength = obj.encoded_length;
+      }
+      if (obj.encoding !== undefined) {
+        copy.encoding = obj.encoding;
+      }
+      if (obj.follows !== undefined) {
+        copy.follows = obj.follows;
+      }
+      if (obj.length !== undefined) {
+        copy.length = obj.length;
+      }
+      if (obj.revpos !== undefined) {
+        copy.revpos = obj.revpos;
+      }
+      if (obj.stub !== undefined) {
+        copy.stub = obj.stub;
+      }
+      return copy as unknown as Attachment;
+    }
+  }
+  export namespace Attachment {
+      export interface Transport {
+        content_type?: string;
+        data?: string;
+        digest?: string;
+        encoded_length?: number;
+        encoding?: string;
+        follows?: boolean;
+        length?: number;
+        revpos?: number;
+        stub?: boolean;
+      }
   }
 
   /** Schema for submitting documents for bulk modifications. */
-  export interface BulkDocs {
+  export class BulkDocs {
     /** Array of documents. */
     docs: Document[];
+
     /** If `false`, prevents the database from assigning them new revision IDs. Default is `true`. */
-    new_edits?: boolean;
+    newEdits?: boolean;
+
+    static serialize(obj): BulkDocs.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: BulkDocs.Transport = <BulkDocs.Transport>{};
+      if (obj.docs !== undefined) {
+        copy.docs = BaseService.convertModel(obj.docs, Document.serialize);
+      }
+      if (obj.newEdits !== undefined) {
+        copy.new_edits = obj.newEdits;
+      }
+      return copy as unknown as BulkDocs.Transport;
+    }
+
+    static deserialize(obj): BulkDocs {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: BulkDocs = <BulkDocs>{};
+      if (obj.docs !== undefined) {
+        copy.docs = BaseService.convertModel(obj.docs, Document.deserialize);
+      }
+      if (obj.new_edits !== undefined) {
+        copy.newEdits = obj.new_edits;
+      }
+      return copy as unknown as BulkDocs;
+    }
+  }
+  export namespace BulkDocs {
+      export interface Transport {
+        docs: Document[];
+        new_edits?: boolean;
+      }
   }
 
   /** Schema for a document item in a bulk get query. */
-  export interface BulkGetQueryDocument {
+  export class BulkGetQueryDocument {
     /** Includes attachments only since specified revisions. */
-    atts_since?: string[];
+    attsSince?: string[];
+
     /** Schema for a document ID. */
     id: string;
+
     /** Schema for a document revision identifier. */
     rev?: string;
+
+    static serialize(obj): BulkGetQueryDocument.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: BulkGetQueryDocument.Transport = <BulkGetQueryDocument.Transport>{};
+      if (obj.attsSince !== undefined) {
+        copy.atts_since = obj.attsSince;
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.rev !== undefined) {
+        copy.rev = obj.rev;
+      }
+      return copy as unknown as BulkGetQueryDocument.Transport;
+    }
+
+    static deserialize(obj): BulkGetQueryDocument {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: BulkGetQueryDocument = <BulkGetQueryDocument>{};
+      if (obj.atts_since !== undefined) {
+        copy.attsSince = obj.atts_since;
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.rev !== undefined) {
+        copy.rev = obj.rev;
+      }
+      return copy as unknown as BulkGetQueryDocument;
+    }
+  }
+  export namespace BulkGetQueryDocument {
+      export interface Transport {
+        atts_since?: string[];
+        id: string;
+        rev?: string;
+      }
   }
 
   /** Schema for the results object of a bulk get operation. */
-  export interface BulkGetResult {
+  export class BulkGetResult {
     /** Results. */
     results: BulkGetResultItem[];
+
+    static serialize(obj): BulkGetResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: BulkGetResult.Transport = <BulkGetResult.Transport>{};
+      if (obj.results !== undefined) {
+        copy.results = BaseService.convertModel(obj.results, BulkGetResultItem.serialize);
+      }
+      return copy as unknown as BulkGetResult.Transport;
+    }
+
+    static deserialize(obj): BulkGetResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: BulkGetResult = <BulkGetResult>{};
+      if (obj.results !== undefined) {
+        copy.results = BaseService.convertModel(obj.results, BulkGetResultItem.deserialize);
+      }
+      return copy as unknown as BulkGetResult;
+    }
+  }
+  export namespace BulkGetResult {
+      export interface Transport {
+        results: BulkGetResultItem[];
+      }
   }
 
   /** Schema for BulkGetResult object containing a successfully retrieved document or error information. */
-  export interface BulkGetResultDocument {
+  export class BulkGetResultDocument {
     /** Schema for the result of a document modification. */
     error?: DocumentResult;
+
     /** Schema for a document. */
     ok?: Document;
+
+    static serialize(obj): BulkGetResultDocument.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: BulkGetResultDocument.Transport = <BulkGetResultDocument.Transport>{};
+      if (obj.error !== undefined) {
+        copy.error = DocumentResult.serialize(obj.error);
+      }
+      if (obj.ok !== undefined) {
+        copy.ok = Document.serialize(obj.ok);
+      }
+      return copy as unknown as BulkGetResultDocument.Transport;
+    }
+
+    static deserialize(obj): BulkGetResultDocument {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: BulkGetResultDocument = <BulkGetResultDocument>{};
+      if (obj.error !== undefined) {
+        copy.error = DocumentResult.deserialize(obj.error);
+      }
+      if (obj.ok !== undefined) {
+        copy.ok = Document.deserialize(obj.ok);
+      }
+      return copy as unknown as BulkGetResultDocument;
+    }
+  }
+  export namespace BulkGetResultDocument {
+      export interface Transport {
+        error?: DocumentResult.Transport;
+        ok?: Document.Transport;
+      }
   }
 
   /** Schema for the document revisions information from a bulk get operation. */
-  export interface BulkGetResultItem {
+  export class BulkGetResultItem {
     /** Array of document revisions or error information. */
     docs: BulkGetResultDocument[];
+
     /** Schema for a document ID. */
     id: string;
+
+    static serialize(obj): BulkGetResultItem.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: BulkGetResultItem.Transport = <BulkGetResultItem.Transport>{};
+      if (obj.docs !== undefined) {
+        copy.docs = BaseService.convertModel(obj.docs, BulkGetResultDocument.serialize);
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      return copy as unknown as BulkGetResultItem.Transport;
+    }
+
+    static deserialize(obj): BulkGetResultItem {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: BulkGetResultItem = <BulkGetResultItem>{};
+      if (obj.docs !== undefined) {
+        copy.docs = BaseService.convertModel(obj.docs, BulkGetResultDocument.deserialize);
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      return copy as unknown as BulkGetResultItem;
+    }
+  }
+  export namespace BulkGetResultItem {
+      export interface Transport {
+        docs: BulkGetResultDocument[];
+        id: string;
+      }
   }
 
   /** Schema for information about the currently provisioned and target throughput capacity. */
-  export interface CapacityThroughputInformation {
+  export class CapacityThroughputInformation {
     /** Detailed information about provisioned throughput capacity. */
     current: CapacityThroughputInformationCurrent;
+
     /** Detailed information about target throughput capacity. */
     target?: CapacityThroughputInformationTarget;
+
+    static serialize(obj): CapacityThroughputInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CapacityThroughputInformation.Transport = <CapacityThroughputInformation.Transport>{};
+      if (obj.current !== undefined) {
+        copy.current = CapacityThroughputInformationCurrent.serialize(obj.current);
+      }
+      if (obj.target !== undefined) {
+        copy.target = CapacityThroughputInformationTarget.serialize(obj.target);
+      }
+      return copy as unknown as CapacityThroughputInformation.Transport;
+    }
+
+    static deserialize(obj): CapacityThroughputInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CapacityThroughputInformation = <CapacityThroughputInformation>{};
+      if (obj.current !== undefined) {
+        copy.current = CapacityThroughputInformationCurrent.deserialize(obj.current);
+      }
+      if (obj.target !== undefined) {
+        copy.target = CapacityThroughputInformationTarget.deserialize(obj.target);
+      }
+      return copy as unknown as CapacityThroughputInformation;
+    }
+  }
+  export namespace CapacityThroughputInformation {
+      export interface Transport {
+        current: CapacityThroughputInformationCurrent.Transport;
+        target?: CapacityThroughputInformationTarget.Transport;
+      }
   }
 
   /** Detailed information about provisioned throughput capacity. */
-  export interface CapacityThroughputInformationCurrent {
+  export class CapacityThroughputInformationCurrent {
     /** Schema for detailed information about throughput capacity with breakdown by specific throughput requests
      *  classes.
      */
     throughput: ThroughputInformation;
+
+    static serialize(obj): CapacityThroughputInformationCurrent.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CapacityThroughputInformationCurrent.Transport = <CapacityThroughputInformationCurrent.Transport>{};
+      if (obj.throughput !== undefined) {
+        copy.throughput = ThroughputInformation.serialize(obj.throughput);
+      }
+      return copy as unknown as CapacityThroughputInformationCurrent.Transport;
+    }
+
+    static deserialize(obj): CapacityThroughputInformationCurrent {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CapacityThroughputInformationCurrent = <CapacityThroughputInformationCurrent>{};
+      if (obj.throughput !== undefined) {
+        copy.throughput = ThroughputInformation.deserialize(obj.throughput);
+      }
+      return copy as unknown as CapacityThroughputInformationCurrent;
+    }
+  }
+  export namespace CapacityThroughputInformationCurrent {
+      export interface Transport {
+        throughput: ThroughputInformation.Transport;
+      }
   }
 
   /** Detailed information about target throughput capacity. */
-  export interface CapacityThroughputInformationTarget {
+  export class CapacityThroughputInformationTarget {
     /** Schema for detailed information about throughput capacity with breakdown by specific throughput requests
      *  classes.
      */
     throughput: ThroughputInformation;
+
+    static serialize(obj): CapacityThroughputInformationTarget.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CapacityThroughputInformationTarget.Transport = <CapacityThroughputInformationTarget.Transport>{};
+      if (obj.throughput !== undefined) {
+        copy.throughput = ThroughputInformation.serialize(obj.throughput);
+      }
+      return copy as unknown as CapacityThroughputInformationTarget.Transport;
+    }
+
+    static deserialize(obj): CapacityThroughputInformationTarget {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CapacityThroughputInformationTarget = <CapacityThroughputInformationTarget>{};
+      if (obj.throughput !== undefined) {
+        copy.throughput = ThroughputInformation.deserialize(obj.throughput);
+      }
+      return copy as unknown as CapacityThroughputInformationTarget;
+    }
+  }
+  export namespace CapacityThroughputInformationTarget {
+      export interface Transport {
+        throughput: ThroughputInformation.Transport;
+      }
   }
 
   /** Schema for a document leaf with single field rev. */
-  export interface Change {
+  export class Change {
     /** Schema for a document revision identifier. */
     rev: string;
+
+    static serialize(obj): Change.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Change.Transport = <Change.Transport>{};
+      if (obj.rev !== undefined) {
+        copy.rev = obj.rev;
+      }
+      return copy as unknown as Change.Transport;
+    }
+
+    static deserialize(obj): Change {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Change = <Change>{};
+      if (obj.rev !== undefined) {
+        copy.rev = obj.rev;
+      }
+      return copy as unknown as Change;
+    }
+  }
+  export namespace Change {
+      export interface Transport {
+        rev: string;
+      }
   }
 
   /** Schema for normal changes feed result. */
-  export interface ChangesResult {
+  export class ChangesResult {
     /** last_seq. */
-    last_seq: string;
+    lastSeq: string;
+
     /** pending. */
     pending: number;
+
     /** results. */
     results: ChangesResultItem[];
+
+    static serialize(obj): ChangesResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ChangesResult.Transport = <ChangesResult.Transport>{};
+      if (obj.lastSeq !== undefined) {
+        copy.last_seq = obj.lastSeq;
+      }
+      if (obj.pending !== undefined) {
+        copy.pending = obj.pending;
+      }
+      if (obj.results !== undefined) {
+        copy.results = BaseService.convertModel(obj.results, ChangesResultItem.serialize);
+      }
+      return copy as unknown as ChangesResult.Transport;
+    }
+
+    static deserialize(obj): ChangesResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ChangesResult = <ChangesResult>{};
+      if (obj.last_seq !== undefined) {
+        copy.lastSeq = obj.last_seq;
+      }
+      if (obj.pending !== undefined) {
+        copy.pending = obj.pending;
+      }
+      if (obj.results !== undefined) {
+        copy.results = BaseService.convertModel(obj.results, ChangesResultItem.deserialize);
+      }
+      return copy as unknown as ChangesResult;
+    }
+  }
+  export namespace ChangesResult {
+      export interface Transport {
+        last_seq: string;
+        pending: number;
+        results: ChangesResultItem[];
+      }
   }
 
   /** Schema for an item in the changes results array. */
-  export interface ChangesResultItem {
+  export class ChangesResultItem {
     /** List of document's leaves with single field rev. */
     changes: Change[];
+
     /** if `true` then the document is deleted. */
     deleted?: boolean;
+
     /** Schema for a document. */
     doc?: Document;
+
     /** Schema for a document ID. */
     id: string;
+
     /** Update sequence. */
     seq: string;
+
+    static serialize(obj): ChangesResultItem.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ChangesResultItem.Transport = <ChangesResultItem.Transport>{};
+      if (obj.changes !== undefined) {
+        copy.changes = BaseService.convertModel(obj.changes, Change.serialize);
+      }
+      if (obj.deleted !== undefined) {
+        copy.deleted = obj.deleted;
+      }
+      if (obj.doc !== undefined) {
+        copy.doc = Document.serialize(obj.doc);
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.seq !== undefined) {
+        copy.seq = obj.seq;
+      }
+      return copy as unknown as ChangesResultItem.Transport;
+    }
+
+    static deserialize(obj): ChangesResultItem {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ChangesResultItem = <ChangesResultItem>{};
+      if (obj.changes !== undefined) {
+        copy.changes = BaseService.convertModel(obj.changes, Change.deserialize);
+      }
+      if (obj.deleted !== undefined) {
+        copy.deleted = obj.deleted;
+      }
+      if (obj.doc !== undefined) {
+        copy.doc = Document.deserialize(obj.doc);
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.seq !== undefined) {
+        copy.seq = obj.seq;
+      }
+      return copy as unknown as ChangesResultItem;
+    }
+  }
+  export namespace ChangesResultItem {
+      export interface Transport {
+        changes: Change[];
+        deleted?: boolean;
+        doc?: Document.Transport;
+        id: string;
+        seq: string;
+      }
   }
 
   /** Schema for size information of content. */
-  export interface ContentInformationSizes {
+  export class ContentInformationSizes {
     /** The active size of the content, in bytes. */
     active: number;
+
     /** The total uncompressed size of the content, in bytes. */
     external: number;
+
     /** The total size of the content as stored on disk, in bytes. */
     file: number;
+
+    static serialize(obj): ContentInformationSizes.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ContentInformationSizes.Transport = <ContentInformationSizes.Transport>{};
+      if (obj.active !== undefined) {
+        copy.active = obj.active;
+      }
+      if (obj.external !== undefined) {
+        copy.external = obj.external;
+      }
+      if (obj.file !== undefined) {
+        copy.file = obj.file;
+      }
+      return copy as unknown as ContentInformationSizes.Transport;
+    }
+
+    static deserialize(obj): ContentInformationSizes {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ContentInformationSizes = <ContentInformationSizes>{};
+      if (obj.active !== undefined) {
+        copy.active = obj.active;
+      }
+      if (obj.external !== undefined) {
+        copy.external = obj.external;
+      }
+      if (obj.file !== undefined) {
+        copy.file = obj.file;
+      }
+      return copy as unknown as ContentInformationSizes;
+    }
+  }
+  export namespace ContentInformationSizes {
+      export interface Transport {
+        active: number;
+        external: number;
+        file: number;
+      }
   }
 
   /** Schema for information about the CORS configuration. */
-  export interface CorsInformation {
+  export class CorsInformation {
     /** Boolean value to allow authentication credentials. If set to true, browser requests must be done by using
      *  withCredentials = true.
      */
-    allow_credentials: boolean;
+    allowCredentials: boolean;
+
     /** Boolean value to turn CORS on and off. */
-    enable_cors: boolean;
+    enableCors: boolean;
+
     /** An array of strings that contain allowed origin domains. You have to specify the full URL including the
      *  protocol. It is recommended that only the HTTPS protocol is used. Subdomains count as separate domains, so you
      *  have to specify all subdomains used.
      */
     origins: string[];
+
+    static serialize(obj): CorsInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CorsInformation.Transport = <CorsInformation.Transport>{};
+      if (obj.allowCredentials !== undefined) {
+        copy.allow_credentials = obj.allowCredentials;
+      }
+      if (obj.enableCors !== undefined) {
+        copy.enable_cors = obj.enableCors;
+      }
+      if (obj.origins !== undefined) {
+        copy.origins = obj.origins;
+      }
+      return copy as unknown as CorsInformation.Transport;
+    }
+
+    static deserialize(obj): CorsInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CorsInformation = <CorsInformation>{};
+      if (obj.allow_credentials !== undefined) {
+        copy.allowCredentials = obj.allow_credentials;
+      }
+      if (obj.enable_cors !== undefined) {
+        copy.enableCors = obj.enable_cors;
+      }
+      if (obj.origins !== undefined) {
+        copy.origins = obj.origins;
+      }
+      return copy as unknown as CorsInformation;
+    }
+  }
+  export namespace CorsInformation {
+      export interface Transport {
+        allow_credentials: boolean;
+        enable_cors: boolean;
+        origins: string[];
+      }
   }
 
   /** Schema for information about current consumption of a provisioned throughput capacity. */
-  export interface CurrentThroughputInformation {
+  export class CurrentThroughputInformation {
     /** Detailed information about current consumption. */
     throughput: CurrentThroughputInformationThroughput;
+
+    static serialize(obj): CurrentThroughputInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CurrentThroughputInformation.Transport = <CurrentThroughputInformation.Transport>{};
+      if (obj.throughput !== undefined) {
+        copy.throughput = CurrentThroughputInformationThroughput.serialize(obj.throughput);
+      }
+      return copy as unknown as CurrentThroughputInformation.Transport;
+    }
+
+    static deserialize(obj): CurrentThroughputInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CurrentThroughputInformation = <CurrentThroughputInformation>{};
+      if (obj.throughput !== undefined) {
+        copy.throughput = CurrentThroughputInformationThroughput.deserialize(obj.throughput);
+      }
+      return copy as unknown as CurrentThroughputInformation;
+    }
+  }
+  export namespace CurrentThroughputInformation {
+      export interface Transport {
+        throughput: CurrentThroughputInformationThroughput.Transport;
+      }
   }
 
   /** Detailed information about current consumption. */
-  export interface CurrentThroughputInformationThroughput {
+  export class CurrentThroughputInformationThroughput {
     /** Number of global queries conducted against the instance for a given second. */
     query: number;
+
     /** Number of reads conducted against the instance for a given second. */
     read: number;
+
     /** Number of writes conducted against the instance for a given second. */
     write: number;
+
+    static serialize(obj): CurrentThroughputInformationThroughput.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CurrentThroughputInformationThroughput.Transport = <CurrentThroughputInformationThroughput.Transport>{};
+      if (obj.query !== undefined) {
+        copy.query = obj.query;
+      }
+      if (obj.read !== undefined) {
+        copy.read = obj.read;
+      }
+      if (obj.write !== undefined) {
+        copy.write = obj.write;
+      }
+      return copy as unknown as CurrentThroughputInformationThroughput.Transport;
+    }
+
+    static deserialize(obj): CurrentThroughputInformationThroughput {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CurrentThroughputInformationThroughput = <CurrentThroughputInformationThroughput>{};
+      if (obj.query !== undefined) {
+        copy.query = obj.query;
+      }
+      if (obj.read !== undefined) {
+        copy.read = obj.read;
+      }
+      if (obj.write !== undefined) {
+        copy.write = obj.write;
+      }
+      return copy as unknown as CurrentThroughputInformationThroughput;
+    }
+  }
+  export namespace CurrentThroughputInformationThroughput {
+      export interface Transport {
+        query: number;
+        read: number;
+        write: number;
+      }
   }
 
   /** Schema for information about a database. */
-  export interface DatabaseInformation {
+  export class DatabaseInformation {
     /** Schema for database cluster information. */
     cluster: DatabaseInformationCluster;
+
     /** An opaque string that describes the committed state of the database. */
-    committed_update_seq?: string;
+    committedUpdateSeq?: string;
+
     /** True if the database compaction routine is operating on this database. */
-    compact_running: boolean;
+    compactRunning: boolean;
+
     /** An opaque string that describes the compaction state of the database. */
-    compacted_seq?: string;
+    compactedSeq?: string;
+
     /** The name of the database. */
-    db_name: string;
+    dbName: string;
+
     /** The version of the physical format used for the data when it is stored on disk. */
-    disk_format_version: number;
+    diskFormatVersion: number;
+
     /** A count of the documents in the specified database. */
-    doc_count: number;
+    docCount: number;
+
     /** Number of deleted documents. */
-    doc_del_count: number;
+    docDelCount: number;
+
     /** The engine used for the database. */
     engine?: string;
+
     /** Schema for database properties. */
     props: DatabaseInformationProps;
+
     /** Schema for size information of content. */
     sizes: ContentInformationSizes;
+
     /** An opaque string that describes the state of the database. Do not rely on this string for counting the
      *  number of updates.
      */
-    update_seq: string;
+    updateSeq: string;
+
     /** The UUID of the database. */
     uuid?: string;
+
     /** Information about database's partitioned indexes. */
-    partitioned_indexes?: PartitionedIndexesInformation;
+    partitionedIndexes?: PartitionedIndexesInformation;
+
+    static serialize(obj): DatabaseInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DatabaseInformation.Transport = <DatabaseInformation.Transport>{};
+      if (obj.cluster !== undefined) {
+        copy.cluster = DatabaseInformationCluster.serialize(obj.cluster);
+      }
+      if (obj.committedUpdateSeq !== undefined) {
+        copy.committed_update_seq = obj.committedUpdateSeq;
+      }
+      if (obj.compactRunning !== undefined) {
+        copy.compact_running = obj.compactRunning;
+      }
+      if (obj.compactedSeq !== undefined) {
+        copy.compacted_seq = obj.compactedSeq;
+      }
+      if (obj.dbName !== undefined) {
+        copy.db_name = obj.dbName;
+      }
+      if (obj.diskFormatVersion !== undefined) {
+        copy.disk_format_version = obj.diskFormatVersion;
+      }
+      if (obj.docCount !== undefined) {
+        copy.doc_count = obj.docCount;
+      }
+      if (obj.docDelCount !== undefined) {
+        copy.doc_del_count = obj.docDelCount;
+      }
+      if (obj.engine !== undefined) {
+        copy.engine = obj.engine;
+      }
+      if (obj.props !== undefined) {
+        copy.props = DatabaseInformationProps.serialize(obj.props);
+      }
+      if (obj.sizes !== undefined) {
+        copy.sizes = ContentInformationSizes.serialize(obj.sizes);
+      }
+      if (obj.updateSeq !== undefined) {
+        copy.update_seq = obj.updateSeq;
+      }
+      if (obj.uuid !== undefined) {
+        copy.uuid = obj.uuid;
+      }
+      if (obj.partitionedIndexes !== undefined) {
+        copy.partitioned_indexes = PartitionedIndexesInformation.serialize(obj.partitionedIndexes);
+      }
+      return copy as unknown as DatabaseInformation.Transport;
+    }
+
+    static deserialize(obj): DatabaseInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DatabaseInformation = <DatabaseInformation>{};
+      if (obj.cluster !== undefined) {
+        copy.cluster = DatabaseInformationCluster.deserialize(obj.cluster);
+      }
+      if (obj.committed_update_seq !== undefined) {
+        copy.committedUpdateSeq = obj.committed_update_seq;
+      }
+      if (obj.compact_running !== undefined) {
+        copy.compactRunning = obj.compact_running;
+      }
+      if (obj.compacted_seq !== undefined) {
+        copy.compactedSeq = obj.compacted_seq;
+      }
+      if (obj.db_name !== undefined) {
+        copy.dbName = obj.db_name;
+      }
+      if (obj.disk_format_version !== undefined) {
+        copy.diskFormatVersion = obj.disk_format_version;
+      }
+      if (obj.doc_count !== undefined) {
+        copy.docCount = obj.doc_count;
+      }
+      if (obj.doc_del_count !== undefined) {
+        copy.docDelCount = obj.doc_del_count;
+      }
+      if (obj.engine !== undefined) {
+        copy.engine = obj.engine;
+      }
+      if (obj.props !== undefined) {
+        copy.props = DatabaseInformationProps.deserialize(obj.props);
+      }
+      if (obj.sizes !== undefined) {
+        copy.sizes = ContentInformationSizes.deserialize(obj.sizes);
+      }
+      if (obj.update_seq !== undefined) {
+        copy.updateSeq = obj.update_seq;
+      }
+      if (obj.uuid !== undefined) {
+        copy.uuid = obj.uuid;
+      }
+      if (obj.partitioned_indexes !== undefined) {
+        copy.partitionedIndexes = PartitionedIndexesInformation.deserialize(obj.partitioned_indexes);
+      }
+      return copy as unknown as DatabaseInformation;
+    }
+  }
+  export namespace DatabaseInformation {
+      export interface Transport {
+        cluster: DatabaseInformationCluster.Transport;
+        committed_update_seq?: string;
+        compact_running: boolean;
+        compacted_seq?: string;
+        db_name: string;
+        disk_format_version: number;
+        doc_count: number;
+        doc_del_count: number;
+        engine?: string;
+        props: DatabaseInformationProps.Transport;
+        sizes: ContentInformationSizes.Transport;
+        update_seq: string;
+        uuid?: string;
+        partitioned_indexes?: PartitionedIndexesInformation.Transport;
+      }
   }
 
   /** Schema for database cluster information. */
-  export interface DatabaseInformationCluster {
+  export class DatabaseInformationCluster {
     /** Schema for the number of replicas of a database in a cluster. The cluster is using the default value and it
      *  cannot be changed by the user.
      */
     n: number;
+
     /** Schema for the number of shards in a database. Each shard is a partition of the hash value range. */
     q: number;
+
     /** Read quorum. The number of consistent copies of a document that need to be read before a successful reply. */
     r: number;
+
     /** Write quorum. The number of copies of a document that need to be written before a successful reply. */
     w: number;
+
+    static serialize(obj): DatabaseInformationCluster.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DatabaseInformationCluster.Transport = <DatabaseInformationCluster.Transport>{};
+      if (obj.n !== undefined) {
+        copy.n = obj.n;
+      }
+      if (obj.q !== undefined) {
+        copy.q = obj.q;
+      }
+      if (obj.r !== undefined) {
+        copy.r = obj.r;
+      }
+      if (obj.w !== undefined) {
+        copy.w = obj.w;
+      }
+      return copy as unknown as DatabaseInformationCluster.Transport;
+    }
+
+    static deserialize(obj): DatabaseInformationCluster {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DatabaseInformationCluster = <DatabaseInformationCluster>{};
+      if (obj.n !== undefined) {
+        copy.n = obj.n;
+      }
+      if (obj.q !== undefined) {
+        copy.q = obj.q;
+      }
+      if (obj.r !== undefined) {
+        copy.r = obj.r;
+      }
+      if (obj.w !== undefined) {
+        copy.w = obj.w;
+      }
+      return copy as unknown as DatabaseInformationCluster;
+    }
+  }
+  export namespace DatabaseInformationCluster {
+      export interface Transport {
+        n: number;
+        q: number;
+        r: number;
+        w: number;
+      }
   }
 
   /** Schema for database properties. */
-  export interface DatabaseInformationProps {
+  export class DatabaseInformationProps {
     /** The value is `true` for a partitioned database. */
     partitioned?: boolean;
+
+    static serialize(obj): DatabaseInformationProps.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DatabaseInformationProps.Transport = <DatabaseInformationProps.Transport>{};
+      if (obj.partitioned !== undefined) {
+        copy.partitioned = obj.partitioned;
+      }
+      return copy as unknown as DatabaseInformationProps.Transport;
+    }
+
+    static deserialize(obj): DatabaseInformationProps {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DatabaseInformationProps = <DatabaseInformationProps>{};
+      if (obj.partitioned !== undefined) {
+        copy.partitioned = obj.partitioned;
+      }
+      return copy as unknown as DatabaseInformationProps;
+    }
+  }
+  export namespace DatabaseInformationProps {
+      export interface Transport {
+        partitioned?: boolean;
+      }
   }
 
   /** Schema for a database change event. */
-  export interface DbEvent {
+  export class DbEvent {
     /** Database name. */
-    db_name: string;
+    dbName: string;
+
     /** Sequence number. */
     seq: string;
+
     /** A database event. */
     type: DbEvent.Constants.Type | string;
+
+    static serialize(obj): DbEvent.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DbEvent.Transport = <DbEvent.Transport>{};
+      if (obj.dbName !== undefined) {
+        copy.db_name = obj.dbName;
+      }
+      if (obj.seq !== undefined) {
+        copy.seq = obj.seq;
+      }
+      if (obj.type !== undefined) {
+        copy.type = obj.type;
+      }
+      return copy as unknown as DbEvent.Transport;
+    }
+
+    static deserialize(obj): DbEvent {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DbEvent = <DbEvent>{};
+      if (obj.db_name !== undefined) {
+        copy.dbName = obj.db_name;
+      }
+      if (obj.seq !== undefined) {
+        copy.seq = obj.seq;
+      }
+      if (obj.type !== undefined) {
+        copy.type = obj.type;
+      }
+      return copy as unknown as DbEvent;
+    }
   }
   export namespace DbEvent {
     export namespace Constants {
@@ -10680,48 +12401,141 @@ namespace CloudantV1 {
         UPDATED = 'updated',
       }
     }
+      export interface Transport {
+        db_name: string;
+        seq: string;
+        type: string;
+      }
   }
 
   /** Schema for database updates. */
-  export interface DbUpdates {
+  export class DbUpdates {
     /** Last sequence number. */
-    last_seq: string;
+    lastSeq: string;
+
     /** results. */
     results: DbEvent[];
+
+    static serialize(obj): DbUpdates.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DbUpdates.Transport = <DbUpdates.Transport>{};
+      if (obj.lastSeq !== undefined) {
+        copy.last_seq = obj.lastSeq;
+      }
+      if (obj.results !== undefined) {
+        copy.results = BaseService.convertModel(obj.results, DbEvent.serialize);
+      }
+      return copy as unknown as DbUpdates.Transport;
+    }
+
+    static deserialize(obj): DbUpdates {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DbUpdates = <DbUpdates>{};
+      if (obj.last_seq !== undefined) {
+        copy.lastSeq = obj.last_seq;
+      }
+      if (obj.results !== undefined) {
+        copy.results = BaseService.convertModel(obj.results, DbEvent.deserialize);
+      }
+      return copy as unknown as DbUpdates;
+    }
+  }
+  export namespace DbUpdates {
+      export interface Transport {
+        last_seq: string;
+        results: DbEvent[];
+      }
   }
 
   /** Schema for database information keyed by database name. */
-  export interface DbsInfoResult {
+  export class DbsInfoResult {
     /** The name of the error. */
     error?: string;
+
     /** Schema for information about a database. */
     info?: DatabaseInformation;
+
     /** Database name. */
     key: string;
+
+    static serialize(obj): DbsInfoResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DbsInfoResult.Transport = <DbsInfoResult.Transport>{};
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.info !== undefined) {
+        copy.info = DatabaseInformation.serialize(obj.info);
+      }
+      if (obj.key !== undefined) {
+        copy.key = obj.key;
+      }
+      return copy as unknown as DbsInfoResult.Transport;
+    }
+
+    static deserialize(obj): DbsInfoResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DbsInfoResult = <DbsInfoResult>{};
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.info !== undefined) {
+        copy.info = DatabaseInformation.deserialize(obj.info);
+      }
+      if (obj.key !== undefined) {
+        copy.key = obj.key;
+      }
+      return copy as unknown as DbsInfoResult;
+    }
+  }
+  export namespace DbsInfoResult {
+      export interface Transport {
+        error?: string;
+        info?: DatabaseInformation.Transport;
+        key: string;
+      }
   }
 
   /** Schema for a design document. */
-  export interface DesignDocument {
+  export class DesignDocument {
     /** Schema for a map of attachment name to attachment metadata. */
-    _attachments?: JsonObject;
+    _attachments?: {[key: string]: Attachment};
+
     /** Schema for a list of document revision identifiers. */
     _conflicts?: string[];
+
     /** Deletion flag. Available if document was removed. */
     _deleted?: boolean;
+
     /** Schema for a list of document revision identifiers. */
     _deleted_conflicts?: string[];
+
     /** Document ID. */
     _id?: string;
+
     /** Document's update sequence in current database. Available if requested with local_seq=true query parameter. */
     _local_seq?: string;
+
     /** Schema for a document revision identifier. */
     _rev?: string;
+
     /** Schema for list of revision information. */
     _revisions?: Revisions;
+
     /** Schema for a list of objects with information about local revisions and their status. */
     _revs_info?: DocumentRevisionStatus[];
+
     /** Indicates whether to automatically build indexes defined in this design document. */
     autoupdate?: boolean;
+
     /** Schema for filter functions definition. This schema is a map where keys are the names of the filter
      *  functions and values are the function definition in string format.
      *
@@ -10765,12 +12579,16 @@ namespace CloudantV1 {
      *  Filter functions must return true if a document passed all the rules.
      */
     filters?: JsonObject;
+
     /** Search (text) index function definitions. */
-    indexes?: JsonObject;
+    indexes?: {[key: string]: SearchIndexDefinition};
+
     /** Defines Query Server key to process design document functions. */
     language?: string;
+
     /** Schema for design document options. */
     options?: DesignDocumentOptions;
+
     /** Validate document update function can be used to prevent invalid or unauthorized document update requests
      *  from being stored. Validation functions typically examine the structure of the new document to ensure that
      *  required fields are present and to verify that the requesting user should be allowed to make changes to the
@@ -10797,133 +12615,835 @@ namespace CloudantV1 {
      *    * `secObj` - Security Object, with lists of database security roles,
      *      see the `SecurityObject`.
      */
-    validate_doc_update?: string;
+    validateDocUpdate?: string;
+
     /** Schema for design document views. */
-    views?: JsonObject;
+    views?: {[key: string]: DesignDocumentViewsMapReduce};
+
     /** DesignDocument accepts additional properties. */
     [propName: string]: any;
+
+    static serialize(obj): DesignDocument.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DesignDocument.Transport = <DesignDocument.Transport>{};
+      if (obj._attachments !== undefined) {
+        copy._attachments = BaseService.convertModel(obj._attachments, Attachment.serialize, true);
+      }
+      if (obj._conflicts !== undefined) {
+        copy._conflicts = obj._conflicts;
+      }
+      if (obj._deleted !== undefined) {
+        copy._deleted = obj._deleted;
+      }
+      if (obj._deleted_conflicts !== undefined) {
+        copy._deleted_conflicts = obj._deleted_conflicts;
+      }
+      if (obj._id !== undefined) {
+        copy._id = obj._id;
+      }
+      if (obj._local_seq !== undefined) {
+        copy._local_seq = obj._local_seq;
+      }
+      if (obj._rev !== undefined) {
+        copy._rev = obj._rev;
+      }
+      if (obj._revisions !== undefined) {
+        copy._revisions = Revisions.serialize(obj._revisions);
+      }
+      if (obj._revs_info !== undefined) {
+        copy._revs_info = BaseService.convertModel(obj._revs_info, DocumentRevisionStatus.serialize);
+      }
+      if (obj.autoupdate !== undefined) {
+        copy.autoupdate = obj.autoupdate;
+      }
+      if (obj.filters !== undefined) {
+        copy.filters = obj.filters;
+      }
+      if (obj.indexes !== undefined) {
+        copy.indexes = BaseService.convertModel(obj.indexes, SearchIndexDefinition.serialize, true);
+      }
+      if (obj.language !== undefined) {
+        copy.language = obj.language;
+      }
+      if (obj.options !== undefined) {
+        copy.options = DesignDocumentOptions.serialize(obj.options);
+      }
+      if (obj.validateDocUpdate !== undefined) {
+        copy.validate_doc_update = obj.validateDocUpdate;
+      }
+      if (obj.views !== undefined) {
+        copy.views = BaseService.convertModel(obj.views, DesignDocumentViewsMapReduce.serialize, true);
+      }
+      let defaultProperties = [
+        '_attachments',
+        '_conflicts',
+        '_deleted',
+        '_deleted_conflicts',
+        '_id',
+        '_local_seq',
+        '_rev',
+        '_revisions',
+        '_revs_info',
+        'autoupdate',
+        'filters',
+        'indexes',
+        'language',
+        'options',
+        'validateDocUpdate',
+        'views',
+      ];
+      Object.keys(obj).forEach(key => {
+        if (!defaultProperties.includes(key)) {
+          copy[key] = obj[key];
+        }
+      });
+      return copy as unknown as DesignDocument.Transport;
+    }
+
+    static deserialize(obj): DesignDocument {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DesignDocument = <DesignDocument>{};
+      if (obj._attachments !== undefined) {
+        copy._attachments = BaseService.convertModel(obj._attachments, Attachment.deserialize, true);
+      }
+      if (obj._conflicts !== undefined) {
+        copy._conflicts = obj._conflicts;
+      }
+      if (obj._deleted !== undefined) {
+        copy._deleted = obj._deleted;
+      }
+      if (obj._deleted_conflicts !== undefined) {
+        copy._deleted_conflicts = obj._deleted_conflicts;
+      }
+      if (obj._id !== undefined) {
+        copy._id = obj._id;
+      }
+      if (obj._local_seq !== undefined) {
+        copy._local_seq = obj._local_seq;
+      }
+      if (obj._rev !== undefined) {
+        copy._rev = obj._rev;
+      }
+      if (obj._revisions !== undefined) {
+        copy._revisions = Revisions.deserialize(obj._revisions);
+      }
+      if (obj._revs_info !== undefined) {
+        copy._revs_info = BaseService.convertModel(obj._revs_info, DocumentRevisionStatus.deserialize);
+      }
+      if (obj.autoupdate !== undefined) {
+        copy.autoupdate = obj.autoupdate;
+      }
+      if (obj.filters !== undefined) {
+        copy.filters = obj.filters;
+      }
+      if (obj.indexes !== undefined) {
+        copy.indexes = BaseService.convertModel(obj.indexes, SearchIndexDefinition.deserialize, true);
+      }
+      if (obj.language !== undefined) {
+        copy.language = obj.language;
+      }
+      if (obj.options !== undefined) {
+        copy.options = DesignDocumentOptions.deserialize(obj.options);
+      }
+      if (obj.validate_doc_update !== undefined) {
+        copy.validateDocUpdate = obj.validate_doc_update;
+      }
+      if (obj.views !== undefined) {
+        copy.views = BaseService.convertModel(obj.views, DesignDocumentViewsMapReduce.deserialize, true);
+      }
+      let defaultProperties = [
+        '_attachments',
+        '_conflicts',
+        '_deleted',
+        '_deleted_conflicts',
+        '_id',
+        '_local_seq',
+        '_rev',
+        '_revisions',
+        '_revs_info',
+        'autoupdate',
+        'filters',
+        'indexes',
+        'language',
+        'options',
+        'validate_doc_update',
+        'views',
+      ];
+      Object.keys(obj).forEach(key => {
+        if (!defaultProperties.includes(key)) {
+          copy[key] = obj[key];
+        }
+      });
+      return copy as unknown as DesignDocument;
+    }
+  }
+  export namespace DesignDocument {
+      export interface Transport {
+        _attachments?: {[key: string]: Attachment.Transport};
+        _conflicts?: string[];
+        _deleted?: boolean;
+        _deleted_conflicts?: string[];
+        _id?: string;
+        _local_seq?: string;
+        _rev?: string;
+        _revisions?: Revisions.Transport;
+        _revs_info?: DocumentRevisionStatus[];
+        autoupdate?: boolean;
+        filters?: JsonObject;
+        indexes?: {[key: string]: SearchIndexDefinition.Transport};
+        language?: string;
+        options?: DesignDocumentOptions.Transport;
+        validate_doc_update?: string;
+        views?: {[key: string]: DesignDocumentViewsMapReduce.Transport};
+        /** DesignDocument.DesignDocument.Transport accepts additional properties. */
+        [propName: string]: any;
+      }
   }
 
   /** Schema for information about a design document. */
-  export interface DesignDocumentInformation {
+  export class DesignDocumentInformation {
     /** name. */
     name: string;
+
     /** View index information. */
-    view_index: DesignDocumentViewIndex;
+    viewIndex: DesignDocumentViewIndex;
+
+    static serialize(obj): DesignDocumentInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DesignDocumentInformation.Transport = <DesignDocumentInformation.Transport>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.viewIndex !== undefined) {
+        copy.view_index = DesignDocumentViewIndex.serialize(obj.viewIndex);
+      }
+      return copy as unknown as DesignDocumentInformation.Transport;
+    }
+
+    static deserialize(obj): DesignDocumentInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DesignDocumentInformation = <DesignDocumentInformation>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.view_index !== undefined) {
+        copy.viewIndex = DesignDocumentViewIndex.deserialize(obj.view_index);
+      }
+      return copy as unknown as DesignDocumentInformation;
+    }
+  }
+  export namespace DesignDocumentInformation {
+      export interface Transport {
+        name: string;
+        view_index: DesignDocumentViewIndex.Transport;
+      }
   }
 
   /** Schema for design document options. */
-  export interface DesignDocumentOptions {
+  export class DesignDocumentOptions {
     /** Whether this design document describes partitioned or global indexes. */
     partitioned?: boolean;
+
+    static serialize(obj): DesignDocumentOptions.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DesignDocumentOptions.Transport = <DesignDocumentOptions.Transport>{};
+      if (obj.partitioned !== undefined) {
+        copy.partitioned = obj.partitioned;
+      }
+      return copy as unknown as DesignDocumentOptions.Transport;
+    }
+
+    static deserialize(obj): DesignDocumentOptions {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DesignDocumentOptions = <DesignDocumentOptions>{};
+      if (obj.partitioned !== undefined) {
+        copy.partitioned = obj.partitioned;
+      }
+      return copy as unknown as DesignDocumentOptions;
+    }
+  }
+  export namespace DesignDocumentOptions {
+      export interface Transport {
+        partitioned?: boolean;
+      }
   }
 
   /** View index information. */
-  export interface DesignDocumentViewIndex {
+  export class DesignDocumentViewIndex {
     /** List of collator versions. If there are multiple entries this implies a libicu upgrade has occurred but
      *  compaction has not run yet.
      */
-    collator_versions: string[];
+    collatorVersions: string[];
+
     /** Indicates whether a compaction routine is currently running on the view. */
-    compact_running: boolean;
+    compactRunning: boolean;
+
     /** Language for the defined views. */
     language: string;
+
     /** MD5 signature of the views for the design document. */
     signature: string;
+
     /** Schema for size information of content. */
     sizes: ContentInformationSizes;
+
     /** Indicates if the view is currently being updated. */
-    updater_running: boolean;
+    updaterRunning: boolean;
+
     /** Schema for an ability to tell if view is up-to-date without querying it. */
-    updates_pending: UpdatesPending;
+    updatesPending: UpdatesPending;
+
     /** Number of clients waiting on views from this design document. */
-    waiting_clients: number;
+    waitingClients: number;
+
     /** Indicates if there are outstanding commits to the underlying database that need to processed. */
-    waiting_commit: boolean;
+    waitingCommit: boolean;
+
+    static serialize(obj): DesignDocumentViewIndex.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DesignDocumentViewIndex.Transport = <DesignDocumentViewIndex.Transport>{};
+      if (obj.collatorVersions !== undefined) {
+        copy.collator_versions = obj.collatorVersions;
+      }
+      if (obj.compactRunning !== undefined) {
+        copy.compact_running = obj.compactRunning;
+      }
+      if (obj.language !== undefined) {
+        copy.language = obj.language;
+      }
+      if (obj.signature !== undefined) {
+        copy.signature = obj.signature;
+      }
+      if (obj.sizes !== undefined) {
+        copy.sizes = ContentInformationSizes.serialize(obj.sizes);
+      }
+      if (obj.updaterRunning !== undefined) {
+        copy.updater_running = obj.updaterRunning;
+      }
+      if (obj.updatesPending !== undefined) {
+        copy.updates_pending = UpdatesPending.serialize(obj.updatesPending);
+      }
+      if (obj.waitingClients !== undefined) {
+        copy.waiting_clients = obj.waitingClients;
+      }
+      if (obj.waitingCommit !== undefined) {
+        copy.waiting_commit = obj.waitingCommit;
+      }
+      return copy as unknown as DesignDocumentViewIndex.Transport;
+    }
+
+    static deserialize(obj): DesignDocumentViewIndex {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DesignDocumentViewIndex = <DesignDocumentViewIndex>{};
+      if (obj.collator_versions !== undefined) {
+        copy.collatorVersions = obj.collator_versions;
+      }
+      if (obj.compact_running !== undefined) {
+        copy.compactRunning = obj.compact_running;
+      }
+      if (obj.language !== undefined) {
+        copy.language = obj.language;
+      }
+      if (obj.signature !== undefined) {
+        copy.signature = obj.signature;
+      }
+      if (obj.sizes !== undefined) {
+        copy.sizes = ContentInformationSizes.deserialize(obj.sizes);
+      }
+      if (obj.updater_running !== undefined) {
+        copy.updaterRunning = obj.updater_running;
+      }
+      if (obj.updates_pending !== undefined) {
+        copy.updatesPending = UpdatesPending.deserialize(obj.updates_pending);
+      }
+      if (obj.waiting_clients !== undefined) {
+        copy.waitingClients = obj.waiting_clients;
+      }
+      if (obj.waiting_commit !== undefined) {
+        copy.waitingCommit = obj.waiting_commit;
+      }
+      return copy as unknown as DesignDocumentViewIndex;
+    }
+  }
+  export namespace DesignDocumentViewIndex {
+      export interface Transport {
+        collator_versions: string[];
+        compact_running: boolean;
+        language: string;
+        signature: string;
+        sizes: ContentInformationSizes.Transport;
+        updater_running: boolean;
+        updates_pending: UpdatesPending.Transport;
+        waiting_clients: number;
+        waiting_commit: boolean;
+      }
   }
 
   /** Schema for view functions definition. */
-  export interface DesignDocumentViewsMapReduce {
+  export class DesignDocumentViewsMapReduce {
     /** JavaScript map function as a string. */
     map: string;
+
     /** JavaScript reduce function as a string. */
     reduce?: string;
+
+    static serialize(obj): DesignDocumentViewsMapReduce.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DesignDocumentViewsMapReduce.Transport = <DesignDocumentViewsMapReduce.Transport>{};
+      if (obj.map !== undefined) {
+        copy.map = obj.map;
+      }
+      if (obj.reduce !== undefined) {
+        copy.reduce = obj.reduce;
+      }
+      return copy as unknown as DesignDocumentViewsMapReduce.Transport;
+    }
+
+    static deserialize(obj): DesignDocumentViewsMapReduce {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DesignDocumentViewsMapReduce = <DesignDocumentViewsMapReduce>{};
+      if (obj.map !== undefined) {
+        copy.map = obj.map;
+      }
+      if (obj.reduce !== undefined) {
+        copy.reduce = obj.reduce;
+      }
+      return copy as unknown as DesignDocumentViewsMapReduce;
+    }
+  }
+  export namespace DesignDocumentViewsMapReduce {
+      export interface Transport {
+        map: string;
+        reduce?: string;
+      }
   }
 
   /** Schema for a row of document information in a DocsResult. */
-  export interface DocsResultRow {
+  export class DocsResultRow {
     /** The cause of the error (if available). */
-    caused_by?: string;
+    causedBy?: string;
+
     /** The name of the error. */
     error?: string;
+
     /** The reason the error occurred (if available). */
     reason?: string;
+
     /** Schema for a document. */
     doc?: Document;
+
     /** id. */
     id?: string;
+
     /** Document ID. */
     key: string;
+
     /** Value of built-in `/_all_docs` style view. */
     value?: DocsResultRowValue;
+
+    static serialize(obj): DocsResultRow.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DocsResultRow.Transport = <DocsResultRow.Transport>{};
+      if (obj.causedBy !== undefined) {
+        copy.caused_by = obj.causedBy;
+      }
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.reason !== undefined) {
+        copy.reason = obj.reason;
+      }
+      if (obj.doc !== undefined) {
+        copy.doc = Document.serialize(obj.doc);
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.key !== undefined) {
+        copy.key = obj.key;
+      }
+      if (obj.value !== undefined) {
+        copy.value = DocsResultRowValue.serialize(obj.value);
+      }
+      return copy as unknown as DocsResultRow.Transport;
+    }
+
+    static deserialize(obj): DocsResultRow {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DocsResultRow = <DocsResultRow>{};
+      if (obj.caused_by !== undefined) {
+        copy.causedBy = obj.caused_by;
+      }
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.reason !== undefined) {
+        copy.reason = obj.reason;
+      }
+      if (obj.doc !== undefined) {
+        copy.doc = Document.deserialize(obj.doc);
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.key !== undefined) {
+        copy.key = obj.key;
+      }
+      if (obj.value !== undefined) {
+        copy.value = DocsResultRowValue.deserialize(obj.value);
+      }
+      return copy as unknown as DocsResultRow;
+    }
+  }
+  export namespace DocsResultRow {
+      export interface Transport {
+        caused_by?: string;
+        error?: string;
+        reason?: string;
+        doc?: Document.Transport;
+        id?: string;
+        key: string;
+        value?: DocsResultRowValue.Transport;
+      }
   }
 
   /** Value of built-in `/_all_docs` style view. */
-  export interface DocsResultRowValue {
+  export class DocsResultRowValue {
     /** If `true` then the document is deleted. Not present for undeleted documents. */
     deleted?: boolean;
+
     /** Schema for a document revision identifier. */
     rev: string;
+
+    static serialize(obj): DocsResultRowValue.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DocsResultRowValue.Transport = <DocsResultRowValue.Transport>{};
+      if (obj.deleted !== undefined) {
+        copy.deleted = obj.deleted;
+      }
+      if (obj.rev !== undefined) {
+        copy.rev = obj.rev;
+      }
+      return copy as unknown as DocsResultRowValue.Transport;
+    }
+
+    static deserialize(obj): DocsResultRowValue {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DocsResultRowValue = <DocsResultRowValue>{};
+      if (obj.deleted !== undefined) {
+        copy.deleted = obj.deleted;
+      }
+      if (obj.rev !== undefined) {
+        copy.rev = obj.rev;
+      }
+      return copy as unknown as DocsResultRowValue;
+    }
+  }
+  export namespace DocsResultRowValue {
+      export interface Transport {
+        deleted?: boolean;
+        rev: string;
+      }
   }
 
   /** Schema for a document. */
-  export interface Document {
+  export class Document {
     /** Schema for a map of attachment name to attachment metadata. */
-    _attachments?: JsonObject;
+    _attachments?: {[key: string]: Attachment};
+
     /** Schema for a list of document revision identifiers. */
     _conflicts?: string[];
+
     /** Deletion flag. Available if document was removed. */
     _deleted?: boolean;
+
     /** Schema for a list of document revision identifiers. */
     _deleted_conflicts?: string[];
+
     /** Document ID. */
     _id?: string;
+
     /** Document's update sequence in current database. Available if requested with local_seq=true query parameter. */
     _local_seq?: string;
+
     /** Schema for a document revision identifier. */
     _rev?: string;
+
     /** Schema for list of revision information. */
     _revisions?: Revisions;
+
     /** Schema for a list of objects with information about local revisions and their status. */
     _revs_info?: DocumentRevisionStatus[];
+
     /** Document accepts additional properties. */
     [propName: string]: any;
+
+    static serialize(obj): Document.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Document.Transport = <Document.Transport>{};
+      if (obj._attachments !== undefined) {
+        copy._attachments = BaseService.convertModel(obj._attachments, Attachment.serialize, true);
+      }
+      if (obj._conflicts !== undefined) {
+        copy._conflicts = obj._conflicts;
+      }
+      if (obj._deleted !== undefined) {
+        copy._deleted = obj._deleted;
+      }
+      if (obj._deleted_conflicts !== undefined) {
+        copy._deleted_conflicts = obj._deleted_conflicts;
+      }
+      if (obj._id !== undefined) {
+        copy._id = obj._id;
+      }
+      if (obj._local_seq !== undefined) {
+        copy._local_seq = obj._local_seq;
+      }
+      if (obj._rev !== undefined) {
+        copy._rev = obj._rev;
+      }
+      if (obj._revisions !== undefined) {
+        copy._revisions = Revisions.serialize(obj._revisions);
+      }
+      if (obj._revs_info !== undefined) {
+        copy._revs_info = BaseService.convertModel(obj._revs_info, DocumentRevisionStatus.serialize);
+      }
+      let defaultProperties = [
+        '_attachments',
+        '_conflicts',
+        '_deleted',
+        '_deleted_conflicts',
+        '_id',
+        '_local_seq',
+        '_rev',
+        '_revisions',
+        '_revs_info',
+      ];
+      Object.keys(obj).forEach(key => {
+        if (!defaultProperties.includes(key)) {
+          copy[key] = obj[key];
+        }
+      });
+      return copy as unknown as Document.Transport;
+    }
+
+    static deserialize(obj): Document {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Document = <Document>{};
+      if (obj._attachments !== undefined) {
+        copy._attachments = BaseService.convertModel(obj._attachments, Attachment.deserialize, true);
+      }
+      if (obj._conflicts !== undefined) {
+        copy._conflicts = obj._conflicts;
+      }
+      if (obj._deleted !== undefined) {
+        copy._deleted = obj._deleted;
+      }
+      if (obj._deleted_conflicts !== undefined) {
+        copy._deleted_conflicts = obj._deleted_conflicts;
+      }
+      if (obj._id !== undefined) {
+        copy._id = obj._id;
+      }
+      if (obj._local_seq !== undefined) {
+        copy._local_seq = obj._local_seq;
+      }
+      if (obj._rev !== undefined) {
+        copy._rev = obj._rev;
+      }
+      if (obj._revisions !== undefined) {
+        copy._revisions = Revisions.deserialize(obj._revisions);
+      }
+      if (obj._revs_info !== undefined) {
+        copy._revs_info = BaseService.convertModel(obj._revs_info, DocumentRevisionStatus.deserialize);
+      }
+      let defaultProperties = [
+        '_attachments',
+        '_conflicts',
+        '_deleted',
+        '_deleted_conflicts',
+        '_id',
+        '_local_seq',
+        '_rev',
+        '_revisions',
+        '_revs_info',
+      ];
+      Object.keys(obj).forEach(key => {
+        if (!defaultProperties.includes(key)) {
+          copy[key] = obj[key];
+        }
+      });
+      return copy as unknown as Document;
+    }
+  }
+  export namespace Document {
+      export interface Transport {
+        _attachments?: {[key: string]: Attachment.Transport};
+        _conflicts?: string[];
+        _deleted?: boolean;
+        _deleted_conflicts?: string[];
+        _id?: string;
+        _local_seq?: string;
+        _rev?: string;
+        _revisions?: Revisions.Transport;
+        _revs_info?: DocumentRevisionStatus[];
+        /** Document.Document.Transport accepts additional properties. */
+        [propName: string]: any;
+      }
   }
 
   /** Schema for the result of a document modification. */
-  export interface DocumentResult {
+  export class DocumentResult {
     /** Schema for a document ID. */
     id: string;
+
     /** Schema for a document revision identifier. */
     rev?: string;
+
     /** ok. */
     ok?: boolean;
+
     /** The cause of the error (if available). */
-    caused_by?: string;
+    causedBy?: string;
+
     /** The name of the error. */
     error?: string;
+
     /** The reason the error occurred (if available). */
     reason?: string;
+
+    static serialize(obj): DocumentResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DocumentResult.Transport = <DocumentResult.Transport>{};
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.rev !== undefined) {
+        copy.rev = obj.rev;
+      }
+      if (obj.ok !== undefined) {
+        copy.ok = obj.ok;
+      }
+      if (obj.causedBy !== undefined) {
+        copy.caused_by = obj.causedBy;
+      }
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.reason !== undefined) {
+        copy.reason = obj.reason;
+      }
+      return copy as unknown as DocumentResult.Transport;
+    }
+
+    static deserialize(obj): DocumentResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DocumentResult = <DocumentResult>{};
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.rev !== undefined) {
+        copy.rev = obj.rev;
+      }
+      if (obj.ok !== undefined) {
+        copy.ok = obj.ok;
+      }
+      if (obj.caused_by !== undefined) {
+        copy.causedBy = obj.caused_by;
+      }
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.reason !== undefined) {
+        copy.reason = obj.reason;
+      }
+      return copy as unknown as DocumentResult;
+    }
+  }
+  export namespace DocumentResult {
+      export interface Transport {
+        id: string;
+        rev?: string;
+        ok?: boolean;
+        caused_by?: string;
+        error?: string;
+        reason?: string;
+      }
   }
 
   /** Schema for information about revisions and their status. */
-  export interface DocumentRevisionStatus {
+  export class DocumentRevisionStatus {
     /** Schema for a document revision identifier. */
     rev: string;
+
     /** Status of the revision. May be one of: - `available`: Revision is available for retrieving with rev query
      *  parameter - `missing`: Revision is not available - `deleted`: Revision belongs to deleted document.
      */
     status: DocumentRevisionStatus.Constants.Status | string;
+
+    static serialize(obj): DocumentRevisionStatus.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DocumentRevisionStatus.Transport = <DocumentRevisionStatus.Transport>{};
+      if (obj.rev !== undefined) {
+        copy.rev = obj.rev;
+      }
+      if (obj.status !== undefined) {
+        copy.status = obj.status;
+      }
+      return copy as unknown as DocumentRevisionStatus.Transport;
+    }
+
+    static deserialize(obj): DocumentRevisionStatus {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DocumentRevisionStatus = <DocumentRevisionStatus>{};
+      if (obj.rev !== undefined) {
+        copy.rev = obj.rev;
+      }
+      if (obj.status !== undefined) {
+        copy.status = obj.status;
+      }
+      return copy as unknown as DocumentRevisionStatus;
+    }
   }
   export namespace DocumentRevisionStatus {
     export namespace Constants {
@@ -10934,50 +13454,156 @@ namespace CloudantV1 {
         DELETED = 'deleted',
       }
     }
+      export interface Transport {
+        rev: string;
+        status: string;
+      }
   }
 
   /** Schema for document shard information. */
-  export interface DocumentShardInfo {
+  export class DocumentShardInfo {
     /** List of nodes serving a replica of the shard. */
     nodes: string[];
+
     /** The shard range in which the document is stored. */
     range: string;
+
+    static serialize(obj): DocumentShardInfo.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DocumentShardInfo.Transport = <DocumentShardInfo.Transport>{};
+      if (obj.nodes !== undefined) {
+        copy.nodes = obj.nodes;
+      }
+      if (obj.range !== undefined) {
+        copy.range = obj.range;
+      }
+      return copy as unknown as DocumentShardInfo.Transport;
+    }
+
+    static deserialize(obj): DocumentShardInfo {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DocumentShardInfo = <DocumentShardInfo>{};
+      if (obj.nodes !== undefined) {
+        copy.nodes = obj.nodes;
+      }
+      if (obj.range !== undefined) {
+        copy.range = obj.range;
+      }
+      return copy as unknown as DocumentShardInfo;
+    }
+  }
+  export namespace DocumentShardInfo {
+      export interface Transport {
+        nodes: string[];
+        range: string;
+      }
   }
 
   /** Schema for find query execution statistics. */
-  export interface ExecutionStats {
+  export class ExecutionStats {
     /** Time to execute the query. */
-    execution_time_ms: number;
+    executionTimeMs: number;
+
     /** Number of results returned. */
-    results_returned: number;
+    resultsReturned: number;
+
     /** Number of documents fetched from the index. */
-    total_docs_examined: number;
+    totalDocsExamined: number;
+
     /** Number of rows scanned in the index. */
-    total_keys_examined: number;
+    totalKeysExamined: number;
+
     /** Number of documents fetched from the primary index with the specified read quorum. */
-    total_quorum_docs_examined: number;
+    totalQuorumDocsExamined: number;
+
+    static serialize(obj): ExecutionStats.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ExecutionStats.Transport = <ExecutionStats.Transport>{};
+      if (obj.executionTimeMs !== undefined) {
+        copy.execution_time_ms = obj.executionTimeMs;
+      }
+      if (obj.resultsReturned !== undefined) {
+        copy.results_returned = obj.resultsReturned;
+      }
+      if (obj.totalDocsExamined !== undefined) {
+        copy.total_docs_examined = obj.totalDocsExamined;
+      }
+      if (obj.totalKeysExamined !== undefined) {
+        copy.total_keys_examined = obj.totalKeysExamined;
+      }
+      if (obj.totalQuorumDocsExamined !== undefined) {
+        copy.total_quorum_docs_examined = obj.totalQuorumDocsExamined;
+      }
+      return copy as unknown as ExecutionStats.Transport;
+    }
+
+    static deserialize(obj): ExecutionStats {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ExecutionStats = <ExecutionStats>{};
+      if (obj.execution_time_ms !== undefined) {
+        copy.executionTimeMs = obj.execution_time_ms;
+      }
+      if (obj.results_returned !== undefined) {
+        copy.resultsReturned = obj.results_returned;
+      }
+      if (obj.total_docs_examined !== undefined) {
+        copy.totalDocsExamined = obj.total_docs_examined;
+      }
+      if (obj.total_keys_examined !== undefined) {
+        copy.totalKeysExamined = obj.total_keys_examined;
+      }
+      if (obj.total_quorum_docs_examined !== undefined) {
+        copy.totalQuorumDocsExamined = obj.total_quorum_docs_examined;
+      }
+      return copy as unknown as ExecutionStats;
+    }
+  }
+  export namespace ExecutionStats {
+      export interface Transport {
+        execution_time_ms: number;
+        results_returned: number;
+        total_docs_examined: number;
+        total_keys_examined: number;
+        total_quorum_docs_examined: number;
+      }
   }
 
   /** Schema for information about the index used for a find query. */
-  export interface ExplainResult {
+  export class ExplainResult {
     /** When `true`, the query is answered using the index only and no documents are fetched. */
     covering: boolean;
+
     /** Name of database. */
     dbname: string;
+
     /** Fields that were requested to be projected from the document. If no fields were requested to be projected
      *  this will be empty and all fields will be returned.
      */
     fields: string[];
+
     /** Schema for information about an index. */
     index: IndexInformation;
+
     /** The used maximum number of results returned. */
     limit: number;
+
     /** Arguments passed to the underlying view. */
     mrargs?: ExplainResultMrArgs;
+
     /** Options used for the request. */
     opts: ExplainResultOpts;
+
     /** Schema for any JSON type. */
-    partitioned?: any;
+    partitioned?: any | null;
+
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
      *  provides an expression to evaluate with the field content or other data.
      *
@@ -11007,38 +13633,214 @@ namespace CloudantV1 {
      *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
+
     /** Skip parameter used. */
     skip: number;
+
+    static serialize(obj): ExplainResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ExplainResult.Transport = <ExplainResult.Transport>{};
+      if (obj.covering !== undefined) {
+        copy.covering = obj.covering;
+      }
+      if (obj.dbname !== undefined) {
+        copy.dbname = obj.dbname;
+      }
+      if (obj.fields !== undefined) {
+        copy.fields = obj.fields;
+      }
+      if (obj.index !== undefined) {
+        copy.index = IndexInformation.serialize(obj.index);
+      }
+      if (obj.limit !== undefined) {
+        copy.limit = obj.limit;
+      }
+      if (obj.mrargs !== undefined) {
+        copy.mrargs = ExplainResultMrArgs.serialize(obj.mrargs);
+      }
+      if (obj.opts !== undefined) {
+        copy.opts = ExplainResultOpts.serialize(obj.opts);
+      }
+      if (obj.partitioned !== undefined) {
+        copy.partitioned = obj.partitioned;
+      }
+      if (obj.selector !== undefined) {
+        copy.selector = obj.selector;
+      }
+      if (obj.skip !== undefined) {
+        copy.skip = obj.skip;
+      }
+      return copy as unknown as ExplainResult.Transport;
+    }
+
+    static deserialize(obj): ExplainResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ExplainResult = <ExplainResult>{};
+      if (obj.covering !== undefined) {
+        copy.covering = obj.covering;
+      }
+      if (obj.dbname !== undefined) {
+        copy.dbname = obj.dbname;
+      }
+      if (obj.fields !== undefined) {
+        copy.fields = obj.fields;
+      }
+      if (obj.index !== undefined) {
+        copy.index = IndexInformation.deserialize(obj.index);
+      }
+      if (obj.limit !== undefined) {
+        copy.limit = obj.limit;
+      }
+      if (obj.mrargs !== undefined) {
+        copy.mrargs = ExplainResultMrArgs.deserialize(obj.mrargs);
+      }
+      if (obj.opts !== undefined) {
+        copy.opts = ExplainResultOpts.deserialize(obj.opts);
+      }
+      if (obj.partitioned !== undefined) {
+        copy.partitioned = obj.partitioned;
+      }
+      if (obj.selector !== undefined) {
+        copy.selector = obj.selector;
+      }
+      if (obj.skip !== undefined) {
+        copy.skip = obj.skip;
+      }
+      return copy as unknown as ExplainResult;
+    }
+  }
+  export namespace ExplainResult {
+      export interface Transport {
+        covering: boolean;
+        dbname: string;
+        fields: string[];
+        index: IndexInformation.Transport;
+        limit: number;
+        mrargs?: ExplainResultMrArgs.Transport;
+        opts: ExplainResultOpts.Transport;
+        partitioned?: any;
+        selector: JsonObject;
+        skip: number;
+      }
   }
 
   /** Arguments passed to the underlying view. */
-  export interface ExplainResultMrArgs {
+  export class ExplainResultMrArgs {
     /** Schema for any JSON type. */
-    conflicts?: any;
+    conflicts?: any | null;
+
     /** Direction parameter passed to the underlying view. */
     direction?: string;
+
     /** Schema for any JSON type. */
-    end_key?: any;
+    endKey?: any | null;
+
     /** A parameter that specifies whether to include the full content of the documents in the response in the
      *  underlying view.
      */
-    include_docs?: boolean;
+    includeDocs?: boolean;
+
     /** Partition parameter passed to the underlying view. */
-    partition?: string;
+    partition?: string | null;
+
     /** A parameter that specifies returning only documents that match any of the specified keys in the underlying
      *  view.
      */
     reduce?: boolean;
+
     /** A parameter that specifies whether the view results should be returned form a "stable" set of shards passed
      *  to the underlying view.
      */
     stable?: boolean;
+
     /** Schema for any JSON type. */
-    start_key?: any;
+    startKey?: any | null;
+
     /** Schema for any JSON type. */
-    update?: any;
+    update?: any | null;
+
     /** The type of the underlying view. */
-    view_type?: ExplainResultMrArgs.Constants.ViewType | string;
+    viewType?: ExplainResultMrArgs.Constants.ViewType | string;
+
+    static serialize(obj): ExplainResultMrArgs.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ExplainResultMrArgs.Transport = <ExplainResultMrArgs.Transport>{};
+      if (obj.conflicts !== undefined) {
+        copy.conflicts = obj.conflicts;
+      }
+      if (obj.direction !== undefined) {
+        copy.direction = obj.direction;
+      }
+      if (obj.endKey !== undefined) {
+        copy.end_key = obj.endKey;
+      }
+      if (obj.includeDocs !== undefined) {
+        copy.include_docs = obj.includeDocs;
+      }
+      if (obj.partition !== undefined) {
+        copy.partition = obj.partition;
+      }
+      if (obj.reduce !== undefined) {
+        copy.reduce = obj.reduce;
+      }
+      if (obj.stable !== undefined) {
+        copy.stable = obj.stable;
+      }
+      if (obj.startKey !== undefined) {
+        copy.start_key = obj.startKey;
+      }
+      if (obj.update !== undefined) {
+        copy.update = obj.update;
+      }
+      if (obj.viewType !== undefined) {
+        copy.view_type = obj.viewType;
+      }
+      return copy as unknown as ExplainResultMrArgs.Transport;
+    }
+
+    static deserialize(obj): ExplainResultMrArgs {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ExplainResultMrArgs = <ExplainResultMrArgs>{};
+      if (obj.conflicts !== undefined) {
+        copy.conflicts = obj.conflicts;
+      }
+      if (obj.direction !== undefined) {
+        copy.direction = obj.direction;
+      }
+      if (obj.end_key !== undefined) {
+        copy.endKey = obj.end_key;
+      }
+      if (obj.include_docs !== undefined) {
+        copy.includeDocs = obj.include_docs;
+      }
+      if (obj.partition !== undefined) {
+        copy.partition = obj.partition;
+      }
+      if (obj.reduce !== undefined) {
+        copy.reduce = obj.reduce;
+      }
+      if (obj.stable !== undefined) {
+        copy.stable = obj.stable;
+      }
+      if (obj.start_key !== undefined) {
+        copy.startKey = obj.start_key;
+      }
+      if (obj.update !== undefined) {
+        copy.update = obj.update;
+      }
+      if (obj.view_type !== undefined) {
+        copy.viewType = obj.view_type;
+      }
+      return copy as unknown as ExplainResultMrArgs;
+    }
   }
   export namespace ExplainResultMrArgs {
     export namespace Constants {
@@ -11048,62 +13850,250 @@ namespace CloudantV1 {
         REDUCE = 'reduce',
       }
     }
+      export interface Transport {
+        conflicts?: any;
+        direction?: string;
+        end_key?: any;
+        include_docs?: boolean;
+        partition?: string;
+        reduce?: boolean;
+        stable?: boolean;
+        start_key?: any;
+        update?: any;
+        view_type?: string;
+      }
   }
 
   /** Options used for the request. */
-  export interface ExplainResultOpts {
+  export class ExplainResultOpts {
     /** Opaque bookmark token used when paginating results. */
     bookmark: string;
+
     /** Conflicts used in the request query. */
     conflicts: boolean;
+
     /** Execution statistics used in the request query. */
-    execution_stats: boolean;
+    executionStats: boolean;
+
     /** JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be
      *  returned. If it is omitted or empty, the entire document is returned.
      */
     fields: string[];
+
     /** Limit used in the request query. */
     limit: number;
+
     /** On which database partition the request was used. If it was not used on a database partition, it returns
      *  with `""`.
      */
     partition: string;
+
     /** The read quorum that is needed for the result. */
     r: number;
+
     /** Skip used in the request query. */
     skip: number;
+
     /** Schema for any JSON type. */
-    sort: any;
+    sort: any | null;
+
     /** Stable used in the request query. */
     stable: boolean;
+
     /** Deprecated: Stale used in the request query. */
     stale: boolean;
+
     /** Update used in the request query. */
     update: boolean;
+
     /** Use index used in the request query. */
-    use_index: string[];
+    useIndex: string[];
+
+    static serialize(obj): ExplainResultOpts.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ExplainResultOpts.Transport = <ExplainResultOpts.Transport>{};
+      if (obj.bookmark !== undefined) {
+        copy.bookmark = obj.bookmark;
+      }
+      if (obj.conflicts !== undefined) {
+        copy.conflicts = obj.conflicts;
+      }
+      if (obj.executionStats !== undefined) {
+        copy.execution_stats = obj.executionStats;
+      }
+      if (obj.fields !== undefined) {
+        copy.fields = obj.fields;
+      }
+      if (obj.limit !== undefined) {
+        copy.limit = obj.limit;
+      }
+      if (obj.partition !== undefined) {
+        copy.partition = obj.partition;
+      }
+      if (obj.r !== undefined) {
+        copy.r = obj.r;
+      }
+      if (obj.skip !== undefined) {
+        copy.skip = obj.skip;
+      }
+      if (obj.sort !== undefined) {
+        copy.sort = obj.sort;
+      }
+      if (obj.stable !== undefined) {
+        copy.stable = obj.stable;
+      }
+      if (obj.stale !== undefined) {
+        copy.stale = obj.stale;
+      }
+      if (obj.update !== undefined) {
+        copy.update = obj.update;
+      }
+      if (obj.useIndex !== undefined) {
+        copy.use_index = obj.useIndex;
+      }
+      return copy as unknown as ExplainResultOpts.Transport;
+    }
+
+    static deserialize(obj): ExplainResultOpts {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ExplainResultOpts = <ExplainResultOpts>{};
+      if (obj.bookmark !== undefined) {
+        copy.bookmark = obj.bookmark;
+      }
+      if (obj.conflicts !== undefined) {
+        copy.conflicts = obj.conflicts;
+      }
+      if (obj.execution_stats !== undefined) {
+        copy.executionStats = obj.execution_stats;
+      }
+      if (obj.fields !== undefined) {
+        copy.fields = obj.fields;
+      }
+      if (obj.limit !== undefined) {
+        copy.limit = obj.limit;
+      }
+      if (obj.partition !== undefined) {
+        copy.partition = obj.partition;
+      }
+      if (obj.r !== undefined) {
+        copy.r = obj.r;
+      }
+      if (obj.skip !== undefined) {
+        copy.skip = obj.skip;
+      }
+      if (obj.sort !== undefined) {
+        copy.sort = obj.sort;
+      }
+      if (obj.stable !== undefined) {
+        copy.stable = obj.stable;
+      }
+      if (obj.stale !== undefined) {
+        copy.stale = obj.stale;
+      }
+      if (obj.update !== undefined) {
+        copy.update = obj.update;
+      }
+      if (obj.use_index !== undefined) {
+        copy.useIndex = obj.use_index;
+      }
+      return copy as unknown as ExplainResultOpts;
+    }
+  }
+  export namespace ExplainResultOpts {
+      export interface Transport {
+        bookmark: string;
+        conflicts: boolean;
+        execution_stats: boolean;
+        fields: string[];
+        limit: number;
+        partition: string;
+        r: number;
+        skip: number;
+        sort: any;
+        stable: boolean;
+        stale: boolean;
+        update: boolean;
+        use_index: string[];
+      }
   }
 
   /** Schema for the result of a query find operation. */
-  export interface FindResult {
+  export class FindResult {
     /** Opaque bookmark token used when paginating results. */
     bookmark: string;
+
     /** Documents matching the selector. */
     docs: Document[];
+
     /** Schema for find query execution statistics. */
-    execution_stats?: ExecutionStats;
+    executionStats?: ExecutionStats;
+
     /** warning. */
     warning?: string;
+
+    static serialize(obj): FindResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: FindResult.Transport = <FindResult.Transport>{};
+      if (obj.bookmark !== undefined) {
+        copy.bookmark = obj.bookmark;
+      }
+      if (obj.docs !== undefined) {
+        copy.docs = BaseService.convertModel(obj.docs, Document.serialize);
+      }
+      if (obj.executionStats !== undefined) {
+        copy.execution_stats = ExecutionStats.serialize(obj.executionStats);
+      }
+      if (obj.warning !== undefined) {
+        copy.warning = obj.warning;
+      }
+      return copy as unknown as FindResult.Transport;
+    }
+
+    static deserialize(obj): FindResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: FindResult = <FindResult>{};
+      if (obj.bookmark !== undefined) {
+        copy.bookmark = obj.bookmark;
+      }
+      if (obj.docs !== undefined) {
+        copy.docs = BaseService.convertModel(obj.docs, Document.deserialize);
+      }
+      if (obj.execution_stats !== undefined) {
+        copy.executionStats = ExecutionStats.deserialize(obj.execution_stats);
+      }
+      if (obj.warning !== undefined) {
+        copy.warning = obj.warning;
+      }
+      return copy as unknown as FindResult;
+    }
+  }
+  export namespace FindResult {
+      export interface Transport {
+        bookmark: string;
+        docs: Document[];
+        execution_stats?: ExecutionStats.Transport;
+        warning?: string;
+      }
   }
 
   /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration properties that do not apply to `json` indexes, these are: * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all document fields and what analyzer to use for that purpose. */
-  export interface IndexDefinition {
+  export class IndexDefinition {
     /** Schema for a full text search analyzer. */
-    default_analyzer?: Analyzer;
+    defaultAnalyzer?: Analyzer;
+
     /** Schema for the text index default field configuration. The default field is used to index the text of all
      *  fields within a document for use with the `$text` operator.
      */
-    default_field?: IndexTextOperatorDefaultField;
+    defaultField?: IndexTextOperatorDefaultField;
+
     /** List of field objects to index.  Nested fields are also allowed, e.g. `person.name`.
      *
      *  For "json" type indexes each object is a mapping of field name to sort direction (asc or desc).
@@ -11112,13 +14102,15 @@ namespace CloudantV1 {
      *  type (string, number, or boolean).
      */
     fields?: IndexField[];
+
     /** Whether to scan every document for arrays and store the length for each array found. Set the
      *  index_array_lengths field to false if:
      *  * You do not need to know the length of an array. * You do not use the `$size` operator. * The documents in your
      *  database are complex, or not completely under your control. As a result, it is difficult to estimate the impact
      *  of the extra processing that is needed to determine and store the arrays lengths.
      */
-    index_array_lengths?: boolean;
+    indexArrayLengths?: boolean;
+
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
      *  provides an expression to evaluate with the field content or other data.
      *
@@ -11147,17 +14139,120 @@ namespace CloudantV1 {
      *  For further reference see
      *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
-    partial_filter_selector?: JsonObject;
+    partialFilterSelector?: JsonObject;
+
+    static serialize(obj): IndexDefinition.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexDefinition.Transport = <IndexDefinition.Transport>{};
+      if (obj.defaultAnalyzer !== undefined) {
+        copy.default_analyzer = Analyzer.serialize(obj.defaultAnalyzer);
+      }
+      if (obj.defaultField !== undefined) {
+        copy.default_field = IndexTextOperatorDefaultField.serialize(obj.defaultField);
+      }
+      if (obj.fields !== undefined) {
+        copy.fields = BaseService.convertModel(obj.fields, IndexField.serialize);
+      }
+      if (obj.indexArrayLengths !== undefined) {
+        copy.index_array_lengths = obj.indexArrayLengths;
+      }
+      if (obj.partialFilterSelector !== undefined) {
+        copy.partial_filter_selector = obj.partialFilterSelector;
+      }
+      return copy as unknown as IndexDefinition.Transport;
+    }
+
+    static deserialize(obj): IndexDefinition {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexDefinition = <IndexDefinition>{};
+      if (obj.default_analyzer !== undefined) {
+        copy.defaultAnalyzer = Analyzer.deserialize(obj.default_analyzer);
+      }
+      if (obj.default_field !== undefined) {
+        copy.defaultField = IndexTextOperatorDefaultField.deserialize(obj.default_field);
+      }
+      if (obj.fields !== undefined) {
+        copy.fields = BaseService.convertModel(obj.fields, IndexField.deserialize);
+      }
+      if (obj.index_array_lengths !== undefined) {
+        copy.indexArrayLengths = obj.index_array_lengths;
+      }
+      if (obj.partial_filter_selector !== undefined) {
+        copy.partialFilterSelector = obj.partial_filter_selector;
+      }
+      return copy as unknown as IndexDefinition;
+    }
+  }
+  export namespace IndexDefinition {
+      export interface Transport {
+        default_analyzer?: Analyzer.Transport;
+        default_field?: IndexTextOperatorDefaultField.Transport;
+        fields?: IndexField[];
+        index_array_lengths?: boolean;
+        partial_filter_selector?: JsonObject;
+      }
   }
 
   /** Schema for indexed fields for use with declarative JSON query. */
-  export interface IndexField {
+  export class IndexField {
     /** Name of the field. */
     name?: string;
+
     /** The type of the named field. */
     type?: IndexField.Constants.Type | string;
+
     /** IndexField accepts additional properties. */
     [propName: string]: any;
+
+    static serialize(obj): IndexField.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexField.Transport = <IndexField.Transport>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.type !== undefined) {
+        copy.type = obj.type;
+      }
+      let defaultProperties = [
+        'name',
+        'type',
+      ];
+      Object.keys(obj).forEach(key => {
+        if (!defaultProperties.includes(key)) {
+          copy[key] = obj[key];
+        }
+      });
+      return copy as unknown as IndexField.Transport;
+    }
+
+    static deserialize(obj): IndexField {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexField = <IndexField>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.type !== undefined) {
+        copy.type = obj.type;
+      }
+      let defaultProperties = [
+        'name',
+        'type',
+      ];
+      Object.keys(obj).forEach(key => {
+        if (!defaultProperties.includes(key)) {
+          copy[key] = obj[key];
+        }
+      });
+      return copy as unknown as IndexField;
+    }
   }
   export namespace IndexField {
     export namespace Constants {
@@ -11168,24 +14263,80 @@ namespace CloudantV1 {
         STRING = 'string',
       }
     }
+      export interface Transport {
+        name?: string;
+        type?: string;
+        /** IndexField.IndexField.Transport accepts additional properties. */
+        [propName: string]: any;
+      }
   }
 
   /** Schema for information about an index. */
-  export interface IndexInformation {
+  export class IndexInformation {
     /** Design document ID including a `_design/` prefix. */
-    ddoc: string;
+    ddoc: string | null;
+
     /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
      *  properties that do not apply to `json` indexes, these are:
      *  * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
      *  document fields and what analyzer to use for that purpose.
      */
     def: IndexDefinition;
+
     /** Index name. */
     name: string;
+
     /** Indicates if index is partitioned. */
     partitioned?: boolean;
+
     /** Schema for the type of an index. */
     type: IndexInformation.Constants.Type | string;
+
+    static serialize(obj): IndexInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexInformation.Transport = <IndexInformation.Transport>{};
+      if (obj.ddoc !== undefined) {
+        copy.ddoc = obj.ddoc;
+      }
+      if (obj.def !== undefined) {
+        copy.def = IndexDefinition.serialize(obj.def);
+      }
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.partitioned !== undefined) {
+        copy.partitioned = obj.partitioned;
+      }
+      if (obj.type !== undefined) {
+        copy.type = obj.type;
+      }
+      return copy as unknown as IndexInformation.Transport;
+    }
+
+    static deserialize(obj): IndexInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexInformation = <IndexInformation>{};
+      if (obj.ddoc !== undefined) {
+        copy.ddoc = obj.ddoc;
+      }
+      if (obj.def !== undefined) {
+        copy.def = IndexDefinition.deserialize(obj.def);
+      }
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.partitioned !== undefined) {
+        copy.partitioned = obj.partitioned;
+      }
+      if (obj.type !== undefined) {
+        copy.type = obj.type;
+      }
+      return copy as unknown as IndexInformation;
+    }
   }
   export namespace IndexInformation {
     export namespace Constants {
@@ -11196,16 +14347,59 @@ namespace CloudantV1 {
         TEXT = 'text',
       }
     }
+      export interface Transport {
+        ddoc: string;
+        def: IndexDefinition.Transport;
+        name: string;
+        partitioned?: boolean;
+        type: string;
+      }
   }
 
   /** Schema for the result of creating an index. */
-  export interface IndexResult {
+  export class IndexResult {
     /** Id of the design document the index was created in. */
     id: string;
+
     /** Name of the index created. */
     name: string;
+
     /** Flag to show whether the index was created or one already exists. */
     result: IndexResult.Constants.Result | string;
+
+    static serialize(obj): IndexResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexResult.Transport = <IndexResult.Transport>{};
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.result !== undefined) {
+        copy.result = obj.result;
+      }
+      return copy as unknown as IndexResult.Transport;
+    }
+
+    static deserialize(obj): IndexResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexResult = <IndexResult>{};
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.result !== undefined) {
+        copy.result = obj.result;
+      }
+      return copy as unknown as IndexResult;
+    }
   }
   export namespace IndexResult {
     export namespace Constants {
@@ -11215,191 +14409,789 @@ namespace CloudantV1 {
         EXISTS = 'exists',
       }
     }
+      export interface Transport {
+        id: string;
+        name: string;
+        result: string;
+      }
   }
 
   /** Schema for the text index default field configuration. The default field is used to index the text of all fields within a document for use with the `$text` operator. */
-  export interface IndexTextOperatorDefaultField {
+  export class IndexTextOperatorDefaultField {
     /** Schema for a full text search analyzer. */
     analyzer?: Analyzer;
+
     /** Whether or not the default_field is enabled. */
     enabled?: boolean;
+
+    static serialize(obj): IndexTextOperatorDefaultField.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexTextOperatorDefaultField.Transport = <IndexTextOperatorDefaultField.Transport>{};
+      if (obj.analyzer !== undefined) {
+        copy.analyzer = Analyzer.serialize(obj.analyzer);
+      }
+      if (obj.enabled !== undefined) {
+        copy.enabled = obj.enabled;
+      }
+      return copy as unknown as IndexTextOperatorDefaultField.Transport;
+    }
+
+    static deserialize(obj): IndexTextOperatorDefaultField {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexTextOperatorDefaultField = <IndexTextOperatorDefaultField>{};
+      if (obj.analyzer !== undefined) {
+        copy.analyzer = Analyzer.deserialize(obj.analyzer);
+      }
+      if (obj.enabled !== undefined) {
+        copy.enabled = obj.enabled;
+      }
+      return copy as unknown as IndexTextOperatorDefaultField;
+    }
+  }
+  export namespace IndexTextOperatorDefaultField {
+      export interface Transport {
+        analyzer?: Analyzer.Transport;
+        enabled?: boolean;
+      }
   }
 
   /** Schema for information about the indexes in a database. */
-  export interface IndexesInformation {
+  export class IndexesInformation {
     /** Number of total rows. */
-    total_rows: number;
+    totalRows: number | null;
+
     /** Indexes. */
     indexes: IndexInformation[];
+
+    static serialize(obj): IndexesInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexesInformation.Transport = <IndexesInformation.Transport>{};
+      if (obj.totalRows !== undefined) {
+        copy.total_rows = obj.totalRows;
+      }
+      if (obj.indexes !== undefined) {
+        copy.indexes = BaseService.convertModel(obj.indexes, IndexInformation.serialize);
+      }
+      return copy as unknown as IndexesInformation.Transport;
+    }
+
+    static deserialize(obj): IndexesInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexesInformation = <IndexesInformation>{};
+      if (obj.total_rows !== undefined) {
+        copy.totalRows = obj.total_rows;
+      }
+      if (obj.indexes !== undefined) {
+        copy.indexes = BaseService.convertModel(obj.indexes, IndexInformation.deserialize);
+      }
+      return copy as unknown as IndexesInformation;
+    }
+  }
+  export namespace IndexesInformation {
+      export interface Transport {
+        total_rows: number;
+        indexes: IndexInformation[];
+      }
   }
 
   /** Schema for information about known nodes and cluster membership. */
-  export interface MembershipInformation {
+  export class MembershipInformation {
     /** List of nodes this node knows about, including the ones that are part of the cluster. */
-    all_nodes: string[];
+    allNodes: string[];
+
     /** All cluster nodes. */
-    cluster_nodes: string[];
+    clusterNodes: string[];
+
+    static serialize(obj): MembershipInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: MembershipInformation.Transport = <MembershipInformation.Transport>{};
+      if (obj.allNodes !== undefined) {
+        copy.all_nodes = obj.allNodes;
+      }
+      if (obj.clusterNodes !== undefined) {
+        copy.cluster_nodes = obj.clusterNodes;
+      }
+      return copy as unknown as MembershipInformation.Transport;
+    }
+
+    static deserialize(obj): MembershipInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: MembershipInformation = <MembershipInformation>{};
+      if (obj.all_nodes !== undefined) {
+        copy.allNodes = obj.all_nodes;
+      }
+      if (obj.cluster_nodes !== undefined) {
+        copy.clusterNodes = obj.cluster_nodes;
+      }
+      return copy as unknown as MembershipInformation;
+    }
+  }
+  export namespace MembershipInformation {
+      export interface Transport {
+        all_nodes: string[];
+        cluster_nodes: string[];
+      }
   }
 
   /** Schema for an OK result. */
-  export interface Ok {
+  export class Ok {
     /** ok. */
     ok?: boolean;
+
+    static serialize(obj): Ok.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Ok.Transport = <Ok.Transport>{};
+      if (obj.ok !== undefined) {
+        copy.ok = obj.ok;
+      }
+      return copy as unknown as Ok.Transport;
+    }
+
+    static deserialize(obj): Ok {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Ok = <Ok>{};
+      if (obj.ok !== undefined) {
+        copy.ok = obj.ok;
+      }
+      return copy as unknown as Ok;
+    }
+  }
+  export namespace Ok {
+      export interface Transport {
+        ok?: boolean;
+      }
   }
 
   /** Schema for information about a database partition. */
-  export interface PartitionInformation {
+  export class PartitionInformation {
     /** The name of the database. */
-    db_name: string;
+    dbName: string;
+
     /** A count of the documents in the specified database partition. */
-    doc_count: number;
+    docCount: number;
+
     /** Number of deleted documents. */
-    doc_del_count: number;
+    docDelCount: number;
+
     /** The name of the partition in the database. */
     partition: string;
+
     /** Schema for information about the partition index count and limit in a database. */
-    partitioned_indexes?: PartitionInformationIndexes;
+    partitionedIndexes?: PartitionInformationIndexes;
+
     /** The size of active and external data, in bytes. */
     sizes: PartitionInformationSizes;
+
+    static serialize(obj): PartitionInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: PartitionInformation.Transport = <PartitionInformation.Transport>{};
+      if (obj.dbName !== undefined) {
+        copy.db_name = obj.dbName;
+      }
+      if (obj.docCount !== undefined) {
+        copy.doc_count = obj.docCount;
+      }
+      if (obj.docDelCount !== undefined) {
+        copy.doc_del_count = obj.docDelCount;
+      }
+      if (obj.partition !== undefined) {
+        copy.partition = obj.partition;
+      }
+      if (obj.partitionedIndexes !== undefined) {
+        copy.partitioned_indexes = PartitionInformationIndexes.serialize(obj.partitionedIndexes);
+      }
+      if (obj.sizes !== undefined) {
+        copy.sizes = PartitionInformationSizes.serialize(obj.sizes);
+      }
+      return copy as unknown as PartitionInformation.Transport;
+    }
+
+    static deserialize(obj): PartitionInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: PartitionInformation = <PartitionInformation>{};
+      if (obj.db_name !== undefined) {
+        copy.dbName = obj.db_name;
+      }
+      if (obj.doc_count !== undefined) {
+        copy.docCount = obj.doc_count;
+      }
+      if (obj.doc_del_count !== undefined) {
+        copy.docDelCount = obj.doc_del_count;
+      }
+      if (obj.partition !== undefined) {
+        copy.partition = obj.partition;
+      }
+      if (obj.partitioned_indexes !== undefined) {
+        copy.partitionedIndexes = PartitionInformationIndexes.deserialize(obj.partitioned_indexes);
+      }
+      if (obj.sizes !== undefined) {
+        copy.sizes = PartitionInformationSizes.deserialize(obj.sizes);
+      }
+      return copy as unknown as PartitionInformation;
+    }
+  }
+  export namespace PartitionInformation {
+      export interface Transport {
+        db_name: string;
+        doc_count: number;
+        doc_del_count: number;
+        partition: string;
+        partitioned_indexes?: PartitionInformationIndexes.Transport;
+        sizes: PartitionInformationSizes.Transport;
+      }
   }
 
   /** Schema for information about the partition index count and limit in a database. */
-  export interface PartitionInformationIndexes {
+  export class PartitionInformationIndexes {
     /** Total count of the partitioned indexes. */
     count?: number;
+
     /** The count breakdown of partitioned indexes. */
     indexes?: PartitionInformationIndexesIndexes;
+
     /** The partitioned index limit. */
     limit?: number;
+
+    static serialize(obj): PartitionInformationIndexes.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: PartitionInformationIndexes.Transport = <PartitionInformationIndexes.Transport>{};
+      if (obj.count !== undefined) {
+        copy.count = obj.count;
+      }
+      if (obj.indexes !== undefined) {
+        copy.indexes = PartitionInformationIndexesIndexes.serialize(obj.indexes);
+      }
+      if (obj.limit !== undefined) {
+        copy.limit = obj.limit;
+      }
+      return copy as unknown as PartitionInformationIndexes.Transport;
+    }
+
+    static deserialize(obj): PartitionInformationIndexes {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: PartitionInformationIndexes = <PartitionInformationIndexes>{};
+      if (obj.count !== undefined) {
+        copy.count = obj.count;
+      }
+      if (obj.indexes !== undefined) {
+        copy.indexes = PartitionInformationIndexesIndexes.deserialize(obj.indexes);
+      }
+      if (obj.limit !== undefined) {
+        copy.limit = obj.limit;
+      }
+      return copy as unknown as PartitionInformationIndexes;
+    }
+  }
+  export namespace PartitionInformationIndexes {
+      export interface Transport {
+        count?: number;
+        indexes?: PartitionInformationIndexesIndexes.Transport;
+        limit?: number;
+      }
   }
 
   /** The count breakdown of partitioned indexes. */
-  export interface PartitionInformationIndexesIndexes {
+  export class PartitionInformationIndexesIndexes {
     /** Number of partitioned search indexes. */
     search?: number;
+
     /** Number of partitioned view indexes. */
     view?: number;
+
+    static serialize(obj): PartitionInformationIndexesIndexes.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: PartitionInformationIndexesIndexes.Transport = <PartitionInformationIndexesIndexes.Transport>{};
+      if (obj.search !== undefined) {
+        copy.search = obj.search;
+      }
+      if (obj.view !== undefined) {
+        copy.view = obj.view;
+      }
+      return copy as unknown as PartitionInformationIndexesIndexes.Transport;
+    }
+
+    static deserialize(obj): PartitionInformationIndexesIndexes {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: PartitionInformationIndexesIndexes = <PartitionInformationIndexesIndexes>{};
+      if (obj.search !== undefined) {
+        copy.search = obj.search;
+      }
+      if (obj.view !== undefined) {
+        copy.view = obj.view;
+      }
+      return copy as unknown as PartitionInformationIndexesIndexes;
+    }
+  }
+  export namespace PartitionInformationIndexesIndexes {
+      export interface Transport {
+        search?: number;
+        view?: number;
+      }
   }
 
   /** The size of active and external data, in bytes. */
-  export interface PartitionInformationSizes {
+  export class PartitionInformationSizes {
     /** The size of live data inside the database, in bytes. */
     active?: number;
+
     /** The uncompressed size of database contents in bytes. */
     external?: number;
+
+    static serialize(obj): PartitionInformationSizes.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: PartitionInformationSizes.Transport = <PartitionInformationSizes.Transport>{};
+      if (obj.active !== undefined) {
+        copy.active = obj.active;
+      }
+      if (obj.external !== undefined) {
+        copy.external = obj.external;
+      }
+      return copy as unknown as PartitionInformationSizes.Transport;
+    }
+
+    static deserialize(obj): PartitionInformationSizes {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: PartitionInformationSizes = <PartitionInformationSizes>{};
+      if (obj.active !== undefined) {
+        copy.active = obj.active;
+      }
+      if (obj.external !== undefined) {
+        copy.external = obj.external;
+      }
+      return copy as unknown as PartitionInformationSizes;
+    }
+  }
+  export namespace PartitionInformationSizes {
+      export interface Transport {
+        active?: number;
+        external?: number;
+      }
   }
 
   /** Number of partitioned indexes by type. */
-  export interface PartitionedIndexesDetailedInformation {
+  export class PartitionedIndexesDetailedInformation {
     /** Number of partitioned indexes of search type. */
     search?: number;
+
     /** Number of partitioned indexes of view type. */
     view?: number;
+
+    static serialize(obj): PartitionedIndexesDetailedInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: PartitionedIndexesDetailedInformation.Transport = <PartitionedIndexesDetailedInformation.Transport>{};
+      if (obj.search !== undefined) {
+        copy.search = obj.search;
+      }
+      if (obj.view !== undefined) {
+        copy.view = obj.view;
+      }
+      return copy as unknown as PartitionedIndexesDetailedInformation.Transport;
+    }
+
+    static deserialize(obj): PartitionedIndexesDetailedInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: PartitionedIndexesDetailedInformation = <PartitionedIndexesDetailedInformation>{};
+      if (obj.search !== undefined) {
+        copy.search = obj.search;
+      }
+      if (obj.view !== undefined) {
+        copy.view = obj.view;
+      }
+      return copy as unknown as PartitionedIndexesDetailedInformation;
+    }
+  }
+  export namespace PartitionedIndexesDetailedInformation {
+      export interface Transport {
+        search?: number;
+        view?: number;
+      }
   }
 
   /** Information about database's partitioned indexes. */
-  export interface PartitionedIndexesInformation {
+  export class PartitionedIndexesInformation {
     /** Total number of partitioned indexes in the database. */
     count?: number;
+
     /** Number of partitioned indexes by type. */
     indexes?: PartitionedIndexesDetailedInformation;
+
     /** Maximum allowed number of partitioned indexes in the database. */
     limit?: number;
+
+    static serialize(obj): PartitionedIndexesInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: PartitionedIndexesInformation.Transport = <PartitionedIndexesInformation.Transport>{};
+      if (obj.count !== undefined) {
+        copy.count = obj.count;
+      }
+      if (obj.indexes !== undefined) {
+        copy.indexes = PartitionedIndexesDetailedInformation.serialize(obj.indexes);
+      }
+      if (obj.limit !== undefined) {
+        copy.limit = obj.limit;
+      }
+      return copy as unknown as PartitionedIndexesInformation.Transport;
+    }
+
+    static deserialize(obj): PartitionedIndexesInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: PartitionedIndexesInformation = <PartitionedIndexesInformation>{};
+      if (obj.count !== undefined) {
+        copy.count = obj.count;
+      }
+      if (obj.indexes !== undefined) {
+        copy.indexes = PartitionedIndexesDetailedInformation.deserialize(obj.indexes);
+      }
+      if (obj.limit !== undefined) {
+        copy.limit = obj.limit;
+      }
+      return copy as unknown as PartitionedIndexesInformation;
+    }
+  }
+  export namespace PartitionedIndexesInformation {
+      export interface Transport {
+        count?: number;
+        indexes?: PartitionedIndexesDetailedInformation.Transport;
+        limit?: number;
+      }
   }
 
   /** Request parameters to use during target database creation. */
-  export interface ReplicationCreateTargetParameters {
+  export class ReplicationCreateTargetParameters {
     /** Schema for the number of replicas of a database in a cluster. The cluster is using the default value and it
      *  cannot be changed by the user.
      */
     n?: number;
+
     /** Parameter to specify whether to enable database partitions when creating the target database. */
     partitioned?: boolean;
+
     /** Schema for the number of shards in a database. Each shard is a partition of the hash value range. */
     q?: number;
+
+    static serialize(obj): ReplicationCreateTargetParameters.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationCreateTargetParameters.Transport = <ReplicationCreateTargetParameters.Transport>{};
+      if (obj.n !== undefined) {
+        copy.n = obj.n;
+      }
+      if (obj.partitioned !== undefined) {
+        copy.partitioned = obj.partitioned;
+      }
+      if (obj.q !== undefined) {
+        copy.q = obj.q;
+      }
+      return copy as unknown as ReplicationCreateTargetParameters.Transport;
+    }
+
+    static deserialize(obj): ReplicationCreateTargetParameters {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationCreateTargetParameters = <ReplicationCreateTargetParameters>{};
+      if (obj.n !== undefined) {
+        copy.n = obj.n;
+      }
+      if (obj.partitioned !== undefined) {
+        copy.partitioned = obj.partitioned;
+      }
+      if (obj.q !== undefined) {
+        copy.q = obj.q;
+      }
+      return copy as unknown as ReplicationCreateTargetParameters;
+    }
+  }
+  export namespace ReplicationCreateTargetParameters {
+      export interface Transport {
+        n?: number;
+        partitioned?: boolean;
+        q?: number;
+      }
   }
 
   /** Schema for a replication source or target database. */
-  export interface ReplicationDatabase {
+  export class ReplicationDatabase {
     /** Schema for replication source or target database authentication. */
     auth?: ReplicationDatabaseAuth;
+
     /** Replication request headers. */
     headers?: JsonObject;
+
     /** Replication database URL. */
     url: string;
+
+    static serialize(obj): ReplicationDatabase.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabase.Transport = <ReplicationDatabase.Transport>{};
+      if (obj.auth !== undefined) {
+        copy.auth = ReplicationDatabaseAuth.serialize(obj.auth);
+      }
+      if (obj.headers !== undefined) {
+        copy.headers = obj.headers;
+      }
+      if (obj.url !== undefined) {
+        copy.url = obj.url;
+      }
+      return copy as unknown as ReplicationDatabase.Transport;
+    }
+
+    static deserialize(obj): ReplicationDatabase {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabase = <ReplicationDatabase>{};
+      if (obj.auth !== undefined) {
+        copy.auth = ReplicationDatabaseAuth.deserialize(obj.auth);
+      }
+      if (obj.headers !== undefined) {
+        copy.headers = obj.headers;
+      }
+      if (obj.url !== undefined) {
+        copy.url = obj.url;
+      }
+      return copy as unknown as ReplicationDatabase;
+    }
+  }
+  export namespace ReplicationDatabase {
+      export interface Transport {
+        auth?: ReplicationDatabaseAuth.Transport;
+        headers?: JsonObject;
+        url: string;
+      }
   }
 
   /** Schema for replication source or target database authentication. */
-  export interface ReplicationDatabaseAuth {
+  export class ReplicationDatabaseAuth {
     /** Schema for basic authentication of replication source or target database. */
     basic?: ReplicationDatabaseAuthBasic;
+
     /** Schema for an IAM API key for replication database authentication. */
     iam?: ReplicationDatabaseAuthIam;
+
+    static serialize(obj): ReplicationDatabaseAuth.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuth.Transport = <ReplicationDatabaseAuth.Transport>{};
+      if (obj.basic !== undefined) {
+        copy.basic = ReplicationDatabaseAuthBasic.serialize(obj.basic);
+      }
+      if (obj.iam !== undefined) {
+        copy.iam = ReplicationDatabaseAuthIam.serialize(obj.iam);
+      }
+      return copy as unknown as ReplicationDatabaseAuth.Transport;
+    }
+
+    static deserialize(obj): ReplicationDatabaseAuth {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuth = <ReplicationDatabaseAuth>{};
+      if (obj.basic !== undefined) {
+        copy.basic = ReplicationDatabaseAuthBasic.deserialize(obj.basic);
+      }
+      if (obj.iam !== undefined) {
+        copy.iam = ReplicationDatabaseAuthIam.deserialize(obj.iam);
+      }
+      return copy as unknown as ReplicationDatabaseAuth;
+    }
+  }
+  export namespace ReplicationDatabaseAuth {
+      export interface Transport {
+        basic?: ReplicationDatabaseAuthBasic.Transport;
+        iam?: ReplicationDatabaseAuthIam.Transport;
+      }
   }
 
   /** Schema for basic authentication of replication source or target database. */
-  export interface ReplicationDatabaseAuthBasic {
+  export class ReplicationDatabaseAuthBasic {
     /** The password associated with the username. */
     password: string;
+
     /** The username. */
     username: string;
+
+    static serialize(obj): ReplicationDatabaseAuthBasic.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuthBasic.Transport = <ReplicationDatabaseAuthBasic.Transport>{};
+      if (obj.password !== undefined) {
+        copy.password = obj.password;
+      }
+      if (obj.username !== undefined) {
+        copy.username = obj.username;
+      }
+      return copy as unknown as ReplicationDatabaseAuthBasic.Transport;
+    }
+
+    static deserialize(obj): ReplicationDatabaseAuthBasic {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuthBasic = <ReplicationDatabaseAuthBasic>{};
+      if (obj.password !== undefined) {
+        copy.password = obj.password;
+      }
+      if (obj.username !== undefined) {
+        copy.username = obj.username;
+      }
+      return copy as unknown as ReplicationDatabaseAuthBasic;
+    }
+  }
+  export namespace ReplicationDatabaseAuthBasic {
+      export interface Transport {
+        password: string;
+        username: string;
+      }
   }
 
   /** Schema for an IAM API key for replication database authentication. */
-  export interface ReplicationDatabaseAuthIam {
+  export class ReplicationDatabaseAuthIam {
     /** IAM API key. */
-    api_key: string;
+    apiKey: string;
+
+    static serialize(obj): ReplicationDatabaseAuthIam.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuthIam.Transport = <ReplicationDatabaseAuthIam.Transport>{};
+      if (obj.apiKey !== undefined) {
+        copy.api_key = obj.apiKey;
+      }
+      return copy as unknown as ReplicationDatabaseAuthIam.Transport;
+    }
+
+    static deserialize(obj): ReplicationDatabaseAuthIam {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuthIam = <ReplicationDatabaseAuthIam>{};
+      if (obj.api_key !== undefined) {
+        copy.apiKey = obj.api_key;
+      }
+      return copy as unknown as ReplicationDatabaseAuthIam;
+    }
+  }
+  export namespace ReplicationDatabaseAuthIam {
+      export interface Transport {
+        api_key: string;
+      }
   }
 
   /** Schema for a replication document. Note that `selector`, `doc_ids`, and `filter` are incompatible with each other. */
-  export interface ReplicationDocument {
+  export class ReplicationDocument {
     /** Schema for a map of attachment name to attachment metadata. */
-    _attachments?: JsonObject;
+    _attachments?: {[key: string]: Attachment};
+
     /** Schema for a list of document revision identifiers. */
     _conflicts?: string[];
+
     /** Deletion flag. Available if document was removed. */
     _deleted?: boolean;
+
     /** Schema for a list of document revision identifiers. */
     _deleted_conflicts?: string[];
+
     /** Document ID. */
     _id?: string;
+
     /** Document's update sequence in current database. Available if requested with local_seq=true query parameter. */
     _local_seq?: string;
+
     /** Schema for a document revision identifier. */
     _rev?: string;
+
     /** Schema for list of revision information. */
     _revisions?: Revisions;
+
     /** Schema for a list of objects with information about local revisions and their status. */
     _revs_info?: DocumentRevisionStatus[];
+
     /** Cancels the replication. */
     cancel?: boolean;
+
     /** Defines replication checkpoint interval in milliseconds. */
-    checkpoint_interval?: number;
+    checkpointInterval?: number;
+
     /** HTTP connection timeout per replication. Even for very fast/reliable networks it might need to be increased
      *  if a remote database is too busy.
      */
-    connection_timeout?: number;
+    connectionTimeout?: number;
+
     /** Configure the replication to be continuous. */
     continuous?: boolean;
+
     /** Creates the target database. Requires administrator privileges on target server. */
-    create_target?: boolean;
+    createTarget?: boolean;
+
     /** Request parameters to use during target database creation. */
-    create_target_params?: ReplicationCreateTargetParameters;
+    createTargetParams?: ReplicationCreateTargetParameters;
+
     /** Schema for a list of document IDs. */
-    doc_ids?: string[];
+    docIds?: string[];
+
     /** The name of a filter function which is defined in a design document in the source database in
      *  {ddoc_id}/{filter} format. It determines which documents get replicated. Using the selector option provides
      *  performance benefits when compared with using the filter option. Use the selector option when possible.
      */
     filter?: string;
+
     /** Maximum number of HTTP connections per replication. */
-    http_connections?: number;
+    httpConnections?: number;
+
     /** Schema for a map of string key value pairs, such as query parameters. */
-    query_params?: JsonObject;
+    queryParams?: JsonObject;
+
     /** Number of times a replication request is retried. The requests are retried with a doubling exponential
      *  backoff starting at 0.25 seconds, with a cap at 5 minutes.
      */
-    retries_per_request?: number;
+    retriesPerRequest?: number;
+
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
      *  provides an expression to evaluate with the field content or other data.
      *
@@ -11429,118 +15221,675 @@ namespace CloudantV1 {
      *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector?: JsonObject;
+
     /** Start the replication at a specific sequence value. */
-    since_seq?: string;
+    sinceSeq?: string;
+
     /** Replication socket options. */
-    socket_options?: string;
+    socketOptions?: string;
+
     /** Schema for a replication source or target database. */
     source: ReplicationDatabase;
+
     /** Deprecated: This setting is forbidden in IBM Cloudant replication documents. This setting may be used with
      *  alternative replication mediators.
      *
      *  Address of a (http or socks5 protocol) proxy server through which replication with the source database should
      *  occur.
      */
-    source_proxy?: string;
+    sourceProxy?: string | null;
+
     /** Schema for a replication source or target database. */
     target: ReplicationDatabase;
+
     /** Deprecated: This setting is forbidden in IBM Cloudant replication documents. This setting may be used with
      *  alternative replication mediators.
      *
      *  Address of a (http or socks5 protocol) proxy server through which replication with the target database should
      *  occur.
      */
-    target_proxy?: string;
+    targetProxy?: string | null;
+
     /** Specify whether to use _bulk_get for fetching documents from the source. If unset, the server configured
      *  default will be used.
      */
-    use_bulk_get?: boolean;
+    useBulkGet?: boolean;
+
     /** Specify if checkpoints should be saved during replication. Using checkpoints means a replication can be
      *  efficiently resumed.
      */
-    use_checkpoints?: boolean;
+    useCheckpoints?: boolean;
+
     /** Schema for the user context of a session. */
-    user_ctx?: UserContext;
+    userCtx?: UserContext;
+
     /** Replicate only the winning revisions. Replication with this mode discards conflicting revisions. Replication
      *  IDs and checkpoints generated by this mode are different to those generated by default, so it is possible to
      *  first replicate the winning revisions then later backfill remaining revisions with a regular replication job.
      */
-    winning_revs_only?: boolean;
+    winningRevsOnly?: boolean;
+
     /** Controls how many documents are processed. After each batch a checkpoint is written so this controls how
      *  frequently checkpointing occurs.
      */
-    worker_batch_size?: number;
+    workerBatchSize?: number;
+
     /** Controls how many separate processes will read from the changes manager and write to the target. A higher
      *  number can improve throughput.
      */
-    worker_processes?: number;
+    workerProcesses?: number;
+
     /** ReplicationDocument accepts additional properties. */
     [propName: string]: any;
+
+    static serialize(obj): ReplicationDocument.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDocument.Transport = <ReplicationDocument.Transport>{};
+      if (obj._attachments !== undefined) {
+        copy._attachments = BaseService.convertModel(obj._attachments, Attachment.serialize, true);
+      }
+      if (obj._conflicts !== undefined) {
+        copy._conflicts = obj._conflicts;
+      }
+      if (obj._deleted !== undefined) {
+        copy._deleted = obj._deleted;
+      }
+      if (obj._deleted_conflicts !== undefined) {
+        copy._deleted_conflicts = obj._deleted_conflicts;
+      }
+      if (obj._id !== undefined) {
+        copy._id = obj._id;
+      }
+      if (obj._local_seq !== undefined) {
+        copy._local_seq = obj._local_seq;
+      }
+      if (obj._rev !== undefined) {
+        copy._rev = obj._rev;
+      }
+      if (obj._revisions !== undefined) {
+        copy._revisions = Revisions.serialize(obj._revisions);
+      }
+      if (obj._revs_info !== undefined) {
+        copy._revs_info = BaseService.convertModel(obj._revs_info, DocumentRevisionStatus.serialize);
+      }
+      if (obj.cancel !== undefined) {
+        copy.cancel = obj.cancel;
+      }
+      if (obj.checkpointInterval !== undefined) {
+        copy.checkpoint_interval = obj.checkpointInterval;
+      }
+      if (obj.connectionTimeout !== undefined) {
+        copy.connection_timeout = obj.connectionTimeout;
+      }
+      if (obj.continuous !== undefined) {
+        copy.continuous = obj.continuous;
+      }
+      if (obj.createTarget !== undefined) {
+        copy.create_target = obj.createTarget;
+      }
+      if (obj.createTargetParams !== undefined) {
+        copy.create_target_params = ReplicationCreateTargetParameters.serialize(obj.createTargetParams);
+      }
+      if (obj.docIds !== undefined) {
+        copy.doc_ids = obj.docIds;
+      }
+      if (obj.filter !== undefined) {
+        copy.filter = obj.filter;
+      }
+      if (obj.httpConnections !== undefined) {
+        copy.http_connections = obj.httpConnections;
+      }
+      if (obj.queryParams !== undefined) {
+        copy.query_params = obj.queryParams;
+      }
+      if (obj.retriesPerRequest !== undefined) {
+        copy.retries_per_request = obj.retriesPerRequest;
+      }
+      if (obj.selector !== undefined) {
+        copy.selector = obj.selector;
+      }
+      if (obj.sinceSeq !== undefined) {
+        copy.since_seq = obj.sinceSeq;
+      }
+      if (obj.socketOptions !== undefined) {
+        copy.socket_options = obj.socketOptions;
+      }
+      if (obj.source !== undefined) {
+        copy.source = ReplicationDatabase.serialize(obj.source);
+      }
+      if (obj.sourceProxy !== undefined) {
+        copy.source_proxy = obj.sourceProxy;
+      }
+      if (obj.target !== undefined) {
+        copy.target = ReplicationDatabase.serialize(obj.target);
+      }
+      if (obj.targetProxy !== undefined) {
+        copy.target_proxy = obj.targetProxy;
+      }
+      if (obj.useBulkGet !== undefined) {
+        copy.use_bulk_get = obj.useBulkGet;
+      }
+      if (obj.useCheckpoints !== undefined) {
+        copy.use_checkpoints = obj.useCheckpoints;
+      }
+      if (obj.userCtx !== undefined) {
+        copy.user_ctx = UserContext.serialize(obj.userCtx);
+      }
+      if (obj.winningRevsOnly !== undefined) {
+        copy.winning_revs_only = obj.winningRevsOnly;
+      }
+      if (obj.workerBatchSize !== undefined) {
+        copy.worker_batch_size = obj.workerBatchSize;
+      }
+      if (obj.workerProcesses !== undefined) {
+        copy.worker_processes = obj.workerProcesses;
+      }
+      let defaultProperties = [
+        '_attachments',
+        '_conflicts',
+        '_deleted',
+        '_deleted_conflicts',
+        '_id',
+        '_local_seq',
+        '_rev',
+        '_revisions',
+        '_revs_info',
+        'cancel',
+        'checkpointInterval',
+        'connectionTimeout',
+        'continuous',
+        'createTarget',
+        'createTargetParams',
+        'docIds',
+        'filter',
+        'httpConnections',
+        'queryParams',
+        'retriesPerRequest',
+        'selector',
+        'sinceSeq',
+        'socketOptions',
+        'source',
+        'sourceProxy',
+        'target',
+        'targetProxy',
+        'useBulkGet',
+        'useCheckpoints',
+        'userCtx',
+        'winningRevsOnly',
+        'workerBatchSize',
+        'workerProcesses',
+      ];
+      Object.keys(obj).forEach(key => {
+        if (!defaultProperties.includes(key)) {
+          copy[key] = obj[key];
+        }
+      });
+      return copy as unknown as ReplicationDocument.Transport;
+    }
+
+    static deserialize(obj): ReplicationDocument {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDocument = <ReplicationDocument>{};
+      if (obj._attachments !== undefined) {
+        copy._attachments = BaseService.convertModel(obj._attachments, Attachment.deserialize, true);
+      }
+      if (obj._conflicts !== undefined) {
+        copy._conflicts = obj._conflicts;
+      }
+      if (obj._deleted !== undefined) {
+        copy._deleted = obj._deleted;
+      }
+      if (obj._deleted_conflicts !== undefined) {
+        copy._deleted_conflicts = obj._deleted_conflicts;
+      }
+      if (obj._id !== undefined) {
+        copy._id = obj._id;
+      }
+      if (obj._local_seq !== undefined) {
+        copy._local_seq = obj._local_seq;
+      }
+      if (obj._rev !== undefined) {
+        copy._rev = obj._rev;
+      }
+      if (obj._revisions !== undefined) {
+        copy._revisions = Revisions.deserialize(obj._revisions);
+      }
+      if (obj._revs_info !== undefined) {
+        copy._revs_info = BaseService.convertModel(obj._revs_info, DocumentRevisionStatus.deserialize);
+      }
+      if (obj.cancel !== undefined) {
+        copy.cancel = obj.cancel;
+      }
+      if (obj.checkpoint_interval !== undefined) {
+        copy.checkpointInterval = obj.checkpoint_interval;
+      }
+      if (obj.connection_timeout !== undefined) {
+        copy.connectionTimeout = obj.connection_timeout;
+      }
+      if (obj.continuous !== undefined) {
+        copy.continuous = obj.continuous;
+      }
+      if (obj.create_target !== undefined) {
+        copy.createTarget = obj.create_target;
+      }
+      if (obj.create_target_params !== undefined) {
+        copy.createTargetParams = ReplicationCreateTargetParameters.deserialize(obj.create_target_params);
+      }
+      if (obj.doc_ids !== undefined) {
+        copy.docIds = obj.doc_ids;
+      }
+      if (obj.filter !== undefined) {
+        copy.filter = obj.filter;
+      }
+      if (obj.http_connections !== undefined) {
+        copy.httpConnections = obj.http_connections;
+      }
+      if (obj.query_params !== undefined) {
+        copy.queryParams = obj.query_params;
+      }
+      if (obj.retries_per_request !== undefined) {
+        copy.retriesPerRequest = obj.retries_per_request;
+      }
+      if (obj.selector !== undefined) {
+        copy.selector = obj.selector;
+      }
+      if (obj.since_seq !== undefined) {
+        copy.sinceSeq = obj.since_seq;
+      }
+      if (obj.socket_options !== undefined) {
+        copy.socketOptions = obj.socket_options;
+      }
+      if (obj.source !== undefined) {
+        copy.source = ReplicationDatabase.deserialize(obj.source);
+      }
+      if (obj.source_proxy !== undefined) {
+        copy.sourceProxy = obj.source_proxy;
+      }
+      if (obj.target !== undefined) {
+        copy.target = ReplicationDatabase.deserialize(obj.target);
+      }
+      if (obj.target_proxy !== undefined) {
+        copy.targetProxy = obj.target_proxy;
+      }
+      if (obj.use_bulk_get !== undefined) {
+        copy.useBulkGet = obj.use_bulk_get;
+      }
+      if (obj.use_checkpoints !== undefined) {
+        copy.useCheckpoints = obj.use_checkpoints;
+      }
+      if (obj.user_ctx !== undefined) {
+        copy.userCtx = UserContext.deserialize(obj.user_ctx);
+      }
+      if (obj.winning_revs_only !== undefined) {
+        copy.winningRevsOnly = obj.winning_revs_only;
+      }
+      if (obj.worker_batch_size !== undefined) {
+        copy.workerBatchSize = obj.worker_batch_size;
+      }
+      if (obj.worker_processes !== undefined) {
+        copy.workerProcesses = obj.worker_processes;
+      }
+      let defaultProperties = [
+        '_attachments',
+        '_conflicts',
+        '_deleted',
+        '_deleted_conflicts',
+        '_id',
+        '_local_seq',
+        '_rev',
+        '_revisions',
+        '_revs_info',
+        'cancel',
+        'checkpoint_interval',
+        'connection_timeout',
+        'continuous',
+        'create_target',
+        'create_target_params',
+        'doc_ids',
+        'filter',
+        'http_connections',
+        'query_params',
+        'retries_per_request',
+        'selector',
+        'since_seq',
+        'socket_options',
+        'source',
+        'source_proxy',
+        'target',
+        'target_proxy',
+        'use_bulk_get',
+        'use_checkpoints',
+        'user_ctx',
+        'winning_revs_only',
+        'worker_batch_size',
+        'worker_processes',
+      ];
+      Object.keys(obj).forEach(key => {
+        if (!defaultProperties.includes(key)) {
+          copy[key] = obj[key];
+        }
+      });
+      return copy as unknown as ReplicationDocument;
+    }
+  }
+  export namespace ReplicationDocument {
+      export interface Transport {
+        _attachments?: {[key: string]: Attachment.Transport};
+        _conflicts?: string[];
+        _deleted?: boolean;
+        _deleted_conflicts?: string[];
+        _id?: string;
+        _local_seq?: string;
+        _rev?: string;
+        _revisions?: Revisions.Transport;
+        _revs_info?: DocumentRevisionStatus[];
+        cancel?: boolean;
+        checkpoint_interval?: number;
+        connection_timeout?: number;
+        continuous?: boolean;
+        create_target?: boolean;
+        create_target_params?: ReplicationCreateTargetParameters.Transport;
+        doc_ids?: string[];
+        filter?: string;
+        http_connections?: number;
+        query_params?: JsonObject;
+        retries_per_request?: number;
+        selector?: JsonObject;
+        since_seq?: string;
+        socket_options?: string;
+        source: ReplicationDatabase.Transport;
+        source_proxy?: string;
+        target: ReplicationDatabase.Transport;
+        target_proxy?: string;
+        use_bulk_get?: boolean;
+        use_checkpoints?: boolean;
+        user_ctx?: UserContext.Transport;
+        winning_revs_only?: boolean;
+        worker_batch_size?: number;
+        worker_processes?: number;
+        /** ReplicationDocument.ReplicationDocument.Transport accepts additional properties. */
+        [propName: string]: any;
+      }
   }
 
   /** Schema for list of revision information. */
-  export interface Revisions {
+  export class Revisions {
     /** Array of valid revision IDs, in reverse order (latest first). */
     ids: string[];
+
     /** Prefix number for the latest revision. */
     start: number;
+
+    static serialize(obj): Revisions.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Revisions.Transport = <Revisions.Transport>{};
+      if (obj.ids !== undefined) {
+        copy.ids = obj.ids;
+      }
+      if (obj.start !== undefined) {
+        copy.start = obj.start;
+      }
+      return copy as unknown as Revisions.Transport;
+    }
+
+    static deserialize(obj): Revisions {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Revisions = <Revisions>{};
+      if (obj.ids !== undefined) {
+        copy.ids = obj.ids;
+      }
+      if (obj.start !== undefined) {
+        copy.start = obj.start;
+      }
+      return copy as unknown as Revisions;
+    }
+  }
+  export namespace Revisions {
+      export interface Transport {
+        ids: string[];
+        start: number;
+      }
   }
 
   /** Schema for information about missing revs and possible ancestors. */
-  export interface RevsDiff {
+  export class RevsDiff {
     /** List of missing revisions. */
     missing?: string[];
+
     /** List of possible ancestor revisions. */
-    possible_ancestors?: string[];
+    possibleAncestors?: string[];
+
+    static serialize(obj): RevsDiff.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: RevsDiff.Transport = <RevsDiff.Transport>{};
+      if (obj.missing !== undefined) {
+        copy.missing = obj.missing;
+      }
+      if (obj.possibleAncestors !== undefined) {
+        copy.possible_ancestors = obj.possibleAncestors;
+      }
+      return copy as unknown as RevsDiff.Transport;
+    }
+
+    static deserialize(obj): RevsDiff {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: RevsDiff = <RevsDiff>{};
+      if (obj.missing !== undefined) {
+        copy.missing = obj.missing;
+      }
+      if (obj.possible_ancestors !== undefined) {
+        copy.possibleAncestors = obj.possible_ancestors;
+      }
+      return copy as unknown as RevsDiff;
+    }
+  }
+  export namespace RevsDiff {
+      export interface Transport {
+        missing?: string[];
+        possible_ancestors?: string[];
+      }
   }
 
   /** Schema for a listing of replication scheduler documents. */
-  export interface SchedulerDocsResult {
+  export class SchedulerDocsResult {
     /** Number of total rows. */
-    total_rows: number;
+    totalRows: number | null;
+
     /** Array of replication scheduler doc objects. */
     docs: SchedulerDocument[];
+
+    static serialize(obj): SchedulerDocsResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SchedulerDocsResult.Transport = <SchedulerDocsResult.Transport>{};
+      if (obj.totalRows !== undefined) {
+        copy.total_rows = obj.totalRows;
+      }
+      if (obj.docs !== undefined) {
+        copy.docs = BaseService.convertModel(obj.docs, SchedulerDocument.serialize);
+      }
+      return copy as unknown as SchedulerDocsResult.Transport;
+    }
+
+    static deserialize(obj): SchedulerDocsResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SchedulerDocsResult = <SchedulerDocsResult>{};
+      if (obj.total_rows !== undefined) {
+        copy.totalRows = obj.total_rows;
+      }
+      if (obj.docs !== undefined) {
+        copy.docs = BaseService.convertModel(obj.docs, SchedulerDocument.deserialize);
+      }
+      return copy as unknown as SchedulerDocsResult;
+    }
+  }
+  export namespace SchedulerDocsResult {
+      export interface Transport {
+        total_rows: number;
+        docs: SchedulerDocument[];
+      }
   }
 
   /** Schema for a replication scheduler document. */
-  export interface SchedulerDocument {
+  export class SchedulerDocument {
     /** Database where replication document came from. */
     database: string;
+
     /** Replication document ID. */
-    doc_id: string;
+    docId: string;
+
     /** Consecutive errors count. Indicates how many times in a row this replication has crashed. Replication will
      *  be retried with an exponential backoff based on this number. As soon as the replication succeeds this count is
      *  reset to 0. To can be used to get an idea why a particular replication is not making progress.
      */
-    error_count: number;
+    errorCount: number;
+
     /** Replication ID, or null if state is completed or failed. */
-    id: string;
+    id: string | null;
+
     /** Schema for scheduler document information. A JSON object that may contain additional information about the
      *  state. For error states this will contain an error field and string value.
      */
-    info: SchedulerInfo;
+    info: SchedulerInfo | null;
+
     /** Timestamp of last state update. */
-    last_updated: string;
+    lastUpdated: string;
+
     /** Cluster node where the job is running. */
     node?: string;
+
     /** Replication source. */
     source?: string;
+
     /** Deprecated: Forbidden in IBM Cloudant mediated replications.
      *
      *  Address of the (http or socks5 protocol) proxy server through which replication with the source database occurs.
      */
-    source_proxy?: string;
+    sourceProxy?: string | null;
+
     /** Timestamp of when the replication was started. */
-    start_time: string;
+    startTime: string;
+
     /** Schema for replication state. */
     state: SchedulerDocument.Constants.State | string;
+
     /** Replication target. */
     target?: string;
+
     /** Deprecated: Forbidden in IBM Cloudant mediated replications.
      *
      *  Address of the (http or socks5 protocol) proxy server through which replication with the target database occurs.
      */
-    target_proxy?: string;
+    targetProxy?: string | null;
+
+    static serialize(obj): SchedulerDocument.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SchedulerDocument.Transport = <SchedulerDocument.Transport>{};
+      if (obj.database !== undefined) {
+        copy.database = obj.database;
+      }
+      if (obj.docId !== undefined) {
+        copy.doc_id = obj.docId;
+      }
+      if (obj.errorCount !== undefined) {
+        copy.error_count = obj.errorCount;
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.info !== undefined) {
+        copy.info = SchedulerInfo.serialize(obj.info);
+      }
+      if (obj.lastUpdated !== undefined) {
+        copy.last_updated = obj.lastUpdated;
+      }
+      if (obj.node !== undefined) {
+        copy.node = obj.node;
+      }
+      if (obj.source !== undefined) {
+        copy.source = obj.source;
+      }
+      if (obj.sourceProxy !== undefined) {
+        copy.source_proxy = obj.sourceProxy;
+      }
+      if (obj.startTime !== undefined) {
+        copy.start_time = obj.startTime;
+      }
+      if (obj.state !== undefined) {
+        copy.state = obj.state;
+      }
+      if (obj.target !== undefined) {
+        copy.target = obj.target;
+      }
+      if (obj.targetProxy !== undefined) {
+        copy.target_proxy = obj.targetProxy;
+      }
+      return copy as unknown as SchedulerDocument.Transport;
+    }
+
+    static deserialize(obj): SchedulerDocument {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SchedulerDocument = <SchedulerDocument>{};
+      if (obj.database !== undefined) {
+        copy.database = obj.database;
+      }
+      if (obj.doc_id !== undefined) {
+        copy.docId = obj.doc_id;
+      }
+      if (obj.error_count !== undefined) {
+        copy.errorCount = obj.error_count;
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.info !== undefined) {
+        copy.info = SchedulerInfo.deserialize(obj.info);
+      }
+      if (obj.last_updated !== undefined) {
+        copy.lastUpdated = obj.last_updated;
+      }
+      if (obj.node !== undefined) {
+        copy.node = obj.node;
+      }
+      if (obj.source !== undefined) {
+        copy.source = obj.source;
+      }
+      if (obj.source_proxy !== undefined) {
+        copy.sourceProxy = obj.source_proxy;
+      }
+      if (obj.start_time !== undefined) {
+        copy.startTime = obj.start_time;
+      }
+      if (obj.state !== undefined) {
+        copy.state = obj.state;
+      }
+      if (obj.target !== undefined) {
+        copy.target = obj.target;
+      }
+      if (obj.target_proxy !== undefined) {
+        copy.targetProxy = obj.target_proxy;
+      }
+      return copy as unknown as SchedulerDocument;
+    }
   }
   export namespace SchedulerDocument {
     export namespace Constants {
@@ -11555,88 +15904,415 @@ namespace CloudantV1 {
         FAILED = 'failed',
       }
     }
+      export interface Transport {
+        database: string;
+        doc_id: string;
+        error_count: number;
+        id: string;
+        info: SchedulerInfo.Transport;
+        last_updated: string;
+        node?: string;
+        source?: string;
+        source_proxy?: string;
+        start_time: string;
+        state: string;
+        target?: string;
+        target_proxy?: string;
+      }
   }
 
   /** Schema for scheduler document information. A JSON object that may contain additional information about the state. For error states this will contain an error field and string value. */
-  export interface SchedulerInfo {
+  export class SchedulerInfo {
     /** The count of changes not yet replicated. */
-    changes_pending?: number;
+    changesPending?: number | null;
+
     /** The source sequence id which was last successfully replicated. */
-    checkpointed_source_seq?: string;
+    checkpointedSourceSeq?: string;
+
     /** The count of docs which failed to be written to the target. */
-    doc_write_failures?: number;
+    docWriteFailures?: number;
+
     /** The count of docs which have been read from the source. */
-    docs_read?: number;
+    docsRead?: number;
+
     /** The count of docs which have been written to the target. */
-    docs_written?: number;
+    docsWritten?: number;
+
     /** Replication error message. */
     error?: string;
+
     /** The count of revisions which were found on the source, but missing from the target. */
-    missing_revisions_found?: number;
+    missingRevisionsFound?: number;
+
     /** The count of revisions which have been checked since this replication began. */
-    revisions_checked?: number;
+    revisionsChecked?: number;
+
     /** The last sequence number obtained from the source database changes feed. */
-    source_seq?: string;
+    sourceSeq?: string;
+
     /** The last sequence number processed by the replicator. */
-    through_seq?: string;
+    throughSeq?: string;
+
+    static serialize(obj): SchedulerInfo.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SchedulerInfo.Transport = <SchedulerInfo.Transport>{};
+      if (obj.changesPending !== undefined) {
+        copy.changes_pending = obj.changesPending;
+      }
+      if (obj.checkpointedSourceSeq !== undefined) {
+        copy.checkpointed_source_seq = obj.checkpointedSourceSeq;
+      }
+      if (obj.docWriteFailures !== undefined) {
+        copy.doc_write_failures = obj.docWriteFailures;
+      }
+      if (obj.docsRead !== undefined) {
+        copy.docs_read = obj.docsRead;
+      }
+      if (obj.docsWritten !== undefined) {
+        copy.docs_written = obj.docsWritten;
+      }
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.missingRevisionsFound !== undefined) {
+        copy.missing_revisions_found = obj.missingRevisionsFound;
+      }
+      if (obj.revisionsChecked !== undefined) {
+        copy.revisions_checked = obj.revisionsChecked;
+      }
+      if (obj.sourceSeq !== undefined) {
+        copy.source_seq = obj.sourceSeq;
+      }
+      if (obj.throughSeq !== undefined) {
+        copy.through_seq = obj.throughSeq;
+      }
+      return copy as unknown as SchedulerInfo.Transport;
+    }
+
+    static deserialize(obj): SchedulerInfo {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SchedulerInfo = <SchedulerInfo>{};
+      if (obj.changes_pending !== undefined) {
+        copy.changesPending = obj.changes_pending;
+      }
+      if (obj.checkpointed_source_seq !== undefined) {
+        copy.checkpointedSourceSeq = obj.checkpointed_source_seq;
+      }
+      if (obj.doc_write_failures !== undefined) {
+        copy.docWriteFailures = obj.doc_write_failures;
+      }
+      if (obj.docs_read !== undefined) {
+        copy.docsRead = obj.docs_read;
+      }
+      if (obj.docs_written !== undefined) {
+        copy.docsWritten = obj.docs_written;
+      }
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.missing_revisions_found !== undefined) {
+        copy.missingRevisionsFound = obj.missing_revisions_found;
+      }
+      if (obj.revisions_checked !== undefined) {
+        copy.revisionsChecked = obj.revisions_checked;
+      }
+      if (obj.source_seq !== undefined) {
+        copy.sourceSeq = obj.source_seq;
+      }
+      if (obj.through_seq !== undefined) {
+        copy.throughSeq = obj.through_seq;
+      }
+      return copy as unknown as SchedulerInfo;
+    }
+  }
+  export namespace SchedulerInfo {
+      export interface Transport {
+        changes_pending?: number;
+        checkpointed_source_seq?: string;
+        doc_write_failures?: number;
+        docs_read?: number;
+        docs_written?: number;
+        error?: string;
+        missing_revisions_found?: number;
+        revisions_checked?: number;
+        source_seq?: string;
+        through_seq?: string;
+      }
   }
 
   /** Schema for a replication scheduler job. */
-  export interface SchedulerJob {
+  export class SchedulerJob {
     /** Replication document database. */
     database: string;
+
     /** Replication document ID. */
-    doc_id: string;
+    docId: string;
+
     /** Timestamped history of events as a list of objects. */
     history: SchedulerJobEvent[];
+
     /** Schema for a replication job id. */
     id: string;
+
     /** Schema for scheduler document information. A JSON object that may contain additional information about the
      *  state. For error states this will contain an error field and string value.
      */
-    info: SchedulerInfo;
+    info: SchedulerInfo | null;
+
     /** Cluster node where the job is running. */
     node: string;
+
     /** Replication process ID. */
-    pid: string;
+    pid: string | null;
+
     /** Replication source. */
     source: string;
+
     /** Timestamp of when the replication was started. */
-    start_time: string;
+    startTime: string;
+
     /** Replication target. */
     target: string;
+
     /** Name of user running replication. */
-    user: string;
+    user: string | null;
+
+    static serialize(obj): SchedulerJob.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SchedulerJob.Transport = <SchedulerJob.Transport>{};
+      if (obj.database !== undefined) {
+        copy.database = obj.database;
+      }
+      if (obj.docId !== undefined) {
+        copy.doc_id = obj.docId;
+      }
+      if (obj.history !== undefined) {
+        copy.history = BaseService.convertModel(obj.history, SchedulerJobEvent.serialize);
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.info !== undefined) {
+        copy.info = SchedulerInfo.serialize(obj.info);
+      }
+      if (obj.node !== undefined) {
+        copy.node = obj.node;
+      }
+      if (obj.pid !== undefined) {
+        copy.pid = obj.pid;
+      }
+      if (obj.source !== undefined) {
+        copy.source = obj.source;
+      }
+      if (obj.startTime !== undefined) {
+        copy.start_time = obj.startTime;
+      }
+      if (obj.target !== undefined) {
+        copy.target = obj.target;
+      }
+      if (obj.user !== undefined) {
+        copy.user = obj.user;
+      }
+      return copy as unknown as SchedulerJob.Transport;
+    }
+
+    static deserialize(obj): SchedulerJob {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SchedulerJob = <SchedulerJob>{};
+      if (obj.database !== undefined) {
+        copy.database = obj.database;
+      }
+      if (obj.doc_id !== undefined) {
+        copy.docId = obj.doc_id;
+      }
+      if (obj.history !== undefined) {
+        copy.history = BaseService.convertModel(obj.history, SchedulerJobEvent.deserialize);
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.info !== undefined) {
+        copy.info = SchedulerInfo.deserialize(obj.info);
+      }
+      if (obj.node !== undefined) {
+        copy.node = obj.node;
+      }
+      if (obj.pid !== undefined) {
+        copy.pid = obj.pid;
+      }
+      if (obj.source !== undefined) {
+        copy.source = obj.source;
+      }
+      if (obj.start_time !== undefined) {
+        copy.startTime = obj.start_time;
+      }
+      if (obj.target !== undefined) {
+        copy.target = obj.target;
+      }
+      if (obj.user !== undefined) {
+        copy.user = obj.user;
+      }
+      return copy as unknown as SchedulerJob;
+    }
+  }
+  export namespace SchedulerJob {
+      export interface Transport {
+        database: string;
+        doc_id: string;
+        history: SchedulerJobEvent[];
+        id: string;
+        info: SchedulerInfo.Transport;
+        node: string;
+        pid: string;
+        source: string;
+        start_time: string;
+        target: string;
+        user: string;
+      }
   }
 
   /** Schema for a replication scheduler job event. */
-  export interface SchedulerJobEvent {
+  export class SchedulerJobEvent {
     /** Reason for current state of event. */
     reason?: string;
+
     /** Timestamp of the event. */
     timestamp: string;
+
     /** Type of the event. */
     type: string;
+
+    static serialize(obj): SchedulerJobEvent.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SchedulerJobEvent.Transport = <SchedulerJobEvent.Transport>{};
+      if (obj.reason !== undefined) {
+        copy.reason = obj.reason;
+      }
+      if (obj.timestamp !== undefined) {
+        copy.timestamp = obj.timestamp;
+      }
+      if (obj.type !== undefined) {
+        copy.type = obj.type;
+      }
+      return copy as unknown as SchedulerJobEvent.Transport;
+    }
+
+    static deserialize(obj): SchedulerJobEvent {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SchedulerJobEvent = <SchedulerJobEvent>{};
+      if (obj.reason !== undefined) {
+        copy.reason = obj.reason;
+      }
+      if (obj.timestamp !== undefined) {
+        copy.timestamp = obj.timestamp;
+      }
+      if (obj.type !== undefined) {
+        copy.type = obj.type;
+      }
+      return copy as unknown as SchedulerJobEvent;
+    }
+  }
+  export namespace SchedulerJobEvent {
+      export interface Transport {
+        reason?: string;
+        timestamp: string;
+        type: string;
+      }
   }
 
   /** Schema for a listing of replication scheduler jobs. */
-  export interface SchedulerJobsResult {
+  export class SchedulerJobsResult {
     /** Number of total rows. */
-    total_rows: number;
+    totalRows: number | null;
+
     /** Array of replication job objects. */
     jobs: SchedulerJob[];
+
+    static serialize(obj): SchedulerJobsResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SchedulerJobsResult.Transport = <SchedulerJobsResult.Transport>{};
+      if (obj.totalRows !== undefined) {
+        copy.total_rows = obj.totalRows;
+      }
+      if (obj.jobs !== undefined) {
+        copy.jobs = BaseService.convertModel(obj.jobs, SchedulerJob.serialize);
+      }
+      return copy as unknown as SchedulerJobsResult.Transport;
+    }
+
+    static deserialize(obj): SchedulerJobsResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SchedulerJobsResult = <SchedulerJobsResult>{};
+      if (obj.total_rows !== undefined) {
+        copy.totalRows = obj.total_rows;
+      }
+      if (obj.jobs !== undefined) {
+        copy.jobs = BaseService.convertModel(obj.jobs, SchedulerJob.deserialize);
+      }
+      return copy as unknown as SchedulerJobsResult;
+    }
+  }
+  export namespace SchedulerJobsResult {
+      export interface Transport {
+        total_rows: number;
+        jobs: SchedulerJob[];
+      }
   }
 
   /** Schema for the output of testing search analyzer tokenization. */
-  export interface SearchAnalyzeResult {
+  export class SearchAnalyzeResult {
     /** tokens. */
     tokens: string[];
+
+    static serialize(obj): SearchAnalyzeResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchAnalyzeResult.Transport = <SearchAnalyzeResult.Transport>{};
+      if (obj.tokens !== undefined) {
+        copy.tokens = obj.tokens;
+      }
+      return copy as unknown as SearchAnalyzeResult.Transport;
+    }
+
+    static deserialize(obj): SearchAnalyzeResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchAnalyzeResult = <SearchAnalyzeResult>{};
+      if (obj.tokens !== undefined) {
+        copy.tokens = obj.tokens;
+      }
+      return copy as unknown as SearchAnalyzeResult;
+    }
+  }
+  export namespace SearchAnalyzeResult {
+      export interface Transport {
+        tokens: string[];
+      }
   }
 
   /** Schema for a search index definition. */
-  export interface SearchIndexDefinition {
+  export class SearchIndexDefinition {
     /** Schema for a search analyzer configuration. */
     analyzer?: AnalyzerConfiguration;
+
     /** String form of a JavaScript function that is called for each document in the database. The function takes
      *  the document as a parameter, extracts some data from it, and then calls the `index` function to index that data.
      *  The index function takes 2, or optionally 3, parameters.
@@ -11658,174 +16334,884 @@ namespace CloudantV1 {
      *        in the search result; otherwise, the value is not returned.
      */
     index: string;
+
+    static serialize(obj): SearchIndexDefinition.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchIndexDefinition.Transport = <SearchIndexDefinition.Transport>{};
+      if (obj.analyzer !== undefined) {
+        copy.analyzer = AnalyzerConfiguration.serialize(obj.analyzer);
+      }
+      if (obj.index !== undefined) {
+        copy.index = obj.index;
+      }
+      return copy as unknown as SearchIndexDefinition.Transport;
+    }
+
+    static deserialize(obj): SearchIndexDefinition {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchIndexDefinition = <SearchIndexDefinition>{};
+      if (obj.analyzer !== undefined) {
+        copy.analyzer = AnalyzerConfiguration.deserialize(obj.analyzer);
+      }
+      if (obj.index !== undefined) {
+        copy.index = obj.index;
+      }
+      return copy as unknown as SearchIndexDefinition;
+    }
+  }
+  export namespace SearchIndexDefinition {
+      export interface Transport {
+        analyzer?: AnalyzerConfiguration.Transport;
+        index: string;
+      }
   }
 
   /** Schema for metadata information about a search index. */
-  export interface SearchIndexInfo {
+  export class SearchIndexInfo {
     /** The committed sequence identifier. */
-    committed_seq: number;
+    committedSeq: number;
+
     /** The size of the search index on disk. */
-    disk_size: number;
+    diskSize: number;
+
     /** The count of the number of indexed documents. */
-    doc_count: number;
+    docCount: number;
+
     /** The number of deleted documents. */
-    doc_del_count: number;
+    docDelCount: number;
+
     /** The pending sequence identifier. */
-    pending_seq: number;
+    pendingSeq: number;
+
     /** Unique signature of the search index. */
     signature: string;
+
+    static serialize(obj): SearchIndexInfo.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchIndexInfo.Transport = <SearchIndexInfo.Transport>{};
+      if (obj.committedSeq !== undefined) {
+        copy.committed_seq = obj.committedSeq;
+      }
+      if (obj.diskSize !== undefined) {
+        copy.disk_size = obj.diskSize;
+      }
+      if (obj.docCount !== undefined) {
+        copy.doc_count = obj.docCount;
+      }
+      if (obj.docDelCount !== undefined) {
+        copy.doc_del_count = obj.docDelCount;
+      }
+      if (obj.pendingSeq !== undefined) {
+        copy.pending_seq = obj.pendingSeq;
+      }
+      if (obj.signature !== undefined) {
+        copy.signature = obj.signature;
+      }
+      return copy as unknown as SearchIndexInfo.Transport;
+    }
+
+    static deserialize(obj): SearchIndexInfo {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchIndexInfo = <SearchIndexInfo>{};
+      if (obj.committed_seq !== undefined) {
+        copy.committedSeq = obj.committed_seq;
+      }
+      if (obj.disk_size !== undefined) {
+        copy.diskSize = obj.disk_size;
+      }
+      if (obj.doc_count !== undefined) {
+        copy.docCount = obj.doc_count;
+      }
+      if (obj.doc_del_count !== undefined) {
+        copy.docDelCount = obj.doc_del_count;
+      }
+      if (obj.pending_seq !== undefined) {
+        copy.pendingSeq = obj.pending_seq;
+      }
+      if (obj.signature !== undefined) {
+        copy.signature = obj.signature;
+      }
+      return copy as unknown as SearchIndexInfo;
+    }
+  }
+  export namespace SearchIndexInfo {
+      export interface Transport {
+        committed_seq: number;
+        disk_size: number;
+        doc_count: number;
+        doc_del_count: number;
+        pending_seq: number;
+        signature: string;
+      }
   }
 
   /** Schema for search index information. */
-  export interface SearchInfoResult {
+  export class SearchInfoResult {
     /** The name of the search index prefixed by the design document ID where the index is stored. */
     name: string;
+
     /** Schema for metadata information about a search index. */
-    search_index: SearchIndexInfo;
+    searchIndex: SearchIndexInfo;
+
+    static serialize(obj): SearchInfoResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchInfoResult.Transport = <SearchInfoResult.Transport>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.searchIndex !== undefined) {
+        copy.search_index = SearchIndexInfo.serialize(obj.searchIndex);
+      }
+      return copy as unknown as SearchInfoResult.Transport;
+    }
+
+    static deserialize(obj): SearchInfoResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchInfoResult = <SearchInfoResult>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.search_index !== undefined) {
+        copy.searchIndex = SearchIndexInfo.deserialize(obj.search_index);
+      }
+      return copy as unknown as SearchInfoResult;
+    }
+  }
+  export namespace SearchInfoResult {
+      export interface Transport {
+        name: string;
+        search_index: SearchIndexInfo.Transport;
+      }
   }
 
   /** Schema for the result of a query search operation. */
-  export interface SearchResult {
+  export class SearchResult {
     /** Number of total rows. */
-    total_rows: number;
+    totalRows: number | null;
+
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
+
     /** Grouped search matches. */
     by?: string;
+
     /** The counts facet syntax returns the number of query results for each unique value of each named field. */
-    counts?: JsonObject;
+    counts?: {[key: string]: JsonObject};
+
     /** The range facet syntax reuses the standard Lucene syntax for ranges to return counts of results that fit
      *  into each specified category.
      */
-    ranges?: JsonObject;
+    ranges?: {[key: string]: JsonObject};
+
     /** Array of row objects. */
     rows?: SearchResultRow[];
+
     /** Array of grouped search matches. */
     groups?: SearchResultProperties[];
+
+    static serialize(obj): SearchResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchResult.Transport = <SearchResult.Transport>{};
+      if (obj.totalRows !== undefined) {
+        copy.total_rows = obj.totalRows;
+      }
+      if (obj.bookmark !== undefined) {
+        copy.bookmark = obj.bookmark;
+      }
+      if (obj.by !== undefined) {
+        copy.by = obj.by;
+      }
+      if (obj.counts !== undefined) {
+        copy.counts = obj.counts;
+      }
+      if (obj.ranges !== undefined) {
+        copy.ranges = obj.ranges;
+      }
+      if (obj.rows !== undefined) {
+        copy.rows = BaseService.convertModel(obj.rows, SearchResultRow.serialize);
+      }
+      if (obj.groups !== undefined) {
+        copy.groups = BaseService.convertModel(obj.groups, SearchResultProperties.serialize);
+      }
+      return copy as unknown as SearchResult.Transport;
+    }
+
+    static deserialize(obj): SearchResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchResult = <SearchResult>{};
+      if (obj.total_rows !== undefined) {
+        copy.totalRows = obj.total_rows;
+      }
+      if (obj.bookmark !== undefined) {
+        copy.bookmark = obj.bookmark;
+      }
+      if (obj.by !== undefined) {
+        copy.by = obj.by;
+      }
+      if (obj.counts !== undefined) {
+        copy.counts = obj.counts;
+      }
+      if (obj.ranges !== undefined) {
+        copy.ranges = obj.ranges;
+      }
+      if (obj.rows !== undefined) {
+        copy.rows = BaseService.convertModel(obj.rows, SearchResultRow.deserialize);
+      }
+      if (obj.groups !== undefined) {
+        copy.groups = BaseService.convertModel(obj.groups, SearchResultProperties.deserialize);
+      }
+      return copy as unknown as SearchResult;
+    }
+  }
+  export namespace SearchResult {
+      export interface Transport {
+        total_rows: number;
+        bookmark?: string;
+        by?: string;
+        counts?: {[key: string]: JsonObject};
+        ranges?: {[key: string]: JsonObject};
+        rows?: SearchResultRow[];
+        groups?: SearchResultProperties[];
+      }
   }
 
   /** Schema for the result of a query search operation. */
-  export interface SearchResultProperties {
+  export class SearchResultProperties {
     /** Number of total rows. */
-    total_rows: number;
+    totalRows: number | null;
+
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
+
     /** Grouped search matches. */
     by?: string;
+
     /** The counts facet syntax returns the number of query results for each unique value of each named field. */
-    counts?: JsonObject;
+    counts?: {[key: string]: JsonObject};
+
     /** The range facet syntax reuses the standard Lucene syntax for ranges to return counts of results that fit
      *  into each specified category.
      */
-    ranges?: JsonObject;
+    ranges?: {[key: string]: JsonObject};
+
     /** Array of row objects. */
     rows?: SearchResultRow[];
+
+    static serialize(obj): SearchResultProperties.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchResultProperties.Transport = <SearchResultProperties.Transport>{};
+      if (obj.totalRows !== undefined) {
+        copy.total_rows = obj.totalRows;
+      }
+      if (obj.bookmark !== undefined) {
+        copy.bookmark = obj.bookmark;
+      }
+      if (obj.by !== undefined) {
+        copy.by = obj.by;
+      }
+      if (obj.counts !== undefined) {
+        copy.counts = obj.counts;
+      }
+      if (obj.ranges !== undefined) {
+        copy.ranges = obj.ranges;
+      }
+      if (obj.rows !== undefined) {
+        copy.rows = BaseService.convertModel(obj.rows, SearchResultRow.serialize);
+      }
+      return copy as unknown as SearchResultProperties.Transport;
+    }
+
+    static deserialize(obj): SearchResultProperties {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchResultProperties = <SearchResultProperties>{};
+      if (obj.total_rows !== undefined) {
+        copy.totalRows = obj.total_rows;
+      }
+      if (obj.bookmark !== undefined) {
+        copy.bookmark = obj.bookmark;
+      }
+      if (obj.by !== undefined) {
+        copy.by = obj.by;
+      }
+      if (obj.counts !== undefined) {
+        copy.counts = obj.counts;
+      }
+      if (obj.ranges !== undefined) {
+        copy.ranges = obj.ranges;
+      }
+      if (obj.rows !== undefined) {
+        copy.rows = BaseService.convertModel(obj.rows, SearchResultRow.deserialize);
+      }
+      return copy as unknown as SearchResultProperties;
+    }
+  }
+  export namespace SearchResultProperties {
+      export interface Transport {
+        total_rows: number;
+        bookmark?: string;
+        by?: string;
+        counts?: {[key: string]: JsonObject};
+        ranges?: {[key: string]: JsonObject};
+        rows?: SearchResultRow[];
+      }
   }
 
   /** Schema for a row of the result of a query search operation. */
-  export interface SearchResultRow {
+  export class SearchResultRow {
     /** Schema for a document. */
     doc?: Document;
+
     /** Schema for the fields returned by a query search operation, a map of field name to value. */
     fields: JsonObject;
+
     /** Returns the context in which a search term was mentioned so that you can display more emphasized results to
      *  a user.
      */
     highlights?: JsonObject;
+
     /** Schema for a document ID. */
     id: string;
+
+    static serialize(obj): SearchResultRow.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchResultRow.Transport = <SearchResultRow.Transport>{};
+      if (obj.doc !== undefined) {
+        copy.doc = Document.serialize(obj.doc);
+      }
+      if (obj.fields !== undefined) {
+        copy.fields = obj.fields;
+      }
+      if (obj.highlights !== undefined) {
+        copy.highlights = obj.highlights;
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      return copy as unknown as SearchResultRow.Transport;
+    }
+
+    static deserialize(obj): SearchResultRow {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchResultRow = <SearchResultRow>{};
+      if (obj.doc !== undefined) {
+        copy.doc = Document.deserialize(obj.doc);
+      }
+      if (obj.fields !== undefined) {
+        copy.fields = obj.fields;
+      }
+      if (obj.highlights !== undefined) {
+        copy.highlights = obj.highlights;
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      return copy as unknown as SearchResultRow;
+    }
+  }
+  export namespace SearchResultRow {
+      export interface Transport {
+        doc?: Document.Transport;
+        fields: JsonObject;
+        highlights?: JsonObject;
+        id: string;
+      }
   }
 
   /** Schema for a security document. */
-  export interface Security {
+  export class Security {
     /** Schema for names and roles to map to a database permission. */
     admins?: SecurityObject;
+
     /** Schema for names and roles to map to a database permission. */
     members?: SecurityObject;
+
     /** Database permissions for Cloudant users and/or API keys. */
     cloudant?: JsonObject;
+
     /** Manage permissions using the `_users` database only. */
-    couchdb_auth_only?: boolean;
+    couchdbAuthOnly?: boolean;
+
+    static serialize(obj): Security.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Security.Transport = <Security.Transport>{};
+      if (obj.admins !== undefined) {
+        copy.admins = SecurityObject.serialize(obj.admins);
+      }
+      if (obj.members !== undefined) {
+        copy.members = SecurityObject.serialize(obj.members);
+      }
+      if (obj.cloudant !== undefined) {
+        copy.cloudant = obj.cloudant;
+      }
+      if (obj.couchdbAuthOnly !== undefined) {
+        copy.couchdb_auth_only = obj.couchdbAuthOnly;
+      }
+      return copy as unknown as Security.Transport;
+    }
+
+    static deserialize(obj): Security {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: Security = <Security>{};
+      if (obj.admins !== undefined) {
+        copy.admins = SecurityObject.deserialize(obj.admins);
+      }
+      if (obj.members !== undefined) {
+        copy.members = SecurityObject.deserialize(obj.members);
+      }
+      if (obj.cloudant !== undefined) {
+        copy.cloudant = obj.cloudant;
+      }
+      if (obj.couchdb_auth_only !== undefined) {
+        copy.couchdbAuthOnly = obj.couchdb_auth_only;
+      }
+      return copy as unknown as Security;
+    }
+  }
+  export namespace Security {
+      export interface Transport {
+        admins?: SecurityObject.Transport;
+        members?: SecurityObject.Transport;
+        cloudant?: JsonObject;
+        couchdb_auth_only?: boolean;
+      }
   }
 
   /** Schema for names and roles to map to a database permission. */
-  export interface SecurityObject {
+  export class SecurityObject {
     /** List of usernames. */
     names?: string[];
+
     /** List of roles. */
     roles?: string[];
+
+    static serialize(obj): SecurityObject.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SecurityObject.Transport = <SecurityObject.Transport>{};
+      if (obj.names !== undefined) {
+        copy.names = obj.names;
+      }
+      if (obj.roles !== undefined) {
+        copy.roles = obj.roles;
+      }
+      return copy as unknown as SecurityObject.Transport;
+    }
+
+    static deserialize(obj): SecurityObject {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SecurityObject = <SecurityObject>{};
+      if (obj.names !== undefined) {
+        copy.names = obj.names;
+      }
+      if (obj.roles !== undefined) {
+        copy.roles = obj.roles;
+      }
+      return copy as unknown as SecurityObject;
+    }
+  }
+  export namespace SecurityObject {
+      export interface Transport {
+        names?: string[];
+        roles?: string[];
+      }
   }
 
   /** Schema for information about the server instance. */
-  export interface ServerInformation {
+  export class ServerInformation {
     /** Welcome message. */
     couchdb: string;
+
     /** List of enabled optional features. */
     features: string[];
+
     /** Schema for server vendor information. */
     vendor: ServerVendor;
+
     /** Apache CouchDB version. */
     version: string;
+
     /** List of feature flags. */
-    features_flags: string[];
+    featuresFlags: string[];
+
+    static serialize(obj): ServerInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ServerInformation.Transport = <ServerInformation.Transport>{};
+      if (obj.couchdb !== undefined) {
+        copy.couchdb = obj.couchdb;
+      }
+      if (obj.features !== undefined) {
+        copy.features = obj.features;
+      }
+      if (obj.vendor !== undefined) {
+        copy.vendor = ServerVendor.serialize(obj.vendor);
+      }
+      if (obj.version !== undefined) {
+        copy.version = obj.version;
+      }
+      if (obj.featuresFlags !== undefined) {
+        copy.features_flags = obj.featuresFlags;
+      }
+      return copy as unknown as ServerInformation.Transport;
+    }
+
+    static deserialize(obj): ServerInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ServerInformation = <ServerInformation>{};
+      if (obj.couchdb !== undefined) {
+        copy.couchdb = obj.couchdb;
+      }
+      if (obj.features !== undefined) {
+        copy.features = obj.features;
+      }
+      if (obj.vendor !== undefined) {
+        copy.vendor = ServerVendor.deserialize(obj.vendor);
+      }
+      if (obj.version !== undefined) {
+        copy.version = obj.version;
+      }
+      if (obj.features_flags !== undefined) {
+        copy.featuresFlags = obj.features_flags;
+      }
+      return copy as unknown as ServerInformation;
+    }
+  }
+  export namespace ServerInformation {
+      export interface Transport {
+        couchdb: string;
+        features: string[];
+        vendor: ServerVendor.Transport;
+        version: string;
+        features_flags: string[];
+      }
   }
 
   /** Schema for server vendor information. */
-  export interface ServerVendor {
+  export class ServerVendor {
     /** Vendor name. */
     name: string;
+
     /** Vendor variant. */
     variant?: string;
+
     /** Vendor version. */
     version?: string;
+
+    static serialize(obj): ServerVendor.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ServerVendor.Transport = <ServerVendor.Transport>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.variant !== undefined) {
+        copy.variant = obj.variant;
+      }
+      if (obj.version !== undefined) {
+        copy.version = obj.version;
+      }
+      return copy as unknown as ServerVendor.Transport;
+    }
+
+    static deserialize(obj): ServerVendor {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ServerVendor = <ServerVendor>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.variant !== undefined) {
+        copy.variant = obj.variant;
+      }
+      if (obj.version !== undefined) {
+        copy.version = obj.version;
+      }
+      return copy as unknown as ServerVendor;
+    }
+  }
+  export namespace ServerVendor {
+      export interface Transport {
+        name: string;
+        variant?: string;
+        version?: string;
+      }
   }
 
   /** Schema for session authentication information. */
-  export interface SessionAuthentication {
+  export class SessionAuthentication {
     /** authenticated. */
     authenticated?: string;
+
     /** authentication_db. */
-    authentication_db?: string;
+    authenticationDb?: string;
+
     /** authentication_handlers. */
-    authentication_handlers: string[];
+    authenticationHandlers: string[];
+
+    static serialize(obj): SessionAuthentication.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SessionAuthentication.Transport = <SessionAuthentication.Transport>{};
+      if (obj.authenticated !== undefined) {
+        copy.authenticated = obj.authenticated;
+      }
+      if (obj.authenticationDb !== undefined) {
+        copy.authentication_db = obj.authenticationDb;
+      }
+      if (obj.authenticationHandlers !== undefined) {
+        copy.authentication_handlers = obj.authenticationHandlers;
+      }
+      return copy as unknown as SessionAuthentication.Transport;
+    }
+
+    static deserialize(obj): SessionAuthentication {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SessionAuthentication = <SessionAuthentication>{};
+      if (obj.authenticated !== undefined) {
+        copy.authenticated = obj.authenticated;
+      }
+      if (obj.authentication_db !== undefined) {
+        copy.authenticationDb = obj.authentication_db;
+      }
+      if (obj.authentication_handlers !== undefined) {
+        copy.authenticationHandlers = obj.authentication_handlers;
+      }
+      return copy as unknown as SessionAuthentication;
+    }
+  }
+  export namespace SessionAuthentication {
+      export interface Transport {
+        authenticated?: string;
+        authentication_db?: string;
+        authentication_handlers: string[];
+      }
   }
 
   /** Schema for information about a session. */
-  export interface SessionInformation {
+  export class SessionInformation {
     /** ok. */
     ok: boolean;
+
     /** Schema for session authentication information. */
     info: SessionAuthentication;
+
     /** Schema for the user context of a session. */
     userCtx: UserContext;
+
+    static serialize(obj): SessionInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SessionInformation.Transport = <SessionInformation.Transport>{};
+      if (obj.ok !== undefined) {
+        copy.ok = obj.ok;
+      }
+      if (obj.info !== undefined) {
+        copy.info = SessionAuthentication.serialize(obj.info);
+      }
+      if (obj.userCtx !== undefined) {
+        copy.userCtx = UserContext.serialize(obj.userCtx);
+      }
+      return copy as unknown as SessionInformation.Transport;
+    }
+
+    static deserialize(obj): SessionInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SessionInformation = <SessionInformation>{};
+      if (obj.ok !== undefined) {
+        copy.ok = obj.ok;
+      }
+      if (obj.info !== undefined) {
+        copy.info = SessionAuthentication.deserialize(obj.info);
+      }
+      if (obj.userCtx !== undefined) {
+        copy.userCtx = UserContext.deserialize(obj.userCtx);
+      }
+      return copy as unknown as SessionInformation;
+    }
+  }
+  export namespace SessionInformation {
+      export interface Transport {
+        ok: boolean;
+        info: SessionAuthentication.Transport;
+        userCtx: UserContext.Transport;
+      }
   }
 
   /** Schema for a shards object that maps the hash value range for each shard to the array of nodes that contain a copy of that shard. */
-  export interface ShardsInformation {
+  export class ShardsInformation {
     /** Mapping of shard hash value range to a list of nodes. */
     shards: JsonObject;
+
+    static serialize(obj): ShardsInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ShardsInformation.Transport = <ShardsInformation.Transport>{};
+      if (obj.shards !== undefined) {
+        copy.shards = obj.shards;
+      }
+      return copy as unknown as ShardsInformation.Transport;
+    }
+
+    static deserialize(obj): ShardsInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ShardsInformation = <ShardsInformation>{};
+      if (obj.shards !== undefined) {
+        copy.shards = obj.shards;
+      }
+      return copy as unknown as ShardsInformation;
+    }
+  }
+  export namespace ShardsInformation {
+      export interface Transport {
+        shards: JsonObject;
+      }
   }
 
   /** Schema for detailed information about throughput capacity with breakdown by specific throughput requests classes. */
-  export interface ThroughputInformation {
+  export class ThroughputInformation {
     /** A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global
      *  queries/sec of provisioned throughput capacity.
      */
     blocks: number;
+
     /** Provisioned global queries capacity in operations per second. */
     query: number;
+
     /** Provisioned reads capacity in operations per second. */
     read: number;
+
     /** Provisioned writes capacity in operations per second. */
     write: number;
+
+    static serialize(obj): ThroughputInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ThroughputInformation.Transport = <ThroughputInformation.Transport>{};
+      if (obj.blocks !== undefined) {
+        copy.blocks = obj.blocks;
+      }
+      if (obj.query !== undefined) {
+        copy.query = obj.query;
+      }
+      if (obj.read !== undefined) {
+        copy.read = obj.read;
+      }
+      if (obj.write !== undefined) {
+        copy.write = obj.write;
+      }
+      return copy as unknown as ThroughputInformation.Transport;
+    }
+
+    static deserialize(obj): ThroughputInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ThroughputInformation = <ThroughputInformation>{};
+      if (obj.blocks !== undefined) {
+        copy.blocks = obj.blocks;
+      }
+      if (obj.query !== undefined) {
+        copy.query = obj.query;
+      }
+      if (obj.read !== undefined) {
+        copy.read = obj.read;
+      }
+      if (obj.write !== undefined) {
+        copy.write = obj.write;
+      }
+      return copy as unknown as ThroughputInformation;
+    }
+  }
+  export namespace ThroughputInformation {
+      export interface Transport {
+        blocks: number;
+        query: number;
+        read: number;
+        write: number;
+      }
   }
 
   /** Schema for information about the up state of the server. */
-  export interface UpInformation {
+  export class UpInformation {
     /** seeds. */
     seeds: JsonObject;
+
     /** status. */
     status: UpInformation.Constants.Status | string;
+
+    static serialize(obj): UpInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: UpInformation.Transport = <UpInformation.Transport>{};
+      if (obj.seeds !== undefined) {
+        copy.seeds = obj.seeds;
+      }
+      if (obj.status !== undefined) {
+        copy.status = obj.status;
+      }
+      return copy as unknown as UpInformation.Transport;
+    }
+
+    static deserialize(obj): UpInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: UpInformation = <UpInformation>{};
+      if (obj.seeds !== undefined) {
+        copy.seeds = obj.seeds;
+      }
+      if (obj.status !== undefined) {
+        copy.status = obj.status;
+      }
+      return copy as unknown as UpInformation;
+    }
   }
   export namespace UpInformation {
     export namespace Constants {
@@ -11836,28 +17222,111 @@ namespace CloudantV1 {
         OK = 'ok',
       }
     }
+      export interface Transport {
+        seeds: JsonObject;
+        status: string;
+      }
   }
 
   /** Schema for an ability to tell if view is up-to-date without querying it. */
-  export interface UpdatesPending {
+  export class UpdatesPending {
     /** Sum of shard copies with the least amount of work to do. */
     minimum: number;
+
     /** Sum of unique shards. This value is zero when at least one copy of every shard range is up-to-date and the
      *  view is able to answer a query without index building delays.
      */
     preferred: number;
+
     /** Sum of all shard copies. */
     total: number;
+
+    static serialize(obj): UpdatesPending.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: UpdatesPending.Transport = <UpdatesPending.Transport>{};
+      if (obj.minimum !== undefined) {
+        copy.minimum = obj.minimum;
+      }
+      if (obj.preferred !== undefined) {
+        copy.preferred = obj.preferred;
+      }
+      if (obj.total !== undefined) {
+        copy.total = obj.total;
+      }
+      return copy as unknown as UpdatesPending.Transport;
+    }
+
+    static deserialize(obj): UpdatesPending {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: UpdatesPending = <UpdatesPending>{};
+      if (obj.minimum !== undefined) {
+        copy.minimum = obj.minimum;
+      }
+      if (obj.preferred !== undefined) {
+        copy.preferred = obj.preferred;
+      }
+      if (obj.total !== undefined) {
+        copy.total = obj.total;
+      }
+      return copy as unknown as UpdatesPending;
+    }
+  }
+  export namespace UpdatesPending {
+      export interface Transport {
+        minimum: number;
+        preferred: number;
+        total: number;
+      }
   }
 
   /** Schema for the user context of a session. */
-  export interface UserContext {
+  export class UserContext {
     /** Database name in the context of the provided operation. */
     db?: string;
+
     /** User name. */
-    name: string;
+    name: string | null;
+
     /** List of user roles. */
     roles: UserContext.Constants.Roles[] | string[];
+
+    static serialize(obj): UserContext.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: UserContext.Transport = <UserContext.Transport>{};
+      if (obj.db !== undefined) {
+        copy.db = obj.db;
+      }
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.roles !== undefined) {
+        copy.roles = obj.roles;
+      }
+      return copy as unknown as UserContext.Transport;
+    }
+
+    static deserialize(obj): UserContext {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: UserContext = <UserContext>{};
+      if (obj.db !== undefined) {
+        copy.db = obj.db;
+      }
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.roles !== undefined) {
+        copy.roles = obj.roles;
+      }
+      return copy as unknown as UserContext;
+    }
   }
   export namespace UserContext {
     export namespace Constants {
@@ -11873,72 +17342,147 @@ namespace CloudantV1 {
         SECURITY = '_security',
       }
     }
+      export interface Transport {
+        db?: string;
+        name: string;
+        roles: string[];
+      }
   }
 
   /** Schema for a set of uuids generated by the server. */
-  export interface UuidsResult {
+  export class UuidsResult {
     /** uuids. */
     uuids: string[];
+
+    static serialize(obj): UuidsResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: UuidsResult.Transport = <UuidsResult.Transport>{};
+      if (obj.uuids !== undefined) {
+        copy.uuids = obj.uuids;
+      }
+      return copy as unknown as UuidsResult.Transport;
+    }
+
+    static deserialize(obj): UuidsResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: UuidsResult = <UuidsResult>{};
+      if (obj.uuids !== undefined) {
+        copy.uuids = obj.uuids;
+      }
+      return copy as unknown as UuidsResult;
+    }
+  }
+  export namespace UuidsResult {
+      export interface Transport {
+        uuids: string[];
+      }
   }
 
   /** Schema for the results of a queries view operation. */
-  export interface ViewQueriesResult {
+  export class ViewQueriesResult {
     /** An array of result objects - one for each query. Each result object contains the same fields as the response
      *  to a regular view request.
      */
     results: ViewResult[];
+
+    static serialize(obj): ViewQueriesResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ViewQueriesResult.Transport = <ViewQueriesResult.Transport>{};
+      if (obj.results !== undefined) {
+        copy.results = BaseService.convertModel(obj.results, ViewResult.serialize);
+      }
+      return copy as unknown as ViewQueriesResult.Transport;
+    }
+
+    static deserialize(obj): ViewQueriesResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ViewQueriesResult = <ViewQueriesResult>{};
+      if (obj.results !== undefined) {
+        copy.results = BaseService.convertModel(obj.results, ViewResult.deserialize);
+      }
+      return copy as unknown as ViewQueriesResult;
+    }
+  }
+  export namespace ViewQueriesResult {
+      export interface Transport {
+        results: ViewResult[];
+      }
   }
 
   /** Schema for a query view operation. */
-  export interface ViewQuery {
+  export class ViewQuery {
     /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
      *  attachment is compressed.
      */
-    att_encoding_info?: boolean;
+    attEncodingInfo?: boolean;
+
     /** Parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
+
     /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
      *  only when `include_docs` is `true`.
      */
     conflicts?: boolean;
+
     /** Parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
+
     /** Parameter to specify whether to include the full content of the documents in the response. */
-    include_docs?: boolean;
+    includeDocs?: boolean;
+
     /** Parameter to specify whether the specified end key should be included in the result. */
-    inclusive_end?: boolean;
+    inclusiveEnd?: boolean;
+
     /** Parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
+
     /** Parameter to specify the number of records before starting to return the results. */
     skip?: number;
+
     /** Parameter to specify whether to include in the response an update_seq value indicating the sequence id of
      *  the database the view reflects.
      */
-    update_seq?: boolean;
+    updateSeq?: boolean;
+
     /** Schema for any JSON type. */
-    end_key?: any;
+    endKey?: any | null;
+
     /** Schema for a document ID. */
-    end_key_doc_id?: string;
+    endKeyDocId?: string;
+
     /** Parameter to specify whether to group reduced results by key. Valid only if a reduce function defined in the
      *  view. If the view emits key in JSON array format, then it is possible to reduce groups further based on the
      *  number of array elements with the `group_level` parameter.
      */
     group?: boolean;
+
     /** Parameter to specify a group level to be used. Only applicable if the view uses keys that are JSON arrays.
      *  Implies group is `true`. Group level groups the reduced results by the specified number of array elements. If
      *  unset, results are grouped by the entire array key, returning a reduced value for each complete key.
      */
-    group_level?: number;
+    groupLevel?: number;
+
     /** Schema for any JSON type. */
-    key?: any;
+    key?: any | null;
+
     /** Parameter to specify returning only documents that match any of the specified keys. A JSON array of keys
      *  that match the key type emitted by the view function.
      */
     keys?: any[];
+
     /** Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce
      *  function is defined.
      */
     reduce?: boolean;
+
     /** Query parameter to specify whether use the same replica of  the index on each request. The default value
      *  `false` contacts all  replicas and returns the result from the first, fastest, responder. Setting it to `true`
      *  when used in conjunction with `update=false`  may improve consistency at the expense of increased latency and
@@ -11947,10 +17491,13 @@ namespace CloudantV1 {
      *  **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
      */
     stable?: boolean;
+
     /** Schema for any JSON type. */
-    start_key?: any;
+    startKey?: any | null;
+
     /** Schema for a document ID. */
-    start_key_doc_id?: string;
+    startKeyDocId?: string;
+
     /** Parameter to specify whether or not the view in question should be updated prior to responding to the user.
      *
      *  * `true` - Return results after the view is updated.
@@ -11958,6 +17505,142 @@ namespace CloudantV1 {
      *  * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
      */
     update?: ViewQuery.Constants.Update | string;
+
+    static serialize(obj): ViewQuery.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ViewQuery.Transport = <ViewQuery.Transport>{};
+      if (obj.attEncodingInfo !== undefined) {
+        copy.att_encoding_info = obj.attEncodingInfo;
+      }
+      if (obj.attachments !== undefined) {
+        copy.attachments = obj.attachments;
+      }
+      if (obj.conflicts !== undefined) {
+        copy.conflicts = obj.conflicts;
+      }
+      if (obj.descending !== undefined) {
+        copy.descending = obj.descending;
+      }
+      if (obj.includeDocs !== undefined) {
+        copy.include_docs = obj.includeDocs;
+      }
+      if (obj.inclusiveEnd !== undefined) {
+        copy.inclusive_end = obj.inclusiveEnd;
+      }
+      if (obj.limit !== undefined) {
+        copy.limit = obj.limit;
+      }
+      if (obj.skip !== undefined) {
+        copy.skip = obj.skip;
+      }
+      if (obj.updateSeq !== undefined) {
+        copy.update_seq = obj.updateSeq;
+      }
+      if (obj.endKey !== undefined) {
+        copy.end_key = obj.endKey;
+      }
+      if (obj.endKeyDocId !== undefined) {
+        copy.end_key_doc_id = obj.endKeyDocId;
+      }
+      if (obj.group !== undefined) {
+        copy.group = obj.group;
+      }
+      if (obj.groupLevel !== undefined) {
+        copy.group_level = obj.groupLevel;
+      }
+      if (obj.key !== undefined) {
+        copy.key = obj.key;
+      }
+      if (obj.keys !== undefined) {
+        copy.keys = obj.keys;
+      }
+      if (obj.reduce !== undefined) {
+        copy.reduce = obj.reduce;
+      }
+      if (obj.stable !== undefined) {
+        copy.stable = obj.stable;
+      }
+      if (obj.startKey !== undefined) {
+        copy.start_key = obj.startKey;
+      }
+      if (obj.startKeyDocId !== undefined) {
+        copy.start_key_doc_id = obj.startKeyDocId;
+      }
+      if (obj.update !== undefined) {
+        copy.update = obj.update;
+      }
+      return copy as unknown as ViewQuery.Transport;
+    }
+
+    static deserialize(obj): ViewQuery {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ViewQuery = <ViewQuery>{};
+      if (obj.att_encoding_info !== undefined) {
+        copy.attEncodingInfo = obj.att_encoding_info;
+      }
+      if (obj.attachments !== undefined) {
+        copy.attachments = obj.attachments;
+      }
+      if (obj.conflicts !== undefined) {
+        copy.conflicts = obj.conflicts;
+      }
+      if (obj.descending !== undefined) {
+        copy.descending = obj.descending;
+      }
+      if (obj.include_docs !== undefined) {
+        copy.includeDocs = obj.include_docs;
+      }
+      if (obj.inclusive_end !== undefined) {
+        copy.inclusiveEnd = obj.inclusive_end;
+      }
+      if (obj.limit !== undefined) {
+        copy.limit = obj.limit;
+      }
+      if (obj.skip !== undefined) {
+        copy.skip = obj.skip;
+      }
+      if (obj.update_seq !== undefined) {
+        copy.updateSeq = obj.update_seq;
+      }
+      if (obj.end_key !== undefined) {
+        copy.endKey = obj.end_key;
+      }
+      if (obj.end_key_doc_id !== undefined) {
+        copy.endKeyDocId = obj.end_key_doc_id;
+      }
+      if (obj.group !== undefined) {
+        copy.group = obj.group;
+      }
+      if (obj.group_level !== undefined) {
+        copy.groupLevel = obj.group_level;
+      }
+      if (obj.key !== undefined) {
+        copy.key = obj.key;
+      }
+      if (obj.keys !== undefined) {
+        copy.keys = obj.keys;
+      }
+      if (obj.reduce !== undefined) {
+        copy.reduce = obj.reduce;
+      }
+      if (obj.stable !== undefined) {
+        copy.stable = obj.stable;
+      }
+      if (obj.start_key !== undefined) {
+        copy.startKey = obj.start_key;
+      }
+      if (obj.start_key_doc_id !== undefined) {
+        copy.startKeyDocId = obj.start_key_doc_id;
+      }
+      if (obj.update !== undefined) {
+        copy.update = obj.update;
+      }
+      return copy as unknown as ViewQuery;
+    }
   }
   export namespace ViewQuery {
     export namespace Constants {
@@ -11968,34 +17651,174 @@ namespace CloudantV1 {
         LAZY = 'lazy',
       }
     }
+      export interface Transport {
+        att_encoding_info?: boolean;
+        attachments?: boolean;
+        conflicts?: boolean;
+        descending?: boolean;
+        include_docs?: boolean;
+        inclusive_end?: boolean;
+        limit?: number;
+        skip?: number;
+        update_seq?: boolean;
+        end_key?: any;
+        end_key_doc_id?: string;
+        group?: boolean;
+        group_level?: number;
+        key?: any;
+        keys?: any[];
+        reduce?: boolean;
+        stable?: boolean;
+        start_key?: any;
+        start_key_doc_id?: string;
+        update?: string;
+      }
   }
 
   /** Schema for the result of a query view operation. */
-  export interface ViewResult {
+  export class ViewResult {
     /** Number of total rows. */
-    total_rows?: number;
+    totalRows?: number | null;
+
     /** Current update sequence for the database. */
-    update_seq?: string;
+    updateSeq?: string;
+
     /** rows. */
     rows: ViewResultRow[];
+
+    static serialize(obj): ViewResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ViewResult.Transport = <ViewResult.Transport>{};
+      if (obj.totalRows !== undefined) {
+        copy.total_rows = obj.totalRows;
+      }
+      if (obj.updateSeq !== undefined) {
+        copy.update_seq = obj.updateSeq;
+      }
+      if (obj.rows !== undefined) {
+        copy.rows = BaseService.convertModel(obj.rows, ViewResultRow.serialize);
+      }
+      return copy as unknown as ViewResult.Transport;
+    }
+
+    static deserialize(obj): ViewResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ViewResult = <ViewResult>{};
+      if (obj.total_rows !== undefined) {
+        copy.totalRows = obj.total_rows;
+      }
+      if (obj.update_seq !== undefined) {
+        copy.updateSeq = obj.update_seq;
+      }
+      if (obj.rows !== undefined) {
+        copy.rows = BaseService.convertModel(obj.rows, ViewResultRow.deserialize);
+      }
+      return copy as unknown as ViewResult;
+    }
+  }
+  export namespace ViewResult {
+      export interface Transport {
+        total_rows?: number;
+        update_seq?: string;
+        rows: ViewResultRow[];
+      }
   }
 
   /** Schema for a row of a view result. */
-  export interface ViewResultRow {
+  export class ViewResultRow {
     /** The cause of the error (if available). */
-    caused_by?: string;
+    causedBy?: string;
+
     /** The name of the error. */
     error?: string;
+
     /** The reason the error occurred (if available). */
     reason?: string;
+
     /** Schema for a document. */
     doc?: Document;
+
     /** Schema for a document ID. */
     id?: string;
+
     /** Schema for any JSON type. */
-    key: any;
+    key: any | null;
+
     /** Schema for any JSON type. */
-    value: any;
+    value: any | null;
+
+    static serialize(obj): ViewResultRow.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ViewResultRow.Transport = <ViewResultRow.Transport>{};
+      if (obj.causedBy !== undefined) {
+        copy.caused_by = obj.causedBy;
+      }
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.reason !== undefined) {
+        copy.reason = obj.reason;
+      }
+      if (obj.doc !== undefined) {
+        copy.doc = Document.serialize(obj.doc);
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.key !== undefined) {
+        copy.key = obj.key;
+      }
+      if (obj.value !== undefined) {
+        copy.value = obj.value;
+      }
+      return copy as unknown as ViewResultRow.Transport;
+    }
+
+    static deserialize(obj): ViewResultRow {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ViewResultRow = <ViewResultRow>{};
+      if (obj.caused_by !== undefined) {
+        copy.causedBy = obj.caused_by;
+      }
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.reason !== undefined) {
+        copy.reason = obj.reason;
+      }
+      if (obj.doc !== undefined) {
+        copy.doc = Document.deserialize(obj.doc);
+      }
+      if (obj.id !== undefined) {
+        copy.id = obj.id;
+      }
+      if (obj.key !== undefined) {
+        copy.key = obj.key;
+      }
+      if (obj.value !== undefined) {
+        copy.value = obj.value;
+      }
+      return copy as unknown as ViewResultRow;
+    }
+  }
+  export namespace ViewResultRow {
+      export interface Transport {
+        caused_by?: string;
+        error?: string;
+        reason?: string;
+        doc?: Document.Transport;
+        id?: string;
+        key: any;
+        value: any;
+      }
   }
 }
 
