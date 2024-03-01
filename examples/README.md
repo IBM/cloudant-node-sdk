@@ -336,7 +336,7 @@ const sourceDb: CloudantV1.ReplicationDatabase = {
 const targetDb: CloudantV1.ReplicationDatabase = {
   auth: {
     iam: {
-      'api_key': '<your-iam-api-key>'
+      'apiKey': '<your-iam-api-key>'
     }
   },
   url: '<your-target-service-url>' + '/' + 'animaldb-target'
@@ -344,7 +344,7 @@ const targetDb: CloudantV1.ReplicationDatabase = {
 
 const replDocument: CloudantV1.ReplicationDocument = {
   id: 'repldoc-example',
-  create_target: true,
+  createTarget: true,
   source: sourceDb,
   target: targetDb
 }
@@ -856,7 +856,7 @@ const service = CloudantV1.newInstance({});
 const bulkGetQueryDocuments: CloudantV1.BulkGetQueryDocument[] = [
   {
     id: 'order00058',
-    atts_since: ['1-99b02e08da151943c2dcb40090160bb8']
+    attsSince: ['1-99b02e08da151943c2dcb40090160bb8']
   },
 ];
 
@@ -1118,7 +1118,7 @@ const service = CloudantV1.newInstance({});
 
 const viewQueries: CloudantV1.ViewQuery[] = [
   {
-    include_docs: true,
+    includeDocs: true,
     limit: 5
   },
   {
@@ -1170,11 +1170,11 @@ const service = CloudantV1.newInstance({});
 
 const doc1: CloudantV1.AllDocsQuery = {
   descending: true,
-  include_docs: true,
+  includeDocs: true,
   limit: 10
 };
 const doc2: CloudantV1.AllDocsQuery = {
-  inclusive_end: true,
+  inclusiveEnd: true,
   key: '_design/allusers',
   skip: 1
 };

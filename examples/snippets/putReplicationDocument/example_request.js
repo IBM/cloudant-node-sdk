@@ -10,7 +10,7 @@ const sourceDb: CloudantV1.ReplicationDatabase = {
 const targetDb: CloudantV1.ReplicationDatabase = {
   auth: {
     iam: {
-      'api_key': '<your-iam-api-key>'
+      'apiKey': '<your-iam-api-key>'
     }
   },
   url: '<your-target-service-url>' + '/' + 'animaldb-target'
@@ -18,7 +18,7 @@ const targetDb: CloudantV1.ReplicationDatabase = {
 
 const replDocument: CloudantV1.ReplicationDocument = {
   id: 'repldoc-example',
-  create_target: true,
+  createTarget: true,
   source: sourceDb,
   target: targetDb
 }

@@ -5,7 +5,7 @@ const service = CloudantV1.newInstance({});
 
 const viewQueries: CloudantV1.ViewQuery[] = [
   {
-    include_docs: true,
+    includeDocs: true,
     limit: 5
   },
   {

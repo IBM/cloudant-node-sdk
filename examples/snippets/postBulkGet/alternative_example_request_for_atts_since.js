@@ -4,7 +4,7 @@ const service = CloudantV1.newInstance({});
 const bulkGetQueryDocuments: CloudantV1.BulkGetQueryDocument[] = [
   {
     id: 'order00058',
-    atts_since: ['1-99b02e08da151943c2dcb40090160bb8']
+    attsSince: ['1-99b02e08da151943c2dcb40090160bb8']
   },
 ];
 

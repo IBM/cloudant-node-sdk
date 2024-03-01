@@ -5,11 +5,11 @@ const service = CloudantV1.newInstance({});
 
 const doc1: CloudantV1.AllDocsQuery = {
   descending: true,
-  include_docs: true,
+  includeDocs: true,
   limit: 10
 };
 const doc2: CloudantV1.AllDocsQuery = {
-  inclusive_end: true,
+  inclusiveEnd: true,
   key: '_design/allusers',
   skip: 1
 };
