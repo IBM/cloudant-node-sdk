@@ -27,46 +27,48 @@ function mockAuthenticator() {
   authenticatorMock.mockImplementation(() => new NoAuthAuthenticator());
 }
 
-function generateRandomHex(size) {
-  return [...Array(size)]
-    .map(() => Math.floor(Math.random() * 16).toString(16))
-    .join('');
-}
-
 function generateSeq(size, gen) {
-  const randomChars = generateRandomHex(size);
+  const randomChars = ''.padStart(size, '0123456789abcdef');
   if (gen !== undefined) {
     return `${gen}-${randomChars}`;
   }
   return randomChars;
 }
 
-function mockRandomChangesResultItem() {
+function mockRandomChangesResultItem(gen = 1) {
   return {
     changes: {
-      rev: generateSeq(32, 1),
+      rev: generateSeq(32, gen),
     },
     deleted: false,
     doc: null,
-    id: generateSeq(10),
+    id: `doc${gen}`,
     seq: generateSeq(512, 1),
   };
 }
 
-function mockChangesResultItems(size = ChangesFollower.BATCH_SIZE) {
+function mockChangesResultItems(
+  size = ChangesFollower.BATCH_SIZE,
+  startFrom = 1
+) {
   const changesResultItems = [];
-  for (let start = 0; start < size; start += 1) {
-    changesResultItems.push(mockRandomChangesResultItem());
+  for (let s = startFrom; s < startFrom + size; s += 1) {
+    changesResultItems.push(mockRandomChangesResultItem(s));
   }
   return changesResultItems;
 }
 
 function mockRandomChangesResult(numberOfBatches) {
-  let pending = numberOfBatches * ChangesFollower.BATCH_SIZE;
+  const batchSize = ChangesFollower.BATCH_SIZE;
+  const total = numberOfBatches * batchSize;
+  let pending = total;
   const mocks = [];
-  for (let i = 1; i <= numberOfBatches; i += 1) {
-    pending -= ChangesFollower.BATCH_SIZE;
-    const changesResultItems = mockChangesResultItems();
+  for (let i = 0; i < numberOfBatches; i += 1) {
+    pending -= batchSize;
+    const changesResultItems = mockChangesResultItems(
+      batchSize,
+      i * batchSize + 1
+    );
     mocks.push({
       result: {
         results: changesResultItems,
