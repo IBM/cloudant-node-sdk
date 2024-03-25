@@ -80,7 +80,7 @@ describe('CloudantV1_integration', () => {
 
   test('putCapacityThroughputConfiguration()', async () => {
     const params = {
-      blocks: 0,
+      blocks: 10,
     };
 
     const res = await cloudantService.putCapacityThroughputConfiguration(params);
@@ -108,7 +108,7 @@ describe('CloudantV1_integration', () => {
   test('postChanges()', async () => {
     const params = {
       db: 'testString',
-      docIds: ['testString'],
+      docIds: ['0007741142412418284'],
       fields: ['testString'],
       selector: { anyKey: 'anyValue' },
       lastEventId: 'testString',
@@ -137,7 +137,7 @@ describe('CloudantV1_integration', () => {
   test('postChangesAsStream()', async () => {
     const params = {
       db: 'testString',
-      docIds: ['testString'],
+      docIds: ['0007741142412418284'],
       fields: ['testString'],
       selector: { anyKey: 'anyValue' },
       lastEventId: 'testString',
@@ -191,7 +191,7 @@ describe('CloudantV1_integration', () => {
 
   test('postDbsInfo()', async () => {
     const params = {
-      keys: ['testString'],
+      keys: ['products', 'users', 'orders'],
     };
 
     const res = await cloudantService.postDbsInfo(params);
@@ -262,13 +262,13 @@ describe('CloudantV1_integration', () => {
       descending: false,
       includeDocs: false,
       inclusiveEnd: true,
-      limit: 0,
+      limit: 10,
       skip: 0,
       updateSeq: false,
       endKey: 'testString',
       key: 'testString',
       keys: ['testString'],
-      startKey: 'testString',
+      startKey: '0007741142412418284',
     };
 
     const res = await cloudantService.postAllDocs(params);
@@ -286,13 +286,13 @@ describe('CloudantV1_integration', () => {
       descending: false,
       includeDocs: false,
       inclusiveEnd: true,
-      limit: 0,
+      limit: 10,
       skip: 0,
       updateSeq: false,
       endKey: 'testString',
       key: 'testString',
       keys: ['testString'],
-      startKey: 'testString',
+      startKey: '0007741142412418284',
     };
 
     const res = await cloudantService.postAllDocsAsStream(params);
@@ -317,7 +317,7 @@ describe('CloudantV1_integration', () => {
       updateSeq: false,
       endKey: 'testString',
       key: 'testString',
-      keys: ['testString'],
+      keys: ['small-appliances:1000042', 'small-appliances:1000043'],
       startKey: 'testString',
     };
 
@@ -348,7 +348,7 @@ describe('CloudantV1_integration', () => {
       updateSeq: false,
       endKey: 'testString',
       key: 'testString',
-      keys: ['testString'],
+      keys: ['small-appliances:1000042', 'small-appliances:1000043'],
       startKey: 'testString',
     };
 
@@ -381,8 +381,8 @@ describe('CloudantV1_integration', () => {
     // BulkGetQueryDocument
     const bulkGetQueryDocumentModel = {
       attsSince: ['1-99b02e08da151943c2dcb40090160bb8'],
-      id: 'testString',
-      rev: 'testString',
+      id: 'order00067',
+      rev: '3-917fa2381192822767f010b95b45325b',
     };
 
     const params = {
@@ -406,8 +406,8 @@ describe('CloudantV1_integration', () => {
     // BulkGetQueryDocument
     const bulkGetQueryDocumentModel = {
       attsSince: ['1-99b02e08da151943c2dcb40090160bb8'],
-      id: 'testString',
-      rev: 'testString',
+      id: 'order00067',
+      rev: '3-917fa2381192822767f010b95b45325b',
     };
 
     const params = {
@@ -431,8 +431,8 @@ describe('CloudantV1_integration', () => {
     // BulkGetQueryDocument
     const bulkGetQueryDocumentModel = {
       attsSince: ['1-99b02e08da151943c2dcb40090160bb8'],
-      id: 'testString',
-      rev: 'testString',
+      id: 'order00067',
+      rev: '3-917fa2381192822767f010b95b45325b',
     };
 
     const params = {
@@ -456,8 +456,8 @@ describe('CloudantV1_integration', () => {
     // BulkGetQueryDocument
     const bulkGetQueryDocumentModel = {
       attsSince: ['1-99b02e08da151943c2dcb40090160bb8'],
-      id: 'testString',
-      rev: 'testString',
+      id: 'order00067',
+      rev: '3-917fa2381192822767f010b95b45325b',
     };
 
     const params = {
@@ -657,7 +657,7 @@ describe('CloudantV1_integration', () => {
 
     // AnalyzerConfiguration
     const analyzerConfigurationModel = {
-      name: 'classic',
+      name: 'standard',
       stopwords: ['testString'],
       fields: { 'key1': analyzerModel },
     };
@@ -665,7 +665,7 @@ describe('CloudantV1_integration', () => {
     // SearchIndexDefinition
     const searchIndexDefinitionModel = {
       analyzer: analyzerConfigurationModel,
-      index: 'testString',
+      index: 'function (doc) {\n  index("price", doc.price);\n}',
     };
 
     // DesignDocumentOptions
@@ -675,7 +675,7 @@ describe('CloudantV1_integration', () => {
 
     // DesignDocumentViewsMapReduce
     const designDocumentViewsMapReduceModel = {
-      map: 'testString',
+      map: 'function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}',
       reduce: 'testString',
     };
 
@@ -685,18 +685,22 @@ describe('CloudantV1_integration', () => {
       _conflicts: ['testString'],
       _deleted: true,
       _deleted_conflicts: ['testString'],
-      _id: 'testString',
+      _id: '_design/appliances',
       _local_seq: 'testString',
-      _rev: 'testString',
+      _rev: '8-7e2537e5989294471061e0cfd7292725',
       _revisions: revisionsModel,
       _revs_info: [documentRevisionStatusModel],
       autoupdate: true,
       filters: { 'key1': 'testString' },
-      indexes: { 'key1': searchIndexDefinitionModel },
+      indexes: { findByPrice: searchIndexDefinitionModel },
+
+
       language: 'javascript',
       options: designDocumentOptionsModel,
       validateDocUpdate: 'testString',
-      views: { 'key1': designDocumentViewsMapReduceModel },
+      views: { byApplianceProdId: designDocumentViewsMapReduceModel },
+
+
       foo: 'testString',
     };
 
@@ -737,13 +741,13 @@ describe('CloudantV1_integration', () => {
       descending: false,
       includeDocs: false,
       inclusiveEnd: true,
-      limit: 0,
+      limit: 10,
       skip: 0,
       updateSeq: false,
       endKey: 'testString',
       key: 'testString',
       keys: ['testString'],
-      startKey: 'testString',
+      startKey: '0007741142412418284',
       accept: 'application/json',
     };
 
@@ -769,7 +773,7 @@ describe('CloudantV1_integration', () => {
       updateSeq: false,
       endKey: 'testString',
       key: 'testString',
-      keys: ['testString'],
+      keys: ['small-appliances:1000042', 'small-appliances:1000043'],
       startKey: 'testString',
     };
 
@@ -794,9 +798,9 @@ describe('CloudantV1_integration', () => {
       attachments: false,
       conflicts: false,
       descending: false,
-      includeDocs: false,
+      includeDocs: true,
       inclusiveEnd: true,
-      limit: 0,
+      limit: 10,
       skip: 0,
       updateSeq: false,
       endKey: 'testString',
@@ -804,7 +808,7 @@ describe('CloudantV1_integration', () => {
       group: false,
       groupLevel: 1,
       key: 'testString',
-      keys: ['testString'],
+      keys: ['examplekey'],
       reduce: true,
       stable: false,
       startKey: 'testString',
@@ -827,9 +831,9 @@ describe('CloudantV1_integration', () => {
       attachments: false,
       conflicts: false,
       descending: false,
-      includeDocs: false,
+      includeDocs: true,
       inclusiveEnd: true,
-      limit: 0,
+      limit: 10,
       skip: 0,
       updateSeq: false,
       endKey: 'testString',
@@ -837,7 +841,7 @@ describe('CloudantV1_integration', () => {
       group: false,
       groupLevel: 1,
       key: 'testString',
-      keys: ['testString'],
+      keys: ['examplekey'],
       reduce: true,
       stable: false,
       startKey: 'testString',
@@ -860,9 +864,9 @@ describe('CloudantV1_integration', () => {
       attachments: false,
       conflicts: false,
       descending: false,
-      includeDocs: false,
+      includeDocs: true,
       inclusiveEnd: true,
-      limit: 0,
+      limit: 5,
       skip: 0,
       updateSeq: false,
       endKey: 'testString',
@@ -900,9 +904,9 @@ describe('CloudantV1_integration', () => {
       attachments: false,
       conflicts: false,
       descending: false,
-      includeDocs: false,
+      includeDocs: true,
       inclusiveEnd: true,
-      limit: 0,
+      limit: 5,
       skip: 0,
       updateSeq: false,
       endKey: 'testString',
@@ -953,13 +957,13 @@ describe('CloudantV1_integration', () => {
       descending: false,
       includeDocs: false,
       inclusiveEnd: true,
-      limit: 0,
+      limit: 10,
       skip: 0,
       updateSeq: false,
       endKey: 'testString',
       key: 'testString',
       keys: ['testString'],
-      startKey: 'testString',
+      startKey: '0007741142412418284',
     };
 
     const res = await cloudantService.postPartitionAllDocs(params);
@@ -978,13 +982,13 @@ describe('CloudantV1_integration', () => {
       descending: false,
       includeDocs: false,
       inclusiveEnd: true,
-      limit: 0,
+      limit: 10,
       skip: 0,
       updateSeq: false,
       endKey: 'testString',
       key: 'testString',
       keys: ['testString'],
-      startKey: 'testString',
+      startKey: '0007741142412418284',
     };
 
     const res = await cloudantService.postPartitionAllDocsAsStream(params);
@@ -1008,7 +1012,7 @@ describe('CloudantV1_integration', () => {
       highlightSize: 100,
       includeDocs: false,
       includeFields: ['testString'],
-      limit: 0,
+      limit: 3,
       sort: ['testString'],
       stale: 'ok',
     };
@@ -1034,7 +1038,7 @@ describe('CloudantV1_integration', () => {
       highlightSize: 100,
       includeDocs: false,
       includeFields: ['testString'],
-      limit: 0,
+      limit: 3,
       sort: ['testString'],
       stale: 'ok',
     };
@@ -1055,9 +1059,9 @@ describe('CloudantV1_integration', () => {
       attachments: false,
       conflicts: false,
       descending: false,
-      includeDocs: false,
+      includeDocs: true,
       inclusiveEnd: true,
-      limit: 0,
+      limit: 10,
       skip: 0,
       updateSeq: false,
       endKey: 'testString',
@@ -1065,7 +1069,7 @@ describe('CloudantV1_integration', () => {
       group: false,
       groupLevel: 1,
       key: 'testString',
-      keys: ['testString'],
+      keys: ['examplekey'],
       reduce: true,
       startKey: 'testString',
       startKeyDocId: 'testString',
@@ -1088,9 +1092,9 @@ describe('CloudantV1_integration', () => {
       attachments: false,
       conflicts: false,
       descending: false,
-      includeDocs: false,
+      includeDocs: true,
       inclusiveEnd: true,
-      limit: 0,
+      limit: 10,
       skip: 0,
       updateSeq: false,
       endKey: 'testString',
@@ -1098,7 +1102,7 @@ describe('CloudantV1_integration', () => {
       group: false,
       groupLevel: 1,
       key: 'testString',
-      keys: ['testString'],
+      keys: ['examplekey'],
       reduce: true,
       startKey: 'testString',
       startKeyDocId: 'testString',
@@ -1115,11 +1119,11 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       partitionKey: 'testString',
-      selector: { anyKey: 'anyValue' },
+      selector: { type: { '$eq': 'product' } },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
-      fields: ['testString'],
+      fields: ['productid', 'name', 'description'],
       limit: 25,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
@@ -1138,11 +1142,11 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       partitionKey: 'testString',
-      selector: { anyKey: 'anyValue' },
+      selector: { type: { '$eq': 'product' } },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
-      fields: ['testString'],
+      fields: ['productid', 'name', 'description'],
       limit: 25,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
@@ -1161,11 +1165,11 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       partitionKey: 'testString',
-      selector: { anyKey: 'anyValue' },
+      selector: { type: { '$eq': 'product' } },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
-      fields: ['testString'],
+      fields: ['productid', 'name', 'description'],
       limit: 25,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
@@ -1183,12 +1187,12 @@ describe('CloudantV1_integration', () => {
   test('postExplain()', async () => {
     const params = {
       db: 'testString',
-      selector: { anyKey: 'anyValue' },
+      selector: { email_verified: { '$eq': true } },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
-      fields: ['testString'],
-      limit: 25,
+      fields: ['_id', 'type', 'name', 'email'],
+      limit: 3,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
       stable: true,
@@ -1206,12 +1210,12 @@ describe('CloudantV1_integration', () => {
   test('postFind()', async () => {
     const params = {
       db: 'testString',
-      selector: { anyKey: 'anyValue' },
+      selector: { email_verified: { '$eq': true } },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
-      fields: ['testString'],
-      limit: 25,
+      fields: ['_id', 'type', 'name', 'email'],
+      limit: 3,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
       stable: true,
@@ -1229,12 +1233,12 @@ describe('CloudantV1_integration', () => {
   test('postFindAsStream()', async () => {
     const params = {
       db: 'testString',
-      selector: { anyKey: 'anyValue' },
+      selector: { email_verified: { '$eq': true } },
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
-      fields: ['testString'],
-      limit: 25,
+      fields: ['_id', 'type', 'name', 'email'],
+      limit: 3,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
       stable: true,
@@ -1277,7 +1281,7 @@ describe('CloudantV1_integration', () => {
 
     // IndexField
     const indexFieldModel = {
-      name: 'testString',
+      name: 'asc',
       type: 'boolean',
       foo: 'asc',
     };
@@ -1294,8 +1298,8 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       index: indexDefinitionModel,
-      ddoc: 'testString',
-      name: 'testString',
+      ddoc: 'json-index',
+      name: 'getUserByName',
       partitioned: true,
       type: 'json',
     };
@@ -1308,8 +1312,8 @@ describe('CloudantV1_integration', () => {
 
   test('postSearchAnalyze()', async () => {
     const params = {
-      analyzer: 'arabic',
-      text: 'testString',
+      analyzer: 'english',
+      text: 'running is fun',
     };
 
     const res = await cloudantService.postSearchAnalyze(params);
@@ -1332,7 +1336,7 @@ describe('CloudantV1_integration', () => {
       highlightSize: 100,
       includeDocs: false,
       includeFields: ['testString'],
-      limit: 0,
+      limit: 3,
       sort: ['testString'],
       stale: 'ok',
       counts: ['testString'],
@@ -1363,7 +1367,7 @@ describe('CloudantV1_integration', () => {
       highlightSize: 100,
       includeDocs: false,
       includeFields: ['testString'],
-      limit: 0,
+      limit: 3,
       sort: ['testString'],
       stale: 'ok',
       counts: ['testString'],
@@ -1481,7 +1485,7 @@ describe('CloudantV1_integration', () => {
     const replicationCreateTargetParametersModel = {
       n: 3,
       partitioned: false,
-      q: 26,
+      q: 1,
     };
 
     // ReplicationDatabaseAuthBasic
@@ -1505,14 +1509,14 @@ describe('CloudantV1_integration', () => {
     const replicationDatabaseModel = {
       auth: replicationDatabaseAuthModel,
       headers: { 'key1': 'testString' },
-      url: 'testString',
+      url: 'https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb',
     };
 
     // UserContext
     const userContextModel = {
       db: 'testString',
-      name: 'testString',
-      roles: ['_reader'],
+      name: 'john',
+      roles: ['researcher'],
     };
 
     // ReplicationDocument
@@ -1526,30 +1530,30 @@ describe('CloudantV1_integration', () => {
       _rev: 'testString',
       _revisions: revisionsModel,
       _revs_info: [documentRevisionStatusModel],
-      cancel: true,
-      checkpointInterval: 30000,
-      connectionTimeout: 30000,
-      continuous: false,
-      createTarget: false,
+      cancel: false,
+      checkpointInterval: 4500,
+      connectionTimeout: 15000,
+      continuous: true,
+      createTarget: true,
       createTargetParams: replicationCreateTargetParametersModel,
-      docIds: ['testString'],
-      filter: 'testString',
-      httpConnections: 20,
+      docIds: ['badger', 'lemur', 'llama'],
+      filter: 'ddoc/my_filter',
+      httpConnections: 10,
       queryParams: { 'key1': 'testString' },
-      retriesPerRequest: 5,
-      selector: { anyKey: 'anyValue' },
-      sinceSeq: 'testString',
-      socketOptions: 'testString',
+      retriesPerRequest: 3,
+      selector: { _id: { '$regex': 'docid' } },
+      sinceSeq: '34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU',
+      socketOptions: '[{keepalive, true}, {nodelay, false}]',
       source: replicationDatabaseModel,
       sourceProxy: 'testString',
       target: replicationDatabaseModel,
       targetProxy: 'testString',
       useBulkGet: true,
-      useCheckpoints: true,
+      useCheckpoints: false,
       userCtx: userContextModel,
       winningRevsOnly: false,
-      workerBatchSize: 500,
-      workerProcesses: 4,
+      workerBatchSize: 400,
+      workerProcesses: 3,
       foo: 'testString',
     };
 
@@ -1638,8 +1642,8 @@ describe('CloudantV1_integration', () => {
 
     // SecurityObject
     const securityObjectModel = {
-      names: ['testString'],
-      roles: ['testString'],
+      names: ['superuser'],
+      roles: ['admins'],
     };
 
     const params = {
@@ -1674,7 +1678,7 @@ describe('CloudantV1_integration', () => {
 
     const params = {
       db: 'testString',
-      cloudant: { 'key1': ['_reader'] },
+      cloudant: { antsellseadespecteposene: ['_reader', '_writer', '_admin'], garbados: ['_reader', '_writer'], nobody: ['_reader'] },
       admins: securityObjectModel,
       members: securityObjectModel,
       couchdbAuthOnly: true,
@@ -1695,7 +1699,7 @@ describe('CloudantV1_integration', () => {
 
   test('putCorsConfiguration()', async () => {
     const params = {
-      origins: ['testString'],
+      origins: ['https://example.com', 'https://www.example.com'],
       allowCredentials: true,
       enableCors: true,
     };
@@ -1867,7 +1871,7 @@ describe('CloudantV1_integration', () => {
 
   test('postActivityTrackerEvents()', async () => {
     const params = {
-      types: ['management'],
+      types: ['management', 'data'],
     };
 
     const res = await cloudantService.postActivityTrackerEvents(params);
