@@ -693,14 +693,10 @@ describe('CloudantV1_integration', () => {
       autoupdate: true,
       filters: { 'key1': 'testString' },
       indexes: { findByPrice: searchIndexDefinitionModel },
-
-
       language: 'javascript',
       options: designDocumentOptionsModel,
       validateDocUpdate: 'testString',
       views: { byApplianceProdId: designDocumentViewsMapReduceModel },
-
-
       foo: 'testString',
     };
 
