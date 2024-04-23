@@ -448,9 +448,13 @@ class CloudantV1 extends CloudantBaseService {
    *
    * ### Note
    *
-   * Before using the changes feed we recommend reading the
+   * Before using the changes feed read the
    * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-changes-feed) to understand the limitations and
    * appropriate use cases.
+   *
+   * If you need to pass parameters to dynamically change the filtered content use the `_selector` filter type for
+   * better performance and compatibility. The SDKs have full support for change requests using selector filters, but
+   * don't support passing parameters to design document filters.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -495,19 +499,25 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
    * key order.
    * @param {string} [params.feed] - Query parameter to specify the changes feed type.
-   * @param {string} [params.filter] - Query parameter to specify a filter function from a design document that will
-   * filter the changes stream emitting only filtered events. For example: `design_doc/filtername`.
+   * @param {string} [params.filter] - Query parameter to specify a filter to emit only specific events from the changes
+   * stream.
    *
-   * Additionally, some keywords are reserved for built-in filters:
-   *
+   * The built-in filter types are:
    *   * `_design` - Returns only changes to design documents.
    *   * `_doc_ids` - Returns changes for documents with an ID matching one specified in
-   *       `doc_ids` request body parameter.
+   *       `doc_ids` request body parameter. (`POST` only)
    *   * `_selector` - Returns changes for documents that match the `selector`
    *       request body parameter. The selector syntax is the same as used for
-   *       `_find`.
+   *       `_find`. (`POST` only)
    *   * `_view` - Returns changes for documents that match an existing map
    *       function in the view specified by the query parameter `view`.
+   *
+   * Additionally, the value can be the name of a JS filter function from a design document. For example:
+   * `design_doc/filtername`.
+   *
+   * **Note:** For better performance use the built-in `_selector`, `_design` or `_doc_ids` filters rather than JS based
+   * `_view` or design document filters. If you need to pass values to change the filtered content use the `_selector`
+   * filter type.
    * @param {number} [params.heartbeat] - Query parameter to specify the period in milliseconds after which an empty
    * line is sent in the results. Off by default and only applicable for
    * `continuous` and `eventsource` feeds. Overrides any timeout to keep the feed alive indefinitely. May also be `true`
@@ -619,9 +629,13 @@ class CloudantV1 extends CloudantBaseService {
    *
    * ### Note
    *
-   * Before using the changes feed we recommend reading the
+   * Before using the changes feed read the
    * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-changes-feed) to understand the limitations and
    * appropriate use cases.
+   *
+   * If you need to pass parameters to dynamically change the filtered content use the `_selector` filter type for
+   * better performance and compatibility. The SDKs have full support for change requests using selector filters, but
+   * don't support passing parameters to design document filters.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -666,19 +680,25 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
    * key order.
    * @param {string} [params.feed] - Query parameter to specify the changes feed type.
-   * @param {string} [params.filter] - Query parameter to specify a filter function from a design document that will
-   * filter the changes stream emitting only filtered events. For example: `design_doc/filtername`.
+   * @param {string} [params.filter] - Query parameter to specify a filter to emit only specific events from the changes
+   * stream.
    *
-   * Additionally, some keywords are reserved for built-in filters:
-   *
+   * The built-in filter types are:
    *   * `_design` - Returns only changes to design documents.
    *   * `_doc_ids` - Returns changes for documents with an ID matching one specified in
-   *       `doc_ids` request body parameter.
+   *       `doc_ids` request body parameter. (`POST` only)
    *   * `_selector` - Returns changes for documents that match the `selector`
    *       request body parameter. The selector syntax is the same as used for
-   *       `_find`.
+   *       `_find`. (`POST` only)
    *   * `_view` - Returns changes for documents that match an existing map
    *       function in the view specified by the query parameter `view`.
+   *
+   * Additionally, the value can be the name of a JS filter function from a design document. For example:
+   * `design_doc/filtername`.
+   *
+   * **Note:** For better performance use the built-in `_selector`, `_design` or `_doc_ids` filters rather than JS based
+   * `_view` or design document filters. If you need to pass values to change the filtered content use the `_selector`
+   * filter type.
    * @param {number} [params.heartbeat] - Query parameter to specify the period in milliseconds after which an empty
    * line is sent in the results. Off by default and only applicable for
    * `continuous` and `eventsource` feeds. Overrides any timeout to keep the feed alive indefinitely. May also be `true`
@@ -4020,8 +4040,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
-   * @param {string[]} [params.useIndex] - Use this option to identify a specific index for query to run against, rather
-   * than by using the IBM Cloudant Query algorithm to find the best index.
+   * @param {string[]} [params.useIndex] - Use this option to identify a specific index to answer the query, rather than
+   * letting the IBM Cloudant query planner choose an index. Specified as a two element array of design document id
+   * followed by index name, for example `["my_design_doc", "my_index"]`.
+   *
+   * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+   * indexes that might get added later.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ExplainResult>>}
    */
@@ -4147,8 +4171,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
-   * @param {string[]} [params.useIndex] - Use this option to identify a specific index for query to run against, rather
-   * than by using the IBM Cloudant Query algorithm to find the best index.
+   * @param {string[]} [params.useIndex] - Use this option to identify a specific index to answer the query, rather than
+   * letting the IBM Cloudant query planner choose an index. Specified as a two element array of design document id
+   * followed by index name, for example `["my_design_doc", "my_index"]`.
+   *
+   * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+   * indexes that might get added later.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.FindResult>>}
    */
@@ -4274,8 +4302,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
-   * @param {string[]} [params.useIndex] - Use this option to identify a specific index for query to run against, rather
-   * than by using the IBM Cloudant Query algorithm to find the best index.
+   * @param {string[]} [params.useIndex] - Use this option to identify a specific index to answer the query, rather than
+   * letting the IBM Cloudant query planner choose an index. Specified as a two element array of design document id
+   * followed by index name, for example `["my_design_doc", "my_index"]`.
+   *
+   * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+   * indexes that might get added later.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
@@ -4396,8 +4428,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
-   * @param {string[]} [params.useIndex] - Use this option to identify a specific index for query to run against, rather
-   * than by using the IBM Cloudant Query algorithm to find the best index.
+   * @param {string[]} [params.useIndex] - Use this option to identify a specific index to answer the query, rather than
+   * letting the IBM Cloudant query planner choose an index. Specified as a two element array of design document id
+   * followed by index name, for example `["my_design_doc", "my_index"]`.
+   *
+   * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+   * indexes that might get added later.
    * @param {number} [params.r] - The read quorum that is needed for the result. The value defaults to 1, in which case
    * the document that was found in the index is returned. If set to a higher value, each document is read from at least
    * that many replicas before it is returned in the results. The request will take more time than using only the
@@ -4526,8 +4562,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
-   * @param {string[]} [params.useIndex] - Use this option to identify a specific index for query to run against, rather
-   * than by using the IBM Cloudant Query algorithm to find the best index.
+   * @param {string[]} [params.useIndex] - Use this option to identify a specific index to answer the query, rather than
+   * letting the IBM Cloudant query planner choose an index. Specified as a two element array of design document id
+   * followed by index name, for example `["my_design_doc", "my_index"]`.
+   *
+   * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+   * indexes that might get added later.
    * @param {number} [params.r] - The read quorum that is needed for the result. The value defaults to 1, in which case
    * the document that was found in the index is returned. If set to a higher value, each document is read from at least
    * that many replicas before it is returned in the results. The request will take more time than using only the
@@ -4656,8 +4696,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.stable] - Whether or not the view results should be returned from a "stable" set of
    * shards.
    * @param {string} [params.update] - Whether to update the index prior to returning the result.
-   * @param {string[]} [params.useIndex] - Use this option to identify a specific index for query to run against, rather
-   * than by using the IBM Cloudant Query algorithm to find the best index.
+   * @param {string[]} [params.useIndex] - Use this option to identify a specific index to answer the query, rather than
+   * letting the IBM Cloudant query planner choose an index. Specified as a two element array of design document id
+   * followed by index name, for example `["my_design_doc", "my_index"]`.
+   *
+   * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+   * indexes that might get added later.
    * @param {number} [params.r] - The read quorum that is needed for the result. The value defaults to 1, in which case
    * the document that was found in the index is returned. If set to a higher value, each document is read from at least
    * that many replicas before it is returned in the results. The request will take more time than using only the
@@ -7417,19 +7461,24 @@ namespace CloudantV1 {
     descending?: boolean;
     /** Query parameter to specify the changes feed type. */
     feed?: PostChangesConstants.Feed | string;
-    /** Query parameter to specify a filter function from a design document that will filter the changes stream
-     *  emitting only filtered events. For example: `design_doc/filtername`.
+    /** Query parameter to specify a filter to emit only specific events from the changes stream.
      *
-     *  Additionally, some keywords are reserved for built-in filters:
-     *
+     *  The built-in filter types are:
      *    * `_design` - Returns only changes to design documents.
      *    * `_doc_ids` - Returns changes for documents with an ID matching one specified in
-     *        `doc_ids` request body parameter.
+     *        `doc_ids` request body parameter. (`POST` only)
      *    * `_selector` - Returns changes for documents that match the `selector`
      *        request body parameter. The selector syntax is the same as used for
-     *        `_find`.
+     *        `_find`. (`POST` only)
      *    * `_view` - Returns changes for documents that match an existing map
      *        function in the view specified by the query parameter `view`.
+     *
+     *  Additionally, the value can be the name of a JS filter function from a design document. For example:
+     *  `design_doc/filtername`.
+     *
+     *  **Note:** For better performance use the built-in `_selector`, `_design` or `_doc_ids` filters rather than JS
+     *  based `_view` or design document filters. If you need to pass values to change the filtered content use the
+     *  `_selector` filter type.
      */
     filter?: string;
     /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Off
@@ -7546,19 +7595,24 @@ namespace CloudantV1 {
     descending?: boolean;
     /** Query parameter to specify the changes feed type. */
     feed?: PostChangesAsStreamConstants.Feed | string;
-    /** Query parameter to specify a filter function from a design document that will filter the changes stream
-     *  emitting only filtered events. For example: `design_doc/filtername`.
+    /** Query parameter to specify a filter to emit only specific events from the changes stream.
      *
-     *  Additionally, some keywords are reserved for built-in filters:
-     *
+     *  The built-in filter types are:
      *    * `_design` - Returns only changes to design documents.
      *    * `_doc_ids` - Returns changes for documents with an ID matching one specified in
-     *        `doc_ids` request body parameter.
+     *        `doc_ids` request body parameter. (`POST` only)
      *    * `_selector` - Returns changes for documents that match the `selector`
      *        request body parameter. The selector syntax is the same as used for
-     *        `_find`.
+     *        `_find`. (`POST` only)
      *    * `_view` - Returns changes for documents that match an existing map
      *        function in the view specified by the query parameter `view`.
+     *
+     *  Additionally, the value can be the name of a JS filter function from a design document. For example:
+     *  `design_doc/filtername`.
+     *
+     *  **Note:** For better performance use the built-in `_selector`, `_design` or `_doc_ids` filters rather than JS
+     *  based `_view` or design document filters. If you need to pass values to change the filtered content use the
+     *  `_selector` filter type.
      */
     filter?: string;
     /** Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Off
@@ -9012,8 +9066,12 @@ namespace CloudantV1 {
     stable?: boolean;
     /** Whether to update the index prior to returning the result. */
     update?: PostPartitionExplainConstants.Update | string;
-    /** Use this option to identify a specific index for query to run against, rather than by using the IBM Cloudant
-     *  Query algorithm to find the best index.
+    /** Use this option to identify a specific index to answer the query, rather than letting the IBM Cloudant query
+     *  planner choose an index. Specified as a two element array of design document id followed by index name, for
+     *  example `["my_design_doc", "my_index"]`.
+     *
+     *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+     *  indexes that might get added later.
      */
     useIndex?: string[];
     headers?: OutgoingHttpHeaders;
@@ -9103,8 +9161,12 @@ namespace CloudantV1 {
     stable?: boolean;
     /** Whether to update the index prior to returning the result. */
     update?: PostPartitionFindConstants.Update | string;
-    /** Use this option to identify a specific index for query to run against, rather than by using the IBM Cloudant
-     *  Query algorithm to find the best index.
+    /** Use this option to identify a specific index to answer the query, rather than letting the IBM Cloudant query
+     *  planner choose an index. Specified as a two element array of design document id followed by index name, for
+     *  example `["my_design_doc", "my_index"]`.
+     *
+     *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+     *  indexes that might get added later.
      */
     useIndex?: string[];
     headers?: OutgoingHttpHeaders;
@@ -9194,8 +9256,12 @@ namespace CloudantV1 {
     stable?: boolean;
     /** Whether to update the index prior to returning the result. */
     update?: PostPartitionFindAsStreamConstants.Update | string;
-    /** Use this option to identify a specific index for query to run against, rather than by using the IBM Cloudant
-     *  Query algorithm to find the best index.
+    /** Use this option to identify a specific index to answer the query, rather than letting the IBM Cloudant query
+     *  planner choose an index. Specified as a two element array of design document id followed by index name, for
+     *  example `["my_design_doc", "my_index"]`.
+     *
+     *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+     *  indexes that might get added later.
      */
     useIndex?: string[];
     headers?: OutgoingHttpHeaders;
@@ -9283,8 +9349,12 @@ namespace CloudantV1 {
     stable?: boolean;
     /** Whether to update the index prior to returning the result. */
     update?: PostExplainConstants.Update | string;
-    /** Use this option to identify a specific index for query to run against, rather than by using the IBM Cloudant
-     *  Query algorithm to find the best index.
+    /** Use this option to identify a specific index to answer the query, rather than letting the IBM Cloudant query
+     *  planner choose an index. Specified as a two element array of design document id followed by index name, for
+     *  example `["my_design_doc", "my_index"]`.
+     *
+     *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+     *  indexes that might get added later.
      */
     useIndex?: string[];
     /** The read quorum that is needed for the result. The value defaults to 1, in which case the document that was
@@ -9378,8 +9448,12 @@ namespace CloudantV1 {
     stable?: boolean;
     /** Whether to update the index prior to returning the result. */
     update?: PostFindConstants.Update | string;
-    /** Use this option to identify a specific index for query to run against, rather than by using the IBM Cloudant
-     *  Query algorithm to find the best index.
+    /** Use this option to identify a specific index to answer the query, rather than letting the IBM Cloudant query
+     *  planner choose an index. Specified as a two element array of design document id followed by index name, for
+     *  example `["my_design_doc", "my_index"]`.
+     *
+     *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+     *  indexes that might get added later.
      */
     useIndex?: string[];
     /** The read quorum that is needed for the result. The value defaults to 1, in which case the document that was
@@ -9473,8 +9547,12 @@ namespace CloudantV1 {
     stable?: boolean;
     /** Whether to update the index prior to returning the result. */
     update?: PostFindAsStreamConstants.Update | string;
-    /** Use this option to identify a specific index for query to run against, rather than by using the IBM Cloudant
-     *  Query algorithm to find the best index.
+    /** Use this option to identify a specific index to answer the query, rather than letting the IBM Cloudant query
+     *  planner choose an index. Specified as a two element array of design document id followed by index name, for
+     *  example `["my_design_doc", "my_index"]`.
+     *
+     *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+     *  indexes that might get added later.
      */
     useIndex?: string[];
     /** The read quorum that is needed for the result. The value defaults to 1, in which case the document that was
@@ -12518,7 +12596,7 @@ namespace CloudantV1 {
     /** Schema for a list of document revision identifiers. */
     _deleted_conflicts?: string[];
 
-    /** Document ID. */
+    /** Schema for a design document ID. */
     _id?: string;
 
     /** Document's update sequence in current database. Available if requested with local_seq=true query parameter. */
@@ -13188,7 +13266,7 @@ namespace CloudantV1 {
     /** Schema for a list of document revision identifiers. */
     _deleted_conflicts?: string[];
 
-    /** Document ID. */
+    /** Schema for a document ID. */
     _id?: string;
 
     /** Document's update sequence in current database. Available if requested with local_seq=true query parameter. */
@@ -13592,6 +13670,9 @@ namespace CloudantV1 {
     /** Schema for information about an index. */
     index: IndexInformation;
 
+    /** Schema for the list of all the other indexes that were not chosen for serving the query. */
+    indexCandidates?: IndexCandidate[];
+
     /** The used maximum number of results returned. */
     limit: number;
 
@@ -13634,6 +13715,9 @@ namespace CloudantV1 {
      */
     selector: JsonObject;
 
+    /** Schema for a list of objects with extra information on the selector to provide insights about its usability. */
+    selectorHints?: SelectorHint[];
+
     /** Skip parameter used. */
     skip: number;
 
@@ -13654,6 +13738,9 @@ namespace CloudantV1 {
       if (obj.index !== undefined) {
         copy.index = IndexInformation.serialize(obj.index);
       }
+      if (obj.indexCandidates !== undefined) {
+        copy.index_candidates = BaseService.convertModel(obj.indexCandidates, IndexCandidate.serialize);
+      }
       if (obj.limit !== undefined) {
         copy.limit = obj.limit;
       }
@@ -13668,6 +13755,9 @@ namespace CloudantV1 {
       }
       if (obj.selector !== undefined) {
         copy.selector = obj.selector;
+      }
+      if (obj.selectorHints !== undefined) {
+        copy.selector_hints = BaseService.convertModel(obj.selectorHints, SelectorHint.serialize);
       }
       if (obj.skip !== undefined) {
         copy.skip = obj.skip;
@@ -13692,6 +13782,9 @@ namespace CloudantV1 {
       if (obj.index !== undefined) {
         copy.index = IndexInformation.deserialize(obj.index);
       }
+      if (obj.index_candidates !== undefined) {
+        copy.indexCandidates = BaseService.convertModel(obj.index_candidates, IndexCandidate.deserialize);
+      }
       if (obj.limit !== undefined) {
         copy.limit = obj.limit;
       }
@@ -13707,6 +13800,9 @@ namespace CloudantV1 {
       if (obj.selector !== undefined) {
         copy.selector = obj.selector;
       }
+      if (obj.selector_hints !== undefined) {
+        copy.selectorHints = BaseService.convertModel(obj.selector_hints, SelectorHint.deserialize);
+      }
       if (obj.skip !== undefined) {
         copy.skip = obj.skip;
       }
@@ -13719,11 +13815,13 @@ namespace CloudantV1 {
         dbname: string;
         fields: string[];
         index: IndexInformation.Transport;
+        index_candidates?: IndexCandidate[];
         limit: number;
         mrargs?: ExplainResultMrArgs.Transport;
         opts: ExplainResultOpts.Transport;
         partitioned?: any;
         selector: JsonObject;
+        selector_hints?: SelectorHint[];
         skip: number;
       }
   }
@@ -14081,6 +14179,179 @@ namespace CloudantV1 {
         docs: Document[];
         execution_stats?: ExecutionStats.Transport;
         warning?: string;
+      }
+  }
+
+  /** Schema for detailed explanation of why the specific index was excluded by the query planner. */
+  export class IndexAnalysis {
+    /** When `true`, the query is answered using the index only and no documents are fetched. */
+    covering: boolean | null;
+
+    /** A position of the unused index based on its potential relevance to the query. */
+    ranking: number;
+
+    /** A list of reasons explaining why index was not chosen for the query. */
+    reasons: IndexAnalysisExclusionReason[];
+
+    /** Indicates whether an index can still be used for the query. */
+    usable: boolean;
+
+    static serialize(obj): IndexAnalysis.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexAnalysis.Transport = <IndexAnalysis.Transport>{};
+      if (obj.covering !== undefined) {
+        copy.covering = obj.covering;
+      }
+      if (obj.ranking !== undefined) {
+        copy.ranking = obj.ranking;
+      }
+      if (obj.reasons !== undefined) {
+        copy.reasons = BaseService.convertModel(obj.reasons, IndexAnalysisExclusionReason.serialize);
+      }
+      if (obj.usable !== undefined) {
+        copy.usable = obj.usable;
+      }
+      return copy as unknown as IndexAnalysis.Transport;
+    }
+
+    static deserialize(obj): IndexAnalysis {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexAnalysis = <IndexAnalysis>{};
+      if (obj.covering !== undefined) {
+        copy.covering = obj.covering;
+      }
+      if (obj.ranking !== undefined) {
+        copy.ranking = obj.ranking;
+      }
+      if (obj.reasons !== undefined) {
+        copy.reasons = BaseService.convertModel(obj.reasons, IndexAnalysisExclusionReason.deserialize);
+      }
+      if (obj.usable !== undefined) {
+        copy.usable = obj.usable;
+      }
+      return copy as unknown as IndexAnalysis;
+    }
+  }
+  export namespace IndexAnalysis {
+      export interface Transport {
+        covering: boolean;
+        ranking: number;
+        reasons: IndexAnalysisExclusionReason[];
+        usable: boolean;
+      }
+  }
+
+  /** A reason for index's exclusion. */
+  export class IndexAnalysisExclusionReason {
+    /** A reason code for index's exclusion.
+     *
+     *  The full list of possible reason codes is following:
+     *
+     *  * alphabetically_comes_after: json
+     *    There is another suitable index whose name comes before that of this index.
+     *  * empty_selector: text
+     *  "text" indexes do not support queries with empty selectors.
+     *  * excluded_by_user: any use_index was used to manually specify the index.
+     *  * field_mismatch: any Fields in "selector" of the query do match with the fields available in the index.
+     *  * is_partial: json, text Partial indexes can be selected only manually.
+     *  * less_overlap: json There is a better match of fields available within the indexes for the query.
+     *  * needs_text_search: json The use of the $text operator requires a "text" index.
+     *  * scope_mismatch: json The scope of the query and the index is not the same.
+     *  * sort_order_mismatch: json, special Fields in "sort" of the query do not match with the fields available in the
+     *  index.
+     *  * too_many_fields: json The index has more fields than the chosen one.
+     *  * unfavored_type: any The type of the index is not preferred.
+     */
+    name?: IndexAnalysisExclusionReason.Constants.Name | string;
+
+    static serialize(obj): IndexAnalysisExclusionReason.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexAnalysisExclusionReason.Transport = <IndexAnalysisExclusionReason.Transport>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      return copy as unknown as IndexAnalysisExclusionReason.Transport;
+    }
+
+    static deserialize(obj): IndexAnalysisExclusionReason {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexAnalysisExclusionReason = <IndexAnalysisExclusionReason>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      return copy as unknown as IndexAnalysisExclusionReason;
+    }
+  }
+  export namespace IndexAnalysisExclusionReason {
+    export namespace Constants {
+      /** A reason code for index's exclusion. The full list of possible reason codes is following: * alphabetically_comes_after: json There is another suitable index whose name comes before that of this index. * empty_selector: text "text" indexes do not support queries with empty selectors. * excluded_by_user: any use_index was used to manually specify the index. * field_mismatch: any Fields in "selector" of the query do match with the fields available in the index. * is_partial: json, text Partial indexes can be selected only manually. * less_overlap: json There is a better match of fields available within the indexes for the query. * needs_text_search: json The use of the $text operator requires a "text" index. * scope_mismatch: json The scope of the query and the index is not the same. * sort_order_mismatch: json, special Fields in "sort" of the query do not match with the fields available in the index. * too_many_fields: json The index has more fields than the chosen one. * unfavored_type: any The type of the index is not preferred. */
+      export enum Name {
+        ALPHABETICALLY_COMES_AFTER = 'alphabetically_comes_after',
+        EMPTY_SELECTOR = 'empty_selector',
+        EXCLUDED_BY_USER = 'excluded_by_user',
+        FIELD_MISMATCH = 'field_mismatch',
+        IS_PARTIAL = 'is_partial',
+        LESS_OVERLAP = 'less_overlap',
+        NEEDS_TEXT_SEARCH = 'needs_text_search',
+        SCOPE_MISMATCH = 'scope_mismatch',
+        SORT_ORDER_MISMATCH = 'sort_order_mismatch',
+        TOO_MANY_FIELDS = 'too_many_fields',
+        UNFAVORED_TYPE = 'unfavored_type',
+      }
+    }
+      export interface Transport {
+        name?: string;
+      }
+  }
+
+  /** Schema for an index that was not chosen for serving the query with the reason for the exclusion. */
+  export class IndexCandidate {
+    /** Schema for detailed explanation of why the specific index was excluded by the query planner. */
+    analysis: IndexAnalysis;
+
+    /** Schema for information about an index. */
+    index: IndexInformation;
+
+    static serialize(obj): IndexCandidate.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexCandidate.Transport = <IndexCandidate.Transport>{};
+      if (obj.analysis !== undefined) {
+        copy.analysis = IndexAnalysis.serialize(obj.analysis);
+      }
+      if (obj.index !== undefined) {
+        copy.index = IndexInformation.serialize(obj.index);
+      }
+      return copy as unknown as IndexCandidate.Transport;
+    }
+
+    static deserialize(obj): IndexCandidate {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexCandidate = <IndexCandidate>{};
+      if (obj.analysis !== undefined) {
+        copy.analysis = IndexAnalysis.deserialize(obj.analysis);
+      }
+      if (obj.index !== undefined) {
+        copy.index = IndexInformation.deserialize(obj.index);
+      }
+      return copy as unknown as IndexCandidate;
+    }
+  }
+  export namespace IndexCandidate {
+      export interface Transport {
+        analysis: IndexAnalysis.Transport;
+        index: IndexInformation.Transport;
       }
   }
 
@@ -15137,7 +15408,7 @@ namespace CloudantV1 {
     /** Schema for a list of document revision identifiers. */
     _deleted_conflicts?: string[];
 
-    /** Document ID. */
+    /** Schema for a document ID. */
     _id?: string;
 
     /** Document's update sequence in current database. Available if requested with local_seq=true query parameter. */
@@ -16844,6 +17115,66 @@ namespace CloudantV1 {
       export interface Transport {
         names?: string[];
         roles?: string[];
+      }
+  }
+
+  /** Schema for extra information on the selector. */
+  export class SelectorHint {
+    /** A list of fields in the given selector that can be used to restrict the query. */
+    indexableFields: string[];
+
+    /** A type of the index. */
+    type: SelectorHint.Constants.Type | string;
+
+    /** A list of fields in the given selector that can't be used to restrict the query. */
+    unindexableFields: string[];
+
+    static serialize(obj): SelectorHint.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SelectorHint.Transport = <SelectorHint.Transport>{};
+      if (obj.indexableFields !== undefined) {
+        copy.indexable_fields = obj.indexableFields;
+      }
+      if (obj.type !== undefined) {
+        copy.type = obj.type;
+      }
+      if (obj.unindexableFields !== undefined) {
+        copy.unindexable_fields = obj.unindexableFields;
+      }
+      return copy as unknown as SelectorHint.Transport;
+    }
+
+    static deserialize(obj): SelectorHint {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SelectorHint = <SelectorHint>{};
+      if (obj.indexable_fields !== undefined) {
+        copy.indexableFields = obj.indexable_fields;
+      }
+      if (obj.type !== undefined) {
+        copy.type = obj.type;
+      }
+      if (obj.unindexable_fields !== undefined) {
+        copy.unindexableFields = obj.unindexable_fields;
+      }
+      return copy as unknown as SelectorHint;
+    }
+  }
+  export namespace SelectorHint {
+    export namespace Constants {
+      /** A type of the index. */
+      export enum Type {
+        JSON = 'json',
+        TEXT = 'text',
+      }
+    }
+      export interface Transport {
+        indexable_fields: string[];
+        type: string;
+        unindexable_fields: string[];
       }
   }
 
