@@ -3827,7 +3827,6 @@ describe('CloudantV1', () => {
         const key = 'testString';
         const keys = ['testString'];
         const startKey = '0007741142412418284';
-        const accept = 'application/json';
         const postDesignDocsParams = {
           db,
           attEncodingInfo,
@@ -3843,7 +3842,6 @@ describe('CloudantV1', () => {
           key,
           keys,
           startKey,
-          accept,
         };
 
         const postDesignDocsResult = cloudantService.postDesignDocs(postDesignDocsParams);
@@ -3857,10 +3855,9 @@ describe('CloudantV1', () => {
         const mockRequestOptions = getOptions(createRequestMock);
 
         checkUrlAndMethod(mockRequestOptions, '/{db}/_design_docs', 'POST');
-        const expectedAccept = accept;
+        const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        checkUserHeader(createRequestMock, 'Accept', accept);
         expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.body.attachments).toEqual(attachments);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
@@ -4975,7 +4972,7 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
-        const query = 'testString';
+        const query = 'name:Jane* AND active:True';
         const bookmark = 'testString';
         const highlightFields = ['testString'];
         const highlightNumber = 1;
@@ -5059,7 +5056,7 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
-        const query = 'testString';
+        const query = 'name:Jane* AND active:True';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postPartitionSearchParams = {
@@ -5112,7 +5109,7 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
-        const query = 'testString';
+        const query = 'name:Jane* AND active:True';
         const bookmark = 'testString';
         const highlightFields = ['testString'];
         const highlightNumber = 1;
@@ -5197,7 +5194,7 @@ describe('CloudantV1', () => {
         const partitionKey = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
-        const query = 'testString';
+        const query = 'name:Jane* AND active:True';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postPartitionSearchAsStreamParams = {
@@ -6705,7 +6702,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
-        const query = 'testString';
+        const query = 'name:Jane* AND active:True';
         const bookmark = 'testString';
         const highlightFields = ['testString'];
         const highlightNumber = 1;
@@ -6804,7 +6801,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
-        const query = 'testString';
+        const query = 'name:Jane* AND active:True';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postSearchParams = {
@@ -6855,7 +6852,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
-        const query = 'testString';
+        const query = 'name:Jane* AND active:True';
         const bookmark = 'testString';
         const highlightFields = ['testString'];
         const highlightNumber = 1;
@@ -6955,7 +6952,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const ddoc = 'testString';
         const index = 'testString';
-        const query = 'testString';
+        const query = 'name:Jane* AND active:True';
         const userAccept = 'fake/accept';
         const userContentType = 'fake/contentType';
         const postSearchAsStreamParams = {
@@ -7622,7 +7619,7 @@ describe('CloudantV1', () => {
       const userContextModel = {
         db: 'testString',
         name: 'john',
-        roles: ['researcher'],
+        roles: ['_replicator'],
       };
 
       // ReplicationDocument
