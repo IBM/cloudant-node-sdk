@@ -744,7 +744,6 @@ describe('CloudantV1_integration', () => {
       key: 'testString',
       keys: ['testString'],
       startKey: '0007741142412418284',
-      accept: 'application/json',
     };
 
     const res = await cloudantService.postDesignDocs(params);
@@ -999,7 +998,7 @@ describe('CloudantV1_integration', () => {
       partitionKey: 'testString',
       ddoc: 'testString',
       index: 'testString',
-      query: 'testString',
+      query: 'name:Jane* AND active:True',
       bookmark: 'testString',
       highlightFields: ['testString'],
       highlightNumber: 1,
@@ -1025,7 +1024,7 @@ describe('CloudantV1_integration', () => {
       partitionKey: 'testString',
       ddoc: 'testString',
       index: 'testString',
-      query: 'testString',
+      query: 'name:Jane* AND active:True',
       bookmark: 'testString',
       highlightFields: ['testString'],
       highlightNumber: 1,
@@ -1323,7 +1322,7 @@ describe('CloudantV1_integration', () => {
       db: 'testString',
       ddoc: 'testString',
       index: 'testString',
-      query: 'testString',
+      query: 'name:Jane* AND active:True',
       bookmark: 'testString',
       highlightFields: ['testString'],
       highlightNumber: 1,
@@ -1354,7 +1353,7 @@ describe('CloudantV1_integration', () => {
       db: 'testString',
       ddoc: 'testString',
       index: 'testString',
-      query: 'testString',
+      query: 'name:Jane* AND active:True',
       bookmark: 'testString',
       highlightFields: ['testString'],
       highlightNumber: 1,
@@ -1512,7 +1511,7 @@ describe('CloudantV1_integration', () => {
     const userContextModel = {
       db: 'testString',
       name: 'john',
-      roles: ['researcher'],
+      roles: ['_replicator'],
     };
 
     // ReplicationDocument

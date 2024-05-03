@@ -854,6 +854,8 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Query a list of all database names in the instance.
    *
+   * Query to retrieve a list of database names from the instance.
+   *
    * @param {Object} [params] - The parameters to send to the service.
    * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
    * key order.
@@ -1020,6 +1022,8 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Retrieve information about a database.
    *
+   * Retrieve detailed information about the database.
+   *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -1068,6 +1072,8 @@ class CloudantV1 extends CloudantBaseService {
 
   /**
    * Create a database.
+   *
+   * Create a new database with the requested properties.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -1141,8 +1147,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
    * matter what rev was requested.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
@@ -1924,8 +1929,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
-   * parameter.
+   * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
    * with a HTTP 202 Accepted response code immediately.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
@@ -1990,8 +1994,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -2080,8 +2083,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -2168,8 +2170,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -2256,8 +2257,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -2349,8 +2349,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {Document | NodeJS.ReadableStream | Buffer} params.document - HTTP request body for Document operations.
    * @param {string} [params.contentType] - The type of the input.
-   * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
-   * parameter.
+   * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
    * with a HTTP 202 Accepted response code immediately.
    * @param {boolean} [params.newEdits] - Query parameter to specify whether to prevent insertion of conflicting
@@ -2429,8 +2428,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
    */
@@ -2484,8 +2482,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
-   * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
-   * parameter.
+   * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
    * with a HTTP 202 Accepted response code immediately.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
@@ -2551,8 +2548,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -2642,8 +2638,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
    * @param {DesignDocument} params.designDocument - HTTP request body for DesignDocument operations.
-   * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
-   * parameter.
+   * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
    * with a HTTP 202 Accepted response code immediately.
    * @param {boolean} [params.newEdits] - Query parameter to specify whether to prevent insertion of conflicting
@@ -2790,7 +2785,6 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.key] - Schema for a document ID.
    * @param {string[]} [params.keys] - Schema for a list of document IDs.
    * @param {string} [params.startKey] - Schema for a document ID.
-   * @param {string} [params.accept] - The type of the response: application/json or application/octet-stream.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.AllDocsResult>>}
    */
@@ -2799,7 +2793,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'accept', 'headers'];
+    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2839,8 +2833,8 @@ class CloudantV1 extends CloudantBaseService {
           true,
           sdkHeaders,
           {
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Accept': _params.accept,
           },
           _params.headers
         ),
@@ -4892,6 +4886,8 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Delete an index.
    *
+   * Delete the index functions from the design document and index files on the server.
+   *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
@@ -5321,8 +5317,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
    */
@@ -5468,8 +5463,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
-   * parameter.
+   * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
    * with a HTTP 202 Accepted response code immediately.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
@@ -5532,8 +5526,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -5621,8 +5614,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {ReplicationDocument} params.replicationDocument - HTTP request body for replication operations.
-   * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
-   * parameter.
+   * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
    * with a HTTP 202 Accepted response code immediately.
    * @param {boolean} [params.newEdits] - Query parameter to specify whether to prevent insertion of conflicting
@@ -6321,10 +6313,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {string} params.attachmentName - Path parameter to specify the attachment name.
-   * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
-   * parameter.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
@@ -6385,8 +6375,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {string} params.attachmentName - Path parameter to specify the attachment name.
-   * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
-   * parameter.
+   * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
    * with a HTTP 202 Accepted response code immediately.
@@ -6455,10 +6444,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {string} params.attachmentName - Path parameter to specify the attachment name.
    * @param {string} [params.accept] - The type of the response:  or *_/_*.
-   * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
-   * parameter.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {string} [params.range] - Header parameter to specify the byte range for a request. This allows the
    * implementation of resumable downloads and skippable streams. This is available for all attachments inside CouchDB.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
@@ -6531,8 +6518,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.attachmentName - Path parameter to specify the attachment name.
    * @param {NodeJS.ReadableStream | Buffer} params.attachment - HTTP request body for attachment operations.
    * @param {string} params.contentType - Content-Type of the attachment.
-   * @param {string} [params.ifMatch] - Header parameter to specify the document revision. Alternative to rev query
-   * parameter.
+   * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
@@ -6601,8 +6587,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
    */
@@ -6717,8 +6702,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {string} [params.accept] - The type of the response: application/json, multipart/mixed, multipart/related,
    * or application/octet-stream.
-   * @param {string} [params.ifNoneMatch] - Header parameter to specify a double quoted document revision token for
-   * cache control.
+   * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -7740,7 +7724,7 @@ namespace CloudantV1 {
     db: string;
     /** Path parameter to specify the document ID. */
     docId: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     /** Query parameter to specify whether to force retrieving latest leaf revision, no matter what rev was
      *  requested.
@@ -7980,7 +7964,7 @@ namespace CloudantV1 {
     db: string;
     /** Path parameter to specify the document ID. */
     docId: string;
-    /** Header parameter to specify the document revision. Alternative to rev query parameter. */
+    /** Header parameter for a conditional HTTP request matching an ETag. */
     ifMatch?: string;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
      *  response code immediately.
@@ -8005,7 +7989,7 @@ namespace CloudantV1 {
     db: string;
     /** Path parameter to specify the document ID. */
     docId: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
@@ -8046,7 +8030,7 @@ namespace CloudantV1 {
     db: string;
     /** Path parameter to specify the document ID. */
     docId: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
@@ -8087,7 +8071,7 @@ namespace CloudantV1 {
     db: string;
     /** Path parameter to specify the document ID. */
     docId: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
@@ -8128,7 +8112,7 @@ namespace CloudantV1 {
     db: string;
     /** Path parameter to specify the document ID. */
     docId: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
@@ -8173,7 +8157,7 @@ namespace CloudantV1 {
     document: Document | NodeJS.ReadableStream | Buffer;
     /** The type of the input. */
     contentType?: PutDocumentConstants.ContentType | string;
-    /** Header parameter to specify the document revision. Alternative to rev query parameter. */
+    /** Header parameter for a conditional HTTP request matching an ETag. */
     ifMatch?: string;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
      *  response code immediately.
@@ -8212,7 +8196,7 @@ namespace CloudantV1 {
      *  excluding the `_design/` prefix.
      */
     ddoc: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     headers?: OutgoingHttpHeaders;
   }
@@ -8225,7 +8209,7 @@ namespace CloudantV1 {
      *  excluding the `_design/` prefix.
      */
     ddoc: string;
-    /** Header parameter to specify the document revision. Alternative to rev query parameter. */
+    /** Header parameter for a conditional HTTP request matching an ETag. */
     ifMatch?: string;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
      *  response code immediately.
@@ -8252,7 +8236,7 @@ namespace CloudantV1 {
      *  excluding the `_design/` prefix.
      */
     ddoc: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
@@ -8297,7 +8281,7 @@ namespace CloudantV1 {
     ddoc: string;
     /** HTTP request body for DesignDocument operations. */
     designDocument: DesignDocument;
-    /** Header parameter to specify the document revision. Alternative to rev query parameter. */
+    /** Header parameter for a conditional HTTP request matching an ETag. */
     ifMatch?: string;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
      *  response code immediately.
@@ -8368,18 +8352,7 @@ namespace CloudantV1 {
     keys?: string[];
     /** Schema for a document ID. */
     startKey?: string;
-    /** The type of the response: application/json or application/octet-stream. */
-    accept?: PostDesignDocsConstants.Accept | string;
     headers?: OutgoingHttpHeaders;
-  }
-
-  /** Constants for the `postDesignDocs` operation. */
-  export namespace PostDesignDocsConstants {
-    /** The type of the response: application/json or application/octet-stream. */
-    export enum Accept {
-      APPLICATION_JSON = 'application/json',
-      APPLICATION_OCTET_STREAM = 'application/octet-stream',
-    }
   }
 
   /** Parameters for the `postDesignDocsQueries` operation. */
@@ -9897,7 +9870,7 @@ namespace CloudantV1 {
   export interface HeadReplicationDocumentParams {
     /** Path parameter to specify the document ID. */
     docId: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     headers?: OutgoingHttpHeaders;
   }
@@ -9920,7 +9893,7 @@ namespace CloudantV1 {
   export interface DeleteReplicationDocumentParams {
     /** Path parameter to specify the document ID. */
     docId: string;
-    /** Header parameter to specify the document revision. Alternative to rev query parameter. */
+    /** Header parameter for a conditional HTTP request matching an ETag. */
     ifMatch?: string;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
      *  response code immediately.
@@ -9943,7 +9916,7 @@ namespace CloudantV1 {
   export interface GetReplicationDocumentParams {
     /** Path parameter to specify the document ID. */
     docId: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
@@ -9984,7 +9957,7 @@ namespace CloudantV1 {
     docId: string;
     /** HTTP request body for replication operations. */
     replicationDocument: ReplicationDocument;
-    /** Header parameter to specify the document revision. Alternative to rev query parameter. */
+    /** Header parameter for a conditional HTTP request matching an ETag. */
     ifMatch?: string;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
      *  response code immediately.
@@ -10164,9 +10137,9 @@ namespace CloudantV1 {
     docId: string;
     /** Path parameter to specify the attachment name. */
     attachmentName: string;
-    /** Header parameter to specify the document revision. Alternative to rev query parameter. */
+    /** Header parameter for a conditional HTTP request matching an ETag. */
     ifMatch?: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     /** Query parameter to specify a document revision. */
     rev?: string;
@@ -10181,7 +10154,7 @@ namespace CloudantV1 {
     docId: string;
     /** Path parameter to specify the attachment name. */
     attachmentName: string;
-    /** Header parameter to specify the document revision. Alternative to rev query parameter. */
+    /** Header parameter for a conditional HTTP request matching an ETag. */
     ifMatch?: string;
     /** Query parameter to specify a document revision. */
     rev?: string;
@@ -10210,9 +10183,9 @@ namespace CloudantV1 {
     attachmentName: string;
     /** The type of the response:  or *_/_*. */
     accept?: string;
-    /** Header parameter to specify the document revision. Alternative to rev query parameter. */
+    /** Header parameter for a conditional HTTP request matching an ETag. */
     ifMatch?: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     /** Header parameter to specify the byte range for a request. This allows the implementation of resumable
      *  downloads and skippable streams. This is available for all attachments inside CouchDB.
@@ -10235,7 +10208,7 @@ namespace CloudantV1 {
     attachment: NodeJS.ReadableStream | Buffer;
     /** Content-Type of the attachment. */
     contentType: string;
-    /** Header parameter to specify the document revision. Alternative to rev query parameter. */
+    /** Header parameter for a conditional HTTP request matching an ETag. */
     ifMatch?: string;
     /** Query parameter to specify a document revision. */
     rev?: string;
@@ -10248,7 +10221,7 @@ namespace CloudantV1 {
     db: string;
     /** Path parameter to specify the document ID. */
     docId: string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     headers?: OutgoingHttpHeaders;
   }
@@ -10282,7 +10255,7 @@ namespace CloudantV1 {
     docId: string;
     /** The type of the response: application/json, multipart/mixed, multipart/related, or application/octet-stream. */
     accept?: GetLocalDocumentConstants.Accept | string;
-    /** Header parameter to specify a double quoted document revision token for cache control. */
+    /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
     /** Query parameter to specify whether to include attachments bodies in a response. */
     attachments?: boolean;
@@ -11055,7 +11028,7 @@ namespace CloudantV1 {
   /** Schema for the result of an all documents operation. */
   export class AllDocsResult {
     /** Number of total rows. */
-    totalRows: number | null;
+    totalRows: number;
 
     /** List of doc results. */
     rows: DocsResultRow[];
@@ -13127,6 +13100,9 @@ namespace CloudantV1 {
     /** The reason the error occurred (if available). */
     reason?: string;
 
+    /** An internal error reference (if available). */
+    ref?: number;
+
     /** Schema for a document. */
     doc?: Document;
 
@@ -13152,6 +13128,9 @@ namespace CloudantV1 {
       }
       if (obj.reason !== undefined) {
         copy.reason = obj.reason;
+      }
+      if (obj.ref !== undefined) {
+        copy.ref = obj.ref;
       }
       if (obj.doc !== undefined) {
         copy.doc = Document.serialize(obj.doc);
@@ -13182,6 +13161,9 @@ namespace CloudantV1 {
       if (obj.reason !== undefined) {
         copy.reason = obj.reason;
       }
+      if (obj.ref !== undefined) {
+        copy.ref = obj.ref;
+      }
       if (obj.doc !== undefined) {
         copy.doc = Document.deserialize(obj.doc);
       }
@@ -13202,6 +13184,7 @@ namespace CloudantV1 {
         caused_by?: string;
         error?: string;
         reason?: string;
+        ref?: number;
         doc?: Document.Transport;
         id?: string;
         key: string;
@@ -13422,6 +13405,9 @@ namespace CloudantV1 {
     /** The reason the error occurred (if available). */
     reason?: string;
 
+    /** An internal error reference (if available). */
+    ref?: number;
+
     static serialize(obj): DocumentResult.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
         return obj;
@@ -13444,6 +13430,9 @@ namespace CloudantV1 {
       }
       if (obj.reason !== undefined) {
         copy.reason = obj.reason;
+      }
+      if (obj.ref !== undefined) {
+        copy.ref = obj.ref;
       }
       return copy as unknown as DocumentResult.Transport;
     }
@@ -13471,6 +13460,9 @@ namespace CloudantV1 {
       if (obj.reason !== undefined) {
         copy.reason = obj.reason;
       }
+      if (obj.ref !== undefined) {
+        copy.ref = obj.ref;
+      }
       return copy as unknown as DocumentResult;
     }
   }
@@ -13482,6 +13474,7 @@ namespace CloudantV1 {
         caused_by?: string;
         error?: string;
         reason?: string;
+        ref?: number;
       }
   }
 
@@ -13683,7 +13676,7 @@ namespace CloudantV1 {
     opts: ExplainResultOpts;
 
     /** Schema for any JSON type. */
-    partitioned?: any | null;
+    partitioned?: any;
 
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
      *  provides an expression to evaluate with the field content or other data.
@@ -13829,13 +13822,13 @@ namespace CloudantV1 {
   /** Arguments passed to the underlying view. */
   export class ExplainResultMrArgs {
     /** Schema for any JSON type. */
-    conflicts?: any | null;
+    conflicts?: any;
 
     /** Direction parameter passed to the underlying view. */
     direction?: string;
 
     /** Schema for any JSON type. */
-    endKey?: any | null;
+    endKey?: any;
 
     /** A parameter that specifies whether to include the full content of the documents in the response in the
      *  underlying view.
@@ -13856,10 +13849,10 @@ namespace CloudantV1 {
     stable?: boolean;
 
     /** Schema for any JSON type. */
-    startKey?: any | null;
+    startKey?: any;
 
     /** Schema for any JSON type. */
-    update?: any | null;
+    update?: any;
 
     /** The type of the underlying view. */
     viewType?: ExplainResultMrArgs.Constants.ViewType | string;
@@ -13993,7 +13986,7 @@ namespace CloudantV1 {
     skip: number;
 
     /** Schema for any JSON type. */
-    sort: any | null;
+    sort: any;
 
     /** Stable used in the request query. */
     stable: boolean;
@@ -14733,7 +14726,7 @@ namespace CloudantV1 {
   /** Schema for information about the indexes in a database. */
   export class IndexesInformation {
     /** Number of total rows. */
-    totalRows: number | null;
+    totalRows: number;
 
     /** Indexes. */
     indexes: IndexInformation[];
@@ -15976,7 +15969,7 @@ namespace CloudantV1 {
   /** Schema for a listing of replication scheduler documents. */
   export class SchedulerDocsResult {
     /** Number of total rows. */
-    totalRows: number | null;
+    totalRows: number;
 
     /** Array of replication scheduler doc objects. */
     docs: SchedulerDocument[];
@@ -16506,7 +16499,7 @@ namespace CloudantV1 {
   /** Schema for a listing of replication scheduler jobs. */
   export class SchedulerJobsResult {
     /** Number of total rows. */
-    totalRows: number | null;
+    totalRows: number;
 
     /** Array of replication job objects. */
     jobs: SchedulerJob[];
@@ -16770,7 +16763,7 @@ namespace CloudantV1 {
   /** Schema for the result of a query search operation. */
   export class SearchResult {
     /** Number of total rows. */
-    totalRows: number | null;
+    totalRows: number;
 
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
@@ -16865,7 +16858,7 @@ namespace CloudantV1 {
   /** Schema for the result of a query search operation. */
   export class SearchResultProperties {
     /** Number of total rows. */
-    totalRows: number | null;
+    totalRows: number;
 
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
@@ -17511,7 +17504,7 @@ namespace CloudantV1 {
   /** Schema for information about the up state of the server. */
   export class UpInformation {
     /** seeds. */
-    seeds: JsonObject;
+    seeds?: JsonObject;
 
     /** status. */
     status: UpInformation.Constants.Status | string;
@@ -17554,7 +17547,7 @@ namespace CloudantV1 {
       }
     }
       export interface Transport {
-        seeds: JsonObject;
+        seeds?: JsonObject;
         status: string;
       }
   }
@@ -17784,7 +17777,7 @@ namespace CloudantV1 {
     updateSeq?: boolean;
 
     /** Schema for any JSON type. */
-    endKey?: any | null;
+    endKey?: any;
 
     /** Schema for a document ID. */
     endKeyDocId?: string;
@@ -17802,7 +17795,7 @@ namespace CloudantV1 {
     groupLevel?: number;
 
     /** Schema for any JSON type. */
-    key?: any | null;
+    key?: any;
 
     /** Parameter to specify returning only documents that match any of the specified keys. A JSON array of keys
      *  that match the key type emitted by the view function.
@@ -17824,7 +17817,7 @@ namespace CloudantV1 {
     stable?: boolean;
 
     /** Schema for any JSON type. */
-    startKey?: any | null;
+    startKey?: any;
 
     /** Schema for a document ID. */
     startKeyDocId?: string;
@@ -18009,7 +18002,7 @@ namespace CloudantV1 {
   /** Schema for the result of a query view operation. */
   export class ViewResult {
     /** Number of total rows. */
-    totalRows?: number | null;
+    totalRows?: number;
 
     /** Current update sequence for the database. */
     updateSeq?: string;
@@ -18070,6 +18063,9 @@ namespace CloudantV1 {
     /** The reason the error occurred (if available). */
     reason?: string;
 
+    /** An internal error reference (if available). */
+    ref?: number;
+
     /** Schema for a document. */
     doc?: Document;
 
@@ -18077,10 +18073,10 @@ namespace CloudantV1 {
     id?: string;
 
     /** Schema for any JSON type. */
-    key: any | null;
+    key: any;
 
     /** Schema for any JSON type. */
-    value: any | null;
+    value: any;
 
     static serialize(obj): ViewResultRow.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
@@ -18095,6 +18091,9 @@ namespace CloudantV1 {
       }
       if (obj.reason !== undefined) {
         copy.reason = obj.reason;
+      }
+      if (obj.ref !== undefined) {
+        copy.ref = obj.ref;
       }
       if (obj.doc !== undefined) {
         copy.doc = Document.serialize(obj.doc);
@@ -18125,6 +18124,9 @@ namespace CloudantV1 {
       if (obj.reason !== undefined) {
         copy.reason = obj.reason;
       }
+      if (obj.ref !== undefined) {
+        copy.ref = obj.ref;
+      }
       if (obj.doc !== undefined) {
         copy.doc = Document.deserialize(obj.doc);
       }
@@ -18145,6 +18147,7 @@ namespace CloudantV1 {
         caused_by?: string;
         error?: string;
         reason?: string;
+        ref?: number;
         doc?: Document.Transport;
         id?: string;
         key: any;
