@@ -12164,6 +12164,11 @@ namespace CloudantV1 {
     /** The engine used for the database. */
     engine?: string;
 
+    /** An opaque string to detect whether a database has been recreated. The field name is for compatibility with
+     *  old replicator versions. Do not use the value to infer timing infromation. Typically only used by replicators.
+     */
+    instanceStartTime: string;
+
     /** Schema for database properties. */
     props: DatabaseInformationProps;
 
@@ -12212,6 +12217,9 @@ namespace CloudantV1 {
       }
       if (obj.engine !== undefined) {
         copy.engine = obj.engine;
+      }
+      if (obj.instanceStartTime !== undefined) {
+        copy.instance_start_time = obj.instanceStartTime;
       }
       if (obj.props !== undefined) {
         copy.props = DatabaseInformationProps.serialize(obj.props);
@@ -12263,6 +12271,9 @@ namespace CloudantV1 {
       if (obj.engine !== undefined) {
         copy.engine = obj.engine;
       }
+      if (obj.instance_start_time !== undefined) {
+        copy.instanceStartTime = obj.instance_start_time;
+      }
       if (obj.props !== undefined) {
         copy.props = DatabaseInformationProps.deserialize(obj.props);
       }
@@ -12292,6 +12303,7 @@ namespace CloudantV1 {
         doc_count: number;
         doc_del_count: number;
         engine?: string;
+        instance_start_time: string;
         props: DatabaseInformationProps.Transport;
         sizes: ContentInformationSizes.Transport;
         update_seq: string;
