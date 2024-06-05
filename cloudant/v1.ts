@@ -11336,7 +11336,7 @@ namespace CloudantV1 {
      *  `attachments=true` or `atts_since`. Note that when used with a view or changes feed `include_docs` must also be
      *  `true`.
      */
-    data?: string;
+    data?: Buffer;
 
     /** Content hash digest. It starts with prefix which announce hash type (e.g. `md5-`) and continues with
      *  Base64-encoded hash digest.
@@ -11376,7 +11376,7 @@ namespace CloudantV1 {
         copy.content_type = obj.contentType;
       }
       if (obj.data !== undefined) {
-        copy.data = obj.data;
+        copy.data = obj.data !== null ? obj.data.toString('base64') : null;
       }
       if (obj.digest !== undefined) {
         copy.digest = obj.digest;
@@ -11411,7 +11411,7 @@ namespace CloudantV1 {
         copy.contentType = obj.content_type;
       }
       if (obj.data !== undefined) {
-        copy.data = obj.data;
+        copy.data = obj.data !== null ? Buffer.from(obj.data, 'base64') : null;
       }
       if (obj.digest !== undefined) {
         copy.digest = obj.digest;
