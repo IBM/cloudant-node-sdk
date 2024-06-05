@@ -627,7 +627,7 @@ describe('CloudantV1_integration', () => {
     // Attachment
     const attachmentModel = {
       contentType: 'testString',
-      data: 'VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=',
+      data: Buffer.from('VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=', 'base64'),
       digest: 'testString',
       encodedLength: 0,
       encoding: 'testString',
@@ -1454,7 +1454,7 @@ describe('CloudantV1_integration', () => {
     // Attachment
     const attachmentModel = {
       contentType: 'testString',
-      data: 'VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=',
+      data: Buffer.from('VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=', 'base64'),
       digest: 'testString',
       encodedLength: 0,
       encoding: 'testString',
