@@ -31,7 +31,7 @@ const {
 
 const cloudantServiceOptions = {
   authenticator: new NoAuthAuthenticator(),
-  url: 'http://localhost:5984',
+  url: 'https://~replace-with-cloudant-host~.cloudantnosqldb.appdomain.cloud',
 };
 
 const cloudantService = new CloudantV1(cloudantServiceOptions);
