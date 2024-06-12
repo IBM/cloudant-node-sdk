@@ -41,7 +41,7 @@ import getAuthenticatorFromEnvCloudantExtension from '../lib/getAuthenticatorFro
 class CloudantV1 extends CloudantBaseService {
   static _logger: SDKLogger = getNewLogger('CloudantV1');
 
-  static DEFAULT_SERVICE_URL: string = 'http://localhost:5984';
+  static DEFAULT_SERVICE_URL: string = 'https://~replace-with-cloudant-host~.cloudantnosqldb.appdomain.cloud';
 
   static DEFAULT_SERVICE_NAME: string = 'cloudant';
 
