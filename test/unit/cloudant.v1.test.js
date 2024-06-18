@@ -18,6 +18,7 @@
 const sdkCorePackage = require('ibm-cloud-sdk-core');
 
 const { BaseService, NoAuthAuthenticator, unitTestUtils } = sdkCorePackage;
+/* eslint-disable import/order */
 const CloudantV1 = require('../../dist/cloudant/v1');
 
 const {
