@@ -17,7 +17,7 @@
 // need to import the whole package to mock getAuthenticatorFromEnvironment
 const sdkCorePackage = require('ibm-cloud-sdk-core');
 
-const { BaseService, NoAuthAuthenticator, unitTestUtils } = sdkCorePackage;
+const { BaseService, NoAuthAuthenticator } = sdkCorePackage;
 /* eslint-disable import/order */
 const CloudantV1 = require('../../dist/cloudant/v1');
 
@@ -28,7 +28,7 @@ const {
   expectToBePromise,
   checkUserHeader,
   checkForSuccessfulExecution,
-} = unitTestUtils;
+} = require('@ibm-cloud/sdk-test-utilities');
 
 const cloudantServiceOptions = {
   authenticator: new NoAuthAuthenticator(),
