@@ -1534,6 +1534,7 @@ describe('CloudantV1_integration', () => {
       docIds: ['badger', 'lemur', 'llama'],
       filter: 'ddoc/my_filter',
       httpConnections: 10,
+      owner: 'testString',
       queryParams: { 'key1': 'testString' },
       retriesPerRequest: 3,
       selector: { _id: { '$regex': 'docid' } },
