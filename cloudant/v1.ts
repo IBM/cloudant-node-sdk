@@ -4762,9 +4762,9 @@ class CloudantV1 extends CloudantBaseService {
   /**
    * Retrieve information about all indexes.
    *
-   * When you make a GET request to `/db/_index`, you get a list of all indexes used by Cloudant Query in the database,
-   * including the primary index. In addition to the information available through this API, indexes are also stored in
-   * the `indexes` property of design documents.
+   * When you make a GET request to `/db/_index`, you get a list of all the indexes using `"language":"query"` in the
+   * database and the primary index. In addition to the information available through this API, the indexes are stored
+   * in the `indexes` property of their respective design documents.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -15460,6 +15460,11 @@ namespace CloudantV1 {
     /** Maximum number of HTTP connections per replication. */
     httpConnections?: number;
 
+    /** The replication document owner. The server sets an appropriate value if the field is unset when writing a
+     *  replication document. Only administrators can modify the value to an owner other than themselves.
+     */
+    owner?: string;
+
     /** Schema for a map of string key value pairs, such as query parameters. */
     queryParams?: JsonObject;
 
@@ -15617,6 +15622,9 @@ namespace CloudantV1 {
       if (obj.httpConnections !== undefined) {
         copy.http_connections = obj.httpConnections;
       }
+      if (obj.owner !== undefined) {
+        copy.owner = obj.owner;
+      }
       if (obj.queryParams !== undefined) {
         copy.query_params = obj.queryParams;
       }
@@ -15681,6 +15689,7 @@ namespace CloudantV1 {
         'docIds',
         'filter',
         'httpConnections',
+        'owner',
         'queryParams',
         'retriesPerRequest',
         'selector',
@@ -15764,6 +15773,9 @@ namespace CloudantV1 {
       if (obj.http_connections !== undefined) {
         copy.httpConnections = obj.http_connections;
       }
+      if (obj.owner !== undefined) {
+        copy.owner = obj.owner;
+      }
       if (obj.query_params !== undefined) {
         copy.queryParams = obj.query_params;
       }
@@ -15828,6 +15840,7 @@ namespace CloudantV1 {
         'doc_ids',
         'filter',
         'http_connections',
+        'owner',
         'query_params',
         'retries_per_request',
         'selector',
@@ -15872,6 +15885,7 @@ namespace CloudantV1 {
         doc_ids?: string[];
         filter?: string;
         http_connections?: number;
+        owner?: string;
         query_params?: JsonObject;
         retries_per_request?: number;
         selector?: JsonObject;
@@ -17262,10 +17276,13 @@ namespace CloudantV1 {
     name: string;
 
     /** Vendor variant. */
-    variant?: string;
+    variant: string;
 
     /** Vendor version. */
-    version?: string;
+    version: string;
+
+    /** ServerVendor accepts additional properties. */
+    [propName: string]: any;
 
     static serialize(obj): ServerVendor.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
@@ -17281,6 +17298,16 @@ namespace CloudantV1 {
       if (obj.version !== undefined) {
         copy.version = obj.version;
       }
+      let defaultProperties = [
+        'name',
+        'variant',
+        'version',
+      ];
+      Object.keys(obj).forEach(key => {
+        if (!defaultProperties.includes(key)) {
+          copy[key] = obj[key];
+        }
+      });
       return copy as unknown as ServerVendor.Transport;
     }
 
@@ -17298,14 +17325,26 @@ namespace CloudantV1 {
       if (obj.version !== undefined) {
         copy.version = obj.version;
       }
+      let defaultProperties = [
+        'name',
+        'variant',
+        'version',
+      ];
+      Object.keys(obj).forEach(key => {
+        if (!defaultProperties.includes(key)) {
+          copy[key] = obj[key];
+        }
+      });
       return copy as unknown as ServerVendor;
     }
   }
   export namespace ServerVendor {
       export interface Transport {
         name: string;
-        variant?: string;
-        version?: string;
+        variant: string;
+        version: string;
+        /** ServerVendor.ServerVendor.Transport accepts additional properties. */
+        [propName: string]: any;
       }
   }
 
