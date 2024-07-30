@@ -10383,7 +10383,9 @@ namespace CloudantV1 {
    * model interfaces
    ************************/
 
-  /** Schema for information about a running task. */
+  /**
+   * Schema for information about a running task.
+   */
   export class ActiveTask {
     /** The total count of attempted doc revisions fetched with `_bulk_get`. Available for `replication` type tasks. */
     bulkGetAttempts?: number;
@@ -10789,7 +10791,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for Activity Tracker events. */
+  /**
+   * Schema for Activity Tracker events.
+   */
   export class ActivityTrackerEvents {
     /** An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
      *  "management" is a required element of this array.
@@ -10831,7 +10835,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the result of an all documents queries operation. */
+  /**
+   * Schema for the result of an all documents queries operation.
+   */
   export class AllDocsQueriesResult {
     /** An array of result objects - one for each query. Each result object contains the same fields as the response
      *  to a regular `/_all_docs` request.
@@ -10866,7 +10872,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for an all documents query operation. */
+  /**
+   * Schema for an all documents query operation.
+   */
   export class AllDocsQuery {
     /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
      *  attachment is compressed.
@@ -11025,7 +11033,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the result of an all documents operation. */
+  /**
+   * Schema for the result of an all documents operation.
+   */
   export class AllDocsResult {
     /** Number of total rows. */
     totalRows: number;
@@ -11078,7 +11088,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a full text search analyzer. */
+  /**
+   * Schema for a full text search analyzer.
+   */
   export class Analyzer {
     /** Schema for the name of the Apache Lucene analyzer to use for text indexing. The default value varies
      *  depending on the analyzer usage:
@@ -11171,7 +11183,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a search analyzer configuration. */
+  /**
+   * Schema for a search analyzer configuration.
+   */
   export class AnalyzerConfiguration {
     /** Schema for the name of the Apache Lucene analyzer to use for text indexing. The default value varies
      *  depending on the analyzer usage:
@@ -11274,7 +11288,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for api keys. */
+  /**
+   * Schema for api keys.
+   */
   export class ApiKeysResult {
     /** ok. */
     ok: boolean;
@@ -11327,7 +11343,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for an attachment. */
+  /**
+   * Schema for an attachment.
+   */
   export class Attachment {
     /** Attachment MIME type. */
     contentType?: string;
@@ -11451,7 +11469,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for submitting documents for bulk modifications. */
+  /**
+   * Schema for submitting documents for bulk modifications.
+   */
   export class BulkDocs {
     /** Array of documents. */
     docs: Document[];
@@ -11494,7 +11514,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a document item in a bulk get query. */
+  /**
+   * Schema for a document item in a bulk get query.
+   */
   export class BulkGetQueryDocument {
     /** Includes attachments only since specified revisions. */
     attsSince?: string[];
@@ -11547,7 +11569,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the results object of a bulk get operation. */
+  /**
+   * Schema for the results object of a bulk get operation.
+   */
   export class BulkGetResult {
     /** Results. */
     results: BulkGetResultItem[];
@@ -11580,7 +11604,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for BulkGetResult object containing a successfully retrieved document or error information. */
+  /**
+   * Schema for BulkGetResult object containing a successfully retrieved document or error information.
+   */
   export class BulkGetResultDocument {
     /** Schema for the result of a document modification. */
     error?: DocumentResult;
@@ -11623,7 +11649,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the document revisions information from a bulk get operation. */
+  /**
+   * Schema for the document revisions information from a bulk get operation.
+   */
   export class BulkGetResultItem {
     /** Array of document revisions or error information. */
     docs: BulkGetResultDocument[];
@@ -11666,7 +11694,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about the currently provisioned and target throughput capacity. */
+  /**
+   * Schema for information about the currently provisioned and target throughput capacity.
+   */
   export class CapacityThroughputInformation {
     /** Detailed information about provisioned throughput capacity. */
     current: CapacityThroughputInformationCurrent;
@@ -11709,7 +11739,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Detailed information about provisioned throughput capacity. */
+  /**
+   * Detailed information about provisioned throughput capacity.
+   */
   export class CapacityThroughputInformationCurrent {
     /** Schema for detailed information about throughput capacity with breakdown by specific throughput requests
      *  classes.
@@ -11744,7 +11776,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Detailed information about target throughput capacity. */
+  /**
+   * Detailed information about target throughput capacity.
+   */
   export class CapacityThroughputInformationTarget {
     /** Schema for detailed information about throughput capacity with breakdown by specific throughput requests
      *  classes.
@@ -11779,7 +11813,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a document leaf with single field rev. */
+  /**
+   * Schema for a document leaf with single field rev.
+   */
   export class Change {
     /** Schema for a document revision identifier. */
     rev: string;
@@ -11812,7 +11848,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for normal changes feed result. */
+  /**
+   * Schema for normal changes feed result.
+   */
   export class ChangesResult {
     /** last_seq. */
     lastSeq: string;
@@ -11865,7 +11903,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for an item in the changes results array. */
+  /**
+   * Schema for an item in the changes results array.
+   */
   export class ChangesResultItem {
     /** List of document's leaves with single field rev. */
     changes: Change[];
@@ -11938,7 +11978,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for size information of content. */
+  /**
+   * Schema for size information of content.
+   */
   export class ContentInformationSizes {
     /** The active size of the content, in bytes. */
     active: number;
@@ -11991,7 +12033,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about the CORS configuration. */
+  /**
+   * Schema for information about the CORS configuration.
+   */
   export class CorsInformation {
     /** Boolean value to allow authentication credentials. If set to true, browser requests must be done by using
      *  withCredentials = true.
@@ -12049,7 +12093,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about current consumption of a provisioned throughput capacity. */
+  /**
+   * Schema for information about current consumption of a provisioned throughput capacity.
+   */
   export class CurrentThroughputInformation {
     /** Detailed information about current consumption. */
     throughput: CurrentThroughputInformationThroughput;
@@ -12082,7 +12128,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Detailed information about current consumption. */
+  /**
+   * Detailed information about current consumption.
+   */
   export class CurrentThroughputInformationThroughput {
     /** Number of global queries conducted against the instance for a given second. */
     query: number;
@@ -12135,7 +12183,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about a database. */
+  /**
+   * Schema for information about a database.
+   */
   export class DatabaseInformation {
     /** Schema for database cluster information. */
     cluster: DatabaseInformationCluster;
@@ -12312,7 +12362,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for database cluster information. */
+  /**
+   * Schema for database cluster information.
+   */
   export class DatabaseInformationCluster {
     /** Schema for the number of replicas of a database in a cluster. The cluster is using the default value and it
      *  cannot be changed by the user.
@@ -12377,7 +12429,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for database properties. */
+  /**
+   * Schema for database properties.
+   */
   export class DatabaseInformationProps {
     /** The value is `true` for a partitioned database. */
     partitioned?: boolean;
@@ -12410,7 +12464,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a database change event. */
+  /**
+   * Schema for a database change event.
+   */
   export class DbEvent {
     /** Database name. */
     dbName: string;
@@ -12471,7 +12527,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for database updates. */
+  /**
+   * Schema for database updates.
+   */
   export class DbUpdates {
     /** Last sequence number. */
     lastSeq: string;
@@ -12514,7 +12572,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for database information keyed by database name. */
+  /**
+   * Schema for database information keyed by database name.
+   */
   export class DbsInfoResult {
     /** The name of the error. */
     error?: string;
@@ -12567,7 +12627,11 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a design document. */
+  /**
+   * Schema for a design document.
+   *
+   * This type supports additional properties of type any.
+   */
   export class DesignDocument {
     /** Schema for a map of attachment name to attachment metadata. */
     _attachments?: {[key: string]: Attachment};
@@ -12683,7 +12747,10 @@ namespace CloudantV1 {
     /** Schema for design document views. */
     views?: {[key: string]: DesignDocumentViewsMapReduce};
 
-    /** DesignDocument accepts additional properties. */
+
+    /**
+     * DesignDocument accepts additional properties of type any.
+     */
     [propName: string]: any;
 
     static serialize(obj): DesignDocument.Transport {
@@ -12862,12 +12929,14 @@ namespace CloudantV1 {
         options?: DesignDocumentOptions.Transport;
         validate_doc_update?: string;
         views?: {[key: string]: DesignDocumentViewsMapReduce.Transport};
-        /** DesignDocument.DesignDocument.Transport accepts additional properties. */
+        /** DesignDocument.DesignDocument.Transport accepts additional properties of type any. */
         [propName: string]: any;
       }
   }
 
-  /** Schema for information about a design document. */
+  /**
+   * Schema for information about a design document.
+   */
   export class DesignDocumentInformation {
     /** name. */
     name: string;
@@ -12910,7 +12979,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for design document options. */
+  /**
+   * Schema for design document options.
+   */
   export class DesignDocumentOptions {
     /** Whether this design document describes partitioned or global indexes. */
     partitioned?: boolean;
@@ -12943,7 +13014,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** View index information. */
+  /**
+   * View index information.
+   */
   export class DesignDocumentViewIndex {
     /** List of collator versions. If there are multiple entries this implies a libicu upgrade has occurred but
      *  compaction has not run yet.
@@ -13058,7 +13131,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for view functions definition. */
+  /**
+   * Schema for view functions definition.
+   */
   export class DesignDocumentViewsMapReduce {
     /** JavaScript map function as a string. */
     map: string;
@@ -13101,7 +13176,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a row of document information in a DocsResult. */
+  /**
+   * Schema for a row of document information in a DocsResult.
+   */
   export class DocsResultRow {
     /** The cause of the error (if available). */
     causedBy?: string;
@@ -13204,7 +13281,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Value of built-in `/_all_docs` style view. */
+  /**
+   * Value of built-in `/_all_docs` style view.
+   */
   export class DocsResultRowValue {
     /** If `true` then the document is deleted. Not present for undeleted documents. */
     deleted?: boolean;
@@ -13247,7 +13326,11 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a document. */
+  /**
+   * Schema for a document.
+   *
+   * This type supports additional properties of type any.
+   */
   export class Document {
     /** Schema for a map of attachment name to attachment metadata. */
     _attachments?: {[key: string]: Attachment};
@@ -13276,7 +13359,10 @@ namespace CloudantV1 {
     /** Schema for a list of objects with information about local revisions and their status. */
     _revs_info?: DocumentRevisionStatus[];
 
-    /** Document accepts additional properties. */
+
+    /**
+     * Document accepts additional properties of type any.
+     */
     [propName: string]: any;
 
     static serialize(obj): Document.Transport {
@@ -13392,12 +13478,14 @@ namespace CloudantV1 {
         _rev?: string;
         _revisions?: Revisions.Transport;
         _revs_info?: DocumentRevisionStatus[];
-        /** Document.Document.Transport accepts additional properties. */
+        /** Document.Document.Transport accepts additional properties of type any. */
         [propName: string]: any;
       }
   }
 
-  /** Schema for the result of a document modification. */
+  /**
+   * Schema for the result of a document modification.
+   */
   export class DocumentResult {
     /** Schema for a document ID. */
     id: string;
@@ -13490,7 +13578,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about revisions and their status. */
+  /**
+   * Schema for information about revisions and their status.
+   */
   export class DocumentRevisionStatus {
     /** Schema for a document revision identifier. */
     rev: string;
@@ -13543,7 +13633,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for document shard information. */
+  /**
+   * Schema for document shard information.
+   */
   export class DocumentShardInfo {
     /** List of nodes serving a replica of the shard. */
     nodes: string[];
@@ -13586,7 +13678,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for find query execution statistics. */
+  /**
+   * Schema for find query execution statistics.
+   */
   export class ExecutionStats {
     /** Time to execute the query. */
     executionTimeMs: number;
@@ -13659,7 +13753,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about the index used for a find query. */
+  /**
+   * Schema for information about the index used for a find query.
+   */
   export class ExplainResult {
     /** When `true`, the query is answered using the index only and no documents are fetched. */
     covering: boolean;
@@ -13831,7 +13927,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Arguments passed to the underlying view. */
+  /**
+   * Arguments passed to the underlying view.
+   */
   export class ExplainResultMrArgs {
     /** Schema for any JSON type. */
     conflicts?: any;
@@ -13967,7 +14065,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Options used for the request. */
+  /**
+   * Options used for the request.
+   */
   export class ExplainResultOpts {
     /** Opaque bookmark token used when paginating results. */
     bookmark: string;
@@ -14124,7 +14224,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the result of a query find operation. */
+  /**
+   * Schema for the result of a query find operation.
+   */
   export class FindResult {
     /** Opaque bookmark token used when paginating results. */
     bookmark: string;
@@ -14187,7 +14289,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for detailed explanation of why the specific index was excluded by the query planner. */
+  /**
+   * Schema for detailed explanation of why the specific index was excluded by the query planner.
+   */
   export class IndexAnalysis {
     /** When `true`, the query is answered using the index only and no documents are fetched. */
     covering: boolean | null;
@@ -14250,7 +14354,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** A reason for index's exclusion. */
+  /**
+   * A reason for index's exclusion.
+   */
   export class IndexAnalysisExclusionReason {
     /** A reason code for index's exclusion.
      *
@@ -14317,7 +14423,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for an index that was not chosen for serving the query with the reason for the exclusion. */
+  /**
+   * Schema for an index that was not chosen for serving the query with the reason for the exclusion.
+   */
   export class IndexCandidate {
     /** Schema for detailed explanation of why the specific index was excluded by the query planner. */
     analysis: IndexAnalysis;
@@ -14360,7 +14468,12 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration properties that do not apply to `json` indexes, these are: * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all document fields and what analyzer to use for that purpose. */
+  /**
+   * Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
+   * properties that do not apply to `json` indexes, these are:
+   * * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
+   * document fields and what analyzer to use for that purpose.
+   */
   export class IndexDefinition {
     /** Schema for a full text search analyzer. */
     defaultAnalyzer?: Analyzer;
@@ -14473,7 +14586,11 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for indexed fields for use with declarative JSON query. */
+  /**
+   * Schema for indexed fields for use with declarative JSON query.
+   *
+   * This type supports additional properties of type string. Schema for sort direction.
+   */
   export class IndexField {
     /** Name of the field. */
     name?: string;
@@ -14481,7 +14598,10 @@ namespace CloudantV1 {
     /** The type of the named field. */
     type?: IndexField.Constants.Type | string;
 
-    /** IndexField accepts additional properties. */
+
+    /**
+     * IndexField accepts additional properties of type string. Schema for sort direction.
+     */
     [propName: string]: any;
 
     static serialize(obj): IndexField.Transport {
@@ -14542,12 +14662,14 @@ namespace CloudantV1 {
       export interface Transport {
         name?: string;
         type?: string;
-        /** IndexField.IndexField.Transport accepts additional properties. */
+        /** IndexField.IndexField.Transport accepts additional properties of type string. */
         [propName: string]: any;
       }
   }
 
-  /** Schema for information about an index. */
+  /**
+   * Schema for information about an index.
+   */
   export class IndexInformation {
     /** Design document ID including a `_design/` prefix. */
     ddoc: string | null;
@@ -14632,7 +14754,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the result of creating an index. */
+  /**
+   * Schema for the result of creating an index.
+   */
   export class IndexResult {
     /** Id of the design document the index was created in. */
     id: string;
@@ -14692,7 +14816,10 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the text index default field configuration. The default field is used to index the text of all fields within a document for use with the `$text` operator. */
+  /**
+   * Schema for the text index default field configuration. The default field is used to index the text of all fields
+   * within a document for use with the `$text` operator.
+   */
   export class IndexTextOperatorDefaultField {
     /** Schema for a full text search analyzer. */
     analyzer?: Analyzer;
@@ -14735,7 +14862,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about the indexes in a database. */
+  /**
+   * Schema for information about the indexes in a database.
+   */
   export class IndexesInformation {
     /** Number of total rows. */
     totalRows: number;
@@ -14778,7 +14907,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about known nodes and cluster membership. */
+  /**
+   * Schema for information about known nodes and cluster membership.
+   */
   export class MembershipInformation {
     /** List of nodes this node knows about, including the ones that are part of the cluster. */
     allNodes: string[];
@@ -14821,7 +14952,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for an OK result. */
+  /**
+   * Schema for an OK result.
+   */
   export class Ok {
     /** ok. */
     ok?: boolean;
@@ -14854,7 +14987,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about a database partition. */
+  /**
+   * Schema for information about a database partition.
+   */
   export class PartitionInformation {
     /** The name of the database. */
     dbName: string;
@@ -14937,7 +15072,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about the partition index count and limit in a database. */
+  /**
+   * Schema for information about the partition index count and limit in a database.
+   */
   export class PartitionInformationIndexes {
     /** Total count of the partitioned indexes. */
     count?: number;
@@ -14990,7 +15127,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** The count breakdown of partitioned indexes. */
+  /**
+   * The count breakdown of partitioned indexes.
+   */
   export class PartitionInformationIndexesIndexes {
     /** Number of partitioned search indexes. */
     search?: number;
@@ -15033,7 +15172,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** The size of active and external data, in bytes. */
+  /**
+   * The size of active and external data, in bytes.
+   */
   export class PartitionInformationSizes {
     /** The size of live data inside the database, in bytes. */
     active?: number;
@@ -15076,7 +15217,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Number of partitioned indexes by type. */
+  /**
+   * Number of partitioned indexes by type.
+   */
   export class PartitionedIndexesDetailedInformation {
     /** Number of partitioned indexes of search type. */
     search?: number;
@@ -15119,7 +15262,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Information about database's partitioned indexes. */
+  /**
+   * Information about database's partitioned indexes.
+   */
   export class PartitionedIndexesInformation {
     /** Total number of partitioned indexes in the database. */
     count?: number;
@@ -15172,7 +15317,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Request parameters to use during target database creation. */
+  /**
+   * Request parameters to use during target database creation.
+   */
   export class ReplicationCreateTargetParameters {
     /** Schema for the number of replicas of a database in a cluster. The cluster is using the default value and it
      *  cannot be changed by the user.
@@ -15227,7 +15374,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a replication source or target database. */
+  /**
+   * Schema for a replication source or target database.
+   */
   export class ReplicationDatabase {
     /** Schema for replication source or target database authentication. */
     auth?: ReplicationDatabaseAuth;
@@ -15280,7 +15429,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for replication source or target database authentication. */
+  /**
+   * Schema for replication source or target database authentication.
+   */
   export class ReplicationDatabaseAuth {
     /** Schema for basic authentication of replication source or target database. */
     basic?: ReplicationDatabaseAuthBasic;
@@ -15323,7 +15474,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for basic authentication of replication source or target database. */
+  /**
+   * Schema for basic authentication of replication source or target database.
+   */
   export class ReplicationDatabaseAuthBasic {
     /** The password associated with the username. */
     password: string;
@@ -15366,7 +15519,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for an IAM API key for replication database authentication. */
+  /**
+   * Schema for an IAM API key for replication database authentication.
+   */
   export class ReplicationDatabaseAuthIam {
     /** IAM API key. */
     apiKey: string;
@@ -15399,7 +15554,11 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a replication document. Note that `selector`, `doc_ids`, and `filter` are incompatible with each other. */
+  /**
+   * Schema for a replication document. Note that `selector`, `doc_ids`, and `filter` are incompatible with each other.
+   *
+   * This type supports additional properties of type any.
+   */
   export class ReplicationDocument {
     /** Schema for a map of attachment name to attachment metadata. */
     _attachments?: {[key: string]: Attachment};
@@ -15560,7 +15719,10 @@ namespace CloudantV1 {
      */
     workerProcesses?: number;
 
-    /** ReplicationDocument accepts additional properties. */
+
+    /**
+     * ReplicationDocument accepts additional properties of type any.
+     */
     [propName: string]: any;
 
     static serialize(obj): ReplicationDocument.Transport {
@@ -15901,12 +16063,14 @@ namespace CloudantV1 {
         winning_revs_only?: boolean;
         worker_batch_size?: number;
         worker_processes?: number;
-        /** ReplicationDocument.ReplicationDocument.Transport accepts additional properties. */
+        /** ReplicationDocument.ReplicationDocument.Transport accepts additional properties of type any. */
         [propName: string]: any;
       }
   }
 
-  /** Schema for list of revision information. */
+  /**
+   * Schema for list of revision information.
+   */
   export class Revisions {
     /** Array of valid revision IDs, in reverse order (latest first). */
     ids: string[];
@@ -15949,7 +16113,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about missing revs and possible ancestors. */
+  /**
+   * Schema for information about missing revs and possible ancestors.
+   */
   export class RevsDiff {
     /** List of missing revisions. */
     missing?: string[];
@@ -15992,7 +16158,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a listing of replication scheduler documents. */
+  /**
+   * Schema for a listing of replication scheduler documents.
+   */
   export class SchedulerDocsResult {
     /** Number of total rows. */
     totalRows: number;
@@ -16035,7 +16203,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a replication scheduler document. */
+  /**
+   * Schema for a replication scheduler document.
+   */
   export class SchedulerDocument {
     /** Database where replication document came from. */
     database: string;
@@ -16211,7 +16381,10 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for scheduler document information. A JSON object that may contain additional information about the state. For error states this will contain an error field and string value. */
+  /**
+   * Schema for scheduler document information. A JSON object that may contain additional information about the state.
+   * For error states this will contain an error field and string value.
+   */
   export class SchedulerInfo {
     /** The count of changes not yet replicated. */
     changesPending?: number | null;
@@ -16334,7 +16507,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a replication scheduler job. */
+  /**
+   * Schema for a replication scheduler job.
+   */
   export class SchedulerJob {
     /** Replication document database. */
     database: string;
@@ -16469,7 +16644,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a replication scheduler job event. */
+  /**
+   * Schema for a replication scheduler job event.
+   */
   export class SchedulerJobEvent {
     /** Reason for current state of event. */
     reason?: string;
@@ -16522,7 +16699,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a listing of replication scheduler jobs. */
+  /**
+   * Schema for a listing of replication scheduler jobs.
+   */
   export class SchedulerJobsResult {
     /** Number of total rows. */
     totalRows: number;
@@ -16565,7 +16744,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the output of testing search analyzer tokenization. */
+  /**
+   * Schema for the output of testing search analyzer tokenization.
+   */
   export class SearchAnalyzeResult {
     /** tokens. */
     tokens: string[];
@@ -16598,7 +16779,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a search index definition. */
+  /**
+   * Schema for a search index definition.
+   */
   export class SearchIndexDefinition {
     /** Schema for a search analyzer configuration. */
     analyzer?: AnalyzerConfiguration;
@@ -16660,7 +16843,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for metadata information about a search index. */
+  /**
+   * Schema for metadata information about a search index.
+   */
   export class SearchIndexInfo {
     /** The committed sequence identifier. */
     committedSeq: number;
@@ -16743,7 +16928,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for search index information. */
+  /**
+   * Schema for search index information.
+   */
   export class SearchInfoResult {
     /** The name of the search index prefixed by the design document ID where the index is stored. */
     name: string;
@@ -16786,7 +16973,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the result of a query search operation. */
+  /**
+   * Schema for the result of a query search operation.
+   */
   export class SearchResult {
     /** Number of total rows. */
     totalRows: number;
@@ -16881,7 +17070,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the result of a query search operation. */
+  /**
+   * Schema for the result of a query search operation.
+   */
   export class SearchResultProperties {
     /** Number of total rows. */
     totalRows: number;
@@ -16966,7 +17157,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a row of the result of a query search operation. */
+  /**
+   * Schema for a row of the result of a query search operation.
+   */
   export class SearchResultRow {
     /** Schema for a document. */
     doc?: Document;
@@ -17031,7 +17224,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a security document. */
+  /**
+   * Schema for a security document.
+   */
   export class Security {
     /** Schema for names and roles to map to a database permission. */
     admins?: SecurityObject;
@@ -17094,7 +17289,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for names and roles to map to a database permission. */
+  /**
+   * Schema for names and roles to map to a database permission.
+   */
   export class SecurityObject {
     /** List of usernames. */
     names?: string[];
@@ -17137,7 +17334,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for extra information on the selector. */
+  /**
+   * Schema for extra information on the selector.
+   */
   export class SelectorHint {
     /** A list of fields in the given selector that can be used to restrict the query. */
     indexableFields: string[];
@@ -17197,7 +17396,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about the server instance. */
+  /**
+   * Schema for information about the server instance.
+   */
   export class ServerInformation {
     /** Welcome message. */
     couchdb: string;
@@ -17270,7 +17471,11 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for server vendor information. */
+  /**
+   * Schema for server vendor information.
+   *
+   * This type supports additional properties of type string.
+   */
   export class ServerVendor {
     /** Vendor name. */
     name: string;
@@ -17281,7 +17486,10 @@ namespace CloudantV1 {
     /** Vendor version. */
     version: string;
 
-    /** ServerVendor accepts additional properties. */
+
+    /**
+     * ServerVendor accepts additional properties of type string.
+     */
     [propName: string]: any;
 
     static serialize(obj): ServerVendor.Transport {
@@ -17343,12 +17551,14 @@ namespace CloudantV1 {
         name: string;
         variant: string;
         version: string;
-        /** ServerVendor.ServerVendor.Transport accepts additional properties. */
+        /** ServerVendor.ServerVendor.Transport accepts additional properties of type string. */
         [propName: string]: any;
       }
   }
 
-  /** Schema for session authentication information. */
+  /**
+   * Schema for session authentication information.
+   */
   export class SessionAuthentication {
     /** authenticated. */
     authenticated?: string;
@@ -17401,7 +17611,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about a session. */
+  /**
+   * Schema for information about a session.
+   */
   export class SessionInformation {
     /** ok. */
     ok: boolean;
@@ -17454,7 +17666,10 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a shards object that maps the hash value range for each shard to the array of nodes that contain a copy of that shard. */
+  /**
+   * Schema for a shards object that maps the hash value range for each shard to the array of nodes that contain a copy
+   * of that shard.
+   */
   export class ShardsInformation {
     /** Mapping of shard hash value range to a list of nodes. */
     shards: JsonObject;
@@ -17487,7 +17702,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for detailed information about throughput capacity with breakdown by specific throughput requests classes. */
+  /**
+   * Schema for detailed information about throughput capacity with breakdown by specific throughput requests classes.
+   */
   export class ThroughputInformation {
     /** A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global
      *  queries/sec of provisioned throughput capacity.
@@ -17552,7 +17769,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for information about the up state of the server. */
+  /**
+   * Schema for information about the up state of the server.
+   */
   export class UpInformation {
     /** seeds. */
     seeds?: JsonObject;
@@ -17603,7 +17822,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for an ability to tell if view is up-to-date without querying it. */
+  /**
+   * Schema for an ability to tell if view is up-to-date without querying it.
+   */
   export class UpdatesPending {
     /** Sum of shard copies with the least amount of work to do. */
     minimum: number;
@@ -17658,7 +17879,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the user context of a session. */
+  /**
+   * Schema for the user context of a session.
+   */
   export class UserContext {
     /** Database name in the context of the provided operation. */
     db?: string;
@@ -17724,7 +17947,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a set of uuids generated by the server. */
+  /**
+   * Schema for a set of uuids generated by the server.
+   */
   export class UuidsResult {
     /** uuids. */
     uuids: string[];
@@ -17757,7 +17982,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the results of a queries view operation. */
+  /**
+   * Schema for the results of a queries view operation.
+   */
   export class ViewQueriesResult {
     /** An array of result objects - one for each query. Each result object contains the same fields as the response
      *  to a regular view request.
@@ -17792,7 +18019,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a query view operation. */
+  /**
+   * Schema for a query view operation.
+   */
   export class ViewQuery {
     /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
      *  attachment is compressed.
@@ -18050,7 +18279,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for the result of a query view operation. */
+  /**
+   * Schema for the result of a query view operation.
+   */
   export class ViewResult {
     /** Number of total rows. */
     totalRows?: number;
@@ -18103,7 +18334,9 @@ namespace CloudantV1 {
       }
   }
 
-  /** Schema for a row of a view result. */
+  /**
+   * Schema for a row of a view result.
+   */
   export class ViewResultRow {
     /** The cause of the error (if available). */
     causedBy?: string;
