@@ -43,6 +43,9 @@ to avoid surprises.
   * [Error handling](#error-handling)
   * [Raw IO](#raw-io)
   * [Further resources](#further-resources)
+  * [Browser usage](#browser-usage)
+    + [Polyfills](#polyfills)
+    + [CORS](#cors)
   * [Changes feed follower (beta)](#changes-feed-follower-beta)
     + [Introduction](#introduction)
     + [Modes of operation](#modes-of-operation)
@@ -948,6 +951,57 @@ Expand them to see examples of:
   The official documentation page for Cloudant.
 - [Cloudant blog](https://blog.cloudant.com/):
   Many useful articles about how to optimize Cloudant for common problems.
+
+### Browser usage
+
+JavaScript using this SDK can run directly in the browser if polyfills for required Node.js
+system modules and cross-origin resource sharing (CORS) are available.
+
+#### Polyfills
+
+Use either a bundler that includes polyfills for Node.js system modules in the browser
+or a Node.js compatible browser-based runtime.
+
+The module lists here describe the requirements for compatibility,
+but it may be possible to omit some for specific use cases.
+
+The Node.js system modules required are:
+* `assert`
+* `buffer`
+* `crypto`
+* `fs`
+* `http`
+* `https`
+* `os`
+* `path`
+* `process`
+* `querystring`
+* `stream`
+* `timers`
+* `url`
+* `util`
+* `vm`
+* `zlib`
+
+Additionally the SDK or its dependencies need to be able to resolve the globals:
+* `Buffer`
+* `process`
+* `Readable`
+* `setImmediate` and `setTimeout`
+
+Environment variables:
+* `NODE_DEBUG` (must be resolvable from the `process.env` even if it is unset)
+
+#### CORS
+
+The server will accept requests from the SDK in the browser if:
+* a CORS origin has been added that matches the URL protocol, host and port where the JS executes
+* the server permits CORS requests with the default CouchDB allow list plus the SDK's additional headers
+
+The additional headers sent by the SDK are:
+* `user-agent`
+* `x-ibmcloud-sdk-analytics`
+* `content-encoding` (unless the SDK has [disable request body compression](./KNOWN_ISSUES.md#Disabling-request-body-compression) set)
 
 ### Changes feed follower (beta)
 
