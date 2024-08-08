@@ -13,13 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ChangesResultItem, PostChangesParams } from '../v1';
+import {
+  default as CloudantV1,
+  ChangesResultItem,
+  PostChangesParams,
+} from '../v1';
 import { Stream } from './stream';
 import { ChangesParamsHelper } from './changesParamsHelper';
 import { ChangesResultItemStream } from './changesResultItemStream';
-import { pipeline, Readable } from 'stream';
+import { pipeline, Readable } from 'node:stream';
 import { ChangesResultIterableIterator } from './changesResultIterator';
-import CloudantV1 = require('../v1');
 
 /** @internal */
 export enum Mode {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { OutgoingHttpHeaders } from 'http';
+import { OutgoingHttpHeaders } from 'node:http';
 import {
   getCurrentTime,
   TokenManager,
