@@ -15,8 +15,7 @@
  */
 
 import * as os from 'os';
-// tslint:disable-next-line:no-var-requires
-const pkg = require('../package.json');
+import { version } from '../package.json';
 
 export type SdkHeaders = {
   'User-Agent': string;
@@ -32,7 +31,7 @@ export function getSdkHeaders(
   operationId: string
 ): SdkHeaders | {} {
   const sdkName = 'cloudant-node-sdk';
-  const sdkVersion = pkg.version;
+  const sdkVersion = version;
   const osName = os.platform();
   const osVersion = os.release();
   const osArch = os.arch();
