@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-const core = require('ibm-cloud-sdk-core');
-const {
+import { default as core, NoAuthAuthenticator } from 'ibm-cloud-sdk-core';
+import {
   ChangesFollower,
-} = require('../../../cloudant/features/changesFollower.ts');
-const { getTransientErrors } = require('./mockErrors');
-
-const { NoAuthAuthenticator } = core;
+} from '../../../cloudant/features/changesFollower.ts';
+import { getTransientErrors } from './mockErrors';
 
 function mockAuthenticator() {
   const authenticatorMock = jest.spyOn(core, 'getAuthenticatorFromEnvironment');

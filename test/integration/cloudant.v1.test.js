@@ -19,7 +19,7 @@
 const { readExternalSources } = require('ibm-cloud-sdk-core');
 /* eslint-disable import/order */
 const CloudantV1 = require('../../dist/cloudant/v1');
-const authHelper = require('../resources/auth-helper.js');
+const authHelper = require('../resources/auth-helper.mjs');
 
 // testcase timeout value (200s).
 const timeout = 200000;

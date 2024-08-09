@@ -14,37 +14,37 @@
  * limitations under the License.
  */
 
-const {
+import {
   Action,
   getClient,
   getModes,
   getSuppressionSequences,
-} = require('./testDataProviders');
-const {
+} from './testDataProviders';
+import {
   ChangesResultIterableIterator,
-} = require('../../../cloudant/features/changesResultIterator.ts');
-const { testParams } = require('./testParams');
-const {
+} from '../../../cloudant/features/changesResultIterator.ts';
+import { testParams } from './testParams';
+import {
   generateRandomChangesResults,
   mockPerpetualSupplier,
   perpetualSupplierResponse,
   mockPostChangesError,
   mockPerptualSupplierRespectingLimit,
-} = require('./testMocks');
-const {
+} from './testMocks';
+import {
   ChangesParamsHelper,
-} = require('../../../cloudant/features/changesParamsHelper.ts');
-const {
+} from '../../../cloudant/features/changesParamsHelper.ts';
+import {
   ChangesFollower,
   Mode,
-} = require('../../../cloudant/features/changesFollower.ts');
-const {
+} from '../../../cloudant/features/changesFollower.ts';
+import {
   getTransientErrors,
   getTerminalErrors,
   getErrors,
   MockError,
-} = require('./mockErrors');
-const { delay } = require('./testUtils');
+} from './mockErrors';
+import { delay } from './testUtils';
 
 const service = getClient();
 let postChangesPromiseMock;
