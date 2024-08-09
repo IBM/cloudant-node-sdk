@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-const core = require('ibm-cloud-sdk-core');
-const { testParams } = require('./testParams');
-const {
+import core from 'ibm-cloud-sdk-core';
+import { testParams } from './testParams';
+import {
   ChangesFollower,
   Mode,
-} = require('../../../cloudant/features/changesFollower.ts');
-const CloudantV1 = require('../../../cloudant/v1.ts');
-const {
+} from '../../../cloudant/features/changesFollower.ts';
+import { default as CloudantV1 } from '../../../cloudant/v1.ts';
+import {
   ChangesParamsHelper,
-} = require('../../../cloudant/features/changesParamsHelper.ts');
+} from '../../../cloudant/features/changesParamsHelper.ts';
 
 function getParams(isValid) {
   const validOptions = [];

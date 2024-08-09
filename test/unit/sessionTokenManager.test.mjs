@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-const assert = require('assert');
-const sinon = require('sinon');
-const { CookieJar } = require('tough-cookie');
-const { SessionTokenManager } = require('../../auth/sessionTokenManager.ts');
+import assert from 'node:assert';
+import { default as sinon } from 'sinon';
+import { CookieJar } from 'tough-cookie';
+import { SessionTokenManager } from '../../auth/sessionTokenManager.ts';
 
 const OPTIONS = Object.freeze({
   username: 'username',

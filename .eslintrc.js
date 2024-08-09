@@ -110,8 +110,9 @@ module.exports = {
       'extends': ['plugin:jest/recommended', 'plugin:jest/style'],
     },
     {
-      'files': ['test/**/*.test.js'],
+      'files': ['test/**/*.test.js', 'test/**/*.test.mjs'],
       'rules': {
+        'import/namespace': 'off',
         'jest/expect-expect': 'off',
         'jest/no-conditional-expect': 'off',
         'jest/no-done-callback': 'off',

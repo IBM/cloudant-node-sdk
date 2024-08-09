@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-const assert = require('assert');
-const http = require('http');
-const https = require('https');
-const {
+import assert from 'node:assert';
+import http from 'node:http';
+import https from 'node:https';
+import {
   BasicAuthenticator,
   IamAuthenticator,
   NoAuthAuthenticator,
-} = require('ibm-cloud-sdk-core');
-const sinon = require('sinon');
-const { CookieJar, MemoryCookieStore } = require('tough-cookie');
-const CloudantBaseService = require('../../lib/cloudantBaseService.ts').default;
-const { CouchdbSessionAuthenticator } = require('../../index.ts');
+} from 'ibm-cloud-sdk-core';
+import { default as sinon } from 'sinon';
+import { CookieJar, MemoryCookieStore } from 'tough-cookie';
+import { default as CloudantBaseService } from '../../lib/cloudantBaseService.ts';
+import { CouchdbSessionAuthenticator } from '../../index.ts';
 
 describe('Test CloudantBaseService', () => {
   const newUrl = 'something.new/';
@@ -89,7 +89,8 @@ describe('Test CloudantBaseService', () => {
 
     // Enable gzip compression as this is the default setting
     service.setEnableGzipCompression(true);
-    // Assert default value of gzip compression is true in base options, token options, and in request wrapper
+    // Assert default value of gzip compression is true in base options,
+    // token options, and in request wrapper
     assert.strictEqual(service.baseOptions.enableGzipCompression, true);
     assert.strictEqual(
       service.getAuthenticator().tokenOptions.enableGzipCompression,
@@ -109,8 +110,12 @@ describe('Test CloudantBaseService', () => {
       false
     );
     isGzipCompressionEnabled =
-      service.getAuthenticator().tokenManager.requestWrapperInstance
-        .axiosInstance.defaults.enableGzipCompression;
+      service.getAuthenticator()
+        .tokenManager
+        .requestWrapperInstance
+        .axiosInstance
+        .defaults
+        .enableGzipCompression;
     assert.strictEqual(isGzipCompressionEnabled, false);
   });
 
@@ -125,7 +130,8 @@ describe('Test CloudantBaseService', () => {
     });
 
     const { tokenManager } = auth;
-    service.setServiceUrl(newUrl); // setServiceUrl actually replaces the SessionTokenManager instance of `auth`
+    // setServiceUrl actually replaces the SessionTokenManager instance of `auth`
+    service.setServiceUrl(newUrl);
     assert.notDeepStrictEqual(auth.tokenManager, tokenManager);
   });
 

@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const assert = require('assert');
-const { BasicAuthenticator } = require('ibm-cloud-sdk-core');
-const getAuthenticatorFromEnvCloudantExtension =
-  require('../../lib/getAuthenticatorFromEnvCloudantExtension.ts').default;
-const { CouchdbSessionAuthenticator } = require('../../index.ts');
+import assert from 'node:assert';
+import { BasicAuthenticator } from 'ibm-cloud-sdk-core';
+import {
+  default as getAuthenticatorFromEnvCloudantExtension
+} from '../../lib/getAuthenticatorFromEnvCloudantExtension.ts';
+import { CouchdbSessionAuthenticator } from '../../index.ts';
 
 describe('Test getAuthenticatorFromEnvCloudantExtension', () => {
   it('Create couchdb_session authenticator', () => {

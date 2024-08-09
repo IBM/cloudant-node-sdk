@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const { testParams } = require('./testParams.js');
-const { getExpectedParams, testSeqNumber } = require('./testParams');
-const { getParams } = require('./testDataProviders');
-const {
+import { testParams, getExpectedParams, testSeqNumber } from './testParams';
+import { getParams } from './testDataProviders';
+import {
   ChangesParamsHelper,
-} = require('../../../cloudant/features/changesParamsHelper.ts');
+} from '../../../cloudant/features/changesParamsHelper.ts';
 
 describe('Test ChangesParamsHelper', () => {
   it.each(getParams(true))('testCloneOptions', (params) => {

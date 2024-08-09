@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const assert = require('assert');
-const { promisify } = require('util');
-const sinon = require('sinon');
-const { CookieJar } = require('tough-cookie');
-const { CouchdbSessionAuthenticator } = require('../../index.ts');
-const { SessionTokenManager } = require('../../auth/sessionTokenManager.ts');
+import assert from 'node:assert';
+import { promisify } from 'node:util';
+import { default as sinon } from 'sinon';
+import { CookieJar } from 'tough-cookie';
+import { CouchdbSessionAuthenticator } from '../../index.ts';
+import { SessionTokenManager } from '../../auth/sessionTokenManager.ts';
 
 describe('CouchdbSessionAutheticator tests', () => {
   it('Constructor input validation check', () => {
@@ -60,7 +60,8 @@ describe('CouchdbSessionAutheticator tests', () => {
   // Elapses time (relative to start of test) to the number of seconds specified by the first arg
   // Part 2. Performs authenticate(), sets cookie into jar and retrieves it for update assertions
   // Elapses time (relative to start of test) to the number of seconds specified by the second arg
-  // Part 3. Asserts cookie is the one from the second authenticate (i.e. it was refreshed and was not purged by expiry)
+  // Part 3. Asserts cookie is the one from the second authenticate
+  // (i.e. it was refreshed and was not purged by expiry)
   function renewalTest(useMaxAge, firstElapsedSeconds, secondElapsedSeconds) {
     const options = {
       username: 'username',
@@ -141,7 +142,7 @@ describe('CouchdbSessionAutheticator tests', () => {
           assert.strictEqual(
             cookieFromJar,
             'AuthSession=56789',
-            'The stored cookie should match that provided by the second session request.'
+            'The stored cookie provided by the second request should match.'
           );
         })
         /* End of part 2 */
@@ -156,7 +157,7 @@ describe('CouchdbSessionAutheticator tests', () => {
           assert.strictEqual(
             cookieFromJar,
             'AuthSession=56789',
-            `The stored cookie should still match that provided by the second session request after the second lapse.`
+            `The stored cookie provided by the second request on the second lapse should match.`
           );
         })
         /* End of part 3 */
