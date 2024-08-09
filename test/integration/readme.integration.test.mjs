@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const http = require('http');
-const fs = require('fs');
-const sinon = require('sinon');
-const {
-  getInfoFromExistingDatabase,
-} = require('../examples/src/js/GetInfoFromExistingDatabase.js');
-const { createDbAndDoc } = require('../examples/src/js/CreateDbAndDoc.js');
-const { updateDoc } = require('../examples/src/js/UpdateDoc.js');
-const { deleteDoc } = require('../examples/src/js/DeleteDoc.js');
+import { request as _request } from 'node:http';
+import { readFileSync } from 'node:fs';
+import { spy } from 'sinon';
+import { getInfoFromExistingDatabase } from '../examples/src/js/GetInfoFromExistingDatabase';
+import { createDbAndDoc } from '../examples/src/js/CreateDbAndDoc';
+import { updateDoc } from '../examples/src/js/UpdateDoc';
+import { deleteDoc } from '../examples/src/js/DeleteDoc';
 
 const setAuthentication = () => {
   process.env.CLOUDANT_AUTH_TYPE = 'basic';
@@ -36,7 +34,7 @@ describe('Readme integration tests', () => {
   // jest --runInBand should be set to run the test cases in order
   beforeAll(() => {
     const wiremockURL = new URL(process.env.WIREMOCK_URL);
-    const request = http.request({
+    const request = _request({
       host: wiremockURL.hostname,
       port: wiremockURL.port,
       path: '/__admin/scenarios/reset',
@@ -57,7 +55,7 @@ describe('Readme integration tests', () => {
   });
 
   beforeEach(() => {
-    consoleLogSpy = sinon.spy(console, 'log');
+    consoleLogSpy = spy(console, 'log');
   });
 
   afterEach(() => {
@@ -65,7 +63,7 @@ describe('Readme integration tests', () => {
   });
 
   it('Create db and doc for the first time', async () => {
-    const expectedJoinedConsoleOutput = fs.readFileSync(
+    const expectedJoinedConsoleOutput = readFileSync(
       'test/examples/output/CreateDbAndDoc.txt',
       'utf8',
       (err, data) => {
@@ -84,7 +82,7 @@ describe('Readme integration tests', () => {
   });
 
   it('Get document from orders database', async () => {
-    const expectedJoinedConsoleOutput = fs.readFileSync(
+    const expectedJoinedConsoleOutput = readFileSync(
       'test/examples/output/GetInfoFromExistingDatabase.txt',
       'utf8',
       (err, data) => {
@@ -103,7 +101,7 @@ describe('Readme integration tests', () => {
   });
 
   it('Update doc for the first time', async () => {
-    const expectedJoinedConsoleOutput = fs.readFileSync(
+    const expectedJoinedConsoleOutput = readFileSync(
       'test/examples/output/UpdateDoc.txt',
       'utf8',
       (err, data) => {
@@ -122,7 +120,7 @@ describe('Readme integration tests', () => {
   });
 
   it('Update doc for the second time', async () => {
-    const expectedJoinedConsoleOutput = fs.readFileSync(
+    const expectedJoinedConsoleOutput = readFileSync(
       'test/examples/output/UpdateDoc2.txt',
       'utf8',
       (err, data) => {
@@ -153,7 +151,8 @@ describe('Readme integration tests', () => {
       .map((a) => a.args[0])
       .join('\n');
     expect(consoleOutput).toBe(
-      'Cannot delete document because either "orders" database or the "example" document was not found.'
+      'Cannot delete document because either "orders" database'
+        + ' or the "example" document was not found.'
     );
   });
 });

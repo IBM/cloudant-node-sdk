@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-const {
+import {
   ChangesFollower,
   Mode,
-} = require('../../../cloudant/features/changesFollower.ts');
-const { testParams } = require('./testParams.js');
-const {
+} from '../../../cloudant/features/changesFollower';
+import { testParams } from './testParams';
+import {
   getStates,
   getModesAndLimits,
   getInvalidTimeoutClients,
   getValidTimeoutClients,
   getClient,
-} = require('./testDataProviders');
-const {
+} from './testDataProviders';
+import {
   mockAuthenticator,
   mockAlternatingBatchesAndErrors,
   mockPerpetualSupplier,
@@ -36,9 +36,9 @@ const {
   generateRandomChangesResults,
   mockAlternatingBatchErrorThenPerpetualSupplier,
   mockPerptualSupplierRespectingLimit,
-} = require('./testMocks.js');
-const { getTerminalErrors, getTransientErrors } = require('./mockErrors');
-const { delay } = require('./testUtils');
+} from './testMocks';
+import { getTerminalErrors, getTransientErrors } from './mockErrors';
+import { delay } from './testUtils';
 
 const minimumTestParams = testParams.MINIMUM.params;
 
@@ -159,7 +159,8 @@ describe('Test ChangesFollower', () => {
             minimumTestParams
           );
         }).toThrow(
-          `To use ChangesFollower the client read timeout must be at least 60000 ms. The client read timeout is ${client.getTimeout()} ms.`
+          `To use ChangesFollower the client read timeout must be at least 60000 ms.`
+            + ` The client read timeout is ${client.getTimeout()} ms.`
         );
       }
     );
@@ -259,7 +260,8 @@ describe('Test ChangesFollower', () => {
     );
 
     /**
-     * Repeatedly encountering transient errors will complete successfully if not exceeding the duration.
+     * Repeatedly encountering transient errors will complete successfully
+     * if not exceeding the duration.
      */
     it('testStartOneOffTransientErrorsWithSuppressionDurationCompletes', (done) => {
       const batches = 5;
@@ -351,8 +353,8 @@ describe('Test ChangesFollower', () => {
     });
   });
   /**
-   * Listening mode tests can terminate for errors, but not when changes complete so the helper stops the feed after the
-   * duration when not an error case.
+   * Listening mode tests can terminate for errors, but not when changes complete
+   * so the helper stops the feed after the duration when not an error case.
    */
   describe('LISTEN mode', () => {
     /**
@@ -444,7 +446,8 @@ describe('Test ChangesFollower', () => {
       }
     );
     /**
-     * Gets changes and can be stopped cleanly with transient errors when not exceeding the suppression duration.
+     * Gets changes and can be stopped cleanly with transient errors
+     * when not exceeding the suppression duration.
      */
     it('testStartTransientErrorsWithSuppressionDurationAllChanges', (done) => {
       setBatchSize(3);
@@ -563,8 +566,8 @@ describe('Test ChangesFollower', () => {
     }
   );
   /**
-   * Checks that setting a limit terminates the stream early for both modes and limits smaller, the same and larger than the default
-   * batch size.
+   * Checks that setting a limit terminates the stream early for both modes
+   * and limits smaller, the same and larger than the default batch size.
    */
   it.each(getModesAndLimits(50))(
     'testLimit $mode $limit',

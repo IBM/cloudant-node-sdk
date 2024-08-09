@@ -14,37 +14,22 @@
  * limitations under the License.
  */
 
-const {
-  Action,
-  getClient,
-  getModes,
-  getSuppressionSequences,
-} = require('./testDataProviders');
-const {
-  ChangesResultIterableIterator,
-} = require('../../../cloudant/features/changesResultIterator.ts');
-const { testParams } = require('./testParams');
-const {
+import { Action, getClient, getModes, getSuppressionSequences } from './testDataProviders';
+import {
+  ChangesResultIterableIterator
+} from '../../../cloudant/features/changesResultIterator';
+import { testParams } from './testParams';
+import {
   generateRandomChangesResults,
   mockPerpetualSupplier,
   perpetualSupplierResponse,
   mockPostChangesError,
-  mockPerptualSupplierRespectingLimit,
-} = require('./testMocks');
-const {
-  ChangesParamsHelper,
-} = require('../../../cloudant/features/changesParamsHelper.ts');
-const {
-  ChangesFollower,
-  Mode,
-} = require('../../../cloudant/features/changesFollower.ts');
-const {
-  getTransientErrors,
-  getTerminalErrors,
-  getErrors,
-  MockError,
-} = require('./mockErrors');
-const { delay } = require('./testUtils');
+  mockPerptualSupplierRespectingLimit
+} from './testMocks';
+import { ChangesParamsHelper } from '../../../cloudant/features/changesParamsHelper';
+import { ChangesFollower, Mode } from '../../../cloudant/features/changesFollower';
+import { getTransientErrors, getTerminalErrors, getErrors, MockError } from './mockErrors';
+import { delay } from './testUtils';
 
 const service = getClient();
 let postChangesPromiseMock;

@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-const { PostChangesConstants } = require('../../../cloudant/v1.ts');
-const {
-  ChangesParamsHelper,
-} = require('../../../cloudant/features/changesParamsHelper.ts');
+import { PostChangesConstants } from '../../../cloudant/v1';
+import { ChangesParamsHelper } from '../../../cloudant/features/changesParamsHelper';
 
 const beginningOfErrorMsg = 'The param';
 const endOfErrorMsg = 'invalid when using ChangesFollower.';
@@ -167,7 +165,8 @@ const testParams = {
       timeout: 3600000,
       ...minimumTestParams,
     },
-    expectedError: `${beginningOfErrorMsg}s 'descending', 'feed', 'heartbeat', 'lastEventId', 'timeout' are ${endOfErrorMsg}`,
+    expectedError: `${beginningOfErrorMsg}s 'descending', 'feed', 'heartbeat',`
+      + ` 'lastEventId', 'timeout' are ${endOfErrorMsg}`,
   },
 };
 
@@ -180,4 +179,4 @@ function getExpectedParams(params) {
   return expectedParams;
 }
 
-module.exports = { testParams, testSeqNumber, getExpectedParams };
+export default { testParams, testSeqNumber, getExpectedParams };

@@ -16,7 +16,7 @@
 
 /* eslint-disable no-console */
 
-const { CloudantV1 } = require('../../../../index.ts');
+import { CloudantV1 } from '../../../../index';
 
 // when you change this file, please run test/examples/src/js/CreateOutputs.js so that the output files are updated
 
@@ -86,4 +86,4 @@ if (require.main === module) {
   createDbAndDoc();
 }
 
-module.exports = { createDbAndDoc };
+export default { createDbAndDoc };

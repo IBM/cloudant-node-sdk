@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-const assert = require('assert');
-const sinon = require('sinon');
-const { CookieJar } = require('tough-cookie');
-const { SessionTokenManager } = require('../../auth/sessionTokenManager.ts');
+import { strictEqual, ok, deepStrictEqual } from 'node:assert';
+import { stub } from 'sinon';
+import { CookieJar } from 'tough-cookie';
+import { SessionTokenManager } from '../../auth/sessionTokenManager';
 
 const OPTIONS = Object.freeze({
   username: 'username',
@@ -38,7 +38,7 @@ describe('SessionTokenManager tests', () => {
         // eslint-disable-next-line no-new
         new SessionTokenManager(optionsWithoutCredentials);
       } catch (error) {
-        assert.strictEqual(
+        strictEqual(
           'Error: Missing required parameters: username, password, serviceUrl, jar',
           error.toString()
         );
@@ -48,11 +48,11 @@ describe('SessionTokenManager tests', () => {
     it('Check option assignment', () => {
       const manager = new SessionTokenManager(OPTIONS);
 
-      assert.ok(manager instanceof SessionTokenManager);
-      assert.strictEqual(manager.options.username, OPTIONS.username);
-      assert.strictEqual(manager.options.password, OPTIONS.password);
-      assert.strictEqual(manager.options.serviceUrl, 'cloudant.example');
-      assert.strictEqual(manager.options.jar, OPTIONS.jar);
+      ok(manager instanceof SessionTokenManager);
+      strictEqual(manager.options.username, OPTIONS.username);
+      strictEqual(manager.options.password, OPTIONS.password);
+      strictEqual(manager.options.serviceUrl, 'cloudant.example');
+      strictEqual(manager.options.jar, OPTIONS.jar);
     });
   });
 
@@ -72,13 +72,13 @@ describe('SessionTokenManager tests', () => {
       };
 
       const manager = new SessionTokenManager({ ...OPTIONS });
-      const sendRequestStubFn = sinon.stub(
+      const sendRequestStubFn = stub(
         manager.requestWrapperInstance,
         'sendRequest'
       );
       sendRequestStubFn.returnsArg(0);
       const parameters = manager.requestToken();
-      assert.deepStrictEqual(parameters, expectedParameters);
+      deepStrictEqual(parameters, expectedParameters);
     });
   });
 
@@ -92,15 +92,15 @@ describe('SessionTokenManager tests', () => {
       try {
         manager.saveTokenInfo(response);
       } catch (error) {
-        assert.strictEqual(
+        strictEqual(
           'Error: Set-Cookie header not present in response',
           error.toString()
         );
       }
 
-      assert.strictEqual(manager.expireTime, undefined);
-      assert.strictEqual(manager.refreshTime, undefined);
-      assert.strictEqual(manager.accessToken, undefined);
+      strictEqual(manager.expireTime, undefined);
+      strictEqual(manager.refreshTime, undefined);
+      strictEqual(manager.accessToken, undefined);
     });
 
     it('AuthSession is missing from the cookie', () => {
@@ -114,15 +114,15 @@ describe('SessionTokenManager tests', () => {
       try {
         manager.saveTokenInfo(response);
       } catch (error) {
-        assert.strictEqual(
+        strictEqual(
           'Error: Session token not present in response',
           error.toString()
         );
       }
 
-      assert.strictEqual(manager.expireTime, undefined);
-      assert.strictEqual(manager.refreshTime, undefined);
-      assert.strictEqual(manager.accessToken, undefined);
+      strictEqual(manager.expireTime, undefined);
+      strictEqual(manager.refreshTime, undefined);
+      strictEqual(manager.accessToken, undefined);
     });
 
     it('Session token presents with other cookie tokens without expire info', () => {
@@ -139,9 +139,9 @@ describe('SessionTokenManager tests', () => {
 
       manager.saveTokenInfo(response);
 
-      assert.strictEqual(manager.expireTime, 0);
-      assert.strictEqual(manager.refreshTime, 0);
-      assert.strictEqual(manager.accessToken, '123456');
+      strictEqual(manager.expireTime, 0);
+      strictEqual(manager.refreshTime, 0);
+      strictEqual(manager.accessToken, '123456');
     });
 
     it('Session token with expire time stamp', () => {
@@ -157,14 +157,14 @@ describe('SessionTokenManager tests', () => {
 
       manager.saveTokenInfo(response);
 
-      assert.strictEqual(Math.ceil(manager.expireTime - dateNow / 1000), 10);
-      assert.strictEqual(Math.ceil(manager.refreshTime - dateNow / 1000), 8);
+      strictEqual(Math.ceil(manager.expireTime - dateNow / 1000), 10);
+      strictEqual(Math.ceil(manager.refreshTime - dateNow / 1000), 8);
       /* time difference between expire time and refresh time should be 2 seconds */
-      assert.strictEqual(
+      strictEqual(
         Math.ceil(manager.expireTime - manager.refreshTime),
         2
       );
-      assert.strictEqual(manager.accessToken, '123456');
+      strictEqual(manager.accessToken, '123456');
     });
 
     it('Session token with max-age seconds', () => {
@@ -178,11 +178,11 @@ describe('SessionTokenManager tests', () => {
 
       manager.saveTokenInfo(response);
 
-      assert.strictEqual(Math.ceil(manager.expireTime - dateNow / 1000), 10);
-      assert.strictEqual(Math.ceil(manager.refreshTime - dateNow / 1000), 8);
+      strictEqual(Math.ceil(manager.expireTime - dateNow / 1000), 10);
+      strictEqual(Math.ceil(manager.refreshTime - dateNow / 1000), 8);
       /* time difference between expire time and refresh time should be 2 seconds */
-      assert.strictEqual(manager.expireTime - manager.refreshTime, 2);
-      assert.strictEqual(manager.accessToken, '123456');
+      strictEqual(manager.expireTime - manager.refreshTime, 2);
+      strictEqual(manager.accessToken, '123456');
     });
   });
   describe('Test setHeader', () => {
@@ -191,7 +191,7 @@ describe('SessionTokenManager tests', () => {
       try {
         manager.setHeaders({ test: 'header' });
       } catch (err) {
-        assert.strictEqual(
+        strictEqual(
           err.toString(),
           'Error: During CouchDB Session Authentication only `request` service headers are in use'
         );

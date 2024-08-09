@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-const { PassThrough, pipeline } = require('stream');
-const {
-  ChangesResultItemStream,
-} = require('../../../cloudant/features/changesResultItemStream.ts');
-const { generateChangesResultItems, generateSeq } = require('./testMocks');
-const {
-  ChangesFollower,
-} = require('../../../cloudant/features/changesFollower.ts');
-const { listenOnStreamEvents, getDefaultStreamEvents } = require('./testUtils');
+import { PassThrough, pipeline } from 'node:stream';
+import { ChangesResultItemStream } from '../../../cloudant/features/changesResultItemStream';
+import { generateChangesResultItems, generateSeq } from './testMocks';
+import { ChangesFollower } from '../../../cloudant/features/changesFollower';
+import { listenOnStreamEvents, getDefaultStreamEvents } from './testUtils';
 
 describe('Test ChangesResultItemStream', () => {
   let producerStream;

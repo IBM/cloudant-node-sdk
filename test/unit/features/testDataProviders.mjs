@@ -14,16 +14,11 @@
  * limitations under the License.
  */
 
-const core = require('ibm-cloud-sdk-core');
-const { testParams } = require('./testParams');
-const {
-  ChangesFollower,
-  Mode,
-} = require('../../../cloudant/features/changesFollower.ts');
-const CloudantV1 = require('../../../cloudant/v1.ts');
-const {
-  ChangesParamsHelper,
-} = require('../../../cloudant/features/changesParamsHelper.ts');
+import { NoAuthAuthenticator } from 'ibm-cloud-sdk-core';
+import { testParams } from './testParams';
+import { ChangesFollower, Mode } from '../../../cloudant/features/changesFollower';
+import CloudantV1 from '../../../cloudant/v1';
+import { ChangesParamsHelper } from '../../../cloudant/features/changesParamsHelper';
 
 function getParams(isValid) {
   const validOptions = [];
@@ -69,8 +64,6 @@ function getModesAndLimits(batchSize = ChangesFollower.BATCH_SIZE) {
   }
   return modesAndLimits;
 }
-
-const { NoAuthAuthenticator } = core;
 
 function getCloudantServiceOptions() {
   return {
@@ -140,7 +133,7 @@ function getSuppressionSequences() {
   return sequences;
 }
 
-module.exports = {
+export default {
   getClient,
   getInvalidTimeoutClients,
   getModes,

@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const assert = require('assert');
-const { promisify } = require('util');
-const sinon = require('sinon');
-const { CookieJar } = require('tough-cookie');
-const { CouchdbSessionAuthenticator } = require('../../index.ts');
-const { SessionTokenManager } = require('../../auth/sessionTokenManager.ts');
+import { strictEqual, ok } from 'node:assert';
+import { promisify } from 'node:util';
+import { stub, fake, replace, restore, useFakeTimers } from 'sinon';
+import { CookieJar } from 'tough-cookie';
+import { CouchdbSessionAuthenticator } from '../../index';
+import { SessionTokenManager } from '../../auth/sessionTokenManager';
 
 describe('CouchdbSessionAutheticator tests', () => {
   it('Constructor input validation check', () => {
@@ -26,7 +26,7 @@ describe('CouchdbSessionAutheticator tests', () => {
       // eslint-disable-next-line no-new
       new CouchdbSessionAuthenticator({});
     } catch (err) {
-      assert.strictEqual(
+      strictEqual(
         'Error: Missing required parameters: username, password',
         err.toString()
       );
@@ -42,17 +42,17 @@ describe('CouchdbSessionAutheticator tests', () => {
     };
     const auth = new CouchdbSessionAuthenticator(options);
     auth.configure({});
-    assert.ok(auth);
-    assert.ok(auth.tokenManager);
-    assert.ok(auth.tokenManager instanceof SessionTokenManager);
-    assert.strictEqual('COUCHDB_SESSION', auth.authenticationType());
+    ok(auth);
+    ok(auth.tokenManager);
+    ok(auth.tokenManager instanceof SessionTokenManager);
+    strictEqual('COUCHDB_SESSION', auth.authenticationType());
 
-    const getTokenStubFn = sinon.stub(auth.tokenManager, 'getToken');
+    const getTokenStubFn = stub(auth.tokenManager, 'getToken');
     auth.authenticate();
-    assert.ok(getTokenStubFn.calledOnce);
+    ok(getTokenStubFn.calledOnce);
 
     /* authenticator stores the same jar */
-    assert.ok(auth.tokenManager.options.jar, options.jar);
+    ok(auth.tokenManager.options.jar, options.jar);
   });
 
   // A function that asserts cookie jar values are correct after the specified times
@@ -60,7 +60,8 @@ describe('CouchdbSessionAutheticator tests', () => {
   // Elapses time (relative to start of test) to the number of seconds specified by the first arg
   // Part 2. Performs authenticate(), sets cookie into jar and retrieves it for update assertions
   // Elapses time (relative to start of test) to the number of seconds specified by the second arg
-  // Part 3. Asserts cookie is the one from the second authenticate (i.e. it was refreshed and was not purged by expiry)
+  // Part 3. Asserts cookie is the one from the second authenticate
+  // (i.e. it was refreshed and was not purged by expiry)
   function renewalTest(useMaxAge, firstElapsedSeconds, secondElapsedSeconds) {
     const options = {
       username: 'username',
@@ -86,14 +87,14 @@ describe('CouchdbSessionAutheticator tests', () => {
     auth.configure({});
 
     const fakeTokenRequest = (index) =>
-      sinon.fake.resolves({
+      fake.resolves({
         'headers': {
           'set-cookie': [headers[index]],
         },
       });
 
     // Fake requestToken for part 1 token request
-    let requestFake = sinon.replace(
+    let requestFake = replace(
       auth.tokenManager,
       'requestToken',
       fakeTokenRequest(0)
@@ -104,7 +105,7 @@ describe('CouchdbSessionAutheticator tests', () => {
       auth
         .authenticate()
         .then(() => {
-          assert.ok(
+          ok(
             requestFake.calledOnce,
             'There should be exactly 1 session request in part 1.'
           );
@@ -112,25 +113,25 @@ describe('CouchdbSessionAutheticator tests', () => {
         })
         .then(() => getCookie(options.serviceUrl))
         .then((cookieFromJar) => {
-          assert.strictEqual(cookieFromJar, 'AuthSession=01234');
+          strictEqual(cookieFromJar, 'AuthSession=01234');
         })
         /* End of part 1 */
         .then(() => {
           // Re-fake requestToken for part 2 token request
-          sinon.restore();
-          requestFake = sinon.replace(
+          restore();
+          requestFake = replace(
             auth.tokenManager,
             'requestToken',
             fakeTokenRequest(1)
           );
           // Advance the clock to the first number of elapsed seconds after the initial request
-          clock = sinon.useFakeTimers(Date.now());
+          clock = useFakeTimers(Date.now());
           clock.tick(1000 * firstElapsedSeconds);
         })
         /* Start of part 2 */
         .then(() => auth.authenticate())
         .then(() => {
-          assert.ok(
+          ok(
             requestFake.calledOnce,
             'There should be exactly 1 session request in part 2.'
           );
@@ -138,10 +139,10 @@ describe('CouchdbSessionAutheticator tests', () => {
         })
         .then(() => getCookie(options.serviceUrl))
         .then((cookieFromJar) => {
-          assert.strictEqual(
+          strictEqual(
             cookieFromJar,
             'AuthSession=56789',
-            'The stored cookie should match that provided by the second session request.'
+            'The stored cookie provided by the second request should match.'
           );
         })
         /* End of part 2 */
@@ -153,15 +154,15 @@ describe('CouchdbSessionAutheticator tests', () => {
         /* Start of part 3 */
         .then(() => getCookie(options.serviceUrl))
         .then((cookieFromJar) => {
-          assert.strictEqual(
+          strictEqual(
             cookieFromJar,
             'AuthSession=56789',
-            `The stored cookie should still match that provided by the second session request after the second lapse.`
+            `The stored cookie provided by the second request on the second lapse should match.`
           );
         })
         /* End of part 3 */
         .finally(() => {
-          sinon.restore();
+          restore();
         })
     );
   }

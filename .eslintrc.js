@@ -20,6 +20,13 @@ module.exports = {
   },
   'plugins': ['header'],
   'extends': ['plugin:import/recommended'],
+  'settings': {
+    'import/resolver': {
+      'node': {
+        'extensions': ['.ts', '.js', '.mjs'],
+      },
+    },
+  },
   'rules': {
     'header/header': [
       2,
@@ -110,44 +117,18 @@ module.exports = {
       'extends': ['plugin:jest/recommended', 'plugin:jest/style'],
     },
     {
-      'files': ['test/**/*.test.js'],
+      'files': ['test/**/*.test.js', 'test/**/*.test.mjs'],
       'rules': {
+        'import/namespace': 'off',
         'jest/expect-expect': 'off',
         'jest/no-conditional-expect': 'off',
         'jest/no-done-callback': 'off',
-        'jest/no-standalone-expect': 'off',
-        'jest/no-try-expect': 'off',
       },
     },
     {
       'files': ['test/**/cloudant.v1.test.js'],
       'rules': {
         'prettier/prettier': 'off',
-        'object-shorthand': 'off',
-      },
-    },
-    {
-      'files': [
-        'test/**/readme.integration.test.js',
-        'test/examples/src/ts/*.ts',
-      ],
-      'rules': {
-        'no-console': 'off',
-      },
-    },
-    {
-      'files': ['test/examples/src/js/*.js'],
-      'rules': {
-        'dot-notation': 'off',
-      },
-    },
-    {
-      'files': [
-        'test/examples/src/js/CreateDbAndDoc.js',
-        'test/examples/src/ts/CreateDbAndDoc.ts',
-      ],
-      'rules': {
-        'prefer-template': 'off',
       },
     },
   ],

@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-const common = require('../../lib/common.ts');
-
-const { getSdkHeaders } = common;
+import { getSdkHeaders } from '../../lib/common';
 
 describe('Tests of Common Library', () => {
   describe('getSdkHeaders', () => {

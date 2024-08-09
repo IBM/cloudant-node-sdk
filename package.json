@@ -13,8 +13,8 @@
   ],
   "author": "IBM Corp.",
   "scripts": {
-    "eslint:fix": "eslint . --ext .ts,.js --fix",
-    "eslint:check": "eslint . --ext .ts,.js --cache",
+    "eslint:fix": "eslint . --ext .ts,.js,.mjs --fix",
+    "eslint:check": "eslint . --ext .ts,.js,.mjs --cache",
     "lint": "npm run eslint:check",
     "lint-fix": "npm run eslint:fix",
     "copymeta": "[ -d 'dist' ] && cp package.json LICENSE README.md dist/",

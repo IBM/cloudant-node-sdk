@@ -18,14 +18,12 @@
  * Run this script from the root folder to regenerate outputs of example codes.
  */
 
-const fs = require('fs');
+import { writeFile } from 'node:fs';
 
-const {
-  getInfoFromExistingDatabase,
-} = require('./GetInfoFromExistingDatabase.js');
-const { createDbAndDoc } = require('./CreateDbAndDoc.js');
-const { updateDoc } = require('./UpdateDoc.js');
-const { deleteDoc } = require('./DeleteDoc.js');
+import { getInfoFromExistingDatabase } from './GetInfoFromExistingDatabase';
+import { createDbAndDoc } from './CreateDbAndDoc';
+import { updateDoc } from './UpdateDoc';
+import { deleteDoc } from './DeleteDoc';
 
 let consoleOutput = ''; // flush consoleOutput
 const mockedLog = (output) => {
@@ -36,7 +34,7 @@ global.console.log = mockedLog; // Mock console.log
 const run = async () => {
   await createDbAndDoc();
 
-  fs.writeFile(
+  writeFile(
     'test/examples/output/CreateDbAndDoc.txt',
     consoleOutput.trim(),
     (err) => {
@@ -48,7 +46,7 @@ const run = async () => {
 
   await getInfoFromExistingDatabase();
 
-  fs.writeFile(
+  writeFile(
     'test/examples/output/GetInfoFromExistingDatabase.txt',
     consoleOutput.trim(),
     (err) => {
@@ -60,7 +58,7 @@ const run = async () => {
 
   await updateDoc();
 
-  fs.writeFile(
+  writeFile(
     'test/examples/output/UpdateDoc.txt',
     consoleOutput.trim(),
     (err) => {
@@ -72,7 +70,7 @@ const run = async () => {
 
   await deleteDoc();
 
-  fs.writeFile(
+  writeFile(
     'test/examples/output/DeleteDoc.txt',
     consoleOutput.trim(),
     (err) => {

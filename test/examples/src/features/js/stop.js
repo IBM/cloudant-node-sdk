@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 import { ChangesFollower, CloudantV1 } from '../../../../../index';
-const { Writable } = require('node:stream');
-const { pipeline } = require('node:stream/promises');
+import { Writable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 
 const client = CloudantV1.newInstance();
 const changesParams = {

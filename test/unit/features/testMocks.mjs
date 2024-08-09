@@ -14,13 +14,9 @@
  * limitations under the License.
  */
 
-const core = require('ibm-cloud-sdk-core');
-const {
-  ChangesFollower,
-} = require('../../../cloudant/features/changesFollower.ts');
-const { getTransientErrors } = require('./mockErrors');
-
-const { NoAuthAuthenticator } = core;
+import { NoAuthAuthenticator } from 'ibm-cloud-sdk-core';
+import { ChangesFollower } from '../../../cloudant/features/changesFollower';
+import { getTransientErrors } from './mockErrors';
 
 function mockAuthenticator() {
   const authenticatorMock = jest.spyOn(core, 'getAuthenticatorFromEnvironment');
@@ -135,7 +131,7 @@ function mockPerptualSupplierRespectingLimit(opts) {
   return getPerpetualSupplierResponse(opts.limit);
 }
 
-module.exports = {
+export default {
   mockAuthenticator,
   mockAlternatingBatchesAndErrors,
   mockAlternatingBatchErrorThenPerpetualSupplier,

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const assert = require('assert');
-const { BasicAuthenticator } = require('ibm-cloud-sdk-core');
-const getAuthenticatorFromEnvCloudantExtension =
-  require('../../lib/getAuthenticatorFromEnvCloudantExtension.ts').default;
-const { CouchdbSessionAuthenticator } = require('../../index.ts');
+import { ok, strictEqual } from 'node:assert';
+import { BasicAuthenticator } from 'ibm-cloud-sdk-core';
+import getAuthenticatorFromEnvCloudantExtension
+  from '../../lib/getAuthenticatorFromEnvCloudantExtension';
+import { CouchdbSessionAuthenticator } from '../../index';
 
 describe('Test getAuthenticatorFromEnvCloudantExtension', () => {
   it('Create couchdb_session authenticator', () => {
@@ -26,9 +26,9 @@ describe('Test getAuthenticatorFromEnvCloudantExtension', () => {
     process.env.TEST1_PASSWORD = 'password';
     const auth = getAuthenticatorFromEnvCloudantExtension('test1');
 
-    assert.ok(auth instanceof CouchdbSessionAuthenticator);
-    assert.strictEqual(auth.tokenOptions.username, 'username');
-    assert.strictEqual(auth.tokenOptions.password, 'password');
+    ok(auth instanceof CouchdbSessionAuthenticator);
+    strictEqual(auth.tokenOptions.username, 'username');
+    strictEqual(auth.tokenOptions.password, 'password');
   });
 
   it('Create couchdb_session authenticator with non-standard casing', () => {
@@ -37,7 +37,7 @@ describe('Test getAuthenticatorFromEnvCloudantExtension', () => {
     process.env.TEST2_PASSWORD = 'password';
     const auth = getAuthenticatorFromEnvCloudantExtension('test2');
 
-    assert.ok(auth instanceof CouchdbSessionAuthenticator);
+    ok(auth instanceof CouchdbSessionAuthenticator);
   });
 
   it('Use invalid authenticator type', () => {
@@ -45,7 +45,7 @@ describe('Test getAuthenticatorFromEnvCloudantExtension', () => {
     process.env.TEST3_USERNAME = 'username';
     process.env.TEST3_PASSWORD = 'password';
     const auth = getAuthenticatorFromEnvCloudantExtension('test3');
-    assert.ok(auth instanceof BasicAuthenticator);
+    ok(auth instanceof BasicAuthenticator);
   });
 
   it('Create couchdb_session authenticator with env auth type alias', () => {
@@ -54,8 +54,8 @@ describe('Test getAuthenticatorFromEnvCloudantExtension', () => {
     process.env.TEST4_PASSWORD = 'password';
     const auth = getAuthenticatorFromEnvCloudantExtension('test4');
 
-    assert.ok(auth instanceof CouchdbSessionAuthenticator);
-    assert.strictEqual(auth.tokenOptions.username, 'username');
-    assert.strictEqual(auth.tokenOptions.password, 'password');
+    ok(auth instanceof CouchdbSessionAuthenticator);
+    strictEqual(auth.tokenOptions.username, 'username');
+    strictEqual(auth.tokenOptions.password, 'password');
   });
 });
