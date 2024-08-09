@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import fs from 'fs';
-import dotenv from 'dotenv';
+const fs = require('fs');
+const dotenv = require('dotenv');
 
 // this variable will either hold the normal `describe` method from `jest`
 // or will be an alias for `describe.skip` from `jest` (skipping all tests)

@@ -16,7 +16,7 @@
 
 const assert = require('assert');
 const { CloudantV1 } = require('../../index.ts');
-const authHelper = require('../resources/auth-helper.mjs');
+const authHelper = require('../resources/auth-helper.js');
 
 // testcase timeout value (10s).
 const timeout = 10000;
