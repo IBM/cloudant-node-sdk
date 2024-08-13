@@ -63,6 +63,7 @@ module.exports = {
       'plugins': ['node', 'prettier'],
       'extends': ['airbnb-base', 'prettier'],
       'rules': {
+        '@typescript-eslint/no-require-imports': 'error',
         'camelcase': 'off',
         'import/extensions': 'off',
         'no-template-curly-in-string': 'off',
@@ -91,6 +92,7 @@ module.exports = {
         'prettier',
       ],
       'rules': {
+        '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
         'no-param-reassign': 'off',
@@ -126,8 +128,9 @@ module.exports = {
       },
     },
     {
-      'files': ['test/**/cloudant.v1.test.js'],
+      'files': ['test/**/cloudant.*.test.js', 'test/**/auth-helper.js'],
       'rules': {
+        '@typescript-eslint/no-require-imports': 'off',
         'prettier/prettier': 'off',
       },
     },
