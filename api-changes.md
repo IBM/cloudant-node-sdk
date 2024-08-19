@@ -831,7 +831,7 @@ to the new SDK name format model with the corrected case convention.
 const vduFunction: string = 'function (doc) { if (!doc.email) { throw({ forbidden: "Users must have an email." }); }}';
 
 const designDocument: CloudantV1.DesignDocument = CloudantV1.DesignDocument.deserialize({
-  validateDocUpdate: vduFunction
+  validate_doc_update: vduFunction
 });
 
 service.putDesignDocument({
