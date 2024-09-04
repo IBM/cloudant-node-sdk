@@ -43,6 +43,9 @@ to avoid surprises.
   * [Error handling](#error-handling)
   * [Raw IO](#raw-io)
   * [Further resources](#further-resources)
+  * [Browser usage](#browser-usage)
+    + [Polyfills](#polyfills)
+    + [CORS](#cors)
   * [Changes feed follower (beta)](#changes-feed-follower-beta)
     + [Introduction](#introduction)
     + [Modes of operation](#modes-of-operation)
@@ -948,6 +951,68 @@ Expand them to see examples of:
   The official documentation page for Cloudant.
 - [Cloudant blog](https://blog.cloudant.com/):
   Many useful articles about how to optimize Cloudant for common problems.
+
+### Browser usage
+
+You can use the SDK directly from JavaScript running in a browser if:
+* Polyfills for required Node.js system modules are available.
+* The server configuration allows cross-origin resource sharing (CORS).
+
+#### Polyfills
+
+Use either:
+* A bundler that includes polyfills for Node.js system modules in the browser.
+* Or a Node.js compatible browser-based runtime.
+
+The Node.js system modules required are:
+* `assert`
+* `buffer`
+* `crypto`
+* `fs`
+* `http`
+* `https`
+* `os`
+* `path`
+* `process`
+* `querystring`
+* `stream`
+* `timers`
+* `url`
+* `util`
+* `vm`
+* `zlib`
+
+Additionally the SDK or its dependencies need to be able to resolve the globals:
+* `Buffer`
+* `process`
+* `Readable`
+* `setImmediate` and `setTimeout`
+
+Environment variables:
+* `NODE_DEBUG` (must be resolvable from the `process.env` even if it is unset)
+
+It may be possible to omit some of these requirements for specific use cases.
+
+#### CORS
+
+To allow CORS requests from the SDK in the browser:
+1. Configure the server with a CORS origin matching the URL protocol, host and port of the JavaScript application.
+2. Either
+   * Configure the server with a CORS headers allow list that includes the default headers plus the SDK's extra headers:
+     * `user-agent`
+     * `x-ibmcloud-sdk-analytics`
+     * `content-encoding` (unless SDK [request body compression is disabled](./KNOWN_ISSUES.md#Disabling-request-body-compression))
+   * Or configure the SDK to remove the extra headers from requests, for example:
+     ```js
+     // Set a request interceptor to remove the headers from the requests
+     service.getHttpClient().interceptors.request.use(requestConfig => {
+     delete requestConfig.headers['User-Agent']
+     delete requestConfig.headers['X-IBMCloud-SDK-Analytics']
+     return requestConfig;
+     });
+     // Disable request body compression
+     service.setEnableGzipCompression(false);
+     ```
 
 ### Changes feed follower (beta)
 
