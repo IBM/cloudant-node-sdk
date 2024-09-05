@@ -53,13 +53,6 @@ describe('CloudantV1_integration', () => {
     expect(res.result).toBeDefined();
   });
 
-  test('getMembershipInformation()', async () => {
-    const res = await cloudantService.getMembershipInformation();
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
   test('getUuids()', async () => {
     const params = {
       count: 1,
@@ -673,9 +666,15 @@ describe('CloudantV1_integration', () => {
       partitioned: true,
     };
 
+    // DesignDocumentViewsMapReduceOptions
+    const designDocumentViewsMapReduceOptionsModel = {
+      foo: 'testString',
+    };
+
     // DesignDocumentViewsMapReduce
     const designDocumentViewsMapReduceModel = {
       map: 'function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}',
+      options: designDocumentViewsMapReduceOptionsModel,
       reduce: 'testString',
     };
 
@@ -1846,6 +1845,13 @@ describe('CloudantV1_integration', () => {
 
   test('getActiveTasks()', async () => {
     const res = await cloudantService.getActiveTasks();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('getMembershipInformation()', async () => {
+    const res = await cloudantService.getMembershipInformation();
     expect(res).toBeDefined();
     expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
