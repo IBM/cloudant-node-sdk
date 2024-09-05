@@ -153,53 +153,6 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Retrieve cluster membership information.
-   *
-   * Displays the nodes that are part of the cluster as `cluster_nodes`. The field, `all_nodes`, displays all nodes this
-   * node knows about, including the ones that are part of the cluster. This endpoint is useful when you set up a
-   * cluster.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.MembershipInformation>>}
-   */
-  public getMembershipInformation(
-    params?: CloudantV1.GetMembershipInformationParams
-  ): Promise<CloudantV1.Response<CloudantV1.MembershipInformation>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getMembershipInformation');
-
-    const parameters = {
-      options: {
-        url: '/_membership',
-        method: 'GET',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.MembershipInformation.deserialize,
-    );
-  }
-
-  /**
    * Retrieve one or more UUIDs.
    *
    * Requests one or more Universally Unique Identifiers (UUIDs) from the instance. The response is a JSON object that
@@ -307,7 +260,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {number} params.blocks - A number of blocks of throughput units. A block consists of 100 reads/sec, 50
-   * writes/sec, and 5 global queries/sec of provisioned throughput capacity.
+   * writes/sec, and 5 global queries/sec of provisioned throughput capacity. Not available for some plans.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>>}
    */
@@ -481,13 +434,19 @@ class CloudantV1 extends CloudantBaseService {
    * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-   * available combination and conditional operators.
+   * argument.
+   *
+   * It is important for query performance to use appropriate selectors:
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
+   * * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+   * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
+   * of documents that will need to be scanned.
    *
-   * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * combination and conditional operators.
+   *
+   * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.lastEventId] - Header parameter to specify the ID of the last events received by the server
    * on a previous connection. Overrides `since` query parameter.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -662,13 +621,19 @@ class CloudantV1 extends CloudantBaseService {
    * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-   * available combination and conditional operators.
+   * argument.
+   *
+   * It is important for query performance to use appropriate selectors:
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
+   * * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+   * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
+   * of documents that will need to be scanned.
    *
-   * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * combination and conditional operators.
+   *
+   * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.lastEventId] - Header parameter to specify the ID of the last events received by the server
    * on a previous connection. Overrides `since` query parameter.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
@@ -1079,6 +1044,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {boolean} [params.partitioned] - Query parameter to specify whether to enable database partitions when
    * creating a database.
+   *
+   * Before using read the
+   * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partitioned-databases-database-partitioning)
+   * to understand the limitations and appropriate use cases.
    * @param {number} [params.q] - The number of shards in the database. Each shard is a partition of the hash value
    * range. Cloudant recommends using the default value for most databases. However, if your database is expected to be
    * larger than 250 GB or have a lot of indexes, you may need to adjust the settings. In these cases, it's best to
@@ -2355,6 +2324,9 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.newEdits] - Query parameter to specify whether to prevent insertion of conflicting
    * document revisions. If false, a well-formed _rev must be included in the document. False is used by the replicator
    * to insert documents into the target database even if that leads to the creation of conflicts.
+   *
+   * Avoid using this parameter, since this option applies document revisions without checking for conflicts, so it is
+   * very easy to accidentally end up with a large number of conflicts.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
@@ -2644,6 +2616,9 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.newEdits] - Query parameter to specify whether to prevent insertion of conflicting
    * document revisions. If false, a well-formed _rev must be included in the document. False is used by the replicator
    * to insert documents into the target database even if that leads to the creation of conflicts.
+   *
+   * Avoid using this parameter, since this option applies document revisions without checking for conflicts, so it is
+   * very easy to accidentally end up with a large number of conflicts.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
@@ -2954,6 +2929,10 @@ class CloudantV1 extends CloudantBaseService {
    * A JSON array of keys that match the key type emitted by the view function.
    * @param {boolean} [params.reduce] - Parameter to specify whether to use the reduce function in a map-reduce view.
    * Default is true when a reduce function is defined.
+   *
+   * A default `reduce` view type can be disabled to behave like a `map` by setting `reduce=false` explicitly.
+   *
+   * Be aware that `include_docs=true` can only be used with `map` views.
    * @param {boolean} [params.stable] - Query parameter to specify whether use the same replica of  the index on each
    * request. The default value `false` contacts all  replicas and returns the result from the first, fastest,
    * responder. Setting it to `true` when used in conjunction with `update=false`  may improve consistency at the
@@ -3082,6 +3061,10 @@ class CloudantV1 extends CloudantBaseService {
    * A JSON array of keys that match the key type emitted by the view function.
    * @param {boolean} [params.reduce] - Parameter to specify whether to use the reduce function in a map-reduce view.
    * Default is true when a reduce function is defined.
+   *
+   * A default `reduce` view type can be disabled to behave like a `map` by setting `reduce=false` explicitly.
+   *
+   * Be aware that `include_docs=true` can only be used with `map` views.
    * @param {boolean} [params.stable] - Query parameter to specify whether use the same replica of  the index on each
    * request. The default value `false` contacts all  replicas and returns the result from the first, fastest,
    * responder. Setting it to `true` when used in conjunction with `update=false`  may improve consistency at the
@@ -3541,6 +3524,10 @@ class CloudantV1 extends CloudantBaseService {
    * Lucene Query Parser Syntax. Search indexes are defined by an index function, similar to a map function in MapReduce
    * views. The index function decides what data to index and store in the index.
    *
+   * Before using read the
+   * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand
+   * the limitations and appropriate use cases.
+   *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.partitionKey - Path parameter to specify the database partition key.
@@ -3641,6 +3628,10 @@ class CloudantV1 extends CloudantBaseService {
    * Lucene Query Parser Syntax. Search indexes are defined by an index function, similar to a map function in MapReduce
    * views. The index function decides what data to index and store in the index.
    *
+   * Before using read the
+   * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand
+   * the limitations and appropriate use cases.
+   *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.partitionKey - Path parameter to specify the database partition key.
@@ -3740,6 +3731,10 @@ class CloudantV1 extends CloudantBaseService {
    * results. The remainder of the POST view functionality is identical to the `GET /{db}/_design/{ddoc}/_view/{view}`
    * API.
    *
+   * Before using read the
+   * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand
+   * the limitations and appropriate use cases.
+   *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.partitionKey - Path parameter to specify the database partition key.
@@ -3775,6 +3770,10 @@ class CloudantV1 extends CloudantBaseService {
    * A JSON array of keys that match the key type emitted by the view function.
    * @param {boolean} [params.reduce] - Parameter to specify whether to use the reduce function in a map-reduce view.
    * Default is true when a reduce function is defined.
+   *
+   * A default `reduce` view type can be disabled to behave like a `map` by setting `reduce=false` explicitly.
+   *
+   * Be aware that `include_docs=true` can only be used with `map` views.
    * @param {any} [params.startKey] - Schema for any JSON type.
    * @param {string} [params.startKeyDocId] - Schema for a document ID.
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
@@ -3862,6 +3861,10 @@ class CloudantV1 extends CloudantBaseService {
    * results. The remainder of the POST view functionality is identical to the `GET /{db}/_design/{ddoc}/_view/{view}`
    * API.
    *
+   * Before using read the
+   * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand
+   * the limitations and appropriate use cases.
+   *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.partitionKey - Path parameter to specify the database partition key.
@@ -3897,6 +3900,10 @@ class CloudantV1 extends CloudantBaseService {
    * A JSON array of keys that match the key type emitted by the view function.
    * @param {boolean} [params.reduce] - Parameter to specify whether to use the reduce function in a map-reduce view.
    * Default is true when a reduce function is defined.
+   *
+   * A default `reduce` view type can be disabled to behave like a `map` by setting `reduce=false` explicitly.
+   *
+   * Be aware that `include_docs=true` can only be used with `map` views.
    * @param {any} [params.startKey] - Schema for any JSON type.
    * @param {string} [params.startKeyDocId] - Schema for a document ID.
    * @param {string} [params.update] - Parameter to specify whether or not the view in question should be updated prior
@@ -4003,13 +4010,19 @@ class CloudantV1 extends CloudantBaseService {
    * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-   * available combination and conditional operators.
+   * argument.
+   *
+   * It is important for query performance to use appropriate selectors:
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
+   * * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+   * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
+   * of documents that will need to be scanned.
    *
-   * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * combination and conditional operators.
+   *
+   * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4040,6 +4053,9 @@ class CloudantV1 extends CloudantBaseService {
    *
    * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
    * indexes that might get added later.
+   *
+   * If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
+   * full scan of all documents will answer the query.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ExplainResult>>}
    */
@@ -4111,6 +4127,10 @@ class CloudantV1 extends CloudantBaseService {
    * recommended because it has a noticeable performance impact causing a full scan of the partition with each request.
    * In this case the response body will include a warning field recommending that an index is created.
    *
+   * Before using read the
+   * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand
+   * the limitations and appropriate use cases.
+   *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.partitionKey - Path parameter to specify the database partition key.
@@ -4134,13 +4154,19 @@ class CloudantV1 extends CloudantBaseService {
    * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-   * available combination and conditional operators.
+   * argument.
+   *
+   * It is important for query performance to use appropriate selectors:
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
+   * * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+   * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
+   * of documents that will need to be scanned.
    *
-   * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * combination and conditional operators.
+   *
+   * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4171,6 +4197,9 @@ class CloudantV1 extends CloudantBaseService {
    *
    * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
    * indexes that might get added later.
+   *
+   * If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
+   * full scan of all documents will answer the query.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.FindResult>>}
    */
@@ -4242,6 +4271,10 @@ class CloudantV1 extends CloudantBaseService {
    * recommended because it has a noticeable performance impact causing a full scan of the partition with each request.
    * In this case the response body will include a warning field recommending that an index is created.
    *
+   * Before using read the
+   * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand
+   * the limitations and appropriate use cases.
+   *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.partitionKey - Path parameter to specify the database partition key.
@@ -4265,13 +4298,19 @@ class CloudantV1 extends CloudantBaseService {
    * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-   * available combination and conditional operators.
+   * argument.
+   *
+   * It is important for query performance to use appropriate selectors:
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
+   * * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+   * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
+   * of documents that will need to be scanned.
    *
-   * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * combination and conditional operators.
+   *
+   * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4302,6 +4341,9 @@ class CloudantV1 extends CloudantBaseService {
    *
    * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
    * indexes that might get added later.
+   *
+   * If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
+   * full scan of all documents will answer the query.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
@@ -4391,13 +4433,19 @@ class CloudantV1 extends CloudantBaseService {
    * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-   * available combination and conditional operators.
+   * argument.
+   *
+   * It is important for query performance to use appropriate selectors:
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
+   * * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+   * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
+   * of documents that will need to be scanned.
    *
-   * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * combination and conditional operators.
+   *
+   * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4428,6 +4476,9 @@ class CloudantV1 extends CloudantBaseService {
    *
    * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
    * indexes that might get added later.
+   *
+   * If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
+   * full scan of all documents will answer the query.
    * @param {number} [params.r] - The read quorum that is needed for the result. The value defaults to 1, in which case
    * the document that was found in the index is returned. If set to a higher value, each document is read from at least
    * that many replicas before it is returned in the results. The request will take more time than using only the
@@ -4525,13 +4576,19 @@ class CloudantV1 extends CloudantBaseService {
    * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-   * available combination and conditional operators.
+   * argument.
+   *
+   * It is important for query performance to use appropriate selectors:
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
+   * * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+   * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
+   * of documents that will need to be scanned.
    *
-   * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * combination and conditional operators.
+   *
+   * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4562,6 +4619,9 @@ class CloudantV1 extends CloudantBaseService {
    *
    * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
    * indexes that might get added later.
+   *
+   * If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
+   * full scan of all documents will answer the query.
    * @param {number} [params.r] - The read quorum that is needed for the result. The value defaults to 1, in which case
    * the document that was found in the index is returned. If set to a higher value, each document is read from at least
    * that many replicas before it is returned in the results. The request will take more time than using only the
@@ -4659,13 +4719,19 @@ class CloudantV1 extends CloudantBaseService {
    * combination operator takes a single argument. The argument is either another selector, or an array of selectors.
    * * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
    * instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-   * argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-   * available combination and conditional operators.
+   * argument.
+   *
+   * It is important for query performance to use appropriate selectors:
    * * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
    * of a query. You should include at least one of these in a selector.
+   * * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+   * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
+   * of documents that will need to be scanned.
    *
-   * For further reference see
-   * [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * combination and conditional operators.
+   *
+   * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4696,6 +4762,9 @@ class CloudantV1 extends CloudantBaseService {
    *
    * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
    * indexes that might get added later.
+   *
+   * If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
+   * full scan of all documents will answer the query.
    * @param {number} [params.r] - The read quorum that is needed for the result. The value defaults to 1, in which case
    * the document that was found in the index is returned. If set to a higher value, each document is read from at least
    * that many replicas before it is returned in the results. The request will take more time than using only the
@@ -5620,6 +5689,9 @@ class CloudantV1 extends CloudantBaseService {
    * @param {boolean} [params.newEdits] - Query parameter to specify whether to prevent insertion of conflicting
    * document revisions. If false, a well-formed _rev must be included in the document. False is used by the replicator
    * to insert documents into the target database even if that leads to the creation of conflicts.
+   *
+   * Avoid using this parameter, since this option applies document revisions without checking for conflicts, so it is
+   * very easy to accidentally end up with a large number of conflicts.
    * @param {string} [params.rev] - Query parameter to specify a document revision.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
@@ -7086,6 +7158,53 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
+   * Retrieve cluster membership information.
+   *
+   * Displays the nodes that are part of the cluster as `cluster_nodes`. The field, `all_nodes`, displays all nodes this
+   * node knows about, including the ones that are part of the cluster. This endpoint is useful when you set up a
+   * cluster.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.MembershipInformation>>}
+   */
+  public getMembershipInformation(
+    params?: CloudantV1.GetMembershipInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.MembershipInformation>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getMembershipInformation');
+
+    const parameters = {
+      options: {
+        url: '/_membership',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.MembershipInformation.deserialize,
+    );
+  }
+
+  /**
    * Retrieve information about whether the server is up.
    *
    * Confirms that the server is up, running, and ready to respond to requests. If `maintenance_mode` is `true` or
@@ -7316,11 +7435,6 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `getMembershipInformation` operation. */
-  export interface GetMembershipInformationParams {
-    headers?: OutgoingHttpHeaders;
-  }
-
   /** Parameters for the `getUuids` operation. */
   export interface GetUuidsParams {
     /** Query parameter to specify the number of UUIDs to return. */
@@ -7336,7 +7450,7 @@ namespace CloudantV1 {
   /** Parameters for the `putCapacityThroughputConfiguration` operation. */
   export interface PutCapacityThroughputConfigurationParams {
     /** A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global
-     *  queries/sec of provisioned throughput capacity.
+     *  queries/sec of provisioned throughput capacity. Not available for some plans.
      */
     blocks: number;
     headers?: OutgoingHttpHeaders;
@@ -7418,13 +7532,19 @@ namespace CloudantV1 {
      *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
-     *  list of all available combination and conditional operators.
+     *  supplied argument.
+     *
+     *  It is important for query performance to use appropriate selectors:
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
+     *  * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query
+     *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
+     *  the number of documents that will need to be scanned.
      *
-     *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+     *  combination and conditional operators.
+     *
+     *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector?: JsonObject;
     /** Header parameter to specify the ID of the last events received by the server on a previous connection.
@@ -7552,13 +7672,19 @@ namespace CloudantV1 {
      *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
-     *  list of all available combination and conditional operators.
+     *  supplied argument.
+     *
+     *  It is important for query performance to use appropriate selectors:
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
+     *  * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query
+     *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
+     *  the number of documents that will need to be scanned.
      *
-     *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+     *  combination and conditional operators.
+     *
+     *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector?: JsonObject;
     /** Header parameter to specify the ID of the last events received by the server on a previous connection.
@@ -7707,7 +7833,12 @@ namespace CloudantV1 {
   export interface PutDatabaseParams {
     /** Path parameter to specify the database name. */
     db: string;
-    /** Query parameter to specify whether to enable database partitions when creating a database. */
+    /** Query parameter to specify whether to enable database partitions when creating a database.
+     *
+     *  Before using read the
+     *  [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partitioned-databases-database-partitioning)
+     *  to understand the limitations and appropriate use cases.
+     */
     partitioned?: boolean;
     /** The number of shards in the database. Each shard is a partition of the hash value range. Cloudant recommends
      *  using the default value for most databases. However, if your database is expected to be larger than 250 GB or
@@ -8166,6 +8297,9 @@ namespace CloudantV1 {
     /** Query parameter to specify whether to prevent insertion of conflicting document revisions. If false, a
      *  well-formed _rev must be included in the document. False is used by the replicator to insert documents into the
      *  target database even if that leads to the creation of conflicts.
+     *
+     *  Avoid using this parameter, since this option applies document revisions without checking for conflicts, so it
+     *  is very easy to accidentally end up with a large number of conflicts.
      */
     newEdits?: boolean;
     /** Query parameter to specify a document revision. */
@@ -8290,6 +8424,9 @@ namespace CloudantV1 {
     /** Query parameter to specify whether to prevent insertion of conflicting document revisions. If false, a
      *  well-formed _rev must be included in the document. False is used by the replicator to insert documents into the
      *  target database even if that leads to the creation of conflicts.
+     *
+     *  Avoid using this parameter, since this option applies document revisions without checking for conflicts, so it
+     *  is very easy to accidentally end up with a large number of conflicts.
      */
     newEdits?: boolean;
     /** Query parameter to specify a document revision. */
@@ -8433,6 +8570,10 @@ namespace CloudantV1 {
     keys?: any[];
     /** Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce
      *  function is defined.
+     *
+     *  A default `reduce` view type can be disabled to behave like a `map` by setting `reduce=false` explicitly.
+     *
+     *  Be aware that `include_docs=true` can only be used with `map` views.
      */
     reduce?: boolean;
     /** Query parameter to specify whether use the same replica of  the index on each request. The default value
@@ -8523,6 +8664,10 @@ namespace CloudantV1 {
     keys?: any[];
     /** Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce
      *  function is defined.
+     *
+     *  A default `reduce` view type can be disabled to behave like a `map` by setting `reduce=false` explicitly.
+     *
+     *  Be aware that `include_docs=true` can only be used with `map` views.
      */
     reduce?: boolean;
     /** Query parameter to specify whether use the same replica of  the index on each request. The default value
@@ -8860,6 +9005,10 @@ namespace CloudantV1 {
     keys?: any[];
     /** Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce
      *  function is defined.
+     *
+     *  A default `reduce` view type can be disabled to behave like a `map` by setting `reduce=false` explicitly.
+     *
+     *  Be aware that `include_docs=true` can only be used with `map` views.
      */
     reduce?: boolean;
     /** Schema for any JSON type. */
@@ -8944,6 +9093,10 @@ namespace CloudantV1 {
     keys?: any[];
     /** Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce
      *  function is defined.
+     *
+     *  A default `reduce` view type can be disabled to behave like a `map` by setting `reduce=false` explicitly.
+     *
+     *  Be aware that `include_docs=true` can only be used with `map` views.
      */
     reduce?: boolean;
     /** Schema for any JSON type. */
@@ -8996,13 +9149,19 @@ namespace CloudantV1 {
      *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
-     *  list of all available combination and conditional operators.
+     *  supplied argument.
+     *
+     *  It is important for query performance to use appropriate selectors:
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
+     *  * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query
+     *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
+     *  the number of documents that will need to be scanned.
      *
-     *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+     *  combination and conditional operators.
+     *
+     *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -9045,6 +9204,9 @@ namespace CloudantV1 {
      *
      *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
      *  indexes that might get added later.
+     *
+     *  If the specified index does not exist or cannot answer the query then the value is ignored and another index or
+     *  a full scan of all documents will answer the query.
      */
     useIndex?: string[];
     headers?: OutgoingHttpHeaders;
@@ -9091,13 +9253,19 @@ namespace CloudantV1 {
      *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
-     *  list of all available combination and conditional operators.
+     *  supplied argument.
+     *
+     *  It is important for query performance to use appropriate selectors:
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
+     *  * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query
+     *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
+     *  the number of documents that will need to be scanned.
      *
-     *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+     *  combination and conditional operators.
+     *
+     *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -9140,6 +9308,9 @@ namespace CloudantV1 {
      *
      *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
      *  indexes that might get added later.
+     *
+     *  If the specified index does not exist or cannot answer the query then the value is ignored and another index or
+     *  a full scan of all documents will answer the query.
      */
     useIndex?: string[];
     headers?: OutgoingHttpHeaders;
@@ -9186,13 +9357,19 @@ namespace CloudantV1 {
      *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
-     *  list of all available combination and conditional operators.
+     *  supplied argument.
+     *
+     *  It is important for query performance to use appropriate selectors:
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
+     *  * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query
+     *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
+     *  the number of documents that will need to be scanned.
      *
-     *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+     *  combination and conditional operators.
+     *
+     *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -9235,6 +9412,9 @@ namespace CloudantV1 {
      *
      *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
      *  indexes that might get added later.
+     *
+     *  If the specified index does not exist or cannot answer the query then the value is ignored and another index or
+     *  a full scan of all documents will answer the query.
      */
     useIndex?: string[];
     headers?: OutgoingHttpHeaders;
@@ -9279,13 +9459,19 @@ namespace CloudantV1 {
      *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
-     *  list of all available combination and conditional operators.
+     *  supplied argument.
+     *
+     *  It is important for query performance to use appropriate selectors:
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
+     *  * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query
+     *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
+     *  the number of documents that will need to be scanned.
      *
-     *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+     *  combination and conditional operators.
+     *
+     *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -9328,6 +9514,9 @@ namespace CloudantV1 {
      *
      *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
      *  indexes that might get added later.
+     *
+     *  If the specified index does not exist or cannot answer the query then the value is ignored and another index or
+     *  a full scan of all documents will answer the query.
      */
     useIndex?: string[];
     /** The read quorum that is needed for the result. The value defaults to 1, in which case the document that was
@@ -9378,13 +9567,19 @@ namespace CloudantV1 {
      *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
-     *  list of all available combination and conditional operators.
+     *  supplied argument.
+     *
+     *  It is important for query performance to use appropriate selectors:
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
+     *  * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query
+     *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
+     *  the number of documents that will need to be scanned.
      *
-     *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+     *  combination and conditional operators.
+     *
+     *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -9427,6 +9622,9 @@ namespace CloudantV1 {
      *
      *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
      *  indexes that might get added later.
+     *
+     *  If the specified index does not exist or cannot answer the query then the value is ignored and another index or
+     *  a full scan of all documents will answer the query.
      */
     useIndex?: string[];
     /** The read quorum that is needed for the result. The value defaults to 1, in which case the document that was
@@ -9477,13 +9675,19 @@ namespace CloudantV1 {
      *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
-     *  list of all available combination and conditional operators.
+     *  supplied argument.
+     *
+     *  It is important for query performance to use appropriate selectors:
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
+     *  * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query
+     *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
+     *  the number of documents that will need to be scanned.
      *
-     *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+     *  combination and conditional operators.
+     *
+     *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
     /** Opaque bookmark token used when paginating results. */
@@ -9526,6 +9730,9 @@ namespace CloudantV1 {
      *
      *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
      *  indexes that might get added later.
+     *
+     *  If the specified index does not exist or cannot answer the query then the value is ignored and another index or
+     *  a full scan of all documents will answer the query.
      */
     useIndex?: string[];
     /** The read quorum that is needed for the result. The value defaults to 1, in which case the document that was
@@ -9966,6 +10173,9 @@ namespace CloudantV1 {
     /** Query parameter to specify whether to prevent insertion of conflicting document revisions. If false, a
      *  well-formed _rev must be included in the document. False is used by the replicator to insert documents into the
      *  target database even if that leads to the creation of conflicts.
+     *
+     *  Avoid using this parameter, since this option applies document revisions without checking for conflicts, so it
+     *  is very easy to accidentally end up with a large number of conflicts.
      */
     newEdits?: boolean;
     /** Query parameter to specify a document revision. */
@@ -10343,6 +10553,11 @@ namespace CloudantV1 {
 
   /** Parameters for the `getActiveTasks` operation. */
   export interface GetActiveTasksParams {
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `getMembershipInformation` operation. */
+  export interface GetMembershipInformationParams {
     headers?: OutgoingHttpHeaders;
   }
 
@@ -11476,7 +11691,11 @@ namespace CloudantV1 {
     /** Array of documents. */
     docs: Document[];
 
-    /** If `false`, prevents the database from assigning them new revision IDs. Default is `true`. */
+    /** If `false`, prevents the database from assigning them new revision IDs. Default is `true`.
+     *
+     *  Avoid using this parameter, since this option applies document revisions without checking for conflicts, so it
+     *  is very easy to accidentally end up with a large number of conflicts.
+     */
     newEdits?: boolean;
 
     static serialize(obj): BulkDocs.Transport {
@@ -13138,6 +13357,9 @@ namespace CloudantV1 {
     /** JavaScript map function as a string. */
     map: string;
 
+    /** Options of view build resuls. */
+    options?: DesignDocumentViewsMapReduceOptions;
+
     /** JavaScript reduce function as a string. */
     reduce?: string;
 
@@ -13148,6 +13370,9 @@ namespace CloudantV1 {
       let copy: DesignDocumentViewsMapReduce.Transport = <DesignDocumentViewsMapReduce.Transport>{};
       if (obj.map !== undefined) {
         copy.map = obj.map;
+      }
+      if (obj.options !== undefined) {
+        copy.options = DesignDocumentViewsMapReduceOptions.serialize(obj.options);
       }
       if (obj.reduce !== undefined) {
         copy.reduce = obj.reduce;
@@ -13163,6 +13388,9 @@ namespace CloudantV1 {
       if (obj.map !== undefined) {
         copy.map = obj.map;
       }
+      if (obj.options !== undefined) {
+        copy.options = DesignDocumentViewsMapReduceOptions.deserialize(obj.options);
+      }
       if (obj.reduce !== undefined) {
         copy.reduce = obj.reduce;
       }
@@ -13172,7 +13400,57 @@ namespace CloudantV1 {
   export namespace DesignDocumentViewsMapReduce {
       export interface Transport {
         map: string;
+        options?: DesignDocumentViewsMapReduceOptions.Transport;
         reduce?: string;
+      }
+  }
+
+  /**
+   * Options of view build resuls.
+   *
+   * This type supports additional properties of type any.
+   */
+  export class DesignDocumentViewsMapReduceOptions {
+
+    /**
+     * DesignDocumentViewsMapReduceOptions accepts additional properties of type any.
+     */
+    [propName: string]: any;
+
+    static serialize(obj): DesignDocumentViewsMapReduceOptions.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DesignDocumentViewsMapReduceOptions.Transport = <DesignDocumentViewsMapReduceOptions.Transport>{};
+      let defaultProperties = [
+      ];
+      Object.keys(obj).forEach(key => {
+        if (!defaultProperties.includes(key)) {
+          copy[key] = obj[key];
+        }
+      });
+      return copy as unknown as DesignDocumentViewsMapReduceOptions.Transport;
+    }
+
+    static deserialize(obj): DesignDocumentViewsMapReduceOptions {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DesignDocumentViewsMapReduceOptions = <DesignDocumentViewsMapReduceOptions>{};
+      let defaultProperties = [
+      ];
+      Object.keys(obj).forEach(key => {
+        if (!defaultProperties.includes(key)) {
+          copy[key] = obj[key];
+        }
+      });
+      return copy as unknown as DesignDocumentViewsMapReduceOptions;
+    }
+  }
+  export namespace DesignDocumentViewsMapReduceOptions {
+      export interface Transport {
+        /** DesignDocumentViewsMapReduceOptions.DesignDocumentViewsMapReduceOptions.Transport accepts additional properties of type any. */
+        [propName: string]: any;
       }
   }
 
@@ -13806,13 +14084,19 @@ namespace CloudantV1 {
      *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
-     *  list of all available combination and conditional operators.
+     *  supplied argument.
+     *
+     *  It is important for query performance to use appropriate selectors:
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
+     *  * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query
+     *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
+     *  the number of documents that will need to be scanned.
      *
-     *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+     *  combination and conditional operators.
+     *
+     *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
 
@@ -14520,13 +14804,19 @@ namespace CloudantV1 {
      *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
-     *  list of all available combination and conditional operators.
+     *  supplied argument.
+     *
+     *  It is important for query performance to use appropriate selectors:
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
+     *  * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query
+     *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
+     *  the number of documents that will need to be scanned.
      *
-     *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+     *  combination and conditional operators.
+     *
+     *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     partialFilterSelector?: JsonObject;
 
@@ -15652,13 +15942,19 @@ namespace CloudantV1 {
      *  combination operator takes a single argument. The argument is either another selector, or an array of selectors.
      *  * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
      *  instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the
-     *  supplied argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a
-     *  list of all available combination and conditional operators.
+     *  supplied argument.
+     *
+     *  It is important for query performance to use appropriate selectors:
      *  * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the
      *  basis of a query. You should include at least one of these in a selector.
+     *  * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query
+     *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
+     *  the number of documents that will need to be scanned.
      *
-     *  For further reference see
-     *  [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+     *  combination and conditional operators.
+     *
+     *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector?: JsonObject;
 
@@ -17707,9 +18003,9 @@ namespace CloudantV1 {
    */
   export class ThroughputInformation {
     /** A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global
-     *  queries/sec of provisioned throughput capacity.
+     *  queries/sec of provisioned throughput capacity. Not available for some plans.
      */
-    blocks: number;
+    blocks?: number;
 
     /** Provisioned global queries capacity in operations per second. */
     query: number;
@@ -17762,7 +18058,7 @@ namespace CloudantV1 {
   }
   export namespace ThroughputInformation {
       export interface Transport {
-        blocks: number;
+        blocks?: number;
         query: number;
         read: number;
         write: number;
@@ -18084,6 +18380,10 @@ namespace CloudantV1 {
 
     /** Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce
      *  function is defined.
+     *
+     *  A default `reduce` view type can be disabled to behave like a `map` by setting `reduce=false` explicitly.
+     *
+     *  Be aware that `include_docs=true` can only be used with `map` views.
      */
     reduce?: boolean;
 

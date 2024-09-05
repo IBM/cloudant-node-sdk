@@ -182,66 +182,6 @@ describe('CloudantV1', () => {
     });
   });
 
-  describe('getMembershipInformation', () => {
-    describe('positive tests', () => {
-      function __getMembershipInformationTest() {
-        // Construct the params object for operation getMembershipInformation
-        const getMembershipInformationParams = {};
-
-        const getMembershipInformationResult = cloudantService.getMembershipInformation(getMembershipInformationParams);
-
-        // all methods should return a Promise
-        expectToBePromise(getMembershipInformationResult);
-
-        // assert that create request was called
-        expect(createRequestMock).toHaveBeenCalledTimes(1);
-
-        const mockRequestOptions = getOptions(createRequestMock);
-
-        checkUrlAndMethod(mockRequestOptions, '/_membership', 'GET');
-        const expectedAccept = 'application/json';
-        const expectedContentType = undefined;
-        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-      }
-
-      test('should pass the right params to createRequest with enable and disable retries', () => {
-        // baseline test
-        __getMembershipInformationTest();
-
-        // enable retries and test again
-        createRequestMock.mockClear();
-        cloudantService.enableRetries();
-        __getMembershipInformationTest();
-
-        // disable retries and test again
-        createRequestMock.mockClear();
-        cloudantService.disableRetries();
-        __getMembershipInformationTest();
-      });
-
-      test('should prioritize user-given headers', () => {
-        // parameters
-        const userAccept = 'fake/accept';
-        const userContentType = 'fake/contentType';
-        const getMembershipInformationParams = {
-          headers: {
-            Accept: userAccept,
-            'Content-Type': userContentType,
-          },
-        };
-
-        cloudantService.getMembershipInformation(getMembershipInformationParams);
-        checkMediaHeaders(createRequestMock, userAccept, userContentType);
-      });
-
-      test('should not have any problems when no parameters are passed in', () => {
-        // invoke the method with no parameters
-        cloudantService.getMembershipInformation({});
-        checkForSuccessfulExecution(createRequestMock);
-      });
-    });
-  });
-
   describe('getUuids', () => {
     describe('positive tests', () => {
       function __getUuidsTest() {
@@ -3590,9 +3530,15 @@ describe('CloudantV1', () => {
         partitioned: true,
       };
 
+      // DesignDocumentViewsMapReduceOptions
+      const designDocumentViewsMapReduceOptionsModel = {
+        foo: 'testString',
+      };
+
       // DesignDocumentViewsMapReduce
       const designDocumentViewsMapReduceModel = {
         map: 'function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}',
+        options: designDocumentViewsMapReduceOptionsModel,
         reduce: 'testString',
       };
 
@@ -9821,6 +9767,66 @@ describe('CloudantV1', () => {
       test('should not have any problems when no parameters are passed in', () => {
         // invoke the method with no parameters
         cloudantService.getActiveTasks({});
+        checkForSuccessfulExecution(createRequestMock);
+      });
+    });
+  });
+
+  describe('getMembershipInformation', () => {
+    describe('positive tests', () => {
+      function __getMembershipInformationTest() {
+        // Construct the params object for operation getMembershipInformation
+        const getMembershipInformationParams = {};
+
+        const getMembershipInformationResult = cloudantService.getMembershipInformation(getMembershipInformationParams);
+
+        // all methods should return a Promise
+        expectToBePromise(getMembershipInformationResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/_membership', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getMembershipInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getMembershipInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getMembershipInformationTest();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const getMembershipInformationParams = {
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.getMembershipInformation(getMembershipInformationParams);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+
+      test('should not have any problems when no parameters are passed in', () => {
+        // invoke the method with no parameters
+        cloudantService.getMembershipInformation({});
         checkForSuccessfulExecution(createRequestMock);
       });
     });
