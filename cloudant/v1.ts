@@ -13357,9 +13357,6 @@ namespace CloudantV1 {
     /** JavaScript map function as a string. */
     map: string;
 
-    /** Options of view build resuls. */
-    options?: DesignDocumentViewsMapReduceOptions;
-
     /** JavaScript reduce function as a string. */
     reduce?: string;
 
@@ -13370,9 +13367,6 @@ namespace CloudantV1 {
       let copy: DesignDocumentViewsMapReduce.Transport = <DesignDocumentViewsMapReduce.Transport>{};
       if (obj.map !== undefined) {
         copy.map = obj.map;
-      }
-      if (obj.options !== undefined) {
-        copy.options = DesignDocumentViewsMapReduceOptions.serialize(obj.options);
       }
       if (obj.reduce !== undefined) {
         copy.reduce = obj.reduce;
@@ -13388,9 +13382,6 @@ namespace CloudantV1 {
       if (obj.map !== undefined) {
         copy.map = obj.map;
       }
-      if (obj.options !== undefined) {
-        copy.options = DesignDocumentViewsMapReduceOptions.deserialize(obj.options);
-      }
       if (obj.reduce !== undefined) {
         copy.reduce = obj.reduce;
       }
@@ -13400,57 +13391,7 @@ namespace CloudantV1 {
   export namespace DesignDocumentViewsMapReduce {
       export interface Transport {
         map: string;
-        options?: DesignDocumentViewsMapReduceOptions.Transport;
         reduce?: string;
-      }
-  }
-
-  /**
-   * Options of view build resuls.
-   *
-   * This type supports additional properties of type any.
-   */
-  export class DesignDocumentViewsMapReduceOptions {
-
-    /**
-     * DesignDocumentViewsMapReduceOptions accepts additional properties of type any.
-     */
-    [propName: string]: any;
-
-    static serialize(obj): DesignDocumentViewsMapReduceOptions.Transport {
-      if (obj === undefined || obj === null || typeof obj === 'string') {
-        return obj;
-      }
-      let copy: DesignDocumentViewsMapReduceOptions.Transport = <DesignDocumentViewsMapReduceOptions.Transport>{};
-      let defaultProperties = [
-      ];
-      Object.keys(obj).forEach(key => {
-        if (!defaultProperties.includes(key)) {
-          copy[key] = obj[key];
-        }
-      });
-      return copy as unknown as DesignDocumentViewsMapReduceOptions.Transport;
-    }
-
-    static deserialize(obj): DesignDocumentViewsMapReduceOptions {
-      if (obj === undefined || obj === null || typeof obj === 'string') {
-        return obj;
-      }
-      let copy: DesignDocumentViewsMapReduceOptions = <DesignDocumentViewsMapReduceOptions>{};
-      let defaultProperties = [
-      ];
-      Object.keys(obj).forEach(key => {
-        if (!defaultProperties.includes(key)) {
-          copy[key] = obj[key];
-        }
-      });
-      return copy as unknown as DesignDocumentViewsMapReduceOptions;
-    }
-  }
-  export namespace DesignDocumentViewsMapReduceOptions {
-      export interface Transport {
-        /** DesignDocumentViewsMapReduceOptions.DesignDocumentViewsMapReduceOptions.Transport accepts additional properties of type any. */
-        [propName: string]: any;
       }
   }
 

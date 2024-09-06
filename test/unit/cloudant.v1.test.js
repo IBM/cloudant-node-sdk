@@ -3530,15 +3530,9 @@ describe('CloudantV1', () => {
         partitioned: true,
       };
 
-      // DesignDocumentViewsMapReduceOptions
-      const designDocumentViewsMapReduceOptionsModel = {
-        foo: 'testString',
-      };
-
       // DesignDocumentViewsMapReduce
       const designDocumentViewsMapReduceModel = {
         map: 'function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}',
-        options: designDocumentViewsMapReduceOptionsModel,
         reduce: 'testString',
       };
 
