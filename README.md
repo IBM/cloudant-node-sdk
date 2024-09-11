@@ -431,7 +431,7 @@ if (require.main === module) {
 
 When you run the code, you see a result similar to the following output.
 
-```txt
+```text
 "orders" database created.
 You have created the document:
 {
@@ -554,7 +554,7 @@ if (require.main === module) {
 </details>
 When you run the code, you see a result similar to the following output.
 
-```txt
+```text
 Server version 3.2.1
 Document count in "orders" database is 1.
 Document retrieved from database:
@@ -771,7 +771,7 @@ if (require.main === module) {
 </details>
 When you run the code, you see a result similar to the following output.
 
-```txt
+```text
 You have updated the document:
 {
   "_id": "example",
@@ -897,7 +897,7 @@ if (require.main === module) {
 </details>
 When you run the code, you see the following output.
 
-```txt
+```text
 You have deleted the document.
 ```
 
