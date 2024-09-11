@@ -6,5 +6,8 @@
     "out": "apidocs",
     "includeVersion": true,
     "entryPoints": ["index.ts"],
-    "excludeInternal": true
+    "excludeInternal": true,
+    "intentionallyNotExported": [
+        "SessionTokenManager"
+    ],
 }
