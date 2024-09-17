@@ -179,4 +179,4 @@ function getExpectedParams(params) {
   return expectedParams;
 }
 
-export default { testParams, testSeqNumber, getExpectedParams };
+export { testParams, testSeqNumber, getExpectedParams };

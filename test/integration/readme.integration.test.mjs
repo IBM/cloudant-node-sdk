@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { request as _request } from 'node:http';
+import { request as httpRequest } from 'node:http';
 import { readFileSync } from 'node:fs';
-import { spy } from 'sinon';
+import { default as sinon } from 'sinon';
 import { getInfoFromExistingDatabase } from '../examples/src/js/GetInfoFromExistingDatabase';
 import { createDbAndDoc } from '../examples/src/js/CreateDbAndDoc';
 import { updateDoc } from '../examples/src/js/UpdateDoc';
@@ -34,7 +34,7 @@ describe('Readme integration tests', () => {
   // jest --runInBand should be set to run the test cases in order
   beforeAll(() => {
     const wiremockURL = new URL(process.env.WIREMOCK_URL);
-    const request = _request({
+    const request = httpRequest({
       host: wiremockURL.hostname,
       port: wiremockURL.port,
       path: '/__admin/scenarios/reset',
@@ -55,7 +55,7 @@ describe('Readme integration tests', () => {
   });
 
   beforeEach(() => {
-    consoleLogSpy = spy(console, 'log');
+    consoleLogSpy = sinon.spy(console, 'log');
   });
 
   afterEach(() => {

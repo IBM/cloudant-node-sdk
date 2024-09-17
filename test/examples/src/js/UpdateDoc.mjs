@@ -108,4 +108,4 @@ if (require.main === module) {
   updateDoc();
 }
 
-export default { updateDoc };
+export { updateDoc };

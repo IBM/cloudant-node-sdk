@@ -86,4 +86,4 @@ if (require.main === module) {
   createDbAndDoc();
 }
 
-export default { createDbAndDoc };
+export { createDbAndDoc };

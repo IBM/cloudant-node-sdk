@@ -58,4 +58,4 @@ if (require.main === module) {
   deleteDoc();
 }
 
-export default { deleteDoc };
+export { deleteDoc };

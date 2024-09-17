@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { ok, equal } from 'node:assert';
-import { spy, stub, assert as _assert, match } from 'sinon';
+import assert from 'node:assert';
+import { default as sinon } from 'sinon';
 
 import { BasicAuthenticator, IamAuthenticator, NoAuthAuthenticator } from 'ibm-cloud-sdk-core';
 import { CloudantV1, CouchdbSessionAuthenticator } from '../../index';
@@ -42,8 +42,8 @@ describe('Default timeout config tests', () => {
   ];
 
   function assertBaseTimeoutOptions(myService, expTimeoutValue) {
-    ok(myService.baseOptions.timeout);
-    equal(myService.baseOptions.timeout, expTimeoutValue);
+    assert.ok(myService.baseOptions.timeout);
+    assert.equal(myService.baseOptions.timeout, expTimeoutValue);
   }
 
   it('CloudantV1 - BasicAuth', () => {
@@ -73,8 +73,8 @@ describe('Default timeout config tests', () => {
 
   function assertAuthTokenTimeoutOptions(myService, expTimeoutValue) {
     const auth = myService.getAuthenticator();
-    ok(auth.tokenOptions.timeout);
-    equal(auth.tokenOptions.timeout, expTimeoutValue);
+    assert.ok(auth.tokenOptions.timeout);
+    assert.equal(auth.tokenOptions.timeout, expTimeoutValue);
   }
 
   it('CloudantV1 - SessionAuth', () => {
@@ -94,10 +94,10 @@ describe('Default timeout config tests', () => {
 
   function assertIamAuthRequestTimeout(myService, expValue) {
     const auth = myService.getAuthenticator();
-    const spyAuth = spy(auth, 'authenticate');
+    const spyAuth = sinon.spy(auth, 'authenticate');
 
     // Mock out server calls
-    const getTokenStubFn = stub(auth.tokenManager, 'getToken');
+    const getTokenStubFn = sinon.stub(auth.tokenManager, 'getToken');
     getTokenStubFn.returns(
       new Promise((resolve) => {
         resolve('apikey');
@@ -114,16 +114,16 @@ describe('Default timeout config tests', () => {
     );
 
     return myService.getServerInformation().then((response) => {
-      ok(response);
-      ok(spyAuth.calledOnce);
-      ok(getTokenStubFn.calledOnce);
+      assert.ok(response);
+      assert.ok(spyAuth.calledOnce);
+      assert.ok(getTokenStubFn.calledOnce);
       // authenticate is called with default timeout
       _assert.calledWith(spyAuth, match.has('timeout', expValue));
       // server request is called with default timeout
-      ok(sendRequestStubFn.calledOnce);
-      _assert.calledWith(
+      assert.ok(sendRequestStubFn.calledOnce);
+      sinon.assert.calledWith(
         sendRequestStubFn,
-        match.hasNested('defaultOptions.timeout', expValue)
+        sinon.match.hasNested('defaultOptions.timeout', expValue)
       );
       // restore stubbed functions
       getTokenStubFn.restore();

@@ -21,7 +21,7 @@
     /* Module Resolution Options */
     "moduleResolution": "node16",          /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
     "types": ["node"],                     /* Type declaration files to be included in compilation. */
-    "resolveJsonModule": true,
+    "resolveJsonModule": true,             /* Allows importing modules with a .json extension. */
     "esModuleInterop": true
   },
   "exclude": [

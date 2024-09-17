@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import { ok, strictEqual, notDeepStrictEqual } from 'node:assert';
-import { Agent } from 'node:http';
-import { Agent as _Agent } from 'node:https';
+import assert from 'node:assert';
+import { Agent as HttpAgent } from 'node:http';
+import { Agent as HttpsAgent } from 'node:https';
 import {
   BasicAuthenticator,
   IamAuthenticator,
   NoAuthAuthenticator,
 } from 'ibm-cloud-sdk-core';
-import { spy } from 'sinon';
+import { default as sinon } from 'sinon';
 import { CookieJar, MemoryCookieStore } from 'tough-cookie';
 import CloudantBaseService from '../../lib/cloudantBaseService';
 import { CouchdbSessionAuthenticator } from '../../index';
@@ -45,32 +45,32 @@ describe('Test CloudantBaseService', () => {
     });
 
     // the same jar is in use in the authenticator and in the base service
-    ok(service);
-    strictEqual(
+    assert.ok(service);
+    assert.strictEqual(
       service.getAuthenticator().tokenManager.options.jar,
       service.requestWrapperInstance.axiosInstance.defaults.jar
     );
     // Check the trailing slash is removed by the constructor
-    strictEqual(
+    assert.strictEqual(
       service.getAuthenticator().tokenOptions.serviceUrl,
       appleUrl.slice(0, -1)
     );
 
     service.setServiceUrl(newUrl);
     // newUrl is used in authenticator
-    strictEqual(
+    assert.strictEqual(
       service.getAuthenticator().tokenOptions.serviceUrl,
       newUrl.slice(0, -1)
     );
 
     service.configureService('apple');
     // the authenticator and the request using the same jar
-    strictEqual(
+    assert.strictEqual(
       service.getAuthenticator().tokenManager.options.jar,
       service.requestWrapperInstance.axiosInstance.defaults.jar
     );
     // authentication url uses serviceUrl
-    strictEqual(
+    assert.strictEqual(
       service.getAuthenticator().tokenOptions.serviceUrl,
       appleUrl.slice(0, -1)
     );
@@ -85,34 +85,34 @@ describe('Test CloudantBaseService', () => {
       authenticator: auth,
       serviceUrl: appleUrl,
     });
-    ok(service);
+    assert.ok(service);
 
     // Enable gzip compression as this is the default setting
     service.setEnableGzipCompression(true);
     // Assert default value of gzip compression is true in base options,
     // token options, and in request wrapper
-    strictEqual(service.baseOptions.enableGzipCompression, true);
-    strictEqual(
+    assert.strictEqual(service.baseOptions.enableGzipCompression, true);
+    assert.strictEqual(
       service.getAuthenticator().tokenOptions.enableGzipCompression,
       true
     );
     let isGzipCompressionEnabled =
       service.getAuthenticator().tokenManager.requestWrapperInstance
         .axiosInstance.defaults.enableGzipCompression;
-    strictEqual(isGzipCompressionEnabled, true);
+    assert.strictEqual(isGzipCompressionEnabled, true);
 
     // Disable gzip compression
     service.setEnableGzipCompression(false);
     // Assert gzip compression is disabled in base options, token options, and in request wrapper
-    strictEqual(service.baseOptions.enableGzipCompression, false);
-    strictEqual(
+    assert.strictEqual(service.baseOptions.enableGzipCompression, false);
+    assert.strictEqual(
       service.getAuthenticator().tokenOptions.enableGzipCompression,
       false
     );
     isGzipCompressionEnabled =
       service.getAuthenticator().tokenManager.requestWrapperInstance
         .axiosInstance.defaults.enableGzipCompression;
-    strictEqual(isGzipCompressionEnabled, false);
+    assert.strictEqual(isGzipCompressionEnabled, false);
   });
 
   it('Invalidate token on setServiceUrl', () => {
@@ -128,7 +128,7 @@ describe('Test CloudantBaseService', () => {
     const { tokenManager } = auth;
     // setServiceUrl actually replaces the SessionTokenManager instance of `auth`
     service.setServiceUrl(newUrl);
-    notDeepStrictEqual(auth.tokenManager, tokenManager);
+    assert.notDeepStrictEqual(auth.tokenManager, tokenManager);
   });
 
   it('Apply SDK UA header', async () => {
@@ -143,16 +143,16 @@ describe('Test CloudantBaseService', () => {
       authenticator: auth,
       serviceUrl: 'http://example.invalid',
     });
-    ok(service);
-    auth.tokenManager.requestWrapperInstance.sendRequest = spy();
+    assert.ok(service);
+    auth.tokenManager.requestWrapperInstance.sendRequest = sinon.spy();
 
     try {
       await auth.authenticate();
       // eslint-disable-next-line no-empty
     } catch (e) {}
-    ok(auth.tokenManager.requestWrapperInstance.sendRequest.calledOnce);
+    assert.ok(auth.tokenManager.requestWrapperInstance.sendRequest.calledOnce);
 
-    strictEqual(
+    assert.strictEqual(
       auth.tokenManager.requestWrapperInstance.sendRequest.getCall(-1).args[0]
         .options.headers['X-IBMCloud-SDK-Analytics'],
       'service_name=cloudant;service_version=v1;operation_id=authenticatorPostSession'
@@ -166,23 +166,23 @@ describe('Test CloudantBaseService', () => {
       clientSecret: '234',
     });
     const service = new CloudantBaseService({ authenticator: auth });
-    ok(service);
+    assert.ok(service);
     // cookie jar exists
-    ok(service.baseOptions.jar);
-    strictEqual(
+    assert.ok(service.baseOptions.jar);
+    assert.strictEqual(
       service.baseOptions.jar,
       service.requestWrapperInstance.axiosInstance.defaults.jar
     );
     service.setServiceUrl(newUrl);
-    strictEqual(service.getAuthenticator().tokenManager.url, iamUrl);
+    assert.strictEqual(service.getAuthenticator().tokenManager.url, iamUrl);
     service.configureService('apple');
     // cookie jar exists
-    ok(service.baseOptions.jar);
-    strictEqual(
+    assert.ok(service.baseOptions.jar);
+    assert.strictEqual(
       service.baseOptions.jar,
       service.requestWrapperInstance.axiosInstance.defaults.jar
     );
-    strictEqual(service.getAuthenticator().tokenManager.url, iamUrl);
+    assert.strictEqual(service.getAuthenticator().tokenManager.url, iamUrl);
   });
 
   it('Custom cookie jar with basic authenticator', () => {
@@ -197,22 +197,22 @@ describe('Test CloudantBaseService', () => {
       authenticator: auth,
       jar: testJar,
     });
-    ok(service);
+    assert.ok(service);
     // cookie jar exists
-    ok(service.baseOptions.jar);
+    assert.ok(service.baseOptions.jar);
     // cookie jar is the same as expected test jar
     let axiosJar = service.requestWrapperInstance.axiosInstance.defaults.jar;
-    strictEqual(axiosJar, testJar);
-    strictEqual(axiosJar.rejectPublicSuffixes, false);
+    assert.strictEqual(axiosJar, testJar);
+    assert.strictEqual(axiosJar.rejectPublicSuffixes, false);
     // reconfigure the service
     service.setServiceUrl(newUrl);
     service.configureService('apple');
     // cookie jar still exists
-    ok(service.baseOptions.jar);
+    assert.ok(service.baseOptions.jar);
     // cookie jar is still the same as expected test jar
     axiosJar = service.requestWrapperInstance.axiosInstance.defaults.jar;
-    strictEqual(axiosJar, testJar);
-    strictEqual(axiosJar.rejectPublicSuffixes, false);
+    assert.strictEqual(axiosJar, testJar);
+    assert.strictEqual(axiosJar.rejectPublicSuffixes, false);
   });
 
   describe('Check keepAlive', () => {
@@ -223,9 +223,9 @@ describe('Test CloudantBaseService', () => {
         authenticator: auth,
         disableSslVerification: true,
       });
-      strictEqual(service.baseOptions.httpAgent.keepAlive, true);
-      strictEqual(service.baseOptions.httpsAgent.keepAlive, true);
-      strictEqual(
+      assert.strictEqual(service.baseOptions.httpAgent.keepAlive, true);
+      assert.strictEqual(service.baseOptions.httpsAgent.keepAlive, true);
+      assert.strictEqual(
         service.baseOptions.httpsAgent.options.rejectUnauthorized,
         false
       );
@@ -233,43 +233,43 @@ describe('Test CloudantBaseService', () => {
     it('Custom https agent', () => {
       const service = new CloudantBaseService({
         authenticator: auth,
-        httpsAgent: new _Agent({ keepAlive: false }),
+        httpsAgent: new HttpsAgent({ keepAlive: false }),
       });
-      strictEqual(service.baseOptions.httpAgent.keepAlive, true);
-      strictEqual(service.baseOptions.httpsAgent.keepAlive, false);
+      assert.strictEqual(service.baseOptions.httpAgent.keepAlive, true);
+      assert.strictEqual(service.baseOptions.httpsAgent.keepAlive, false);
     });
 
     it('Custom http agent', () => {
       const service = new CloudantBaseService({
         authenticator: auth,
-        httpAgent: new Agent({ keepAlive: false }),
+        httpAgent: new HttpAgent({ keepAlive: false }),
       });
-      strictEqual(service.baseOptions.httpAgent.keepAlive, false);
-      strictEqual(service.baseOptions.httpsAgent.keepAlive, true);
+      assert.strictEqual(service.baseOptions.httpAgent.keepAlive, false);
+      assert.strictEqual(service.baseOptions.httpsAgent.keepAlive, true);
     });
 
     it('Custom http and https agent', () => {
       const service = new CloudantBaseService({
         authenticator: auth,
-        httpAgent: new _Agent({ keepAlive: false }),
-        httpsAgent: new _Agent({ keepAlive: false }),
+        httpAgent: new HttpsAgent({ keepAlive: false }),
+        httpsAgent: new HttpsAgent({ keepAlive: false }),
       });
-      strictEqual(service.baseOptions.httpAgent.keepAlive, false);
-      strictEqual(service.baseOptions.httpsAgent.keepAlive, false);
+      assert.strictEqual(service.baseOptions.httpAgent.keepAlive, false);
+      assert.strictEqual(service.baseOptions.httpsAgent.keepAlive, false);
     });
 
     it('Custom http agent with disableSslVerification', () => {
       const service = new CloudantBaseService({
         authenticator: auth,
-        httpAgent: new _Agent({ keepAlive: false }),
+        httpAgent: new HttpsAgent({ keepAlive: false }),
         disableSslVerification: true,
       });
-      strictEqual(service.baseOptions.httpAgent.keepAlive, false);
-      strictEqual(
+      assert.strictEqual(service.baseOptions.httpAgent.keepAlive, false);
+      assert.strictEqual(
         service.baseOptions.httpsAgent.options.rejectUnauthorized,
         false
       );
-      strictEqual(service.baseOptions.httpsAgent.keepAlive, true);
+      assert.strictEqual(service.baseOptions.httpsAgent.keepAlive, true);
     });
   });
 });

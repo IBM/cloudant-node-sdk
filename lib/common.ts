@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as os from 'node:os';
+import { platform, release, arch } from 'node:os';
 import { version } from '../package.json';
 
 export type SdkHeaders = {
@@ -32,9 +32,9 @@ export function getSdkHeaders(
 ): SdkHeaders | {} {
   const sdkName = 'cloudant-node-sdk';
   const sdkVersion = version;
-  const osName = os.platform();
-  const osVersion = os.release();
-  const osArch = os.arch();
+  const osName = platform();
+  const osVersion = release();
+  const osArch = arch();
   const nodeVersion = process.version;
 
   const headers = {

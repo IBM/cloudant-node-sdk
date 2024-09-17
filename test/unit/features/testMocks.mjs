@@ -131,15 +131,18 @@ function mockPerptualSupplierRespectingLimit(opts) {
   return getPerpetualSupplierResponse(opts.limit);
 }
 
-export default {
+const generateChangesResultItems = mockChangesResultItems;
+const generateRandomChangesResults = mockRandomChangesResult;
+
+export {
   mockAuthenticator,
   mockAlternatingBatchesAndErrors,
   mockAlternatingBatchErrorThenPerpetualSupplier,
   mockPostChangesError,
   mockPerpetualSupplier,
-  generateChangesResultItems: mockChangesResultItems,
+  generateChangesResultItems,
   generateSeq,
-  generateRandomChangesResults: mockRandomChangesResult,
+  generateRandomChangesResults,
   perpetualSupplierResponse,
   mockPerptualSupplierRespectingLimit,
 };

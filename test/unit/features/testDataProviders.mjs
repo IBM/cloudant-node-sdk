@@ -133,7 +133,7 @@ function getSuppressionSequences() {
   return sequences;
 }
 
-export default {
+export {
   getClient,
   getInvalidTimeoutClients,
   getModes,

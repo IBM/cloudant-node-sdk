@@ -60,4 +60,4 @@ if (require.main === module) {
   getInfoFromExistingDatabase();
 }
 
-export default { getInfoFromExistingDatabase };
+export { getInfoFromExistingDatabase };
