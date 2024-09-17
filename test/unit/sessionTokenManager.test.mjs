@@ -15,7 +15,7 @@
  */
 
 import assert from 'node:assert';
-import * as sinon from 'sinon';
+import { default as sinon } from 'sinon';
 import { CookieJar } from 'tough-cookie';
 import { SessionTokenManager } from '../../auth/sessionTokenManager';
 
@@ -78,7 +78,7 @@ describe('SessionTokenManager tests', () => {
       );
       sendRequestStubFn.returnsArg(0);
       const parameters = manager.requestToken();
-      deepassert.strictEqual(parameters, expectedParameters);
+      assert.strictEqual(parameters, expectedParameters);
     });
   });
 
