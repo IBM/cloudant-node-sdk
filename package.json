@@ -72,6 +72,9 @@
   },
   "jest": {
     "moduleFileExtensions": ["ts", "js", "msj"],
+    "testMatch": [
+      "test/**/?(*.).?js"
+    ],
     "collectCoverage": true,
     "coverageDirectory": "./coverage/",
     "coveragePathIgnorePatterns": [
