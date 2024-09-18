@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ChangesFollower, CloudantV1 } from '../../../../../index';
+const { ChangesFollower, CloudantV1 } = require('../../../../../index');
 const { Writable } = require('node:stream');
 const { pipeline } = require('node:stream/promises');
 
