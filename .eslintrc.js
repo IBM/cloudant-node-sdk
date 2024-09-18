@@ -62,6 +62,7 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'prefer-const': 'error',
         'prettier/prettier': 'error',
+        '@typescript-eslint/no-require-imports': 'error',
       },
     },
     // TypeScript specific rules
@@ -84,7 +85,6 @@ module.exports = {
         'prettier',
       ],
       'rules': {
-        '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
         'no-param-reassign': 'off',
@@ -109,6 +109,9 @@ module.exports = {
       },
       'plugins': ['jest'],
       'extends': ['plugin:jest/recommended', 'plugin:jest/style'],
+      'rules': {
+        '@typescript-eslint/no-require-imports': 'off',
+      },
     },
     {
       'files': ['test/**/*.test.js'],
@@ -116,8 +119,6 @@ module.exports = {
         'jest/expect-expect': 'off',
         'jest/no-conditional-expect': 'off',
         'jest/no-done-callback': 'off',
-        'jest/no-standalone-expect': 'off',
-        'jest/no-try-expect': 'off',
       },
     },
     {
@@ -134,21 +135,6 @@ module.exports = {
       ],
       'rules': {
         'no-console': 'off',
-      },
-    },
-    {
-      'files': ['test/examples/src/js/*.js'],
-      'rules': {
-        'dot-notation': 'off',
-      },
-    },
-    {
-      'files': [
-        'test/examples/src/js/CreateDbAndDoc.js',
-        'test/examples/src/ts/CreateDbAndDoc.ts',
-      ],
-      'rules': {
-        'prefer-template': 'off',
       },
     },
   ],
