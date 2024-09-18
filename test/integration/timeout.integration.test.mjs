@@ -118,7 +118,7 @@ describe('Default timeout config tests', () => {
       assert.ok(spyAuth.calledOnce);
       assert.ok(getTokenStubFn.calledOnce);
       // authenticate is called with default timeout
-      sinon.assert.calledWith(spyAuth, match.has('timeout', expValue));
+      sinon.assert.calledWith(spyAuth, sinon.match.has('timeout', expValue));
       // server request is called with default timeout
       assert.ok(sendRequestStubFn.calledOnce);
       sinon.assert.calledWith(

@@ -78,7 +78,7 @@ describe('SessionTokenManager tests', () => {
       );
       sendRequestStubFn.returnsArg(0);
       const parameters = manager.requestToken();
-      assert.strictEqual(parameters, expectedParameters);
+      assert.deepStrictEqual(parameters, expectedParameters);
     });
   });
 
