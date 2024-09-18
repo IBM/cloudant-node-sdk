@@ -129,7 +129,7 @@ describe('Test CloudantBaseService', () => {
     assert.notDeepStrictEqual(auth.tokenManager, tokenManager);
   });
 
-  it('Apply SDK UA header', () => {
+  it('Apply SDK UA header', async () => {
     const auth = new CouchdbSessionAuthenticator({
       username: 'test',
       password: 'user', // pragma: allowlist secret
@@ -145,7 +145,7 @@ describe('Test CloudantBaseService', () => {
     auth.tokenManager.requestWrapperInstance.sendRequest = sinon.spy();
 
     try {
-      auth.authenticate();
+      await auth.authenticate();
       // eslint-disable-next-line no-empty
     } catch (e) {}
     assert.ok(auth.tokenManager.requestWrapperInstance.sendRequest.calledOnce);
