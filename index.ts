@@ -18,7 +18,7 @@
  * @module cloudant-node-sdk
  */
 
-export import CloudantV1 = require('./cloudant/v1');
+export { default as CloudantV1 } from './cloudant/v1';
 
 export {
   BasicAuthenticator,

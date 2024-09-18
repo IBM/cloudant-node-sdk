@@ -19,8 +19,8 @@ import { Authenticator, BaseService, UserOptions } from 'ibm-cloud-sdk-core';
 import { CookieJar } from 'tough-cookie';
 import { CouchdbSessionAuthenticator } from '../auth';
 import { getSdkHeaders } from './common';
-import { Agent as HttpsAgent } from 'https';
-import { Agent as HttpAgent } from 'http';
+import { Agent as HttpsAgent } from 'node:https';
+import { Agent as HttpAgent } from 'node:http';
 
 /**
  * Set default timeout to 2.5 minutes (= 150 000 ms)

@@ -84,6 +84,7 @@ module.exports = {
         'prettier',
       ],
       'rules': {
+        '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
         'no-param-reassign': 'off',
