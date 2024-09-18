@@ -15,7 +15,7 @@
  */
 import assert from 'node:assert';
 import { promisify } from 'node:util';
-import { default as sinon } from 'sinon';
+import * as sinon from 'sinon';
 import { CookieJar } from 'tough-cookie';
 import { CouchdbSessionAuthenticator } from '../../index';
 import { SessionTokenManager } from '../../auth/sessionTokenManager';

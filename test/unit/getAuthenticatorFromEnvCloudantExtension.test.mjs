@@ -15,8 +15,7 @@
  */
 import assert from 'node:assert';
 import { BasicAuthenticator } from 'ibm-cloud-sdk-core';
-import getAuthenticatorFromEnvCloudantExtension
-  from '../../lib/getAuthenticatorFromEnvCloudantExtension';
+import getAuthenticatorFromEnvCloudantExtension from '../../lib/getAuthenticatorFromEnvCloudantExtension';
 import { CouchdbSessionAuthenticator } from '../../index';
 
 describe('Test getAuthenticatorFromEnvCloudantExtension', () => {

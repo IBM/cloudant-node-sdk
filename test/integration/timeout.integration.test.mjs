@@ -15,9 +15,13 @@
  */
 
 import assert from 'node:assert';
-import { default as sinon } from 'sinon';
+import * as sinon from 'sinon';
 
-import { BasicAuthenticator, IamAuthenticator, NoAuthAuthenticator } from 'ibm-cloud-sdk-core';
+import {
+  BasicAuthenticator,
+  IamAuthenticator,
+  NoAuthAuthenticator,
+} from 'ibm-cloud-sdk-core';
 import { CloudantV1, CouchdbSessionAuthenticator } from '../../index';
 
 const DEFAULT_TIMEOUT = 150000; // (2.5m=150s)

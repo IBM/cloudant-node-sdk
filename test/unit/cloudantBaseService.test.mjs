@@ -22,7 +22,7 @@ import {
   IamAuthenticator,
   NoAuthAuthenticator,
 } from 'ibm-cloud-sdk-core';
-import { default as sinon } from 'sinon';
+import * as sinon from 'sinon';
 import { CookieJar, MemoryCookieStore } from 'tough-cookie';
 import CloudantBaseService from '../../lib/cloudantBaseService';
 import { CouchdbSessionAuthenticator } from '../../index';

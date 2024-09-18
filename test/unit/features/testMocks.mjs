@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-import { NoAuthAuthenticator } from 'ibm-cloud-sdk-core';
+import * as core from 'ibm-cloud-sdk-core';
 import { ChangesFollower } from '../../../cloudant/features/changesFollower';
 import { getTransientErrors } from './mockErrors';
+
+const { NoAuthAuthenticator } = core;
 
 function mockAuthenticator() {
   const authenticatorMock = jest.spyOn(core, 'getAuthenticatorFromEnvironment');

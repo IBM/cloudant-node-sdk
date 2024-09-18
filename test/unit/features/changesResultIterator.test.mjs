@@ -14,21 +14,32 @@
  * limitations under the License.
  */
 
-import { Action, getClient, getModes, getSuppressionSequences } from './testDataProviders';
 import {
-  ChangesResultIterableIterator
-} from '../../../cloudant/features/changesResultIterator';
+  Action,
+  getClient,
+  getModes,
+  getSuppressionSequences,
+} from './testDataProviders';
+import { ChangesResultIterableIterator } from '../../../cloudant/features/changesResultIterator';
 import { testParams } from './testParams';
 import {
   generateRandomChangesResults,
   mockPerpetualSupplier,
   perpetualSupplierResponse,
   mockPostChangesError,
-  mockPerptualSupplierRespectingLimit
+  mockPerptualSupplierRespectingLimit,
 } from './testMocks';
 import { ChangesParamsHelper } from '../../../cloudant/features/changesParamsHelper';
-import { ChangesFollower, Mode } from '../../../cloudant/features/changesFollower';
-import { getTransientErrors, getTerminalErrors, getErrors, MockError } from './mockErrors';
+import {
+  ChangesFollower,
+  Mode,
+} from '../../../cloudant/features/changesFollower';
+import {
+  getTransientErrors,
+  getTerminalErrors,
+  getErrors,
+  MockError,
+} from './mockErrors';
 import { delay } from './testUtils';
 
 const service = getClient();

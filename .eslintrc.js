@@ -59,7 +59,7 @@ module.exports = {
   'overrides': [
     // JavaScript specific rules
     {
-      'files': ['**/*.js'],
+      'files': ['**/*.js', '**/*.mjs'],
       'plugins': ['node', 'prettier'],
       'extends': ['airbnb-base', 'prettier'],
       'rules': {
@@ -117,11 +117,15 @@ module.exports = {
       },
       'plugins': ['jest'],
       'extends': ['plugin:jest/recommended', 'plugin:jest/style'],
+      'rules': {
+        'no-console': 'off',
+        'import/namespace': 'off',
+        'import/no-unresolved': 'off',
+      },
     },
     {
       'files': ['test/**/*.test.js', 'test/**/*.test.mjs'],
       'rules': {
-        'import/namespace': 'off',
         'jest/expect-expect': 'off',
         'jest/no-conditional-expect': 'off',
         'jest/no-done-callback': 'off',

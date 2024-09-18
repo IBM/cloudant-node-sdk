@@ -16,7 +16,10 @@
 
 import { NoAuthAuthenticator } from 'ibm-cloud-sdk-core';
 import { testParams } from './testParams';
-import { ChangesFollower, Mode } from '../../../cloudant/features/changesFollower';
+import {
+  ChangesFollower,
+  Mode,
+} from '../../../cloudant/features/changesFollower';
 import CloudantV1 from '../../../cloudant/v1';
 import { ChangesParamsHelper } from '../../../cloudant/features/changesParamsHelper';
 

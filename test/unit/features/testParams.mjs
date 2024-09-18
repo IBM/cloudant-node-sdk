@@ -165,8 +165,9 @@ const testParams = {
       timeout: 3600000,
       ...minimumTestParams,
     },
-    expectedError: `${beginningOfErrorMsg}s 'descending', 'feed', 'heartbeat',`
-      + ` 'lastEventId', 'timeout' are ${endOfErrorMsg}`,
+    expectedError:
+      `${beginningOfErrorMsg}s 'descending', 'feed', 'heartbeat',` +
+      ` 'lastEventId', 'timeout' are ${endOfErrorMsg}`,
   },
 };
 

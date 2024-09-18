@@ -15,7 +15,7 @@
  */
 
 import assert from 'node:assert';
-import { default as sinon } from 'sinon';
+import * as sinon from 'sinon';
 import { CookieJar } from 'tough-cookie';
 import { SessionTokenManager } from '../../auth/sessionTokenManager';
 

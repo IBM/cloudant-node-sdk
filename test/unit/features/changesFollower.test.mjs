@@ -159,8 +159,8 @@ describe('Test ChangesFollower', () => {
             minimumTestParams
           );
         }).toThrow(
-          `To use ChangesFollower the client read timeout must be at least 60000 ms.`
-            + ` The client read timeout is ${client.getTimeout()} ms.`
+          `To use ChangesFollower the client read timeout must be at least 60000 ms.` +
+            ` The client read timeout is ${client.getTimeout()} ms.`
         );
       }
     );

@@ -15,7 +15,7 @@
  */
 import { request as httpRequest } from 'node:http';
 import { readFileSync } from 'node:fs';
-import { default as sinon } from 'sinon';
+import * as sinon from 'sinon';
 import { getInfoFromExistingDatabase } from '../examples/src/js/GetInfoFromExistingDatabase';
 import { createDbAndDoc } from '../examples/src/js/CreateDbAndDoc';
 import { updateDoc } from '../examples/src/js/UpdateDoc';
@@ -151,8 +151,8 @@ describe('Readme integration tests', () => {
       .map((a) => a.args[0])
       .join('\n');
     expect(consoleOutput).toBe(
-      'Cannot delete document because either "orders" database'
-        + ' or the "example" document was not found.'
+      'Cannot delete document because either "orders" database' +
+        ' or the "example" document was not found.'
     );
   });
 });
