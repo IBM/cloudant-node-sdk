@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Transform, TransformOptions } from 'stream';
+import { Transform, TransformOptions } from 'node:stream';
 
 export class Stream<T> extends Transform {
   constructor(opts?: TransformOptions) {

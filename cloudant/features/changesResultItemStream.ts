@@ -15,9 +15,9 @@
  */
 
 import { Stream } from './stream';
-import { TransformCallback } from 'stream';
+import { TransformCallback } from 'node:stream';
 import { validateParams } from 'ibm-cloud-sdk-core';
-import CloudantV1 = require('../v1');
+import CloudantV1 from '../v1';
 
 export class ChangesResultItemStream extends Stream<CloudantV1.ChangesResultItem> {
   _transform(
