@@ -71,6 +71,7 @@
     "tough-cookie": "^4.0.0"
   },
   "jest": {
+    "moduleFileExtensions": ["ts", "js", "msj"],
     "collectCoverage": true,
     "coverageDirectory": "./coverage/",
     "coveragePathIgnorePatterns": [
