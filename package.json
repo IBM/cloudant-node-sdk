@@ -72,8 +72,12 @@
   },
   "jest": {
     "moduleFileExtensions": ["ts", "js", "msj"],
+    "transform": {
+      "^.+\\.m?js$": "babel-jest"
+    },
     "testMatch": [
-      "test/**/?(*.).?js"
+      "**/?(*.)+(spec|test).[jt]s",
+      "**/?(*.)+(spec|test).mjs"
     ],
     "collectCoverage": true,
     "coverageDirectory": "./coverage/",
