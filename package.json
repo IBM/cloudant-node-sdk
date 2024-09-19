@@ -8,8 +8,12 @@
     "url": "https://github.com/IBM/cloudant-node-sdk"
   },
   "keywords": [
-    "ibm",
-    "cloudant"
+    "IBM",
+    "Cloudant",
+    "database",
+    "client",
+    "SDK",
+    "official"
   ],
   "author": "IBM Corp.",
   "scripts": {
