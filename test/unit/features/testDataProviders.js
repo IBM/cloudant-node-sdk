@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2022. All Rights Reserved.
+ * © Copyright IBM Corporation 2022, 2024. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,7 +75,7 @@ const { NoAuthAuthenticator } = core;
 function getCloudantServiceOptions() {
   return {
     authenticator: new NoAuthAuthenticator(),
-    url: 'http://localhost:5984',
+    serviceUrl: 'http://localhost:5984',
   };
 }
 
