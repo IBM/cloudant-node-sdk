@@ -18,7 +18,8 @@
  * @module cloudant-node-sdk
  */
 
-export { default as CloudantV1 } from './cloudant/v1';
+import { default as CloudantV1 } from './cloudant/v1';
+export { CloudantV1 };
 
 export {
   BasicAuthenticator,
