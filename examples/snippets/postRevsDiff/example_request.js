@@ -17,3 +17,5 @@ service.postRevsDiff({
 }).then(response => {
   console.log(response.result);
 });
+// section: markdown
+// This example requires the example revisions in the POST body to be replaced with valid revisions.

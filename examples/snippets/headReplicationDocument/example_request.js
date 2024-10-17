@@ -7,5 +7,5 @@ service.headReplicationDocument({
   docId: 'repldoc-example'
 }).then(response => {
   console.log(response.status);
-  console.log(response.headers['etag']);
+  console.log(response.headers['ETag']);
 });

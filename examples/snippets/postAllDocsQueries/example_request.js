@@ -4,7 +4,7 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 const allDocsQueries: CloudantV1.AllDocsQuery[] = [{
-    keys: ['small-appliances:1000042', 'small-appliances:1000043'],
+    keys: ['1000042', '1000043'],
   },
   {
     limit: 3,

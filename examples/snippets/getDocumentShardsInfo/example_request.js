@@ -5,7 +5,7 @@ const service = CloudantV1.newInstance({});
 
 service.getDocumentShardsInfo({
   db: 'products',
-  docId: 'small-appliances:1000042'
+  docId: '1000042'
 }).then(response => {
   console.log(response.result);
 });
