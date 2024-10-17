@@ -350,7 +350,7 @@ service.headReplicationDocument({
   docId: 'repldoc-example'
 }).then(response => {
   console.log(response.status);
-  console.log(response.headers['etag']);
+  console.log(response.headers['ETag']);
 });
 ```
 
@@ -377,7 +377,7 @@ const targetDb: CloudantV1.ReplicationDatabase = {
       'apiKey': '<your-iam-api-key>'
     }
   },
-  url: '<your-target-service-url>' + '/' + 'animaldb-target'
+  url: '<your-target-service-url>/animaldb-target'
 };
 
 const replDocument: CloudantV1.ReplicationDocument = {
@@ -644,9 +644,9 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 const productsDoc: CloudantV1.Document = {
-  _id: 'small-appliances:1000042',
+  _id: '1000042',
   type: 'product',
-  productid: '1000042',
+  productId: '1000042',
   brand: 'Salter',
   name: 'Digital Kitchen Scales',
   description: 'Slim Colourful Design Electronic Cooking Appliance for Home / Kitchen, Weigh up to 5kg + Aquatronic for Liquids ml + fl. oz. 15Yr Guarantee - Green',
@@ -676,7 +676,7 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 service.putDatabase({
-  db: 'products',
+  db: 'events',
   partitioned: true
 }).then(response => {
   console.log(response.result);
@@ -741,7 +741,7 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 const allDocsQueries: CloudantV1.AllDocsQuery[] = [{
-    keys: ['small-appliances:1000042', 'small-appliances:1000043'],
+    keys: ['1000042', '1000043'],
   },
   {
     limit: 3,
@@ -770,17 +770,17 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 const eventDoc1: CloudantV1.Document = {
-  _id: '0007241142412418284',
+  _id: 'ns1HJS13AMkK:0007241142412418284',
   type: 'event',
-  userid: 'abc123',
+  userId: 'abc123',
   eventType:'addedToBasket',
   productId: '1000042',
   date: '2019-01-28T10:44:22.000Z'
 }
 const eventDoc2: CloudantV1.Document = {
-  _id: '0007241142412418285',
+  _id: 'H8tDIwfadxp9:0007241142412418285',
   type: 'event',
-  userid: 'abc234',
+  userId: 'abc234',
   eventType: 'addedToBasket',
   productId: '1000050',
   date: '2019-01-25T20:00:00.000Z'
@@ -807,12 +807,12 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 const eventDoc1: CloudantV1.Document = {
-  _id: '0007241142412418284',
+  _id: 'ns1HJS13AMkK:0007241142412418284',
   _rev: '1-5005d65514fe9e90f8eccf174af5dd64',
   _deleted: true,
 }
 const eventDoc2: CloudantV1.Document = {
-  _id: '0007241142412418285',
+  _id: 'H8tDIwfadxp9:0007241142412418285',
   _rev: '1-2d7810b054babeda4812b3924428d6d6',
   _deleted: true,
 }
@@ -851,17 +851,17 @@ service.postBulkDocs({
 {
   "docs": [
     {
-      "_id": "0007241142412418284",
+      "_id": "ns1HJS13AMkK:0007241142412418284",
       "type": "event",
-      "userid": "abc123",
+      "userId": "abc123",
       "eventType": "addedToBasket",
       "productId": "1000042",
       "date": "2019-01-28T10:44:22.000Z"
     },
     {
-      "_id": "0007241142412418285",
+      "_id": "H8tDIwfadxp9:0007241142412418285",
       "type": "event",
-      "userid": "abc123",
+      "userId": "abc234",
       "eventType": "addedToBasket",
       "productId": "1000050",
       "date": "2019-01-25T20:00:00.000Z"
@@ -1050,11 +1050,11 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 service.headDesignDocument({
-  db: 'products',
-  ddoc: 'appliances'
+  db: 'events',
+  ddoc: 'checkout'
 }).then(response => {
   console.log(response.status);
-  console.log(response.headers['etag']);
+  console.log(response.headers['ETag']);
 });
 ```
 
@@ -1072,11 +1072,11 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 const emailViewMapReduce: CloudantV1.DesignDocumentViewsMapReduce = {
-  map: 'function(doc) { if(doc.email_verified  === true){\n  emit(doc.email, [doc.name, doc.email_verified, doc.joined]) }}'
+  map: 'function(doc) { if(doc.email_verified === true) { emit(doc.email, [doc.name, doc.email_verified, doc.joined]); }}'
 }
 
 const userIndex: CloudantV1.SearchIndexDefinition = {
-  index: 'function (doc) {  index("name", doc.name);  index("active", doc.active);}'
+  index: 'function(doc) { index("name", doc.name); index("active", doc.active); }'
 }
 
 const designDocument: CloudantV1.DesignDocument = {
@@ -1092,26 +1092,26 @@ service.putDesignDocument({
 });
 
 const productMap: CloudantV1.DesignDocumentViewsMapReduce = {
-  map: 'function(doc) { emit(doc.productid, [doc.brand, doc.name, doc.description]) }'
+  map: 'function(doc) { emit(doc.productId, [doc.date, doc.eventType, doc.userId]); }'
 }
 
-const priceIndex: CloudantV1.SearchIndexDefinition = {
-  index: 'function (doc) {  index(\"price\", doc.price);}'
+const dateIndex: CloudantV1.SearchIndexDefinition = {
+  index: 'function(doc) { index("date", doc.date); }'
 }
 
 const partitionedDesignDoc: CloudantV1.DesignDocument = {
-  views: {'byApplianceProdId': productMap},
-  indexes: {'findByPrice': priceIndex}}
+  views: {'byProductId': productMap},
+  indexes: {'findByDate': dateIndex}}
 
 service.putDesignDocument({
-  db: 'products',
+  db: 'events',
   designDocument: partitionedDesignDoc,
-  ddoc: 'appliances'
+  ddoc: 'checkout'
 }).then(response => {
   console.log(response.result);
 });
 // section: markdown
-// This example creates `allusers` design document in the `users` database and `appliances` design document in the partitioned `products` database.
+// This example creates `allusers` design document in the `users` database and `checkout` design document in the partitioned `events` database.
 ```
 
 ## getDesignDocumentInformation
@@ -1174,14 +1174,14 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 service.getSearchInfo({
-  db: 'products',
-  ddoc: 'appliances',
-  index: 'findByPrice'
+  db: 'events',
+  ddoc: 'checkout',
+  index: 'findByDate'
 }).then(response => {
   console.log(response.result);
 });
 // section: markdown
-// This example requires the `findByPrice` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
+// This example requires the `findByDate` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 ```
 
 ## postView
@@ -1554,13 +1554,13 @@ const service = CloudantV1.newInstance({});
 const localDocument: CloudantV1.Document = {
   type: 'order',
   user: 'Bob Smith',
-  orderid: '0007741142412418284',
-  userid: 'abc123',
+  orderId: '0007741142412418284',
+  userId: 'abc123',
   total: 214.98,
   deliveryAddress: '19 Front Street, Darlington, DL5 1TY',
   delivered: 'true',
   courier: 'UPS',
-  courierid: '15125425151261289',
+  courierId: '15125425151261289',
   date: '2019-01-28T10:44:22.000Z'
 }
 
@@ -1587,8 +1587,8 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 service.getPartitionInformation({
-  db: 'products',
-  partitionKey: 'small-appliances'
+  db: 'events',
+  partitionKey: 'ns1HJS13AMkK'
 }).then(response => {
   console.log(response.result);
 });
@@ -1608,8 +1608,8 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 service.postPartitionAllDocs({
-  db: 'products',
-  partitionKey: 'small-appliances',
+  db: 'events',
+  partitionKey: 'ns1HJS13AMkK',
   includeDocs: true
 }).then(response => {
   console.log(response.result);
@@ -1630,16 +1630,16 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 service.postPartitionSearch({
-  db: 'products',
-  partitionKey: 'small-appliances',
-  ddoc: 'appliances',
-  index: 'findByPrice',
-  query: 'price:[14 TO 20]'
+  db: 'events',
+  partitionKey: 'ns1HJS13AMkK',
+  ddoc: 'checkout',
+  index: 'findByDate',
+  query: 'date:[2019-01-01T12:00:00.000Z TO 2019-01-31T12:00:00.000Z]'
 }).then(response => {
   console.log(response.result);
 });
 // section: markdown
-// This example requires the `findByPrice` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
+// This example requires the `findByDate` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 ```
 
 ## postPartitionView
@@ -1656,18 +1656,24 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 service.postPartitionView({
-  db: 'products',
-  ddoc: 'appliances',
+  db: 'events',
+  ddoc: 'checkout',
   includeDocs: true,
   limit: 10,
-  partitionKey: 'small-appliances',
-  view: 'byApplianceProdId'
+  partitionKey: 'ns1HJS13AMkK',
+  view: 'byProductId'
 }).then(response => {
   console.log(response.result);
 });
 // section: markdown
-// This example requires the `byApplianceProdId` partitioned view to exist. To create the design document with this view, see [Create or modify a design document.](#putdesigndocument)
+// This example requires the `byProductId` partitioned view to exist. To create the design document with this view, see [Create or modify a design document.](#putdesigndocument)
 ```
+
+## postPartitionExplain
+
+_POST `/{db}/_partition/{partition_key}/_explain`_
+
+### [Example request](snippets/postPartitionExplain/example_request.js)
 
 ## postPartitionFind
 
@@ -1683,12 +1689,12 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 const selector: CloudantV1.Selector = {
-  type: {'$eq': 'product'}
+  userId: {'$eq': 'abc123'}
 }
 service.postPartitionFind({
-  db: 'products',
-  partitionKey: 'small-appliances',
-  fields: ['productid', 'name', 'description'],
+  db: 'events',
+  partitionKey: 'ns1HJS13AMkK',
+  fields: ['productId', 'eventType', 'date'],
   selector: selector
 }).then(response => {
   console.log(response.result);
@@ -1722,6 +1728,8 @@ service.postRevsDiff({
 }).then(response => {
   console.log(response.result);
 });
+// section: markdown
+// This example requires the example revisions in the POST body to be replaced with valid revisions.
 ```
 
 ## getSecurity
@@ -1809,7 +1817,7 @@ const service = CloudantV1.newInstance({});
 
 service.getDocumentShardsInfo({
   db: 'products',
-  docId: 'small-appliances:1000042'
+  docId: '1000042'
 }).then(response => {
   console.log(response.result);
 });
@@ -1828,9 +1836,9 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 service.deleteDocument({
-  db: 'events',
-  docId: '0007241142412418284',
-  rev: '2-9a0d1cd9f40472509e9aac6461837367'
+  db: 'orders',
+  docId: 'order00058',
+  rev: '1-99b02e08da151943c2dcb40090160bb8'
 }).then(response => {
   console.log(response.result);
 });
@@ -1851,7 +1859,7 @@ const service = CloudantV1.newInstance({});
 
 service.getDocument({
   db: 'products',
-  docId: 'small-appliances:1000042'
+  docId: '1000042'
 }).then(response => {
   console.log(response.result);
 });
@@ -1871,11 +1879,11 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 service.headDocument({
-  db: 'events',
-  docId: '0007241142412418284'
+  db: 'orders',
+  docId: 'order00058'
 }).then(response => {
   console.log(response.status);
-  console.log(response.headers['etag']);
+  console.log(response.headers['ETag']);
 });
 ```
 
@@ -1894,7 +1902,7 @@ const service = CloudantV1.newInstance({});
 
 const eventDoc: CloudantV1.Document = {
   type: 'event',
-  userid: 'abc123',
+  userId: 'abc123',
   eventType: 'addedToBasket',
   productId: '1000042',
   date: '2019-01-28T10:44:22.000Z'
@@ -1902,7 +1910,7 @@ const eventDoc: CloudantV1.Document = {
 
 service.putDocument({
   db: 'events',
-  docId: '0007241142412418284',
+  docId: 'ns1HJS13AMkK:0007241142412418284',
   document: eventDoc
 }).then(response => {
   console.log(response.result);
@@ -1924,14 +1932,14 @@ const service = CloudantV1.newInstance({});
 
 service.deleteAttachment({
   db: 'products',
-  docId: 'small-appliances:100001',
+  docId: '1000042',
   attachmentName: 'product_details.txt',
   rev: '4-1a0d1cd6f40472509e9aac646183736a'
 }).then(response => {
   console.log(response.result);
 });
 // section: markdown
-// This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
+// This example requires the `product_details.txt` attachment in `1000042` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 ```
 
 ## getAttachment
@@ -1949,14 +1957,14 @@ const service = CloudantV1.newInstance({});
 
 service.getAttachment({
   db: 'products',
-  docId: 'small-appliances:100001',
+  docId: '1000042',
   attachmentName: 'product_details.txt'
 }).then(response => {
   let attachment = response.result as Readable;
   attachment.pipe(process.stdout);
 });
 // section: markdown
-// This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
+// This example requires the `product_details.txt` attachment in `1000042` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 ```
 
 ## headAttachment
@@ -1974,15 +1982,15 @@ const service = CloudantV1.newInstance({});
 
 service.headAttachment({
   db: 'products',
-  docId: 'small-appliances:100001',
+  docId: '1000042',
   attachmentName: 'product_details.txt'
 }).then(response => {
   console.log(response.status);
-  console.log(response.headers['content-length']);
-  console.log(response.headers['content-type']);
+  console.log(response.headers['Content-Length']);
+  console.log(response.headers['Content-Type']);
 });
 // section: markdown
-// This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
+// This example requires the `product_details.txt` attachment in `1000042` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 ```
 
 ## putAttachment
@@ -2004,7 +2012,7 @@ stream.push(null);
 
 service.putAttachment({
   db: 'products',
-  docId: 'small-appliances:100001',
+  docId: '1000042',
   attachmentName: 'product_details.txt',
   attachment: stream,
   contentType: 'text/plain'

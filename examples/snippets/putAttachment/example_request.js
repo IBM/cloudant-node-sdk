@@ -9,7 +9,7 @@ stream.push(null);
 
 service.putAttachment({
   db: 'products',
-  docId: 'small-appliances:100001',
+  docId: '1000042',
   attachmentName: 'product_details.txt',
   attachment: stream,
   contentType: 'text/plain'

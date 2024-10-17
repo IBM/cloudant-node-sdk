@@ -6,10 +6,11 @@ const service = CloudantV1.newInstance({});
 const selector: CloudantV1.Selector = {
   userId: {'$eq': 'abc123'}
 }
-service.postPartitionFind({
+service.postPartitionExplain({
   db: 'events',
+  executionStats: true,
+  limit: 10,
   partitionKey: 'ns1HJS13AMkK',
-  fields: ['productId', 'eventType', 'date'],
   selector: selector
 }).then(response => {
   console.log(response.result);

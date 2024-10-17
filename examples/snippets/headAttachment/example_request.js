@@ -5,12 +5,12 @@ const service = CloudantV1.newInstance({});
 
 service.headAttachment({
   db: 'products',
-  docId: 'small-appliances:100001',
+  docId: '1000042',
   attachmentName: 'product_details.txt'
 }).then(response => {
   console.log(response.status);
-  console.log(response.headers['content-length']);
-  console.log(response.headers['content-type']);
+  console.log(response.headers['Content-Length']);
+  console.log(response.headers['Content-Type']);
 });
 // section: markdown
-// This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
+// This example requires the `product_details.txt` attachment in `1000042` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)

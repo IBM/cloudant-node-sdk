@@ -13,7 +13,7 @@ const targetDb: CloudantV1.ReplicationDatabase = {
       'apiKey': '<your-iam-api-key>'
     }
   },
-  url: '<your-target-service-url>' + '/' + 'animaldb-target'
+  url: '<your-target-service-url>/animaldb-target'
 };
 
 const replDocument: CloudantV1.ReplicationDocument = {
