@@ -149,6 +149,11 @@ export default abstract class CloudantBaseService extends BaseService {
     // Read external configuration and set as request defaults.
     super.configureService(serviceName);
     this.configureSessionAuthenticator();
+    // Add response interceptor for error transforms
+    this.getHttpClient().interceptors.response.use(
+      (response) => response,
+      (axiosError) => errorResponseInterceptor(axiosError)
+    );
   }
 
   /**

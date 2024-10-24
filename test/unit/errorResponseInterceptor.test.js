@@ -20,6 +20,9 @@ const { Writable } = require('node:stream');
 const { pipeline } = require('node:stream/promises');
 const { IncomingMessage } = require('http');
 const { getClient } = require('./features/testDataProviders.js');
+const {
+  errorResponseInterceptor,
+} = require('../../lib/errorResponseInterceptor.ts');
 
 // Constants used by most of the test cases:
 const TRACE = '338da230c5';
@@ -30,6 +33,7 @@ const DB_URL = `http://localhost:5984/${DB_NAME}`;
 const ERROR_CODE = 459; // not a common error code because nock is able to fail with that too
 
 let service;
+const numberOfBaseInterceptors = 1;
 
 function getCases() {
   return [
@@ -356,5 +360,60 @@ describe('test errorResponseInterceptor', () => {
       assert.ok(responseMessage.includes(test.expectedResponseMessage));
       assert.ok(!responseStack.includes('errorResponseInterceptor'));
     }
+  });
+
+  it('test_added', async () => {
+    const expectedNumberOfResponseInterceptors = numberOfBaseInterceptors + 1;
+    assert.strictEqual(
+      service.requestWrapperInstance.axiosInstance.interceptors.response
+        .handlers.length,
+      expectedNumberOfResponseInterceptors
+    );
+    // check whether errorResponseInterceptor is set as a new interceptor for rejected responses
+    const actualErrorResponseInterceptor =
+      service.requestWrapperInstance.axiosInstance.interceptors.response
+        .handlers[expectedNumberOfResponseInterceptors - 1].rejected;
+    assert.deepStrictEqual(
+      Object.getPrototypeOf(actualErrorResponseInterceptor),
+      Object.getPrototypeOf(errorResponseInterceptor)
+    );
+  });
+  it('test_added_via_configureService', async () => {
+    // Before configureService:
+    let expectedNumberOfResponseInterceptors = numberOfBaseInterceptors + 1;
+    assert.strictEqual(
+      service.requestWrapperInstance.axiosInstance.interceptors.response
+        .handlers.length,
+      expectedNumberOfResponseInterceptors
+    );
+    // check whether errorResponseInterceptor is set as a new interceptor for rejected responses
+    let actualErrorResponseInterceptor =
+      service.requestWrapperInstance.axiosInstance.interceptors.response
+        .handlers[expectedNumberOfResponseInterceptors - 1].rejected;
+    assert.deepStrictEqual(
+      Object.getPrototypeOf(actualErrorResponseInterceptor),
+      Object.getPrototypeOf(errorResponseInterceptor)
+    );
+    // get number of service response interceptors before configureService
+    expectedNumberOfResponseInterceptors =
+      service.requestWrapperInstance.axiosInstance.interceptors.response
+        .handlers.length; // after configureService we should get the same number of interceptors
+
+    service.configureService('apple'); // configureService overrides the interceptors as well
+
+    // After configureService:
+    assert.strictEqual(
+      service.requestWrapperInstance.axiosInstance.interceptors.response
+        .handlers.length,
+      expectedNumberOfResponseInterceptors
+    );
+    // check whether errorResponseInterceptor is set as a new interceptor for rejected responses
+    actualErrorResponseInterceptor =
+      service.requestWrapperInstance.axiosInstance.interceptors.response
+        .handlers[expectedNumberOfResponseInterceptors - 1].rejected;
+    assert.deepStrictEqual(
+      Object.getPrototypeOf(actualErrorResponseInterceptor),
+      Object.getPrototypeOf(errorResponseInterceptor)
+    );
   });
 });
