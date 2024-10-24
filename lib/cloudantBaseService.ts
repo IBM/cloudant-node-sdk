@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2024. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,11 @@
 // eslint-disable-next-line max-classes-per-file
 import { Authenticator, BaseService, UserOptions } from 'ibm-cloud-sdk-core';
 import { CookieJar } from 'tough-cookie';
-import { CouchdbSessionAuthenticator } from '../auth';
-import { getSdkHeaders } from './common';
 import { Agent as HttpsAgent } from 'node:https';
 import { Agent as HttpAgent } from 'node:http';
+import { CouchdbSessionAuthenticator } from '../auth';
+import { errorResponseInterceptor } from './errorResponseInterceptor';
+import { getSdkHeaders } from './common';
 
 /**
  * Set default timeout to 2.5 minutes (= 150 000 ms)
@@ -112,6 +113,12 @@ export default abstract class CloudantBaseService extends BaseService {
     super(userOptions);
     this.timeout = userOptions.timeout;
     this.configureSessionAuthenticator();
+
+    // Add response interceptor for error transforms
+    this.getHttpClient().interceptors.response.use(
+      (response) => response,
+      (axiosError) => errorResponseInterceptor(axiosError)
+    );
   }
 
   public getTimeout() {
@@ -142,6 +149,11 @@ export default abstract class CloudantBaseService extends BaseService {
     // Read external configuration and set as request defaults.
     super.configureService(serviceName);
     this.configureSessionAuthenticator();
+    // Add response interceptor for error transforms
+    this.getHttpClient().interceptors.response.use(
+      (response) => response,
+      (axiosError) => errorResponseInterceptor(axiosError)
+    );
   }
 
   /**
