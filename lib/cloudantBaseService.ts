@@ -20,7 +20,10 @@ import { CookieJar } from 'tough-cookie';
 import { Agent as HttpsAgent } from 'node:https';
 import { Agent as HttpAgent } from 'node:http';
 import { CouchdbSessionAuthenticator } from '../auth';
-import { errorResponseInterceptor } from './errorResponseInterceptor';
+import {
+  errorResponseInterceptor,
+  errorResponseStreamConverter,
+} from './errorResponseInterceptor';
 import { getSdkHeaders } from './common';
 
 /**
@@ -115,9 +118,17 @@ export default abstract class CloudantBaseService extends BaseService {
     this.configureSessionAuthenticator();
 
     // Add response interceptor for error transforms
+    this.addErrorTransformers();
+  }
+
+  private addErrorTransformers() {
     this.getHttpClient().interceptors.response.use(
       (response) => response,
-      (axiosError) => errorResponseInterceptor(axiosError)
+      errorResponseStreamConverter
+    );
+    this.getHttpClient().interceptors.response.use(
+      (response) => response,
+      errorResponseInterceptor
     );
   }
 
@@ -150,10 +161,7 @@ export default abstract class CloudantBaseService extends BaseService {
     super.configureService(serviceName);
     this.configureSessionAuthenticator();
     // Add response interceptor for error transforms
-    this.getHttpClient().interceptors.response.use(
-      (response) => response,
-      (axiosError) => errorResponseInterceptor(axiosError)
-    );
+    this.addErrorTransformers();
   }
 
   /**
