@@ -4023,6 +4023,7 @@ class CloudantV1 extends CloudantBaseService {
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * @param {boolean} [params.allowFallback] - Whether to allow fallback to other indexes.  Default is true.
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4054,8 +4055,9 @@ class CloudantV1 extends CloudantBaseService {
    * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
    * indexes that might get added later.
    *
-   * If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
-   * full scan of all documents will answer the query.
+   * If the specified index doesn't exist or can't answer the query then the server ignores the value and answers using
+   * another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and the
+   * server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.ExplainResult>>}
    */
@@ -4064,7 +4066,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ExplainResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'selector'];
-    const _validParams = ['db', 'partitionKey', 'selector', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4072,6 +4074,7 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = {
       'selector': _params.selector,
+      'allow_fallback': _params.allowFallback,
       'bookmark': _params.bookmark,
       'conflicts': _params.conflicts,
       'execution_stats': _params.executionStats,
@@ -4123,9 +4126,13 @@ class CloudantV1 extends CloudantBaseService {
    * Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
    * all fields in selector by using the `_index` endpoint.
    *
-   * Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
-   * recommended because it has a noticeable performance impact causing a full scan of the partition with each request.
-   * In this case the response body will include a warning field recommending that an index is created.
+   * Queries without an appropriate backing index by default fallback to using the built-in `_all_docs` index. This
+   * isn't recommended because it has a significant performance impact causing a full scan of the partition with each
+   * request. In this case the response body includes a warning field recommending the creation of an index.
+   *
+   * To avoid the fallback behavior set the `allow_fallback` option to `false` and the server responds with a `400`
+   * status code if no suitable index exists. If you want to use only a specific index for your query set
+   * `allow_fallback` to `false` and set the `use_index` option.
    *
    * Before using read the
    * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand
@@ -4167,6 +4174,7 @@ class CloudantV1 extends CloudantBaseService {
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * @param {boolean} [params.allowFallback] - Whether to allow fallback to other indexes.  Default is true.
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4198,8 +4206,9 @@ class CloudantV1 extends CloudantBaseService {
    * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
    * indexes that might get added later.
    *
-   * If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
-   * full scan of all documents will answer the query.
+   * If the specified index doesn't exist or can't answer the query then the server ignores the value and answers using
+   * another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and the
+   * server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.FindResult>>}
    */
@@ -4208,7 +4217,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.FindResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'selector'];
-    const _validParams = ['db', 'partitionKey', 'selector', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4216,6 +4225,7 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = {
       'selector': _params.selector,
+      'allow_fallback': _params.allowFallback,
       'bookmark': _params.bookmark,
       'conflicts': _params.conflicts,
       'execution_stats': _params.executionStats,
@@ -4267,9 +4277,13 @@ class CloudantV1 extends CloudantBaseService {
    * Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
    * all fields in selector by using the `_index` endpoint.
    *
-   * Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
-   * recommended because it has a noticeable performance impact causing a full scan of the partition with each request.
-   * In this case the response body will include a warning field recommending that an index is created.
+   * Queries without an appropriate backing index by default fallback to using the built-in `_all_docs` index. This
+   * isn't recommended because it has a significant performance impact causing a full scan of the partition with each
+   * request. In this case the response body includes a warning field recommending the creation of an index.
+   *
+   * To avoid the fallback behavior set the `allow_fallback` option to `false` and the server responds with a `400`
+   * status code if no suitable index exists. If you want to use only a specific index for your query set
+   * `allow_fallback` to `false` and set the `use_index` option.
    *
    * Before using read the
    * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand
@@ -4311,6 +4325,7 @@ class CloudantV1 extends CloudantBaseService {
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * @param {boolean} [params.allowFallback] - Whether to allow fallback to other indexes.  Default is true.
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4342,8 +4357,9 @@ class CloudantV1 extends CloudantBaseService {
    * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
    * indexes that might get added later.
    *
-   * If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
-   * full scan of all documents will answer the query.
+   * If the specified index doesn't exist or can't answer the query then the server ignores the value and answers using
+   * another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and the
+   * server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
@@ -4352,7 +4368,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'selector'];
-    const _validParams = ['db', 'partitionKey', 'selector', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4360,6 +4376,7 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = {
       'selector': _params.selector,
+      'allow_fallback': _params.allowFallback,
       'bookmark': _params.bookmark,
       'conflicts': _params.conflicts,
       'execution_stats': _params.executionStats,
@@ -4446,6 +4463,7 @@ class CloudantV1 extends CloudantBaseService {
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * @param {boolean} [params.allowFallback] - Whether to allow fallback to other indexes.  Default is true.
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4477,8 +4495,9 @@ class CloudantV1 extends CloudantBaseService {
    * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
    * indexes that might get added later.
    *
-   * If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
-   * full scan of all documents will answer the query.
+   * If the specified index doesn't exist or can't answer the query then the server ignores the value and answers using
+   * another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and the
+   * server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
    * @param {number} [params.r] - The read quorum that is needed for the result. The value defaults to 1, in which case
    * the document that was found in the index is returned. If set to a higher value, each document is read from at least
    * that many replicas before it is returned in the results. The request will take more time than using only the
@@ -4491,7 +4510,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ExplainResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'selector'];
-    const _validParams = ['db', 'selector', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'headers'];
+    const _validParams = ['db', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4499,6 +4518,7 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = {
       'selector': _params.selector,
+      'allow_fallback': _params.allowFallback,
       'bookmark': _params.bookmark,
       'conflicts': _params.conflicts,
       'execution_stats': _params.executionStats,
@@ -4550,9 +4570,13 @@ class CloudantV1 extends CloudantBaseService {
    * Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
    * all fields in selector by using the `_index` endpoint.
    *
-   * Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
-   * recommended because it has a significant performance impact causing a full scan of the database with each request.
-   * In this case the response body will include a warning field recommending that an index is created.
+   * Queries without an appropriate backing index by default fallback to using the built-in `_all_docs` index. This
+   * isn't recommended because it has a significant performance impact causing a full scan of the database with each
+   * request. In this case the response body includes a warning field recommending the creation of an index.
+   *
+   * To avoid the fallback behavior set the `allow_fallback` option to `false` and the server responds with a `400`
+   * status code if no suitable index exists. If you want to use only a specific index for your query set
+   * `allow_fallback` to `false` and set the `use_index` option.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -4589,6 +4613,7 @@ class CloudantV1 extends CloudantBaseService {
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * @param {boolean} [params.allowFallback] - Whether to allow fallback to other indexes.  Default is true.
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4620,8 +4645,9 @@ class CloudantV1 extends CloudantBaseService {
    * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
    * indexes that might get added later.
    *
-   * If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
-   * full scan of all documents will answer the query.
+   * If the specified index doesn't exist or can't answer the query then the server ignores the value and answers using
+   * another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and the
+   * server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
    * @param {number} [params.r] - The read quorum that is needed for the result. The value defaults to 1, in which case
    * the document that was found in the index is returned. If set to a higher value, each document is read from at least
    * that many replicas before it is returned in the results. The request will take more time than using only the
@@ -4634,7 +4660,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.FindResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'selector'];
-    const _validParams = ['db', 'selector', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'headers'];
+    const _validParams = ['db', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4642,6 +4668,7 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = {
       'selector': _params.selector,
+      'allow_fallback': _params.allowFallback,
       'bookmark': _params.bookmark,
       'conflicts': _params.conflicts,
       'execution_stats': _params.executionStats,
@@ -4693,9 +4720,13 @@ class CloudantV1 extends CloudantBaseService {
    * Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
    * all fields in selector by using the `_index` endpoint.
    *
-   * Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
-   * recommended because it has a significant performance impact causing a full scan of the database with each request.
-   * In this case the response body will include a warning field recommending that an index is created.
+   * Queries without an appropriate backing index by default fallback to using the built-in `_all_docs` index. This
+   * isn't recommended because it has a significant performance impact causing a full scan of the database with each
+   * request. In this case the response body includes a warning field recommending the creation of an index.
+   *
+   * To avoid the fallback behavior set the `allow_fallback` option to `false` and the server responds with a `400`
+   * status code if no suitable index exists. If you want to use only a specific index for your query set
+   * `allow_fallback` to `false` and set the `use_index` option.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
@@ -4732,6 +4763,7 @@ class CloudantV1 extends CloudantBaseService {
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+   * @param {boolean} [params.allowFallback] - Whether to allow fallback to other indexes.  Default is true.
    * @param {string} [params.bookmark] - Opaque bookmark token used when paginating results.
    * @param {boolean} [params.conflicts] - A boolean value that indicates whether or not to include information about
    * existing conflicts in the document.
@@ -4763,8 +4795,9 @@ class CloudantV1 extends CloudantBaseService {
    * It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
    * indexes that might get added later.
    *
-   * If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
-   * full scan of all documents will answer the query.
+   * If the specified index doesn't exist or can't answer the query then the server ignores the value and answers using
+   * another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and the
+   * server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
    * @param {number} [params.r] - The read quorum that is needed for the result. The value defaults to 1, in which case
    * the document that was found in the index is returned. If set to a higher value, each document is read from at least
    * that many replicas before it is returned in the results. The request will take more time than using only the
@@ -4777,7 +4810,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'selector'];
-    const _validParams = ['db', 'selector', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'headers'];
+    const _validParams = ['db', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4785,6 +4818,7 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = {
       'selector': _params.selector,
+      'allow_fallback': _params.allowFallback,
       'bookmark': _params.bookmark,
       'conflicts': _params.conflicts,
       'execution_stats': _params.executionStats,
@@ -9164,6 +9198,8 @@ namespace CloudantV1 {
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
+    /** Whether to allow fallback to other indexes.  Default is true. */
+    allowFallback?: boolean;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** A boolean value that indicates whether or not to include information about existing conflicts in the
@@ -9205,8 +9241,9 @@ namespace CloudantV1 {
      *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
      *  indexes that might get added later.
      *
-     *  If the specified index does not exist or cannot answer the query then the value is ignored and another index or
-     *  a full scan of all documents will answer the query.
+     *  If the specified index doesn't exist or can't answer the query then the server ignores the value and answers
+     *  using another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and
+     *  the server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
      */
     useIndex?: string[];
     headers?: OutgoingHttpHeaders;
@@ -9268,6 +9305,8 @@ namespace CloudantV1 {
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
+    /** Whether to allow fallback to other indexes.  Default is true. */
+    allowFallback?: boolean;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** A boolean value that indicates whether or not to include information about existing conflicts in the
@@ -9309,8 +9348,9 @@ namespace CloudantV1 {
      *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
      *  indexes that might get added later.
      *
-     *  If the specified index does not exist or cannot answer the query then the value is ignored and another index or
-     *  a full scan of all documents will answer the query.
+     *  If the specified index doesn't exist or can't answer the query then the server ignores the value and answers
+     *  using another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and
+     *  the server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
      */
     useIndex?: string[];
     headers?: OutgoingHttpHeaders;
@@ -9372,6 +9412,8 @@ namespace CloudantV1 {
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
+    /** Whether to allow fallback to other indexes.  Default is true. */
+    allowFallback?: boolean;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** A boolean value that indicates whether or not to include information about existing conflicts in the
@@ -9413,8 +9455,9 @@ namespace CloudantV1 {
      *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
      *  indexes that might get added later.
      *
-     *  If the specified index does not exist or cannot answer the query then the value is ignored and another index or
-     *  a full scan of all documents will answer the query.
+     *  If the specified index doesn't exist or can't answer the query then the server ignores the value and answers
+     *  using another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and
+     *  the server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
      */
     useIndex?: string[];
     headers?: OutgoingHttpHeaders;
@@ -9474,6 +9517,8 @@ namespace CloudantV1 {
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
+    /** Whether to allow fallback to other indexes.  Default is true. */
+    allowFallback?: boolean;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** A boolean value that indicates whether or not to include information about existing conflicts in the
@@ -9515,8 +9560,9 @@ namespace CloudantV1 {
      *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
      *  indexes that might get added later.
      *
-     *  If the specified index does not exist or cannot answer the query then the value is ignored and another index or
-     *  a full scan of all documents will answer the query.
+     *  If the specified index doesn't exist or can't answer the query then the server ignores the value and answers
+     *  using another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and
+     *  the server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
      */
     useIndex?: string[];
     /** The read quorum that is needed for the result. The value defaults to 1, in which case the document that was
@@ -9582,6 +9628,8 @@ namespace CloudantV1 {
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
+    /** Whether to allow fallback to other indexes.  Default is true. */
+    allowFallback?: boolean;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** A boolean value that indicates whether or not to include information about existing conflicts in the
@@ -9623,8 +9671,9 @@ namespace CloudantV1 {
      *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
      *  indexes that might get added later.
      *
-     *  If the specified index does not exist or cannot answer the query then the value is ignored and another index or
-     *  a full scan of all documents will answer the query.
+     *  If the specified index doesn't exist or can't answer the query then the server ignores the value and answers
+     *  using another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and
+     *  the server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
      */
     useIndex?: string[];
     /** The read quorum that is needed for the result. The value defaults to 1, in which case the document that was
@@ -9690,6 +9739,8 @@ namespace CloudantV1 {
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
     selector: JsonObject;
+    /** Whether to allow fallback to other indexes.  Default is true. */
+    allowFallback?: boolean;
     /** Opaque bookmark token used when paginating results. */
     bookmark?: string;
     /** A boolean value that indicates whether or not to include information about existing conflicts in the
@@ -9731,8 +9782,9 @@ namespace CloudantV1 {
      *  It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
      *  indexes that might get added later.
      *
-     *  If the specified index does not exist or cannot answer the query then the value is ignored and another index or
-     *  a full scan of all documents will answer the query.
+     *  If the specified index doesn't exist or can't answer the query then the server ignores the value and answers
+     *  using another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and
+     *  the server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
      */
     useIndex?: string[];
     /** The read quorum that is needed for the result. The value defaults to 1, in which case the document that was
@@ -10714,7 +10766,7 @@ namespace CloudantV1 {
     /** Schema for a Unix epoch timestamp. */
     updatedOn: number;
 
-    /** Name of user running replication or owning the indexer. Available for `indexer`, `replication` type tasks. */
+    /** Name of user running the process. */
     user?: string | null;
 
     /** Number of view indexes. Available for `view_compaction` type tasks. */
@@ -12418,7 +12470,7 @@ namespace CloudantV1 {
     /** An opaque string that describes the compaction state of the database. */
     compactedSeq?: string;
 
-    /** The name of the database. */
+    /** Schema for a database name. */
     dbName: string;
 
     /** The version of the physical format used for the data when it is stored on disk. */
@@ -12687,7 +12739,7 @@ namespace CloudantV1 {
    * Schema for a database change event.
    */
   export class DbEvent {
-    /** Database name. */
+    /** Schema for a database name. */
     dbName: string;
 
     /** Sequence number. */
@@ -12801,7 +12853,7 @@ namespace CloudantV1 {
     /** Schema for information about a database. */
     info?: DatabaseInformation;
 
-    /** Database name. */
+    /** Schema for a database name. */
     key: string;
 
     static serialize(obj): DbsInfoResult.Transport {
@@ -12864,7 +12916,7 @@ namespace CloudantV1 {
     /** Schema for a list of document revision identifiers. */
     _deleted_conflicts?: string[];
 
-    /** Schema for a design document ID. */
+    /** Schema for a design document ID including a `_design/` prefix. */
     _id?: string;
 
     /** Document's update sequence in current database. Available if requested with local_seq=true query parameter. */
@@ -13414,10 +13466,10 @@ namespace CloudantV1 {
     /** Schema for a document. */
     doc?: Document;
 
-    /** id. */
+    /** Schema for a document ID. */
     id?: string;
 
-    /** Document ID. */
+    /** Schema for a document ID. */
     key: string;
 
     /** Value of built-in `/_all_docs` style view. */
@@ -13979,7 +14031,7 @@ namespace CloudantV1 {
     /** When `true`, the query is answered using the index only and no documents are fetched. */
     covering: boolean;
 
-    /** Name of database. */
+    /** Schema for a database name. */
     dbname: string;
 
     /** Fields that were requested to be projected from the document. If no fields were requested to be projected
@@ -13991,7 +14043,7 @@ namespace CloudantV1 {
     index: IndexInformation;
 
     /** Schema for the list of all the other indexes that were not chosen for serving the query. */
-    indexCandidates?: IndexCandidate[];
+    indexCandidates: IndexCandidate[];
 
     /** The used maximum number of results returned. */
     limit: number;
@@ -14042,7 +14094,7 @@ namespace CloudantV1 {
     selector: JsonObject;
 
     /** Schema for a list of objects with extra information on the selector to provide insights about its usability. */
-    selectorHints?: SelectorHint[];
+    selectorHints: SelectorHint[];
 
     /** Skip parameter used. */
     skip: number;
@@ -14141,13 +14193,13 @@ namespace CloudantV1 {
         dbname: string;
         fields: string[];
         index: IndexInformation.Transport;
-        index_candidates?: IndexCandidate[];
+        index_candidates: IndexCandidate[];
         limit: number;
         mrargs?: ExplainResultMrArgs.Transport;
         opts: ExplainResultOpts.Transport;
         partitioned?: any;
         selector: JsonObject;
-        selector_hints?: SelectorHint[];
+        selector_hints: SelectorHint[];
         skip: number;
       }
   }
@@ -14160,7 +14212,7 @@ namespace CloudantV1 {
     conflicts?: any;
 
     /** Direction parameter passed to the underlying view. */
-    direction?: string;
+    direction?: ExplainResultMrArgs.Constants.Direction | string;
 
     /** Schema for any JSON type. */
     endKey?: any;
@@ -14270,6 +14322,11 @@ namespace CloudantV1 {
   }
   export namespace ExplainResultMrArgs {
     export namespace Constants {
+      /** Direction parameter passed to the underlying view. */
+      export enum Direction {
+        ASC = 'asc',
+        DESC = 'desc',
+      }
       /** The type of the underlying view. */
       export enum ViewType {
         MAP = 'map',
@@ -14715,7 +14772,7 @@ namespace CloudantV1 {
      *  For "text" type indexes each object has a `name` property of the field name and a `type` property of the field
      *  type (string, number, or boolean).
      */
-    fields?: IndexField[];
+    fields: IndexField[];
 
     /** Whether to scan every document for arrays and store the length for each array found. Set the
      *  index_array_lengths field to false if:
@@ -14811,7 +14868,7 @@ namespace CloudantV1 {
       export interface Transport {
         default_analyzer?: Analyzer.Transport;
         default_field?: IndexTextOperatorDefaultField.Transport;
-        fields?: IndexField[];
+        fields: IndexField[];
         index_array_lengths?: boolean;
         partial_filter_selector?: JsonObject;
       }
@@ -14902,7 +14959,7 @@ namespace CloudantV1 {
    * Schema for information about an index.
    */
   export class IndexInformation {
-    /** Design document ID including a `_design/` prefix. */
+    /** Schema for a nullable design document ID including a `_design/` prefix. */
     ddoc: string | null;
 
     /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
@@ -15222,7 +15279,7 @@ namespace CloudantV1 {
    * Schema for information about a database partition.
    */
   export class PartitionInformation {
-    /** The name of the database. */
+    /** Schema for a database name. */
     dbName: string;
 
     /** A count of the documents in the specified database partition. */
@@ -15231,7 +15288,7 @@ namespace CloudantV1 {
     /** Number of deleted documents. */
     docDelCount: number;
 
-    /** The name of the partition in the database. */
+    /** Schema for a partition key. */
     partition: string;
 
     /** Schema for information about the partition index count and limit in a database. */
@@ -15712,7 +15769,7 @@ namespace CloudantV1 {
     /** The password associated with the username. */
     password: string;
 
-    /** The username. */
+    /** Schema for a username. */
     username: string;
 
     static serialize(obj): ReplicationDatabaseAuthBasic.Transport {
@@ -16780,7 +16837,7 @@ namespace CloudantV1 {
     /** Replication target. */
     target: string;
 
-    /** Name of user running replication. */
+    /** Name of user running the process. */
     user: string | null;
 
     static serialize(obj): SchedulerJob.Transport {
@@ -17232,7 +17289,7 @@ namespace CloudantV1 {
     ranges?: {[key: string]: JsonObject};
 
     /** Array of row objects. */
-    rows?: SearchResultRow[];
+    rows: SearchResultRow[];
 
     /** Array of grouped search matches. */
     groups?: SearchResultProperties[];
@@ -17302,7 +17359,7 @@ namespace CloudantV1 {
         by?: string;
         counts?: {[key: string]: JsonObject};
         ranges?: {[key: string]: JsonObject};
-        rows?: SearchResultRow[];
+        rows: SearchResultRow[];
         groups?: SearchResultProperties[];
       }
   }
@@ -17329,7 +17386,7 @@ namespace CloudantV1 {
     ranges?: {[key: string]: JsonObject};
 
     /** Array of row objects. */
-    rows?: SearchResultRow[];
+    rows: SearchResultRow[];
 
     static serialize(obj): SearchResultProperties.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
@@ -17390,7 +17447,7 @@ namespace CloudantV1 {
         by?: string;
         counts?: {[key: string]: JsonObject};
         ranges?: {[key: string]: JsonObject};
-        rows?: SearchResultRow[];
+        rows: SearchResultRow[];
       }
   }
 
@@ -17718,7 +17775,7 @@ namespace CloudantV1 {
     name: string;
 
     /** Vendor variant. */
-    variant: string;
+    variant: ServerVendor.Constants.Variant | string;
 
     /** Vendor version. */
     version: string;
@@ -17784,6 +17841,12 @@ namespace CloudantV1 {
     }
   }
   export namespace ServerVendor {
+    export namespace Constants {
+      /** Vendor variant. */
+      export enum Variant {
+        PAAS = 'paas',
+      }
+    }
       export interface Transport {
         name: string;
         variant: string;
@@ -18123,7 +18186,7 @@ namespace CloudantV1 {
     /** Database name in the context of the provided operation. */
     db?: string;
 
-    /** User name. */
+    /** Name of user running the process. */
     name: string | null;
 
     /** List of user roles. */
