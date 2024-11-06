@@ -52,8 +52,10 @@ export function errorResponseInterceptor(axiosError) {
       axiosError.response.data.errors = [error];
     }
     if (axiosError.response.data.errors) {
-      // Map x-couch-request-id if available to the trace field
-      const trace = axiosError.response.headers['x-couch-request-id'];
+      // Map x-request-id or x-couch-request-id if available to the trace field
+      const trace =
+        axiosError.response.headers['x-request-id'] ||
+        axiosError.response.headers['x-couch-request-id'];
       if (trace) {
         // Trace should be omitted if there is no value
         axiosError.response.data.trace = trace;
