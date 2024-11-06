@@ -219,6 +219,42 @@ function getCases() {
       },
     },
     {
+      name: 'test_augment_error_reason_with_trace_request_id',
+      mockResponse: { error: 'foo', reason: 'Bar.' },
+      expectedResponse: {
+        error: 'foo',
+        reason: 'Bar.',
+        errors: [{ message: 'foo: Bar.', code: 'foo' }],
+        trace: TRACE,
+      },
+      mockHeaders: {
+        'x-request-id': TRACE,
+      },
+      expectedHeaders: {
+        'x-request-id': TRACE,
+        'content-type': 'application/json',
+      },
+    },
+    {
+      name: 'test_augment_error_reason_with_trace_request_id_preferred',
+      mockResponse: { error: 'foo', reason: 'Bar.' },
+      expectedResponse: {
+        error: 'foo',
+        reason: 'Bar.',
+        errors: [{ message: 'foo: Bar.', code: 'foo' }],
+        trace: TRACE,
+      },
+      mockHeaders: {
+        'x-request-id': TRACE,
+        'x-couch-request-id': 'anotherid',
+      },
+      expectedHeaders: {
+        'x-request-id': TRACE,
+        'x-couch-request-id': 'anotherid',
+        'content-type': 'application/json',
+      },
+    },
+    {
       name: 'test_no_augment_existing_trace',
       // trace diffs from x-couch-request-id in header:
       mockResponse: { error: 'foo', reason: 'Bar.', trace: 'fooBar' },
