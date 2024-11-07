@@ -1108,6 +1108,7 @@ describe('CloudantV1_integration', () => {
       db: 'testString',
       partitionKey: 'testString',
       selector: { type: { '$eq': 'product' } },
+      allowFallback: true,
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
@@ -1131,6 +1132,7 @@ describe('CloudantV1_integration', () => {
       db: 'testString',
       partitionKey: 'testString',
       selector: { type: { '$eq': 'product' } },
+      allowFallback: true,
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
@@ -1154,6 +1156,7 @@ describe('CloudantV1_integration', () => {
       db: 'testString',
       partitionKey: 'testString',
       selector: { type: { '$eq': 'product' } },
+      allowFallback: true,
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
@@ -1176,6 +1179,7 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       selector: { email_verified: { '$eq': true } },
+      allowFallback: true,
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
@@ -1199,6 +1203,7 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       selector: { email_verified: { '$eq': true } },
+      allowFallback: true,
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
@@ -1222,6 +1227,7 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       selector: { email_verified: { '$eq': true } },
+      allowFallback: true,
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
