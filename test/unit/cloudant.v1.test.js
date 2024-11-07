@@ -5500,6 +5500,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const partitionKey = 'testString';
         const selector = { type: { '$eq': 'product' } };
+        const allowFallback = true;
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5514,6 +5515,7 @@ describe('CloudantV1', () => {
           db,
           partitionKey,
           selector,
+          allowFallback,
           bookmark,
           conflicts,
           executionStats,
@@ -5541,6 +5543,7 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.body.allow_fallback).toEqual(allowFallback);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.execution_stats).toEqual(executionStats);
@@ -5624,6 +5627,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const partitionKey = 'testString';
         const selector = { type: { '$eq': 'product' } };
+        const allowFallback = true;
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5638,6 +5642,7 @@ describe('CloudantV1', () => {
           db,
           partitionKey,
           selector,
+          allowFallback,
           bookmark,
           conflicts,
           executionStats,
@@ -5665,6 +5670,7 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.body.allow_fallback).toEqual(allowFallback);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.execution_stats).toEqual(executionStats);
@@ -5748,6 +5754,7 @@ describe('CloudantV1', () => {
         const db = 'testString';
         const partitionKey = 'testString';
         const selector = { type: { '$eq': 'product' } };
+        const allowFallback = true;
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5762,6 +5769,7 @@ describe('CloudantV1', () => {
           db,
           partitionKey,
           selector,
+          allowFallback,
           bookmark,
           conflicts,
           executionStats,
@@ -5789,6 +5797,7 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.body.allow_fallback).toEqual(allowFallback);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.execution_stats).toEqual(executionStats);
@@ -5872,6 +5881,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postExplain
         const db = 'testString';
         const selector = { email_verified: { '$eq': true } };
+        const allowFallback = true;
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -5886,6 +5896,7 @@ describe('CloudantV1', () => {
         const postExplainParams = {
           db,
           selector,
+          allowFallback,
           bookmark,
           conflicts,
           executionStats,
@@ -5914,6 +5925,7 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.body.allow_fallback).toEqual(allowFallback);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.execution_stats).toEqual(executionStats);
@@ -5994,6 +6006,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postFind
         const db = 'testString';
         const selector = { email_verified: { '$eq': true } };
+        const allowFallback = true;
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -6008,6 +6021,7 @@ describe('CloudantV1', () => {
         const postFindParams = {
           db,
           selector,
+          allowFallback,
           bookmark,
           conflicts,
           executionStats,
@@ -6036,6 +6050,7 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.body.allow_fallback).toEqual(allowFallback);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.execution_stats).toEqual(executionStats);
@@ -6116,6 +6131,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postFindAsStream
         const db = 'testString';
         const selector = { email_verified: { '$eq': true } };
+        const allowFallback = true;
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
@@ -6130,6 +6146,7 @@ describe('CloudantV1', () => {
         const postFindAsStreamParams = {
           db,
           selector,
+          allowFallback,
           bookmark,
           conflicts,
           executionStats,
@@ -6158,6 +6175,7 @@ describe('CloudantV1', () => {
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.selector).toEqual(selector);
+        expect(mockRequestOptions.body.allow_fallback).toEqual(allowFallback);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.execution_stats).toEqual(executionStats);
