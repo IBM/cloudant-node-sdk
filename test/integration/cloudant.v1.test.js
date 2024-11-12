@@ -1425,6 +1425,122 @@ describe('CloudantV1_integration', () => {
     expect(res.result).toBeDefined();
   });
 
+  test('postReplicator()', async () => {
+    // Request models needed by this operation.
+
+    // Attachment
+    const attachmentModel = {
+      contentType: 'testString',
+      data: Buffer.from('VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=', 'base64'),
+      digest: 'testString',
+      encodedLength: 0,
+      encoding: 'testString',
+      follows: true,
+      length: 0,
+      revpos: 1,
+      stub: true,
+    };
+
+    // Revisions
+    const revisionsModel = {
+      ids: ['testString'],
+      start: 1,
+    };
+
+    // DocumentRevisionStatus
+    const documentRevisionStatusModel = {
+      rev: 'testString',
+      status: 'available',
+    };
+
+    // ReplicationCreateTargetParameters
+    const replicationCreateTargetParametersModel = {
+      n: 3,
+      partitioned: false,
+      q: 1,
+    };
+
+    // ReplicationDatabaseAuthBasic
+    const replicationDatabaseAuthBasicModel = {
+      password: 'testString',
+      username: 'testString',
+    };
+
+    // ReplicationDatabaseAuthIam
+    const replicationDatabaseAuthIamModel = {
+      apiKey: 'testString',
+    };
+
+    // ReplicationDatabaseAuth
+    const replicationDatabaseAuthModel = {
+      basic: replicationDatabaseAuthBasicModel,
+      iam: replicationDatabaseAuthIamModel,
+    };
+
+    // ReplicationDatabase
+    const replicationDatabaseModel = {
+      auth: replicationDatabaseAuthModel,
+      headers: { 'key1': 'testString' },
+      url: 'https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb',
+    };
+
+    // UserContext
+    const userContextModel = {
+      db: 'testString',
+      name: 'john',
+      roles: ['_replicator'],
+    };
+
+    // ReplicationDocument
+    const replicationDocumentModel = {
+      _attachments: { 'key1': attachmentModel },
+      _conflicts: ['testString'],
+      _deleted: true,
+      _deleted_conflicts: ['testString'],
+      _id: 'testString',
+      _local_seq: 'testString',
+      _rev: 'testString',
+      _revisions: revisionsModel,
+      _revs_info: [documentRevisionStatusModel],
+      cancel: false,
+      checkpointInterval: 4500,
+      connectionTimeout: 15000,
+      continuous: true,
+      createTarget: true,
+      createTargetParams: replicationCreateTargetParametersModel,
+      docIds: ['badger', 'lemur', 'llama'],
+      filter: 'ddoc/my_filter',
+      httpConnections: 10,
+      owner: 'testString',
+      queryParams: { 'key1': 'testString' },
+      retriesPerRequest: 3,
+      selector: { _id: { '$regex': 'docid' } },
+      sinceSeq: '34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU',
+      socketOptions: '[{keepalive, true}, {nodelay, false}]',
+      source: replicationDatabaseModel,
+      sourceProxy: 'testString',
+      target: replicationDatabaseModel,
+      targetProxy: 'testString',
+      useBulkGet: true,
+      useCheckpoints: false,
+      userCtx: userContextModel,
+      winningRevsOnly: false,
+      workerBatchSize: 400,
+      workerProcesses: 3,
+      foo: 'testString',
+    };
+
+    const params = {
+      replicationDocument: replicationDocumentModel,
+      batch: 'ok',
+    };
+
+    const res = await cloudantService.postReplicator(params);
+    expect(res).toBeDefined();
+    expect(res.status).toBe(201);
+    expect(res.result).toBeDefined();
+  });
+
   test('getReplicationDocument()', async () => {
     const params = {
       docId: 'testString',

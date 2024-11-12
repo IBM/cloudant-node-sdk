@@ -5412,7 +5412,7 @@ class CloudantV1 extends CloudantBaseService {
    ************************/
 
   /**
-   * Retrieve the HTTP headers for a replication document.
+   * Retrieve the HTTP headers for a persistent replication.
    *
    * Retrieves the HTTP headers containing minimal amount of information about the specified replication document from
    * the `_replicator` database.  The method supports the same query arguments as the `GET /_replicator/{doc_id}`
@@ -5560,7 +5560,64 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Cancel a replication.
+   * Create a persistent replication with a generated ID.
+   *
+   * Creates or modifies a document in the `_replicator` database to start a new replication or to edit an existing
+   * replication.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {ReplicationDocument} params.replicationDocument - HTTP request body for replication operations.
+   * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
+   * with a HTTP 202 Accepted response code immediately.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
+   */
+  public postReplicator(
+    params: CloudantV1.PostReplicatorParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
+    const _requiredParams = ['replicationDocument'];
+    const _validParams = ['replicationDocument', 'batch', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const body = CloudantV1.ReplicationDocument.serialize(_params.replicationDocument);
+    const query = {
+      'batch': _params.batch,
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postReplicator');
+
+    const parameters = {
+      options: {
+        url: '/_replicator',
+        method: 'POST',
+        body,
+        qs: query,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
+  }
+
+  /**
+   * Cancel a persistent replication.
    *
    * Cancels a replication by deleting the document that describes it from the `_replicator` database.
    *
@@ -5622,7 +5679,7 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Retrieve a replication document.
+   * Retrieve the configuration for a persistent replication.
    *
    * Retrieves a replication document from the `_replicator` database to view the configuration of the replication. The
    * status of the replication is no longer recorded in the document but can be checked via the replication scheduler.
@@ -5709,7 +5766,7 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Create or modify a replication using a replication document.
+   * Create or modify a persistent replication.
    *
    * Creates or modifies a document in the `_replicator` database to start a new replication or to edit an existing
    * replication.
@@ -10148,6 +10205,25 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
+  /** Parameters for the `postReplicator` operation. */
+  export interface PostReplicatorParams {
+    /** HTTP request body for replication operations. */
+    replicationDocument: ReplicationDocument;
+    /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
+     *  response code immediately.
+     */
+    batch?: PostReplicatorConstants.Batch | string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Constants for the `postReplicator` operation. */
+  export namespace PostReplicatorConstants {
+    /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response code immediately. */
+    export enum Batch {
+      OK = 'ok',
+    }
+  }
+
   /** Parameters for the `deleteReplicationDocument` operation. */
   export interface DeleteReplicationDocumentParams {
     /** Path parameter to specify the document ID. */
@@ -11364,7 +11440,7 @@ namespace CloudantV1 {
      *  * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query
      *  text index default_field the default is `standard`.
      */
-    name?: Analyzer.Constants.Name | string;
+    name: Analyzer.Constants.Name | string;
 
     /** Custom stopwords to use with the named analyzer. */
     stopwords?: string[];
@@ -11445,7 +11521,7 @@ namespace CloudantV1 {
       }
     }
       export interface Transport {
-        name?: string;
+        name: string;
         stopwords?: string[];
       }
   }
@@ -11459,7 +11535,7 @@ namespace CloudantV1 {
      *  * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query
      *  text index default_field the default is `standard`.
      */
-    name?: AnalyzerConfiguration.Constants.Name | string;
+    name: AnalyzerConfiguration.Constants.Name | string;
 
     /** Custom stopwords to use with the named analyzer. */
     stopwords?: string[];
@@ -11549,7 +11625,7 @@ namespace CloudantV1 {
       }
     }
       export interface Transport {
-        name?: string;
+        name: string;
         stopwords?: string[];
         fields?: {[key: string]: Analyzer.Transport};
       }
@@ -14209,40 +14285,40 @@ namespace CloudantV1 {
    */
   export class ExplainResultMrArgs {
     /** Schema for any JSON type. */
-    conflicts?: any;
+    conflicts: any;
 
     /** Direction parameter passed to the underlying view. */
-    direction?: ExplainResultMrArgs.Constants.Direction | string;
+    direction: ExplainResultMrArgs.Constants.Direction | string;
 
     /** Schema for any JSON type. */
-    endKey?: any;
+    endKey: any;
 
     /** A parameter that specifies whether to include the full content of the documents in the response in the
      *  underlying view.
      */
-    includeDocs?: boolean;
+    includeDocs: boolean;
 
     /** Partition parameter passed to the underlying view. */
-    partition?: string | null;
+    partition: string | null;
 
     /** A parameter that specifies returning only documents that match any of the specified keys in the underlying
      *  view.
      */
-    reduce?: boolean;
+    reduce: boolean;
 
     /** A parameter that specifies whether the view results should be returned form a "stable" set of shards passed
      *  to the underlying view.
      */
-    stable?: boolean;
+    stable: boolean;
 
     /** Schema for any JSON type. */
     startKey?: any;
 
     /** Schema for any JSON type. */
-    update?: any;
+    update: any;
 
     /** The type of the underlying view. */
-    viewType?: ExplainResultMrArgs.Constants.ViewType | string;
+    viewType: ExplainResultMrArgs.Constants.ViewType | string;
 
     static serialize(obj): ExplainResultMrArgs.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
@@ -14334,16 +14410,16 @@ namespace CloudantV1 {
       }
     }
       export interface Transport {
-        conflicts?: any;
-        direction?: string;
-        end_key?: any;
-        include_docs?: boolean;
-        partition?: string;
-        reduce?: boolean;
-        stable?: boolean;
+        conflicts: any;
+        direction: string;
+        end_key: any;
+        include_docs: boolean;
+        partition: string;
+        reduce: boolean;
+        stable: boolean;
         start_key?: any;
-        update?: any;
-        view_type?: string;
+        update: any;
+        view_type: string;
       }
   }
 
@@ -14659,7 +14735,7 @@ namespace CloudantV1 {
      *  * too_many_fields: json The index has more fields than the chosen one.
      *  * unfavored_type: any The type of the index is not preferred.
      */
-    name?: IndexAnalysisExclusionReason.Constants.Name | string;
+    name: IndexAnalysisExclusionReason.Constants.Name | string;
 
     static serialize(obj): IndexAnalysisExclusionReason.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
@@ -14701,7 +14777,7 @@ namespace CloudantV1 {
       }
     }
       export interface Transport {
-        name?: string;
+        name: string;
       }
   }
 

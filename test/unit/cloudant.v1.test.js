@@ -7304,6 +7304,197 @@ describe('CloudantV1', () => {
     });
   });
 
+  describe('postReplicator', () => {
+    describe('positive tests', () => {
+      // Request models needed by this operation.
+
+      // Attachment
+      const attachmentModel = {
+        contentType: 'testString',
+        data: Buffer.from('VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=', 'base64'),
+        digest: 'testString',
+        encodedLength: 0,
+        encoding: 'testString',
+        follows: true,
+        length: 0,
+        revpos: 1,
+        stub: true,
+      };
+
+      // Revisions
+      const revisionsModel = {
+        ids: ['testString'],
+        start: 1,
+      };
+
+      // DocumentRevisionStatus
+      const documentRevisionStatusModel = {
+        rev: 'testString',
+        status: 'available',
+      };
+
+      // ReplicationCreateTargetParameters
+      const replicationCreateTargetParametersModel = {
+        n: 3,
+        partitioned: false,
+        q: 1,
+      };
+
+      // ReplicationDatabaseAuthBasic
+      const replicationDatabaseAuthBasicModel = {
+        password: 'testString',
+        username: 'testString',
+      };
+
+      // ReplicationDatabaseAuthIam
+      const replicationDatabaseAuthIamModel = {
+        apiKey: 'testString',
+      };
+
+      // ReplicationDatabaseAuth
+      const replicationDatabaseAuthModel = {
+        basic: replicationDatabaseAuthBasicModel,
+        iam: replicationDatabaseAuthIamModel,
+      };
+
+      // ReplicationDatabase
+      const replicationDatabaseModel = {
+        auth: replicationDatabaseAuthModel,
+        headers: { 'key1': 'testString' },
+        url: 'https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb',
+      };
+
+      // UserContext
+      const userContextModel = {
+        db: 'testString',
+        name: 'john',
+        roles: ['_replicator'],
+      };
+
+      // ReplicationDocument
+      const replicationDocumentModel = {
+        _attachments: { 'key1': attachmentModel },
+        _conflicts: ['testString'],
+        _deleted: true,
+        _deleted_conflicts: ['testString'],
+        _id: 'testString',
+        _local_seq: 'testString',
+        _rev: 'testString',
+        _revisions: revisionsModel,
+        _revs_info: [documentRevisionStatusModel],
+        cancel: false,
+        checkpointInterval: 4500,
+        connectionTimeout: 15000,
+        continuous: true,
+        createTarget: true,
+        createTargetParams: replicationCreateTargetParametersModel,
+        docIds: ['badger', 'lemur', 'llama'],
+        filter: 'ddoc/my_filter',
+        httpConnections: 10,
+        owner: 'testString',
+        queryParams: { 'key1': 'testString' },
+        retriesPerRequest: 3,
+        selector: { _id: { '$regex': 'docid' } },
+        sinceSeq: '34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU',
+        socketOptions: '[{keepalive, true}, {nodelay, false}]',
+        source: replicationDatabaseModel,
+        sourceProxy: 'testString',
+        target: replicationDatabaseModel,
+        targetProxy: 'testString',
+        useBulkGet: true,
+        useCheckpoints: false,
+        userCtx: userContextModel,
+        winningRevsOnly: false,
+        workerBatchSize: 400,
+        workerProcesses: 3,
+        foo: 'testString',
+      };
+
+      function __postReplicatorTest() {
+        // Construct the params object for operation postReplicator
+        const replicationDocument = replicationDocumentModel;
+        const batch = 'ok';
+        const postReplicatorParams = {
+          replicationDocument,
+          batch,
+        };
+
+        const postReplicatorResult = cloudantService.postReplicator(postReplicatorParams);
+
+        // all methods should return a Promise
+        expectToBePromise(postReplicatorResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/_replicator', 'POST');
+        const expectedAccept = 'application/json';
+        const expectedContentType = 'application/json';
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body).toEqual(CloudantV1.ReplicationDocument.serialize(replicationDocument));
+        expect(mockRequestOptions.qs.batch).toEqual(batch);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __postReplicatorTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __postReplicatorTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __postReplicatorTest();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const replicationDocument = replicationDocumentModel;
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const postReplicatorParams = {
+          replicationDocument,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.postReplicator(postReplicatorParams);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async () => {
+        let err;
+        try {
+          await cloudantService.postReplicator({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.postReplicator();
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+    });
+  });
+
   describe('deleteReplicationDocument', () => {
     describe('positive tests', () => {
       function __deleteReplicationDocumentTest() {
