@@ -6549,7 +6549,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {string} params.attachmentName - Path parameter to specify the attachment name.
-   * @param {string} [params.accept] - The type of the response:  or *_/_*.
+   * @param {string} [params.accept] - The type of the response: *_/_*.
    * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
    * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {string} [params.range] - Header parameter to specify the byte range for a request. This allows the
@@ -10443,7 +10443,7 @@ namespace CloudantV1 {
     docId: string;
     /** Path parameter to specify the attachment name. */
     attachmentName: string;
-    /** The type of the response:  or *_/_*. */
+    /** The type of the response: *_/_*. */
     accept?: string;
     /** Header parameter for a conditional HTTP request matching an ETag. */
     ifMatch?: string;
