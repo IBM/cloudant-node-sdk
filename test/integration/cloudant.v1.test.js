@@ -53,17 +53,6 @@ describe('CloudantV1_integration', () => {
     expect(res.result).toBeDefined();
   });
 
-  test('getUuids()', async () => {
-    const params = {
-      count: 1,
-    };
-
-    const res = await cloudantService.getUuids(params);
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
   test('getCapacityThroughputInformation()', async () => {
     const res = await cloudantService.getCapacityThroughputInformation();
     expect(res).toBeDefined();
@@ -82,11 +71,22 @@ describe('CloudantV1_integration', () => {
     expect(res.result).toBeDefined();
   });
 
+  test('getUuids()', async () => {
+    const params = {
+      count: 1,
+    };
+
+    const res = await cloudantService.getUuids(params);
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
   test('getDbUpdates()', async () => {
     const params = {
       descending: false,
       feed: 'normal',
-      heartbeat: 0,
+      heartbeat: 1,
       limit: 0,
       timeout: 60000,
       since: '0',
@@ -111,7 +111,7 @@ describe('CloudantV1_integration', () => {
       descending: false,
       feed: 'normal',
       filter: 'testString',
-      heartbeat: 0,
+      heartbeat: 1,
       includeDocs: false,
       limit: 0,
       seqInterval: 1,
@@ -140,7 +140,7 @@ describe('CloudantV1_integration', () => {
       descending: false,
       feed: 'normal',
       filter: 'testString',
-      heartbeat: 0,
+      heartbeat: 1,
       includeDocs: false,
       limit: 0,
       seqInterval: 1,
@@ -208,7 +208,7 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       partitioned: false,
-      q: 26,
+      q: 16,
     };
 
     const res = await cloudantService.putDatabase(params);
@@ -1338,7 +1338,7 @@ describe('CloudantV1_integration', () => {
       groupField: 'testString',
       groupLimit: 1,
       groupSort: ['testString'],
-      ranges: { 'key1': { 'key1': { 'key1': 'testString' } } },
+      ranges: { 'key1': { 'key1': 'testString' } },
     };
 
     const res = await cloudantService.postSearch(params);
@@ -1369,7 +1369,7 @@ describe('CloudantV1_integration', () => {
       groupField: 'testString',
       groupLimit: 1,
       groupSort: ['testString'],
-      ranges: { 'key1': { 'key1': { 'key1': 'testString' } } },
+      ranges: { 'key1': { 'key1': 'testString' } },
     };
 
     const res = await cloudantService.postSearchAsStream(params);
@@ -1422,6 +1422,122 @@ describe('CloudantV1_integration', () => {
     const res = await cloudantService.headSchedulerJob(params);
     expect(res).toBeDefined();
     expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('postReplicator()', async () => {
+    // Request models needed by this operation.
+
+    // Attachment
+    const attachmentModel = {
+      contentType: 'testString',
+      data: Buffer.from('VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=', 'base64'),
+      digest: 'testString',
+      encodedLength: 0,
+      encoding: 'testString',
+      follows: true,
+      length: 0,
+      revpos: 1,
+      stub: true,
+    };
+
+    // Revisions
+    const revisionsModel = {
+      ids: ['testString'],
+      start: 1,
+    };
+
+    // DocumentRevisionStatus
+    const documentRevisionStatusModel = {
+      rev: 'testString',
+      status: 'available',
+    };
+
+    // ReplicationCreateTargetParameters
+    const replicationCreateTargetParametersModel = {
+      n: 3,
+      partitioned: false,
+      q: 1,
+    };
+
+    // ReplicationDatabaseAuthBasic
+    const replicationDatabaseAuthBasicModel = {
+      password: 'testString',
+      username: 'testString',
+    };
+
+    // ReplicationDatabaseAuthIam
+    const replicationDatabaseAuthIamModel = {
+      apiKey: 'testString',
+    };
+
+    // ReplicationDatabaseAuth
+    const replicationDatabaseAuthModel = {
+      basic: replicationDatabaseAuthBasicModel,
+      iam: replicationDatabaseAuthIamModel,
+    };
+
+    // ReplicationDatabase
+    const replicationDatabaseModel = {
+      auth: replicationDatabaseAuthModel,
+      headers: { 'key1': 'testString' },
+      url: 'https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb',
+    };
+
+    // UserContext
+    const userContextModel = {
+      db: 'testString',
+      name: 'john',
+      roles: ['_replicator'],
+    };
+
+    // ReplicationDocument
+    const replicationDocumentModel = {
+      _attachments: { 'key1': attachmentModel },
+      _conflicts: ['testString'],
+      _deleted: true,
+      _deleted_conflicts: ['testString'],
+      _id: 'testString',
+      _local_seq: 'testString',
+      _rev: 'testString',
+      _revisions: revisionsModel,
+      _revs_info: [documentRevisionStatusModel],
+      cancel: false,
+      checkpointInterval: 4500,
+      connectionTimeout: 15000,
+      continuous: true,
+      createTarget: true,
+      createTargetParams: replicationCreateTargetParametersModel,
+      docIds: ['badger', 'lemur', 'llama'],
+      filter: 'ddoc/my_filter',
+      httpConnections: 10,
+      owner: 'testString',
+      queryParams: { 'key1': 'testString' },
+      retriesPerRequest: 3,
+      selector: { _id: { '$regex': 'docid' } },
+      sinceSeq: '34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU',
+      socketOptions: '[{keepalive, true}, {nodelay, false}]',
+      source: replicationDatabaseModel,
+      sourceProxy: 'testString',
+      target: replicationDatabaseModel,
+      targetProxy: 'testString',
+      useBulkGet: true,
+      useCheckpoints: false,
+      userCtx: userContextModel,
+      winningRevsOnly: false,
+      workerBatchSize: 400,
+      workerProcesses: 3,
+      foo: 'testString',
+    };
+
+    const params = {
+      replicationDocument: replicationDocumentModel,
+      batch: 'ok',
+    };
+
+    const res = await cloudantService.postReplicator(params);
+    expect(res).toBeDefined();
+    expect(res.status).toBe(201);
     expect(res.result).toBeDefined();
   });
 
@@ -1621,6 +1737,36 @@ describe('CloudantV1_integration', () => {
     expect(res.result).toBeDefined();
   });
 
+  test('postApiKeys()', async () => {
+    const res = await cloudantService.postApiKeys();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(201);
+    expect(res.result).toBeDefined();
+  });
+
+  test('putCloudantSecurityConfiguration()', async () => {
+    // Request models needed by this operation.
+
+    // SecurityObject
+    const securityObjectModel = {
+      names: ['testString'],
+      roles: ['testString'],
+    };
+
+    const params = {
+      db: 'testString',
+      cloudant: { antsellseadespecteposene: ['_reader', '_writer', '_admin'], garbados: ['_reader', '_writer'], nobody: ['_reader'] },
+      admins: securityObjectModel,
+      couchdbAuthOnly: true,
+      members: securityObjectModel,
+    };
+
+    const res = await cloudantService.putCloudantSecurityConfiguration(params);
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
   test('getSecurity()', async () => {
     const params = {
       db: 'testString',
@@ -1644,42 +1790,12 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       admins: securityObjectModel,
-      members: securityObjectModel,
       cloudant: { 'key1': ['_reader'] },
       couchdbAuthOnly: true,
+      members: securityObjectModel,
     };
 
     const res = await cloudantService.putSecurity(params);
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
-  test('postApiKeys()', async () => {
-    const res = await cloudantService.postApiKeys();
-    expect(res).toBeDefined();
-    expect(res.status).toBe(201);
-    expect(res.result).toBeDefined();
-  });
-
-  test('putCloudantSecurityConfiguration()', async () => {
-    // Request models needed by this operation.
-
-    // SecurityObject
-    const securityObjectModel = {
-      names: ['testString'],
-      roles: ['testString'],
-    };
-
-    const params = {
-      db: 'testString',
-      cloudant: { antsellseadespecteposene: ['_reader', '_writer', '_admin'], garbados: ['_reader', '_writer'], nobody: ['_reader'] },
-      admins: securityObjectModel,
-      members: securityObjectModel,
-      couchdbAuthOnly: true,
-    };
-
-    const res = await cloudantService.putCloudantSecurityConfiguration(params);
     expect(res).toBeDefined();
     expect(res.status).toBe(200);
     expect(res.result).toBeDefined();
@@ -1850,20 +1966,6 @@ describe('CloudantV1_integration', () => {
     expect(res.result).toBeDefined();
   });
 
-  test('getMembershipInformation()', async () => {
-    const res = await cloudantService.getMembershipInformation();
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
-  test('getUpInformation()', async () => {
-    const res = await cloudantService.getUpInformation();
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
   test('getActivityTrackerEvents()', async () => {
     const res = await cloudantService.getActivityTrackerEvents();
     expect(res).toBeDefined();
@@ -1884,6 +1986,20 @@ describe('CloudantV1_integration', () => {
 
   test('getCurrentThroughputInformation()', async () => {
     const res = await cloudantService.getCurrentThroughputInformation();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('getMembershipInformation()', async () => {
+    const res = await cloudantService.getMembershipInformation();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('getUpInformation()', async () => {
+    const res = await cloudantService.getUpInformation();
     expect(res).toBeDefined();
     expect(res.status).toBe(200);
     expect(res.result).toBeDefined();

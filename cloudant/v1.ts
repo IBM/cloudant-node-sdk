@@ -153,60 +153,6 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Retrieve one or more UUIDs.
-   *
-   * Requests one or more Universally Unique Identifiers (UUIDs) from the instance. The response is a JSON object that
-   * provides a list of UUIDs.
-   *
-   * **Tip:**  The authentication for this endpoint is only enforced when using IAM.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {number} [params.count] - Query parameter to specify the number of UUIDs to return.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.UuidsResult>>}
-   */
-  public getUuids(
-    params?: CloudantV1.GetUuidsParams
-  ): Promise<CloudantV1.Response<CloudantV1.UuidsResult>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['count', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const query = {
-      'count': _params.count,
-    };
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getUuids');
-
-    const parameters = {
-      options: {
-        url: '/_uuids',
-        method: 'GET',
-        qs: query,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.UuidsResult.deserialize,
-    );
-  }
-
-  /**
    * Retrieve provisioned throughput capacity information.
    *
    * View the amount of provisioned throughput capacity that is allocated to an IBM Cloudant instance and what is the
@@ -303,6 +249,60 @@ class CloudantV1 extends CloudantBaseService {
     return this.createRequestAndDeserializeResponse(
       parameters,
       CloudantV1.CapacityThroughputInformation.deserialize,
+    );
+  }
+
+  /**
+   * Retrieve one or more UUIDs.
+   *
+   * Requests one or more Universally Unique Identifiers (UUIDs) from the instance. The response is a JSON object that
+   * provides a list of UUIDs.
+   *
+   * **Tip:**  The authentication for this endpoint is only enforced when using IAM.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {number} [params.count] - Query parameter to specify the number of UUIDs to return.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.UuidsResult>>}
+   */
+  public getUuids(
+    params?: CloudantV1.GetUuidsParams
+  ): Promise<CloudantV1.Response<CloudantV1.UuidsResult>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['count', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const query = {
+      'count': _params.count,
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getUuids');
+
+    const parameters = {
+      options: {
+        url: '/_uuids',
+        method: 'GET',
+        qs: query,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.UuidsResult.deserialize,
     );
   }
   /*************************
@@ -5155,10 +5155,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string[]} [params.groupSort] - This field defines the order of the groups in a search that uses
    * group_field. The default sort order is relevance. This field can have the same values as the sort field, so single
    * fields and arrays of fields are supported. This option is only available when making global queries.
-   * @param {JsonObject} [params.ranges] - This field defines ranges for faceted, numeric search fields. The value is a
-   * JSON object where the fields names are faceted numeric search fields, and the values of the fields are JSON
-   * objects. The field names of the JSON objects are names for ranges. The values are strings that describe the range,
-   * for example "[0 TO 10]". This option is only available when making global queries.
+   * @param {JsonObject} [params.ranges] - Object mapping faceted, numeric search field names to the required ranges.
+   * Each key is a field name and each value is another object defining the ranges by mapping range name keys to string
+   * values describing the numeric ranges, for example "[0 TO 10]". This option is only available when making global
+   * queries.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.SearchResult>>}
    */
@@ -5281,10 +5281,10 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string[]} [params.groupSort] - This field defines the order of the groups in a search that uses
    * group_field. The default sort order is relevance. This field can have the same values as the sort field, so single
    * fields and arrays of fields are supported. This option is only available when making global queries.
-   * @param {JsonObject} [params.ranges] - This field defines ranges for faceted, numeric search fields. The value is a
-   * JSON object where the fields names are faceted numeric search fields, and the values of the fields are JSON
-   * objects. The field names of the JSON objects are names for ranges. The values are strings that describe the range,
-   * for example "[0 TO 10]". This option is only available when making global queries.
+   * @param {JsonObject} [params.ranges] - Object mapping faceted, numeric search field names to the required ranges.
+   * Each key is a field name and each value is another object defining the ranges by mapping range name keys to string
+   * values describing the numeric ranges, for example "[0 TO 10]". This option is only available when making global
+   * queries.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<NodeJS.ReadableStream>>}
    */
@@ -5412,7 +5412,7 @@ class CloudantV1 extends CloudantBaseService {
    ************************/
 
   /**
-   * Retrieve the HTTP headers for a replication document.
+   * Retrieve the HTTP headers for a persistent replication.
    *
    * Retrieves the HTTP headers containing minimal amount of information about the specified replication document from
    * the `_replicator` database.  The method supports the same query arguments as the `GET /_replicator/{doc_id}`
@@ -5560,7 +5560,64 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Cancel a replication.
+   * Create a persistent replication with a generated ID.
+   *
+   * Creates or modifies a document in the `_replicator` database to start a new replication or to edit an existing
+   * replication.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {ReplicationDocument} params.replicationDocument - HTTP request body for replication operations.
+   * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
+   * with a HTTP 202 Accepted response code immediately.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.DocumentResult>>}
+   */
+  public postReplicator(
+    params: CloudantV1.PostReplicatorParams
+  ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
+    const _params = { ...params };
+    const _requiredParams = ['replicationDocument'];
+    const _validParams = ['replicationDocument', 'batch', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const body = CloudantV1.ReplicationDocument.serialize(_params.replicationDocument);
+    const query = {
+      'batch': _params.batch,
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postReplicator');
+
+    const parameters = {
+      options: {
+        url: '/_replicator',
+        method: 'POST',
+        body,
+        qs: query,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.DocumentResult.deserialize,
+    );
+  }
+
+  /**
+   * Cancel a persistent replication.
    *
    * Cancels a replication by deleting the document that describes it from the `_replicator` database.
    *
@@ -5622,7 +5679,7 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Retrieve a replication document.
+   * Retrieve the configuration for a persistent replication.
    *
    * Retrieves a replication document from the `_replicator` database to view the configuration of the replication. The
    * status of the replication is no longer recorded in the document but can be checked via the replication scheduler.
@@ -5709,7 +5766,7 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Create or modify a replication using a replication document.
+   * Create or modify a persistent replication.
    *
    * Creates or modifies a document in the `_replicator` database to start a new replication or to edit an existing
    * replication.
@@ -6054,6 +6111,124 @@ class CloudantV1 extends CloudantBaseService {
    ************************/
 
   /**
+   * Generates API keys for apps or persons to enable database access.
+   *
+   * Generates API keys to enable database access for a person or application, but without creating a new IBM Cloudant
+   * account for that person or application. An API key is a randomly generated username and password. The key is given
+   * the wanted access permissions for a database.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.ApiKeysResult>>}
+   */
+  public postApiKeys(
+    params?: CloudantV1.PostApiKeysParams
+  ): Promise<CloudantV1.Response<CloudantV1.ApiKeysResult>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postApiKeys');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/api_keys',
+        method: 'POST',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ApiKeysResult.deserialize,
+    );
+  }
+
+  /**
+   * Modify only Cloudant related database permissions.
+   *
+   * Modify only Cloudant related permissions to database. Be careful: by removing an API key from the list, you remove
+   * the API key from the list of users that have access to the database.
+   *
+   * ### Note about nobody role
+   *
+   * The `nobody` username applies to all unauthenticated connection attempts. For example, if an application tries to
+   * read data from a database, but did not identify itself, the task can continue only if the `nobody` user has the
+   * role `_reader`.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.db - Path parameter to specify the database name.
+   * @param {JsonObject} params.cloudant - Database permissions for Cloudant users and/or API keys.
+   * @param {SecurityObject} [params.admins] - Schema for names and roles to map to a database permission.
+   * @param {boolean} [params.couchdbAuthOnly] - Manage permissions using the `_users` database only.
+   * @param {SecurityObject} [params.members] - Schema for names and roles to map to a database permission.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
+   */
+  public putCloudantSecurityConfiguration(
+    params: CloudantV1.PutCloudantSecurityConfigurationParams
+  ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = { ...params };
+    const _requiredParams = ['db', 'cloudant'];
+    const _validParams = ['db', 'cloudant', 'admins', 'couchdbAuthOnly', 'members', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const body = {
+      'cloudant': _params.cloudant,
+      'admins': CloudantV1.SecurityObject.serialize(_params.admins),
+      'couchdb_auth_only': _params.couchdbAuthOnly,
+      'members': CloudantV1.SecurityObject.serialize(_params.members),
+    };
+
+    const path = {
+      'db': _params.db,
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCloudantSecurityConfiguration');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/db/{db}/_security',
+        method: 'PUT',
+        body,
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.Ok.deserialize,
+    );
+  }
+
+  /**
    * Retrieve database permissions information.
    *
    * See who has permission to read, write, and manage the database. The credentials you use to log in to the dashboard
@@ -6122,9 +6297,9 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {SecurityObject} [params.admins] - Schema for names and roles to map to a database permission.
-   * @param {SecurityObject} [params.members] - Schema for names and roles to map to a database permission.
    * @param {JsonObject} [params.cloudant] - Database permissions for Cloudant users and/or API keys.
    * @param {boolean} [params.couchdbAuthOnly] - Manage permissions using the `_users` database only.
+   * @param {SecurityObject} [params.members] - Schema for names and roles to map to a database permission.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
    */
@@ -6133,7 +6308,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'admins', 'members', 'cloudant', 'couchdbAuthOnly', 'headers'];
+    const _validParams = ['db', 'admins', 'cloudant', 'couchdbAuthOnly', 'members', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6141,9 +6316,9 @@ class CloudantV1 extends CloudantBaseService {
 
     const body = {
       'admins': CloudantV1.SecurityObject.serialize(_params.admins),
-      'members': CloudantV1.SecurityObject.serialize(_params.members),
       'cloudant': _params.cloudant,
       'couchdb_auth_only': _params.couchdbAuthOnly,
+      'members': CloudantV1.SecurityObject.serialize(_params.members),
     };
 
     const path = {
@@ -6155,124 +6330,6 @@ class CloudantV1 extends CloudantBaseService {
     const parameters = {
       options: {
         url: '/{db}/_security',
-        method: 'PUT',
-        body,
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.Ok.deserialize,
-    );
-  }
-
-  /**
-   * Generates API keys for apps or persons to enable database access.
-   *
-   * Generates API keys to enable database access for a person or application, but without creating a new IBM Cloudant
-   * account for that person or application. An API key is a randomly generated username and password. The key is given
-   * the wanted access permissions for a database.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.ApiKeysResult>>}
-   */
-  public postApiKeys(
-    params?: CloudantV1.PostApiKeysParams
-  ): Promise<CloudantV1.Response<CloudantV1.ApiKeysResult>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postApiKeys');
-
-    const parameters = {
-      options: {
-        url: '/_api/v2/api_keys',
-        method: 'POST',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.ApiKeysResult.deserialize,
-    );
-  }
-
-  /**
-   * Modify only Cloudant related database permissions.
-   *
-   * Modify only Cloudant related permissions to database. Be careful: by removing an API key from the list, you remove
-   * the API key from the list of users that have access to the database.
-   *
-   * ### Note about nobody role
-   *
-   * The `nobody` username applies to all unauthenticated connection attempts. For example, if an application tries to
-   * read data from a database, but did not identify itself, the task can continue only if the `nobody` user has the
-   * role `_reader`.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.db - Path parameter to specify the database name.
-   * @param {JsonObject} params.cloudant - Database permissions for Cloudant users and/or API keys.
-   * @param {SecurityObject} [params.admins] - Schema for names and roles to map to a database permission.
-   * @param {SecurityObject} [params.members] - Schema for names and roles to map to a database permission.
-   * @param {boolean} [params.couchdbAuthOnly] - Manage permissions using the `_users` database only.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
-   */
-  public putCloudantSecurityConfiguration(
-    params: CloudantV1.PutCloudantSecurityConfigurationParams
-  ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = { ...params };
-    const _requiredParams = ['db', 'cloudant'];
-    const _validParams = ['db', 'cloudant', 'admins', 'members', 'couchdbAuthOnly', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const body = {
-      'cloudant': _params.cloudant,
-      'admins': CloudantV1.SecurityObject.serialize(_params.admins),
-      'members': CloudantV1.SecurityObject.serialize(_params.members),
-      'couchdb_auth_only': _params.couchdbAuthOnly,
-    };
-
-    const path = {
-      'db': _params.db,
-    };
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'putCloudantSecurityConfiguration');
-
-    const parameters = {
-      options: {
-        url: '/_api/v2/db/{db}/_security',
         method: 'PUT',
         body,
         path,
@@ -7192,101 +7249,6 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Retrieve cluster membership information.
-   *
-   * Displays the nodes that are part of the cluster as `cluster_nodes`. The field, `all_nodes`, displays all nodes this
-   * node knows about, including the ones that are part of the cluster. This endpoint is useful when you set up a
-   * cluster.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.MembershipInformation>>}
-   */
-  public getMembershipInformation(
-    params?: CloudantV1.GetMembershipInformationParams
-  ): Promise<CloudantV1.Response<CloudantV1.MembershipInformation>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getMembershipInformation');
-
-    const parameters = {
-      options: {
-        url: '/_membership',
-        method: 'GET',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.MembershipInformation.deserialize,
-    );
-  }
-
-  /**
-   * Retrieve information about whether the server is up.
-   *
-   * Confirms that the server is up, running, and ready to respond to requests. If `maintenance_mode` is `true` or
-   * `nolb`, the endpoint returns a 404 response.
-   *
-   * **Tip:**  The authentication for this endpoint is only enforced when using IAM.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.UpInformation>>}
-   */
-  public getUpInformation(
-    params?: CloudantV1.GetUpInformationParams
-  ): Promise<CloudantV1.Response<CloudantV1.UpInformation>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getUpInformation');
-
-    const parameters = {
-      options: {
-        url: '/_up',
-        method: 'GET',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.UpInformation.deserialize,
-    );
-  }
-
-  /**
    * Retrieve Activity Tracker events information.
    *
    * Check event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
@@ -7430,6 +7392,101 @@ class CloudantV1 extends CloudantBaseService {
       CloudantV1.CurrentThroughputInformation.deserialize,
     );
   }
+
+  /**
+   * Retrieve cluster membership information.
+   *
+   * Displays the nodes that are part of the cluster as `cluster_nodes`. The field, `all_nodes`, displays all nodes this
+   * node knows about, including the ones that are part of the cluster. This endpoint is useful when you set up a
+   * cluster.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.MembershipInformation>>}
+   */
+  public getMembershipInformation(
+    params?: CloudantV1.GetMembershipInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.MembershipInformation>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getMembershipInformation');
+
+    const parameters = {
+      options: {
+        url: '/_membership',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.MembershipInformation.deserialize,
+    );
+  }
+
+  /**
+   * Retrieve information about whether the server is up.
+   *
+   * Confirms that the server is up, running, and ready to respond to requests. If `maintenance_mode` is `true` or
+   * `nolb`, the endpoint returns a 404 response.
+   *
+   * **Tip:**  The authentication for this endpoint is only enforced when using IAM.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.UpInformation>>}
+   */
+  public getUpInformation(
+    params?: CloudantV1.GetUpInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.UpInformation>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getUpInformation');
+
+    const parameters = {
+      options: {
+        url: '/_up',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.UpInformation.deserialize,
+    );
+  }
 }
 
 /*************************
@@ -7469,13 +7526,6 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `getUuids` operation. */
-  export interface GetUuidsParams {
-    /** Query parameter to specify the number of UUIDs to return. */
-    count?: number;
-    headers?: OutgoingHttpHeaders;
-  }
-
   /** Parameters for the `getCapacityThroughputInformation` operation. */
   export interface GetCapacityThroughputInformationParams {
     headers?: OutgoingHttpHeaders;
@@ -7487,6 +7537,13 @@ namespace CloudantV1 {
      *  queries/sec of provisioned throughput capacity. Not available for some plans.
      */
     blocks: number;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `getUuids` operation. */
+  export interface GetUuidsParams {
+    /** Query parameter to specify the number of UUIDs to return. */
+    count?: number;
     headers?: OutgoingHttpHeaders;
   }
 
@@ -7651,7 +7708,7 @@ namespace CloudantV1 {
      *  will only return the current "winning" revision; all_docs will return all leaf revisions (including conflicts
      *  and deleted former conflicts).
      */
-    style?: string;
+    style?: PostChangesConstants.Style | string;
     /** Query parameter to specify the maximum period in milliseconds to wait for a change before the response is
      *  sent, even if there are no results. Only applicable for `longpoll` or `continuous` feeds. Default value is
      *  specified by `httpd/changes_timeout` configuration option. Note that `60000` value is also the default maximum
@@ -7673,6 +7730,11 @@ namespace CloudantV1 {
       EVENTSOURCE = 'eventsource',
       LONGPOLL = 'longpoll',
       NORMAL = 'normal',
+    }
+    /** Query parameter to specify how many revisions are returned in the changes array. The default, `main_only`, will only return the current "winning" revision; all_docs will return all leaf revisions (including conflicts and deleted former conflicts). */
+    export enum Style {
+      MAIN_ONLY = 'main_only',
+      ALL_DOCS = 'all_docs',
     }
   }
 
@@ -7791,7 +7853,7 @@ namespace CloudantV1 {
      *  will only return the current "winning" revision; all_docs will return all leaf revisions (including conflicts
      *  and deleted former conflicts).
      */
-    style?: string;
+    style?: PostChangesAsStreamConstants.Style | string;
     /** Query parameter to specify the maximum period in milliseconds to wait for a change before the response is
      *  sent, even if there are no results. Only applicable for `longpoll` or `continuous` feeds. Default value is
      *  specified by `httpd/changes_timeout` configuration option. Note that `60000` value is also the default maximum
@@ -7813,6 +7875,11 @@ namespace CloudantV1 {
       EVENTSOURCE = 'eventsource',
       LONGPOLL = 'longpoll',
       NORMAL = 'normal',
+    }
+    /** Query parameter to specify how many revisions are returned in the changes array. The default, `main_only`, will only return the current "winning" revision; all_docs will return all leaf revisions (including conflicts and deleted former conflicts). */
+    export enum Style {
+      MAIN_ONLY = 'main_only',
+      ALL_DOCS = 'all_docs',
     }
   }
 
@@ -10006,10 +10073,9 @@ namespace CloudantV1 {
      *  supported. This option is only available when making global queries.
      */
     groupSort?: string[];
-    /** This field defines ranges for faceted, numeric search fields. The value is a JSON object where the fields
-     *  names are faceted numeric search fields, and the values of the fields are JSON objects. The field names of the
-     *  JSON objects are names for ranges. The values are strings that describe the range, for example "[0 TO 10]". This
-     *  option is only available when making global queries.
+    /** Object mapping faceted, numeric search field names to the required ranges. Each key is a field name and each
+     *  value is another object defining the ranges by mapping range name keys to string values describing the numeric
+     *  ranges, for example "[0 TO 10]". This option is only available when making global queries.
      */
     ranges?: JsonObject;
     headers?: OutgoingHttpHeaders;
@@ -10095,10 +10161,9 @@ namespace CloudantV1 {
      *  supported. This option is only available when making global queries.
      */
     groupSort?: string[];
-    /** This field defines ranges for faceted, numeric search fields. The value is a JSON object where the fields
-     *  names are faceted numeric search fields, and the values of the fields are JSON objects. The field names of the
-     *  JSON objects are names for ranges. The values are strings that describe the range, for example "[0 TO 10]". This
-     *  option is only available when making global queries.
+    /** Object mapping faceted, numeric search field names to the required ranges. Each key is a field name and each
+     *  value is another object defining the ranges by mapping range name keys to string values describing the numeric
+     *  ranges, for example "[0 TO 10]". This option is only available when making global queries.
      */
     ranges?: JsonObject;
     headers?: OutgoingHttpHeaders;
@@ -10146,6 +10211,25 @@ namespace CloudantV1 {
     /** Path parameter to specify the replication job id. */
     jobId: string;
     headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `postReplicator` operation. */
+  export interface PostReplicatorParams {
+    /** HTTP request body for replication operations. */
+    replicationDocument: ReplicationDocument;
+    /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
+     *  response code immediately.
+     */
+    batch?: PostReplicatorConstants.Batch | string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Constants for the `postReplicator` operation. */
+  export namespace PostReplicatorConstants {
+    /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response code immediately. */
+    export enum Batch {
+      OK = 'ok',
+    }
   }
 
   /** Parameters for the `deleteReplicationDocument` operation. */
@@ -10298,43 +10382,6 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `getSecurity` operation. */
-  export interface GetSecurityParams {
-    /** Path parameter to specify the database name. */
-    db: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `putSecurity` operation. */
-  export interface PutSecurityParams {
-    /** Path parameter to specify the database name. */
-    db: string;
-    /** Schema for names and roles to map to a database permission. */
-    admins?: SecurityObject;
-    /** Schema for names and roles to map to a database permission. */
-    members?: SecurityObject;
-    /** Database permissions for Cloudant users and/or API keys. */
-    cloudant?: JsonObject;
-    /** Manage permissions using the `_users` database only. */
-    couchdbAuthOnly?: boolean;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Constants for the `putSecurity` operation. */
-  export namespace PutSecurityConstants {
-    /** Database permissions for Cloudant users and/or API keys. */
-    export enum Cloudant {
-      READER = '_reader',
-      WRITER = '_writer',
-      ADMIN = '_admin',
-      REPLICATOR = '_replicator',
-      DB_UPDATES = '_db_updates',
-      DESIGN = '_design',
-      SHARDS = '_shards',
-      SECURITY = '_security',
-    }
-  }
-
   /** Parameters for the `postApiKeys` operation. */
   export interface PostApiKeysParams {
     headers?: OutgoingHttpHeaders;
@@ -10348,15 +10395,52 @@ namespace CloudantV1 {
     cloudant: JsonObject;
     /** Schema for names and roles to map to a database permission. */
     admins?: SecurityObject;
-    /** Schema for names and roles to map to a database permission. */
-    members?: SecurityObject;
     /** Manage permissions using the `_users` database only. */
     couchdbAuthOnly?: boolean;
+    /** Schema for names and roles to map to a database permission. */
+    members?: SecurityObject;
     headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `putCloudantSecurityConfiguration` operation. */
   export namespace PutCloudantSecurityConfigurationConstants {
+    /** Database permissions for Cloudant users and/or API keys. */
+    export enum Cloudant {
+      READER = '_reader',
+      WRITER = '_writer',
+      ADMIN = '_admin',
+      REPLICATOR = '_replicator',
+      DB_UPDATES = '_db_updates',
+      DESIGN = '_design',
+      SHARDS = '_shards',
+      SECURITY = '_security',
+    }
+  }
+
+  /** Parameters for the `getSecurity` operation. */
+  export interface GetSecurityParams {
+    /** Path parameter to specify the database name. */
+    db: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `putSecurity` operation. */
+  export interface PutSecurityParams {
+    /** Path parameter to specify the database name. */
+    db: string;
+    /** Schema for names and roles to map to a database permission. */
+    admins?: SecurityObject;
+    /** Database permissions for Cloudant users and/or API keys. */
+    cloudant?: JsonObject;
+    /** Manage permissions using the `_users` database only. */
+    couchdbAuthOnly?: boolean;
+    /** Schema for names and roles to map to a database permission. */
+    members?: SecurityObject;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Constants for the `putSecurity` operation. */
+  export namespace PutSecurityConstants {
     /** Database permissions for Cloudant users and/or API keys. */
     export enum Cloudant {
       READER = '_reader',
@@ -10608,16 +10692,6 @@ namespace CloudantV1 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `getMembershipInformation` operation. */
-  export interface GetMembershipInformationParams {
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `getUpInformation` operation. */
-  export interface GetUpInformationParams {
-    headers?: OutgoingHttpHeaders;
-  }
-
   /** Parameters for the `getActivityTrackerEvents` operation. */
   export interface GetActivityTrackerEventsParams {
     headers?: OutgoingHttpHeaders;
@@ -10643,6 +10717,16 @@ namespace CloudantV1 {
 
   /** Parameters for the `getCurrentThroughputInformation` operation. */
   export interface GetCurrentThroughputInformationParams {
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `getMembershipInformation` operation. */
+  export interface GetMembershipInformationParams {
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `getUpInformation` operation. */
+  export interface GetUpInformationParams {
     headers?: OutgoingHttpHeaders;
   }
 
@@ -11304,7 +11388,7 @@ namespace CloudantV1 {
    * Schema for the result of an all documents operation.
    */
   export class AllDocsResult {
-    /** Number of total rows. */
+    /** Total number of document results. */
     totalRows: number;
 
     /** List of doc results. */
@@ -11364,7 +11448,7 @@ namespace CloudantV1 {
      *  * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query
      *  text index default_field the default is `standard`.
      */
-    name?: Analyzer.Constants.Name | string;
+    name: Analyzer.Constants.Name | string;
 
     /** Custom stopwords to use with the named analyzer. */
     stopwords?: string[];
@@ -11445,7 +11529,7 @@ namespace CloudantV1 {
       }
     }
       export interface Transport {
-        name?: string;
+        name: string;
         stopwords?: string[];
       }
   }
@@ -11459,7 +11543,7 @@ namespace CloudantV1 {
      *  * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query
      *  text index default_field the default is `standard`.
      */
-    name?: AnalyzerConfiguration.Constants.Name | string;
+    name: AnalyzerConfiguration.Constants.Name | string;
 
     /** Custom stopwords to use with the named analyzer. */
     stopwords?: string[];
@@ -11549,7 +11633,7 @@ namespace CloudantV1 {
       }
     }
       export interface Transport {
-        name?: string;
+        name: string;
         stopwords?: string[];
         fields?: {[key: string]: Analyzer.Transport};
       }
@@ -12490,6 +12574,9 @@ namespace CloudantV1 {
      */
     instanceStartTime: string;
 
+    /** Information about database's partitioned indexes. */
+    partitionedIndexes?: PartitionedIndexesInformation;
+
     /** Schema for database properties. */
     props: DatabaseInformationProps;
 
@@ -12503,9 +12590,6 @@ namespace CloudantV1 {
 
     /** The UUID of the database. */
     uuid?: string;
-
-    /** Information about database's partitioned indexes. */
-    partitionedIndexes?: PartitionedIndexesInformation;
 
     static serialize(obj): DatabaseInformation.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
@@ -12542,6 +12626,9 @@ namespace CloudantV1 {
       if (obj.instanceStartTime !== undefined) {
         copy.instance_start_time = obj.instanceStartTime;
       }
+      if (obj.partitionedIndexes !== undefined) {
+        copy.partitioned_indexes = PartitionedIndexesInformation.serialize(obj.partitionedIndexes);
+      }
       if (obj.props !== undefined) {
         copy.props = DatabaseInformationProps.serialize(obj.props);
       }
@@ -12553,9 +12640,6 @@ namespace CloudantV1 {
       }
       if (obj.uuid !== undefined) {
         copy.uuid = obj.uuid;
-      }
-      if (obj.partitionedIndexes !== undefined) {
-        copy.partitioned_indexes = PartitionedIndexesInformation.serialize(obj.partitionedIndexes);
       }
       return copy as unknown as DatabaseInformation.Transport;
     }
@@ -12595,6 +12679,9 @@ namespace CloudantV1 {
       if (obj.instance_start_time !== undefined) {
         copy.instanceStartTime = obj.instance_start_time;
       }
+      if (obj.partitioned_indexes !== undefined) {
+        copy.partitionedIndexes = PartitionedIndexesInformation.deserialize(obj.partitioned_indexes);
+      }
       if (obj.props !== undefined) {
         copy.props = DatabaseInformationProps.deserialize(obj.props);
       }
@@ -12606,9 +12693,6 @@ namespace CloudantV1 {
       }
       if (obj.uuid !== undefined) {
         copy.uuid = obj.uuid;
-      }
-      if (obj.partitioned_indexes !== undefined) {
-        copy.partitionedIndexes = PartitionedIndexesInformation.deserialize(obj.partitioned_indexes);
       }
       return copy as unknown as DatabaseInformation;
     }
@@ -12625,11 +12709,11 @@ namespace CloudantV1 {
         doc_del_count: number;
         engine?: string;
         instance_start_time: string;
+        partitioned_indexes?: PartitionedIndexesInformation.Transport;
         props: DatabaseInformationProps.Transport;
         sizes: ContentInformationSizes.Transport;
         update_seq: string;
         uuid?: string;
-        partitioned_indexes?: PartitionedIndexesInformation.Transport;
       }
   }
 
@@ -14209,40 +14293,40 @@ namespace CloudantV1 {
    */
   export class ExplainResultMrArgs {
     /** Schema for any JSON type. */
-    conflicts?: any;
+    conflicts: any;
 
     /** Direction parameter passed to the underlying view. */
-    direction?: ExplainResultMrArgs.Constants.Direction | string;
+    direction: ExplainResultMrArgs.Constants.Direction | string;
 
     /** Schema for any JSON type. */
-    endKey?: any;
+    endKey: any;
 
     /** A parameter that specifies whether to include the full content of the documents in the response in the
      *  underlying view.
      */
-    includeDocs?: boolean;
+    includeDocs: boolean;
 
     /** Partition parameter passed to the underlying view. */
-    partition?: string | null;
+    partition: string | null;
 
     /** A parameter that specifies returning only documents that match any of the specified keys in the underlying
      *  view.
      */
-    reduce?: boolean;
+    reduce: boolean;
 
     /** A parameter that specifies whether the view results should be returned form a "stable" set of shards passed
      *  to the underlying view.
      */
-    stable?: boolean;
+    stable: boolean;
 
     /** Schema for any JSON type. */
     startKey?: any;
 
     /** Schema for any JSON type. */
-    update?: any;
+    update: any;
 
     /** The type of the underlying view. */
-    viewType?: ExplainResultMrArgs.Constants.ViewType | string;
+    viewType: ExplainResultMrArgs.Constants.ViewType | string;
 
     static serialize(obj): ExplainResultMrArgs.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
@@ -14324,8 +14408,8 @@ namespace CloudantV1 {
     export namespace Constants {
       /** Direction parameter passed to the underlying view. */
       export enum Direction {
-        ASC = 'asc',
-        DESC = 'desc',
+        FWD = 'fwd',
+        REV = 'rev',
       }
       /** The type of the underlying view. */
       export enum ViewType {
@@ -14334,16 +14418,16 @@ namespace CloudantV1 {
       }
     }
       export interface Transport {
-        conflicts?: any;
-        direction?: string;
-        end_key?: any;
-        include_docs?: boolean;
-        partition?: string;
-        reduce?: boolean;
-        stable?: boolean;
+        conflicts: any;
+        direction: string;
+        end_key: any;
+        include_docs: boolean;
+        partition: string;
+        reduce: boolean;
+        stable: boolean;
         start_key?: any;
-        update?: any;
-        view_type?: string;
+        update: any;
+        view_type: string;
       }
   }
 
@@ -14659,7 +14743,7 @@ namespace CloudantV1 {
      *  * too_many_fields: json The index has more fields than the chosen one.
      *  * unfavored_type: any The type of the index is not preferred.
      */
-    name?: IndexAnalysisExclusionReason.Constants.Name | string;
+    name: IndexAnalysisExclusionReason.Constants.Name | string;
 
     static serialize(obj): IndexAnalysisExclusionReason.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
@@ -14701,7 +14785,7 @@ namespace CloudantV1 {
       }
     }
       export interface Transport {
-        name?: string;
+        name: string;
       }
   }
 
@@ -15154,7 +15238,7 @@ namespace CloudantV1 {
    * Schema for information about the indexes in a database.
    */
   export class IndexesInformation {
-    /** Number of total rows. */
+    /** Total number of query indexes in the database. */
     totalRows: number;
 
     /** Indexes. */
@@ -16456,7 +16540,7 @@ namespace CloudantV1 {
    * Schema for a listing of replication scheduler documents.
    */
   export class SchedulerDocsResult {
-    /** Number of total rows. */
+    /** Total number of replication scheduler documents. */
     totalRows: number;
 
     /** Array of replication scheduler doc objects. */
@@ -16997,7 +17081,7 @@ namespace CloudantV1 {
    * Schema for a listing of replication scheduler jobs.
    */
   export class SchedulerJobsResult {
-    /** Number of total rows. */
+    /** Total number of replication jobs. */
     totalRows: number;
 
     /** Array of replication job objects. */
@@ -17271,7 +17355,9 @@ namespace CloudantV1 {
    * Schema for the result of a query search operation.
    */
   export class SearchResult {
-    /** Number of total rows. */
+    /** Total number of rows in the index matching the search query. The limit may truncate the number of matches
+     *  returned.
+     */
     totalRows: number;
 
     /** Opaque bookmark token used when paginating results. */
@@ -17368,7 +17454,9 @@ namespace CloudantV1 {
    * Schema for the result of a query search operation.
    */
   export class SearchResultProperties {
-    /** Number of total rows. */
+    /** Total number of rows in the index matching the search query. The limit may truncate the number of matches
+     *  returned.
+     */
     totalRows: number;
 
     /** Opaque bookmark token used when paginating results. */
@@ -17525,14 +17613,14 @@ namespace CloudantV1 {
     /** Schema for names and roles to map to a database permission. */
     admins?: SecurityObject;
 
-    /** Schema for names and roles to map to a database permission. */
-    members?: SecurityObject;
-
     /** Database permissions for Cloudant users and/or API keys. */
     cloudant?: JsonObject;
 
     /** Manage permissions using the `_users` database only. */
     couchdbAuthOnly?: boolean;
+
+    /** Schema for names and roles to map to a database permission. */
+    members?: SecurityObject;
 
     static serialize(obj): Security.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
@@ -17542,14 +17630,14 @@ namespace CloudantV1 {
       if (obj.admins !== undefined) {
         copy.admins = SecurityObject.serialize(obj.admins);
       }
-      if (obj.members !== undefined) {
-        copy.members = SecurityObject.serialize(obj.members);
-      }
       if (obj.cloudant !== undefined) {
         copy.cloudant = obj.cloudant;
       }
       if (obj.couchdbAuthOnly !== undefined) {
         copy.couchdb_auth_only = obj.couchdbAuthOnly;
+      }
+      if (obj.members !== undefined) {
+        copy.members = SecurityObject.serialize(obj.members);
       }
       return copy as unknown as Security.Transport;
     }
@@ -17562,14 +17650,14 @@ namespace CloudantV1 {
       if (obj.admins !== undefined) {
         copy.admins = SecurityObject.deserialize(obj.admins);
       }
-      if (obj.members !== undefined) {
-        copy.members = SecurityObject.deserialize(obj.members);
-      }
       if (obj.cloudant !== undefined) {
         copy.cloudant = obj.cloudant;
       }
       if (obj.couchdb_auth_only !== undefined) {
         copy.couchdbAuthOnly = obj.couchdb_auth_only;
+      }
+      if (obj.members !== undefined) {
+        copy.members = SecurityObject.deserialize(obj.members);
       }
       return copy as unknown as Security;
     }
@@ -17577,9 +17665,9 @@ namespace CloudantV1 {
   export namespace Security {
       export interface Transport {
         admins?: SecurityObject.Transport;
-        members?: SecurityObject.Transport;
         cloudant?: JsonObject;
         couchdb_auth_only?: boolean;
+        members?: SecurityObject.Transport;
       }
   }
 
@@ -17700,14 +17788,14 @@ namespace CloudantV1 {
     /** List of enabled optional features. */
     features: string[];
 
+    /** List of feature flags. */
+    featuresFlags: string[];
+
     /** Schema for server vendor information. */
     vendor: ServerVendor;
 
     /** Apache CouchDB version. */
     version: string;
-
-    /** List of feature flags. */
-    featuresFlags: string[];
 
     static serialize(obj): ServerInformation.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
@@ -17720,14 +17808,14 @@ namespace CloudantV1 {
       if (obj.features !== undefined) {
         copy.features = obj.features;
       }
+      if (obj.featuresFlags !== undefined) {
+        copy.features_flags = obj.featuresFlags;
+      }
       if (obj.vendor !== undefined) {
         copy.vendor = ServerVendor.serialize(obj.vendor);
       }
       if (obj.version !== undefined) {
         copy.version = obj.version;
-      }
-      if (obj.featuresFlags !== undefined) {
-        copy.features_flags = obj.featuresFlags;
       }
       return copy as unknown as ServerInformation.Transport;
     }
@@ -17743,14 +17831,14 @@ namespace CloudantV1 {
       if (obj.features !== undefined) {
         copy.features = obj.features;
       }
+      if (obj.features_flags !== undefined) {
+        copy.featuresFlags = obj.features_flags;
+      }
       if (obj.vendor !== undefined) {
         copy.vendor = ServerVendor.deserialize(obj.vendor);
       }
       if (obj.version !== undefined) {
         copy.version = obj.version;
-      }
-      if (obj.features_flags !== undefined) {
-        copy.featuresFlags = obj.features_flags;
       }
       return copy as unknown as ServerInformation;
     }
@@ -17759,9 +17847,9 @@ namespace CloudantV1 {
       export interface Transport {
         couchdb: string;
         features: string[];
+        features_flags: string[];
         vendor: ServerVendor.Transport;
         version: string;
-        features_flags: string[];
       }
   }
 
@@ -18587,7 +18675,10 @@ namespace CloudantV1 {
    * Schema for the result of a query view operation.
    */
   export class ViewResult {
-    /** Number of total rows. */
+    /** Total number of rows in the view index. Note that if the request query narrows the view this is not the
+     *  number of matching rows. The number of matching rows, up to the specified `limit`, is the size of the `rows`
+     *  array.
+     */
     totalRows?: number;
 
     /** Current update sequence for the database. */
