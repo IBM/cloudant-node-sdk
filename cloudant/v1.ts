@@ -5353,6 +5353,62 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
+   * Retrieve information about the search index disk size.
+   *
+   * Retrieve size of the search index on disk.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.db - Path parameter to specify the database name.
+   * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
+   * design document ID excluding the `_design/` prefix.
+   * @param {string} params.index - Path parameter to specify the index name.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.SearchDiskSizeInformation>>}
+   */
+  public getSearchDiskSize(
+    params: CloudantV1.GetSearchDiskSizeParams
+  ): Promise<CloudantV1.Response<CloudantV1.SearchDiskSizeInformation>> {
+    const _params = { ...params };
+    const _requiredParams = ['db', 'ddoc', 'index'];
+    const _validParams = ['db', 'ddoc', 'index', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const path = {
+      'db': _params.db,
+      'ddoc': _params.ddoc,
+      'index': _params.index,
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getSearchDiskSize');
+
+    const parameters = {
+      options: {
+        url: '/{db}/_design/{ddoc}/_search_disk_size/{index}',
+        method: 'GET',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.SearchDiskSizeInformation.deserialize,
+    );
+  }
+
+  /**
    * Retrieve information about a search index.
    *
    * Retrieve search index metadata information, such as the size of the index on disk.
@@ -5419,7 +5475,8 @@ class CloudantV1 extends CloudantBaseService {
    * method, but only headers like content length and the revision (ETag header) are returned.
    *
    * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.docId - Path parameter to specify the document ID.
+   * @param {string} params.docId - Path parameter to specify the ID of the stored replication configuration in the
+   * `_replicator` database.
    * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
@@ -5622,7 +5679,8 @@ class CloudantV1 extends CloudantBaseService {
    * Cancels a replication by deleting the document that describes it from the `_replicator` database.
    *
    * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.docId - Path parameter to specify the document ID.
+   * @param {string} params.docId - Path parameter to specify the ID of the stored replication configuration in the
+   * `_replicator` database.
    * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
    * with a HTTP 202 Accepted response code immediately.
@@ -5685,7 +5743,8 @@ class CloudantV1 extends CloudantBaseService {
    * status of the replication is no longer recorded in the document but can be checked via the replication scheduler.
    *
    * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.docId - Path parameter to specify the document ID.
+   * @param {string} params.docId - Path parameter to specify the ID of the stored replication configuration in the
+   * `_replicator` database.
    * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
    * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
    * response.
@@ -5772,7 +5831,8 @@ class CloudantV1 extends CloudantBaseService {
    * replication.
    *
    * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.docId - Path parameter to specify the document ID.
+   * @param {string} params.docId - Path parameter to specify the ID of the stored replication configuration in the
+   * `_replicator` database.
    * @param {ReplicationDocument} params.replicationDocument - HTTP request body for replication operations.
    * @param {string} [params.ifMatch] - Header parameter for a conditional HTTP request matching an ETag.
    * @param {string} [params.batch] - Query parameter to specify whether to store in batch mode. The server will respond
@@ -10177,6 +10237,19 @@ namespace CloudantV1 {
     }
   }
 
+  /** Parameters for the `getSearchDiskSize` operation. */
+  export interface GetSearchDiskSizeParams {
+    /** Path parameter to specify the database name. */
+    db: string;
+    /** Path parameter to specify the design document name. The design document name is the design document ID
+     *  excluding the `_design/` prefix.
+     */
+    ddoc: string;
+    /** Path parameter to specify the index name. */
+    index: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
   /** Parameters for the `getSearchInfo` operation. */
   export interface GetSearchInfoParams {
     /** Path parameter to specify the database name. */
@@ -10192,7 +10265,7 @@ namespace CloudantV1 {
 
   /** Parameters for the `headReplicationDocument` operation. */
   export interface HeadReplicationDocumentParams {
-    /** Path parameter to specify the document ID. */
+    /** Path parameter to specify the ID of the stored replication configuration in the `_replicator` database. */
     docId: string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
@@ -10234,7 +10307,7 @@ namespace CloudantV1 {
 
   /** Parameters for the `deleteReplicationDocument` operation. */
   export interface DeleteReplicationDocumentParams {
-    /** Path parameter to specify the document ID. */
+    /** Path parameter to specify the ID of the stored replication configuration in the `_replicator` database. */
     docId: string;
     /** Header parameter for a conditional HTTP request matching an ETag. */
     ifMatch?: string;
@@ -10257,7 +10330,7 @@ namespace CloudantV1 {
 
   /** Parameters for the `getReplicationDocument` operation. */
   export interface GetReplicationDocumentParams {
-    /** Path parameter to specify the document ID. */
+    /** Path parameter to specify the ID of the stored replication configuration in the `_replicator` database. */
     docId: string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
@@ -10296,7 +10369,7 @@ namespace CloudantV1 {
 
   /** Parameters for the `putReplicationDocument` operation. */
   export interface PutReplicationDocumentParams {
-    /** Path parameter to specify the document ID. */
+    /** Path parameter to specify the ID of the stored replication configuration in the `_replicator` database. */
     docId: string;
     /** HTTP request body for replication operations. */
     replicationDocument: ReplicationDocument;
@@ -17158,6 +17231,51 @@ namespace CloudantV1 {
   }
 
   /**
+   * Schema for search index disk size.
+   */
+  export class SearchDiskSizeInformation {
+    /** The name of the search index prefixed by the design document ID where the index is stored. */
+    name: string;
+
+    /** Schema for search index disk size. */
+    searchIndex: SearchIndexDiskSize;
+
+    static serialize(obj): SearchDiskSizeInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchDiskSizeInformation.Transport = <SearchDiskSizeInformation.Transport>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.searchIndex !== undefined) {
+        copy.search_index = SearchIndexDiskSize.serialize(obj.searchIndex);
+      }
+      return copy as unknown as SearchDiskSizeInformation.Transport;
+    }
+
+    static deserialize(obj): SearchDiskSizeInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchDiskSizeInformation = <SearchDiskSizeInformation>{};
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      if (obj.search_index !== undefined) {
+        copy.searchIndex = SearchIndexDiskSize.deserialize(obj.search_index);
+      }
+      return copy as unknown as SearchDiskSizeInformation;
+    }
+  }
+  export namespace SearchDiskSizeInformation {
+      export interface Transport {
+        name: string;
+        search_index: SearchIndexDiskSize.Transport;
+      }
+  }
+
+  /**
    * Schema for a search index definition.
    */
   export class SearchIndexDefinition {
@@ -17218,6 +17336,41 @@ namespace CloudantV1 {
       export interface Transport {
         analyzer?: AnalyzerConfiguration.Transport;
         index: string;
+      }
+  }
+
+  /**
+   * Schema for search index disk size.
+   */
+  export class SearchIndexDiskSize {
+    /** The size of the search index on disk. */
+    diskSize?: number;
+
+    static serialize(obj): SearchIndexDiskSize.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchIndexDiskSize.Transport = <SearchIndexDiskSize.Transport>{};
+      if (obj.diskSize !== undefined) {
+        copy.disk_size = obj.diskSize;
+      }
+      return copy as unknown as SearchIndexDiskSize.Transport;
+    }
+
+    static deserialize(obj): SearchIndexDiskSize {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchIndexDiskSize = <SearchIndexDiskSize>{};
+      if (obj.disk_size !== undefined) {
+        copy.diskSize = obj.disk_size;
+      }
+      return copy as unknown as SearchIndexDiskSize;
+    }
+  }
+  export namespace SearchIndexDiskSize {
+      export interface Transport {
+        disk_size?: number;
       }
   }
 
