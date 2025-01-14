@@ -6955,6 +6955,100 @@ describe('CloudantV1', () => {
     });
   });
 
+  describe('getSearchDiskSize', () => {
+    describe('positive tests', () => {
+      function __getSearchDiskSizeTest() {
+        // Construct the params object for operation getSearchDiskSize
+        const db = 'testString';
+        const ddoc = 'testString';
+        const index = 'testString';
+        const getSearchDiskSizeParams = {
+          db,
+          ddoc,
+          index,
+        };
+
+        const getSearchDiskSizeResult = cloudantService.getSearchDiskSize(getSearchDiskSizeParams);
+
+        // all methods should return a Promise
+        expectToBePromise(getSearchDiskSizeResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_search_disk_size/{index}', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.path.db).toEqual(db);
+        expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
+        expect(mockRequestOptions.path.index).toEqual(index);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getSearchDiskSizeTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getSearchDiskSizeTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getSearchDiskSizeTest();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const db = 'testString';
+        const ddoc = 'testString';
+        const index = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const getSearchDiskSizeParams = {
+          db,
+          ddoc,
+          index,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.getSearchDiskSize(getSearchDiskSizeParams);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async () => {
+        let err;
+        try {
+          await cloudantService.getSearchDiskSize({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await cloudantService.getSearchDiskSize();
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+    });
+  });
+
   describe('getSearchInfo', () => {
     describe('positive tests', () => {
       function __getSearchInfoTest() {

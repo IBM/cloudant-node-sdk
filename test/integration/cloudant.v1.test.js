@@ -1378,6 +1378,19 @@ describe('CloudantV1_integration', () => {
     expect(res.result).toBeDefined();
   });
 
+  test('getSearchDiskSize()', async () => {
+    const params = {
+      db: 'testString',
+      ddoc: 'testString',
+      index: 'testString',
+    };
+
+    const res = await cloudantService.getSearchDiskSize(params);
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
   test('getSearchInfo()', async () => {
     const params = {
       db: 'testString',
