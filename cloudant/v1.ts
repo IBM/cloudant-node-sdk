@@ -138,6 +138,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -184,6 +185,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -237,6 +239,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -292,6 +295,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -379,6 +383,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -564,6 +569,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -752,6 +758,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -806,6 +813,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
           },
           _params.headers
@@ -866,6 +874,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -916,6 +925,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -970,6 +980,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -1021,6 +1032,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -1088,6 +1100,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -1157,6 +1170,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'If-None-Match': _params.ifNoneMatch,
           },
@@ -1224,6 +1238,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': _params.contentType,
@@ -1315,6 +1330,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -1407,6 +1423,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -1466,6 +1483,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -1529,6 +1547,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -1583,6 +1602,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -1657,6 +1677,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -1732,6 +1753,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'multipart/mixed',
             'Content-Type': 'application/json',
@@ -1804,6 +1826,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'multipart/related',
             'Content-Type': 'application/json',
@@ -1876,6 +1899,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -1939,6 +1963,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'If-Match': _params.ifMatch,
@@ -2028,6 +2053,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'If-None-Match': _params.ifNoneMatch,
@@ -2118,6 +2144,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'multipart/mixed',
             'If-None-Match': _params.ifNoneMatch,
@@ -2205,6 +2232,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'multipart/related',
             'If-None-Match': _params.ifNoneMatch,
@@ -2292,6 +2320,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'If-None-Match': _params.ifNoneMatch,
@@ -2368,6 +2397,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': _params.contentType,
@@ -2432,6 +2462,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'If-None-Match': _params.ifNoneMatch,
           },
@@ -2495,6 +2526,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'If-Match': _params.ifMatch,
@@ -2585,6 +2617,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'If-None-Match': _params.ifNoneMatch,
@@ -2660,6 +2693,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -2717,6 +2751,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -2807,6 +2842,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -2869,6 +2905,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Content-Type': 'application/json',
             'Accept': _params.accept,
@@ -3004,6 +3041,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3137,6 +3175,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3199,6 +3238,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3265,6 +3305,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3319,6 +3360,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -3411,6 +3453,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3505,6 +3548,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3606,6 +3650,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3711,6 +3756,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3838,6 +3884,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3969,6 +4016,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -4105,6 +4153,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -4256,6 +4305,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -4408,6 +4458,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -4549,6 +4600,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -4699,6 +4751,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -4850,6 +4903,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -4901,6 +4955,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -4971,6 +5026,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -5030,6 +5086,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -5087,6 +5144,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -5213,6 +5271,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -5340,6 +5399,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -5394,6 +5454,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -5450,6 +5511,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -5508,6 +5570,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'If-None-Match': _params.ifNoneMatch,
           },
@@ -5558,6 +5621,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
           },
           _params.headers
@@ -5606,6 +5670,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
           },
           _params.headers
@@ -5658,6 +5723,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -5721,6 +5787,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'If-Match': _params.ifMatch,
@@ -5809,6 +5876,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'If-None-Match': _params.ifNoneMatch,
@@ -5883,6 +5951,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -5945,6 +6014,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -5997,6 +6067,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -6054,6 +6125,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -6105,6 +6177,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -6153,6 +6226,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -6203,6 +6277,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -6273,6 +6348,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -6327,6 +6403,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -6398,6 +6475,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -6448,6 +6526,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -6507,6 +6586,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -6576,6 +6656,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'If-Match': _params.ifMatch,
             'If-None-Match': _params.ifNoneMatch,
@@ -6640,6 +6721,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'If-Match': _params.ifMatch,
@@ -6710,6 +6792,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': _params.accept,
             'If-Match': _params.ifMatch,
@@ -6782,6 +6865,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': _params.contentType,
@@ -6842,6 +6926,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'If-None-Match': _params.ifNoneMatch,
           },
@@ -6900,6 +6985,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -6970,6 +7056,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': _params.accept,
             'If-None-Match': _params.ifNoneMatch,
@@ -7036,6 +7123,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': _params.contentType,
@@ -7096,6 +7184,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -7149,6 +7238,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -7203,6 +7293,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -7251,6 +7342,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
           },
           _params.headers
@@ -7294,6 +7386,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -7339,6 +7432,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -7391,6 +7485,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -7439,6 +7534,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -7486,6 +7582,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
@@ -7534,6 +7631,7 @@ class CloudantV1 extends CloudantBaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
