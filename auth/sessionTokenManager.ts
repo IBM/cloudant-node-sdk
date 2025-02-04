@@ -22,6 +22,8 @@ import {
   validateInput,
 } from 'ibm-cloud-sdk-core';
 
+import { getSdkHeaders } from '../lib/common';
+
 /** Configuration options for CouchDB session token retrieval. */
 export interface SessionTokenManagerOptions extends UserOptions {
   /** The username portion of CouchDB session authentication. */
@@ -92,8 +94,15 @@ export class SessionTokenManager extends TokenManager {
    * @returns {Promise}
    */
   protected requestToken(): Promise<any> {
+    const newHeaders = getSdkHeaders(
+      'cloudant',
+      'v1',
+      'authenticatorPostSession'
+    );
     if (!this.options.headers) {
-      this.options.headers = {};
+      Object.assign(this.options, { 'headers': newHeaders });
+    } else {
+      Object.assign(this.options.headers, newHeaders);
     }
     // these cannot be overwritten
     const parameters = {

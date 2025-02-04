@@ -18,6 +18,7 @@ const assert = require('assert');
 const sinon = require('sinon');
 const { CookieJar } = require('tough-cookie');
 const { SessionTokenManager } = require('../../auth/sessionTokenManager.ts');
+const { getSdkHeaders } = require('../../lib/common.ts');
 
 const OPTIONS = Object.freeze({
   username: 'username',
@@ -61,7 +62,7 @@ describe('SessionTokenManager tests', () => {
       const sessionUrl = 'cloudant.example/_session';
       const expectedParameters = {
         options: {
-          headers: {},
+          headers: getSdkHeaders('cloudant', 'v1', 'authenticatorPostSession'),
           url: sessionUrl,
           method: 'POST',
           body: {
