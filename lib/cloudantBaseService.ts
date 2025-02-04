@@ -24,7 +24,6 @@ import {
   errorResponseInterceptor,
   errorResponseStreamConverter,
 } from './errorResponseInterceptor';
-import { getSdkHeaders } from './common';
 
 /**
  * Set default timeout to 2.5 minutes (= 150 000 ms)
@@ -184,17 +183,6 @@ export default abstract class CloudantBaseService extends BaseService {
   private configureSessionAuthenticator() {
     const auth: Authenticator = this.getAuthenticator();
     if (auth instanceof CouchdbSessionAuthenticator) {
-      const serviceClass = this.constructor as typeof BaseService;
-      const newHeaders = getSdkHeaders(
-        serviceClass.DEFAULT_SERVICE_NAME,
-        'v1',
-        'authenticatorPostSession'
-      );
-      if (this.baseOptions.headers === undefined) {
-        Object.assign(this.baseOptions, { 'headers': newHeaders });
-      } else {
-        Object.assign(this.baseOptions.headers, newHeaders);
-      }
       (auth as CouchdbSessionAuthenticator).configure(this.baseOptions);
     }
   }
