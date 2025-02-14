@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2022, 2025. All Rights Reserved.
+ * © Copyright IBM Corporation 2025. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-param-reassign */
-function delay(milliseconds) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, milliseconds);
-  });
+/**
+ * Interface for pagination of database operations.
+ *
+ * Use the static methods to instantiate a Pager instance for
+ * the required operation.
+ *
+ * @param <I> the item type of the page rows.
+ */
+export interface Pager<I> {
+  hasNext(): boolean;
+  getNext(): Promise<ReadonlyArray<I>>;
+  getAll(): Promise<ReadonlyArray<I>>;
 }
-
-module.exports = {
-  delay,
-};

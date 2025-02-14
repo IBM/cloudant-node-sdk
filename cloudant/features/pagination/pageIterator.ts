@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2022, 2025. All Rights Reserved.
+ * © Copyright IBM Corporation 2025. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-/* eslint-disable no-param-reassign */
-function delay(milliseconds) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, milliseconds);
-  });
+import { default as CloudantV1 } from '../../v1';
+export interface PageIterator<
+  I extends
+    | CloudantV1.DocsResultRow
+    | CloudantV1.Document
+    | CloudantV1.SearchResultRow
+    | CloudantV1.ViewResultRow,
+> extends AsyncIterableIterator<ReadonlyArray<I>> {
+  hasNext(): boolean;
 }
-
-module.exports = {
-  delay,
-};

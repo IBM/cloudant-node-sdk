@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2022. All Rights Reserved.
+ * © Copyright IBM Corporation 2022, 2025. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { Transform, TransformOptions } from 'node:stream';
+import { PassThrough, TransformCallback, TransformOptions } from 'node:stream';
 
-export class Stream<T> extends Transform {
+export class Stream<T> extends PassThrough {
   constructor(opts?: TransformOptions) {
     super({
       ...opts,
@@ -26,10 +26,14 @@ export class Stream<T> extends Transform {
   }
 
   push(chunk: T, encoding?: BufferEncoding): boolean {
-    return super.push(chunk);
+    return super.push(chunk, encoding);
   }
 
   read(size?: number): T {
     return super.read(size);
+  }
+
+  _transform(chunk: T, encoding: BufferEncoding, callback: TransformCallback) {
+    super._transform(chunk, encoding, callback);
   }
 }
