@@ -17,10 +17,10 @@ import {
   default as CloudantV1,
   ChangesResultItem,
   PostChangesParams,
+  ChangesResult,
 } from '../v1';
 import { Stream } from './stream';
 import { ChangesParamsHelper } from './changesParamsHelper';
-import { ChangesResultItemStream } from './changesResultItemStream';
 import { pipeline, Readable } from 'node:stream';
 import { ChangesResultIterableIterator } from './changesResultIterator';
 
@@ -219,10 +219,14 @@ export class ChangesFollower {
       this.errorTolerance
     );
 
-    return pipeline(
-      Readable.from(this.changesResultIterator),
-      new ChangesResultItemStream(),
-      () => {}
-    );
+    let resultsIterator = Readable.from(
+      pipeline(
+        Readable.from(this.changesResultIterator),
+        new Stream<Array<ChangesResultItem>>(),
+        () => {}
+      )
+    ).flatMap((item: ChangesResult) => item.results);
+
+    return pipeline(resultsIterator, new Stream<ChangesResultItem>(), () => {});
   }
 }

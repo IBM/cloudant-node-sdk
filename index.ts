@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2025. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,3 +30,8 @@ export {
 
 export { ChangesFollower } from './cloudant/features/changesFollower';
 export { Stream } from './cloudant/features/stream';
+export {
+  Pagination,
+  PagerType,
+} from './cloudant/features/pagination/pagination';
+export { Pager } from './cloudant/features/pagination/pager';
