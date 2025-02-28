@@ -7502,6 +7502,98 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
+   * Retrieve maximum allowed database count.
+   *
+   * Retrieves the maximum number of databases currently allowed in the instance.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.CapacityDatabasesInformation>>}
+   */
+  public getCapacityDatabasesInformation(
+    params?: CloudantV1.GetCapacityDatabasesInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.CapacityDatabasesInformation>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCapacityDatabasesInformation');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/user/capacity/databases',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.CapacityDatabasesInformation.deserialize,
+    );
+  }
+
+  /**
+   * Retrieve current database count.
+   *
+   * Retrieves the current number of databases that exist in the instance.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.CurrentDatabasesInformation>>}
+   */
+  public getCurrentDatabasesInformation(
+    params?: CloudantV1.GetCurrentDatabasesInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.CurrentDatabasesInformation>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCurrentDatabasesInformation');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/user/current/databases',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.CurrentDatabasesInformation.deserialize,
+    );
+  }
+
+  /**
    * Retrieve the current provisioned throughput capacity consumption.
    *
    * View the current consumption of provisioned throughput capacity for an IBM Cloudant instance. The current
@@ -10886,6 +10978,16 @@ namespace CloudantV1 {
     }
   }
 
+  /** Parameters for the `getCapacityDatabasesInformation` operation. */
+  export interface GetCapacityDatabasesInformationParams {
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `getCurrentDatabasesInformation` operation. */
+  export interface GetCurrentDatabasesInformationParams {
+    headers?: OutgoingHttpHeaders;
+  }
+
   /** Parameters for the `getCurrentThroughputInformation` operation. */
   export interface GetCurrentThroughputInformationParams {
     headers?: OutgoingHttpHeaders;
@@ -12221,6 +12323,76 @@ namespace CloudantV1 {
   }
 
   /**
+   * Schema for information about maximum total database count.
+   */
+  export class CapacityDatabasesInformation {
+    /** Schema for information about the current database capacity. */
+    current?: CapacityDatabasesInformationCurrent;
+
+    static serialize(obj): CapacityDatabasesInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CapacityDatabasesInformation.Transport = <CapacityDatabasesInformation.Transport>{};
+      if (obj.current !== undefined) {
+        copy.current = CapacityDatabasesInformationCurrent.serialize(obj.current);
+      }
+      return copy as unknown as CapacityDatabasesInformation.Transport;
+    }
+
+    static deserialize(obj): CapacityDatabasesInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CapacityDatabasesInformation = <CapacityDatabasesInformation>{};
+      if (obj.current !== undefined) {
+        copy.current = CapacityDatabasesInformationCurrent.deserialize(obj.current);
+      }
+      return copy as unknown as CapacityDatabasesInformation;
+    }
+  }
+  export namespace CapacityDatabasesInformation {
+      export interface Transport {
+        current?: CapacityDatabasesInformationCurrent.Transport;
+      }
+  }
+
+  /**
+   * Schema for information about the current database capacity.
+   */
+  export class CapacityDatabasesInformationCurrent {
+    /** Schema for databases count. */
+    databases?: DatabasesCountInformation;
+
+    static serialize(obj): CapacityDatabasesInformationCurrent.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CapacityDatabasesInformationCurrent.Transport = <CapacityDatabasesInformationCurrent.Transport>{};
+      if (obj.databases !== undefined) {
+        copy.databases = DatabasesCountInformation.serialize(obj.databases);
+      }
+      return copy as unknown as CapacityDatabasesInformationCurrent.Transport;
+    }
+
+    static deserialize(obj): CapacityDatabasesInformationCurrent {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CapacityDatabasesInformationCurrent = <CapacityDatabasesInformationCurrent>{};
+      if (obj.databases !== undefined) {
+        copy.databases = DatabasesCountInformation.deserialize(obj.databases);
+      }
+      return copy as unknown as CapacityDatabasesInformationCurrent;
+    }
+  }
+  export namespace CapacityDatabasesInformationCurrent {
+      export interface Transport {
+        databases?: DatabasesCountInformation.Transport;
+      }
+  }
+
+  /**
    * Schema for information about the currently provisioned and target throughput capacity.
    */
   export class CapacityThroughputInformation {
@@ -12620,6 +12792,41 @@ namespace CloudantV1 {
   }
 
   /**
+   * Schema for information about the current database counts.
+   */
+  export class CurrentDatabasesInformation {
+    /** Schema for databases count. */
+    databases?: DatabasesCountInformation;
+
+    static serialize(obj): CurrentDatabasesInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CurrentDatabasesInformation.Transport = <CurrentDatabasesInformation.Transport>{};
+      if (obj.databases !== undefined) {
+        copy.databases = DatabasesCountInformation.serialize(obj.databases);
+      }
+      return copy as unknown as CurrentDatabasesInformation.Transport;
+    }
+
+    static deserialize(obj): CurrentDatabasesInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: CurrentDatabasesInformation = <CurrentDatabasesInformation>{};
+      if (obj.databases !== undefined) {
+        copy.databases = DatabasesCountInformation.deserialize(obj.databases);
+      }
+      return copy as unknown as CurrentDatabasesInformation;
+    }
+  }
+  export namespace CurrentDatabasesInformation {
+      export interface Transport {
+        databases?: DatabasesCountInformation.Transport;
+      }
+  }
+
+  /**
    * Schema for information about current consumption of a provisioned throughput capacity.
    */
   export class CurrentThroughputInformation {
@@ -12987,6 +13194,41 @@ namespace CloudantV1 {
   export namespace DatabaseInformationProps {
       export interface Transport {
         partitioned?: boolean;
+      }
+  }
+
+  /**
+   * Schema for databases count.
+   */
+  export class DatabasesCountInformation {
+    /** The total number of databases. */
+    total?: number;
+
+    static serialize(obj): DatabasesCountInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DatabasesCountInformation.Transport = <DatabasesCountInformation.Transport>{};
+      if (obj.total !== undefined) {
+        copy.total = obj.total;
+      }
+      return copy as unknown as DatabasesCountInformation.Transport;
+    }
+
+    static deserialize(obj): DatabasesCountInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: DatabasesCountInformation = <DatabasesCountInformation>{};
+      if (obj.total !== undefined) {
+        copy.total = obj.total;
+      }
+      return copy as unknown as DatabasesCountInformation;
+    }
+  }
+  export namespace DatabasesCountInformation {
+      export interface Transport {
+        total?: number;
       }
   }
 
