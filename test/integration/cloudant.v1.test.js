@@ -1997,6 +1997,20 @@ describe('CloudantV1_integration', () => {
     expect(res.result).toBeDefined();
   });
 
+  test('getCapacityDatabasesInformation()', async () => {
+    const res = await cloudantService.getCapacityDatabasesInformation();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('getCurrentDatabasesInformation()', async () => {
+    const res = await cloudantService.getCurrentDatabasesInformation();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
   test('getCurrentThroughputInformation()', async () => {
     const res = await cloudantService.getCurrentThroughputInformation();
     expect(res).toBeDefined();

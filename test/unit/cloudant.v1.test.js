@@ -10213,6 +10213,126 @@ describe('CloudantV1', () => {
     });
   });
 
+  describe('getCapacityDatabasesInformation', () => {
+    describe('positive tests', () => {
+      function __getCapacityDatabasesInformationTest() {
+        // Construct the params object for operation getCapacityDatabasesInformation
+        const getCapacityDatabasesInformationParams = {};
+
+        const getCapacityDatabasesInformationResult = cloudantService.getCapacityDatabasesInformation(getCapacityDatabasesInformationParams);
+
+        // all methods should return a Promise
+        expectToBePromise(getCapacityDatabasesInformationResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/capacity/databases', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getCapacityDatabasesInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getCapacityDatabasesInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getCapacityDatabasesInformationTest();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const getCapacityDatabasesInformationParams = {
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.getCapacityDatabasesInformation(getCapacityDatabasesInformationParams);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+
+      test('should not have any problems when no parameters are passed in', () => {
+        // invoke the method with no parameters
+        cloudantService.getCapacityDatabasesInformation({});
+        checkForSuccessfulExecution(createRequestMock);
+      });
+    });
+  });
+
+  describe('getCurrentDatabasesInformation', () => {
+    describe('positive tests', () => {
+      function __getCurrentDatabasesInformationTest() {
+        // Construct the params object for operation getCurrentDatabasesInformation
+        const getCurrentDatabasesInformationParams = {};
+
+        const getCurrentDatabasesInformationResult = cloudantService.getCurrentDatabasesInformation(getCurrentDatabasesInformationParams);
+
+        // all methods should return a Promise
+        expectToBePromise(getCurrentDatabasesInformationResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/current/databases', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getCurrentDatabasesInformationTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.enableRetries();
+        __getCurrentDatabasesInformationTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        cloudantService.disableRetries();
+        __getCurrentDatabasesInformationTest();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const getCurrentDatabasesInformationParams = {
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        cloudantService.getCurrentDatabasesInformation(getCurrentDatabasesInformationParams);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+
+      test('should not have any problems when no parameters are passed in', () => {
+        // invoke the method with no parameters
+        cloudantService.getCurrentDatabasesInformation({});
+        checkForSuccessfulExecution(createRequestMock);
+      });
+    });
+  });
+
   describe('getCurrentThroughputInformation', () => {
     describe('positive tests', () => {
       function __getCurrentThroughputInformationTest() {
