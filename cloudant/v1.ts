@@ -17,6 +17,7 @@
 import extend from 'extend';
 import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
 import {
+  AbortSignal,
   Authenticator,
   BaseService,
   SDKLogger,
@@ -121,7 +122,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ServerInformation>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -144,6 +145,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -168,7 +172,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -191,6 +195,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -217,7 +224,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.CapacityThroughputInformation>> {
     const _params = { ...params };
     const _requiredParams = ['blocks'];
-    const _validParams = ['blocks', 'headers'];
+    const _validParams = ['blocks', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -246,6 +253,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -273,7 +283,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.UuidsResult>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['count', 'headers'];
+    const _validParams = ['count', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -301,6 +311,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -356,7 +369,7 @@ class CloudantV1 extends CloudantBaseService {
     CloudantV1._logger.warn('A deprecated operation has been invoked: getDbUpdates');
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['descending', 'feed', 'heartbeat', 'limit', 'timeout', 'since', 'headers'];
+    const _validParams = ['descending', 'feed', 'heartbeat', 'limit', 'timeout', 'since', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -389,6 +402,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -522,7 +538,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ChangesResult>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'docIds', 'fields', 'selector', 'lastEventId', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'feed', 'filter', 'heartbeat', 'includeDocs', 'limit', 'seqInterval', 'since', 'style', 'timeout', 'view', 'headers'];
+    const _validParams = ['db', 'docIds', 'fields', 'selector', 'lastEventId', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'feed', 'filter', 'heartbeat', 'includeDocs', 'limit', 'seqInterval', 'since', 'style', 'timeout', 'view', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -577,6 +593,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -710,7 +729,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'docIds', 'fields', 'selector', 'lastEventId', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'feed', 'filter', 'heartbeat', 'includeDocs', 'limit', 'seqInterval', 'since', 'style', 'timeout', 'view', 'headers'];
+    const _validParams = ['db', 'docIds', 'fields', 'selector', 'lastEventId', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'feed', 'filter', 'heartbeat', 'includeDocs', 'limit', 'seqInterval', 'since', 'style', 'timeout', 'view', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -766,6 +785,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -791,7 +813,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'headers'];
+    const _validParams = ['db', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -818,6 +840,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -848,7 +873,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<string[]>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['descending', 'endKey', 'limit', 'skip', 'startKey', 'headers'];
+    const _validParams = ['descending', 'endKey', 'limit', 'skip', 'startKey', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -880,6 +905,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -903,7 +931,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DbsInfoResult[]>> {
     const _params = { ...params };
     const _requiredParams = ['keys'];
-    const _validParams = ['keys', 'headers'];
+    const _validParams = ['keys', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -932,6 +960,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -958,7 +989,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'headers'];
+    const _validParams = ['db', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -986,6 +1017,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1010,7 +1044,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DatabaseInformation>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'headers'];
+    const _validParams = ['db', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1038,6 +1072,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1072,7 +1109,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'partitioned', 'q', 'headers'];
+    const _validParams = ['db', 'partitioned', 'q', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1106,6 +1143,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1141,7 +1181,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId'];
-    const _validParams = ['db', 'docId', 'ifNoneMatch', 'latest', 'rev', 'headers'];
+    const _validParams = ['db', 'docId', 'ifNoneMatch', 'latest', 'rev', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1176,6 +1216,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1209,7 +1252,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'document'];
-    const _validParams = ['db', 'document', 'contentType', 'batch', 'headers'];
+    const _validParams = ['db', 'document', 'contentType', 'batch', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1245,6 +1288,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1291,7 +1337,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'headers'];
+    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1337,6 +1383,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1383,7 +1432,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'headers'];
+    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1430,6 +1479,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1456,7 +1508,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'queries'];
-    const _validParams = ['db', 'queries', 'headers'];
+    const _validParams = ['db', 'queries', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1490,6 +1542,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1519,7 +1574,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'queries'];
-    const _validParams = ['db', 'queries', 'headers'];
+    const _validParams = ['db', 'queries', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1554,6 +1609,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1578,7 +1636,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult[]>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'bulkDocs'];
-    const _validParams = ['db', 'bulkDocs', 'headers'];
+    const _validParams = ['db', 'bulkDocs', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1609,6 +1667,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1642,7 +1703,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.BulkGetResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docs'];
-    const _validParams = ['db', 'docs', 'attachments', 'attEncodingInfo', 'latest', 'revs', 'headers'];
+    const _validParams = ['db', 'docs', 'attachments', 'attEncodingInfo', 'latest', 'revs', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1684,6 +1745,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1717,7 +1781,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docs'];
-    const _validParams = ['db', 'docs', 'attachments', 'attEncodingInfo', 'latest', 'revs', 'headers'];
+    const _validParams = ['db', 'docs', 'attachments', 'attEncodingInfo', 'latest', 'revs', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1760,6 +1824,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1790,7 +1857,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docs'];
-    const _validParams = ['db', 'docs', 'attachments', 'attEncodingInfo', 'latest', 'revs', 'headers'];
+    const _validParams = ['db', 'docs', 'attachments', 'attEncodingInfo', 'latest', 'revs', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1833,6 +1900,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1863,7 +1933,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docs'];
-    const _validParams = ['db', 'docs', 'attachments', 'attEncodingInfo', 'latest', 'revs', 'headers'];
+    const _validParams = ['db', 'docs', 'attachments', 'attEncodingInfo', 'latest', 'revs', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1906,6 +1976,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1934,7 +2007,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId'];
-    const _validParams = ['db', 'docId', 'ifMatch', 'batch', 'rev', 'headers'];
+    const _validParams = ['db', 'docId', 'ifMatch', 'batch', 'rev', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1970,6 +2043,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2016,7 +2092,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.Document>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId'];
-    const _validParams = ['db', 'docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'headers'];
+    const _validParams = ['db', 'docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2060,6 +2136,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2106,7 +2185,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId'];
-    const _validParams = ['db', 'docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'headers'];
+    const _validParams = ['db', 'docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2151,6 +2230,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2194,7 +2276,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId'];
-    const _validParams = ['db', 'docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'headers'];
+    const _validParams = ['db', 'docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2239,6 +2321,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2282,7 +2367,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId'];
-    const _validParams = ['db', 'docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'headers'];
+    const _validParams = ['db', 'docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2327,6 +2412,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2365,7 +2453,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId', 'document'];
-    const _validParams = ['db', 'docId', 'document', 'contentType', 'ifMatch', 'batch', 'newEdits', 'rev', 'headers'];
+    const _validParams = ['db', 'docId', 'document', 'contentType', 'ifMatch', 'batch', 'newEdits', 'rev', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2405,6 +2493,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2439,7 +2530,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc'];
-    const _validParams = ['db', 'ddoc', 'ifNoneMatch', 'headers'];
+    const _validParams = ['db', 'ddoc', 'ifNoneMatch', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2468,6 +2559,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2497,7 +2591,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc'];
-    const _validParams = ['db', 'ddoc', 'ifMatch', 'batch', 'rev', 'headers'];
+    const _validParams = ['db', 'ddoc', 'ifMatch', 'batch', 'rev', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2533,6 +2627,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2580,7 +2677,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DesignDocument>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc'];
-    const _validParams = ['db', 'ddoc', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'headers'];
+    const _validParams = ['db', 'ddoc', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2624,6 +2721,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2661,7 +2761,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc', 'designDocument'];
-    const _validParams = ['db', 'ddoc', 'designDocument', 'ifMatch', 'batch', 'newEdits', 'rev', 'headers'];
+    const _validParams = ['db', 'ddoc', 'designDocument', 'ifMatch', 'batch', 'newEdits', 'rev', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2701,6 +2801,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2728,7 +2831,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DesignDocumentInformation>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc'];
-    const _validParams = ['db', 'ddoc', 'headers'];
+    const _validParams = ['db', 'ddoc', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2757,6 +2860,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2803,7 +2909,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'headers'];
+    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2849,6 +2955,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2878,7 +2987,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsQueriesResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'queries'];
-    const _validParams = ['db', 'queries', 'accept', 'headers'];
+    const _validParams = ['db', 'queries', 'accept', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2912,6 +3021,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2993,7 +3105,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ViewResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc', 'view'];
-    const _validParams = ['db', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startKey', 'startKeyDocId', 'update', 'headers'];
+    const _validParams = ['db', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startKey', 'startKeyDocId', 'update', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3048,6 +3160,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3126,7 +3241,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc', 'view'];
-    const _validParams = ['db', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startKey', 'startKeyDocId', 'update', 'headers'];
+    const _validParams = ['db', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'stable', 'startKey', 'startKeyDocId', 'update', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3182,6 +3297,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3209,7 +3327,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ViewQueriesResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc', 'view', 'queries'];
-    const _validParams = ['db', 'ddoc', 'view', 'queries', 'headers'];
+    const _validParams = ['db', 'ddoc', 'view', 'queries', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3245,6 +3363,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3275,7 +3396,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc', 'view', 'queries'];
-    const _validParams = ['db', 'ddoc', 'view', 'queries', 'headers'];
+    const _validParams = ['db', 'ddoc', 'view', 'queries', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3312,6 +3433,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3337,7 +3461,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.PartitionInformation>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey'];
-    const _validParams = ['db', 'partitionKey', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3366,6 +3490,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3413,7 +3540,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.AllDocsResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey'];
-    const _validParams = ['db', 'partitionKey', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3460,6 +3587,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3507,7 +3637,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey'];
-    const _validParams = ['db', 'partitionKey', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3555,6 +3685,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3609,7 +3742,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.SearchResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'ddoc', 'index', 'query'];
-    const _validParams = ['db', 'partitionKey', 'ddoc', 'index', 'query', 'bookmark', 'highlightFields', 'highlightNumber', 'highlightPostTag', 'highlightPreTag', 'highlightSize', 'includeDocs', 'includeFields', 'limit', 'sort', 'stale', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'ddoc', 'index', 'query', 'bookmark', 'highlightFields', 'highlightNumber', 'highlightPostTag', 'highlightPreTag', 'highlightSize', 'includeDocs', 'includeFields', 'limit', 'sort', 'stale', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3657,6 +3790,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3714,7 +3850,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'ddoc', 'index', 'query'];
-    const _validParams = ['db', 'partitionKey', 'ddoc', 'index', 'query', 'bookmark', 'highlightFields', 'highlightNumber', 'highlightPostTag', 'highlightPreTag', 'highlightSize', 'includeDocs', 'includeFields', 'limit', 'sort', 'stale', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'ddoc', 'index', 'query', 'bookmark', 'highlightFields', 'highlightNumber', 'highlightPostTag', 'highlightPreTag', 'highlightSize', 'includeDocs', 'includeFields', 'limit', 'sort', 'stale', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3763,6 +3899,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3836,7 +3975,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ViewResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
-    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'startKey', 'startKeyDocId', 'update', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'startKey', 'startKeyDocId', 'update', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3891,6 +4030,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3967,7 +4109,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'ddoc', 'view'];
-    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'startKey', 'startKeyDocId', 'update', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'ddoc', 'view', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'endKeyDocId', 'group', 'groupLevel', 'key', 'keys', 'reduce', 'startKey', 'startKeyDocId', 'update', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4023,6 +4165,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4114,7 +4259,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ExplainResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'selector'];
-    const _validParams = ['db', 'partitionKey', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4160,6 +4305,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4266,7 +4414,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.FindResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'selector'];
-    const _validParams = ['db', 'partitionKey', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4312,6 +4460,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4418,7 +4569,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'partitionKey', 'selector'];
-    const _validParams = ['db', 'partitionKey', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'headers'];
+    const _validParams = ['db', 'partitionKey', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4465,6 +4616,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4561,7 +4715,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ExplainResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'selector'];
-    const _validParams = ['db', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'headers'];
+    const _validParams = ['db', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4607,6 +4761,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4712,7 +4869,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.FindResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'selector'];
-    const _validParams = ['db', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'headers'];
+    const _validParams = ['db', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4758,6 +4915,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4863,7 +5023,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'selector'];
-    const _validParams = ['db', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'headers'];
+    const _validParams = ['db', 'selector', 'allowFallback', 'bookmark', 'conflicts', 'executionStats', 'fields', 'limit', 'skip', 'sort', 'stable', 'update', 'useIndex', 'r', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4910,6 +5070,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4933,7 +5096,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.IndexesInformation>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'headers'];
+    const _validParams = ['db', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4961,6 +5124,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4995,7 +5161,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.IndexResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'index'];
-    const _validParams = ['db', 'index', 'ddoc', 'name', 'partitioned', 'type', 'headers'];
+    const _validParams = ['db', 'index', 'ddoc', 'name', 'partitioned', 'type', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5033,6 +5199,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5061,7 +5230,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc', 'type', 'index'];
-    const _validParams = ['db', 'ddoc', 'type', 'index', 'headers'];
+    const _validParams = ['db', 'ddoc', 'type', 'index', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5092,6 +5261,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5121,7 +5293,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.SearchAnalyzeResult>> {
     const _params = { ...params };
     const _requiredParams = ['analyzer', 'text'];
-    const _validParams = ['analyzer', 'text', 'headers'];
+    const _validParams = ['analyzer', 'text', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5151,6 +5323,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5225,7 +5400,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.SearchResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc', 'index', 'query'];
-    const _validParams = ['db', 'ddoc', 'index', 'query', 'bookmark', 'highlightFields', 'highlightNumber', 'highlightPostTag', 'highlightPreTag', 'highlightSize', 'includeDocs', 'includeFields', 'limit', 'sort', 'stale', 'counts', 'drilldown', 'groupField', 'groupLimit', 'groupSort', 'ranges', 'headers'];
+    const _validParams = ['db', 'ddoc', 'index', 'query', 'bookmark', 'highlightFields', 'highlightNumber', 'highlightPostTag', 'highlightPreTag', 'highlightSize', 'includeDocs', 'includeFields', 'limit', 'sort', 'stale', 'counts', 'drilldown', 'groupField', 'groupLimit', 'groupSort', 'ranges', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5278,6 +5453,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5352,7 +5530,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc', 'index', 'query'];
-    const _validParams = ['db', 'ddoc', 'index', 'query', 'bookmark', 'highlightFields', 'highlightNumber', 'highlightPostTag', 'highlightPreTag', 'highlightSize', 'includeDocs', 'includeFields', 'limit', 'sort', 'stale', 'counts', 'drilldown', 'groupField', 'groupLimit', 'groupSort', 'ranges', 'headers'];
+    const _validParams = ['db', 'ddoc', 'index', 'query', 'bookmark', 'highlightFields', 'highlightNumber', 'highlightPostTag', 'highlightPreTag', 'highlightSize', 'includeDocs', 'includeFields', 'limit', 'sort', 'stale', 'counts', 'drilldown', 'groupField', 'groupLimit', 'groupSort', 'ranges', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5406,6 +5584,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5430,7 +5611,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.SearchDiskSizeInformation>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc', 'index'];
-    const _validParams = ['db', 'ddoc', 'index', 'headers'];
+    const _validParams = ['db', 'ddoc', 'index', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5460,6 +5641,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5487,7 +5671,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.SearchInfoResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'ddoc', 'index'];
-    const _validParams = ['db', 'ddoc', 'index', 'headers'];
+    const _validParams = ['db', 'ddoc', 'index', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5517,6 +5701,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5548,7 +5735,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['docId'];
-    const _validParams = ['docId', 'ifNoneMatch', 'headers'];
+    const _validParams = ['docId', 'ifNoneMatch', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5576,6 +5763,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5599,7 +5789,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['docId'];
-    const _validParams = ['docId', 'headers'];
+    const _validParams = ['docId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5626,6 +5816,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5648,7 +5841,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['jobId'];
-    const _validParams = ['jobId', 'headers'];
+    const _validParams = ['jobId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5675,6 +5868,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5699,7 +5895,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
     const _requiredParams = ['replicationDocument'];
-    const _validParams = ['replicationDocument', 'batch', 'headers'];
+    const _validParams = ['replicationDocument', 'batch', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5730,6 +5926,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5759,7 +5958,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
     const _requiredParams = ['docId'];
-    const _validParams = ['docId', 'ifMatch', 'batch', 'rev', 'headers'];
+    const _validParams = ['docId', 'ifMatch', 'batch', 'rev', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5794,6 +5993,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5840,7 +6042,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ReplicationDocument>> {
     const _params = { ...params };
     const _requiredParams = ['docId'];
-    const _validParams = ['docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'headers'];
+    const _validParams = ['docId', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'conflicts', 'deletedConflicts', 'latest', 'localSeq', 'meta', 'rev', 'revs', 'revsInfo', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5883,6 +6085,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5920,7 +6125,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
     const _requiredParams = ['docId', 'replicationDocument'];
-    const _validParams = ['docId', 'replicationDocument', 'ifMatch', 'batch', 'newEdits', 'rev', 'headers'];
+    const _validParams = ['docId', 'replicationDocument', 'ifMatch', 'batch', 'newEdits', 'rev', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5959,6 +6164,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5990,7 +6198,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.SchedulerDocsResult>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['limit', 'skip', 'states', 'headers'];
+    const _validParams = ['limit', 'skip', 'states', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6020,6 +6228,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6045,7 +6256,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.SchedulerDocument>> {
     const _params = { ...params };
     const _requiredParams = ['docId'];
-    const _validParams = ['docId', 'headers'];
+    const _validParams = ['docId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6073,6 +6284,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6102,7 +6316,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.SchedulerJobsResult>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['limit', 'skip', 'headers'];
+    const _validParams = ['limit', 'skip', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6131,6 +6345,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6155,7 +6372,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.SchedulerJob>> {
     const _params = { ...params };
     const _requiredParams = ['jobId'];
-    const _validParams = ['jobId', 'headers'];
+    const _validParams = ['jobId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6183,6 +6400,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6209,7 +6429,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.SessionInformation>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6232,6 +6452,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6260,7 +6483,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ApiKeysResult>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6283,6 +6506,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6318,7 +6544,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'cloudant'];
-    const _validParams = ['db', 'cloudant', 'admins', 'couchdbAuthOnly', 'members', 'headers'];
+    const _validParams = ['db', 'cloudant', 'admins', 'couchdbAuthOnly', 'members', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6355,6 +6581,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6381,7 +6610,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.Security>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'headers'];
+    const _validParams = ['db', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6409,6 +6638,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6445,7 +6677,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'admins', 'cloudant', 'couchdbAuthOnly', 'members', 'headers'];
+    const _validParams = ['db', 'admins', 'cloudant', 'couchdbAuthOnly', 'members', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6482,6 +6714,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6509,7 +6744,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.CorsInformation>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6532,6 +6767,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6562,7 +6800,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
     const _requiredParams = ['origins'];
-    const _validParams = ['origins', 'allowCredentials', 'enableCors', 'headers'];
+    const _validParams = ['origins', 'allowCredentials', 'enableCors', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6593,6 +6831,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6627,7 +6868,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId', 'attachmentName'];
-    const _validParams = ['db', 'docId', 'attachmentName', 'ifMatch', 'ifNoneMatch', 'rev', 'headers'];
+    const _validParams = ['db', 'docId', 'attachmentName', 'ifMatch', 'ifNoneMatch', 'rev', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6663,6 +6904,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6691,7 +6935,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId', 'attachmentName'];
-    const _validParams = ['db', 'docId', 'attachmentName', 'ifMatch', 'rev', 'batch', 'headers'];
+    const _validParams = ['db', 'docId', 'attachmentName', 'ifMatch', 'rev', 'batch', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6728,6 +6972,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6762,7 +7009,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<NodeJS.ReadableStream>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId', 'attachmentName'];
-    const _validParams = ['db', 'docId', 'attachmentName', 'accept', 'ifMatch', 'ifNoneMatch', 'range', 'rev', 'headers'];
+    const _validParams = ['db', 'docId', 'attachmentName', 'accept', 'ifMatch', 'ifNoneMatch', 'range', 'rev', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6801,6 +7048,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6834,7 +7084,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId', 'attachmentName', 'attachment', 'contentType'];
-    const _validParams = ['db', 'docId', 'attachmentName', 'attachment', 'contentType', 'ifMatch', 'rev', 'headers'];
+    const _validParams = ['db', 'docId', 'attachmentName', 'attachment', 'contentType', 'ifMatch', 'rev', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6873,6 +7123,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6903,7 +7156,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId'];
-    const _validParams = ['db', 'docId', 'ifNoneMatch', 'headers'];
+    const _validParams = ['db', 'docId', 'ifNoneMatch', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6932,6 +7185,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6957,7 +7213,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId'];
-    const _validParams = ['db', 'docId', 'batch', 'headers'];
+    const _validParams = ['db', 'docId', 'batch', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6991,6 +7247,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7026,7 +7285,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.Document>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId'];
-    const _validParams = ['db', 'docId', 'accept', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'localSeq', 'headers'];
+    const _validParams = ['db', 'docId', 'accept', 'ifNoneMatch', 'attachments', 'attEncodingInfo', 'localSeq', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7063,6 +7322,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7093,7 +7355,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentResult>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId', 'document'];
-    const _validParams = ['db', 'docId', 'document', 'contentType', 'batch', 'headers'];
+    const _validParams = ['db', 'docId', 'document', 'contentType', 'batch', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7130,6 +7392,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7160,7 +7425,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.JsonObject>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'documentRevisions'];
-    const _validParams = ['db', 'documentRevisions', 'headers'];
+    const _validParams = ['db', 'documentRevisions', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7191,6 +7456,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7216,7 +7484,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ShardsInformation>> {
     const _params = { ...params };
     const _requiredParams = ['db'];
-    const _validParams = ['db', 'headers'];
+    const _validParams = ['db', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7244,6 +7512,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7270,7 +7541,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.DocumentShardInfo>> {
     const _params = { ...params };
     const _requiredParams = ['db', 'docId'];
-    const _validParams = ['db', 'docId', 'headers'];
+    const _validParams = ['db', 'docId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7299,6 +7570,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7325,7 +7599,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7347,6 +7621,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7369,7 +7646,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ActiveTask[]>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7392,6 +7669,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7415,7 +7695,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEvents>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7438,6 +7718,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7463,7 +7746,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
     const _params = { ...params };
     const _requiredParams = ['types'];
-    const _validParams = ['types', 'headers'];
+    const _validParams = ['types', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7492,6 +7775,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7515,7 +7801,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.CapacityDatabasesInformation>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7538,6 +7824,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7561,7 +7850,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.CurrentDatabasesInformation>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7584,6 +7873,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7609,7 +7901,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.CurrentThroughputInformation>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7632,6 +7924,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7657,7 +7952,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.MembershipInformation>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7680,6 +7975,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7706,7 +8004,7 @@ class CloudantV1 extends CloudantBaseService {
   ): Promise<CloudantV1.Response<CloudantV1.UpInformation>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -7729,6 +8027,9 @@ class CloudantV1 extends CloudantBaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -7771,34 +8072,35 @@ namespace CloudantV1 {
    * request interfaces
    ************************/
 
+   interface DefaultParams {
+     headers?: OutgoingHttpHeaders;
+     signal?: AbortSignal;
+   }
+
   /** Parameters for the `getServerInformation` operation. */
-  export interface GetServerInformationParams {
-    headers?: OutgoingHttpHeaders;
+  export interface GetServerInformationParams extends DefaultParams {
   }
 
   /** Parameters for the `getCapacityThroughputInformation` operation. */
-  export interface GetCapacityThroughputInformationParams {
-    headers?: OutgoingHttpHeaders;
+  export interface GetCapacityThroughputInformationParams extends DefaultParams {
   }
 
   /** Parameters for the `putCapacityThroughputConfiguration` operation. */
-  export interface PutCapacityThroughputConfigurationParams {
+  export interface PutCapacityThroughputConfigurationParams extends DefaultParams {
     /** A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global
      *  queries/sec of provisioned throughput capacity. Not available for some plans.
      */
     blocks: number;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getUuids` operation. */
-  export interface GetUuidsParams {
+  export interface GetUuidsParams extends DefaultParams {
     /** Query parameter to specify the number of UUIDs to return. */
     count?: number;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getDbUpdates` operation. */
-  export interface GetDbUpdatesParams {
+  export interface GetDbUpdatesParams extends DefaultParams {
     /** Query parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
     /** Query parameter to specify the changes feed type. */
@@ -7829,7 +8131,6 @@ namespace CloudantV1 {
      *  Can be a valid update sequence or `now` value. Default is `0` i.e. all changes.
      */
     since?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `getDbUpdates` operation. */
@@ -7844,7 +8145,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postChanges` operation. */
-  export interface PostChangesParams {
+  export interface PostChangesParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Schema for a list of document IDs. */
@@ -7969,7 +8270,6 @@ namespace CloudantV1 {
      *  emits at least one record for them.
      */
     view?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postChanges` operation. */
@@ -7989,7 +8289,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postChangesAsStream` operation. */
-  export interface PostChangesAsStreamParams {
+  export interface PostChangesAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Schema for a list of document IDs. */
@@ -8114,7 +8414,6 @@ namespace CloudantV1 {
      *  emits at least one record for them.
      */
     view?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postChangesAsStream` operation. */
@@ -8134,14 +8433,13 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `headDatabase` operation. */
-  export interface HeadDatabaseParams {
+  export interface HeadDatabaseParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getAllDbs` operation. */
-  export interface GetAllDbsParams {
+  export interface GetAllDbsParams extends DefaultParams {
     /** Query parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
     /** Query parameter to specify to stop returning records when the specified key is reached. String
@@ -8156,32 +8454,28 @@ namespace CloudantV1 {
      *  JSON type that matches the key type emitted by the view function.
      */
     startKey?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postDbsInfo` operation. */
-  export interface PostDbsInfoParams {
+  export interface PostDbsInfoParams extends DefaultParams {
     /** A list of database names. */
     keys: string[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `deleteDatabase` operation. */
-  export interface DeleteDatabaseParams {
+  export interface DeleteDatabaseParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getDatabaseInformation` operation. */
-  export interface GetDatabaseInformationParams {
+  export interface GetDatabaseInformationParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `putDatabase` operation. */
-  export interface PutDatabaseParams {
+  export interface PutDatabaseParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Query parameter to specify whether to enable database partitions when creating a database.
@@ -8197,11 +8491,10 @@ namespace CloudantV1 {
      *  Cloudant customer support for guidance on how to meet your specific needs and requirements.
      */
     q?: number;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `headDocument` operation. */
-  export interface HeadDocumentParams {
+  export interface HeadDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -8214,11 +8507,10 @@ namespace CloudantV1 {
     latest?: boolean;
     /** Query parameter to specify a document revision. */
     rev?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postDocument` operation. */
-  export interface PostDocumentParams {
+  export interface PostDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** HTTP request body for Document operations. */
@@ -8229,7 +8521,6 @@ namespace CloudantV1 {
      *  response code immediately.
      */
     batch?: PostDocumentConstants.Batch | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postDocument` operation. */
@@ -8248,7 +8539,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postAllDocs` operation. */
-  export interface PostAllDocsParams {
+  export interface PostAllDocsParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
@@ -8283,11 +8574,10 @@ namespace CloudantV1 {
     keys?: string[];
     /** Schema for a document ID. */
     startKey?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postAllDocsAsStream` operation. */
-  export interface PostAllDocsAsStreamParams {
+  export interface PostAllDocsAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
@@ -8322,42 +8612,38 @@ namespace CloudantV1 {
     keys?: string[];
     /** Schema for a document ID. */
     startKey?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postAllDocsQueries` operation. */
-  export interface PostAllDocsQueriesParams {
+  export interface PostAllDocsQueriesParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** An array of query objects with fields for the parameters of each individual view query to be executed. The
      *  field names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
      */
     queries: AllDocsQuery[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postAllDocsQueriesAsStream` operation. */
-  export interface PostAllDocsQueriesAsStreamParams {
+  export interface PostAllDocsQueriesAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** An array of query objects with fields for the parameters of each individual view query to be executed. The
      *  field names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
      */
     queries: AllDocsQuery[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postBulkDocs` operation. */
-  export interface PostBulkDocsParams {
+  export interface PostBulkDocsParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** HTTP request body for postBulkDocs. */
     bulkDocs: BulkDocs | NodeJS.ReadableStream | Buffer;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postBulkGet` operation. */
-  export interface PostBulkGetParams {
+  export interface PostBulkGetParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** List of document items to get in bulk. */
@@ -8374,11 +8660,10 @@ namespace CloudantV1 {
     latest?: boolean;
     /** Query parameter to specify whether to include a list of all known document revisions. */
     revs?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postBulkGetAsMixed` operation. */
-  export interface PostBulkGetAsMixedParams {
+  export interface PostBulkGetAsMixedParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** List of document items to get in bulk. */
@@ -8395,11 +8680,10 @@ namespace CloudantV1 {
     latest?: boolean;
     /** Query parameter to specify whether to include a list of all known document revisions. */
     revs?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postBulkGetAsRelated` operation. */
-  export interface PostBulkGetAsRelatedParams {
+  export interface PostBulkGetAsRelatedParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** List of document items to get in bulk. */
@@ -8416,11 +8700,10 @@ namespace CloudantV1 {
     latest?: boolean;
     /** Query parameter to specify whether to include a list of all known document revisions. */
     revs?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postBulkGetAsStream` operation. */
-  export interface PostBulkGetAsStreamParams {
+  export interface PostBulkGetAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** List of document items to get in bulk. */
@@ -8437,11 +8720,10 @@ namespace CloudantV1 {
     latest?: boolean;
     /** Query parameter to specify whether to include a list of all known document revisions. */
     revs?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `deleteDocument` operation. */
-  export interface DeleteDocumentParams {
+  export interface DeleteDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -8454,7 +8736,6 @@ namespace CloudantV1 {
     batch?: DeleteDocumentConstants.Batch | string;
     /** Query parameter to specify a document revision. */
     rev?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `deleteDocument` operation. */
@@ -8466,7 +8747,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getDocument` operation. */
-  export interface GetDocumentParams {
+  export interface GetDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -8503,11 +8784,10 @@ namespace CloudantV1 {
     revs?: boolean;
     /** Query parameter to specify whether to includes detailed information for all known document revisions. */
     revsInfo?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getDocumentAsMixed` operation. */
-  export interface GetDocumentAsMixedParams {
+  export interface GetDocumentAsMixedParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -8544,11 +8824,10 @@ namespace CloudantV1 {
     revs?: boolean;
     /** Query parameter to specify whether to includes detailed information for all known document revisions. */
     revsInfo?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getDocumentAsRelated` operation. */
-  export interface GetDocumentAsRelatedParams {
+  export interface GetDocumentAsRelatedParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -8585,11 +8864,10 @@ namespace CloudantV1 {
     revs?: boolean;
     /** Query parameter to specify whether to includes detailed information for all known document revisions. */
     revsInfo?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getDocumentAsStream` operation. */
-  export interface GetDocumentAsStreamParams {
+  export interface GetDocumentAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -8626,11 +8904,10 @@ namespace CloudantV1 {
     revs?: boolean;
     /** Query parameter to specify whether to includes detailed information for all known document revisions. */
     revsInfo?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `putDocument` operation. */
-  export interface PutDocumentParams {
+  export interface PutDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -8655,7 +8932,6 @@ namespace CloudantV1 {
     newEdits?: boolean;
     /** Query parameter to specify a document revision. */
     rev?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `putDocument` operation. */
@@ -8674,7 +8950,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `headDesignDocument` operation. */
-  export interface HeadDesignDocumentParams {
+  export interface HeadDesignDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -8683,11 +8959,10 @@ namespace CloudantV1 {
     ddoc: string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `deleteDesignDocument` operation. */
-  export interface DeleteDesignDocumentParams {
+  export interface DeleteDesignDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -8702,7 +8977,6 @@ namespace CloudantV1 {
     batch?: DeleteDesignDocumentConstants.Batch | string;
     /** Query parameter to specify a document revision. */
     rev?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `deleteDesignDocument` operation. */
@@ -8714,7 +8988,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getDesignDocument` operation. */
-  export interface GetDesignDocumentParams {
+  export interface GetDesignDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -8753,11 +9027,10 @@ namespace CloudantV1 {
     revs?: boolean;
     /** Query parameter to specify whether to includes detailed information for all known document revisions. */
     revsInfo?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `putDesignDocument` operation. */
-  export interface PutDesignDocumentParams {
+  export interface PutDesignDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -8782,7 +9055,6 @@ namespace CloudantV1 {
     newEdits?: boolean;
     /** Query parameter to specify a document revision. */
     rev?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `putDesignDocument` operation. */
@@ -8794,18 +9066,17 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getDesignDocumentInformation` operation. */
-  export interface GetDesignDocumentInformationParams {
+  export interface GetDesignDocumentInformationParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
      *  excluding the `_design/` prefix.
      */
     ddoc: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postDesignDocs` operation. */
-  export interface PostDesignDocsParams {
+  export interface PostDesignDocsParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
@@ -8840,11 +9111,10 @@ namespace CloudantV1 {
     keys?: string[];
     /** Schema for a document ID. */
     startKey?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postDesignDocsQueries` operation. */
-  export interface PostDesignDocsQueriesParams {
+  export interface PostDesignDocsQueriesParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** An array of query objects with fields for the parameters of each individual view query to be executed. The
@@ -8853,7 +9123,6 @@ namespace CloudantV1 {
     queries: AllDocsQuery[];
     /** The type of the response: application/json or application/octet-stream. */
     accept?: PostDesignDocsQueriesConstants.Accept | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postDesignDocsQueries` operation. */
@@ -8866,7 +9135,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postView` operation. */
-  export interface PostViewParams {
+  export interface PostViewParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -8946,7 +9215,6 @@ namespace CloudantV1 {
      *  * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
      */
     update?: PostViewConstants.Update | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postView` operation. */
@@ -8960,7 +9228,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postViewAsStream` operation. */
-  export interface PostViewAsStreamParams {
+  export interface PostViewAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -9040,7 +9308,6 @@ namespace CloudantV1 {
      *  * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
      */
     update?: PostViewAsStreamConstants.Update | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postViewAsStream` operation. */
@@ -9054,7 +9321,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postViewQueries` operation. */
-  export interface PostViewQueriesParams {
+  export interface PostViewQueriesParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -9067,11 +9334,10 @@ namespace CloudantV1 {
      *  field names and their meaning are the same as the query parameters of a regular view request.
      */
     queries: ViewQuery[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postViewQueriesAsStream` operation. */
-  export interface PostViewQueriesAsStreamParams {
+  export interface PostViewQueriesAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -9084,20 +9350,18 @@ namespace CloudantV1 {
      *  field names and their meaning are the same as the query parameters of a regular view request.
      */
     queries: ViewQuery[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getPartitionInformation` operation. */
-  export interface GetPartitionInformationParams {
+  export interface GetPartitionInformationParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the database partition key. */
     partitionKey: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postPartitionAllDocs` operation. */
-  export interface PostPartitionAllDocsParams {
+  export interface PostPartitionAllDocsParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the database partition key. */
@@ -9134,11 +9398,10 @@ namespace CloudantV1 {
     keys?: string[];
     /** Schema for a document ID. */
     startKey?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postPartitionAllDocsAsStream` operation. */
-  export interface PostPartitionAllDocsAsStreamParams {
+  export interface PostPartitionAllDocsAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the database partition key. */
@@ -9175,11 +9438,10 @@ namespace CloudantV1 {
     keys?: string[];
     /** Schema for a document ID. */
     startKey?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postPartitionSearch` operation. */
-  export interface PostPartitionSearchParams {
+  export interface PostPartitionSearchParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the database partition key. */
@@ -9227,7 +9489,6 @@ namespace CloudantV1 {
     sort?: string[];
     /** Do not wait for the index to finish building to return results. */
     stale?: PostPartitionSearchConstants.Stale | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postPartitionSearch` operation. */
@@ -9239,7 +9500,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postPartitionSearchAsStream` operation. */
-  export interface PostPartitionSearchAsStreamParams {
+  export interface PostPartitionSearchAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the database partition key. */
@@ -9287,7 +9548,6 @@ namespace CloudantV1 {
     sort?: string[];
     /** Do not wait for the index to finish building to return results. */
     stale?: PostPartitionSearchAsStreamConstants.Stale | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postPartitionSearchAsStream` operation. */
@@ -9299,7 +9559,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postPartitionView` operation. */
-  export interface PostPartitionViewParams {
+  export interface PostPartitionViewParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the database partition key. */
@@ -9373,7 +9633,6 @@ namespace CloudantV1 {
      *  * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
      */
     update?: PostPartitionViewConstants.Update | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postPartitionView` operation. */
@@ -9387,7 +9646,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postPartitionViewAsStream` operation. */
-  export interface PostPartitionViewAsStreamParams {
+  export interface PostPartitionViewAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the database partition key. */
@@ -9461,7 +9720,6 @@ namespace CloudantV1 {
      *  * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
      */
     update?: PostPartitionViewAsStreamConstants.Update | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postPartitionViewAsStream` operation. */
@@ -9475,7 +9733,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postPartitionExplain` operation. */
-  export interface PostPartitionExplainParams {
+  export interface PostPartitionExplainParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the database partition key. */
@@ -9563,7 +9821,6 @@ namespace CloudantV1 {
      *  the server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
      */
     useIndex?: string[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postPartitionExplain` operation. */
@@ -9582,7 +9839,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postPartitionFind` operation. */
-  export interface PostPartitionFindParams {
+  export interface PostPartitionFindParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the database partition key. */
@@ -9670,7 +9927,6 @@ namespace CloudantV1 {
      *  the server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
      */
     useIndex?: string[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postPartitionFind` operation. */
@@ -9689,7 +9945,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postPartitionFindAsStream` operation. */
-  export interface PostPartitionFindAsStreamParams {
+  export interface PostPartitionFindAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the database partition key. */
@@ -9777,7 +10033,6 @@ namespace CloudantV1 {
      *  the server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
      */
     useIndex?: string[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postPartitionFindAsStream` operation. */
@@ -9796,7 +10051,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postExplain` operation. */
-  export interface PostExplainParams {
+  export interface PostExplainParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
@@ -9888,7 +10143,6 @@ namespace CloudantV1 {
      *  stored locally with the index.
      */
     r?: number;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postExplain` operation. */
@@ -9907,7 +10161,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postFind` operation. */
-  export interface PostFindParams {
+  export interface PostFindParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
@@ -9999,7 +10253,6 @@ namespace CloudantV1 {
      *  stored locally with the index.
      */
     r?: number;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postFind` operation. */
@@ -10018,7 +10271,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postFindAsStream` operation. */
-  export interface PostFindAsStreamParams {
+  export interface PostFindAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
@@ -10110,7 +10363,6 @@ namespace CloudantV1 {
      *  stored locally with the index.
      */
     r?: number;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postFindAsStream` operation. */
@@ -10129,14 +10381,13 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getIndexesInformation` operation. */
-  export interface GetIndexesInformationParams {
+  export interface GetIndexesInformationParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postIndex` operation. */
-  export interface PostIndexParams {
+  export interface PostIndexParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
@@ -10157,7 +10408,6 @@ namespace CloudantV1 {
     partitioned?: boolean;
     /** Schema for the type of an index. */
     type?: PostIndexConstants.Type | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postIndex` operation. */
@@ -10171,7 +10421,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `deleteIndex` operation. */
-  export interface DeleteIndexParams {
+  export interface DeleteIndexParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -10182,7 +10432,6 @@ namespace CloudantV1 {
     type: DeleteIndexConstants.Type | string;
     /** Path parameter to specify the index name. */
     index: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `deleteIndex` operation. */
@@ -10196,12 +10445,11 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postSearchAnalyze` operation. */
-  export interface PostSearchAnalyzeParams {
+  export interface PostSearchAnalyzeParams extends DefaultParams {
     /** The analyzer type that is being used at the tokenization. */
     analyzer: PostSearchAnalyzeConstants.Analyzer | string;
     /** The text to tokenize with the analyzer. */
     text: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postSearchAnalyze` operation. */
@@ -10252,7 +10500,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postSearch` operation. */
-  export interface PostSearchParams {
+  export interface PostSearchParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -10328,7 +10576,6 @@ namespace CloudantV1 {
      *  ranges, for example "[0 TO 10]". This option is only available when making global queries.
      */
     ranges?: JsonObject;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postSearch` operation. */
@@ -10340,7 +10587,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postSearchAsStream` operation. */
-  export interface PostSearchAsStreamParams {
+  export interface PostSearchAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -10416,7 +10663,6 @@ namespace CloudantV1 {
      *  ranges, for example "[0 TO 10]". This option is only available when making global queries.
      */
     ranges?: JsonObject;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postSearchAsStream` operation. */
@@ -10428,7 +10674,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getSearchDiskSize` operation. */
-  export interface GetSearchDiskSizeParams {
+  export interface GetSearchDiskSizeParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -10437,11 +10683,10 @@ namespace CloudantV1 {
     ddoc: string;
     /** Path parameter to specify the index name. */
     index: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getSearchInfo` operation. */
-  export interface GetSearchInfoParams {
+  export interface GetSearchInfoParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the design document name. The design document name is the design document ID
@@ -10450,41 +10695,36 @@ namespace CloudantV1 {
     ddoc: string;
     /** Path parameter to specify the index name. */
     index: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `headReplicationDocument` operation. */
-  export interface HeadReplicationDocumentParams {
+  export interface HeadReplicationDocumentParams extends DefaultParams {
     /** Path parameter to specify the ID of the stored replication configuration in the `_replicator` database. */
     docId: string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `headSchedulerDocument` operation. */
-  export interface HeadSchedulerDocumentParams {
+  export interface HeadSchedulerDocumentParams extends DefaultParams {
     /** Path parameter to specify the document ID. */
     docId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `headSchedulerJob` operation. */
-  export interface HeadSchedulerJobParams {
+  export interface HeadSchedulerJobParams extends DefaultParams {
     /** Path parameter to specify the replication job id. */
     jobId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `postReplicator` operation. */
-  export interface PostReplicatorParams {
+  export interface PostReplicatorParams extends DefaultParams {
     /** HTTP request body for replication operations. */
     replicationDocument: ReplicationDocument;
     /** Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted
      *  response code immediately.
      */
     batch?: PostReplicatorConstants.Batch | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postReplicator` operation. */
@@ -10496,7 +10736,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `deleteReplicationDocument` operation. */
-  export interface DeleteReplicationDocumentParams {
+  export interface DeleteReplicationDocumentParams extends DefaultParams {
     /** Path parameter to specify the ID of the stored replication configuration in the `_replicator` database. */
     docId: string;
     /** Header parameter for a conditional HTTP request matching an ETag. */
@@ -10507,7 +10747,6 @@ namespace CloudantV1 {
     batch?: DeleteReplicationDocumentConstants.Batch | string;
     /** Query parameter to specify a document revision. */
     rev?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `deleteReplicationDocument` operation. */
@@ -10519,7 +10758,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getReplicationDocument` operation. */
-  export interface GetReplicationDocumentParams {
+  export interface GetReplicationDocumentParams extends DefaultParams {
     /** Path parameter to specify the ID of the stored replication configuration in the `_replicator` database. */
     docId: string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
@@ -10554,11 +10793,10 @@ namespace CloudantV1 {
     revs?: boolean;
     /** Query parameter to specify whether to includes detailed information for all known document revisions. */
     revsInfo?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `putReplicationDocument` operation. */
-  export interface PutReplicationDocumentParams {
+  export interface PutReplicationDocumentParams extends DefaultParams {
     /** Path parameter to specify the ID of the stored replication configuration in the `_replicator` database. */
     docId: string;
     /** HTTP request body for replication operations. */
@@ -10579,7 +10817,6 @@ namespace CloudantV1 {
     newEdits?: boolean;
     /** Query parameter to specify a document revision. */
     rev?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `putReplicationDocument` operation. */
@@ -10591,7 +10828,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getSchedulerDocs` operation. */
-  export interface GetSchedulerDocsParams {
+  export interface GetSchedulerDocsParams extends DefaultParams {
     /** Query parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
     /** Query parameter to specify the number of records before starting to return the results. */
@@ -10600,7 +10837,6 @@ namespace CloudantV1 {
      *  comma-delimited string.
      */
     states?: GetSchedulerDocsConstants.States[] | string[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `getSchedulerDocs` operation. */
@@ -10618,40 +10854,35 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getSchedulerDocument` operation. */
-  export interface GetSchedulerDocumentParams {
+  export interface GetSchedulerDocumentParams extends DefaultParams {
     /** Path parameter to specify the document ID. */
     docId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getSchedulerJobs` operation. */
-  export interface GetSchedulerJobsParams {
+  export interface GetSchedulerJobsParams extends DefaultParams {
     /** Query parameter to specify the number of returned jobs to limit the result to. */
     limit?: number;
     /** Query parameter to specify the number of records before starting to return the results. */
     skip?: number;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getSchedulerJob` operation. */
-  export interface GetSchedulerJobParams {
+  export interface GetSchedulerJobParams extends DefaultParams {
     /** Path parameter to specify the replication job id. */
     jobId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getSessionInformation` operation. */
-  export interface GetSessionInformationParams {
-    headers?: OutgoingHttpHeaders;
+  export interface GetSessionInformationParams extends DefaultParams {
   }
 
   /** Parameters for the `postApiKeys` operation. */
-  export interface PostApiKeysParams {
-    headers?: OutgoingHttpHeaders;
+  export interface PostApiKeysParams extends DefaultParams {
   }
 
   /** Parameters for the `putCloudantSecurityConfiguration` operation. */
-  export interface PutCloudantSecurityConfigurationParams {
+  export interface PutCloudantSecurityConfigurationParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Database permissions for Cloudant users and/or API keys. */
@@ -10662,7 +10893,6 @@ namespace CloudantV1 {
     couchdbAuthOnly?: boolean;
     /** Schema for names and roles to map to a database permission. */
     members?: SecurityObject;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `putCloudantSecurityConfiguration` operation. */
@@ -10681,14 +10911,13 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getSecurity` operation. */
-  export interface GetSecurityParams {
+  export interface GetSecurityParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `putSecurity` operation. */
-  export interface PutSecurityParams {
+  export interface PutSecurityParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Schema for names and roles to map to a database permission. */
@@ -10699,7 +10928,6 @@ namespace CloudantV1 {
     couchdbAuthOnly?: boolean;
     /** Schema for names and roles to map to a database permission. */
     members?: SecurityObject;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `putSecurity` operation. */
@@ -10718,12 +10946,11 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getCorsInformation` operation. */
-  export interface GetCorsInformationParams {
-    headers?: OutgoingHttpHeaders;
+  export interface GetCorsInformationParams extends DefaultParams {
   }
 
   /** Parameters for the `putCorsConfiguration` operation. */
-  export interface PutCorsConfigurationParams {
+  export interface PutCorsConfigurationParams extends DefaultParams {
     /** An array of strings that contain allowed origin domains. You have to specify the full URL including the
      *  protocol. It is recommended that only the HTTPS protocol is used. Subdomains count as separate domains, so you
      *  have to specify all subdomains used.
@@ -10735,11 +10962,10 @@ namespace CloudantV1 {
     allowCredentials?: boolean;
     /** Boolean value to turn CORS on and off. */
     enableCors?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `headAttachment` operation. */
-  export interface HeadAttachmentParams {
+  export interface HeadAttachmentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -10752,11 +10978,10 @@ namespace CloudantV1 {
     ifNoneMatch?: string;
     /** Query parameter to specify a document revision. */
     rev?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `deleteAttachment` operation. */
-  export interface DeleteAttachmentParams {
+  export interface DeleteAttachmentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -10771,7 +10996,6 @@ namespace CloudantV1 {
      *  response code immediately.
      */
     batch?: DeleteAttachmentConstants.Batch | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `deleteAttachment` operation. */
@@ -10783,7 +11007,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getAttachment` operation. */
-  export interface GetAttachmentParams {
+  export interface GetAttachmentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -10802,11 +11026,10 @@ namespace CloudantV1 {
     range?: string;
     /** Query parameter to specify a document revision. */
     rev?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `putAttachment` operation. */
-  export interface PutAttachmentParams {
+  export interface PutAttachmentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -10821,22 +11044,20 @@ namespace CloudantV1 {
     ifMatch?: string;
     /** Query parameter to specify a document revision. */
     rev?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `headLocalDocument` operation. */
-  export interface HeadLocalDocumentParams {
+  export interface HeadLocalDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
     docId: string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `deleteLocalDocument` operation. */
-  export interface DeleteLocalDocumentParams {
+  export interface DeleteLocalDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -10845,7 +11066,6 @@ namespace CloudantV1 {
      *  response code immediately.
      */
     batch?: DeleteLocalDocumentConstants.Batch | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `deleteLocalDocument` operation. */
@@ -10857,7 +11077,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getLocalDocument` operation. */
-  export interface GetLocalDocumentParams {
+  export interface GetLocalDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -10874,7 +11094,6 @@ namespace CloudantV1 {
     attEncodingInfo?: boolean;
     /** Query parameter to specify whether to include the last update sequence for the document. */
     localSeq?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `getLocalDocument` operation. */
@@ -10889,7 +11108,7 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `putLocalDocument` operation. */
-  export interface PutLocalDocumentParams {
+  export interface PutLocalDocumentParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
@@ -10902,7 +11121,6 @@ namespace CloudantV1 {
      *  response code immediately.
      */
     batch?: PutLocalDocumentConstants.Batch | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `putLocalDocument` operation. */
@@ -10921,52 +11139,45 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `postRevsDiff` operation. */
-  export interface PostRevsDiffParams {
+  export interface PostRevsDiffParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** HTTP request body for operations with Document revisions. */
     documentRevisions: JsonObject;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getShardsInformation` operation. */
-  export interface GetShardsInformationParams {
+  export interface GetShardsInformationParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getDocumentShardsInfo` operation. */
-  export interface GetDocumentShardsInfoParams {
+  export interface GetDocumentShardsInfoParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
     /** Path parameter to specify the document ID. */
     docId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `headUpInformation` operation. */
-  export interface HeadUpInformationParams {
-    headers?: OutgoingHttpHeaders;
+  export interface HeadUpInformationParams extends DefaultParams {
   }
 
   /** Parameters for the `getActiveTasks` operation. */
-  export interface GetActiveTasksParams {
-    headers?: OutgoingHttpHeaders;
+  export interface GetActiveTasksParams extends DefaultParams {
   }
 
   /** Parameters for the `getActivityTrackerEvents` operation. */
-  export interface GetActivityTrackerEventsParams {
-    headers?: OutgoingHttpHeaders;
+  export interface GetActivityTrackerEventsParams extends DefaultParams {
   }
 
   /** Parameters for the `postActivityTrackerEvents` operation. */
-  export interface PostActivityTrackerEventsParams {
+  export interface PostActivityTrackerEventsParams extends DefaultParams {
     /** An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
      *  "management" is a required element of this array.
      */
     types: PostActivityTrackerEventsConstants.Types[] | string[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `postActivityTrackerEvents` operation. */
@@ -10979,28 +11190,23 @@ namespace CloudantV1 {
   }
 
   /** Parameters for the `getCapacityDatabasesInformation` operation. */
-  export interface GetCapacityDatabasesInformationParams {
-    headers?: OutgoingHttpHeaders;
+  export interface GetCapacityDatabasesInformationParams extends DefaultParams {
   }
 
   /** Parameters for the `getCurrentDatabasesInformation` operation. */
-  export interface GetCurrentDatabasesInformationParams {
-    headers?: OutgoingHttpHeaders;
+  export interface GetCurrentDatabasesInformationParams extends DefaultParams {
   }
 
   /** Parameters for the `getCurrentThroughputInformation` operation. */
-  export interface GetCurrentThroughputInformationParams {
-    headers?: OutgoingHttpHeaders;
+  export interface GetCurrentThroughputInformationParams extends DefaultParams {
   }
 
   /** Parameters for the `getMembershipInformation` operation. */
-  export interface GetMembershipInformationParams {
-    headers?: OutgoingHttpHeaders;
+  export interface GetMembershipInformationParams extends DefaultParams {
   }
 
   /** Parameters for the `getUpInformation` operation. */
-  export interface GetUpInformationParams {
-    headers?: OutgoingHttpHeaders;
+  export interface GetUpInformationParams extends DefaultParams {
   }
 
   /*************************
