@@ -64,7 +64,7 @@
     "jest-junit": "16.0.0",
     "nock": "13.5.6",
     "prettier": "3.5.3",
-    "sinon": "19.0.4",
+    "sinon": "20.0.0",
     "ts-jest": "29.3.0",
     "typedoc": "0.28.1",
     "typescript": "5.8.2"
