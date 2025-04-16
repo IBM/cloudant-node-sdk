@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2022, 2023. All Rights Reserved.
+ * © Copyright IBM Corporation 2022, 2025. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 
 import { PostChangesConstants, PostChangesParams } from '../v1';
+import { Mode } from './changesFollower';
 
 export class ChangesParamsHelper {
   /**
@@ -33,17 +34,17 @@ export class ChangesParamsHelper {
 
   static cloneParams(
     params: PostChangesParams,
+    mode?: Mode,
     since?: string,
     limit?: number
   ): PostChangesParams {
-    return {
+    let clonedParams: PostChangesParams = {
       db: params.db,
       attEncodingInfo: params.attEncodingInfo,
       attachments: params.attachments,
       conflicts: params.conflicts,
       // no descending
       docIds: params.docIds,
-      feed: PostChangesConstants.Feed.LONGPOLL,
       fields: params.fields,
       filter: params.filter,
       // no heartbeat
@@ -54,9 +55,15 @@ export class ChangesParamsHelper {
       seqInterval: params.seqInterval,
       since: since ? since : params.since,
       style: params.style,
-      timeout: this.LONGPOLL_TIMEOUT,
       view: params.view,
     };
+    if (mode === Mode.FINITE) {
+      clonedParams.feed = PostChangesConstants.Feed.NORMAL;
+    } else if (mode === Mode.LISTEN) {
+      clonedParams.feed = PostChangesConstants.Feed.LONGPOLL;
+      clonedParams.timeout = this.LONGPOLL_TIMEOUT;
+    }
+    return clonedParams;
   }
 
   static validateParams(params: PostChangesParams) {

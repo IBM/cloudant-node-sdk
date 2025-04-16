@@ -29,7 +29,7 @@ const {
   mockPerpetualSupplier,
   perpetualSupplierResponse,
   mockPostChangesError,
-  mockPerptualSupplierRespectingLimit,
+  mockPerpetualSupplierRespectingLimit,
 } = require('./testMocks');
 const {
   ChangesParamsHelper,
@@ -142,7 +142,7 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
     });
     beforeEach(() => {
       postChangesPromiseMock.mockImplementation(
-        mockPerptualSupplierRespectingLimit
+        mockPerpetualSupplierRespectingLimit
       );
     });
     it('Limit less than batch size', () => {
@@ -151,6 +151,7 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
         service,
         ChangesParamsHelper.cloneParams(
           testParams.MINIMUM.params,
+          mode,
           undefined,
           limit
         ),
@@ -181,6 +182,7 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
         service,
         ChangesParamsHelper.cloneParams(
           testParams.MINIMUM.params,
+          mode,
           undefined,
           limit
         ),
@@ -213,6 +215,7 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
         service,
         ChangesParamsHelper.cloneParams(
           testParams.MINIMUM.params,
+          mode,
           undefined,
           limit
         ),
@@ -248,6 +251,7 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
         service,
         ChangesParamsHelper.cloneParams(
           testParams.MINIMUM.params,
+          undefined,
           undefined,
           limit
         ),
