@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2022, 2023. All Rights Reserved.
+ * © Copyright IBM Corporation 2022, 2025. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ const {
   generateSeq,
   generateRandomChangesResults,
   mockAlternatingBatchErrorThenPerpetualSupplier,
-  mockPerptualSupplierRespectingLimit,
+  mockPerpetualSupplierRespectingLimit,
 } = require('./testMocks.js');
 const { getTerminalErrors, getTransientErrors } = require('./mockErrors');
 const { delay } = require('./testUtils');
@@ -573,7 +573,7 @@ describe('Test ChangesFollower', () => {
       // Note size also passed to test parameter generator.
       setBatchSize(50);
       postChangesPromiseMock.mockImplementation(
-        mockPerptualSupplierRespectingLimit
+        mockPerpetualSupplierRespectingLimit
       );
       const changesFollower = new ChangesFollower(service, {
         limit: modeAndLimit.limit,
