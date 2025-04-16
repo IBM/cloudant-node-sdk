@@ -191,6 +191,7 @@ export class ChangesResultIterableIterator
       this.client.postChanges(
         ChangesParamsHelper.cloneParams(
           this.params,
+          this.mode,
           this.since,
           this.countDown && this.countDown < this.params.limit
             ? this.countDown

@@ -131,7 +131,7 @@ function mockPostChangesError(mock, error) {
   mock.mockRejectedValue(error.error);
 }
 
-function mockPerptualSupplierRespectingLimit(opts) {
+function mockPerpetualSupplierRespectingLimit(opts) {
   return getPerpetualSupplierResponse(opts.limit);
 }
 
@@ -145,5 +145,5 @@ module.exports = {
   generateSeq,
   generateRandomChangesResults: mockRandomChangesResult,
   perpetualSupplierResponse,
-  mockPerptualSupplierRespectingLimit,
+  mockPerpetualSupplierRespectingLimit,
 };

@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2022, 2023. All Rights Reserved.
+ * © Copyright IBM Corporation 2022, 2025. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ const { PostChangesConstants } = require('../../../cloudant/v1.ts');
 const {
   ChangesParamsHelper,
 } = require('../../../cloudant/features/changesParamsHelper.ts');
+
+const { Mode } = require('../../../cloudant/features/changesFollower.ts');
 
 const beginningOfErrorMsg = 'The param';
 const endOfErrorMsg = 'invalid when using ChangesFollower.';
@@ -109,7 +111,7 @@ const testParams = {
     expectedError: `${beginningOfErrorMsg} 'filter=_view' is ${endOfErrorMsg}`,
   },
   VIEW: {
-    isvalid: false,
+    isValid: false,
     params: {
       filter: '_view',
       view: 'foo/bar',
@@ -171,12 +173,16 @@ const testParams = {
   },
 };
 
-function getExpectedParams(params) {
+function getExpectedParams(params, mode) {
   const expectedParams = params;
-  if (params.feed === undefined) {
-    expectedParams.feed = PostChangesConstants.Feed.LONGPOLL;
+  if (mode === Mode.LISTEN) {
+    if (params.feed === undefined) {
+      expectedParams.feed = PostChangesConstants.Feed.LONGPOLL;
+    }
+    expectedParams.timeout = ChangesParamsHelper.LONGPOLL_TIMEOUT;
+  } else if (mode === Mode.FINITE) {
+    expectedParams.feed = PostChangesConstants.Feed.NORMAL;
   }
-  expectedParams.timeout = ChangesParamsHelper.LONGPOLL_TIMEOUT;
   return expectedParams;
 }
 
