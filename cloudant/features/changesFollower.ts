@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2022. All Rights Reserved.
+ * © Copyright IBM Corporation 2022, 2025. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -214,7 +214,7 @@ export class ChangesFollower {
   private createChangesResultItemsStream(mode: Mode) {
     this.changesResultIterator = new ChangesResultIterableIterator(
       this.client,
-      ChangesParamsHelper.cloneParams(this.params),
+      ChangesParamsHelper.cloneParams(this.params, mode),
       mode,
       this.errorTolerance
     );

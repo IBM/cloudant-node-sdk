@@ -41,6 +41,7 @@ describe('Test ChangesParamsHelper', () => {
     const newLimitParams = ChangesParamsHelper.cloneParams(
       original,
       undefined,
+      undefined,
       newLimit
     );
     expect(newLimitParams).not.toBe(original);
@@ -57,7 +58,11 @@ describe('Test ChangesParamsHelper', () => {
       since: newSince,
       ...params[paramsName],
     });
-    const newSinceParams = ChangesParamsHelper.cloneParams(original, newSince);
+    const newSinceParams = ChangesParamsHelper.cloneParams(
+      original,
+      undefined,
+      newSince
+    );
     expect(newSinceParams).not.toBe(original);
     expect(newSinceParams).not.toEqual(original);
     expect(newSinceParams.since).toEqual(newSince);
