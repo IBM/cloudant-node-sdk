@@ -7682,9 +7682,9 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Retrieve Activity Tracker events information.
+   * Retrieve activity tracking events information.
    *
-   * Check event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
+   * Check event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance.
    *
    * @param {Object} [params] - The parameters to send to the service.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -7731,12 +7731,12 @@ class CloudantV1 extends CloudantBaseService {
   }
 
   /**
-   * Modify Activity Tracker events configuration.
+   * Modify activity tracking events configuration.
    *
-   * Configure event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
+   * Configure event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance.
    *
    * @param {Object} params - The parameters to send to the service.
-   * @param {string[]} params.types - An array of event types that are being sent to IBM Cloud Activity Tracker for the
+   * @param {string[]} params.types - An array of event types sent to IBM Cloud Activity Tracker Event Routing for the
    * IBM Cloudant instance. "management" is a required element of this array.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
@@ -11174,7 +11174,7 @@ namespace CloudantV1 {
 
   /** Parameters for the `postActivityTrackerEvents` operation. */
   export interface PostActivityTrackerEventsParams extends DefaultParams {
-    /** An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
+    /** An array of event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance.
      *  "management" is a required element of this array.
      */
     types: PostActivityTrackerEventsConstants.Types[] | string[];
@@ -11622,10 +11622,10 @@ namespace CloudantV1 {
   }
 
   /**
-   * Schema for Activity Tracker events.
+   * Schema for activity tracking events.
    */
   export class ActivityTrackerEvents {
-    /** An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
+    /** An array of event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance.
      *  "management" is a required element of this array.
      */
     types: ActivityTrackerEvents.Constants.Types[] | string[];
@@ -11654,7 +11654,7 @@ namespace CloudantV1 {
   }
   export namespace ActivityTrackerEvents {
     export namespace Constants {
-      /** An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance. "management" is a required element of this array. */
+      /** An array of event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance. "management" is a required element of this array. */
       export enum Types {
         MANAGEMENT = 'management',
         DATA = 'data',
@@ -11967,26 +11967,28 @@ namespace CloudantV1 {
         CLASSIC = 'classic',
         EMAIL = 'email',
         KEYWORD = 'keyword',
+        PERFIELD = 'perfield',
         SIMPLE = 'simple',
+        SIMPLE_ASCIIFOLDING = 'simple_asciifolding',
         STANDARD = 'standard',
         WHITESPACE = 'whitespace',
         ARABIC = 'arabic',
         ARMENIAN = 'armenian',
         BASQUE = 'basque',
-        BULGARIAN = 'bulgarian',
         BRAZILIAN = 'brazilian',
+        BULGARIAN = 'bulgarian',
         CATALAN = 'catalan',
-        CJK = 'cjk',
         CHINESE = 'chinese',
+        CJK = 'cjk',
         CZECH = 'czech',
         DANISH = 'danish',
         DUTCH = 'dutch',
         ENGLISH = 'english',
         FINNISH = 'finnish',
         FRENCH = 'french',
+        GALICIAN = 'galician',
         GERMAN = 'german',
         GREEK = 'greek',
-        GALICIAN = 'galician',
         HINDI = 'hindi',
         HUNGARIAN = 'hungarian',
         INDONESIAN = 'indonesian',
@@ -12004,7 +12006,6 @@ namespace CloudantV1 {
         SWEDISH = 'swedish',
         THAI = 'thai',
         TURKISH = 'turkish',
-        PERFIELD = 'perfield',
       }
     }
       export interface Transport {
@@ -12071,26 +12072,28 @@ namespace CloudantV1 {
         CLASSIC = 'classic',
         EMAIL = 'email',
         KEYWORD = 'keyword',
+        PERFIELD = 'perfield',
         SIMPLE = 'simple',
+        SIMPLE_ASCIIFOLDING = 'simple_asciifolding',
         STANDARD = 'standard',
         WHITESPACE = 'whitespace',
         ARABIC = 'arabic',
         ARMENIAN = 'armenian',
         BASQUE = 'basque',
-        BULGARIAN = 'bulgarian',
         BRAZILIAN = 'brazilian',
+        BULGARIAN = 'bulgarian',
         CATALAN = 'catalan',
-        CJK = 'cjk',
         CHINESE = 'chinese',
+        CJK = 'cjk',
         CZECH = 'czech',
         DANISH = 'danish',
         DUTCH = 'dutch',
         ENGLISH = 'english',
         FINNISH = 'finnish',
         FRENCH = 'french',
+        GALICIAN = 'galician',
         GERMAN = 'german',
         GREEK = 'greek',
-        GALICIAN = 'galician',
         HINDI = 'hindi',
         HUNGARIAN = 'hungarian',
         INDONESIAN = 'indonesian',
@@ -12108,7 +12111,6 @@ namespace CloudantV1 {
         SWEDISH = 'swedish',
         THAI = 'thai',
         TURKISH = 'turkish',
-        PERFIELD = 'perfield',
       }
     }
       export interface Transport {
