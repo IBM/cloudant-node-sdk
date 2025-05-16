@@ -65,7 +65,7 @@
     "nock": "14.0.4",
     "prettier": "3.5.3",
     "sinon": "20.0.0",
-    "ts-jest": "29.3.3",
+    "ts-jest": "29.3.4",
     "typedoc": "0.28.4",
     "typescript": "5.8.3"
   },
