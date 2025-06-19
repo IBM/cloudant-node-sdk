@@ -60,7 +60,7 @@
     "eslint-plugin-jsdoc": "50.8.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "5.4.0",
-    "jest": "30.0.0",
+    "jest": "30.0.2",
     "jest-junit": "16.0.0",
     "nock": "14.0.5",
     "prettier": "3.5.3",
