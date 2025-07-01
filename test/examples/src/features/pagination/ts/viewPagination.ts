@@ -24,7 +24,7 @@ const client: CloudantV1 = CloudantV1.newInstance({});
 const paginationParams: CloudantV1.PostViewParams = {
   db: 'shoppers', // Required: the database name.
   limit: 50, // Optional: limit parameter sets the page size. Default and max is 200.
-  ddoc: 'allUsers', // use the checkout design document
+  ddoc: 'allUsers', // use the allUsers design document
   view: 'getVerifiedEmails', // the view to use
 };
 
