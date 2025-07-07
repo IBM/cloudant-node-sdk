@@ -293,6 +293,7 @@ Once the environment variables are set, you can try out the code examples.
 ```ts
 import { CloudantV1 } from '@ibm-cloud/cloudant';
 ```
+
 ```ts
 interface OrderDocument extends CloudantV1.Document {
   name?: string;
@@ -364,6 +365,7 @@ createDb.then(() => {
     });
 });
 ```
+
 </details>
 
 <details>
@@ -372,6 +374,7 @@ createDb.then(() => {
 ```js
 import { CloudantV1 } from '@ibm-cloud/cloudant';
 ```
+
 ```js
 const createDbAndDoc = async () => {
   // 1. Create a client with `CLOUDANT` default service name ====================
@@ -439,6 +442,7 @@ if (require.main === module) {
   createDbAndDoc();
 }
 ```
+
 </details>
 
 When you run the code, you see a result similar to the following output.
@@ -471,6 +475,7 @@ database or 'example' document was not found."
 ```ts
 import { CloudantV1 } from '@ibm-cloud/cloudant';
 ```
+
 ```ts
 // 1. Create a client with `CLOUDANT` default service name =====================
 const client = CloudantV1.newInstance({});
@@ -511,6 +516,7 @@ client.getDocument(getDocParams).then((documentExample) => {
   );
 });
 ```
+
 </details>
 
 <details>
@@ -519,6 +525,7 @@ client.getDocument(getDocParams).then((documentExample) => {
 ```js
 import { CloudantV1 } from '@ibm-cloud/cloudant';
 ```
+
 ```js
 const getInfoFromExistingDatabase = async () => {
   // 1. Create a client with `CLOUDANT` default service name  ===================
@@ -595,6 +602,7 @@ database or 'example' document was not found."
 ```ts
 import { CloudantV1 } from '@ibm-cloud/cloudant';
 ```
+
 ```ts
 interface OrderDocument extends CloudantV1.Document {
   address?: string;
@@ -681,6 +689,7 @@ client
     }
   });
 ```
+
 </details>
 
 <details>
@@ -689,6 +698,7 @@ client
 ```js
 import { CloudantV1 } from '@ibm-cloud/cloudant';
 ```
+
 ```js
 const updateDoc = async () => {
   // 1. Create a client with `CLOUDANT` default service name ====================
@@ -778,6 +788,7 @@ if (require.main === module) {
   updateDoc();
 }
 ```
+
 </details>
 
 </details>
@@ -810,6 +821,7 @@ database or 'example' document was not found."
 ```ts
 import { CloudantV1 } from '@ibm-cloud/cloudant';
 ```
+
 ```ts
 interface OrderDocument extends CloudantV1.Document {
   name?: string;
@@ -857,6 +869,7 @@ client
     }
   });
 ```
+
 </details>
 
 <details>
@@ -865,6 +878,7 @@ client
 ```js
 import { CloudantV1 } from '@ibm-cloud/cloudant';
 ```
+
 ```js
 const deleteDoc = async () => {
   // 1. Create a client with `CLOUDANT` default service name ====================
@@ -904,6 +918,7 @@ if (require.main === module) {
   deleteDoc();
 }
 ```
+
 </details>
 
 </details>
@@ -1144,6 +1159,7 @@ is a considerable risk of missing changes on a restart if the sequence is record
 import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
 import { PostChangesParams } from '@ibm-cloud/cloudant/cloudant/v1';
 ```
+
 ```ts
 const client = CloudantV1.newInstance({});
 const changesParams: PostChangesParams = {
@@ -1158,6 +1174,7 @@ const changesFollower: ChangesFollower = new ChangesFollower(
   10000 // Optional: suppress transient errors for at least 10 seconds before terminating.
 );
 ```
+
 </details>
 
 <details>
@@ -1166,6 +1183,7 @@ const changesFollower: ChangesFollower = new ChangesFollower(
 ```js
 import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
 ```
+
 ```js
 const client = CloudantV1.newInstance();
 const changesParams = {
@@ -1179,6 +1197,7 @@ const changesFollower = new ChangesFollower(
   10000 // Optional: suppress transient errors for at least 10 seconds before terminating.
 );
 ```
+
 </details>
 
 ##### Starting the changes follower
@@ -1191,6 +1210,7 @@ const changesFollower = new ChangesFollower(
 import { ChangesFollower, CloudantV1, Stream } from '@ibm-cloud/cloudant';
 import { ChangesResultItem, PostChangesParams } from '@ibm-cloud/cloudant/cloudant/v1';
 ```
+
 ```ts
 const client = CloudantV1.newInstance({});
 const changesParams: PostChangesParams = {
@@ -1201,6 +1221,7 @@ const changesItemsStream: Stream<ChangesResultItem> = changesFollower.start();
 // Create for-async-loop or pipeline to begin the flow of changes
 // e.g. pipeline(changesItemsStream, destinationStream).then(() => { ... }).catch((err) => { ... });
 ```
+
 </details>
 
 <details>
@@ -1209,6 +1230,7 @@ const changesItemsStream: Stream<ChangesResultItem> = changesFollower.start();
 ```js
 import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
 ```
+
 ```js
 const client = CloudantV1.newInstance();
 const changesParams = {
@@ -1219,6 +1241,7 @@ const changesItemsStream = changesFollower.start();
 // Create for-async-loop or pipeline to begin the flow of changes
 // e.g. pipeline(changesItemsStream, destinationStream).then(() => { ... }).catch((err) => { ... });
 ```
+
 </details>
 
 ###### Start mode for one-off fetching
@@ -1229,6 +1252,7 @@ const changesItemsStream = changesFollower.start();
 import { ChangesFollower, CloudantV1, Stream } from '@ibm-cloud/cloudant';
 import { ChangesResultItem, PostChangesParams } from '@ibm-cloud/cloudant/cloudant/v1';
 ```
+
 ```ts
 const client = CloudantV1.newInstance({});
 const changesParams: PostChangesParams = {
@@ -1239,6 +1263,7 @@ const changesItemsStream: Stream<ChangesResultItem> = changesFollower.startOneOf
 // Create for-async-loop or pipeline to begin the flow of changes
 // e.g. pipeline(changesItemsStream, destinationStream).then(() => { ... }).catch((err) => { ... });
 ```
+
 </details>
 
 <details>
@@ -1247,6 +1272,7 @@ const changesItemsStream: Stream<ChangesResultItem> = changesFollower.startOneOf
 ```js
 import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
 ```
+
 ```js
 const client = CloudantV1.newInstance();
 const changesParams = {
@@ -1257,6 +1283,7 @@ const changesItemsStream = changesFollower.startOneOff();
 // Create for-async-loop or pipeline to begin the flow of changes
 // e.g. pipeline(changesItemsStream, destinationStream).then(() => { ... }).catch((err) => { ... });
 ```
+
 </details>
 
 ##### Processing changes
@@ -1271,6 +1298,7 @@ import { ChangesResultItem, PostChangesParams } from '@ibm-cloud/cloudant/clouda
 import { Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 ```
+
 ```ts
 const client = CloudantV1.newInstance({});
 // Start from a previously persisted seq
@@ -1309,6 +1337,7 @@ pipeline(changesItemsStream, destinationStream)
     console.log(err);
   });
 ```
+
 </details>
 
 <details>
@@ -1319,6 +1348,7 @@ import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
 import { Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 ```
+
 ```js
 const client = CloudantV1.newInstance();
 // Start from a previously persisted seq
@@ -1357,6 +1387,7 @@ pipeline(changesItemsStream, destinationStream)
     console.log(err);
   });
 ```
+
 </details>
 
 ###### Process one-off changes
@@ -1369,6 +1400,7 @@ import { ChangesResultItem, PostChangesParams } from '@ibm-cloud/cloudant/clouda
 import { Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 ```
+
 ```ts
 const client = CloudantV1.newInstance({});
 // Start from a previously persisted seq
@@ -1425,6 +1457,7 @@ async function getChangesFromFollower(changesItemsStream: Stream<CloudantV1.Chan
 }
 */
 ```
+
 </details>
 
 <details>
@@ -1435,6 +1468,7 @@ import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
 import { Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 ```
+
 ```js
 const client = CloudantV1.newInstance();
 // Start from a previously persisted seq
@@ -1491,6 +1525,7 @@ async function getChangesFromFollower(changesItemsStream) {
 }
 */
 ```
+
 </details>
 
 ##### Stopping the changes follower
@@ -1503,6 +1538,7 @@ import { ChangesResultItem, PostChangesParams } from '@ibm-cloud/cloudant/clouda
 import { Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 ```
+
 ```ts
 const client = CloudantV1.newInstance({});
 const changesParams: PostChangesParams = {
@@ -1540,6 +1576,7 @@ setTimeout(() => {
   changesFollower.stop();
 }, 60000);
 ```
+
 </details>
 
 <details>
@@ -1550,6 +1587,7 @@ import { ChangesFollower, CloudantV1 } from '@ibm-cloud/cloudant';
 import { Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 ```
+
 ```js
 const client = CloudantV1.newInstance();
 const changesParams = {
@@ -1587,6 +1625,7 @@ setTimeout(() => {
   changesFollower.stop();
 }, 60000);
 ```
+
 </details>
 
 ## Questions
