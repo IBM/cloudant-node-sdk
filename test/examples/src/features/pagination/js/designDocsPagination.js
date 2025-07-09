@@ -51,15 +51,17 @@ const destinationPageStream = new Writable({
   write(page, _, callback) {
     // Do something with page
     callback();
-  }
+  },
 });
-await pipeline(pageStream, destinationPageStream)
-  .then(() => {
-    console.log('Page stream is done');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+(async () => {
+  await pipeline(pageStream, destinationPageStream)
+    .then(() => {
+      console.log('Page stream is done');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+})();
 
 // Option: iterate rows with for await...of statement
 (async () => {
@@ -78,15 +80,17 @@ const destinationRowStream = new Writable({
   write(row, _, callback) {
     // Do something with row
     callback();
-  }
+  },
 });
-await pipeline(rowStream, destinationRowStream)
-  .then(() => {
-    console.log('Row stream is done');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+(async () => {
+  await pipeline(rowStream, destinationRowStream)
+    .then(() => {
+      console.log('Row stream is done');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+})();
 
 // Option: use pager next page
 // For retrieving one page at a time with a function call.
