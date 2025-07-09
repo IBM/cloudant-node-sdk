@@ -13,7 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CloudantV1, PagerType, Pagination, Pager, Stream } from '@ibm-cloud/cloudant';
+import {
+  CloudantV1,
+  PagerType,
+  Pagination,
+  Pager,
+  Stream,
+} from '@ibm-cloud/cloudant';
 import { Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 
@@ -39,7 +45,7 @@ const pagination: Pagination<CloudantV1.Document> = Pagination.newPagination(
 
 // Option: iterate pages with for await...of statement
 (async () => {
-  for await (let page: Array<CloudantV1.Document> of pagination.pages()) {
+  for await (let page of pagination.pages()) {
     // Do something with page
   }
 })();
@@ -48,13 +54,14 @@ const pagination: Pagination<CloudantV1.Document> = Pagination.newPagination(
 // As `next()` returns with a Promise, use `await` or `.then()` on it.
 
 // Option: stream pages
-const pageStream: Stream<ReadonlyArray<CloudantV1.Document>> = pagination.pageStream(); // a new stream of the pages
+const pageStream: Stream<ReadonlyArray<CloudantV1.Document>> =
+  pagination.pageStream(); // a new stream of the pages
 const destinationPageStream = new Writable({
   objectMode: true,
   write(page: Array<CloudantV1.Document>, _, callback) {
     // Do something with page
     callback();
-  }
+  },
 });
 await pipeline(pageStream, destinationPageStream)
   .then(() => {
@@ -66,7 +73,7 @@ await pipeline(pageStream, destinationPageStream)
 
 // Option: iterate rows with for await...of statement
 (async () => {
-  for await (let row: CloudantV1.Document of pagination.rows()) {
+  for await (let row of pagination.rows()) {
     // Do something with row
   }
 })();
@@ -81,7 +88,7 @@ const destinationRowStream = new Writable({
   write(row: CloudantV1.Document, _, callback) {
     // Do something with row
     callback();
-  }
+  },
 });
 await pipeline(rowStream, destinationRowStream)
   .then(() => {
@@ -108,7 +115,7 @@ const pager: Pager<CloudantV1.Document> = pagination.pager();
 const allPager: Pager<CloudantV1.Document> = pagination.pager();
 (async () => {
   const allRows: Array<CloudantV1.Document> = await allPager.getAll();
-  for (let row: CloudantV1.Document of allRows) {
+  for (let row of allRows) {
     // Do something with row
   }
 })();
