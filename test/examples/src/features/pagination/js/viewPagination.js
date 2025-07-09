@@ -24,7 +24,7 @@ const client = CloudantV1.newInstance();
 const paginationParams = {
   db: 'shoppers', // Required: the database name.
   limit: 50, // Optional: limit parameter sets the page size. Default and max is 200.
-  ddoc: 'allUsers', // use the checkout design document
+  ddoc: 'allUsers', // use the allUsers design document
   view: 'getVerifiedEmails', // the view to use
 };
 
@@ -53,7 +53,7 @@ const destinationPageStream = new Writable({
   write(page, _, callback) {
     // Do something with page
     callback();
-  }
+  },
 });
 await pipeline(pageStream, destinationPageStream)
   .then(() => {
@@ -80,7 +80,7 @@ const destinationRowStream = new Writable({
   write(row, _, callback) {
     // Do something with row
     callback();
-  }
+  },
 });
 await pipeline(rowStream, destinationRowStream)
   .then(() => {
