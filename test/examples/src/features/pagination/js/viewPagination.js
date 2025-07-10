@@ -38,7 +38,7 @@ const pagination = Pagination.newPagination(
 
 // Option: iterate pages with for await...of statement
 (async () => {
-  for await (let page of pagination.pages()) {
+  for await (const page of pagination.pages()) {
     // Do something with page
   }
 })();
@@ -67,7 +67,7 @@ const destinationPageStream = new Writable({
 
 // Option: iterate rows with for await...of statement
 (async () => {
-  for await (let row of pagination.rows()) {
+  for await (const row of pagination.rows()) {
     // Do something with row
   }
 })();
@@ -111,7 +111,7 @@ const pager = pagination.pager();
 const allPager = pagination.pager();
 (async () => {
   const allRows = await allPager.getAll();
-  for (let row of allRows) {
+  for (const row of allRows) {
     // Do something with row
   }
 })();
