@@ -13,7 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CloudantV1, PagerType, Pagination, Pager, Stream } from '@ibm-cloud/cloudant';
+import {
+  CloudantV1,
+  PagerType,
+  Pagination,
+  Pager,
+  Stream,
+} from '@ibm-cloud/cloudant';
 import { Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 
@@ -26,7 +32,7 @@ const paginationParams: CloudantV1.PostFindParams = {
   limit: 50, // Optional: limit parameter sets the page size. Default and max is 200.
   fields: ['_id', 'type', 'name', 'email'], // return these fields
   selector: { email_verified: { '$eq': true } }, // select docs with verified emails
-  sort: [ { email: 'desc' } ],
+  sort: [{ email: 'desc' }],
 };
 
 // Create pagination
@@ -39,7 +45,7 @@ const pagination: Pagination<CloudantV1.Document> = Pagination.newPagination(
 
 // Option: iterate pages with for await...of statement
 (async () => {
-  for await (let page: Array<CloudantV1.Document> of pagination.pages()) {
+  for await (const page of pagination.pages()) {
     // Do something with page
   }
 })();
@@ -48,25 +54,28 @@ const pagination: Pagination<CloudantV1.Document> = Pagination.newPagination(
 // As `next()` returns with a Promise, use `await` or `.then()` on it.
 
 // Option: stream pages
-const pageStream: Stream<ReadonlyArray<CloudantV1.Document>> = pagination.pageStream(); // a new stream of the pages
+const pageStream: Stream<ReadonlyArray<CloudantV1.Document>> =
+  pagination.pageStream(); // a new stream of the pages
 const destinationPageStream = new Writable({
   objectMode: true,
   write(page: Array<CloudantV1.Document>, _, callback) {
     // Do something with page
     callback();
-  }
+  },
 });
-await pipeline(pageStream, destinationPageStream)
-  .then(() => {
-    console.log('Page stream is done');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+(async () => {
+  await pipeline(pageStream, destinationPageStream)
+    .then(() => {
+      console.log('Page stream is done');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+})();
 
 // Option: iterate rows with for await...of statement
 (async () => {
-  for await (let row: CloudantV1.Document of pagination.rows()) {
+  for await (const row of pagination.rows()) {
     // Do something with row
   }
 })();
@@ -81,15 +90,17 @@ const destinationRowStream = new Writable({
   write(row: CloudantV1.Document, _, callback) {
     // Do something with row
     callback();
-  }
+  },
 });
-await pipeline(rowStream, destinationRowStream)
-  .then(() => {
-    console.log('Row stream is done');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+(async () => {
+  await pipeline(rowStream, destinationRowStream)
+    .then(() => {
+      console.log('Row stream is done');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+})();
 
 // Option: use pager next page
 // For retrieving one page at a time with a function call.
@@ -108,7 +119,7 @@ const pager: Pager<CloudantV1.Document> = pagination.pager();
 const allPager: Pager<CloudantV1.Document> = pagination.pager();
 (async () => {
   const allRows: Array<CloudantV1.Document> = await allPager.getAll();
-  for (let row: CloudantV1.Document of allRows) {
+  for (const row of allRows) {
     // Do something with row
   }
 })();

@@ -13,7 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CloudantV1, PagerType, Pagination, Pager, Stream } from '@ibm-cloud/cloudant';
+import {
+  CloudantV1,
+  PagerType,
+  Pagination,
+  Pager,
+  Stream,
+} from '@ibm-cloud/cloudant';
 import { Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 
@@ -24,7 +30,7 @@ const client: CloudantV1 = CloudantV1.newInstance({});
 const paginationParams: CloudantV1.PostSearchParams = {
   db: 'shoppers', // Required: the database name.
   limit: 50, // Optional: limit parameter sets the page size. Default and max is 200.
-  ddoc: 'allUsers', // use the checkout design document
+  ddoc: 'allUsers', // use the allUsers design document
   index: 'activeUsers', // search in this index
   query: 'name:Jane* AND active:True', // Lucene search query
 };
@@ -34,15 +40,16 @@ const pagerType: PagerType = PagerType.POST_SEARCH;
 
 // Create pagination
 // pagination can be reused without side-effects as a factory for async iterables, streams or pagers
-const pagination: Pagination<CloudantV1.SearchResultRow> = Pagination.newPagination(
-  client, // Required: the Cloudant service client instance.
-  pagerType, // Required: Pager type
-  paginationParams // Required: pagination configuration params are fixed at pagination creation time
-);
+const pagination: Pagination<CloudantV1.SearchResultRow> =
+  Pagination.newPagination(
+    client, // Required: the Cloudant service client instance.
+    pagerType, // Required: Pager type
+    paginationParams // Required: pagination configuration params are fixed at pagination creation time
+  );
 
 // Option: iterate pages with for await...of statement
 (async () => {
-  for await (let page: Array<CloudantV1.SearchResultRow> of pagination.pages()) {
+  for await (const page of pagination.pages()) {
     // Do something with page
   }
 })();
@@ -51,25 +58,28 @@ const pagination: Pagination<CloudantV1.SearchResultRow> = Pagination.newPaginat
 // As `next()` returns with a Promise, use `await` or `.then()` on it.
 
 // Option: stream pages
-const pageStream: Stream<ReadonlyArray<CloudantV1.SearchResultRow>> = pagination.pageStream(); // a new stream of the pages
+const pageStream: Stream<ReadonlyArray<CloudantV1.SearchResultRow>> =
+  pagination.pageStream(); // a new stream of the pages
 const destinationPageStream = new Writable({
   objectMode: true,
   write(page: Array<CloudantV1.SearchResultRow>, _, callback) {
     // Do something with page
     callback();
-  }
+  },
 });
-await pipeline(pageStream, destinationPageStream)
-  .then(() => {
-    console.log('Page stream is done');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+(async () => {
+  await pipeline(pageStream, destinationPageStream)
+    .then(() => {
+      console.log('Page stream is done');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+})();
 
 // Option: iterate rows with for await...of statement
 (async () => {
-  for await (let row: CloudantV1.SearchResultRow of pagination.rows()) {
+  for await (const row of pagination.rows()) {
     // Do something with row
   }
 })();
@@ -84,15 +94,17 @@ const destinationRowStream = new Writable({
   write(row: CloudantV1.SearchResultRow, _, callback) {
     // Do something with row
     callback();
-  }
+  },
 });
-await pipeline(rowStream, destinationRowStream)
-  .then(() => {
-    console.log('Row stream is done');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+(async () => {
+  await pipeline(rowStream, destinationRowStream)
+    .then(() => {
+      console.log('Row stream is done');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+})();
 
 // Option: use pager next page
 // For retrieving one page at a time with a function call.
@@ -111,7 +123,7 @@ const pager: Pager<CloudantV1.SearchResultRow> = pagination.pager();
 const allPager: Pager<CloudantV1.SearchResultRow> = pagination.pager();
 (async () => {
   const allRows: Array<CloudantV1.SearchResultRow> = await allPager.getAll();
-  for (let row: CloudantV1.SearchResultRow of allRows) {
+  for (const row of allRows) {
     // Do something with row
   }
 })();

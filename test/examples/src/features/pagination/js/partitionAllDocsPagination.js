@@ -37,7 +37,7 @@ const pagination = Pagination.newPagination(
 
 // Option: iterate pages with for await...of statement
 (async () => {
-  for await (let page of pagination.pages()) {
+  for await (const page of pagination.pages()) {
     // Do something with page
   }
 })();
@@ -52,19 +52,21 @@ const destinationPageStream = new Writable({
   write(page, _, callback) {
     // Do something with page
     callback();
-  }
+  },
 });
-await pipeline(pageStream, destinationPageStream)
-  .then(() => {
-    console.log('Page stream is done');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+(async () => {
+  await pipeline(pageStream, destinationPageStream)
+    .then(() => {
+      console.log('Page stream is done');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+})();
 
 // Option: iterate rows with for await...of statement
 (async () => {
-  for await (let row of pagination.rows()) {
+  for await (const row of pagination.rows()) {
     // Do something with row
   }
 })();
@@ -79,15 +81,17 @@ const destinationRowStream = new Writable({
   write(row, _, callback) {
     // Do something with row
     callback();
-  }
+  },
 });
-await pipeline(rowStream, destinationRowStream)
-  .then(() => {
-    console.log('Row stream is done');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+(async () => {
+  await pipeline(rowStream, destinationRowStream)
+    .then(() => {
+      console.log('Row stream is done');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+})();
 
 // Option: use pager next page
 // For retrieving one page at a time with a function call.
@@ -106,7 +110,7 @@ const pager = pagination.pager();
 const allPager = pagination.pager();
 (async () => {
   const allRows = await allPager.getAll();
-  for (let row of allRows) {
+  for (const row of allRows) {
     // Do something with row
   }
 })();
