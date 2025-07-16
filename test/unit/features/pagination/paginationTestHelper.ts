@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 import { BasePageIterator } from '../../../../cloudant/features/pagination/basePageIterator';
-import { BookmarkPageIterator } from '../../../../cloudant/features/pagination/bookmarkPageIterator';
+import { FindPageIterator } from '../../../../cloudant/features/pagination/findPageIterator';
 import { KeyPageIterator } from '../../../../cloudant/features/pagination/keyPageIterator';
 import {
   PostViewParams,
   default as CloudantV1,
   ViewResultRow,
   PostFindParams,
+  FindResult,
 } from '../../../../cloudant/v1';
 
 import { getClient } from '../testDataProviders';
@@ -141,17 +142,16 @@ export class TestPageIterator extends BasePageIterator<
   }
 }
 
-export function getDefaultTestParams(limit: number): PostViewParams {
-  let params: PostViewParams = getRequiredTestParams();
+export function getDefaultTestParams(limit: number): PostFindParams {
+  let params: PostFindParams = getRequiredTestParams();
   params.limit = limit;
   return params;
 }
 
-export function getRequiredTestParams(): PostViewParams {
-  let params: PostViewParams = {
+export function getRequiredTestParams(): PostFindParams {
+  let params: PostFindParams = {
     db: 'example-database',
-    ddoc: 'test-ddoc',
-    view: 'test-view',
+    selector: { email_verified: { '$eq': true } },
   };
   return params;
 }
@@ -206,11 +206,7 @@ export class TestKeyPageIterator extends KeyPageIterator<
   }
 }
 
-export class TestBookmarkPageIterator extends BookmarkPageIterator<
-  PostFindParams,
-  TestResult,
-  Document
-> {
+export class TestBookmarkPageIterator extends FindPageIterator {
   pageSupplier;
   callCounter;
 
@@ -220,13 +216,13 @@ export class TestBookmarkPageIterator extends BookmarkPageIterator<
     this.callCounter = 0;
   }
 
-  protected getItems(result: TestResult): Document[] {
+  protected getItems(result: FindResult): CloudantV1.Document[] {
     return result.docs;
   }
   // This is just a placeholder, so we can mock the function from the tests
   protected nextRequestFunction(): (
     params: CloudantV1.PostFindParams
-  ) => Promise<CloudantV1.Response<TestResult>> {
+  ) => Promise<CloudantV1.Response<FindResult>> {
     this.callCounter += 1;
     return this.mockCall.bind(this);
   }
@@ -237,7 +233,7 @@ export class TestBookmarkPageIterator extends BookmarkPageIterator<
     return { result: { docs } };
   }
 
-  protected getBookmark(result: TestResult): string {
+  protected getBookmark(result: FindResult): string {
     const docs = result.docs;
     return (docs.length - 1).toString();
   }
