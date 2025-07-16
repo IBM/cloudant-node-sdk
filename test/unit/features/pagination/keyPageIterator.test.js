@@ -174,7 +174,7 @@ describe('KeyPageIterator tests', () => {
     expect(actualSecondPage.value).toEqual(expectedPages[1]);
   });
 
-  it('test boundary failure throws on next()()', async () => {
+  it('test boundary failure throws on next()', async () => {
     const pageSize = 1;
     // Make pages with identical rows
     const pageOne = [1, 1];
@@ -226,5 +226,22 @@ describe('KeyPageIterator tests', () => {
     expect(actualPage.value).toEqual(expectedPages[0]);
     // Assert _hasNext false
     expect(pageIterator._hasNext).toBe(false);
+  });
+
+  it('test skip removed from subsequent pages', async () => {
+    const pageSize = 3;
+    const expectedSkip = 17;
+    const mock = new KeyPageSupplier(pageSize * 3, pageSize);
+    const params = getDefaultTestParams(pageSize);
+    params.skip = expectedSkip;
+    const pageIterator = new TestKeyPageIterator(mockClient, params, mock);
+    const pagination = new Pagination(pageIterator);
+    const pager = pagination.pager();
+    expect(pager.pageIterableIterator.nextPageParams).toHaveProperty('skip');
+    expect(pager.pageIterableIterator.nextPageParams.skip).toBe(expectedSkip);
+    await pager.getNext();
+    expect(pager.pageIterableIterator.nextPageParams).not.toHaveProperty(
+      'skip'
+    );
   });
 });

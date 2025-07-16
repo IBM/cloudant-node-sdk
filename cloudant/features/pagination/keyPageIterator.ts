@@ -61,6 +61,9 @@ export abstract class KeyPageIterator<
     const nextKeyId: string = this.getNextKeyId(lastItem);
     this.setNextKey(params, nextKey);
     this.setNextKeyId(params, nextKeyId);
+    if (params.skip) {
+      delete params.skip;
+    }
   }
 
   protected async nextRequest(): Promise<Array<I>> {
