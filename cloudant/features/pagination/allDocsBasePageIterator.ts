@@ -54,4 +54,12 @@ export abstract class AllDocsBasePageIterator<
   ) {
     return null;
   }
+
+  protected getValidateParamsAbsentErrorMessage(paramName) {
+    let errorMsg = super.getValidateParamsAbsentErrorMessage(paramName);
+    if (paramName === 'key') {
+      errorMsg = `${errorMsg} No need to paginate as 'key' returns a single result for an ID.`;
+    }
+    return errorMsg;
+  }
 }
