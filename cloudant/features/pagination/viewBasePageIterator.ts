@@ -63,4 +63,11 @@ export abstract class ViewBasePageIterator<
     }
     return null;
   }
+  protected getValidateParamsAbsentErrorMessage(paramName) {
+    let errorMsg = super.getValidateParamsAbsentErrorMessage(paramName);
+    if (paramName === 'key') {
+      errorMsg = `${errorMsg} Use 'start_key' and 'end_key' instead.`;
+    }
+    return errorMsg;
+  }
 }

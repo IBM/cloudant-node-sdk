@@ -89,6 +89,6 @@ export abstract class KeyPageIterator<
 
   protected validate(params: P): void {
     super.validate(params);
-    this.validateParamsAbsent(params, ['keys']);
+    this.validateParamsAbsent(params, ['keys', 'key']);
   }
 }

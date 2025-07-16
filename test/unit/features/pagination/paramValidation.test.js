@@ -19,6 +19,12 @@ const {
 const {
   SearchPageIterator,
 } = require('../../../../cloudant/features/pagination/searchPageIterator.ts');
+const {
+  AllDocsBasePageIterator,
+} = require('../../../../cloudant/features/pagination/allDocsBasePageIterator.ts');
+const {
+  ViewBasePageIterator,
+} = require('../../../../cloudant/features/pagination/viewBasePageIterator.ts');
 const { getClient } = require('../testDataProviders.js');
 const {
   TestKeyPageIterator,
@@ -99,6 +105,13 @@ describe('Params validation tests', () => {
       expect(t).toThrow(Error);
       expect(t).toThrow(`The param 'keys' is invalid when using pagination.`);
     });
+    it('params validation errors for key', () => {
+      const params = getRequiredTestParams();
+      params.key = 'abc';
+      const t = () => new TestKeyPageIterator(mockClient, params);
+      expect(t).toThrow(Error);
+      expect(t).toThrow(`The param 'key' is invalid when using pagination.`);
+    });
   });
 
   describe('BookmarkPagerIterator params validation tests', () => {
@@ -131,5 +144,27 @@ describe('Params validation tests', () => {
         );
       }
     );
+  });
+
+  describe('AllDocsBasePageIterator params validation tests', () => {
+    it('params validation errors for key', () => {
+      const params = { db: 'example-database', key: 'abc' };
+      const t = () => new AllDocsBasePageIterator(mockClient, params);
+      expect(t).toThrow(Error);
+      expect(t).toThrow(
+        `The param 'key' is invalid when using pagination. No need to paginate as 'key' returns a single result for an ID.`
+      );
+    });
+  });
+
+  describe('ViewBasePageIterator params validation tests', () => {
+    it('params validation errors for key', () => {
+      const params = { db: 'example-database', key: 'abc' };
+      const t = () => new ViewBasePageIterator(mockClient, params);
+      expect(t).toThrow(Error);
+      expect(t).toThrow(
+        `The param 'key' is invalid when using pagination. Use 'start_key' and 'end_key' instead.`
+      );
+    });
   });
 });

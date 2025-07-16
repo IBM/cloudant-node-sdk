@@ -115,11 +115,13 @@ export abstract class BasePageIterator<
   protected validateParamsAbsent(params: P, paramNames: Array<string>) {
     for (let paramName of paramNames) {
       if (params[paramName] !== undefined) {
-        throw new Error(
-          `The param '${paramName}' is invalid when using pagination.`
-        );
+        throw new Error(this.getValidateParamsAbsentErrorMessage(paramName));
       }
     }
+  }
+
+  protected getValidateParamsAbsentErrorMessage(paramName) {
+    return `The param '${paramName}' is invalid when using pagination.`;
   }
 
   private validateLimit(limit: number) {
