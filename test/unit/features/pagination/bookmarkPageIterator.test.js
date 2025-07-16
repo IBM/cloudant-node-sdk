@@ -145,4 +145,21 @@ describe('BookmarkPageIterator tests', () => {
     const actualItems = await pager.getAll();
     expect(actualItems).toEqual(mock.allItems);
   });
+
+  it('test skip removed from subsequent pages', async () => {
+    const pageSize = 3;
+    const expectedSkip = 17;
+    const mock = new BookmarkPageSupplier(pageSize * 3, pageSize);
+    const params = getDefaultTestParams(pageSize);
+    params.skip = expectedSkip;
+    const pageIterator = new TestBookmarkPageIterator(mockClient, params, mock);
+    const pagination = new Pagination(pageIterator);
+    const pager = pagination.pager();
+    expect(pager.pageIterableIterator.nextPageParams).toHaveProperty('skip');
+    expect(pager.pageIterableIterator.nextPageParams.skip).toBe(expectedSkip);
+    await pager.getNext();
+    expect(pager.pageIterableIterator.nextPageParams).not.toHaveProperty(
+      'skip'
+    );
+  });
 });
