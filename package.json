@@ -62,7 +62,7 @@
     "eslint-plugin-prettier": "5.5.0",
     "jest": "30.0.4",
     "jest-junit": "16.0.0",
-    "nock": "14.0.5",
+    "nock": "14.0.6",
     "prettier": "3.6.2",
     "sinon": "21.0.0",
     "ts-jest": "29.4.0",
