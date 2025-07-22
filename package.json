@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@types/node": "20.19.8",
-    "ibm-cloud-sdk-core": "5.4.0"
+    "ibm-cloud-sdk-core": "5.4.1"
   },
   "devDependencies": {
     "@ibm-cloud/sdk-test-utilities": "^1.0.0",
