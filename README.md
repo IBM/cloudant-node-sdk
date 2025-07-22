@@ -2,7 +2,7 @@
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-node-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-node-sdk/releases/latest)
 [![Docs](https://img.shields.io/static/v1?label=TypeDoc&message=latest&color=blue)](https://ibm.github.io/cloudant-node-sdk/)
 
-# IBM Cloudant Node.js SDK Version 0.12.5
+# IBM Cloudant Node.js SDK Version 0.12.6
 
 IBM Cloudant Node.js SDK is a client library that interacts with the
 [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=node).
@@ -948,7 +948,7 @@ You have deleted the document.
 
 #### Further code examples
 
-For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/examples#examples-for-node).
+For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/examples#examples-for-node).
 
 ### Error handling
 
@@ -1107,7 +1107,7 @@ The changes follower requires the client to have HTTP timeouts of at least 1 min
 instantiation if it is insufficient. The default client configuration has sufficiently long timeouts.
 
 For use-cases where these configuration limitations are too restrictive then write code to use the SDK's
-[POST `_changes` API](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/examples#postchanges) instead of the follower.
+[POST `_changes` API](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/examples#postchanges) instead of the follower.
 
 #### Error suppression
 
@@ -1141,7 +1141,7 @@ The follower is not optimized for some use cases and it is not recommended to us
 * Setting `include_docs` and larger document sizes (for example > 10 kiB).
 * The volume of changes is very high (if the rate of changes in the database exceeds the follower's rate of pulling them it can never catch-up).
 
-In these use-cases use the SDK's [POST `_changes` API](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/examples#postchanges)
+In these use-cases use the SDK's [POST `_changes` API](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/examples#postchanges)
 for  specific control over the number of change requests made and the content size of the responses.
 
 #### Checkpoints
@@ -1699,22 +1699,22 @@ then a `429 Too Many Requests` error occurs.
 Pagination is available for these operations:
 * Query all documents [global](https://cloud.ibm.com/apidocs/cloudant?code=node#postalldocs)
   and [partitioned](https://cloud.ibm.com/apidocs/cloudant?code=node#postpartitionalldocs)
-  * [Global all documents examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/test/examples/src/features/pagination/ts/allDocsPagination.ts)
-  * [Partitioned all documents examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/test/examples/src/features/pagination/ts/partitionAllDocsPagination.ts)
+  * [Global all documents examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/test/examples/src/features/pagination/ts/allDocsPagination.ts)
+  * [Partitioned all documents examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/test/examples/src/features/pagination/ts/partitionAllDocsPagination.ts)
 * Query all [design documents](https://cloud.ibm.com/apidocs/cloudant?code=node#postdesigndocs)
-  * [Design documents examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/test/examples/src/features/pagination/ts/designDocsPagination.ts)
+  * [Design documents examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/test/examples/src/features/pagination/ts/designDocsPagination.ts)
 * Query with selector syntax [global](https://cloud.ibm.com/apidocs/cloudant?code=node#postfind)
   and [partitioned](https://cloud.ibm.com/apidocs/cloudant?code=node#postpartitionfind)
-  * [Global find selector query examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/test/examples/src/features/pagination/ts/findPagination.ts)
-  * [Partitioned find selector query examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/test/examples/src/features/pagination/ts/partitionFindPagination.ts)
+  * [Global find selector query examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/test/examples/src/features/pagination/ts/findPagination.ts)
+  * [Partitioned find selector query examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/test/examples/src/features/pagination/ts/partitionFindPagination.ts)
 * Query a search index [global](https://cloud.ibm.com/apidocs/cloudant?code=node#postsearch)
   and [partitioned](https://cloud.ibm.com/apidocs/cloudant?code=node#postpartitionsearch)
-  * [Global search examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/test/examples/src/features/pagination/ts/searchPagination.ts)
-  * [Partitioned search examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/test/examples/src/features/pagination/ts/partitionSearchPagination.ts)
+  * [Global search examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/test/examples/src/features/pagination/ts/searchPagination.ts)
+  * [Partitioned search examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/test/examples/src/features/pagination/ts/partitionSearchPagination.ts)
 * Query a MapReduce view [global](https://cloud.ibm.com/apidocs/cloudant?code=node#postview)
   and [partitioned](https://cloud.ibm.com/apidocs/cloudant?code=node#postpartitionview)
-  * [Global view examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/test/examples/src/features/pagination/ts/viewPagination.ts)
-  * [Partitioned view examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/test/examples/src/features/pagination/ts/partitionViewPagination.ts)
+  * [Global view examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/test/examples/src/features/pagination/ts/viewPagination.ts)
+  * [Partitioned view examples](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/test/examples/src/features/pagination/ts/partitionViewPagination.ts)
 
 The examples presented in this `README` are for all documents in a partition.
 The links in the list are to equivalent examples for each of the other available operations.
@@ -2164,7 +2164,7 @@ If you encounter an issue with the project, you are welcome to submit a
 
 Before you submit a bug report, search for
 [similar issues](https://github.com/IBM/cloudant-node-sdk/issues?q=is%3Aissue) and review the
-[KNOWN_ISSUES file](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/KNOWN_ISSUES.md) to verify that your issue hasn't been reported yet.
+[KNOWN_ISSUES file](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/KNOWN_ISSUES.md) to verify that your issue hasn't been reported yet.
 
 Please consult the [security policy](https://github.com/IBM/cloudant-node-sdk/security/policy) before opening security related issues.
 
@@ -2194,8 +2194,8 @@ Find more open source projects on the [IBM GitHub](http://ibm.github.io/) page.
 
 ## Contributing
 
-For more information, see [CONTRIBUTING](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/CONTRIBUTING.md).
+For more information, see [CONTRIBUTING](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/CONTRIBUTING.md).
 
 ## License
 
-This SDK is released under the Apache 2.0 license. To read the full text of the license, see [LICENSE](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.5/LICENSE).
+This SDK is released under the Apache 2.0 license. To read the full text of the license, see [LICENSE](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.6/LICENSE).
