@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@types/node": "20.19.9",
-    "ibm-cloud-sdk-core": "5.4.0"
+    "ibm-cloud-sdk-core": "5.4.1"
   },
   "devDependencies": {
     "@ibm-cloud/sdk-test-utilities": "^1.0.0",
@@ -60,9 +60,9 @@
     "eslint-plugin-jsdoc": "51.4.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "5.5.0",
-    "jest": "30.0.4",
+    "jest": "30.0.5",
     "jest-junit": "16.0.0",
-    "nock": "14.0.5",
+    "nock": "14.0.6",
     "prettier": "3.6.2",
     "sinon": "21.0.0",
     "ts-jest": "29.4.0",
