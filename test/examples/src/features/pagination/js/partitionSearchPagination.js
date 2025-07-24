@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Pagination, PagerType } from '@ibm-cloud/cloudant';
+import { CloudantV1, Pagination, PagerType } from '@ibm-cloud/cloudant';
 import { Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 
