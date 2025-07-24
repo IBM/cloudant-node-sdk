@@ -1748,7 +1748,7 @@ import { pipeline } from 'node:stream/promises';
 <summary>JavaScript:</summary>
 
 ```js
-import { Pagination, PagerType } from '@ibm-cloud/cloudant';
+import { CloudantV1, Pagination, PagerType } from '@ibm-cloud/cloudant';
 import { Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 ```
