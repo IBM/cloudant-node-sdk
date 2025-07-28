@@ -59,7 +59,7 @@ module.exports = {
     {
       'files': ['**/*.js'],
       'plugins': ['node', 'prettier'],
-      'extends': ['airbnb-base', 'prettier'],
+      'extends': ['prettier'],
       'rules': {
         'camelcase': 'off',
         'import/extensions': 'off',
