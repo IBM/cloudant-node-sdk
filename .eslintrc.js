@@ -16,9 +16,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-require-imports */
 const {
-  rules: baseStyleRules,
-} = require('eslint-config-airbnb-base/rules/style');
-const {
   rules: baseVariablesRules,
 } = require('eslint-config-airbnb-base/rules/variables');
 /* eslint-disable import/no-extraneous-dependencies */
@@ -100,8 +97,8 @@ module.exports = {
         '@typescript-eslint/dot-notation': ['error', { allowKeywords: true }],
 
         'no-array-constructor': 'off', // disable base rule in favour of the extended typescript rule:
-        '@typescript-eslint/no-array-constructor':
-          baseStyleRules['no-array-constructor'],
+        // disallow use of the Array constructor
+        '@typescript-eslint/no-array-constructor': 'error',
 
         'no-empty-function': 'off', // disable base rule in favour of the extended typescript rule:
         // disallow empty functions, except for standalone funcs/arrows
