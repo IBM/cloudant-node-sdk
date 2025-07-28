@@ -16,9 +16,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-require-imports */
 const {
-  rules: baseImportsRules,
-} = require('eslint-config-airbnb-base/rules/imports');
-const {
   rules: baseStyleRules,
 } = require('eslint-config-airbnb-base/rules/style');
 const {
@@ -180,10 +177,12 @@ module.exports = {
         // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/extensions.md
         // and append 'ts' and 'tsx' to Airbnb 'import/extensions' config
         'import/extensions': [
-          baseImportsRules['import/extensions'][0],
-          baseImportsRules['import/extensions'][1],
+          'error',
+          'ignorePackages',
           {
-            ...baseImportsRules['import/extensions'][2],
+            js: 'never',
+            mjs: 'never',
+            jsx: 'never',
             ts: 'never',
             tsx: 'never',
           },
