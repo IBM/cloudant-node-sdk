@@ -15,9 +15,6 @@
  */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-require-imports */
-const {
-  rules: baseErrorsRules,
-} = require('eslint-config-airbnb-base/rules/errors');
 const { rules: baseES6Rules } = require('eslint-config-airbnb-base/rules/es6');
 const {
   rules: baseImportsRules,
@@ -127,7 +124,9 @@ module.exports = {
 
         // @typescript-eslint/no-loss-of-precision is deprecated, but
         // we still need error on no-loss-of-precision:
-        'no-loss-of-precision': baseErrorsRules['no-loss-of-precision'],
+        // Disallow Number Literals That Lose Precision
+        // https://eslint.org/docs/rules/no-loss-of-precision
+        'no-loss-of-precision': 'error',
 
         'no-loop-func': 'off', // disable base rule in favour of the extended typescript rule:
         // disallow creation of functions within loops
