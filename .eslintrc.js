@@ -15,9 +15,6 @@
  */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-require-imports */
-const {
-  rules: baseVariablesRules,
-} = require('eslint-config-airbnb-base/rules/variables');
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-require-imports */
 
@@ -127,7 +124,8 @@ module.exports = {
         '@typescript-eslint/no-loop-func': 'error',
 
         'no-shadow': 'off', // disable base rule in favour of the extended typescript rule:
-        '@typescript-eslint/no-shadow': baseVariablesRules['no-shadow'],
+        // disallow declaration of variables already declared in the outer scope
+        '@typescript-eslint/no-shadow': 'error',
 
         'no-throw-literal': 'off', // disable base rule in favour of the extended typescript rule:
         // in @typescript-eslint no-throw-literal became only-throw-error:
