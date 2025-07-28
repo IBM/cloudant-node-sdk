@@ -15,7 +15,6 @@
  */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-require-imports */
-const { rules: baseES6Rules } = require('eslint-config-airbnb-base/rules/es6');
 const {
   rules: baseImportsRules,
 } = require('eslint-config-airbnb-base/rules/imports');
@@ -166,8 +165,9 @@ module.exports = {
         ],
 
         'no-useless-constructor': 'off', // disable base rule in favour of the extended typescript rule:
-        '@typescript-eslint/no-useless-constructor':
-          baseES6Rules['no-useless-constructor'],
+        // disallow unnecessary constructor
+        // https://eslint.org/docs/rules/no-useless-constructor
+        '@typescript-eslint/no-useless-constructor': 'error',
 
         'return-await': 'off', // disable base rule in favour of the extended typescript rule:
         // disallow redundant `return await`
