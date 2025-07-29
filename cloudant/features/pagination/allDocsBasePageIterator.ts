@@ -37,18 +37,18 @@ export abstract class AllDocsBasePageIterator<
    * Setting start key doc ID is a no-op for all_docs based paging where
    * key is the same as id.
    */
-  protected setNextKeyId(params: P, startKeyDocId: string) {
+  protected override setNextKeyId(params: P, startKeyDocId: string) {
     return;
   }
 
-  protected getItems(result: AllDocsResult): Array<DocsResultRow> {
+  protected override getItems(result: AllDocsResult): Array<DocsResultRow> {
     return result.rows;
   }
   protected abstract nextRequestFunction(): (
     params: P
   ) => Promise<Response<AllDocsResult>>;
 
-  protected checkBoundary(
+  protected override checkBoundary(
     penultimateItem: DocsResultRow,
     lastItem: DocsResultRow
   ) {

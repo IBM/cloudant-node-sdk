@@ -30,7 +30,7 @@ export abstract class SearchBasePageIterator<
     super(client, params);
   }
 
-  protected getItems(result: SearchResult): Array<SearchResultRow> {
+  protected override getItems(result: SearchResult): Array<SearchResultRow> {
     return result.rows;
   }
   protected abstract nextRequestFunction(): (

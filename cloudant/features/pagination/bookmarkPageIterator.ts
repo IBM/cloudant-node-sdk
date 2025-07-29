@@ -31,10 +31,12 @@ export abstract class BookmarkPageIterator<
     super(client, params);
   }
 
+  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
   protected setBookmark(params: P, bookmark: string) {
     params.bookmark = bookmark;
   }
 
+  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
   protected getBookmark(result: R): string {
     return result.bookmark;
   }

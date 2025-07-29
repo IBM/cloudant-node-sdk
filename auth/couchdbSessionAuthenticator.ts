@@ -152,8 +152,7 @@ export class CouchdbSessionAuthenticator extends Authenticator {
    *
    * @returns a string that indicates the authenticator's type
    */
-  // eslint-disable-next-line class-methods-use-this
-  public authenticationType(): string {
+  public override authenticationType(): string {
     return CouchdbSessionAuthenticator.AUTHTYPE_COUCHDB_SESSION;
   }
 }

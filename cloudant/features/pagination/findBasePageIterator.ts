@@ -30,7 +30,7 @@ export abstract class FindBasePageIterator<
     super(client, params);
   }
 
-  protected getItems(result: FindResult): Array<Document> {
+  protected override getItems(result: FindResult): Array<Document> {
     return result.docs;
   }
   protected abstract nextRequestFunction(): (
