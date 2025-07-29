@@ -22,10 +22,6 @@ module.exports = {
   'parserOptions': {
     'ecmaVersion': 2018,
     'sourceType': 'module',
-    // 'ecmaFeatures': {
-    //   'generators': false,
-    //   'objectLiteralDuplicateProperties': false,
-    // },
   },
   'plugins': ['header'],
   'extends': ['./.eslint-rules.json'],
@@ -271,17 +267,4 @@ module.exports = {
       },
     },
   ],
-  // 'settings': {
-  //   'import/resolver': {
-  //     'node': {
-  //       'extensions': ['.mjs', '.js', '.json'],
-  //     },
-  //   },
-  //   'import/extensions': ['.js', '.mjs', '.jsx'],
-  //   'import/core-modules': [],
-  //   'import/ignore': [
-  //     'node_modules',
-  //     '\\.(coffee|scss|css|less|hbs|svg|json)$',
-  //   ],
-  // },
 };
