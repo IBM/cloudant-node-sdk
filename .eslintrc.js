@@ -19,6 +19,14 @@ module.exports = {
   'env': {
     'node': true,
   },
+  'parserOptions': {
+    'ecmaVersion': 2018,
+    'sourceType': 'module',
+    // 'ecmaFeatures': {
+    //   'generators': false,
+    //   'objectLiteralDuplicateProperties': false,
+    // },
+  },
   'plugins': ['header'],
   'extends': ['./.eslint-rules.json'],
   'rules': {
@@ -73,7 +81,6 @@ module.exports = {
       'parser': '@typescript-eslint/parser',
       'parserOptions': {
         'project': 'tsconfig.json',
-        'sourceType': 'module',
       },
       'plugins': [
         'eslint-plugin-jsdoc',
@@ -188,6 +195,35 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'prettier/prettier': 'error',
         'spaced-comment': ['error', 'always', { 'exceptions': ['*'] }],
+
+        // Turn off not relevant airbnb rules on typescript files:
+        'class-methods-use-this': 'off',
+        'default-case': 'off',
+        'eqeqeq': 'off',
+        'import/newline-after-import': 'off',
+        'import/no-cycle': 'off',
+        'import/no-cycles': 'off',
+        'import/no-named-default': 'off',
+        'import/order': 'off',
+        'import/prefer-default-export': 'off',
+        'lines-between-class-members': 'off',
+        'max-classes-per-file': 'off',
+        'no-case-declarations': 'off',
+        'no-dupe-class-members': 'off',
+        'no-else-return': 'off',
+        'no-plusplus': 'off',
+        'no-promise-executor-return': 'off',
+        'no-redeclare': 'off',
+        'no-restricted-properties': 'off',
+        'no-restricted-syntax': 'off',
+        'no-undef': 'off',
+        'no-unneeded-ternary': 'off',
+        'no-unused-vars': 'off',
+        'no-useless-return': 'off',
+        'prefer-const': 'off',
+        'prefer-destructuring': 'off',
+        'prefer-exponentiation-operator': 'off',
+        'prefer-regex-literals': 'off',
       },
     },
     {
@@ -235,4 +271,17 @@ module.exports = {
       },
     },
   ],
+  // 'settings': {
+  //   'import/resolver': {
+  //     'node': {
+  //       'extensions': ['.mjs', '.js', '.json'],
+  //     },
+  //   },
+  //   'import/extensions': ['.js', '.mjs', '.jsx'],
+  //   'import/core-modules': [],
+  //   'import/ignore': [
+  //     'node_modules',
+  //     '\\.(coffee|scss|css|less|hbs|svg|json)$',
+  //   ],
+  // },
 };
