@@ -202,7 +202,6 @@ module.exports = {
         ],
         'eqeqeq': ['error', 'always', { 'null': 'ignore' }],
         // Turn off not relevant airbnb rules on typescript files:
-        'import/newline-after-import': 'off',
         'import/no-cycle': 'off',
         'import/no-cycles': 'off',
         'import/no-named-default': 'off',
