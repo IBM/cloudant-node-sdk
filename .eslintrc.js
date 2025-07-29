@@ -192,7 +192,6 @@ module.exports = {
         'prettier/prettier': 'error',
         'spaced-comment': ['error', 'always', { 'exceptions': ['*'] }],
 
-        // Turn off not relevant airbnb rules on typescript files:
         'class-methods-use-this': 'off', // disable base rule in favour of the extended typescript rule:
         '@typescript-eslint/class-methods-use-this': [
           'error',
@@ -201,8 +200,8 @@ module.exports = {
             'ignoreClassesThatImplementAnInterface': true,
           },
         ],
-
-        'eqeqeq': 'off',
+        'eqeqeq': ['error', 'always', { 'null': 'ignore' }],
+        // Turn off not relevant airbnb rules on typescript files:
         'import/newline-after-import': 'off',
         'import/no-cycle': 'off',
         'import/no-cycles': 'off',

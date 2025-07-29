@@ -55,7 +55,7 @@ export abstract class ViewBasePageIterator<
       // Then check values
       if (
         penultimateKey === lastKey ||
-        (penultimateKey !== null && penultimateKey == lastKey)
+        (penultimateKey !== null && penultimateKey === lastKey)
       ) {
         // Identical keys, set an error message
         return `Cannot paginate on a boundary containing identical keys '${lastKey}' and document IDs '${lastId}'`;
