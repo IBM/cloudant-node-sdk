@@ -13,10 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-require-imports */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-require-imports */
 
 module.exports = {
   'root': true,
@@ -24,7 +20,7 @@ module.exports = {
     'node': true,
   },
   'plugins': ['header'],
-  'extends': ['plugin:import/recommended'],
+  'extends': ['./.eslint-rules.json'],
   'rules': {
     'header/header': [
       2,
