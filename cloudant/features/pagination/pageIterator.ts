@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import { default as CloudantV1 } from '../../v1';
+
 export interface PageIterator<
   I extends
     | CloudantV1.DocsResultRow

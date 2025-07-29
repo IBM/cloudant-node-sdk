@@ -25,6 +25,7 @@ import {
 } from '../../../../cloudant/v1';
 
 import { getClient } from '../testDataProviders';
+
 const {
   PagerType,
 } = require('../../../../cloudant/features/pagination/pagination');
