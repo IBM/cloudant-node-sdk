@@ -30,18 +30,18 @@ export abstract class ViewBasePageIterator<
     super(client, params);
   }
 
-  protected getItems(result: ViewResult): Array<ViewResultRow> {
+  protected override getItems(result: ViewResult): Array<ViewResultRow> {
     return result.rows;
   }
   protected abstract nextRequestFunction(): (
     params: P
   ) => Promise<Response<ViewResult>>;
 
-  protected setNextKeyId(params: P, startKeyDocId: string) {
+  protected override setNextKeyId(params: P, startKeyDocId: string) {
     params.startKeyDocId = startKeyDocId;
   }
 
-  protected checkBoundary(
+  protected override checkBoundary(
     penultimateItem: ViewResultRow,
     lastItem: ViewResultRow
   ) {

@@ -193,7 +193,15 @@ module.exports = {
         'spaced-comment': ['error', 'always', { 'exceptions': ['*'] }],
 
         // Turn off not relevant airbnb rules on typescript files:
-        'class-methods-use-this': 'off',
+        'class-methods-use-this': 'off', // disable base rule in favour of the extended typescript rule:
+        '@typescript-eslint/class-methods-use-this': [
+          'error',
+          {
+            'ignoreOverrideMethods': true,
+            'ignoreClassesThatImplementAnInterface': true,
+          },
+        ],
+
         'default-case': 'off',
         'eqeqeq': 'off',
         'import/newline-after-import': 'off',

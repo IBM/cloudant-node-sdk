@@ -34,19 +34,23 @@ export abstract class KeyPageIterator<
     this.setLimit(this.nextPageParams, this.getPageSize(params)); // n+1 items per request
   }
 
+  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
   protected setNextKey(params: P, startKey: K) {
     params.startKey = startKey;
   }
 
+  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
   protected getNextKey(item: I): K {
     return item.key;
   }
   protected abstract setNextKeyId(params: P, startKeyDocId: string);
 
+  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
   protected getNextKeyId(item: I): string {
     return item.id;
   }
 
+  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
   protected setLimit(params: P, limit: number) {
     params.limit = limit;
   }

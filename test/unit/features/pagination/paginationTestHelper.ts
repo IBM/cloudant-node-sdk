@@ -93,7 +93,7 @@ export class TestPageIterator extends BasePageIterator<
     this.callCounter = 0;
   }
 
-  getItems(result: TestResult): Array<ViewResultRow> {
+  override getItems(result: TestResult): Array<ViewResultRow> {
     return result.rows;
   }
 
@@ -137,6 +137,7 @@ export class TestPageIterator extends BasePageIterator<
     return { result: { rows } };
   }
 
+  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
   setRowOnTestParams(params: PostViewParams, row: ViewResultRow) {
     params.startKey = row;
   }
@@ -170,9 +171,14 @@ export class TestKeyPageIterator extends KeyPageIterator<
     this.pageSupplier = pageSupplier;
     this.callCounter = 0;
   }
-  protected setNextKeyId(params: PostViewParams, startKeyDocId: string) {}
 
-  protected getItems(result: TestResult): CloudantV1.ViewResultRow[] {
+  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
+  protected override setNextKeyId(
+    params: PostViewParams,
+    startKeyDocId: string
+  ) {}
+
+  protected override getItems(result: TestResult): CloudantV1.ViewResultRow[] {
     return result.rows;
   }
 
@@ -190,17 +196,17 @@ export class TestKeyPageIterator extends KeyPageIterator<
     this.pageSupplier.rowIterator += 1;
     return { result: { rows } };
   }
-  protected checkBoundary(
+  protected override checkBoundary(
     penultimateItem: CloudantV1.ViewResultRow,
     lastItem: CloudantV1.ViewResultRow
   ) {
     return null;
   }
-  protected getNextKey(item: ViewResultRow): number {
+  protected override getNextKey(item: ViewResultRow): number {
     return item as unknown as number;
   }
 
-  protected getNextKeyId(item: ViewResultRow): string {
+  protected override getNextKeyId(item: ViewResultRow): string {
     const itemAsNumber = item as unknown as number;
     return itemAsNumber.toString();
   }
@@ -216,7 +222,7 @@ export class TestBookmarkPageIterator extends FindPageIterator {
     this.callCounter = 0;
   }
 
-  protected getItems(result: FindResult): CloudantV1.Document[] {
+  protected override getItems(result: FindResult): CloudantV1.Document[] {
     return result.docs;
   }
   // This is just a placeholder, so we can mock the function from the tests
@@ -233,7 +239,7 @@ export class TestBookmarkPageIterator extends FindPageIterator {
     return { result: { docs } };
   }
 
-  protected getBookmark(result: FindResult): string {
+  protected override getBookmark(result: FindResult): string {
     const docs = result.docs;
     return (docs.length - 1).toString();
   }
