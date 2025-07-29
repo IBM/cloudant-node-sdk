@@ -249,6 +249,8 @@ export class ChangesResultIterableIterator
           case TransientErrorSuppression.NEVER:
             this.logger.verbose(`ChangesResultStream stream: ${err.message}`);
             throw err;
+          default:
+          // do nothing
         }
         switch (err.code) {
           case 400:

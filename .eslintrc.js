@@ -202,7 +202,6 @@ module.exports = {
           },
         ],
 
-        'default-case': 'off',
         'eqeqeq': 'off',
         'import/newline-after-import': 'off',
         'import/no-cycle': 'off',
