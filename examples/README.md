@@ -1453,7 +1453,7 @@ const service = CloudantV1.newInstance({});
 // Type "text" index fields require an object with a name and type properties for the field.
 const indexField: CloudantV1.IndexField = {
   name: 'address',
-  type: 'string'
+  type: CloudantV1.IndexField.Constants.Type.STRING
 }
 
 const index: CloudantV1.IndexDefinition = {
