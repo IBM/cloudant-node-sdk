@@ -284,7 +284,7 @@ export default class ChangesResultIterableIterator
             }
             const delay: number = Math.round(Math.random() * expDelay) + 1;
             this.logger.debug(`Backing off for ${delay} ms.`);
-            this.retry++;
+            this.retry += 1;
             return this.timeoutPromise(delay).then(() => {
               this.logger.debug(`Iterator next exiting with empty result.`);
               return emptyChangesResultPromise;
