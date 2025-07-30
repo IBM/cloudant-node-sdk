@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-import {
-  default as CloudantV1,
-  Response,
-  ViewResult,
-  ViewResultRow,
-} from '../../v1';
+import CloudantV1, { Response, ViewResult, ViewResultRow } from '../../v1';
 import { KeyPageIterator } from './keyPageIterator';
 
 export abstract class ViewBasePageIterator<

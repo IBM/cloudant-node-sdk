@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-import {
+import CloudantV1, {
   AllDocsResult,
-  default as CloudantV1,
   PostAllDocsParams,
   Response,
 } from '../../v1';

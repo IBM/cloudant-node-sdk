@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-import {
-  default as CloudantV1,
-  AllDocsResult,
-  DocsResultRow,
-  Response,
-} from '../../v1';
+import CloudantV1, { AllDocsResult, DocsResultRow, Response } from '../../v1';
 import { KeyPageIterator } from './keyPageIterator';
 
 export abstract class AllDocsBasePageIterator<

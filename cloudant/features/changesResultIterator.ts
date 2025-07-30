@@ -17,7 +17,7 @@
 import { ChangesParamsHelper } from './changesParamsHelper';
 import { ChangesFollower, Mode } from './changesFollower';
 import { getNewLogger } from 'ibm-cloud-sdk-core';
-import { default as CloudantV1, PostChangesParams } from '../v1';
+import CloudantV1, { PostChangesParams } from '../v1';
 import { promisify } from 'node:util';
 
 enum TransientErrorSuppression {

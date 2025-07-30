@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-import {
-  default as CloudantV1,
-  PostSearchParams,
-  Response,
-  SearchResult,
-} from '../../v1';
+import CloudantV1, { PostSearchParams, Response, SearchResult } from '../../v1';
 import { SearchBasePageIterator } from './searchBasePageIterator';
 
 export class SearchPageIterator extends SearchBasePageIterator<PostSearchParams> {

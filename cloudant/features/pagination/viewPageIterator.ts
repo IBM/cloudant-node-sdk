@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-import {
-  default as CloudantV1,
-  PostViewParams,
-  Response,
-  ViewResult,
-} from '../../v1';
+import CloudantV1, { PostViewParams, Response, ViewResult } from '../../v1';
 import { ViewBasePageIterator } from './viewBasePageIterator';
 
 export class ViewPageIterator extends ViewBasePageIterator<PostViewParams> {
