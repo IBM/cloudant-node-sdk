@@ -165,6 +165,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_PARTITION_ALL_DOCS,
     params: PostPartitionAllDocsParams
   ): Pagination<DocsResultRow>;
+
   /**
    * Get a {@link Pagination} for the `postDesignDocs` operation.
    * The page size is configured with the limit parameter of the params.
@@ -179,6 +180,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_DESIGN_DOCS,
     params: PostDesignDocsParams
   ): Pagination<DocsResultRow>;
+
   /**
    * Get a {@link Pagination} for the `postFind` operation.
    * The page size is configured with the limit parameter of the params.
@@ -193,6 +195,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_FIND,
     params: PostFindParams
   ): Pagination<Document>;
+
   /**
    * Get a {@link Pagination} for the `postPartitionFind` operation.
    * The page size is configured with the limit parameter of the params.
@@ -207,6 +210,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_PARTITION_FIND,
     params: PostPartitionFindParams
   ): Pagination<Document>;
+
   /**
    * Get a {@link Pagination} for the `postSearch` operation.
    * The page size is configured with the limit parameter of the params.
@@ -221,6 +225,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_SEARCH,
     params: PostSearchParams
   ): Pagination<SearchResultRow>;
+
   /**
    * Get a {@link Pagination} for the `postPartitionSearch` operation.
    * The page size is configured with the limit parameter of the params.
@@ -235,6 +240,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_PARTITION_SEARCH,
     params: PostPartitionSearchParams
   ): Pagination<SearchResultRow>;
+
   /**
    * Get a {@link Pagination} for the `postView` operation.
    * The page size is configured with the limit parameter of the params.
@@ -249,6 +255,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_VIEW,
     params: PostViewParams
   ): Pagination<ViewResultRow>;
+
   /**
    * Get a {@link Pagination} for the `postPartitionView` operation.
    * The page size is configured with the limit parameter of the params.

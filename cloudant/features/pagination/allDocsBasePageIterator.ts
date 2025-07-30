@@ -39,6 +39,7 @@ export default abstract class AllDocsBasePageIterator<
   protected override getItems(result: AllDocsResult): Array<DocsResultRow> {
     return result.rows;
   }
+
   protected abstract nextRequestFunction(): (
     params: P
   ) => Promise<Response<AllDocsResult>>;

@@ -28,6 +28,7 @@ export default abstract class SearchBasePageIterator<
   protected override getItems(result: SearchResult): Array<SearchResultRow> {
     return result.rows;
   }
+
   protected abstract nextRequestFunction(): (
     params: P
   ) => Promise<Response<SearchResult>>;

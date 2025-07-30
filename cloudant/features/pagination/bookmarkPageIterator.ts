@@ -42,9 +42,11 @@ export default abstract class BookmarkPageIterator<
   }
 
   protected abstract getItems(result: R): Array<I>;
+
   protected setNextPageParams(params: P, result: R) {
     const bookmark = this.getBookmark(result);
     this.setBookmark(params, bookmark);
   }
+
   protected abstract nextRequestFunction(): (params: P) => Promise<Response<R>>;
 }
