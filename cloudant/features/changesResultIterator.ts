@@ -283,7 +283,7 @@ export default class ChangesResultIterableIterator
               // If we've exceeded the cap, use the timeout value
               expDelay = ChangesParamsHelper.LONGPOLL_TIMEOUT;
             } else {
-              expDelay = Math.pow(2, this.retry) * this.baseDelay;
+              expDelay = 2 ** this.retry * this.baseDelay;
             }
             const delay: number = Math.round(Math.random() * expDelay) + 1;
             this.logger.debug(`Backing off for ${delay} ms.`);
