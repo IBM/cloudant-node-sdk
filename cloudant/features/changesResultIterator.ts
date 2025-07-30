@@ -172,7 +172,10 @@ export default class ChangesResultIterableIterator
     // end up blocking I/O.
     await Promise.all([
       this.promisedConfig,
-      new Promise((resolve) => setImmediate(resolve)),
+      new Promise((resolve) => {
+        setImmediate(resolve);
+        return;
+      }),
     ]);
 
     this.logger.debug('Making next request.');
