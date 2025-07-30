@@ -15,11 +15,11 @@
  */
 
 import { Authenticator, UserOptions, validateInput } from 'ibm-cloud-sdk-core';
+import { Cookie, CookieJar, Store } from 'tough-cookie';
 import {
   SessionTokenManager,
   SessionTokenManagerOptions,
 } from './sessionTokenManager';
-import { Cookie, CookieJar, Store } from 'tough-cookie';
 
 interface SessionCookieJar extends CookieJar {
   cloudantPatch: boolean;

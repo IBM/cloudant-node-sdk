@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { pipeline, Readable } from 'node:stream';
 import CloudantV1, {
   DocsResultRow,
   Document,
@@ -34,7 +35,6 @@ import { Pager } from './pager';
 import { IteratorPager } from './iteratorPager';
 import { AllDocsPageIterator } from './allDocsPageIterator';
 import { Stream } from '../stream';
-import { pipeline, Readable } from 'node:stream';
 import { PageIterator } from './pageIterator';
 import { DesignDocsPageIterator } from './designDocsPageIterator';
 import { FindPageIterator } from './findPageIterator';
