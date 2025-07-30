@@ -261,7 +261,7 @@ export default class ChangesResultIterableIterator
             this.logger.debug('Terminal error');
             this.logger.verbose(`ChangesResultStream stream: ${err.message}`);
             throw err;
-          default:
+          default: {
             // Note this includes Errors
             // which handles cases like disconnections and incomplete
             // bodies where we may have received a successful response
@@ -290,6 +290,7 @@ export default class ChangesResultIterableIterator
               this.logger.debug(`Iterator next exiting with empty result.`);
               return emptyChangesResultPromise;
             });
+          }
         }
       })
       .finally(() => {
