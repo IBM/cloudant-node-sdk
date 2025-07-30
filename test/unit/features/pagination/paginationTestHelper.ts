@@ -134,13 +134,12 @@ export class TestPageIterator extends BasePageIterator<
     this.callCounter += 1;
     if (!this.pageSupplier.errorMessage || this.callCounter !== 2) {
       return this.mockCall.bind(this);
-    } else {
-      if (this.pageSupplier.resumable) {
-        // when iterator is resumable, resume rowIterator of pageSupplier after throwing an error
-        this.pageSupplier.rowIterator = 0;
-      }
-      throw new Error(this.pageSupplier.errorMessage);
     }
+    if (this.pageSupplier.resumable) {
+      // when iterator is resumable, resume rowIterator of pageSupplier after throwing an error
+      this.pageSupplier.rowIterator = 0;
+    }
+    throw new Error(this.pageSupplier.errorMessage);
   }
 
   private mockCall() {

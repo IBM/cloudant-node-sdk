@@ -135,10 +135,9 @@ export default class ChangesResultIterableIterator
               ) || 1;
           }
         });
-    } else {
-      this.params.limit = ChangesFollower.BATCH_SIZE;
-      return Promise.resolve();
     }
+    this.params.limit = ChangesFollower.BATCH_SIZE;
+    return Promise.resolve();
   }
 
   [Symbol.asyncIterator](): AsyncIterableIterator<CloudantV1.ChangesResult> {

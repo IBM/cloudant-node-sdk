@@ -68,9 +68,8 @@ export default abstract class BasePageIterator<
       const items = await this.nextRequest();
       const readonlyItems: ReadonlyArray<I> = [...items];
       return { done: false, value: readonlyItems };
-    } else {
-      return { done: true, value: undefined };
     }
+    return { done: true, value: undefined };
   }
 
   protected async nextRequest(): Promise<Array<I>> {
