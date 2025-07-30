@@ -81,11 +81,11 @@ export default class ChangesParamsHelper {
       'lastEventId',
       'timeout',
     ];
-    for (let paramName of paramsShouldBeUndefined) {
+    paramsShouldBeUndefined.forEach((paramName) => {
       if (paramName in params) {
         invalidParams.push(`'${paramName}'`);
       }
-    }
+    });
     if ('filter' in params && params.filter !== '_selector') {
       invalidParams.push(`'filter=${params.filter}'`);
     }
