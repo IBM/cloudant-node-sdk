@@ -20,9 +20,8 @@ const {
   getModes,
   getSuppressionSequences,
 } = require('./testDataProviders');
-const {
-  ChangesResultIterableIterator,
-} = require('../../../cloudant/features/changesResultIterator.ts');
+const ChangesResultIterableIterator =
+  require('../../../cloudant/features/changesResultIterator.ts').default;
 const { testParams } = require('./testParams');
 const {
   generateRandomChangesResults,
@@ -31,9 +30,8 @@ const {
   mockPostChangesError,
   mockPerpetualSupplierRespectingLimit,
 } = require('./testMocks');
-const {
-  ChangesParamsHelper,
-} = require('../../../cloudant/features/changesParamsHelper.ts');
+const ChangesParamsHelper =
+  require('../../../cloudant/features/changesParamsHelper.ts').default;
 const {
   ChangesFollower,
   Mode,

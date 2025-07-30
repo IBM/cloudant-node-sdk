@@ -16,9 +16,8 @@
 const { testParams } = require('./testParams.js');
 const { getExpectedParams, testSeqNumber } = require('./testParams');
 const { getParams } = require('./testDataProviders');
-const {
-  ChangesParamsHelper,
-} = require('../../../cloudant/features/changesParamsHelper.ts');
+const ChangesParamsHelper =
+  require('../../../cloudant/features/changesParamsHelper.ts').default;
 
 describe('Test ChangesParamsHelper', () => {
   it.each(getParams(true))('testCloneOptions', (params) => {

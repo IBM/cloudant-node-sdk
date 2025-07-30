@@ -19,9 +19,9 @@ import CloudantV1, {
   PostPartitionFindParams,
   Response,
 } from '../../v1';
-import { FindBasePageIterator } from './findBasePageIterator';
+import FindBasePageIterator from './findBasePageIterator';
 
-export class FindPartitionPageIterator extends FindBasePageIterator<PostPartitionFindParams> {
+export default class FindPartitionPageIterator extends FindBasePageIterator<PostPartitionFindParams> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(client: CloudantV1, params: PostPartitionFindParams) {
     super(client, params);

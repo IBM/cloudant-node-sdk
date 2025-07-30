@@ -19,6 +19,7 @@
  */
 
 import CloudantV1 from './cloudant/v1';
+import Stream from './cloudant/features/stream';
 
 export { CloudantV1 };
 
@@ -30,7 +31,7 @@ export {
 } from './auth';
 
 export { ChangesFollower } from './cloudant/features/changesFollower';
-export { Stream } from './cloudant/features/stream';
+export { Stream };
 export {
   Pagination,
   PagerType,

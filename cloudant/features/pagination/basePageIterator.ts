@@ -16,7 +16,7 @@
 import CloudantV1, { Response } from '../../v1';
 import { PageIterator } from './pageIterator';
 
-export abstract class BasePageIterator<
+export default abstract class BasePageIterator<
   P extends
     | CloudantV1.PostAllDocsParams
     | CloudantV1.PostPartitionAllDocsParams

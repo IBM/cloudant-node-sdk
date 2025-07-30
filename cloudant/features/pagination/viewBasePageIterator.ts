@@ -15,9 +15,9 @@
  */
 
 import CloudantV1, { Response, ViewResult, ViewResultRow } from '../../v1';
-import { KeyPageIterator } from './keyPageIterator';
+import KeyPageIterator from './keyPageIterator';
 
-export abstract class ViewBasePageIterator<
+export default abstract class ViewBasePageIterator<
   P extends CloudantV1.PostViewParams | CloudantV1.PostPartitionViewParams,
 > extends KeyPageIterator<any, P, ViewResult, ViewResultRow> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor

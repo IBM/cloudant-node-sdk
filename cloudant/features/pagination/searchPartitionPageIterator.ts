@@ -19,9 +19,9 @@ import CloudantV1, {
   Response,
   SearchResult,
 } from '../../v1';
-import { SearchBasePageIterator } from './searchBasePageIterator';
+import SearchBasePageIterator from './searchBasePageIterator';
 
-export class SearchPartitionPageIterator extends SearchBasePageIterator<PostPartitionSearchParams> {
+export default class SearchPartitionPageIterator extends SearchBasePageIterator<PostPartitionSearchParams> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(client: CloudantV1, params: PostPartitionSearchParams) {
     super(client, params);

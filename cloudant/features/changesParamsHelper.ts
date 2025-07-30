@@ -17,7 +17,7 @@
 import { PostChangesConstants, PostChangesParams } from '../v1';
 import { Mode } from './changesFollower';
 
-export class ChangesParamsHelper {
+export default class ChangesParamsHelper {
   /**
    * Set minimum client timeout to 1 minute (= 60 000 ms).
    * 1 minute is the sort of number that very likely to be used as a client timeout,

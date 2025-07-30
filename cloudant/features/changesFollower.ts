@@ -19,9 +19,9 @@ import CloudantV1, {
   PostChangesParams,
   ChangesResult,
 } from '../v1';
-import { Stream } from './stream';
-import { ChangesParamsHelper } from './changesParamsHelper';
-import { ChangesResultIterableIterator } from './changesResultIterator';
+import Stream from './stream';
+import ChangesParamsHelper from './changesParamsHelper';
+import ChangesResultIterableIterator from './changesResultIterator';
 
 /** @internal */
 export enum Mode {
