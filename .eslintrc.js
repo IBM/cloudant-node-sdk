@@ -204,7 +204,6 @@ module.exports = {
         // Turn off not relevant airbnb rules on typescript files:
         'import/no-cycle': 'off',
         'no-dupe-class-members': 'off', // it is safe to disable this rule when using TS because TS's compiler enforces this check
-        'no-redeclare': 'off',
         'no-restricted-properties': 'off',
         'no-restricted-syntax': 'off',
         'no-undef': 'off',
@@ -222,6 +221,7 @@ module.exports = {
       'rules': {
         'prettier/prettier': 'off',
         'max-len': 'off',
+        'no-redeclare': 'off',
       },
     },
     // Test folder specific rules
