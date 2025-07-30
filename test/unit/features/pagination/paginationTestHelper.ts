@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/* eslint-disable max-classes-per-file */
+
 import BasePageIterator from '../../../../cloudant/features/pagination/basePageIterator';
 import FindPageIterator from '../../../../cloudant/features/pagination/findPageIterator';
 import KeyPageIterator from '../../../../cloudant/features/pagination/keyPageIterator';
