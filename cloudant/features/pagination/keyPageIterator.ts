@@ -29,6 +29,7 @@ export default abstract class KeyPageIterator<
   I extends CloudantV1.DocsResultRow | CloudantV1.ViewResultRow,
 > extends BasePageIterator<P, R, I> {
   private boundaryFailure = null;
+
   constructor(client: CloudantV1, params: P) {
     super(client, params);
     this.setLimit(this.nextPageParams, this.getPageSize(params)); // n+1 items per request
@@ -43,6 +44,7 @@ export default abstract class KeyPageIterator<
   protected getNextKey(item: I): K {
     return item.key;
   }
+
   protected abstract setNextKeyId(params: P, startKeyDocId: string);
 
   // eslint-disable-next-line @typescript-eslint/class-methods-use-this
@@ -56,6 +58,7 @@ export default abstract class KeyPageIterator<
   }
 
   protected abstract getItems(result: R): Array<I>;
+
   protected abstract nextRequestFunction(): (params: P) => Promise<Response<R>>;
 
   protected setNextPageParams(params: P, result: R): void {

@@ -34,10 +34,15 @@ export const mockClient = getClient();
 
 export class PageSupplier {
   pages: number[][];
+
   allItems: any;
+
   rowIterator: number;
+
   errorMessage: any;
+
   resumable: boolean;
+
   constructor(total, pageSize, errorMessage, resumable = false) {
     this.pages = makePageSupplier(total, pageSize);
     this.allItems = this.pages.flatMap((num) => num);
@@ -71,7 +76,9 @@ export function makePageSupplier(
 
 export class TestResult {
   rows;
+
   totalRows;
+
   docs;
 }
 
@@ -85,7 +92,9 @@ export class TestPageIterator extends BasePageIterator<
   ViewResultRow
 > {
   pageSupplier;
+
   callCounter;
+
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(client: CloudantV1, params: PostViewParams, pageSupplier) {
     super(client, params);
@@ -164,7 +173,9 @@ export class TestKeyPageIterator extends KeyPageIterator<
   ViewResultRow
 > {
   pageSupplier;
+
   callCounter;
+
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(client: CloudantV1, params: PostViewParams, pageSupplier) {
     super(client, params);
@@ -191,17 +202,20 @@ export class TestKeyPageIterator extends KeyPageIterator<
     this.callCounter += 1;
     return this.mockCall.bind(this);
   }
+
   private mockCall() {
     const rows = this.pageSupplier.pages[this.pageSupplier.rowIterator];
     this.pageSupplier.rowIterator += 1;
     return { result: { rows } };
   }
+
   protected override checkBoundary(
     penultimateItem: CloudantV1.ViewResultRow,
     lastItem: CloudantV1.ViewResultRow
   ) {
     return null;
   }
+
   protected override getNextKey(item: ViewResultRow): number {
     return item as unknown as number;
   }
@@ -214,6 +228,7 @@ export class TestKeyPageIterator extends KeyPageIterator<
 
 export class TestBookmarkPageIterator extends FindPageIterator {
   pageSupplier;
+
   callCounter;
 
   constructor(client: CloudantV1, params: PostFindParams, pageSupplier) {
@@ -225,6 +240,7 @@ export class TestBookmarkPageIterator extends FindPageIterator {
   protected override getItems(result: FindResult): CloudantV1.Document[] {
     return result.docs;
   }
+
   // This is just a placeholder, so we can mock the function from the tests
   protected nextRequestFunction(): (
     params: CloudantV1.PostFindParams
@@ -251,19 +267,25 @@ export class PaginationMockSupport {
     PagerType.POST_PARTITION_ALL_DOCS,
     PagerType.POST_DESIGN_DOCS,
   ];
+
   static viewPagers = [PagerType.POST_VIEW, PagerType.POST_PARTITION_VIEW];
+
   static findPagers = [PagerType.POST_FIND, PagerType.POST_PARTITION_FIND];
+
   static searchPagers = [
     PagerType.POST_SEARCH,
     PagerType.POST_PARTITION_SEARCH,
   ];
+
   // the key pager types (n+1 paging)
   static keyPagers = PaginationMockSupport.allDocsPagers.concat(
     PaginationMockSupport.viewPagers
   );
+
   static bookmarkPagers = PaginationMockSupport.findPagers.concat(
     PaginationMockSupport.searchPagers
   );
+
   static mockOperation(pagerType) {
     switch (pagerType) {
       case PagerType.POST_ALL_DOCS:
@@ -288,6 +310,7 @@ export class PaginationMockSupport {
         throw new Error(`Unknown pager type of ${pagerType}, fail test.`);
     }
   }
+
   static makeWrapper(pagerType, total, rows) {
     if (PaginationMockSupport.keyPagers.includes(pagerType)) {
       return { 'total_rows': total, 'rows': rows };
@@ -311,6 +334,7 @@ export class PaginationMockSupport {
     }
     throw new Error(`Unknown pager type of ${pagerType}, fail test.`);
   }
+
   static makeRow(pagerType, i) {
     const id = `testDoc${i}`;
     const rev = `1-abc${i}`;
@@ -333,12 +357,19 @@ export class PaginationMockSupport {
 
 export class PaginationMockResponse {
   totalItems;
+
   pageSize;
+
   pages;
+
   pagerType;
+
   plusOnePaging;
+
   expectedPages;
+
   pageIterator;
+
   constructor(totalItems, pageSize, pagerType) {
     this.totalItems = totalItems;
     this.pageSize = pageSize;
@@ -350,6 +381,7 @@ export class PaginationMockResponse {
     this.expectedPages = [];
     this.pageIterator = 0;
   }
+
   wrapPages() {
     let pages = [];
     // Add an n+1 row for key based paging
@@ -377,6 +409,7 @@ export class PaginationMockResponse {
     }
     return pages;
   }
+
   getNextPage() {
     const nextPage = this.pages[this.pageIterator];
     this.pageIterator += 1;

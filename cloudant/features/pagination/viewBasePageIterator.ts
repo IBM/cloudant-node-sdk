@@ -28,6 +28,7 @@ export default abstract class ViewBasePageIterator<
   protected override getItems(result: ViewResult): Array<ViewResultRow> {
     return result.rows;
   }
+
   protected abstract nextRequestFunction(): (
     params: P
   ) => Promise<Response<ViewResult>>;
@@ -58,6 +59,7 @@ export default abstract class ViewBasePageIterator<
     }
     return null;
   }
+
   protected getValidateParamsAbsentErrorMessage(paramName) {
     let errorMsg = super.getValidateParamsAbsentErrorMessage(paramName);
     if (paramName === 'key') {

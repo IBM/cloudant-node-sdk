@@ -28,6 +28,7 @@ export default abstract class FindBasePageIterator<
   protected override getItems(result: FindResult): Array<Document> {
     return result.docs;
   }
+
   protected abstract nextRequestFunction(): (
     params: P
   ) => Promise<Response<FindResult>>;
