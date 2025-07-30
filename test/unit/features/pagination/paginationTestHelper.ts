@@ -62,7 +62,7 @@ export function makePageSupplier(
 ) {
   let pages: Array<Array<number>> = [];
   let page: Array<number> = [];
-  for (let i = 0; i < total; i++) {
+  for (let i = 0; i < total; i += 1) {
     page.push(i);
     if (page.length === pageSize) {
       pages.push(page);
