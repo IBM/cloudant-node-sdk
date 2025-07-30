@@ -119,7 +119,7 @@ export class Pagination<I> {
    */
   async *rows(): AsyncIterableIterator<I> {
     // eslint-disable-next-line no-restricted-syntax
-    for await (let row of this.rowStream()) {
+    for await (const row of this.rowStream()) {
       yield row;
     }
   }

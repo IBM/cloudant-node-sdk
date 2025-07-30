@@ -217,7 +217,7 @@ export class ChangesFollower {
       this.errorTolerance
     );
 
-    let resultsIterator = Readable.from(
+    const resultsIterator = Readable.from(
       pipeline(
         Readable.from(this.changesResultIterator),
         new Stream<Array<ChangesResultItem>>(),

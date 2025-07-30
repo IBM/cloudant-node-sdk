@@ -60,7 +60,7 @@ export function makePageSupplier(
   pageSize: number,
   isKeyPageSupplier: boolean = false
 ) {
-  let pages: Array<Array<number>> = [];
+  const pages: Array<Array<number>> = [];
   let page: Array<number> = [];
   for (let i = 0; i < total; i += 1) {
     page.push(i);
@@ -116,7 +116,7 @@ export class TestPageIterator extends BasePageIterator<
         'Test failure: tried to setNextPageParams on empty page.'
       );
     } else {
-      let i: ViewResultRow = items[items.length - 1];
+      const i: ViewResultRow = items[items.length - 1];
       this.setRowOnTestParams(params, i);
     }
   }
@@ -155,13 +155,13 @@ export class TestPageIterator extends BasePageIterator<
 }
 
 export function getDefaultTestParams(limit: number): PostFindParams {
-  let params: PostFindParams = getRequiredTestParams();
+  const params: PostFindParams = getRequiredTestParams();
   params.limit = limit;
   return params;
 }
 
 export function getRequiredTestParams(): PostFindParams {
-  let params: PostFindParams = {
+  const params: PostFindParams = {
     db: 'example-database',
     selector: { email_verified: { '$eq': true } },
   };
@@ -390,14 +390,14 @@ export class PaginationMockResponse {
   }
 
   wrapPages() {
-    let pages = [];
+    const pages = [];
     // Add an n+1 row for key based paging
     const pageSize = this.plusOnePaging ? this.pageSize + 1 : this.pageSize;
     makePageSupplier(this.totalItems, pageSize, this.plusOnePaging).forEach(
       (page) => {
-        let pageWithWrappedRows = [];
+        const pageWithWrappedRows = [];
         page.forEach((row) => {
-          let modifiedRow = PaginationMockSupport.makeRow(
+          const modifiedRow = PaginationMockSupport.makeRow(
             PagerType[this.pagerType],
             row
           );
