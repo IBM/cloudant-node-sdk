@@ -43,7 +43,7 @@ export class IteratorPager<I> implements Pager<I> {
 
   async getAll(): Promise<ReadonlyArray<I>> {
     this.checkState(State.GET_ALL);
-    let items: Array<I> = [];
+    const items: Array<I> = [];
     // eslint-disable-next-line no-restricted-syntax
     for await (const page of this.pageIterableIterator) {
       items.push(...page);

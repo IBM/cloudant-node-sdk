@@ -38,7 +38,7 @@ export default class ChangesParamsHelper {
     since?: string,
     limit?: number
   ): PostChangesParams {
-    let clonedParams: PostChangesParams = {
+    const clonedParams: PostChangesParams = {
       db: params.db,
       attEncodingInfo: params.attEncodingInfo,
       attachments: params.attachments,
@@ -73,8 +73,8 @@ export default class ChangesParamsHelper {
     if (!('db' in params) || !params.db) {
       throw new Error('The param db is required for PostChangesParams.');
     }
-    let invalidParams = [];
-    let paramsShouldBeUndefined = [
+    const invalidParams = [];
+    const paramsShouldBeUndefined = [
       'descending',
       'feed',
       'heartbeat',

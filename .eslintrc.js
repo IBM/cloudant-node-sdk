@@ -209,7 +209,6 @@ module.exports = {
         'no-undef': 'off',
         'no-unused-vars': 'off', // disable base rule in favour of the extended typescript rule:
         '@typescript-eslint/no-unused-vars': 'error',
-        'prefer-const': 'off',
         'prefer-destructuring': 'off',
         'prefer-exponentiation-operator': 'off',
         'prefer-regex-literals': 'off',
@@ -222,6 +221,7 @@ module.exports = {
         'max-len': 'off',
         'no-redeclare': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
+        'prefer-const': 'off',
       },
     },
     // Test folder specific rules
