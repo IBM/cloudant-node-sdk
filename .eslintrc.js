@@ -207,7 +207,8 @@ module.exports = {
         // Don't use no-undef in TS files.
         // https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
         'no-undef': 'off',
-        'no-unused-vars': 'off',
+        'no-unused-vars': 'off', // disable base rule in favour of the extended typescript rule:
+        '@typescript-eslint/no-unused-vars': 'error',
         'no-useless-return': 'off',
         'prefer-const': 'off',
         'prefer-destructuring': 'off',
@@ -221,6 +222,7 @@ module.exports = {
         'prettier/prettier': 'off',
         'max-len': 'off',
         'no-redeclare': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
       },
     },
     // Test folder specific rules
