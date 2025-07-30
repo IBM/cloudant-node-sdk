@@ -204,7 +204,6 @@ module.exports = {
         // Turn off not relevant airbnb rules on typescript files:
         'import/no-cycle': 'off',
         'no-dupe-class-members': 'off', // it is safe to disable this rule when using TS because TS's compiler enforces this check
-        'no-else-return': 'off',
         'no-plusplus': 'off',
         'no-promise-executor-return': 'off',
         'no-redeclare': 'off',

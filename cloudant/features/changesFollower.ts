@@ -205,9 +205,8 @@ export class ChangesFollower {
   private run(mode: Mode) {
     if (!this.changesResultIterator) {
       return this.createChangesResultItemsStream(mode);
-    } else {
-      throw new Error('Cannot start a feed that has already started.');
     }
+    throw new Error('Cannot start a feed that has already started.');
   }
 
   private createChangesResultItemsStream(mode: Mode) {
