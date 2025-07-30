@@ -209,7 +209,6 @@ module.exports = {
         'no-undef': 'off',
         'no-unused-vars': 'off', // disable base rule in favour of the extended typescript rule:
         '@typescript-eslint/no-unused-vars': 'error',
-        'no-useless-return': 'off',
         'prefer-const': 'off',
         'prefer-destructuring': 'off',
         'prefer-exponentiation-operator': 'off',

@@ -176,6 +176,7 @@ export default class ChangesResultIterableIterator
       this.promisedConfig,
       new Promise((resolve) => {
         setImmediate(resolve);
+        // eslint-disable-next-line no-useless-return
         return;
       }),
     ]);
