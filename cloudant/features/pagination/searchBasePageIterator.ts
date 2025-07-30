@@ -15,9 +15,9 @@
  */
 
 import CloudantV1, { Response, SearchResult, SearchResultRow } from '../../v1';
-import { BookmarkPageIterator } from './bookmarkPageIterator';
+import BookmarkPageIterator from './bookmarkPageIterator';
 
-export abstract class SearchBasePageIterator<
+export default abstract class SearchBasePageIterator<
   P extends CloudantV1.PostSearchParams | CloudantV1.PostPartitionSearchParams,
 > extends BookmarkPageIterator<P, SearchResult, SearchResultRow> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor

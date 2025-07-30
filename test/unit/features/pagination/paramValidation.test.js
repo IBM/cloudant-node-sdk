@@ -13,18 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {
-  BasePageIterator,
-} = require('../../../../cloudant/features/pagination/basePageIterator.ts');
-const {
-  SearchPageIterator,
-} = require('../../../../cloudant/features/pagination/searchPageIterator.ts');
-const {
-  AllDocsBasePageIterator,
-} = require('../../../../cloudant/features/pagination/allDocsBasePageIterator.ts');
-const {
-  ViewBasePageIterator,
-} = require('../../../../cloudant/features/pagination/viewBasePageIterator.ts');
+const BasePageIterator =
+  require('../../../../cloudant/features/pagination/basePageIterator.ts').default;
+const SearchPageIterator =
+  require('../../../../cloudant/features/pagination/searchPageIterator.ts').default;
+const AllDocsBasePageIterator =
+  require('../../../../cloudant/features/pagination/allDocsBasePageIterator.ts').default;
+const ViewBasePageIterator =
+  require('../../../../cloudant/features/pagination/viewBasePageIterator.ts').default;
 const { getClient } = require('../testDataProviders.js');
 const {
   TestKeyPageIterator,

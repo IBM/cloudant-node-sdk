@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { BasePageIterator } from './basePageIterator';
+import BasePageIterator from './basePageIterator';
 import CloudantV1, { Response } from '../../v1';
 
-export abstract class BookmarkPageIterator<
+export default abstract class BookmarkPageIterator<
   P extends
     | CloudantV1.PostFindParams
     | CloudantV1.PostPartitionFindParams

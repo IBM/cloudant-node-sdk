@@ -15,9 +15,9 @@
  */
 
 import CloudantV1, { AllDocsResult, DocsResultRow, Response } from '../../v1';
-import { KeyPageIterator } from './keyPageIterator';
+import KeyPageIterator from './keyPageIterator';
 
-export abstract class AllDocsBasePageIterator<
+export default abstract class AllDocsBasePageIterator<
   P extends
     | CloudantV1.PostAllDocsParams
     | CloudantV1.PostPartitionAllDocsParams

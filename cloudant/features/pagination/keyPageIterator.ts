@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { BasePageIterator } from './basePageIterator';
+import BasePageIterator from './basePageIterator';
 import CloudantV1, { Response } from '../../v1';
 
-export abstract class KeyPageIterator<
+export default abstract class KeyPageIterator<
   K,
   P extends
     | CloudantV1.PostAllDocsParams

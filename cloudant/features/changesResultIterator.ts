@@ -16,7 +16,7 @@
 
 import { getNewLogger } from 'ibm-cloud-sdk-core';
 import { promisify } from 'node:util';
-import { ChangesParamsHelper } from './changesParamsHelper';
+import ChangesParamsHelper from './changesParamsHelper';
 import { ChangesFollower, Mode } from './changesFollower';
 import CloudantV1, { PostChangesParams } from '../v1';
 
@@ -26,7 +26,7 @@ enum TransientErrorSuppression {
   TIMER,
 }
 
-export class ChangesResultIterableIterator
+export default class ChangesResultIterableIterator
   implements AsyncIterableIterator<CloudantV1.ChangesResult>
 {
   private readonly timeoutPromise = promisify(setTimeout);

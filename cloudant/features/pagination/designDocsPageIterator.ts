@@ -19,9 +19,9 @@ import CloudantV1, {
   PostDesignDocsParams,
   Response,
 } from '../../v1';
-import { AllDocsBasePageIterator } from './allDocsBasePageIterator';
+import AllDocsBasePageIterator from './allDocsBasePageIterator';
 
-export class DesignDocsPageIterator extends AllDocsBasePageIterator<PostDesignDocsParams> {
+export default class DesignDocsPageIterator extends AllDocsBasePageIterator<PostDesignDocsParams> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(client: CloudantV1, params: PostDesignDocsParams) {
     super(client, params);

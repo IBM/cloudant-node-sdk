@@ -16,7 +16,7 @@
 
 import { PassThrough, TransformCallback, TransformOptions } from 'node:stream';
 
-export class Stream<T> extends PassThrough {
+export default class Stream<T> extends PassThrough {
   constructor(opts?: TransformOptions) {
     super({
       ...opts,
