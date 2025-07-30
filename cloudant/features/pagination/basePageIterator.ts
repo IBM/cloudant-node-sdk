@@ -78,7 +78,7 @@ export default abstract class BasePageIterator<
       this.client,
       this.nextPageParams
     );
-    const result: R = response.result;
+    const { result }: { result: R } = response;
     const items: Array<I> = this.getItems(result);
     if (items.length < this.pageSize) {
       this._hasNext = false;

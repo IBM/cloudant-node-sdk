@@ -263,7 +263,7 @@ export class TestBookmarkPageIterator extends FindPageIterator {
   }
 
   protected override getBookmark(result: FindResult): string {
-    const docs = result.docs;
+    const { docs } = result;
     return (docs.length - 1).toString();
   }
 }
