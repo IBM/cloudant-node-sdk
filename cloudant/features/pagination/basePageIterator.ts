@@ -119,11 +119,11 @@ export default abstract class BasePageIterator<
   }
 
   protected validateParamsAbsent(params: P, paramNames: Array<string>) {
-    for (let paramName of paramNames) {
+    paramNames.forEach((paramName) => {
       if (params[paramName] !== undefined) {
         throw new Error(this.getValidateParamsAbsentErrorMessage(paramName));
       }
-    }
+    });
   }
 
   protected getValidateParamsAbsentErrorMessage(paramName) {

@@ -388,27 +388,25 @@ export class PaginationMockResponse {
     let pages = [];
     // Add an n+1 row for key based paging
     const pageSize = this.plusOnePaging ? this.pageSize + 1 : this.pageSize;
-    for (let page of makePageSupplier(
-      this.totalItems,
-      pageSize,
-      this.plusOnePaging
-    )) {
-      let pageWithWrappedRows = [];
-      for (let row of page) {
-        let modifiedRow = PaginationMockSupport.makeRow(
-          PagerType[this.pagerType],
-          row
+    makePageSupplier(this.totalItems, pageSize, this.plusOnePaging).forEach(
+      (page) => {
+        let pageWithWrappedRows = [];
+        page.forEach((row) => {
+          let modifiedRow = PaginationMockSupport.makeRow(
+            PagerType[this.pagerType],
+            row
+          );
+          pageWithWrappedRows.push(modifiedRow);
+        });
+        pages.push(
+          PaginationMockSupport.makeWrapper(
+            PagerType[this.pagerType],
+            this.totalItems,
+            pageWithWrappedRows
+          )
         );
-        pageWithWrappedRows.push(modifiedRow);
       }
-      pages.push(
-        PaginationMockSupport.makeWrapper(
-          PagerType[this.pagerType],
-          this.totalItems,
-          pageWithWrappedRows
-        )
-      );
-    }
+    );
     return pages;
   }
 

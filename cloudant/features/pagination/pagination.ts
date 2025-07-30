@@ -118,6 +118,7 @@ export class Pagination<I> {
    *  @return an {@link AsyncIterableIterator} over all the result rows
    */
   async *rows(): AsyncIterableIterator<I> {
+    // eslint-disable-next-line no-restricted-syntax
     for await (let row of this.rowStream()) {
       yield row;
     }
