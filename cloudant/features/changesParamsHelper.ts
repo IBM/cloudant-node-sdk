@@ -50,10 +50,10 @@ export default class ChangesParamsHelper {
       // no heartbeat
       includeDocs: params.includeDocs,
       // no lastEventId
-      limit: limit ? limit : params.limit,
+      limit: limit || params.limit,
       selector: params.selector,
       seqInterval: params.seqInterval,
-      since: since ? since : params.since,
+      since: since || params.since,
       style: params.style,
       view: params.view,
     };
