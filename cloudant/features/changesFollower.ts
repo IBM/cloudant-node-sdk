@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { pipeline, Readable } from 'node:stream';
 import CloudantV1, {
   ChangesResultItem,
   PostChangesParams,
@@ -20,7 +21,6 @@ import CloudantV1, {
 } from '../v1';
 import { Stream } from './stream';
 import { ChangesParamsHelper } from './changesParamsHelper';
-import { pipeline, Readable } from 'node:stream';
 import { ChangesResultIterableIterator } from './changesResultIterator';
 
 /** @internal */
