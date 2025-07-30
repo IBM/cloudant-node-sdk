@@ -138,10 +138,10 @@ export class SessionTokenManager extends TokenManager {
     let expireTime = null;
     let refreshTime = null;
     for (let i = 0; i < sessionCookie.length && sessionToken == null; i += 1) {
-      sessionToken = new RegExp('AuthSession=([^;]*);').exec(sessionCookie[i]);
+      sessionToken = /AuthSession=([^;]*);/.exec(sessionCookie[i]);
       if (sessionToken != null) {
-        expireTime = new RegExp('.*Expires=([^;]*);').exec(sessionCookie[i]);
-        refreshTime = new RegExp('.*Max-Age=([^;]*);').exec(sessionCookie[i]);
+        expireTime = /.*Expires=([^;]*);/.exec(sessionCookie[i]);
+        refreshTime = /.*Max-Age=([^;]*);/.exec(sessionCookie[i]);
       }
     }
     if (sessionToken == null) {
