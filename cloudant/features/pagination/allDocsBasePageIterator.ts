@@ -33,9 +33,7 @@ export default abstract class AllDocsBasePageIterator<
    * key is the same as id.
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected override setNextKeyId(params: P, startKeyDocId: string) {
-    return;
-  }
+  protected override setNextKeyId(params: P, startKeyDocId: string) {}
 
   protected override getItems(result: AllDocsResult): Array<DocsResultRow> {
     return result.rows;
