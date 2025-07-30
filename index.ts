@@ -18,7 +18,7 @@
  * @module cloudant-node-sdk
  */
 
-import { default as CloudantV1 } from './cloudant/v1';
+import CloudantV1 from './cloudant/v1';
 
 export { CloudantV1 };
 

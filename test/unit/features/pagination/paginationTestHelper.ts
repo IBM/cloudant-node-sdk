@@ -16,9 +16,8 @@
 import { BasePageIterator } from '../../../../cloudant/features/pagination/basePageIterator';
 import { FindPageIterator } from '../../../../cloudant/features/pagination/findPageIterator';
 import { KeyPageIterator } from '../../../../cloudant/features/pagination/keyPageIterator';
-import {
+import CloudantV1, {
   PostViewParams,
-  default as CloudantV1,
   ViewResultRow,
   PostFindParams,
   FindResult,

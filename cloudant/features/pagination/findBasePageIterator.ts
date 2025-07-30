@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-import {
-  default as CloudantV1,
-  FindResult,
-  Document,
-  Response,
-} from '../../v1';
+import CloudantV1, { FindResult, Document, Response } from '../../v1';
 import { BookmarkPageIterator } from './bookmarkPageIterator';
 
 export abstract class FindBasePageIterator<

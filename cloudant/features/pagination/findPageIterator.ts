@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-import {
-  default as CloudantV1,
-  FindResult,
-  PostFindParams,
-  Response,
-} from '../../v1';
+import CloudantV1, { FindResult, PostFindParams, Response } from '../../v1';
 import { FindBasePageIterator } from './findBasePageIterator';
 
 export class FindPageIterator extends FindBasePageIterator<PostFindParams> {

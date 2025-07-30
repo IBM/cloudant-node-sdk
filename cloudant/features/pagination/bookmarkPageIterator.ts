@@ -15,7 +15,7 @@
  */
 
 import { BasePageIterator } from './basePageIterator';
-import { default as CloudantV1, Response } from '../../v1';
+import CloudantV1, { Response } from '../../v1';
 
 export abstract class BookmarkPageIterator<
   P extends

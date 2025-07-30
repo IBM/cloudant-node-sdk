@@ -203,8 +203,6 @@ module.exports = {
         'eqeqeq': ['error', 'always', { 'null': 'ignore' }],
         // Turn off not relevant airbnb rules on typescript files:
         'import/no-cycle': 'off',
-        'import/no-cycles': 'off',
-        'import/no-named-default': 'off',
         'import/order': 'off',
         'import/prefer-default-export': 'off',
         'lines-between-class-members': 'off',

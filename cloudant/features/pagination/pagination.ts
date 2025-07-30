@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import {
-  default as CloudantV1,
+import CloudantV1, {
   DocsResultRow,
   Document,
   PostAllDocsParams,
