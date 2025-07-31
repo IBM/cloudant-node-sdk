@@ -86,16 +86,11 @@ export enum Mode {
 export class ChangesFollower {
   /** @internal */
   static BATCH_SIZE = 10_000;
-
   // Initialization fields
   private readonly client: CloudantV1;
-
   private readonly params: PostChangesParams;
-
   private readonly errorTolerance?: number;
-
   private limit: number;
-
   private changesResultIterator: ChangesResultIterableIterator;
 
   /**

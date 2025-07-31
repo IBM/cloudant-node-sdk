@@ -52,11 +52,8 @@ export type CouchdbSessionAuthenticatorOptions = {
  */
 export class CouchdbSessionAuthenticator extends Authenticator {
   protected tokenManager: SessionTokenManager;
-
   protected requiredOptions: ['username', 'password'];
-
   private tokenOptions: SessionTokenManagerOptions;
-
   static readonly AUTHTYPE_COUCHDB_SESSION = 'COUCHDB_SESSION';
 
   /**

@@ -40,16 +40,11 @@ export default abstract class BasePageIterator<
 > implements PageIterator<I>
 {
   protected client: CloudantV1;
-
   protected pageSize: number;
-
   protected _hasNext: boolean = true;
-
   protected nextPageParams: P;
-
   // The maximum and minimum limit values (i.e. page size)
   protected static MAX_LIMIT = 200;
-
   protected static MIN_LIMIT = 1;
 
   constructor(client: CloudantV1, params: P) {

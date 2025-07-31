@@ -201,6 +201,12 @@ module.exports = {
           },
         ],
         'eqeqeq': 'error',
+        'lines-between-class-members': [
+          'error',
+          {
+            'enforce': [{ blankLine: 'never', prev: 'field', next: 'field' }],
+          },
+        ],
         'import/no-cycle': 'off',
         'no-dupe-class-members': 'off', // it is safe to disable this rule when using TS because TS's compiler enforces this check
         // Don't use no-undef in TS files.
@@ -218,6 +224,7 @@ module.exports = {
         'no-redeclare': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
         'prefer-const': 'off',
+        'lines-between-class-members': 'off',
       },
     },
     // Test folder specific rules

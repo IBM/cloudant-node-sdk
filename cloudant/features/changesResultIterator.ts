@@ -30,49 +30,30 @@ export default class ChangesResultIterableIterator
   implements AsyncIterableIterator<CloudantV1.ChangesResult>
 {
   private readonly timeoutPromise = promisify(setTimeout);
-
   private readonly cancelToken = 'CloudantChangesIteratorCancel';
-
   private readonly client: CloudantV1;
-
   private readonly doneResult: IteratorResult<CloudantV1.ChangesResult> = {
     done: true,
     value: undefined,
   };
-
   private readonly errorTolerance?: number;
-
   private readonly logger = getNewLogger('cloudant-node-sdk');
-
   private readonly mode: Mode;
-
   private readonly promisedConfig: Promise<void>;
-
   private readonly transientErrorSuppression: TransientErrorSuppression;
-
   private readonly baseDelay: number = 100;
-
   private readonly expRetryGate: number = Math.floor(
     Math.log2(ChangesParamsHelper.LONGPOLL_TIMEOUT / this.baseDelay)
   );
-
   private cancel: (error?: Error) => void;
-
   private countDown: number;
-
   private inflight: Promise<any> = null;
-
   private params: PostChangesParams;
-
   // Default to "infinite"
   private pending: number = Number.MAX_VALUE;
-
   private since: string;
-
   private stopped: boolean = false;
-
   private successTimestamp: number;
-
   private retry: number = 0;
 
   constructor(

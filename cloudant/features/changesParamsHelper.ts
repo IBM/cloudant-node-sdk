@@ -24,7 +24,6 @@ export default class ChangesParamsHelper {
    * so it makes sense to set as our minimum client timeout.
    */
   static MIN_CLIENT_TIMEOUT: number = 60_000;
-
   /**
    * Set longpoll timeout to {@link MIN_CLIENT_TIMEOUT} - 3 second (= 3000 ms).
    * To give the changes request a chance to be answered before the client timeout
