@@ -31,21 +31,10 @@ export default abstract class BookmarkPageIterator<
     super(client, params);
   }
 
-  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
-  protected setBookmark(params: P, bookmark: string) {
-    params.bookmark = bookmark;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
-  protected getBookmark(result: R): string {
-    return result.bookmark;
-  }
-
   protected abstract getItems(result: R): Array<I>;
 
-  protected setNextPageParams(params: P, result: R) {
-    const bookmark = this.getBookmark(result);
-    this.setBookmark(params, bookmark);
+  protected setNextPageParams(result: R) {
+    this.nextPageParams.bookmark = result.bookmark;
   }
 
   protected abstract nextRequestFunction(): (params: P) => Promise<Response<R>>;

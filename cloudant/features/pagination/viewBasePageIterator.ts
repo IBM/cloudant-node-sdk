@@ -19,7 +19,7 @@ import KeyPageIterator from './keyPageIterator';
 
 export default abstract class ViewBasePageIterator<
   P extends CloudantV1.PostViewParams | CloudantV1.PostPartitionViewParams,
-> extends KeyPageIterator<any, P, ViewResult, ViewResultRow> {
+> extends KeyPageIterator<P, ViewResult, ViewResultRow> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(client: CloudantV1, params: P) {
     super(client, params);
@@ -33,8 +33,8 @@ export default abstract class ViewBasePageIterator<
     params: P
   ) => Promise<Response<ViewResult>>;
 
-  protected override setNextKeyId(params: P, startKeyDocId: string) {
-    params.startKeyDocId = startKeyDocId;
+  protected override setNextKeyId(startKeyDocId: string) {
+    this.nextPageParams.startKeyDocId = startKeyDocId;
   }
 
   protected override checkBoundary(

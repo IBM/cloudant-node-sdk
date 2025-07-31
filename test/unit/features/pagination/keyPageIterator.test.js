@@ -99,7 +99,7 @@ describe('KeyPageIterator tests', () => {
     // Get next page
     const actualSecondPage = await pageIterator.next();
     // Assert first item on second page is correct (again we start at zero, so pageSize not pageSize + 1)
-    expect(actualSecondPage.value[0]).toEqual(pageSize);
+    expect(actualSecondPage.value[0].key).toEqual(pageSize);
     // Assert size is 1
     expect(actualSecondPage.value).toHaveLength(1);
     // Assert second page
@@ -129,7 +129,7 @@ describe('KeyPageIterator tests', () => {
     // Get next page
     const actualSecondPage = await pageIterator.next();
     // Assert first item on second page is correct (again we start at zero, so pageSize not pageSize + 1)
-    expect(actualSecondPage.value[0]).toEqual(pageSize);
+    expect(actualSecondPage.value[0].key).toEqual(pageSize);
     // Assert size is 2
     expect(actualSecondPage.value).toHaveLength(2);
     // Assert second page

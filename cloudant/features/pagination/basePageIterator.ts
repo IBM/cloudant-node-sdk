@@ -83,14 +83,14 @@ export default abstract class BasePageIterator<
     if (items.length < this.pageSize) {
       this._hasNext = false;
     } else {
-      this.setNextPageParams(this.nextPageParams, result);
+      this.setNextPageParams(result);
     }
     return items;
   }
 
   protected abstract getItems(result: R): Array<I>;
 
-  protected abstract setNextPageParams(params: P, result: R): void;
+  protected abstract setNextPageParams(result: R): void;
 
   protected abstract nextRequestFunction(): (params: P) => Promise<Response<R>>;
 
