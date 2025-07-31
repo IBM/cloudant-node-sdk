@@ -125,7 +125,6 @@ export default class ChangesResultIterableIterator
     return this;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async return(value?: any): Promise<IteratorResult<CloudantV1.ChangesResult>> {
     this.logger.debug('Iterator return entry.');
     if (!this.stopped) {
@@ -140,7 +139,6 @@ export default class ChangesResultIterableIterator
     return this.doneResult;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async next(value?: any): Promise<IteratorResult<CloudantV1.ChangesResult>> {
     this.logger.debug('Iterator next entry.');
     // Stop the iterator if stopped is set to true.

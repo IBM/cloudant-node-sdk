@@ -32,7 +32,6 @@ export default abstract class AllDocsBasePageIterator<
    * Setting start key doc ID is a no-op for all_docs based paging where
    * key is the same as id.
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected override setNextKeyId(startKeyDocId: string) {}
 
   protected override getItems(result: AllDocsResult): Array<DocsResultRow> {
@@ -44,10 +43,8 @@ export default abstract class AllDocsBasePageIterator<
   ) => Promise<Response<AllDocsResult>>;
 
   protected override checkBoundary(
-    /* eslint-disable @typescript-eslint/no-unused-vars */
     penultimateItem: DocsResultRow,
     lastItem: DocsResultRow
-    /* eslint-disable @typescript-eslint/no-unused-vars */
   ) {
     return null;
   }
