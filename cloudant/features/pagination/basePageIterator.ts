@@ -57,7 +57,6 @@ export default abstract class BasePageIterator<
   }
 
   public async next(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     ...[value]: [] | [any]
   ): Promise<IteratorResult<ReadonlyArray<I>, any>> {
     if (this._hasNext) {

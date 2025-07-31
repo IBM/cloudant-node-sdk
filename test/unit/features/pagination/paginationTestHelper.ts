@@ -176,12 +176,8 @@ export class TestKeyPageIterator extends KeyPageIterator<
     this.callCounter = 0;
   }
 
-  protected override setNextKeyId(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    startKeyDocId: string
-  ) {}
+  protected override setNextKeyId(startKeyDocId: string) {}
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected override getItems(result: TestResult): CloudantV1.ViewResultRow[] {
     return result.rows;
   }
@@ -203,10 +199,8 @@ export class TestKeyPageIterator extends KeyPageIterator<
   }
 
   protected override checkBoundary(
-    /* eslint-disable @typescript-eslint/no-unused-vars */
     penultimateItem: CloudantV1.ViewResultRow,
     lastItem: CloudantV1.ViewResultRow
-    /* eslint-disable @typescript-eslint/no-unused-vars */
   ) {
     return null;
   }

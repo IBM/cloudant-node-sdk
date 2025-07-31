@@ -79,7 +79,6 @@ export class CouchdbSessionAuthenticator extends Authenticator {
    * @param {object.<string, string>} requestOptions.headers - The headers the
    *   authentication information will be added to.
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public authenticate(requestOptions: object): Promise<void> {
     return this.tokenManager.getToken();
   }
