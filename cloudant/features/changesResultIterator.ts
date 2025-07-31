@@ -255,7 +255,8 @@ export default class ChangesResultIterableIterator
             this.logger.verbose(`ChangesResultStream stream: ${err.message}`);
             throw err;
           default:
-          // do nothing
+            err.message = `${err.message}\nMeanwhile this other error happened: No implementation available for TransientErrorSuppression of ${this.transientErrorSuppression}.`;
+            throw err;
         }
         switch (err.code) {
           case 400:
