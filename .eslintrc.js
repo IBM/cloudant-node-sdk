@@ -200,7 +200,7 @@ module.exports = {
             'ignoreClassesThatImplementAnInterface': true,
           },
         ],
-        'eqeqeq': ['error', 'always', { 'null': 'ignore' }],
+        'eqeqeq': 'error',
         'import/no-cycle': 'off',
         'no-dupe-class-members': 'off', // it is safe to disable this rule when using TS because TS's compiler enforces this check
         // Don't use no-undef in TS files.

@@ -113,8 +113,8 @@ export default abstract class BasePageIterator<
   }
 
   protected validate(params: P): void {
-    // != null filters out undefined and null values for limit:
-    if (params.limit != null) {
+    // filter out undefined and null values for limit:
+    if (params.limit !== undefined && params.limit !== null) {
       this.validateLimit(params.limit);
     }
   }
