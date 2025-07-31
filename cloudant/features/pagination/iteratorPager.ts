@@ -18,7 +18,6 @@ import { Pager } from './pager';
 
 export class IteratorPager<I> implements Pager<I> {
   private pageIterableIterator: PageIterator<I>;
-
   private state: State = State.NEW;
 
   constructor(pageIterableIterator: PageIterator<I>) {

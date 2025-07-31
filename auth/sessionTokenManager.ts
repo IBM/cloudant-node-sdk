@@ -45,9 +45,7 @@ export class SessionTokenManager extends TokenManager {
     'serviceUrl',
     'jar',
   ];
-
   private tokenName: string;
-
   private options: SessionTokenManagerOptions;
 
   /**

@@ -37,13 +37,9 @@ export const mockClient = getClient();
 
 export class PageSupplier {
   pages: (number | { key: number })[][];
-
   allItems: any;
-
   rowIterator: number;
-
   errorMessage: any;
-
   resumable: boolean;
 
   constructor(total, pageSize, errorMessage, resumable = false) {
@@ -80,9 +76,7 @@ export function makePageSupplier(
 
 export class TestResult {
   rows;
-
   totalRows;
-
   docs;
 }
 
@@ -96,7 +90,6 @@ export class TestPageIterator extends BasePageIterator<
   ViewResultRow
 > {
   pageSupplier;
-
   callCounter;
 
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
@@ -174,7 +167,6 @@ export class TestKeyPageIterator extends KeyPageIterator<
   ViewResultRow
 > {
   pageSupplier;
-
   callCounter;
 
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
@@ -222,7 +214,6 @@ export class TestKeyPageIterator extends KeyPageIterator<
 
 export class TestBookmarkPageIterator extends FindPageIterator {
   pageSupplier;
-
   callCounter;
 
   constructor(client: CloudantV1, params: PostFindParams, pageSupplier) {
@@ -262,21 +253,16 @@ export class PaginationMockSupport {
     PagerType.POST_PARTITION_ALL_DOCS,
     PagerType.POST_DESIGN_DOCS,
   ];
-
   static viewPagers = [PagerType.POST_VIEW, PagerType.POST_PARTITION_VIEW];
-
   static findPagers = [PagerType.POST_FIND, PagerType.POST_PARTITION_FIND];
-
   static searchPagers = [
     PagerType.POST_SEARCH,
     PagerType.POST_PARTITION_SEARCH,
   ];
-
   // the key pager types (n+1 paging)
   static keyPagers = PaginationMockSupport.allDocsPagers.concat(
     PaginationMockSupport.viewPagers
   );
-
   static bookmarkPagers = PaginationMockSupport.findPagers.concat(
     PaginationMockSupport.searchPagers
   );
@@ -352,17 +338,11 @@ export class PaginationMockSupport {
 
 export class PaginationMockResponse {
   totalItems;
-
   pageSize;
-
   pages;
-
   pagerType;
-
   plusOnePaging;
-
   expectedPages;
-
   pageIterator;
 
   constructor(totalItems, pageSize, pagerType) {
