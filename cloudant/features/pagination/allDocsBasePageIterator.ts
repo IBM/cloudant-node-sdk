@@ -22,7 +22,7 @@ export default abstract class AllDocsBasePageIterator<
     | CloudantV1.PostAllDocsParams
     | CloudantV1.PostPartitionAllDocsParams
     | CloudantV1.PostDesignDocsParams,
-> extends KeyPageIterator<string, P, AllDocsResult, DocsResultRow> {
+> extends KeyPageIterator<P, AllDocsResult, DocsResultRow> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(client: CloudantV1, params: P) {
     super(client, params);
@@ -33,7 +33,7 @@ export default abstract class AllDocsBasePageIterator<
    * key is the same as id.
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected override setNextKeyId(params: P, startKeyDocId: string) {}
+  protected override setNextKeyId(startKeyDocId: string) {}
 
   protected override getItems(result: AllDocsResult): Array<DocsResultRow> {
     return result.rows;

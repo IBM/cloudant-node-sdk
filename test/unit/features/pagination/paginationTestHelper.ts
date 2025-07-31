@@ -36,7 +36,7 @@ export const DEFAULT_PAGE_SIZE = 200;
 export const mockClient = getClient();
 
 export class PageSupplier {
-  pages: number[][];
+  pages: (number | { key: number })[][];
 
   allItems: any;
 
@@ -60,15 +60,16 @@ export function makePageSupplier(
   pageSize: number,
   isKeyPageSupplier: boolean = false
 ) {
-  const pages: Array<Array<number>> = [];
-  let page: Array<number> = [];
+  const pages: Array<Array<number | { key: number }>> = [];
+  let page: Array<number | { key: number }> = [];
   for (let i = 0; i < total; i += 1) {
-    page.push(i);
+    const item = isKeyPageSupplier ? { key: i } : i;
+    page.push(item);
     if (page.length === pageSize) {
       pages.push(page);
       page = [];
       if (isKeyPageSupplier) {
-        page = [i]; // key page supplier next page have this last item as first
+        page = [item]; // key page supplier next page have this last item as first
       }
     }
   }
@@ -109,7 +110,7 @@ export class TestPageIterator extends BasePageIterator<
     return result.rows;
   }
 
-  setNextPageParams(params: PostViewParams, result: TestResult): void {
+  setNextPageParams(result: TestResult): void {
     const items: Array<ViewResultRow> = this.getItems(result);
     if (items.length === 0) {
       throw new Error(
@@ -117,7 +118,7 @@ export class TestPageIterator extends BasePageIterator<
       );
     } else {
       const i: ViewResultRow = items[items.length - 1];
-      this.setRowOnTestParams(params, i);
+      this.setRowOnTestParams(i);
     }
   }
 
@@ -148,9 +149,8 @@ export class TestPageIterator extends BasePageIterator<
     return { result: { rows } };
   }
 
-  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
-  setRowOnTestParams(params: PostViewParams, row: ViewResultRow) {
-    params.startKey = row;
+  setRowOnTestParams(row: ViewResultRow) {
+    this.nextPageParams.startKey = row;
   }
 }
 
@@ -169,7 +169,6 @@ export function getRequiredTestParams(): PostFindParams {
 }
 
 export class TestKeyPageIterator extends KeyPageIterator<
-  number,
   PostViewParams,
   TestResult,
   ViewResultRow
@@ -185,12 +184,9 @@ export class TestKeyPageIterator extends KeyPageIterator<
     this.callCounter = 0;
   }
 
-  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
   protected override setNextKeyId(
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    params: PostViewParams,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     startKeyDocId: string
-    /* eslint-disable @typescript-eslint/no-unused-vars */
   ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -222,15 +218,6 @@ export class TestKeyPageIterator extends KeyPageIterator<
   ) {
     return null;
   }
-
-  protected override getNextKey(item: ViewResultRow): number {
-    return item as unknown as number;
-  }
-
-  protected override getNextKeyId(item: ViewResultRow): string {
-    const itemAsNumber = item as unknown as number;
-    return itemAsNumber.toString();
-  }
 }
 
 export class TestBookmarkPageIterator extends FindPageIterator {
@@ -259,12 +246,13 @@ export class TestBookmarkPageIterator extends FindPageIterator {
   private mockCall() {
     const docs = this.pageSupplier.pages[this.pageSupplier.rowIterator];
     this.pageSupplier.rowIterator += 1;
-    return { result: { docs } };
-  }
-
-  protected override getBookmark(result: FindResult): string {
-    const { docs } = result;
-    return (docs.length - 1).toString();
+    let result: { result: { docs: number[]; bookmark?: string } } = {
+      result: { docs },
+    };
+    if (docs.length > 0) {
+      result = { result: { docs, bookmark: docs[docs.length - 1].toString() } };
+    }
+    return result;
   }
 }
 

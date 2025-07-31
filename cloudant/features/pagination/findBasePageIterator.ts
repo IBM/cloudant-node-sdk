@@ -33,10 +33,10 @@ export default abstract class FindBasePageIterator<
     params: P
   ) => Promise<Response<FindResult>>;
 
-  protected setNextPageParams(params: P, result: FindResult): void {
-    super.setNextPageParams(params, result);
-    if (params.skip) {
-      delete params.skip;
+  protected setNextPageParams(result: FindResult): void {
+    super.setNextPageParams(result);
+    if (this.nextPageParams.skip) {
+      delete this.nextPageParams.skip;
     }
   }
 }
