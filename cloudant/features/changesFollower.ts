@@ -124,8 +124,7 @@ export class ChangesFollower {
     if (errorTolerance < 0) {
       throw new Error('Error tolerance duration must not be negative.');
     }
-    // loose equality for null and undefined values
-    if (errorTolerance == null) {
+    if (errorTolerance === undefined || errorTolerance === null) {
       this.errorTolerance = Number.MAX_VALUE;
     } else {
       this.errorTolerance = errorTolerance;
