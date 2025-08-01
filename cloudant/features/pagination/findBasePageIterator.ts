@@ -25,11 +25,6 @@ import { BookmarkPageIterator } from './bookmarkPageIterator';
 export abstract class FindBasePageIterator<
   P extends CloudantV1.PostFindParams | CloudantV1.PostPartitionFindParams,
 > extends BookmarkPageIterator<P, FindResult, Document> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(client: CloudantV1, params: P) {
-    super(client, params);
-  }
-
   protected override getItems(result: FindResult): Array<Document> {
     return result.docs;
   }
