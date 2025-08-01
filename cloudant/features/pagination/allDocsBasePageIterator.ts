@@ -14,10 +14,15 @@
  * limitations under the License.
  */
 
-import CloudantV1, { AllDocsResult, DocsResultRow, Response } from '../../v1';
-import KeyPageIterator from './keyPageIterator';
+import {
+  default as CloudantV1,
+  AllDocsResult,
+  DocsResultRow,
+  Response,
+} from '../../v1';
+import { KeyPageIterator } from './keyPageIterator';
 
-export default abstract class AllDocsBasePageIterator<
+export abstract class AllDocsBasePageIterator<
   P extends
     | CloudantV1.PostAllDocsParams
     | CloudantV1.PostPartitionAllDocsParams

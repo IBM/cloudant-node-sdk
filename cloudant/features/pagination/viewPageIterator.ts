@@ -14,10 +14,15 @@
  * limitations under the License.
  */
 
-import CloudantV1, { PostViewParams, Response, ViewResult } from '../../v1';
-import ViewBasePageIterator from './viewBasePageIterator';
+import {
+  default as CloudantV1,
+  PostViewParams,
+  Response,
+  ViewResult,
+} from '../../v1';
+import { ViewBasePageIterator } from './viewBasePageIterator';
 
-export default class ViewPageIterator extends ViewBasePageIterator<PostViewParams> {
+export class ViewPageIterator extends ViewBasePageIterator<PostViewParams> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(client: CloudantV1, params: PostViewParams) {
     super(client, params);

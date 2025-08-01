@@ -19,8 +19,6 @@
  */
 
 import CloudantV1 from './cloudant/v1';
-import Stream from './cloudant/features/stream';
-import ChangesFollower from './cloudant/features/changesFollower';
 
 export { CloudantV1 };
 
@@ -31,8 +29,8 @@ export {
   CouchdbSessionAuthenticatorOptions,
 } from './auth';
 
-export { ChangesFollower };
-export { Stream };
+export { ChangesFollower } from './cloudant/features/changesFollower';
+export { Stream } from './cloudant/features/stream';
 export {
   Pagination,
   PagerType,

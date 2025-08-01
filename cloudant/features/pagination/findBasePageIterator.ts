@@ -14,10 +14,15 @@
  * limitations under the License.
  */
 
-import CloudantV1, { FindResult, Document, Response } from '../../v1';
-import BookmarkPageIterator from './bookmarkPageIterator';
+import {
+  default as CloudantV1,
+  FindResult,
+  Document,
+  Response,
+} from '../../v1';
+import { BookmarkPageIterator } from './bookmarkPageIterator';
 
-export default abstract class FindBasePageIterator<
+export abstract class FindBasePageIterator<
   P extends CloudantV1.PostFindParams | CloudantV1.PostPartitionFindParams,
 > extends BookmarkPageIterator<P, FindResult, Document> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor

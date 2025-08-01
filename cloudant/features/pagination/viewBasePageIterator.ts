@@ -14,10 +14,15 @@
  * limitations under the License.
  */
 
-import CloudantV1, { Response, ViewResult, ViewResultRow } from '../../v1';
-import KeyPageIterator from './keyPageIterator';
+import {
+  default as CloudantV1,
+  Response,
+  ViewResult,
+  ViewResultRow,
+} from '../../v1';
+import { KeyPageIterator } from './keyPageIterator';
 
-export default abstract class ViewBasePageIterator<
+export abstract class ViewBasePageIterator<
   P extends CloudantV1.PostViewParams | CloudantV1.PostPartitionViewParams,
 > extends KeyPageIterator<P, ViewResult, ViewResultRow> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor

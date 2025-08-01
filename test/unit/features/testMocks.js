@@ -15,8 +15,9 @@
  */
 
 const core = require('ibm-cloud-sdk-core');
-const ChangesResultIterableIterator =
-  require('../../../cloudant/features/changesResultIterator.ts').default;
+const {
+  ChangesResultIterableIterator,
+} = require('../../../cloudant/features/changesResultIterator.ts');
 const { getTransientErrors } = require('./mockErrors');
 
 const { NoAuthAuthenticator } = core;

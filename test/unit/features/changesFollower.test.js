@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-const ChangesFollower =
-  require('../../../cloudant/features/changesFollower.ts').default;
+const {
+  ChangesFollower,
+} = require('../../../cloudant/features/changesFollower.ts');
 const { Mode } = require('../../../cloudant/features/changesParamsHelper.ts');
-const ChangesResultIterableIterator =
-  require('../../../cloudant/features/changesResultIterator.ts').default;
+const {
+  ChangesResultIterableIterator,
+} = require('../../../cloudant/features/changesResultIterator.ts');
 const { testParams } = require('./testParams.js');
 const {
   getStates,

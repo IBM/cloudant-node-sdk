@@ -16,11 +16,13 @@
 
 const core = require('ibm-cloud-sdk-core');
 const { testParams } = require('./testParams');
-const ChangesResultIterableIterator =
-  require('../../../cloudant/features/changesResultIterator.ts').default;
+const {
+  ChangesResultIterableIterator,
+} = require('../../../cloudant/features/changesResultIterator.ts');
 const CloudantV1 = require('../../../cloudant/v1.ts');
-const ChangesParamsHelper =
-  require('../../../cloudant/features/changesParamsHelper.ts').default;
+const {
+  ChangesParamsHelper,
+} = require('../../../cloudant/features/changesParamsHelper.ts');
 const { Mode } = require('../../../cloudant/features/changesParamsHelper.ts');
 
 function getParams(isValid) {

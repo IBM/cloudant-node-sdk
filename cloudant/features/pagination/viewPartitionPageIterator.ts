@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-import CloudantV1, {
+import {
+  default as CloudantV1,
   PostPartitionViewParams,
   Response,
   ViewResult,
 } from '../../v1';
-import ViewBasePageIterator from './viewBasePageIterator';
+import { ViewBasePageIterator } from './viewBasePageIterator';
 
-export default class ViewPartitionPageIterator extends ViewBasePageIterator<PostPartitionViewParams> {
+export class ViewPartitionPageIterator extends ViewBasePageIterator<PostPartitionViewParams> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(client: CloudantV1, params: PostPartitionViewParams) {
     super(client, params);
