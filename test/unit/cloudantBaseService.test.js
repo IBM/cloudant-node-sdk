@@ -24,7 +24,7 @@ const {
 } = require('ibm-cloud-sdk-core');
 const sinon = require('sinon');
 const { CookieJar, MemoryCookieStore } = require('tough-cookie');
-const CloudantBaseService = require('../../lib/cloudantBaseService.ts').default;
+const { CloudantBaseService } = require('../../lib/cloudantBaseService.ts');
 const { CouchdbSessionAuthenticator } = require('../../index.ts');
 
 describe('Test CloudantBaseService', () => {

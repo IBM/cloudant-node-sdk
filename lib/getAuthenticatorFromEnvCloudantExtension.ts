@@ -30,7 +30,7 @@ const COUCHDB_SESSION_AUTH_TYPE = 'couchdb_session';
  * @param {string} serviceName The service name prefix.
  *
  */
-export default function getAuthenticatorFromEnvCloudantExtension(
+export function getAuthenticatorFromEnvCloudantExtension(
   serviceName: string
 ): Authenticator {
   let auth;
