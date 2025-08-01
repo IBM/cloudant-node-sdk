@@ -16,13 +16,12 @@
 
 const core = require('ibm-cloud-sdk-core');
 const { testParams } = require('./testParams');
-const {
-  ChangesFollower,
-  Mode,
-} = require('../../../cloudant/features/changesFollower.ts');
+const ChangesResultIterableIterator =
+  require('../../../cloudant/features/changesResultIterator.ts').default;
 const CloudantV1 = require('../../../cloudant/v1.ts');
 const ChangesParamsHelper =
   require('../../../cloudant/features/changesParamsHelper.ts').default;
+const { Mode } = require('../../../cloudant/features/changesParamsHelper.ts');
 
 function getParams(isValid) {
   const validOptions = [];
@@ -54,7 +53,9 @@ function getStates() {
   return states;
 }
 
-function getModesAndLimits(batchSize = ChangesFollower.BATCH_SIZE) {
+function getModesAndLimits(
+  batchSize = ChangesResultIterableIterator.BATCH_SIZE
+) {
   // Use something smaller, equal and larger than batch size.
   // For larger cases make something an exact multiple of batches
   // and something not an exact multiple.

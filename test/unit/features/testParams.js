@@ -19,7 +19,7 @@ const {
   ChangesParamsHelper,
 } = require('../../../cloudant/features/changesParamsHelper.ts');
 
-const { Mode } = require('../../../cloudant/features/changesFollower.ts');
+const { Mode } = require('../../../cloudant/features/changesParamsHelper.ts');
 
 const beginningOfErrorMsg = 'The param';
 const endOfErrorMsg = 'invalid when using ChangesFollower.';

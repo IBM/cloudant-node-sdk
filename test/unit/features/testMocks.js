@@ -15,9 +15,8 @@
  */
 
 const core = require('ibm-cloud-sdk-core');
-const {
-  ChangesFollower,
-} = require('../../../cloudant/features/changesFollower.ts');
+const ChangesResultIterableIterator =
+  require('../../../cloudant/features/changesResultIterator.ts').default;
 const { getTransientErrors } = require('./mockErrors');
 
 const { NoAuthAuthenticator } = core;
@@ -48,7 +47,7 @@ function mockRandomChangesResultItem(gen = 1) {
 }
 
 function mockChangesResultItems(
-  size = ChangesFollower.BATCH_SIZE,
+  size = ChangesResultIterableIterator.BATCH_SIZE,
   startFrom = 1
 ) {
   const changesResultItems = [];
@@ -59,7 +58,7 @@ function mockChangesResultItems(
 }
 
 function mockRandomChangesResult(numberOfBatches) {
-  const batchSize = ChangesFollower.BATCH_SIZE;
+  const batchSize = ChangesResultIterableIterator.BATCH_SIZE;
   const total = numberOfBatches * batchSize;
   let pending = total;
   const mocks = [];
@@ -109,7 +108,9 @@ function mockAlternatingBatchErrorThenPerpetualSupplier(batches) {
   return mockFn;
 }
 
-function getPerpetualSupplierResponse(size = ChangesFollower.BATCH_SIZE) {
+function getPerpetualSupplierResponse(
+  size = ChangesResultIterableIterator.BATCH_SIZE
+) {
   const changesResultItems = mockChangesResultItems(size);
   return {
     result: {

@@ -20,14 +20,8 @@ import CloudantV1, {
   ChangesResult,
 } from '../v1';
 import Stream from './stream';
-import ChangesParamsHelper from './changesParamsHelper';
+import ChangesParamsHelper, { Mode } from './changesParamsHelper';
 import ChangesResultIterableIterator from './changesResultIterator';
-
-/** @internal */
-export enum Mode {
-  FINITE,
-  LISTEN,
-}
 
 /**
  * A helper for using the changes feed.
@@ -83,9 +77,7 @@ export enum Mode {
  * HTTP call and read timeouts of at least 1 minute. The default client
  * configuration has sufficiently long timeouts.
  */
-export class ChangesFollower {
-  /** @internal */
-  static BATCH_SIZE = 10_000;
+export default class ChangesFollower {
   // Initialization fields
   private readonly client: CloudantV1;
   private readonly params: PostChangesParams;
