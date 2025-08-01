@@ -15,11 +15,11 @@
  */
 
 import { Authenticator, UserOptions, validateInput } from 'ibm-cloud-sdk-core';
+import { Cookie, CookieJar, Store } from 'tough-cookie';
 import {
   SessionTokenManager,
   SessionTokenManagerOptions,
 } from './sessionTokenManager';
-import { Cookie, CookieJar, Store } from 'tough-cookie';
 
 interface SessionCookieJar extends CookieJar {
   cloudantPatch: boolean;
@@ -52,11 +52,8 @@ export type CouchdbSessionAuthenticatorOptions = {
  */
 export class CouchdbSessionAuthenticator extends Authenticator {
   protected tokenManager: SessionTokenManager;
-
   protected requiredOptions: ['username', 'password'];
-
   private tokenOptions: SessionTokenManagerOptions;
-
   static readonly AUTHTYPE_COUCHDB_SESSION = 'COUCHDB_SESSION';
 
   /**
@@ -152,8 +149,7 @@ export class CouchdbSessionAuthenticator extends Authenticator {
    *
    * @returns a string that indicates the authenticator's type
    */
-  // eslint-disable-next-line class-methods-use-this
-  public authenticationType(): string {
+  public override authenticationType(): string {
     return CouchdbSessionAuthenticator.AUTHTYPE_COUCHDB_SESSION;
   }
 }

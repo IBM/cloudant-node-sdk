@@ -14,20 +14,10 @@
  * limitations under the License.
  */
 
-import {
-  default as CloudantV1,
-  FindResult,
-  PostPartitionFindParams,
-  Response,
-} from '../../v1';
+import { FindResult, PostPartitionFindParams, Response } from '../../v1';
 import { FindBasePageIterator } from './findBasePageIterator';
 
 export class FindPartitionPageIterator extends FindBasePageIterator<PostPartitionFindParams> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(client: CloudantV1, params: PostPartitionFindParams) {
-    super(client, params);
-  }
-
   protected nextRequestFunction(): (
     params: PostPartitionFindParams
   ) => Promise<Response<FindResult>> {

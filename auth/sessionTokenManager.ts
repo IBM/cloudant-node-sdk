@@ -45,9 +45,7 @@ export class SessionTokenManager extends TokenManager {
     'serviceUrl',
     'jar',
   ];
-
   private tokenName: string;
-
   private options: SessionTokenManagerOptions;
 
   /**
@@ -81,8 +79,7 @@ export class SessionTokenManager extends TokenManager {
    * @param {OutgoingHttpHeaders} headers - the new set of headers as an object
    * @returns {Error}
    */
-  // eslint-disable-next-line class-methods-use-this
-  public setHeaders(headers: OutgoingHttpHeaders): void {
+  public override setHeaders(headers: OutgoingHttpHeaders): void {
     const errMsg =
       'During CouchDB Session Authentication only `request` service headers are in use';
     throw new Error(errMsg);
@@ -138,10 +135,10 @@ export class SessionTokenManager extends TokenManager {
     let expireTime = null;
     let refreshTime = null;
     for (let i = 0; i < sessionCookie.length && sessionToken == null; i += 1) {
-      sessionToken = new RegExp('AuthSession=([^;]*);').exec(sessionCookie[i]);
+      sessionToken = /AuthSession=([^;]*);/.exec(sessionCookie[i]);
       if (sessionToken != null) {
-        expireTime = new RegExp('.*Expires=([^;]*);').exec(sessionCookie[i]);
-        refreshTime = new RegExp('.*Max-Age=([^;]*);').exec(sessionCookie[i]);
+        expireTime = /.*Expires=([^;]*);/.exec(sessionCookie[i]);
+        refreshTime = /.*Max-Age=([^;]*);/.exec(sessionCookie[i]);
       }
     }
     if (sessionToken == null) {

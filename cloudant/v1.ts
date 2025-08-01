@@ -27,8 +27,8 @@ import {
   validateParams,
 } from 'ibm-cloud-sdk-core';
 import { getSdkHeaders } from '../lib/common';
-import CloudantBaseService from '../lib/cloudantBaseService';
-import getAuthenticatorFromEnvCloudantExtension from '../lib/getAuthenticatorFromEnvCloudantExtension';
+import { CloudantBaseService } from '../lib/cloudantBaseService';
+import { getAuthenticatorFromEnvCloudantExtension } from '../lib/getAuthenticatorFromEnvCloudantExtension';
 
 /* eslint @typescript-eslint/no-use-before-define: 0 */
 /* eslint max-classes-per-file: 0 */

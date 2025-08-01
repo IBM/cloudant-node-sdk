@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { pipeline, Readable } from 'node:stream';
 import {
   default as CloudantV1,
   ChangesResultItem,
@@ -20,15 +21,8 @@ import {
   ChangesResult,
 } from '../v1';
 import { Stream } from './stream';
-import { ChangesParamsHelper } from './changesParamsHelper';
-import { pipeline, Readable } from 'node:stream';
+import { ChangesParamsHelper, Mode } from './changesParamsHelper';
 import { ChangesResultIterableIterator } from './changesResultIterator';
-
-/** @internal */
-export enum Mode {
-  FINITE,
-  LISTEN,
-}
 
 /**
  * A helper for using the changes feed.
@@ -85,18 +79,11 @@ export enum Mode {
  * configuration has sufficiently long timeouts.
  */
 export class ChangesFollower {
-  /** @internal */
-  static BATCH_SIZE = 10_000;
-
   // Initialization fields
   private readonly client: CloudantV1;
-
   private readonly params: PostChangesParams;
-
   private readonly errorTolerance?: number;
-
   private limit: number;
-
   private changesResultIterator: ChangesResultIterableIterator;
 
   /**
@@ -125,8 +112,7 @@ export class ChangesFollower {
     if (errorTolerance < 0) {
       throw new Error('Error tolerance duration must not be negative.');
     }
-    // loose equality for null and undefined values
-    if (errorTolerance == undefined) {
+    if (errorTolerance === undefined || errorTolerance === null) {
       this.errorTolerance = Number.MAX_VALUE;
     } else {
       this.errorTolerance = errorTolerance;
@@ -206,9 +192,8 @@ export class ChangesFollower {
   private run(mode: Mode) {
     if (!this.changesResultIterator) {
       return this.createChangesResultItemsStream(mode);
-    } else {
-      throw new Error('Cannot start a feed that has already started.');
     }
+    throw new Error('Cannot start a feed that has already started.');
   }
 
   private createChangesResultItemsStream(mode: Mode) {
@@ -219,7 +204,7 @@ export class ChangesFollower {
       this.errorTolerance
     );
 
-    let resultsIterator = Readable.from(
+    const resultsIterator = Readable.from(
       pipeline(
         Readable.from(this.changesResultIterator),
         new Stream<Array<ChangesResultItem>>(),

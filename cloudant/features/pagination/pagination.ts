@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { pipeline, Readable } from 'node:stream';
 import {
   default as CloudantV1,
   DocsResultRow,
@@ -35,7 +36,6 @@ import { Pager } from './pager';
 import { IteratorPager } from './iteratorPager';
 import { AllDocsPageIterator } from './allDocsPageIterator';
 import { Stream } from '../stream';
-import { pipeline, Readable } from 'node:stream';
 import { PageIterator } from './pageIterator';
 import { DesignDocsPageIterator } from './designDocsPageIterator';
 import { FindPageIterator } from './findPageIterator';
@@ -119,7 +119,8 @@ export class Pagination<I> {
    *  @return an {@link AsyncIterableIterator} over all the result rows
    */
   async *rows(): AsyncIterableIterator<I> {
-    for await (let row of this.rowStream()) {
+    // eslint-disable-next-line no-restricted-syntax
+    for await (const row of this.rowStream()) {
       yield row;
     }
   }
@@ -166,6 +167,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_PARTITION_ALL_DOCS,
     params: PostPartitionAllDocsParams
   ): Pagination<DocsResultRow>;
+
   /**
    * Get a {@link Pagination} for the `postDesignDocs` operation.
    * The page size is configured with the limit parameter of the params.
@@ -180,6 +182,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_DESIGN_DOCS,
     params: PostDesignDocsParams
   ): Pagination<DocsResultRow>;
+
   /**
    * Get a {@link Pagination} for the `postFind` operation.
    * The page size is configured with the limit parameter of the params.
@@ -194,6 +197,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_FIND,
     params: PostFindParams
   ): Pagination<Document>;
+
   /**
    * Get a {@link Pagination} for the `postPartitionFind` operation.
    * The page size is configured with the limit parameter of the params.
@@ -208,6 +212,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_PARTITION_FIND,
     params: PostPartitionFindParams
   ): Pagination<Document>;
+
   /**
    * Get a {@link Pagination} for the `postSearch` operation.
    * The page size is configured with the limit parameter of the params.
@@ -222,6 +227,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_SEARCH,
     params: PostSearchParams
   ): Pagination<SearchResultRow>;
+
   /**
    * Get a {@link Pagination} for the `postPartitionSearch` operation.
    * The page size is configured with the limit parameter of the params.
@@ -236,6 +242,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_PARTITION_SEARCH,
     params: PostPartitionSearchParams
   ): Pagination<SearchResultRow>;
+
   /**
    * Get a {@link Pagination} for the `postView` operation.
    * The page size is configured with the limit parameter of the params.
@@ -250,6 +257,7 @@ export class Pagination<I> {
     pagerType: PagerType.POST_VIEW,
     params: PostViewParams
   ): Pagination<ViewResultRow>;
+
   /**
    * Get a {@link Pagination} for the `postPartitionView` operation.
    * The page size is configured with the limit parameter of the params.

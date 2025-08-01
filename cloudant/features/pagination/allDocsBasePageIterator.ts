@@ -27,28 +27,22 @@ export abstract class AllDocsBasePageIterator<
     | CloudantV1.PostAllDocsParams
     | CloudantV1.PostPartitionAllDocsParams
     | CloudantV1.PostDesignDocsParams,
-> extends KeyPageIterator<string, P, AllDocsResult, DocsResultRow> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(client: CloudantV1, params: P) {
-    super(client, params);
-  }
-
+> extends KeyPageIterator<P, AllDocsResult, DocsResultRow> {
   /**
    * Setting start key doc ID is a no-op for all_docs based paging where
    * key is the same as id.
    */
-  protected setNextKeyId(params: P, startKeyDocId: string) {
-    return;
-  }
+  protected override setNextKeyId(startKeyDocId: string) {}
 
-  protected getItems(result: AllDocsResult): Array<DocsResultRow> {
+  protected override getItems(result: AllDocsResult): Array<DocsResultRow> {
     return result.rows;
   }
+
   protected abstract nextRequestFunction(): (
     params: P
   ) => Promise<Response<AllDocsResult>>;
 
-  protected checkBoundary(
+  protected override checkBoundary(
     penultimateItem: DocsResultRow,
     lastItem: DocsResultRow
   ) {

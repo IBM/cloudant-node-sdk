@@ -43,7 +43,6 @@ export abstract class BasePageIterator<
   protected pageSize: number;
   protected _hasNext: boolean = true;
   protected nextPageParams: P;
-
   // The maximum and minimum limit values (i.e. page size)
   protected static MAX_LIMIT = 200;
   protected static MIN_LIMIT = 1;
@@ -64,9 +63,8 @@ export abstract class BasePageIterator<
       const items = await this.nextRequest();
       const readonlyItems: ReadonlyArray<I> = [...items];
       return { done: false, value: readonlyItems };
-    } else {
-      return { done: true, value: undefined };
     }
+    return { done: true, value: undefined };
   }
 
   protected async nextRequest(): Promise<Array<I>> {
@@ -74,19 +72,22 @@ export abstract class BasePageIterator<
       this.client,
       this.nextPageParams
     );
-    const result: R = response.result;
+    const { result }: { result: R } = response;
     const items: Array<I> = this.getItems(result);
     if (items.length < this.pageSize) {
       this._hasNext = false;
     } else {
-      this.setNextPageParams(this.nextPageParams, result);
+      this.setNextPageParams(result);
     }
     return items;
   }
 
   protected abstract getItems(result: R): Array<I>;
-  protected abstract setNextPageParams(params: P, result: R): void;
+
+  protected abstract setNextPageParams(result: R): void;
+
   protected abstract nextRequestFunction(): (params: P) => Promise<Response<R>>;
+
   protected getLimit(params: P): number {
     return params.limit;
   }
@@ -106,18 +107,18 @@ export abstract class BasePageIterator<
   }
 
   protected validate(params: P): void {
-    // != undefined filters out undefined and null values for limit:
-    if (params.limit != undefined) {
+    // filter out undefined and null values for limit:
+    if (params.limit !== undefined && params.limit !== null) {
       this.validateLimit(params.limit);
     }
   }
 
   protected validateParamsAbsent(params: P, paramNames: Array<string>) {
-    for (let paramName of paramNames) {
+    paramNames.forEach((paramName) => {
       if (params[paramName] !== undefined) {
         throw new Error(this.getValidateParamsAbsentErrorMessage(paramName));
       }
-    }
+    });
   }
 
   protected getValidateParamsAbsentErrorMessage(paramName) {
