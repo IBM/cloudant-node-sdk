@@ -15,7 +15,12 @@
  */
 
 import { PostChangesConstants, PostChangesParams } from '../v1';
-import { Mode } from './changesFollower';
+
+/** @internal */
+export enum Mode {
+  FINITE,
+  LISTEN,
+}
 
 export default class ChangesParamsHelper {
   /**

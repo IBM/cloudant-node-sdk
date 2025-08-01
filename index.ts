@@ -20,6 +20,7 @@
 
 import CloudantV1 from './cloudant/v1';
 import Stream from './cloudant/features/stream';
+import ChangesFollower from './cloudant/features/changesFollower';
 
 export { CloudantV1 };
 
@@ -30,7 +31,7 @@ export {
   CouchdbSessionAuthenticatorOptions,
 } from './auth';
 
-export { ChangesFollower } from './cloudant/features/changesFollower';
+export { ChangesFollower };
 export { Stream };
 export {
   Pagination,

@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-const {
-  ChangesFollower,
-  Mode,
-} = require('../../../cloudant/features/changesFollower.ts');
+const ChangesFollower =
+  require('../../../cloudant/features/changesFollower.ts').default;
+const { Mode } = require('../../../cloudant/features/changesParamsHelper.ts');
+const ChangesResultIterableIterator =
+  require('../../../cloudant/features/changesResultIterator.ts').default;
 const { testParams } = require('./testParams.js');
 const {
   getStates,
@@ -57,7 +58,7 @@ function assertObjectNumbersOnChangesFollowerStream(stream, batches, done) {
   });
   stream.on('end', () => {
     try {
-      expect(count).toBe(batches * ChangesFollower.BATCH_SIZE);
+      expect(count).toBe(batches * ChangesResultIterableIterator.BATCH_SIZE);
       expect(stream.readableEnded).toBe(true);
     } finally {
       done();
@@ -82,10 +83,10 @@ function stopChangesFollowerAndAssertStreamDidNotError(
 }
 
 describe('Test ChangesFollower', () => {
-  const originalBatchSize = ChangesFollower.BATCH_SIZE;
+  const originalBatchSize = ChangesResultIterableIterator.BATCH_SIZE;
   function setBatchSize(size) {
     // modify batch size from 10_000 to size for the sake of quick iteration
-    ChangesFollower.BATCH_SIZE = size;
+    ChangesResultIterableIterator.BATCH_SIZE = size;
   }
 
   beforeEach(() => {
@@ -98,7 +99,7 @@ describe('Test ChangesFollower', () => {
   afterEach(() => {
     jest.clearAllMocks();
     // Reset the batch size in case it was modified by a test
-    ChangesFollower.BATCH_SIZE = originalBatchSize;
+    ChangesResultIterableIterator.BATCH_SIZE = originalBatchSize;
   });
   describe('Initialization', () => {
     it('testInitialization', () => {
@@ -338,7 +339,9 @@ describe('Test ChangesFollower', () => {
       });
       stream.on('end', () => {
         try {
-          expect(count).toBeGreaterThan(2 * ChangesFollower.BATCH_SIZE + 1);
+          expect(count).toBeGreaterThan(
+            2 * ChangesResultIterableIterator.BATCH_SIZE + 1
+          );
         } finally {
           done();
         }
@@ -369,7 +372,9 @@ describe('Test ChangesFollower', () => {
       });
       stream.on('end', () => {
         try {
-          expect(count).toBeGreaterThan(2 * ChangesFollower.BATCH_SIZE + 1);
+          expect(count).toBeGreaterThan(
+            2 * ChangesResultIterableIterator.BATCH_SIZE + 1
+          );
         } finally {
           done();
         }
@@ -464,7 +469,9 @@ describe('Test ChangesFollower', () => {
       });
       stream.on('end', () => {
         try {
-          expect(count).toEqual(batches * ChangesFollower.BATCH_SIZE);
+          expect(count).toEqual(
+            batches * ChangesResultIterableIterator.BATCH_SIZE
+          );
         } finally {
           done();
         }
@@ -520,7 +527,9 @@ describe('Test ChangesFollower', () => {
       });
       stream.on('end', () => {
         try {
-          expect(count).toEqual(batches * ChangesFollower.BATCH_SIZE);
+          expect(count).toEqual(
+            batches * ChangesResultIterableIterator.BATCH_SIZE
+          );
         } finally {
           done();
         }

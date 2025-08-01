@@ -16,8 +16,7 @@
 
 import { getNewLogger } from 'ibm-cloud-sdk-core';
 import { promisify } from 'node:util';
-import ChangesParamsHelper from './changesParamsHelper';
-import { ChangesFollower, Mode } from './changesFollower';
+import ChangesParamsHelper, { Mode } from './changesParamsHelper';
 import CloudantV1, { PostChangesParams } from '../v1';
 
 enum TransientErrorSuppression {
@@ -55,6 +54,8 @@ export default class ChangesResultIterableIterator
   private stopped: boolean = false;
   private successTimestamp: number;
   private retry: number = 0;
+  /** @internal */
+  static BATCH_SIZE = 10_000;
 
   constructor(
     client: CloudantV1,
@@ -117,7 +118,7 @@ export default class ChangesResultIterableIterator
           }
         });
     }
-    this.params.limit = ChangesFollower.BATCH_SIZE;
+    this.params.limit = ChangesResultIterableIterator.BATCH_SIZE;
     return Promise.resolve();
   }
 

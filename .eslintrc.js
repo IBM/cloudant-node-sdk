@@ -207,7 +207,6 @@ module.exports = {
             'enforce': [{ blankLine: 'never', prev: 'field', next: 'field' }],
           },
         ],
-        'import/no-cycle': 'off',
         'no-dupe-class-members': 'off', // it is safe to disable this rule when using TS because TS's compiler enforces this check
         // Don't use no-undef in TS files.
         // https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
