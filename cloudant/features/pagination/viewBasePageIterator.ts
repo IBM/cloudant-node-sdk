@@ -25,11 +25,6 @@ import { KeyPageIterator } from './keyPageIterator';
 export abstract class ViewBasePageIterator<
   P extends CloudantV1.PostViewParams | CloudantV1.PostPartitionViewParams,
 > extends KeyPageIterator<P, ViewResult, ViewResultRow> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(client: CloudantV1, params: P) {
-    super(client, params);
-  }
-
   protected override getItems(result: ViewResult): Array<ViewResultRow> {
     return result.rows;
   }

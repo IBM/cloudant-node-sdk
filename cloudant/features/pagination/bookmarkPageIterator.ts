@@ -26,11 +26,6 @@ export abstract class BookmarkPageIterator<
   R extends CloudantV1.FindResult | CloudantV1.SearchResult,
   I,
 > extends BasePageIterator<P, R, I> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(client: CloudantV1, params: P) {
-    super(client, params);
-  }
-
   protected abstract getItems(result: R): Array<I>;
 
   protected setNextPageParams(result: R) {

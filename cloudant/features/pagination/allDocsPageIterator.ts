@@ -14,20 +14,10 @@
  * limitations under the License.
  */
 
-import {
-  default as CloudantV1,
-  AllDocsResult,
-  PostAllDocsParams,
-  Response,
-} from '../../v1';
+import { AllDocsResult, PostAllDocsParams, Response } from '../../v1';
 import { AllDocsBasePageIterator } from './allDocsBasePageIterator';
 
 export class AllDocsPageIterator extends AllDocsBasePageIterator<PostAllDocsParams> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(client: CloudantV1, params: PostAllDocsParams) {
-    super(client, params);
-  }
-
   protected nextRequestFunction(): (
     params: PostAllDocsParams
   ) => Promise<Response<AllDocsResult>> {

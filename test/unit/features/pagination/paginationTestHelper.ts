@@ -93,7 +93,6 @@ export class TestPageIterator extends BasePageIterator<
   pageSupplier;
   callCounter;
 
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(client: CloudantV1, params: PostViewParams, pageSupplier) {
     super(client, params);
     this.pageSupplier = pageSupplier;
@@ -170,7 +169,6 @@ export class TestKeyPageIterator extends KeyPageIterator<
   pageSupplier;
   callCounter;
 
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(client: CloudantV1, params: PostViewParams, pageSupplier) {
     super(client, params);
     this.pageSupplier = pageSupplier;

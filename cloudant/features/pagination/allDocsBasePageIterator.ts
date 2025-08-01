@@ -28,11 +28,6 @@ export abstract class AllDocsBasePageIterator<
     | CloudantV1.PostPartitionAllDocsParams
     | CloudantV1.PostDesignDocsParams,
 > extends KeyPageIterator<P, AllDocsResult, DocsResultRow> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(client: CloudantV1, params: P) {
-    super(client, params);
-  }
-
   /**
    * Setting start key doc ID is a no-op for all_docs based paging where
    * key is the same as id.
