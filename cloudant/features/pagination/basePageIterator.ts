@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import CloudantV1, { Response } from '../../v1';
+import { default as CloudantV1, Response } from '../../v1';
 import { PageIterator } from './pageIterator';
 
-export default abstract class BasePageIterator<
+export abstract class BasePageIterator<
   P extends
     | CloudantV1.PostAllDocsParams
     | CloudantV1.PostPartitionAllDocsParams

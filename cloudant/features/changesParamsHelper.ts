@@ -22,7 +22,7 @@ export enum Mode {
   LISTEN,
 }
 
-export default class ChangesParamsHelper {
+export class ChangesParamsHelper {
   /**
    * Set minimum client timeout to 1 minute (= 60 000 ms).
    * 1 minute is the sort of number that very likely to be used as a client timeout,

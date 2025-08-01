@@ -201,6 +201,11 @@ module.exports = {
           },
         ],
         'eqeqeq': 'error',
+        // We use `import { default as CloudantV1 } from ...` only for CloudantV1,
+        // other classes should be _named exports_ resulting ` import { ClassName } from ...`:
+        'import/no-named-default': 'off',
+        // For clarity and explicitness we do not prefer default exports other than the generated CloudantV1 class:
+        'import/prefer-default-export': 'off',
         'lines-between-class-members': [
           'error',
           {

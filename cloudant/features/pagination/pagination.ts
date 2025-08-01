@@ -15,7 +15,8 @@
  */
 
 import { pipeline, Readable } from 'node:stream';
-import CloudantV1, {
+import {
+  default as CloudantV1,
   DocsResultRow,
   Document,
   PostAllDocsParams,
@@ -33,17 +34,17 @@ import CloudantV1, {
 
 import { Pager } from './pager';
 import { IteratorPager } from './iteratorPager';
-import AllDocsPageIterator from './allDocsPageIterator';
-import Stream from '../stream';
+import { AllDocsPageIterator } from './allDocsPageIterator';
+import { Stream } from '../stream';
 import { PageIterator } from './pageIterator';
-import DesignDocsPageIterator from './designDocsPageIterator';
-import FindPageIterator from './findPageIterator';
-import AllDocsPartitionPageIterator from './allDocsPartitionPageIterator';
-import FindPartitionPageIterator from './findPartitionPageIterator';
-import SearchPartitionPageIterator from './searchPartitionPageIterator';
-import ViewPageIterator from './viewPageIterator';
-import SearchPageIterator from './searchPageIterator';
-import ViewPartitionPageIterator from './viewPartitionPageIterator';
+import { DesignDocsPageIterator } from './designDocsPageIterator';
+import { FindPageIterator } from './findPageIterator';
+import { AllDocsPartitionPageIterator } from './allDocsPartitionPageIterator';
+import { FindPartitionPageIterator } from './findPartitionPageIterator';
+import { SearchPartitionPageIterator } from './searchPartitionPageIterator';
+import { ViewPageIterator } from './viewPageIterator';
+import { SearchPageIterator } from './searchPageIterator';
+import { ViewPartitionPageIterator } from './viewPartitionPageIterator';
 
 /**
  * {@link Pagination} is the entry point for pagination features.

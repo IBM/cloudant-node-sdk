@@ -16,10 +16,11 @@
 
 /* eslint-disable max-classes-per-file */
 
-import BasePageIterator from '../../../../cloudant/features/pagination/basePageIterator';
-import FindPageIterator from '../../../../cloudant/features/pagination/findPageIterator';
-import KeyPageIterator from '../../../../cloudant/features/pagination/keyPageIterator';
-import CloudantV1, {
+import { BasePageIterator } from '../../../../cloudant/features/pagination/basePageIterator';
+import { FindPageIterator } from '../../../../cloudant/features/pagination/findPageIterator';
+import { KeyPageIterator } from '../../../../cloudant/features/pagination/keyPageIterator';
+import {
+  default as CloudantV1,
   PostViewParams,
   ViewResultRow,
   PostFindParams,

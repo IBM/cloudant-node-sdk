@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 import { pipeline, Readable } from 'node:stream';
-import CloudantV1, {
+import {
+  default as CloudantV1,
   ChangesResultItem,
   PostChangesParams,
   ChangesResult,
 } from '../v1';
-import Stream from './stream';
-import ChangesParamsHelper, { Mode } from './changesParamsHelper';
-import ChangesResultIterableIterator from './changesResultIterator';
+import { Stream } from './stream';
+import { ChangesParamsHelper, Mode } from './changesParamsHelper';
+import { ChangesResultIterableIterator } from './changesResultIterator';
 
 /**
  * A helper for using the changes feed.
@@ -77,7 +78,7 @@ import ChangesResultIterableIterator from './changesResultIterator';
  * HTTP call and read timeouts of at least 1 minute. The default client
  * configuration has sufficiently long timeouts.
  */
-export default class ChangesFollower {
+export class ChangesFollower {
   // Initialization fields
   private readonly client: CloudantV1;
   private readonly params: PostChangesParams;
