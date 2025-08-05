@@ -47,12 +47,7 @@ export abstract class ViewBasePageIterator<
       // ID's are the same, check the keys
       const penultimateKey: any = penultimateItem.key;
       const lastKey: any = lastItem.key;
-      // Check reference equality first (e.g. null)
-      // Then check values
-      if (
-        penultimateKey === lastKey ||
-        (penultimateKey !== null && penultimateKey === lastKey)
-      ) {
+      if (penultimateKey === lastKey) {
         // Identical keys, set an error message
         return `Cannot paginate on a boundary containing identical keys '${lastKey}' and document IDs '${lastId}'`;
       }
