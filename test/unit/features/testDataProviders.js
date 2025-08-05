@@ -22,8 +22,8 @@ const {
 const CloudantV1 = require('../../../cloudant/v1.ts');
 const {
   ChangesParamsHelper,
+  Mode,
 } = require('../../../cloudant/features/changesParamsHelper.ts');
-const { Mode } = require('../../../cloudant/features/changesParamsHelper.ts');
 
 function getParams(isValid) {
   const validOptions = [];

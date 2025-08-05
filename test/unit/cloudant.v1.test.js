@@ -46,10 +46,7 @@ function mock_createRequest() {
 }
 
 // dont actually construct an authenticator
-const getAuthenticatorMock = jest.spyOn(
-  sdkCorePackage,
-  'getAuthenticatorFromEnvironment'
-);
+const getAuthenticatorMock = jest.spyOn(sdkCorePackage, 'getAuthenticatorFromEnvironment');
 getAuthenticatorMock.mockImplementation(() => new NoAuthAuthenticator());
 
 describe('CloudantV1', () => {
@@ -69,15 +66,9 @@ describe('CloudantV1', () => {
       const testInstance = CloudantV1.newInstance();
 
       expect(getAuthenticatorMock).toHaveBeenCalled();
-      expect(testInstance.baseOptions.authenticator).toBeInstanceOf(
-        NoAuthAuthenticator
-      );
-      expect(testInstance.baseOptions.serviceName).toBe(
-        CloudantV1.DEFAULT_SERVICE_NAME
-      );
-      expect(testInstance.baseOptions.serviceUrl).toBe(
-        CloudantV1.DEFAULT_SERVICE_URL
-      );
+      expect(testInstance.baseOptions.authenticator).toBeInstanceOf(NoAuthAuthenticator);
+      expect(testInstance.baseOptions.serviceName).toBe(CloudantV1.DEFAULT_SERVICE_NAME);
+      expect(testInstance.baseOptions.serviceUrl).toBe(CloudantV1.DEFAULT_SERVICE_URL);
       expect(testInstance).toBeInstanceOf(CloudantV1);
     });
 
@@ -91,9 +82,7 @@ describe('CloudantV1', () => {
       const testInstance = CloudantV1.newInstance(options);
 
       expect(getAuthenticatorMock).not.toHaveBeenCalled();
-      expect(testInstance.baseOptions.authenticator).toBeInstanceOf(
-        NoAuthAuthenticator
-      );
+      expect(testInstance.baseOptions.authenticator).toBeInstanceOf(NoAuthAuthenticator);
       expect(testInstance.baseOptions.serviceUrl).toBe('custom.com');
       expect(testInstance.baseOptions.serviceName).toBe('my-service');
       expect(testInstance).toBeInstanceOf(CloudantV1);
@@ -119,9 +108,7 @@ describe('CloudantV1', () => {
 
       const testInstance = new CloudantV1(options);
 
-      expect(testInstance.baseOptions.serviceUrl).toBe(
-        CloudantV1.DEFAULT_SERVICE_URL
-      );
+      expect(testInstance.baseOptions.serviceUrl).toBe(CloudantV1.DEFAULT_SERVICE_URL);
     });
 
     test('should set `enableGzipCompression` by default', () => {
@@ -141,9 +128,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getServerInformation
         const getServerInformationParams = {};
 
-        const getServerInformationResult = cloudantService.getServerInformation(
-          getServerInformationParams
-        );
+        const getServerInformationResult = cloudantService.getServerInformation(getServerInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getServerInformationResult);
@@ -156,11 +141,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -207,10 +188,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getCapacityThroughputInformation
         const getCapacityThroughputInformationParams = {};
 
-        const getCapacityThroughputInformationResult =
-          cloudantService.getCapacityThroughputInformation(
-            getCapacityThroughputInformationParams
-          );
+        const getCapacityThroughputInformationResult = cloudantService.getCapacityThroughputInformation(getCapacityThroughputInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getCapacityThroughputInformationResult);
@@ -220,18 +198,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_api/v2/user/capacity/throughput',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/capacity/throughput', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -260,9 +230,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getCapacityThroughputInformation(
-          getCapacityThroughputInformationParams
-        );
+        cloudantService.getCapacityThroughputInformation(getCapacityThroughputInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -283,10 +251,7 @@ describe('CloudantV1', () => {
           blocks,
         };
 
-        const putCapacityThroughputConfigurationResult =
-          cloudantService.putCapacityThroughputConfiguration(
-            putCapacityThroughputConfigurationParams
-          );
+        const putCapacityThroughputConfigurationResult = cloudantService.putCapacityThroughputConfiguration(putCapacityThroughputConfigurationParams);
 
         // all methods should return a Promise
         expectToBePromise(putCapacityThroughputConfigurationResult);
@@ -296,18 +261,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_api/v2/user/capacity/throughput',
-          'PUT'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/capacity/throughput', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.blocks).toEqual(blocks);
       }
 
@@ -339,9 +296,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putCapacityThroughputConfiguration(
-          putCapacityThroughputConfigurationParams
-        );
+        cloudantService.putCapacityThroughputConfiguration(putCapacityThroughputConfigurationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -393,11 +348,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_uuids', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.qs.count).toEqual(count);
       }
 
@@ -458,8 +409,7 @@ describe('CloudantV1', () => {
           since,
         };
 
-        const getDbUpdatesResult =
-          cloudantService.getDbUpdates(getDbUpdatesParams);
+        const getDbUpdatesResult = cloudantService.getDbUpdates(getDbUpdatesParams);
 
         // all methods should return a Promise
         expectToBePromise(getDbUpdatesResult);
@@ -472,11 +422,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_db_updates', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.qs.descending).toEqual(descending);
         expect(mockRequestOptions.qs.feed).toEqual(feed);
         expect(mockRequestOptions.qs.heartbeat).toEqual(heartbeat);
@@ -568,8 +514,7 @@ describe('CloudantV1', () => {
           view,
         };
 
-        const postChangesResult =
-          cloudantService.postChanges(postChangesParams);
+        const postChangesResult = cloudantService.postChanges(postChangesParams);
 
         // all methods should return a Promise
         expectToBePromise(postChangesResult);
@@ -582,18 +527,12 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_changes', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Last-Event-ID', lastEventId);
         expect(mockRequestOptions.body.doc_ids).toEqual(docIds);
         expect(mockRequestOptions.body.fields).toEqual(fields);
         expect(mockRequestOptions.body.selector).toEqual(selector);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
         expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.qs.descending).toEqual(descending);
@@ -713,9 +652,7 @@ describe('CloudantV1', () => {
           view,
         };
 
-        const postChangesAsStreamResult = cloudantService.postChangesAsStream(
-          postChangesAsStreamParams
-        );
+        const postChangesAsStreamResult = cloudantService.postChangesAsStream(postChangesAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postChangesAsStreamResult);
@@ -728,18 +665,12 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_changes', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Last-Event-ID', lastEventId);
         expect(mockRequestOptions.body.doc_ids).toEqual(docIds);
         expect(mockRequestOptions.body.fields).toEqual(fields);
         expect(mockRequestOptions.body.selector).toEqual(selector);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
         expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.qs.descending).toEqual(descending);
@@ -824,8 +755,7 @@ describe('CloudantV1', () => {
           db,
         };
 
-        const headDatabaseResult =
-          cloudantService.headDatabase(headDatabaseParams);
+        const headDatabaseResult = cloudantService.headDatabase(headDatabaseParams);
 
         // all methods should return a Promise
         expectToBePromise(headDatabaseResult);
@@ -838,11 +768,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -934,11 +860,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_all_dbs', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.qs.descending).toEqual(descending);
         expect(mockRequestOptions.qs.end_key).toEqual(endKey);
         expect(mockRequestOptions.qs.limit).toEqual(limit);
@@ -993,8 +915,7 @@ describe('CloudantV1', () => {
           keys,
         };
 
-        const postDbsInfoResult =
-          cloudantService.postDbsInfo(postDbsInfoParams);
+        const postDbsInfoResult = cloudantService.postDbsInfo(postDbsInfoParams);
 
         // all methods should return a Promise
         expectToBePromise(postDbsInfoResult);
@@ -1007,11 +928,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_dbs_info', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.keys).toEqual(keys);
       }
 
@@ -1082,8 +999,7 @@ describe('CloudantV1', () => {
           db,
         };
 
-        const deleteDatabaseResult =
-          cloudantService.deleteDatabase(deleteDatabaseParams);
+        const deleteDatabaseResult = cloudantService.deleteDatabase(deleteDatabaseParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteDatabaseResult);
@@ -1096,11 +1012,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -1171,8 +1083,7 @@ describe('CloudantV1', () => {
           db,
         };
 
-        const getDatabaseInformationResult =
-          cloudantService.getDatabaseInformation(getDatabaseInformationParams);
+        const getDatabaseInformationResult = cloudantService.getDatabaseInformation(getDatabaseInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getDatabaseInformationResult);
@@ -1185,11 +1096,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -1264,8 +1171,7 @@ describe('CloudantV1', () => {
           q,
         };
 
-        const putDatabaseResult =
-          cloudantService.putDatabase(putDatabaseParams);
+        const putDatabaseResult = cloudantService.putDatabase(putDatabaseParams);
 
         // all methods should return a Promise
         expectToBePromise(putDatabaseResult);
@@ -1278,11 +1184,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.qs.partitioned).toEqual(partitioned);
         expect(mockRequestOptions.qs.q).toEqual(q);
         expect(mockRequestOptions.path.db).toEqual(db);
@@ -1363,8 +1265,7 @@ describe('CloudantV1', () => {
           rev,
         };
 
-        const headDocumentResult =
-          cloudantService.headDocument(headDocumentParams);
+        const headDocumentResult = cloudantService.headDocument(headDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(headDocumentResult);
@@ -1377,11 +1278,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
         expect(mockRequestOptions.qs.rev).toEqual(rev);
@@ -1464,8 +1361,7 @@ describe('CloudantV1', () => {
           batch,
         };
 
-        const postDocumentResult =
-          cloudantService.postDocument(postDocumentParams);
+        const postDocumentResult = cloudantService.postDocument(postDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(postDocumentResult);
@@ -1478,11 +1374,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = contentType;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Content-Type', contentType);
         expect(mockRequestOptions.body).toEqual(document);
         expect(mockRequestOptions.qs.batch).toEqual(batch);
@@ -1584,8 +1476,7 @@ describe('CloudantV1', () => {
           startKey,
         };
 
-        const postAllDocsResult =
-          cloudantService.postAllDocs(postAllDocsParams);
+        const postAllDocsResult = cloudantService.postAllDocs(postAllDocsParams);
 
         // all methods should return a Promise
         expectToBePromise(postAllDocsResult);
@@ -1598,14 +1489,8 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_all_docs', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.body.attachments).toEqual(attachments);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.descending).toEqual(descending);
@@ -1714,9 +1599,7 @@ describe('CloudantV1', () => {
           startKey,
         };
 
-        const postAllDocsAsStreamResult = cloudantService.postAllDocsAsStream(
-          postAllDocsAsStreamParams
-        );
+        const postAllDocsAsStreamResult = cloudantService.postAllDocsAsStream(postAllDocsAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postAllDocsAsStreamResult);
@@ -1729,14 +1612,8 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_all_docs', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.body.attachments).toEqual(attachments);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.descending).toEqual(descending);
@@ -1841,9 +1718,7 @@ describe('CloudantV1', () => {
           queries,
         };
 
-        const postAllDocsQueriesResult = cloudantService.postAllDocsQueries(
-          postAllDocsQueriesParams
-        );
+        const postAllDocsQueriesResult = cloudantService.postAllDocsQueries(postAllDocsQueriesParams);
 
         // all methods should return a Promise
         expectToBePromise(postAllDocsQueriesResult);
@@ -1853,20 +1728,15 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_all_docs/queries',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_all_docs/queries', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.queries).toEqual(
-          BaseService.convertModel(queries, CloudantV1.AllDocsQuery.serialize)
+          BaseService.convertModel(
+            queries,
+            CloudantV1.AllDocsQuery.serialize,
+          )
         );
         expect(mockRequestOptions.path.db).toEqual(db);
       }
@@ -1961,10 +1831,7 @@ describe('CloudantV1', () => {
           queries,
         };
 
-        const postAllDocsQueriesAsStreamResult =
-          cloudantService.postAllDocsQueriesAsStream(
-            postAllDocsQueriesAsStreamParams
-          );
+        const postAllDocsQueriesAsStreamResult = cloudantService.postAllDocsQueriesAsStream(postAllDocsQueriesAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postAllDocsQueriesAsStreamResult);
@@ -1974,20 +1841,15 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_all_docs/queries',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_all_docs/queries', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.queries).toEqual(
-          BaseService.convertModel(queries, CloudantV1.AllDocsQuery.serialize)
+          BaseService.convertModel(
+            queries,
+            CloudantV1.AllDocsQuery.serialize,
+          )
         );
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.responseType).toBe('stream');
@@ -2023,9 +1885,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postAllDocsQueriesAsStream(
-          postAllDocsQueriesAsStreamParams
-        );
+        cloudantService.postAllDocsQueriesAsStream(postAllDocsQueriesAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -2066,8 +1926,7 @@ describe('CloudantV1', () => {
           bulkDocs,
         };
 
-        const postBulkDocsResult =
-          cloudantService.postBulkDocs(postBulkDocsParams);
+        const postBulkDocsResult = cloudantService.postBulkDocs(postBulkDocsParams);
 
         // all methods should return a Promise
         expectToBePromise(postBulkDocsResult);
@@ -2080,14 +1939,8 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_bulk_docs', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body).toEqual(
-          CloudantV1.BulkDocs.serialize(bulkDocs)
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body).toEqual(CloudantV1.BulkDocs.serialize(bulkDocs));
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -2179,8 +2032,7 @@ describe('CloudantV1', () => {
           revs,
         };
 
-        const postBulkGetResult =
-          cloudantService.postBulkGet(postBulkGetParams);
+        const postBulkGetResult = cloudantService.postBulkGet(postBulkGetParams);
 
         // all methods should return a Promise
         expectToBePromise(postBulkGetResult);
@@ -2193,21 +2045,15 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_bulk_get', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.docs).toEqual(
           BaseService.convertModel(
             docs,
-            CloudantV1.BulkGetQueryDocument.serialize
+            CloudantV1.BulkGetQueryDocument.serialize,
           )
         );
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
         expect(mockRequestOptions.qs.revs).toEqual(revs);
         expect(mockRequestOptions.path.db).toEqual(db);
@@ -2301,9 +2147,7 @@ describe('CloudantV1', () => {
           revs,
         };
 
-        const postBulkGetAsMixedResult = cloudantService.postBulkGetAsMixed(
-          postBulkGetAsMixedParams
-        );
+        const postBulkGetAsMixedResult = cloudantService.postBulkGetAsMixed(postBulkGetAsMixedParams);
 
         // all methods should return a Promise
         expectToBePromise(postBulkGetAsMixedResult);
@@ -2316,21 +2160,15 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_bulk_get', 'POST');
         const expectedAccept = 'multipart/mixed';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.docs).toEqual(
           BaseService.convertModel(
             docs,
-            CloudantV1.BulkGetQueryDocument.serialize
+            CloudantV1.BulkGetQueryDocument.serialize,
           )
         );
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
         expect(mockRequestOptions.qs.revs).toEqual(revs);
         expect(mockRequestOptions.path.db).toEqual(db);
@@ -2425,9 +2263,7 @@ describe('CloudantV1', () => {
           revs,
         };
 
-        const postBulkGetAsRelatedResult = cloudantService.postBulkGetAsRelated(
-          postBulkGetAsRelatedParams
-        );
+        const postBulkGetAsRelatedResult = cloudantService.postBulkGetAsRelated(postBulkGetAsRelatedParams);
 
         // all methods should return a Promise
         expectToBePromise(postBulkGetAsRelatedResult);
@@ -2440,21 +2276,15 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_bulk_get', 'POST');
         const expectedAccept = 'multipart/related';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.docs).toEqual(
           BaseService.convertModel(
             docs,
-            CloudantV1.BulkGetQueryDocument.serialize
+            CloudantV1.BulkGetQueryDocument.serialize,
           )
         );
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
         expect(mockRequestOptions.qs.revs).toEqual(revs);
         expect(mockRequestOptions.path.db).toEqual(db);
@@ -2549,9 +2379,7 @@ describe('CloudantV1', () => {
           revs,
         };
 
-        const postBulkGetAsStreamResult = cloudantService.postBulkGetAsStream(
-          postBulkGetAsStreamParams
-        );
+        const postBulkGetAsStreamResult = cloudantService.postBulkGetAsStream(postBulkGetAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postBulkGetAsStreamResult);
@@ -2564,21 +2392,15 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_bulk_get', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.docs).toEqual(
           BaseService.convertModel(
             docs,
-            CloudantV1.BulkGetQueryDocument.serialize
+            CloudantV1.BulkGetQueryDocument.serialize,
           )
         );
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
         expect(mockRequestOptions.qs.revs).toEqual(revs);
         expect(mockRequestOptions.path.db).toEqual(db);
@@ -2662,8 +2484,7 @@ describe('CloudantV1', () => {
           rev,
         };
 
-        const deleteDocumentResult =
-          cloudantService.deleteDocument(deleteDocumentParams);
+        const deleteDocumentResult = cloudantService.deleteDocument(deleteDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteDocumentResult);
@@ -2676,11 +2497,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
         expect(mockRequestOptions.qs.batch).toEqual(batch);
         expect(mockRequestOptions.qs.rev).toEqual(rev);
@@ -2781,8 +2598,7 @@ describe('CloudantV1', () => {
           revsInfo,
         };
 
-        const getDocumentResult =
-          cloudantService.getDocument(getDocumentParams);
+        const getDocumentResult = cloudantService.getDocument(getDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(getDocumentResult);
@@ -2795,20 +2611,12 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
-        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(
-          deletedConflicts
-        );
+        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(deletedConflicts);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
         expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
         expect(mockRequestOptions.qs.meta).toEqual(meta);
@@ -2912,9 +2720,7 @@ describe('CloudantV1', () => {
           revsInfo,
         };
 
-        const getDocumentAsMixedResult = cloudantService.getDocumentAsMixed(
-          getDocumentAsMixedParams
-        );
+        const getDocumentAsMixedResult = cloudantService.getDocumentAsMixed(getDocumentAsMixedParams);
 
         // all methods should return a Promise
         expectToBePromise(getDocumentAsMixedResult);
@@ -2927,20 +2733,12 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'GET');
         const expectedAccept = 'multipart/mixed';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
-        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(
-          deletedConflicts
-        );
+        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(deletedConflicts);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
         expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
         expect(mockRequestOptions.qs.meta).toEqual(meta);
@@ -3045,9 +2843,7 @@ describe('CloudantV1', () => {
           revsInfo,
         };
 
-        const getDocumentAsRelatedResult = cloudantService.getDocumentAsRelated(
-          getDocumentAsRelatedParams
-        );
+        const getDocumentAsRelatedResult = cloudantService.getDocumentAsRelated(getDocumentAsRelatedParams);
 
         // all methods should return a Promise
         expectToBePromise(getDocumentAsRelatedResult);
@@ -3060,20 +2856,12 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'GET');
         const expectedAccept = 'multipart/related';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
-        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(
-          deletedConflicts
-        );
+        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(deletedConflicts);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
         expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
         expect(mockRequestOptions.qs.meta).toEqual(meta);
@@ -3178,9 +2966,7 @@ describe('CloudantV1', () => {
           revsInfo,
         };
 
-        const getDocumentAsStreamResult = cloudantService.getDocumentAsStream(
-          getDocumentAsStreamParams
-        );
+        const getDocumentAsStreamResult = cloudantService.getDocumentAsStream(getDocumentAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(getDocumentAsStreamResult);
@@ -3193,20 +2979,12 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
-        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(
-          deletedConflicts
-        );
+        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(deletedConflicts);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
         expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
         expect(mockRequestOptions.qs.meta).toEqual(meta);
@@ -3301,8 +3079,7 @@ describe('CloudantV1', () => {
           rev,
         };
 
-        const putDocumentResult =
-          cloudantService.putDocument(putDocumentParams);
+        const putDocumentResult = cloudantService.putDocument(putDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(putDocumentResult);
@@ -3315,11 +3092,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = contentType;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Content-Type', contentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
         expect(mockRequestOptions.body).toEqual(document);
@@ -3405,9 +3178,7 @@ describe('CloudantV1', () => {
           ifNoneMatch,
         };
 
-        const headDesignDocumentResult = cloudantService.headDesignDocument(
-          headDesignDocumentParams
-        );
+        const headDesignDocumentResult = cloudantService.headDesignDocument(headDesignDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(headDesignDocumentResult);
@@ -3420,11 +3191,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
@@ -3507,9 +3274,7 @@ describe('CloudantV1', () => {
           rev,
         };
 
-        const deleteDesignDocumentResult = cloudantService.deleteDesignDocument(
-          deleteDesignDocumentParams
-        );
+        const deleteDesignDocumentResult = cloudantService.deleteDesignDocument(deleteDesignDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteDesignDocumentResult);
@@ -3522,11 +3287,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
         expect(mockRequestOptions.qs.batch).toEqual(batch);
         expect(mockRequestOptions.qs.rev).toEqual(rev);
@@ -3627,9 +3388,7 @@ describe('CloudantV1', () => {
           revsInfo,
         };
 
-        const getDesignDocumentResult = cloudantService.getDesignDocument(
-          getDesignDocumentParams
-        );
+        const getDesignDocumentResult = cloudantService.getDesignDocument(getDesignDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(getDesignDocumentResult);
@@ -3642,20 +3401,12 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
-        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(
-          deletedConflicts
-        );
+        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(deletedConflicts);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
         expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
         expect(mockRequestOptions.qs.meta).toEqual(meta);
@@ -3733,10 +3484,7 @@ describe('CloudantV1', () => {
       // Attachment
       const attachmentModel = {
         contentType: 'testString',
-        data: Buffer.from(
-          'VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=',
-          'base64'
-        ),
+        data: Buffer.from('VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=', 'base64'),
         digest: 'testString',
         encodedLength: 0,
         encoding: 'testString',
@@ -3828,9 +3576,7 @@ describe('CloudantV1', () => {
           rev,
         };
 
-        const putDesignDocumentResult = cloudantService.putDesignDocument(
-          putDesignDocumentParams
-        );
+        const putDesignDocumentResult = cloudantService.putDesignDocument(putDesignDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(putDesignDocumentResult);
@@ -3843,15 +3589,9 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
-        expect(mockRequestOptions.body).toEqual(
-          CloudantV1.DesignDocument.serialize(designDocument)
-        );
+        expect(mockRequestOptions.body).toEqual(CloudantV1.DesignDocument.serialize(designDocument));
         expect(mockRequestOptions.qs.batch).toEqual(batch);
         expect(mockRequestOptions.qs.new_edits).toEqual(newEdits);
         expect(mockRequestOptions.qs.rev).toEqual(rev);
@@ -3932,10 +3672,7 @@ describe('CloudantV1', () => {
           ddoc,
         };
 
-        const getDesignDocumentInformationResult =
-          cloudantService.getDesignDocumentInformation(
-            getDesignDocumentInformationParams
-          );
+        const getDesignDocumentInformationResult = cloudantService.getDesignDocumentInformation(getDesignDocumentInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getDesignDocumentInformationResult);
@@ -3945,18 +3682,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_design/{ddoc}/_info',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_info', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
       }
@@ -3991,9 +3720,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getDesignDocumentInformation(
-          getDesignDocumentInformationParams
-        );
+        cloudantService.getDesignDocumentInformation(getDesignDocumentInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -4058,8 +3785,7 @@ describe('CloudantV1', () => {
           startKey,
         };
 
-        const postDesignDocsResult =
-          cloudantService.postDesignDocs(postDesignDocsParams);
+        const postDesignDocsResult = cloudantService.postDesignDocs(postDesignDocsParams);
 
         // all methods should return a Promise
         expectToBePromise(postDesignDocsResult);
@@ -4072,14 +3798,8 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_design_docs', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.body.attachments).toEqual(attachments);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.descending).toEqual(descending);
@@ -4185,8 +3905,7 @@ describe('CloudantV1', () => {
           accept,
         };
 
-        const postDesignDocsQueriesResult =
-          cloudantService.postDesignDocsQueries(postDesignDocsQueriesParams);
+        const postDesignDocsQueriesResult = cloudantService.postDesignDocsQueries(postDesignDocsQueriesParams);
 
         // all methods should return a Promise
         expectToBePromise(postDesignDocsQueriesResult);
@@ -4196,21 +3915,16 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_design_docs/queries',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design_docs/queries', 'POST');
         const expectedAccept = accept;
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Accept', accept);
         expect(mockRequestOptions.body.queries).toEqual(
-          BaseService.convertModel(queries, CloudantV1.AllDocsQuery.serialize)
+          BaseService.convertModel(
+            queries,
+            CloudantV1.AllDocsQuery.serialize,
+          )
         );
         expect(mockRequestOptions.path.db).toEqual(db);
       }
@@ -4338,21 +4052,11 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_design/{ddoc}/_view/{view}',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_view/{view}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.body.attachments).toEqual(attachments);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.descending).toEqual(descending);
@@ -4492,9 +4196,7 @@ describe('CloudantV1', () => {
           update,
         };
 
-        const postViewAsStreamResult = cloudantService.postViewAsStream(
-          postViewAsStreamParams
-        );
+        const postViewAsStreamResult = cloudantService.postViewAsStream(postViewAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postViewAsStreamResult);
@@ -4504,21 +4206,11 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_design/{ddoc}/_view/{view}',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_view/{view}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.body.attachments).toEqual(attachments);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.descending).toEqual(descending);
@@ -4647,9 +4339,7 @@ describe('CloudantV1', () => {
           queries,
         };
 
-        const postViewQueriesResult = cloudantService.postViewQueries(
-          postViewQueriesParams
-        );
+        const postViewQueriesResult = cloudantService.postViewQueries(postViewQueriesParams);
 
         // all methods should return a Promise
         expectToBePromise(postViewQueriesResult);
@@ -4659,20 +4349,15 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_design/{ddoc}/_view/{view}/queries',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_view/{view}/queries', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.queries).toEqual(
-          BaseService.convertModel(queries, CloudantV1.ViewQuery.serialize)
+          BaseService.convertModel(
+            queries,
+            CloudantV1.ViewQuery.serialize,
+          )
         );
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
@@ -4784,10 +4469,7 @@ describe('CloudantV1', () => {
           queries,
         };
 
-        const postViewQueriesAsStreamResult =
-          cloudantService.postViewQueriesAsStream(
-            postViewQueriesAsStreamParams
-          );
+        const postViewQueriesAsStreamResult = cloudantService.postViewQueriesAsStream(postViewQueriesAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postViewQueriesAsStreamResult);
@@ -4797,20 +4479,15 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_design/{ddoc}/_view/{view}/queries',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_view/{view}/queries', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.queries).toEqual(
-          BaseService.convertModel(queries, CloudantV1.ViewQuery.serialize)
+          BaseService.convertModel(
+            queries,
+            CloudantV1.ViewQuery.serialize,
+          )
         );
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
@@ -4893,10 +4570,7 @@ describe('CloudantV1', () => {
           partitionKey,
         };
 
-        const getPartitionInformationResult =
-          cloudantService.getPartitionInformation(
-            getPartitionInformationParams
-          );
+        const getPartitionInformationResult = cloudantService.getPartitionInformation(getPartitionInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getPartitionInformationResult);
@@ -4906,18 +4580,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_partition/{partition_key}',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.partition_key).toEqual(partitionKey);
       }
@@ -5019,9 +4685,7 @@ describe('CloudantV1', () => {
           startKey,
         };
 
-        const postPartitionAllDocsResult = cloudantService.postPartitionAllDocs(
-          postPartitionAllDocsParams
-        );
+        const postPartitionAllDocsResult = cloudantService.postPartitionAllDocs(postPartitionAllDocsParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionAllDocsResult);
@@ -5031,21 +4695,11 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_partition/{partition_key}/_all_docs',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_all_docs', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.body.attachments).toEqual(attachments);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.descending).toEqual(descending);
@@ -5159,10 +4813,7 @@ describe('CloudantV1', () => {
           startKey,
         };
 
-        const postPartitionAllDocsAsStreamResult =
-          cloudantService.postPartitionAllDocsAsStream(
-            postPartitionAllDocsAsStreamParams
-          );
+        const postPartitionAllDocsAsStreamResult = cloudantService.postPartitionAllDocsAsStream(postPartitionAllDocsAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionAllDocsAsStreamResult);
@@ -5172,21 +4823,11 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_partition/{partition_key}/_all_docs',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_all_docs', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.body.attachments).toEqual(attachments);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.descending).toEqual(descending);
@@ -5234,9 +4875,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postPartitionAllDocsAsStream(
-          postPartitionAllDocsAsStreamParams
-        );
+        cloudantService.postPartitionAllDocsAsStream(postPartitionAllDocsAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -5305,9 +4944,7 @@ describe('CloudantV1', () => {
           stale,
         };
 
-        const postPartitionSearchResult = cloudantService.postPartitionSearch(
-          postPartitionSearchParams
-        );
+        const postPartitionSearchResult = cloudantService.postPartitionSearch(postPartitionSearchParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionSearchResult);
@@ -5317,32 +4954,16 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.query).toEqual(query);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
-        expect(mockRequestOptions.body.highlight_fields).toEqual(
-          highlightFields
-        );
-        expect(mockRequestOptions.body.highlight_number).toEqual(
-          highlightNumber
-        );
-        expect(mockRequestOptions.body.highlight_post_tag).toEqual(
-          highlightPostTag
-        );
-        expect(mockRequestOptions.body.highlight_pre_tag).toEqual(
-          highlightPreTag
-        );
+        expect(mockRequestOptions.body.highlight_fields).toEqual(highlightFields);
+        expect(mockRequestOptions.body.highlight_number).toEqual(highlightNumber);
+        expect(mockRequestOptions.body.highlight_post_tag).toEqual(highlightPostTag);
+        expect(mockRequestOptions.body.highlight_pre_tag).toEqual(highlightPreTag);
         expect(mockRequestOptions.body.highlight_size).toEqual(highlightSize);
         expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
         expect(mockRequestOptions.body.include_fields).toEqual(includeFields);
@@ -5460,10 +5081,7 @@ describe('CloudantV1', () => {
           stale,
         };
 
-        const postPartitionSearchAsStreamResult =
-          cloudantService.postPartitionSearchAsStream(
-            postPartitionSearchAsStreamParams
-          );
+        const postPartitionSearchAsStreamResult = cloudantService.postPartitionSearchAsStream(postPartitionSearchAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionSearchAsStreamResult);
@@ -5473,32 +5091,16 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.query).toEqual(query);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
-        expect(mockRequestOptions.body.highlight_fields).toEqual(
-          highlightFields
-        );
-        expect(mockRequestOptions.body.highlight_number).toEqual(
-          highlightNumber
-        );
-        expect(mockRequestOptions.body.highlight_post_tag).toEqual(
-          highlightPostTag
-        );
-        expect(mockRequestOptions.body.highlight_pre_tag).toEqual(
-          highlightPreTag
-        );
+        expect(mockRequestOptions.body.highlight_fields).toEqual(highlightFields);
+        expect(mockRequestOptions.body.highlight_number).toEqual(highlightNumber);
+        expect(mockRequestOptions.body.highlight_post_tag).toEqual(highlightPostTag);
+        expect(mockRequestOptions.body.highlight_pre_tag).toEqual(highlightPreTag);
         expect(mockRequestOptions.body.highlight_size).toEqual(highlightSize);
         expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
         expect(mockRequestOptions.body.include_fields).toEqual(includeFields);
@@ -5548,9 +5150,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postPartitionSearchAsStream(
-          postPartitionSearchAsStreamParams
-        );
+        cloudantService.postPartitionSearchAsStream(postPartitionSearchAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -5633,9 +5233,7 @@ describe('CloudantV1', () => {
           update,
         };
 
-        const postPartitionViewResult = cloudantService.postPartitionView(
-          postPartitionViewParams
-        );
+        const postPartitionViewResult = cloudantService.postPartitionView(postPartitionViewParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionViewResult);
@@ -5645,21 +5243,11 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.body.attachments).toEqual(attachments);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.descending).toEqual(descending);
@@ -5801,10 +5389,7 @@ describe('CloudantV1', () => {
           update,
         };
 
-        const postPartitionViewAsStreamResult =
-          cloudantService.postPartitionViewAsStream(
-            postPartitionViewAsStreamParams
-          );
+        const postPartitionViewAsStreamResult = cloudantService.postPartitionViewAsStream(postPartitionViewAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionViewAsStreamResult);
@@ -5814,21 +5399,11 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.body.attachments).toEqual(attachments);
         expect(mockRequestOptions.body.conflicts).toEqual(conflicts);
         expect(mockRequestOptions.body.descending).toEqual(descending);
@@ -5888,9 +5463,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postPartitionViewAsStream(
-          postPartitionViewAsStreamParams
-        );
+        cloudantService.postPartitionViewAsStream(postPartitionViewAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -5955,9 +5528,7 @@ describe('CloudantV1', () => {
           useIndex,
         };
 
-        const postPartitionExplainResult = cloudantService.postPartitionExplain(
-          postPartitionExplainParams
-        );
+        const postPartitionExplainResult = cloudantService.postPartitionExplain(postPartitionExplainParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionExplainResult);
@@ -5967,18 +5538,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_partition/{partition_key}/_explain',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_explain', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.selector).toEqual(selector);
         expect(mockRequestOptions.body.allow_fallback).toEqual(allowFallback);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
@@ -6092,9 +5655,7 @@ describe('CloudantV1', () => {
           useIndex,
         };
 
-        const postPartitionFindResult = cloudantService.postPartitionFind(
-          postPartitionFindParams
-        );
+        const postPartitionFindResult = cloudantService.postPartitionFind(postPartitionFindParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionFindResult);
@@ -6104,18 +5665,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_partition/{partition_key}/_find',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_find', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.selector).toEqual(selector);
         expect(mockRequestOptions.body.allow_fallback).toEqual(allowFallback);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
@@ -6229,10 +5782,7 @@ describe('CloudantV1', () => {
           useIndex,
         };
 
-        const postPartitionFindAsStreamResult =
-          cloudantService.postPartitionFindAsStream(
-            postPartitionFindAsStreamParams
-          );
+        const postPartitionFindAsStreamResult = cloudantService.postPartitionFindAsStream(postPartitionFindAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postPartitionFindAsStreamResult);
@@ -6242,18 +5792,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_partition/{partition_key}/_find',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_partition/{partition_key}/_find', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.selector).toEqual(selector);
         expect(mockRequestOptions.body.allow_fallback).toEqual(allowFallback);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
@@ -6303,9 +5845,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postPartitionFindAsStream(
-          postPartitionFindAsStreamParams
-        );
+        cloudantService.postPartitionFindAsStream(postPartitionFindAsStreamParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -6370,8 +5910,7 @@ describe('CloudantV1', () => {
           r,
         };
 
-        const postExplainResult =
-          cloudantService.postExplain(postExplainParams);
+        const postExplainResult = cloudantService.postExplain(postExplainParams);
 
         // all methods should return a Promise
         expectToBePromise(postExplainResult);
@@ -6384,11 +5923,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_explain', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.selector).toEqual(selector);
         expect(mockRequestOptions.body.allow_fallback).toEqual(allowFallback);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
@@ -6513,11 +6048,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_find', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.selector).toEqual(selector);
         expect(mockRequestOptions.body.allow_fallback).toEqual(allowFallback);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
@@ -6629,9 +6160,7 @@ describe('CloudantV1', () => {
           r,
         };
 
-        const postFindAsStreamResult = cloudantService.postFindAsStream(
-          postFindAsStreamParams
-        );
+        const postFindAsStreamResult = cloudantService.postFindAsStream(postFindAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postFindAsStreamResult);
@@ -6644,11 +6173,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_find', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.selector).toEqual(selector);
         expect(mockRequestOptions.body.allow_fallback).toEqual(allowFallback);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
@@ -6735,8 +6260,7 @@ describe('CloudantV1', () => {
           db,
         };
 
-        const getIndexesInformationResult =
-          cloudantService.getIndexesInformation(getIndexesInformationParams);
+        const getIndexesInformationResult = cloudantService.getIndexesInformation(getIndexesInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getIndexesInformationResult);
@@ -6749,11 +6273,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_index', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -6877,14 +6397,8 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_index', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body.index).toEqual(
-          CloudantV1.IndexDefinition.serialize(indexDefinitionModel)
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body.index).toEqual(CloudantV1.IndexDefinition.serialize(indexDefinitionModel));
         expect(mockRequestOptions.body.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.body.name).toEqual(name);
         expect(mockRequestOptions.body.partitioned).toEqual(partitioned);
@@ -6967,8 +6481,7 @@ describe('CloudantV1', () => {
           index,
         };
 
-        const deleteIndexResult =
-          cloudantService.deleteIndex(deleteIndexParams);
+        const deleteIndexResult = cloudantService.deleteIndex(deleteIndexParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteIndexResult);
@@ -6978,18 +6491,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_index/_design/{ddoc}/{type}/{index}',
-          'DELETE'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_index/_design/{ddoc}/{type}/{index}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.type).toEqual(type);
@@ -7071,9 +6576,7 @@ describe('CloudantV1', () => {
           text,
         };
 
-        const postSearchAnalyzeResult = cloudantService.postSearchAnalyze(
-          postSearchAnalyzeParams
-        );
+        const postSearchAnalyzeResult = cloudantService.postSearchAnalyze(postSearchAnalyzeParams);
 
         // all methods should return a Promise
         expectToBePromise(postSearchAnalyzeResult);
@@ -7086,11 +6589,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_search_analyze', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.analyzer).toEqual(analyzer);
         expect(mockRequestOptions.body.text).toEqual(text);
       }
@@ -7214,32 +6713,16 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_design/{ddoc}/_search/{index}',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_search/{index}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.query).toEqual(query);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
-        expect(mockRequestOptions.body.highlight_fields).toEqual(
-          highlightFields
-        );
-        expect(mockRequestOptions.body.highlight_number).toEqual(
-          highlightNumber
-        );
-        expect(mockRequestOptions.body.highlight_post_tag).toEqual(
-          highlightPostTag
-        );
-        expect(mockRequestOptions.body.highlight_pre_tag).toEqual(
-          highlightPreTag
-        );
+        expect(mockRequestOptions.body.highlight_fields).toEqual(highlightFields);
+        expect(mockRequestOptions.body.highlight_number).toEqual(highlightNumber);
+        expect(mockRequestOptions.body.highlight_post_tag).toEqual(highlightPostTag);
+        expect(mockRequestOptions.body.highlight_pre_tag).toEqual(highlightPreTag);
         expect(mockRequestOptions.body.highlight_size).toEqual(highlightSize);
         expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
         expect(mockRequestOptions.body.include_fields).toEqual(includeFields);
@@ -7370,9 +6853,7 @@ describe('CloudantV1', () => {
           ranges,
         };
 
-        const postSearchAsStreamResult = cloudantService.postSearchAsStream(
-          postSearchAsStreamParams
-        );
+        const postSearchAsStreamResult = cloudantService.postSearchAsStream(postSearchAsStreamParams);
 
         // all methods should return a Promise
         expectToBePromise(postSearchAsStreamResult);
@@ -7382,32 +6863,16 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_design/{ddoc}/_search/{index}',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_search/{index}', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.query).toEqual(query);
         expect(mockRequestOptions.body.bookmark).toEqual(bookmark);
-        expect(mockRequestOptions.body.highlight_fields).toEqual(
-          highlightFields
-        );
-        expect(mockRequestOptions.body.highlight_number).toEqual(
-          highlightNumber
-        );
-        expect(mockRequestOptions.body.highlight_post_tag).toEqual(
-          highlightPostTag
-        );
-        expect(mockRequestOptions.body.highlight_pre_tag).toEqual(
-          highlightPreTag
-        );
+        expect(mockRequestOptions.body.highlight_fields).toEqual(highlightFields);
+        expect(mockRequestOptions.body.highlight_number).toEqual(highlightNumber);
+        expect(mockRequestOptions.body.highlight_post_tag).toEqual(highlightPostTag);
+        expect(mockRequestOptions.body.highlight_pre_tag).toEqual(highlightPreTag);
         expect(mockRequestOptions.body.highlight_size).toEqual(highlightSize);
         expect(mockRequestOptions.body.include_docs).toEqual(includeDocs);
         expect(mockRequestOptions.body.include_fields).toEqual(includeFields);
@@ -7503,9 +6968,7 @@ describe('CloudantV1', () => {
           index,
         };
 
-        const getSearchDiskSizeResult = cloudantService.getSearchDiskSize(
-          getSearchDiskSizeParams
-        );
+        const getSearchDiskSizeResult = cloudantService.getSearchDiskSize(getSearchDiskSizeParams);
 
         // all methods should return a Promise
         expectToBePromise(getSearchDiskSizeResult);
@@ -7515,18 +6978,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_design/{ddoc}/_search_disk_size/{index}',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_search_disk_size/{index}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.index).toEqual(index);
@@ -7607,8 +7062,7 @@ describe('CloudantV1', () => {
           index,
         };
 
-        const getSearchInfoResult =
-          cloudantService.getSearchInfo(getSearchInfoParams);
+        const getSearchInfoResult = cloudantService.getSearchInfo(getSearchInfoParams);
 
         // all methods should return a Promise
         expectToBePromise(getSearchInfoResult);
@@ -7618,18 +7072,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_design/{ddoc}/_search_info/{index}',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_design/{ddoc}/_search_info/{index}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.ddoc).toEqual(ddoc);
         expect(mockRequestOptions.path.index).toEqual(index);
@@ -7708,10 +7154,7 @@ describe('CloudantV1', () => {
           ifNoneMatch,
         };
 
-        const headReplicationDocumentResult =
-          cloudantService.headReplicationDocument(
-            headReplicationDocumentParams
-          );
+        const headReplicationDocumentResult = cloudantService.headReplicationDocument(headReplicationDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(headReplicationDocumentResult);
@@ -7724,11 +7167,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_replicator/{doc_id}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
       }
@@ -7800,8 +7239,7 @@ describe('CloudantV1', () => {
           docId,
         };
 
-        const headSchedulerDocumentResult =
-          cloudantService.headSchedulerDocument(headSchedulerDocumentParams);
+        const headSchedulerDocumentResult = cloudantService.headSchedulerDocument(headSchedulerDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(headSchedulerDocumentResult);
@@ -7811,18 +7249,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_scheduler/docs/_replicator/{doc_id}',
-          'HEAD'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_scheduler/docs/_replicator/{doc_id}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
       }
 
@@ -7893,9 +7323,7 @@ describe('CloudantV1', () => {
           jobId,
         };
 
-        const headSchedulerJobResult = cloudantService.headSchedulerJob(
-          headSchedulerJobParams
-        );
+        const headSchedulerJobResult = cloudantService.headSchedulerJob(headSchedulerJobParams);
 
         // all methods should return a Promise
         expectToBePromise(headSchedulerJobResult);
@@ -7905,18 +7333,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_scheduler/jobs/{job_id}',
-          'HEAD'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_scheduler/jobs/{job_id}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.job_id).toEqual(jobId);
       }
 
@@ -7985,10 +7405,7 @@ describe('CloudantV1', () => {
       // Attachment
       const attachmentModel = {
         contentType: 'testString',
-        data: Buffer.from(
-          'VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=',
-          'base64'
-        ),
+        data: Buffer.from('VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=', 'base64'),
         digest: 'testString',
         encodedLength: 0,
         encoding: 'testString',
@@ -8096,8 +7513,7 @@ describe('CloudantV1', () => {
           batch,
         };
 
-        const postReplicatorResult =
-          cloudantService.postReplicator(postReplicatorParams);
+        const postReplicatorResult = cloudantService.postReplicator(postReplicatorParams);
 
         // all methods should return a Promise
         expectToBePromise(postReplicatorResult);
@@ -8110,14 +7526,8 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_replicator', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body).toEqual(
-          CloudantV1.ReplicationDocument.serialize(replicationDocument)
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body).toEqual(CloudantV1.ReplicationDocument.serialize(replicationDocument));
         expect(mockRequestOptions.qs.batch).toEqual(batch);
       }
 
@@ -8194,10 +7604,7 @@ describe('CloudantV1', () => {
           rev,
         };
 
-        const deleteReplicationDocumentResult =
-          cloudantService.deleteReplicationDocument(
-            deleteReplicationDocumentParams
-          );
+        const deleteReplicationDocumentResult = cloudantService.deleteReplicationDocument(deleteReplicationDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteReplicationDocumentResult);
@@ -8207,18 +7614,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_replicator/{doc_id}',
-          'DELETE'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_replicator/{doc_id}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
         expect(mockRequestOptions.qs.batch).toEqual(batch);
         expect(mockRequestOptions.qs.rev).toEqual(rev);
@@ -8253,9 +7652,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.deleteReplicationDocument(
-          deleteReplicationDocumentParams
-        );
+        cloudantService.deleteReplicationDocument(deleteReplicationDocumentParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -8316,8 +7713,7 @@ describe('CloudantV1', () => {
           revsInfo,
         };
 
-        const getReplicationDocumentResult =
-          cloudantService.getReplicationDocument(getReplicationDocumentParams);
+        const getReplicationDocumentResult = cloudantService.getReplicationDocument(getReplicationDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(getReplicationDocumentResult);
@@ -8330,20 +7726,12 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_replicator/{doc_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.conflicts).toEqual(conflicts);
-        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(
-          deletedConflicts
-        );
+        expect(mockRequestOptions.qs.deleted_conflicts).toEqual(deletedConflicts);
         expect(mockRequestOptions.qs.latest).toEqual(latest);
         expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
         expect(mockRequestOptions.qs.meta).toEqual(meta);
@@ -8418,10 +7806,7 @@ describe('CloudantV1', () => {
       // Attachment
       const attachmentModel = {
         contentType: 'testString',
-        data: Buffer.from(
-          'VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=',
-          'base64'
-        ),
+        data: Buffer.from('VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=', 'base64'),
         digest: 'testString',
         encodedLength: 0,
         encoding: 'testString',
@@ -8537,8 +7922,7 @@ describe('CloudantV1', () => {
           rev,
         };
 
-        const putReplicationDocumentResult =
-          cloudantService.putReplicationDocument(putReplicationDocumentParams);
+        const putReplicationDocumentResult = cloudantService.putReplicationDocument(putReplicationDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(putReplicationDocumentResult);
@@ -8551,15 +7935,9 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_replicator/{doc_id}', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
-        expect(mockRequestOptions.body).toEqual(
-          CloudantV1.ReplicationDocument.serialize(replicationDocument)
-        );
+        expect(mockRequestOptions.body).toEqual(CloudantV1.ReplicationDocument.serialize(replicationDocument));
         expect(mockRequestOptions.qs.batch).toEqual(batch);
         expect(mockRequestOptions.qs.new_edits).toEqual(newEdits);
         expect(mockRequestOptions.qs.rev).toEqual(rev);
@@ -8639,9 +8017,7 @@ describe('CloudantV1', () => {
           states,
         };
 
-        const getSchedulerDocsResult = cloudantService.getSchedulerDocs(
-          getSchedulerDocsParams
-        );
+        const getSchedulerDocsResult = cloudantService.getSchedulerDocs(getSchedulerDocsParams);
 
         // all methods should return a Promise
         expectToBePromise(getSchedulerDocsResult);
@@ -8654,11 +8030,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_scheduler/docs', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.qs.limit).toEqual(limit);
         expect(mockRequestOptions.qs.skip).toEqual(skip);
         expect(mockRequestOptions.qs.states).toEqual(states);
@@ -8711,9 +8083,7 @@ describe('CloudantV1', () => {
           docId,
         };
 
-        const getSchedulerDocumentResult = cloudantService.getSchedulerDocument(
-          getSchedulerDocumentParams
-        );
+        const getSchedulerDocumentResult = cloudantService.getSchedulerDocument(getSchedulerDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(getSchedulerDocumentResult);
@@ -8723,18 +8093,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_scheduler/docs/_replicator/{doc_id}',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_scheduler/docs/_replicator/{doc_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
       }
 
@@ -8807,9 +8169,7 @@ describe('CloudantV1', () => {
           skip,
         };
 
-        const getSchedulerJobsResult = cloudantService.getSchedulerJobs(
-          getSchedulerJobsParams
-        );
+        const getSchedulerJobsResult = cloudantService.getSchedulerJobs(getSchedulerJobsParams);
 
         // all methods should return a Promise
         expectToBePromise(getSchedulerJobsResult);
@@ -8822,11 +8182,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_scheduler/jobs', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.qs.limit).toEqual(limit);
         expect(mockRequestOptions.qs.skip).toEqual(skip);
       }
@@ -8878,9 +8234,7 @@ describe('CloudantV1', () => {
           jobId,
         };
 
-        const getSchedulerJobResult = cloudantService.getSchedulerJob(
-          getSchedulerJobParams
-        );
+        const getSchedulerJobResult = cloudantService.getSchedulerJob(getSchedulerJobParams);
 
         // all methods should return a Promise
         expectToBePromise(getSchedulerJobResult);
@@ -8890,18 +8244,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_scheduler/jobs/{job_id}',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_scheduler/jobs/{job_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.job_id).toEqual(jobId);
       }
 
@@ -8969,8 +8315,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getSessionInformation
         const getSessionInformationParams = {};
 
-        const getSessionInformationResult =
-          cloudantService.getSessionInformation(getSessionInformationParams);
+        const getSessionInformationResult = cloudantService.getSessionInformation(getSessionInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getSessionInformationResult);
@@ -8983,11 +8328,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_session', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -9034,8 +8375,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation postApiKeys
         const postApiKeysParams = {};
 
-        const postApiKeysResult =
-          cloudantService.postApiKeys(postApiKeysParams);
+        const postApiKeysResult = cloudantService.postApiKeys(postApiKeysParams);
 
         // all methods should return a Promise
         expectToBePromise(postApiKeysResult);
@@ -9048,11 +8388,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_api/v2/api_keys', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -9118,10 +8454,7 @@ describe('CloudantV1', () => {
           members,
         };
 
-        const putCloudantSecurityConfigurationResult =
-          cloudantService.putCloudantSecurityConfiguration(
-            putCloudantSecurityConfigurationParams
-          );
+        const putCloudantSecurityConfigurationResult = cloudantService.putCloudantSecurityConfiguration(putCloudantSecurityConfigurationParams);
 
         // all methods should return a Promise
         expectToBePromise(putCloudantSecurityConfigurationResult);
@@ -9131,28 +8464,14 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_api/v2/db/{db}/_security',
-          'PUT'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/db/{db}/_security', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.cloudant).toEqual(cloudant);
-        expect(mockRequestOptions.body.admins).toEqual(
-          CloudantV1.SecurityObject.serialize(securityObjectModel)
-        );
-        expect(mockRequestOptions.body.couchdb_auth_only).toEqual(
-          couchdbAuthOnly
-        );
-        expect(mockRequestOptions.body.members).toEqual(
-          CloudantV1.SecurityObject.serialize(securityObjectModel)
-        );
+        expect(mockRequestOptions.body.admins).toEqual(CloudantV1.SecurityObject.serialize(securityObjectModel));
+        expect(mockRequestOptions.body.couchdb_auth_only).toEqual(couchdbAuthOnly);
+        expect(mockRequestOptions.body.members).toEqual(CloudantV1.SecurityObject.serialize(securityObjectModel));
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -9186,9 +8505,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.putCloudantSecurityConfiguration(
-          putCloudantSecurityConfigurationParams
-        );
+        cloudantService.putCloudantSecurityConfiguration(putCloudantSecurityConfigurationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -9227,8 +8544,7 @@ describe('CloudantV1', () => {
           db,
         };
 
-        const getSecurityResult =
-          cloudantService.getSecurity(getSecurityParams);
+        const getSecurityResult = cloudantService.getSecurity(getSecurityParams);
 
         // all methods should return a Promise
         expectToBePromise(getSecurityResult);
@@ -9241,11 +8557,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_security', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -9332,8 +8644,7 @@ describe('CloudantV1', () => {
           members,
         };
 
-        const putSecurityResult =
-          cloudantService.putSecurity(putSecurityParams);
+        const putSecurityResult = cloudantService.putSecurity(putSecurityParams);
 
         // all methods should return a Promise
         expectToBePromise(putSecurityResult);
@@ -9346,21 +8657,11 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_security', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
-        expect(mockRequestOptions.body.admins).toEqual(
-          CloudantV1.SecurityObject.serialize(securityObjectModel)
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.body.admins).toEqual(CloudantV1.SecurityObject.serialize(securityObjectModel));
         expect(mockRequestOptions.body.cloudant).toEqual(cloudant);
-        expect(mockRequestOptions.body.couchdb_auth_only).toEqual(
-          couchdbAuthOnly
-        );
-        expect(mockRequestOptions.body.members).toEqual(
-          CloudantV1.SecurityObject.serialize(securityObjectModel)
-        );
+        expect(mockRequestOptions.body.couchdb_auth_only).toEqual(couchdbAuthOnly);
+        expect(mockRequestOptions.body.members).toEqual(CloudantV1.SecurityObject.serialize(securityObjectModel));
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -9428,9 +8729,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getCorsInformation
         const getCorsInformationParams = {};
 
-        const getCorsInformationResult = cloudantService.getCorsInformation(
-          getCorsInformationParams
-        );
+        const getCorsInformationResult = cloudantService.getCorsInformation(getCorsInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getCorsInformationResult);
@@ -9440,18 +8739,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_api/v2/user/config/cors',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/config/cors', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -9505,9 +8796,7 @@ describe('CloudantV1', () => {
           enableCors,
         };
 
-        const putCorsConfigurationResult = cloudantService.putCorsConfiguration(
-          putCorsConfigurationParams
-        );
+        const putCorsConfigurationResult = cloudantService.putCorsConfiguration(putCorsConfigurationParams);
 
         // all methods should return a Promise
         expectToBePromise(putCorsConfigurationResult);
@@ -9517,22 +8806,12 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_api/v2/user/config/cors',
-          'PUT'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/config/cors', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.origins).toEqual(origins);
-        expect(mockRequestOptions.body.allow_credentials).toEqual(
-          allowCredentials
-        );
+        expect(mockRequestOptions.body.allow_credentials).toEqual(allowCredentials);
         expect(mockRequestOptions.body.enable_cors).toEqual(enableCors);
       }
 
@@ -9613,8 +8892,7 @@ describe('CloudantV1', () => {
           rev,
         };
 
-        const headAttachmentResult =
-          cloudantService.headAttachment(headAttachmentParams);
+        const headAttachmentResult = cloudantService.headAttachment(headAttachmentParams);
 
         // all methods should return a Promise
         expectToBePromise(headAttachmentResult);
@@ -9624,18 +8902,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/{doc_id}/{attachment_name}',
-          'HEAD'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}/{attachment_name}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.qs.rev).toEqual(rev);
@@ -9725,9 +8995,7 @@ describe('CloudantV1', () => {
           batch,
         };
 
-        const deleteAttachmentResult = cloudantService.deleteAttachment(
-          deleteAttachmentParams
-        );
+        const deleteAttachmentResult = cloudantService.deleteAttachment(deleteAttachmentParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteAttachmentResult);
@@ -9737,18 +9005,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/{doc_id}/{attachment_name}',
-          'DELETE'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}/{attachment_name}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
         expect(mockRequestOptions.qs.rev).toEqual(rev);
         expect(mockRequestOptions.qs.batch).toEqual(batch);
@@ -9842,8 +9102,7 @@ describe('CloudantV1', () => {
           rev,
         };
 
-        const getAttachmentResult =
-          cloudantService.getAttachment(getAttachmentParams);
+        const getAttachmentResult = cloudantService.getAttachment(getAttachmentParams);
 
         // all methods should return a Promise
         expectToBePromise(getAttachmentResult);
@@ -9853,18 +9112,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/{doc_id}/{attachment_name}',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}/{attachment_name}', 'GET');
         const expectedAccept = accept;
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Accept', accept);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
@@ -9959,8 +9210,7 @@ describe('CloudantV1', () => {
           rev,
         };
 
-        const putAttachmentResult =
-          cloudantService.putAttachment(putAttachmentParams);
+        const putAttachmentResult = cloudantService.putAttachment(putAttachmentParams);
 
         // all methods should return a Promise
         expectToBePromise(putAttachmentResult);
@@ -9970,18 +9220,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/{doc_id}/{attachment_name}',
-          'PUT'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/{doc_id}/{attachment_name}', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = contentType;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Content-Type', contentType);
         checkUserHeader(createRequestMock, 'If-Match', ifMatch);
         expect(mockRequestOptions.body).toEqual(attachment);
@@ -10070,9 +9312,7 @@ describe('CloudantV1', () => {
           ifNoneMatch,
         };
 
-        const headLocalDocumentResult = cloudantService.headLocalDocument(
-          headLocalDocumentParams
-        );
+        const headLocalDocumentResult = cloudantService.headLocalDocument(headLocalDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(headLocalDocumentResult);
@@ -10085,11 +9325,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_local/{doc_id}', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
@@ -10168,9 +9404,7 @@ describe('CloudantV1', () => {
           batch,
         };
 
-        const deleteLocalDocumentResult = cloudantService.deleteLocalDocument(
-          deleteLocalDocumentParams
-        );
+        const deleteLocalDocumentResult = cloudantService.deleteLocalDocument(deleteLocalDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteLocalDocumentResult);
@@ -10180,18 +9414,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/{db}/_local/{doc_id}',
-          'DELETE'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/{db}/_local/{doc_id}', 'DELETE');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.qs.batch).toEqual(batch);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
@@ -10278,9 +9504,7 @@ describe('CloudantV1', () => {
           localSeq,
         };
 
-        const getLocalDocumentResult = cloudantService.getLocalDocument(
-          getLocalDocumentParams
-        );
+        const getLocalDocumentResult = cloudantService.getLocalDocument(getLocalDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(getLocalDocumentResult);
@@ -10293,17 +9517,11 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_local/{doc_id}', 'GET');
         const expectedAccept = accept;
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Accept', accept);
         checkUserHeader(createRequestMock, 'If-None-Match', ifNoneMatch);
         expect(mockRequestOptions.qs.attachments).toEqual(attachments);
-        expect(mockRequestOptions.qs.att_encoding_info).toEqual(
-          attEncodingInfo
-        );
+        expect(mockRequestOptions.qs.att_encoding_info).toEqual(attEncodingInfo);
         expect(mockRequestOptions.qs.local_seq).toEqual(localSeq);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
@@ -10386,9 +9604,7 @@ describe('CloudantV1', () => {
           batch,
         };
 
-        const putLocalDocumentResult = cloudantService.putLocalDocument(
-          putLocalDocumentParams
-        );
+        const putLocalDocumentResult = cloudantService.putLocalDocument(putLocalDocumentParams);
 
         // all methods should return a Promise
         expectToBePromise(putLocalDocumentResult);
@@ -10401,11 +9617,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_local/{doc_id}', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = contentType;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         checkUserHeader(createRequestMock, 'Content-Type', contentType);
         expect(mockRequestOptions.body).toEqual(document);
         expect(mockRequestOptions.qs.batch).toEqual(batch);
@@ -10486,8 +9698,7 @@ describe('CloudantV1', () => {
           documentRevisions,
         };
 
-        const postRevsDiffResult =
-          cloudantService.postRevsDiff(postRevsDiffParams);
+        const postRevsDiffResult = cloudantService.postRevsDiff(postRevsDiffParams);
 
         // all methods should return a Promise
         expectToBePromise(postRevsDiffResult);
@@ -10500,11 +9711,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_revs_diff', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body).toEqual(documentRevisions);
         expect(mockRequestOptions.path.db).toEqual(db);
       }
@@ -10578,9 +9785,7 @@ describe('CloudantV1', () => {
           db,
         };
 
-        const getShardsInformationResult = cloudantService.getShardsInformation(
-          getShardsInformationParams
-        );
+        const getShardsInformationResult = cloudantService.getShardsInformation(getShardsInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getShardsInformationResult);
@@ -10593,11 +9798,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_shards', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
       }
 
@@ -10670,8 +9871,7 @@ describe('CloudantV1', () => {
           docId,
         };
 
-        const getDocumentShardsInfoResult =
-          cloudantService.getDocumentShardsInfo(getDocumentShardsInfoParams);
+        const getDocumentShardsInfoResult = cloudantService.getDocumentShardsInfo(getDocumentShardsInfoParams);
 
         // all methods should return a Promise
         expectToBePromise(getDocumentShardsInfoResult);
@@ -10684,11 +9884,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/{db}/_shards/{doc_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.path.db).toEqual(db);
         expect(mockRequestOptions.path.doc_id).toEqual(docId);
       }
@@ -10759,9 +9955,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation headUpInformation
         const headUpInformationParams = {};
 
-        const headUpInformationResult = cloudantService.headUpInformation(
-          headUpInformationParams
-        );
+        const headUpInformationResult = cloudantService.headUpInformation(headUpInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(headUpInformationResult);
@@ -10774,11 +9968,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_up', 'HEAD');
         const expectedAccept = undefined;
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -10825,8 +10015,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getActiveTasks
         const getActiveTasksParams = {};
 
-        const getActiveTasksResult =
-          cloudantService.getActiveTasks(getActiveTasksParams);
+        const getActiveTasksResult = cloudantService.getActiveTasks(getActiveTasksParams);
 
         // all methods should return a Promise
         expectToBePromise(getActiveTasksResult);
@@ -10839,11 +10028,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_active_tasks', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -10890,10 +10075,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getActivityTrackerEvents
         const getActivityTrackerEventsParams = {};
 
-        const getActivityTrackerEventsResult =
-          cloudantService.getActivityTrackerEvents(
-            getActivityTrackerEventsParams
-          );
+        const getActivityTrackerEventsResult = cloudantService.getActivityTrackerEvents(getActivityTrackerEventsParams);
 
         // all methods should return a Promise
         expectToBePromise(getActivityTrackerEventsResult);
@@ -10903,18 +10085,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_api/v2/user/activity_tracker/events',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/activity_tracker/events', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -10943,9 +10117,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getActivityTrackerEvents(
-          getActivityTrackerEventsParams
-        );
+        cloudantService.getActivityTrackerEvents(getActivityTrackerEventsParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -10966,10 +10138,7 @@ describe('CloudantV1', () => {
           types,
         };
 
-        const postActivityTrackerEventsResult =
-          cloudantService.postActivityTrackerEvents(
-            postActivityTrackerEventsParams
-          );
+        const postActivityTrackerEventsResult = cloudantService.postActivityTrackerEvents(postActivityTrackerEventsParams);
 
         // all methods should return a Promise
         expectToBePromise(postActivityTrackerEventsResult);
@@ -10979,18 +10148,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_api/v2/user/activity_tracker/events',
-          'POST'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/activity_tracker/events', 'POST');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(mockRequestOptions.body.types).toEqual(types);
       }
 
@@ -11022,9 +10183,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.postActivityTrackerEvents(
-          postActivityTrackerEventsParams
-        );
+        cloudantService.postActivityTrackerEvents(postActivityTrackerEventsParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -11060,10 +10219,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getCapacityDatabasesInformation
         const getCapacityDatabasesInformationParams = {};
 
-        const getCapacityDatabasesInformationResult =
-          cloudantService.getCapacityDatabasesInformation(
-            getCapacityDatabasesInformationParams
-          );
+        const getCapacityDatabasesInformationResult = cloudantService.getCapacityDatabasesInformation(getCapacityDatabasesInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getCapacityDatabasesInformationResult);
@@ -11073,18 +10229,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_api/v2/user/capacity/databases',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/capacity/databases', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -11113,9 +10261,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getCapacityDatabasesInformation(
-          getCapacityDatabasesInformationParams
-        );
+        cloudantService.getCapacityDatabasesInformation(getCapacityDatabasesInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -11133,10 +10279,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getCurrentDatabasesInformation
         const getCurrentDatabasesInformationParams = {};
 
-        const getCurrentDatabasesInformationResult =
-          cloudantService.getCurrentDatabasesInformation(
-            getCurrentDatabasesInformationParams
-          );
+        const getCurrentDatabasesInformationResult = cloudantService.getCurrentDatabasesInformation(getCurrentDatabasesInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getCurrentDatabasesInformationResult);
@@ -11146,18 +10289,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_api/v2/user/current/databases',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/current/databases', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -11186,9 +10321,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getCurrentDatabasesInformation(
-          getCurrentDatabasesInformationParams
-        );
+        cloudantService.getCurrentDatabasesInformation(getCurrentDatabasesInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -11206,10 +10339,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getCurrentThroughputInformation
         const getCurrentThroughputInformationParams = {};
 
-        const getCurrentThroughputInformationResult =
-          cloudantService.getCurrentThroughputInformation(
-            getCurrentThroughputInformationParams
-          );
+        const getCurrentThroughputInformationResult = cloudantService.getCurrentThroughputInformation(getCurrentThroughputInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getCurrentThroughputInformationResult);
@@ -11219,18 +10349,10 @@ describe('CloudantV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/_api/v2/user/current/throughput',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/_api/v2/user/current/throughput', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -11259,9 +10381,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getCurrentThroughputInformation(
-          getCurrentThroughputInformationParams
-        );
+        cloudantService.getCurrentThroughputInformation(getCurrentThroughputInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -11279,10 +10399,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getMembershipInformation
         const getMembershipInformationParams = {};
 
-        const getMembershipInformationResult =
-          cloudantService.getMembershipInformation(
-            getMembershipInformationParams
-          );
+        const getMembershipInformationResult = cloudantService.getMembershipInformation(getMembershipInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getMembershipInformationResult);
@@ -11295,11 +10412,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_membership', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {
@@ -11328,9 +10441,7 @@ describe('CloudantV1', () => {
           },
         };
 
-        cloudantService.getMembershipInformation(
-          getMembershipInformationParams
-        );
+        cloudantService.getMembershipInformation(getMembershipInformationParams);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
@@ -11348,9 +10459,7 @@ describe('CloudantV1', () => {
         // Construct the params object for operation getUpInformation
         const getUpInformationParams = {};
 
-        const getUpInformationResult = cloudantService.getUpInformation(
-          getUpInformationParams
-        );
+        const getUpInformationResult = cloudantService.getUpInformation(getUpInformationParams);
 
         // all methods should return a Promise
         expectToBePromise(getUpInformationResult);
@@ -11363,11 +10472,7 @@ describe('CloudantV1', () => {
         checkUrlAndMethod(mockRequestOptions, '/_up', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
-        checkMediaHeaders(
-          createRequestMock,
-          expectedAccept,
-          expectedContentType
-        );
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
       }
 
       test('should pass the right params to createRequest with enable and disable retries', () => {

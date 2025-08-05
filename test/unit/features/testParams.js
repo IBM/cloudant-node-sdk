@@ -17,9 +17,8 @@
 const { PostChangesConstants } = require('../../../cloudant/v1.ts');
 const {
   ChangesParamsHelper,
+  Mode,
 } = require('../../../cloudant/features/changesParamsHelper.ts');
-
-const { Mode } = require('../../../cloudant/features/changesParamsHelper.ts');
 
 const beginningOfErrorMsg = 'The param';
 const endOfErrorMsg = 'invalid when using ChangesFollower.';
