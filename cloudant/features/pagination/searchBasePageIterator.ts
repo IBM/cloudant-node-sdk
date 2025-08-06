@@ -25,14 +25,10 @@ import { BookmarkPageIterator } from './bookmarkPageIterator';
 export abstract class SearchBasePageIterator<
   P extends CloudantV1.PostSearchParams | CloudantV1.PostPartitionSearchParams,
 > extends BookmarkPageIterator<P, SearchResult, SearchResultRow> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(client: CloudantV1, params: P) {
-    super(client, params);
-  }
-
-  protected getItems(result: SearchResult): Array<SearchResultRow> {
+  protected override getItems(result: SearchResult): Array<SearchResultRow> {
     return result.rows;
   }
+
   protected abstract nextRequestFunction(): (
     params: P
   ) => Promise<Response<SearchResult>>;

@@ -18,7 +18,6 @@ import { BasePageIterator } from './basePageIterator';
 import { default as CloudantV1, Response } from '../../v1';
 
 export abstract class KeyPageIterator<
-  K,
   P extends
     | CloudantV1.PostAllDocsParams
     | CloudantV1.PostPartitionAllDocsParams
@@ -29,40 +28,35 @@ export abstract class KeyPageIterator<
   I extends CloudantV1.DocsResultRow | CloudantV1.ViewResultRow,
 > extends BasePageIterator<P, R, I> {
   private boundaryFailure = null;
+
   constructor(client: CloudantV1, params: P) {
     super(client, params);
-    this.setLimit(this.nextPageParams, this.getPageSize(params)); // n+1 items per request
+    this.setLimit(this.getPageSize(params)); // n+1 items per request
   }
 
-  protected setNextKey(params: P, startKey: K) {
-    params.startKey = startKey;
+  protected abstract setNextKeyId(startKeyDocId: string);
+
+  protected setNextKey(startKey: string) {
+    this.nextPageParams.startKey = startKey;
   }
 
-  protected getNextKey(item: I): K {
-    return item.key;
-  }
-  protected abstract setNextKeyId(params: P, startKeyDocId: string);
-
-  protected getNextKeyId(item: I): string {
-    return item.id;
-  }
-
-  protected setLimit(params: P, limit: number) {
-    params.limit = limit;
+  protected setLimit(limit: number) {
+    this.nextPageParams.limit = limit;
   }
 
   protected abstract getItems(result: R): Array<I>;
+
   protected abstract nextRequestFunction(): (params: P) => Promise<Response<R>>;
 
-  protected setNextPageParams(params: P, result: R): void {
+  protected setNextPageParams(result: R): void {
     const items: Array<I> = this.getItems(result);
     const lastItem: I = items[items.length - 1];
-    const nextKey: any = this.getNextKey(lastItem);
-    const nextKeyId: string = this.getNextKeyId(lastItem);
-    this.setNextKey(params, nextKey);
-    this.setNextKeyId(params, nextKeyId);
-    if (params.skip) {
-      delete params.skip;
+    const nextKey: any = lastItem.key;
+    const nextKeyId: string = lastItem.id;
+    this.setNextKey(nextKey);
+    this.setNextKeyId(nextKeyId);
+    if (this.nextPageParams.skip) {
+      delete this.nextPageParams.skip;
     }
   }
 

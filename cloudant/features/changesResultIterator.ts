@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-import { ChangesParamsHelper } from './changesParamsHelper';
-import { ChangesFollower, Mode } from './changesFollower';
 import { getNewLogger } from 'ibm-cloud-sdk-core';
-import { default as CloudantV1, PostChangesParams } from '../v1';
 import { promisify } from 'node:util';
+import { ChangesParamsHelper, Mode } from './changesParamsHelper';
+import { default as CloudantV1, PostChangesParams } from '../v1';
 
 enum TransientErrorSuppression {
   ALWAYS,
@@ -30,50 +29,33 @@ export class ChangesResultIterableIterator
   implements AsyncIterableIterator<CloudantV1.ChangesResult>
 {
   private readonly timeoutPromise = promisify(setTimeout);
-
   private readonly cancelToken = 'CloudantChangesIteratorCancel';
-
   private readonly client: CloudantV1;
-
   private readonly doneResult: IteratorResult<CloudantV1.ChangesResult> = {
     done: true,
     value: undefined,
   };
-
   private readonly errorTolerance?: number;
-
   private readonly logger = getNewLogger('cloudant-node-sdk');
-
   private readonly mode: Mode;
-
   private readonly promisedConfig: Promise<void>;
-
   private readonly transientErrorSuppression: TransientErrorSuppression;
-
   private readonly baseDelay: number = 100;
-
   private readonly expRetryGate: number = Math.floor(
     Math.log2(ChangesParamsHelper.LONGPOLL_TIMEOUT / this.baseDelay)
   );
-
   private cancel: (error?: Error) => void;
-
   private countDown: number;
-
   private inflight: Promise<any> = null;
-
   private params: PostChangesParams;
-
   // Default to "infinite"
   private pending: number = Number.MAX_VALUE;
-
   private since: string;
-
   private stopped: boolean = false;
-
   private successTimestamp: number;
-
   private retry: number = 0;
+  /** @internal */
+  static BATCH_SIZE = 10_000;
 
   constructor(
     client: CloudantV1,
@@ -135,10 +117,9 @@ export class ChangesResultIterableIterator
               ) || 1;
           }
         });
-    } else {
-      this.params.limit = ChangesFollower.BATCH_SIZE;
-      return Promise.resolve();
     }
+    this.params.limit = ChangesResultIterableIterator.BATCH_SIZE;
+    return Promise.resolve();
   }
 
   [Symbol.asyncIterator](): AsyncIterableIterator<CloudantV1.ChangesResult> {
@@ -173,7 +154,11 @@ export class ChangesResultIterableIterator
     // end up blocking I/O.
     await Promise.all([
       this.promisedConfig,
-      new Promise((resolve) => setImmediate(resolve)),
+      new Promise((resolve) => {
+        setImmediate(resolve);
+        // eslint-disable-next-line no-useless-return
+        return;
+      }),
     ]);
 
     this.logger.debug('Making next request.');
@@ -249,6 +234,9 @@ export class ChangesResultIterableIterator
           case TransientErrorSuppression.NEVER:
             this.logger.verbose(`ChangesResultStream stream: ${err.message}`);
             throw err;
+          default:
+            err.message = `${err.message}\nMeanwhile this other error happened: No implementation available for TransientErrorSuppression of ${this.transientErrorSuppression}.`;
+            throw err;
         }
         switch (err.code) {
           case 400:
@@ -259,7 +247,7 @@ export class ChangesResultIterableIterator
             this.logger.debug('Terminal error');
             this.logger.verbose(`ChangesResultStream stream: ${err.message}`);
             throw err;
-          default:
+          default: {
             // Note this includes Errors
             // which handles cases like disconnections and incomplete
             // bodies where we may have received a successful response
@@ -279,15 +267,16 @@ export class ChangesResultIterableIterator
               // If we've exceeded the cap, use the timeout value
               expDelay = ChangesParamsHelper.LONGPOLL_TIMEOUT;
             } else {
-              expDelay = Math.pow(2, this.retry) * this.baseDelay;
+              expDelay = 2 ** this.retry * this.baseDelay;
             }
             const delay: number = Math.round(Math.random() * expDelay) + 1;
             this.logger.debug(`Backing off for ${delay} ms.`);
-            this.retry++;
+            this.retry += 1;
             return this.timeoutPromise(delay).then(() => {
               this.logger.debug(`Iterator next exiting with empty result.`);
               return emptyChangesResultPromise;
             });
+          }
         }
       })
       .finally(() => {

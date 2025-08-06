@@ -14,20 +14,10 @@
  * limitations under the License.
  */
 
-import {
-  AllDocsResult,
-  default as CloudantV1,
-  PostPartitionAllDocsParams,
-  Response,
-} from '../../v1';
+import { AllDocsResult, PostPartitionAllDocsParams, Response } from '../../v1';
 import { AllDocsBasePageIterator } from './allDocsBasePageIterator';
 
 export class AllDocsPartitionPageIterator extends AllDocsBasePageIterator<PostPartitionAllDocsParams> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(client: CloudantV1, params: PostPartitionAllDocsParams) {
-    super(client, params);
-  }
-
   protected nextRequestFunction(): (
     params: PostPartitionAllDocsParams
   ) => Promise<Response<AllDocsResult>> {

@@ -23,6 +23,7 @@ const {
 const {
   ChangesResultIterableIterator,
 } = require('../../../cloudant/features/changesResultIterator.ts');
+const { Mode } = require('../../../cloudant/features/changesParamsHelper.ts');
 const { testParams } = require('./testParams');
 const {
   generateRandomChangesResults,
@@ -34,10 +35,6 @@ const {
 const {
   ChangesParamsHelper,
 } = require('../../../cloudant/features/changesParamsHelper.ts');
-const {
-  ChangesFollower,
-  Mode,
-} = require('../../../cloudant/features/changesFollower.ts');
 const {
   getTransientErrors,
   getTerminalErrors,
@@ -130,15 +127,15 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
     );
   });
   describe('Test iterator next with limits', () => {
-    const originalBatchSize = ChangesFollower.BATCH_SIZE;
+    const originalBatchSize = ChangesResultIterableIterator.BATCH_SIZE;
     beforeAll(() => {
       // Monkey patch to reduce the batch size for speed,
       // Node seems slow at generating mock changes!
-      ChangesFollower.BATCH_SIZE = 42;
+      ChangesResultIterableIterator.BATCH_SIZE = 42;
     });
     afterAll(() => {
       // Reset the batch size
-      ChangesFollower.BATCH_SIZE = originalBatchSize;
+      ChangesResultIterableIterator.BATCH_SIZE = originalBatchSize;
     });
     beforeEach(() => {
       postChangesPromiseMock.mockImplementation(
@@ -177,7 +174,7 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
         });
     });
     it('Limit of batch size', () => {
-      const limit = ChangesFollower.BATCH_SIZE;
+      const limit = ChangesResultIterableIterator.BATCH_SIZE;
       const testIterator = new ChangesResultIterableIterator(
         service,
         ChangesParamsHelper.cloneParams(
@@ -209,8 +206,8 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
     });
     it('Limit of batch multiple', () => {
       // Reduce batch size for speed
-      ChangesFollower.BATCH_SIZE = 42;
-      const limit = 2 * ChangesFollower.BATCH_SIZE;
+      ChangesResultIterableIterator.BATCH_SIZE = 42;
+      const limit = 2 * ChangesResultIterableIterator.BATCH_SIZE;
       const testIterator = new ChangesResultIterableIterator(
         service,
         ChangesParamsHelper.cloneParams(
@@ -228,14 +225,18 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
           expect(result.done).toBeFalsy();
           expect(result.value).toBeTruthy();
           expect(result.value.results).toBeTruthy();
-          expect(result.value.results).toHaveLength(ChangesFollower.BATCH_SIZE);
+          expect(result.value.results).toHaveLength(
+            ChangesResultIterableIterator.BATCH_SIZE
+          );
         })
         .then(() => testIterator.next())
         .then((result) => {
           expect(result.done).toBeFalsy();
           expect(result.value).toBeTruthy();
           expect(result.value.results).toBeTruthy();
-          expect(result.value.results).toHaveLength(ChangesFollower.BATCH_SIZE);
+          expect(result.value.results).toHaveLength(
+            ChangesResultIterableIterator.BATCH_SIZE
+          );
         })
         .then(() => testIterator.next())
         .then((result) => {
@@ -246,7 +247,7 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
     });
     it('Limit final partial batch', () => {
       const delta = 17;
-      const limit = ChangesFollower.BATCH_SIZE + delta;
+      const limit = ChangesResultIterableIterator.BATCH_SIZE + delta;
       const testIterator = new ChangesResultIterableIterator(
         service,
         ChangesParamsHelper.cloneParams(
@@ -264,7 +265,9 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
           expect(result.done).toBeFalsy();
           expect(result.value).toBeTruthy();
           expect(result.value.results).toBeTruthy();
-          expect(result.value.results).toHaveLength(ChangesFollower.BATCH_SIZE);
+          expect(result.value.results).toHaveLength(
+            ChangesResultIterableIterator.BATCH_SIZE
+          );
         })
         .then(() => testIterator.next())
         .then((result) => {
@@ -321,17 +324,17 @@ describe.each(getModes())('Test ChangesResultIterator %s', (mode) => {
       mockPostChangesError(postChangesPromiseMock, terminalError);
       return expect(testIterator.next()).rejects.toEqual(terminalError.error);
     });
-    describe('with supppresion sequences', () => {
-      const originalBatchSize = ChangesFollower.BATCH_SIZE;
+    describe('with suppression sequences', () => {
+      const originalBatchSize = ChangesResultIterableIterator.BATCH_SIZE;
       beforeAll(() => {
         // Monkey patch to reduce the batch size for speed,
         // Node seems slow at generating mock changes and
         // deep equals on large batches takes a long time!
-        ChangesFollower.BATCH_SIZE = 7;
+        ChangesResultIterableIterator.BATCH_SIZE = 7;
       });
       afterAll(() => {
         // Reset the batch size
-        ChangesFollower.BATCH_SIZE = originalBatchSize;
+        ChangesResultIterableIterator.BATCH_SIZE = originalBatchSize;
       });
       test.each(getSuppressionSequences())('$first $second $third', (seq) => {
         const error = MockError.TRANSIENT_429;

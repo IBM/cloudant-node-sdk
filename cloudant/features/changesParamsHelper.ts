@@ -15,7 +15,12 @@
  */
 
 import { PostChangesConstants, PostChangesParams } from '../v1';
-import { Mode } from './changesFollower';
+
+/** @internal */
+export enum Mode {
+  FINITE,
+  LISTEN,
+}
 
 export class ChangesParamsHelper {
   /**
@@ -24,7 +29,6 @@ export class ChangesParamsHelper {
    * so it makes sense to set as our minimum client timeout.
    */
   static MIN_CLIENT_TIMEOUT: number = 60_000;
-
   /**
    * Set longpoll timeout to {@link MIN_CLIENT_TIMEOUT} - 3 second (= 3000 ms).
    * To give the changes request a chance to be answered before the client timeout
@@ -38,7 +42,7 @@ export class ChangesParamsHelper {
     since?: string,
     limit?: number
   ): PostChangesParams {
-    let clonedParams: PostChangesParams = {
+    const clonedParams: PostChangesParams = {
       db: params.db,
       attEncodingInfo: params.attEncodingInfo,
       attachments: params.attachments,
@@ -50,10 +54,10 @@ export class ChangesParamsHelper {
       // no heartbeat
       includeDocs: params.includeDocs,
       // no lastEventId
-      limit: limit ? limit : params.limit,
+      limit: limit || params.limit,
       selector: params.selector,
       seqInterval: params.seqInterval,
-      since: since ? since : params.since,
+      since: since || params.since,
       style: params.style,
       view: params.view,
     };
@@ -73,19 +77,19 @@ export class ChangesParamsHelper {
     if (!('db' in params) || !params.db) {
       throw new Error('The param db is required for PostChangesParams.');
     }
-    let invalidParams = [];
-    let paramsShouldBeUndefined = [
+    const invalidParams = [];
+    const paramsShouldBeUndefined = [
       'descending',
       'feed',
       'heartbeat',
       'lastEventId',
       'timeout',
     ];
-    for (let paramName of paramsShouldBeUndefined) {
+    paramsShouldBeUndefined.forEach((paramName) => {
       if (paramName in params) {
         invalidParams.push(`'${paramName}'`);
       }
-    }
+    });
     if ('filter' in params && params.filter !== '_selector') {
       invalidParams.push(`'filter=${params.filter}'`);
     }

@@ -24,24 +24,20 @@ import { KeyPageIterator } from './keyPageIterator';
 
 export abstract class ViewBasePageIterator<
   P extends CloudantV1.PostViewParams | CloudantV1.PostPartitionViewParams,
-> extends KeyPageIterator<any, P, ViewResult, ViewResultRow> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(client: CloudantV1, params: P) {
-    super(client, params);
-  }
-
-  protected getItems(result: ViewResult): Array<ViewResultRow> {
+> extends KeyPageIterator<P, ViewResult, ViewResultRow> {
+  protected override getItems(result: ViewResult): Array<ViewResultRow> {
     return result.rows;
   }
+
   protected abstract nextRequestFunction(): (
     params: P
   ) => Promise<Response<ViewResult>>;
 
-  protected setNextKeyId(params: P, startKeyDocId: string) {
-    params.startKeyDocId = startKeyDocId;
+  protected override setNextKeyId(startKeyDocId: string) {
+    this.nextPageParams.startKeyDocId = startKeyDocId;
   }
 
-  protected checkBoundary(
+  protected override checkBoundary(
     penultimateItem: ViewResultRow,
     lastItem: ViewResultRow
   ) {
@@ -51,18 +47,14 @@ export abstract class ViewBasePageIterator<
       // ID's are the same, check the keys
       const penultimateKey: any = penultimateItem.key;
       const lastKey: any = lastItem.key;
-      // Check reference equality first (e.g. null)
-      // Then check values
-      if (
-        penultimateKey === lastKey ||
-        (penultimateKey !== null && penultimateKey == lastKey)
-      ) {
+      if (penultimateKey === lastKey) {
         // Identical keys, set an error message
         return `Cannot paginate on a boundary containing identical keys '${lastKey}' and document IDs '${lastId}'`;
       }
     }
     return null;
   }
+
   protected getValidateParamsAbsentErrorMessage(paramName) {
     let errorMsg = super.getValidateParamsAbsentErrorMessage(paramName);
     if (paramName === 'key') {
