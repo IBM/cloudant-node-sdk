@@ -14760,7 +14760,7 @@ namespace CloudantV1 {
     opts: ExplainResultOpts;
 
     /** Schema for any JSON type. */
-    partitioned?: any;
+    partitioned?: any | null;
 
     /** JSON object describing criteria used to select documents. The selector specifies fields in the document, and
      *  provides an expression to evaluate with the field content or other data.
@@ -14914,13 +14914,13 @@ namespace CloudantV1 {
    */
   export class ExplainResultMrArgs {
     /** Schema for any JSON type. */
-    conflicts: any;
+    conflicts: any | null;
 
     /** Direction parameter passed to the underlying view. */
     direction: ExplainResultMrArgs.Constants.Direction | string;
 
     /** Schema for any JSON type. */
-    endKey: any;
+    endKey: any | null;
 
     /** A parameter that specifies whether to include the full content of the documents in the response in the
      *  underlying view.
@@ -14941,10 +14941,10 @@ namespace CloudantV1 {
     stable: boolean;
 
     /** Schema for any JSON type. */
-    startKey?: any;
+    startKey?: any | null;
 
     /** Schema for any JSON type. */
-    update: any;
+    update: any | null;
 
     /** The type of the underlying view. */
     viewType: ExplainResultMrArgs.Constants.ViewType | string;
@@ -15085,7 +15085,7 @@ namespace CloudantV1 {
     skip: number;
 
     /** Schema for any JSON type. */
-    sort: any;
+    sort: any | null;
 
     /** Stable used in the request query. */
     stable: boolean;
@@ -19146,7 +19146,7 @@ namespace CloudantV1 {
     updateSeq?: boolean;
 
     /** Schema for any JSON type. */
-    endKey?: any;
+    endKey?: any | null;
 
     /** Schema for a document ID. */
     endKeyDocId?: string;
@@ -19164,7 +19164,7 @@ namespace CloudantV1 {
     groupLevel?: number;
 
     /** Schema for any JSON type. */
-    key?: any;
+    key?: any | null;
 
     /** Parameter to specify returning only documents that match any of the specified keys. A JSON array of keys
      *  that match the key type emitted by the view function.
@@ -19190,7 +19190,7 @@ namespace CloudantV1 {
     stable?: boolean;
 
     /** Schema for any JSON type. */
-    startKey?: any;
+    startKey?: any | null;
 
     /** Schema for a document ID. */
     startKeyDocId?: string;
@@ -19453,10 +19453,10 @@ namespace CloudantV1 {
     id?: string;
 
     /** Schema for any JSON type. */
-    key: any;
+    key: any | null;
 
     /** Schema for any JSON type. */
-    value: any;
+    value: any | null;
 
     static serialize(obj): ViewResultRow.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
