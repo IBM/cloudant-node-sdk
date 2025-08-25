@@ -13,3 +13,4 @@ service.deleteAttachment({
 });
 // section: markdown
 // This example requires the `product_details.txt` attachment in `1000042` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
+//
