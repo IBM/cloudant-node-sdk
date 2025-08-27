@@ -2,7 +2,7 @@
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-node-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-node-sdk/releases/latest)
 [![Docs](https://img.shields.io/static/v1?label=TypeDoc&message=latest&color=blue)](https://ibm.github.io/cloudant-node-sdk/)
 
-# IBM Cloudant Node.js SDK Version 0.12.7
+# IBM Cloudant Node.js SDK Version 0.12.8
 
 IBM Cloudant Node.js SDK is a client library that interacts with the
 [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=node).
@@ -157,7 +157,7 @@ service.getAllDbs().then(response => {
 [More tutorial examples](./docs/Examples.md) for creating a database
 and document create, read, update and delete operations.
 
-For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.7/examples#examples-for-node).
+For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.8/examples#examples-for-node).
 
 ### Error handling
 
@@ -282,7 +282,7 @@ If you encounter an issue with the project, you are welcome to submit a
 
 Before you submit a bug report, search for
 [similar issues](https://github.com/IBM/cloudant-node-sdk/issues?q=is%3Aissue) and review the
-[KNOWN_ISSUES file](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.7/KNOWN_ISSUES.md) to verify that your issue hasn't been reported yet.
+[KNOWN_ISSUES file](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.8/KNOWN_ISSUES.md) to verify that your issue hasn't been reported yet.
 
 Please consult the [security policy](https://github.com/IBM/cloudant-node-sdk/security/policy) before opening security related issues.
 
@@ -312,8 +312,8 @@ Find more open source projects on the [IBM GitHub](http://ibm.github.io/) page.
 
 ## Contributing
 
-For more information, see [CONTRIBUTING](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.7/CONTRIBUTING.md).
+For more information, see [CONTRIBUTING](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.8/CONTRIBUTING.md).
 
 ## License
 
-This SDK is released under the Apache 2.0 license. To read the full text of the license, see [LICENSE](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.7/LICENSE).
+This SDK is released under the Apache 2.0 license. To read the full text of the license, see [LICENSE](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.8/LICENSE).
