@@ -24,7 +24,7 @@
     "copymeta": "[ -d 'dist' ] && cp package.json LICENSE README.md dist/",
     "build": "tsc",
     "postbuild": "npm run copymeta",
-    "version": "bump-my-version bump patch --allow-dirty --new-version $npm_package_version && git add README.md .bumpversion.toml",
+    "version": "bump-my-version bump patch --allow-dirty --new-version $npm_package_version && git add README.md .bumpversion.toml docs/*.md",
     "postversion": "npm run copymeta",
     "jest": "jest --runInBand",
     "test": "npm run build && npm run lint && jest --runInBand test/",

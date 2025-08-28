@@ -12,3 +12,9 @@ serialize = [
 filename = "README.md"
 search = "{current_version}"
 replace = "{new_version}"
+
+[[tool.bumpversion.files]]
+glob = "docs/*.md"
+ignore_missing_version = true
+search = "{current_version}"
+replace = "{new_version}"
