@@ -39,7 +39,7 @@ const paginationParams: CloudantV1.PostPartitionFindParams = {
 // pagination can be reused without side-effects as a factory for async iterables, streams or pagers
 const pagination: Pagination<CloudantV1.Document> = Pagination.newPagination(
   client, // Required: the Cloudant service client instance.
-  PagerType.POST_FIND, // Required: Pager type
+  PagerType.POST_PARTITION_FIND, // Required: Pager type
   paginationParams // Required: pagination configuration params are fixed at pagination creation time
 );
 
