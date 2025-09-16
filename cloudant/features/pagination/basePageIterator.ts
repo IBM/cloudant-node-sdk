@@ -53,7 +53,7 @@ export abstract class BasePageIterator<
     // Set the page size from the supplied params limit
     this.pageSize = this.getPageSize(params);
     // Clone the supplied params into the nextPageParams
-    this.nextPageParams = { ...params };
+    this.nextPageParams = { ...params, limit: this.pageSize };
   }
 
   public async next(
@@ -93,9 +93,7 @@ export abstract class BasePageIterator<
   }
 
   protected getPageSize(params): number {
-    return this.getLimit(params)
-      ? this.getLimit(params)
-      : BasePageIterator.MAX_LIMIT;
+    return this.getLimit(params) || BasePageIterator.MAX_LIMIT;
   }
 
   public [Symbol.asyncIterator](): AsyncIterableIterator<ReadonlyArray<I>> {
