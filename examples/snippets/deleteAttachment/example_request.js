@@ -7,7 +7,7 @@ service.deleteAttachment({
   db: 'products',
   docId: '1000042',
   attachmentName: 'product_details.txt',
-  rev: '4-1a0d1cd6f40472509e9aac646183736a'
+  rev: '4-33333333333333333333333333333333'
 }).then(response => {
   console.log(response.result);
 });

@@ -5,7 +5,7 @@ const service = CloudantV1.newInstance({});
 service.deleteDocument({
   db: 'orders',
   docId: 'order00058',
-  rev: '1-99b02e08da151943c2dcb40090160bb8'
+  rev: '1-00000000000000000000000000000000'
 }).then(response => {
   console.log(response.result);
 });
