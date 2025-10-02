@@ -307,7 +307,7 @@ const service = CloudantV1.newInstance({});
 
 service.deleteReplicationDocument({
   docId: 'repldoc-example',
-  rev: '3-a0ccbdc6fe95b4184f9031d086034d85'
+  rev: '1-00000000000000000000000000000000'
 }).then(response => {
   console.log(response.result);
 });
@@ -368,16 +368,16 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 const sourceDb: CloudantV1.ReplicationDatabase = {
-  url: '<your-source-service-url>/animaldb'
+  url: 'https://~replace-with-source-host~.cloudantnosqldb.appdomain.cloud/animaldb'
 };
 
 const targetDb: CloudantV1.ReplicationDatabase = {
   auth: {
     iam: {
-      'apiKey': '<your-iam-api-key>'
+      'apiKey': 'a1b2c3d4e5f6f1g4h7j3k6l9m2p5q8s1t4v7x0z3' //use your own IAM API key
     }
   },
-  url: '<your-target-service-url>/animaldb-target'
+  url: 'https://~replace-with-target-host~.cloudantnosqldb.appdomain.cloud/animaldb-target'
 };
 
 const replDocument: CloudantV1.ReplicationDocument = {
@@ -589,7 +589,7 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 
 const service = CloudantV1.newInstance({});
 
-service.deleteDatabase({db: '<db-name>'}).then(response => {
+service.deleteDatabase({db: 'products'}).then(response => {
   console.log(response.result);
 });
 ```
@@ -808,12 +808,12 @@ const service = CloudantV1.newInstance({});
 
 const eventDoc1: CloudantV1.Document = {
   _id: 'ns1HJS13AMkK:0007241142412418284',
-  _rev: '1-5005d65514fe9e90f8eccf174af5dd64',
+  _rev: '1-00000000000000000000000000000000',
   _deleted: true,
 }
 const eventDoc2: CloudantV1.Document = {
   _id: 'H8tDIwfadxp9:0007241142412418285',
-  _rev: '1-2d7810b054babeda4812b3924428d6d6',
+  _rev: '1-00000000000000000000000000000000',
   _deleted: true,
 }
 
@@ -885,11 +885,11 @@ const docId = 'order00067';
 
 const bulkGetDoc1: CloudantV1.BulkGetQueryDocument = {
   id: docId,
-  rev: '3-917fa2381192822767f010b95b45325b'
+  rev: '3-22222222222222222222222222222222'
 };
 const bulkGetDoc2: CloudantV1.BulkGetQueryDocument = {
   id: docId,
-  rev: '4-a5be949eeb7296747cc271766e9a498b'
+  rev: '4-33333333333333333333333333333333'
 };
 
 const bulkGetDocs: CloudantV1.BulkGetQueryDocument[] = [bulkGetDoc1, bulkGetDoc2];
@@ -939,7 +939,7 @@ const service = CloudantV1.newInstance({});
 const bulkGetQueryDocuments: CloudantV1.BulkGetQueryDocument[] = [
   {
     id: 'order00058',
-    attsSince: ['1-99b02e08da151943c2dcb40090160bb8']
+    attsSince: ['1-00000000000000000000000000000000']
   },
 ];
 
@@ -1008,7 +1008,7 @@ const service = CloudantV1.newInstance({});
 service.deleteDesignDocument({
   db: 'products',
   ddoc: 'appliances',
-  rev: '1-98e6a25b3b45df62e7d47095ac15b16a'
+  rev: '1-00000000000000000000000000000000'
 }).then(response => {
   console.log(response.result);
 });
@@ -1716,9 +1716,9 @@ const service = CloudantV1.newInstance({});
 
 const revsDiff: CloudantV1.DocumentRevisions = {
   order00077: [
-    "<1-missing-revision>",
-    "<2-missing-revision>",
-    "<3-possible-ancestor-revision>"
+    "1-00000000000000000000000000000000", // missing revision
+    "2-11111111111111111111111111111111", // missing revision
+    "3-22222222222222222222222222222222"  // possible ancestor revision
   ]
 }
 
@@ -1838,7 +1838,7 @@ const service = CloudantV1.newInstance({});
 service.deleteDocument({
   db: 'orders',
   docId: 'order00058',
-  rev: '1-99b02e08da151943c2dcb40090160bb8'
+  rev: '1-00000000000000000000000000000000'
 }).then(response => {
   console.log(response.result);
 });
@@ -1934,7 +1934,7 @@ service.deleteAttachment({
   db: 'products',
   docId: '1000042',
   attachmentName: 'product_details.txt',
-  rev: '4-1a0d1cd6f40472509e9aac646183736a'
+  rev: '4-33333333333333333333333333333333'
 }).then(response => {
   console.log(response.result);
 });
