@@ -5,7 +5,6 @@ const service = CloudantV1.newInstance({});
 
 service.getDbUpdates({
   feed: 'normal',
-  heartbeat: 10000,
   since: 'now'
 }).then(response => {
   console.log(response.result);

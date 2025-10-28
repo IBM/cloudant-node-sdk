@@ -4,7 +4,7 @@ const service = CloudantV1.newInstance({});
 
 const selector: CloudantV1.JsonObject = {
   address: {
-    '$regex': 'Street'
+    '$exists': true
   }
 };
 

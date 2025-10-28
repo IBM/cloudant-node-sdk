@@ -5,8 +5,7 @@ const service = CloudantV1.newInstance({});
 
 service.getDesignDocument({
   db: 'products',
-  ddoc: 'appliances',
-  latest: true
+  ddoc: 'appliances'
 }).then(response => {
   console.log(response.result);
 });

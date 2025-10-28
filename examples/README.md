@@ -248,7 +248,6 @@ const service = CloudantV1.newInstance({});
 
 service.getDbUpdates({
   feed: 'normal',
-  heartbeat: 10000,
   since: 'now'
 }).then(response => {
   console.log(response.result);
@@ -1032,8 +1031,7 @@ const service = CloudantV1.newInstance({});
 
 service.getDesignDocument({
   db: 'products',
-  ddoc: 'appliances',
-  latest: true
+  ddoc: 'appliances'
 }).then(response => {
   console.log(response.result);
 });
@@ -1260,7 +1258,7 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 service.postDesignDocs({
-  attachments: true,
+  descending: true,
   db: 'users'
 }).then(response => {
   console.log(response.result);
@@ -1287,7 +1285,7 @@ const doc1: CloudantV1.AllDocsQuery = {
 };
 const doc2: CloudantV1.AllDocsQuery = {
   inclusiveEnd: true,
-  key: '_design/allusers',
+  startKey: '_design/allusers',
   skip: 1
 };
 
@@ -1375,7 +1373,7 @@ const service = CloudantV1.newInstance({});
 
 const selector: CloudantV1.JsonObject = {
   address: {
-    '$regex': 'Street'
+    '$exists': true
   }
 };
 
