@@ -10,7 +10,7 @@ const doc1: CloudantV1.AllDocsQuery = {
 };
 const doc2: CloudantV1.AllDocsQuery = {
   inclusiveEnd: true,
-  key: '_design/allusers',
+  startKey: '_design/allusers',
   skip: 1
 };
 
