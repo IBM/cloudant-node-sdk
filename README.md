@@ -81,7 +81,7 @@ project:
   service instance or a
   [CouchDB](https://docs.couchdb.org/en/latest/install/index.html)
   server.
-- Node.js 20 or 22.
+- Node.js 20, 22 or 24.
 
 ## Installation
 
