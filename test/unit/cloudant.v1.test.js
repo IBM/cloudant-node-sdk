@@ -3532,7 +3532,7 @@ describe('CloudantV1', () => {
 
       // DesignDocumentViewsMapReduce
       const designDocumentViewsMapReduceModel = {
-        map: 'function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}',
+        map: 'function(doc) {\n  emit(doc.productId, [doc.brand, doc.name, doc.description])\n}',
         reduce: 'testString',
       };
 
@@ -5504,7 +5504,7 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
-        const fields = ['productid', 'name', 'description'];
+        const fields = ['productId', 'name', 'description'];
         const limit = 25;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
@@ -5631,7 +5631,7 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
-        const fields = ['productid', 'name', 'description'];
+        const fields = ['productId', 'name', 'description'];
         const limit = 25;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
@@ -5758,7 +5758,7 @@ describe('CloudantV1', () => {
         const bookmark = 'testString';
         const conflicts = true;
         const executionStats = true;
-        const fields = ['productid', 'name', 'description'];
+        const fields = ['productId', 'name', 'description'];
         const limit = 25;
         const skip = 0;
         const sort = [{ 'key1': 'asc' }];
