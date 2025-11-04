@@ -401,17 +401,16 @@ void publishPublic() {
   withCredentials([string(credentialsId: 'npm-mail', variable: 'NPMRC_EMAIL'),
                   usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPMRC_TOKEN', usernameVariable: 'NPMRC_USER')]) {
     withNpmEnv(registryPublic) {
-      publishNpm(registryPublic)
+      publishNpm(registryPublic, 'latest')
     }
   }
 }
 
-void publishNpm(registry) {
+void publishNpm(registry, tag='next') {
   sh 'npm run build'
-  sh "npm publish ./dist"
+  sh "npm publish --tag ${tag} ./dist"
 }
 
 void publishDocs() {
   sh './scripts/typedoc/publish-doc.sh'
 }
-
