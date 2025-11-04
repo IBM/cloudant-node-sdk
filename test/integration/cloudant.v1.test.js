@@ -668,7 +668,7 @@ describe('CloudantV1_integration', () => {
 
     // DesignDocumentViewsMapReduce
     const designDocumentViewsMapReduceModel = {
-      map: 'function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}',
+      map: 'function(doc) {\n  emit(doc.productId, [doc.brand, doc.name, doc.description])\n}',
       reduce: 'testString',
     };
 
@@ -1112,7 +1112,7 @@ describe('CloudantV1_integration', () => {
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
-      fields: ['productid', 'name', 'description'],
+      fields: ['productId', 'name', 'description'],
       limit: 25,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
@@ -1136,7 +1136,7 @@ describe('CloudantV1_integration', () => {
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
-      fields: ['productid', 'name', 'description'],
+      fields: ['productId', 'name', 'description'],
       limit: 25,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
@@ -1160,7 +1160,7 @@ describe('CloudantV1_integration', () => {
       bookmark: 'testString',
       conflicts: true,
       executionStats: true,
-      fields: ['productid', 'name', 'description'],
+      fields: ['productId', 'name', 'description'],
       limit: 25,
       skip: 0,
       sort: [{ 'key1': 'asc' }],
