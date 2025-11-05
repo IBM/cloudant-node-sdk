@@ -1,0 +1,256 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@ibm-cloud/cloudant - v0.12.11</title><meta name="description" content="Documentation for @ibm-cloud/cloudant"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">@ibm-cloud/cloudant - v0.12.11</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>@ibm-cloud/cloudant - v0.12.11</h1></div><div class="tsd-panel tsd-typography"><p><a href="https://github.com/IBM/cloudant-node-sdk/actions/workflows/test.yml"><img src="https://github.com/IBM/cloudant-node-sdk/actions/workflows/test.yml/badge.svg?branch=main&amp;event=push" alt="Build Status"></a>
+<a href="https://github.com/IBM/cloudant-node-sdk/releases/latest"><img src="https://img.shields.io/github/v/release/IBM/cloudant-node-sdk?include_prereleases&amp;sort=semver" alt="Release"></a>
+<a href="https://ibm.github.io/cloudant-node-sdk/"><img src="https://img.shields.io/static/v1?label=TypeDoc&amp;message=latest&amp;color=blue" alt="Docs"></a></p>
+<h1 id="ibm-cloudant-nodejs-sdk-version-01211" class="tsd-anchor-link">IBM Cloudant Node.js SDK Version 0.12.11<a href="#ibm-cloudant-nodejs-sdk-version-01211" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><p>IBM Cloudant Node.js SDK is a client library that interacts with the
+<a href="https://cloud.ibm.com/apidocs/cloudant?code=node">IBM Cloudant APIs</a>.</p>
+<p>Disclaimer: This library is still a 0.x release. We do consider this
+library production-ready and capable, but there are still some
+limitations we’re working to resolve, and refinements we want to
+deliver. We are working really hard to minimise the disruption from
+now until the 1.0 release, but there may still be some changes that
+impact applications using this SDK. For now, be sure to pin versions
+to avoid surprises.</p>
+<details>
+<summary>Table of Contents</summary>
+<!-- toc -->
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#using-the-sdk">Using the SDK</a>
+<ul>
+<li><a href="#authentication">Authentication</a></li>
+<li><a href="#automatic-retries">Automatic retries</a></li>
+<li><a href="#request-timeout-configuration">Request timeout configuration</a></li>
+<li><a href="#code-examples">Code examples</a></li>
+<li><a href="#error-handling">Error handling</a></li>
+<li><a href="#raw-io">Raw IO</a></li>
+<li><a href="#further-resources">Further resources</a></li>
+<li><a href="#browser-usage">Browser usage</a>
+<ul>
+<li><a href="#polyfills">Polyfills</a></li>
+<li><a href="#cors">CORS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#questions">Questions</a></li>
+<li><a href="#issues">Issues</a></li>
+<li><a href="#versioning-and-lts-support">Versioning and LTS support</a></li>
+<li><a href="#open-source-at-ibm">Open source at IBM</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+</details>
+<h2 id="overview" class="tsd-anchor-link">Overview<a href="#overview" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>The IBM Cloudant Node.js SDK allows developers to programmatically
+interact with <a href="https://cloud.ibm.com/apidocs/cloudant">IBM Cloudant</a>
+with the help of the <code>@ibm-cloud/cloudant</code> package.</p>
+<h2 id="features" class="tsd-anchor-link">Features<a href="#features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>The purpose of this Node.js SDK is to wrap most of the HTTP request APIs
+provided by Cloudant and supply other functions to ease the usage of Cloudant.
+This SDK should make life easier for programmers to do what’s really important
+to them: developing software.</p>
+<p>Reasons why you should consider using Cloudant Node.js SDK in your
+project:</p>
+<ul>
+<li>Supported by IBM Cloudant.</li>
+<li>Server compatibility with:
+<ul>
+<li>IBM Cloudant.</li>
+<li><a href="https://docs.couchdb.org/en/stable/">Apache CouchDB 3.x</a> for data operations.</li>
+</ul>
+</li>
+<li>Includes all the most popular and latest supported endpoints for
+applications.</li>
+<li>Handles the authentication.</li>
+<li>Familiar user experience with IBM Cloud SDKs.</li>
+<li>Flexibility to use either built-in models or byte-based requests and responses for documents.</li>
+<li>Built-in <a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/docs/Changes_Follower.md">Changes feed follower</a></li>
+<li>Built-in <a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/docs/Pagination.md">Pagination</a> (beta)</li>
+<li><code>Promise</code> based design with asynchronous HTTP requests.</li>
+<li>Use either as native JavaScript or take advantage of TypeScript models.</li>
+<li>Transparently compresses request and response bodies.</li>
+</ul>
+<h2 id="prerequisites" class="tsd-anchor-link">Prerequisites<a href="#prerequisites" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li>A
+<a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-getting-started-with-cloudant">Cloudant</a>
+service instance or a
+<a href="https://docs.couchdb.org/en/latest/install/index.html">CouchDB</a>
+server.</li>
+<li>Node.js 20, 22 or 24.</li>
+</ul>
+<h2 id="installation" class="tsd-anchor-link">Installation<a href="#installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><pre><code class="sh"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">@ibm-cloud/cloudant</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="using-the-sdk" class="tsd-anchor-link">Using the SDK<a href="#using-the-sdk" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>For fundamental SDK usage information and config options, please see the common <a href="https://github.com/IBM/ibm-cloud-sdk-common/blob/main/README.md">IBM Cloud SDK</a> documentation.</p>
+<p>This library requires configuration with a service URL and
+[Cloudant service credentials][service-credentials] to authenticate with your
+account.</p>
+<p>There are several ways to <strong>set</strong> these authentication properties:</p>
+<ol>
+<li>As <a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/docs/Authentication.md#authentication-with-environment-variables">environment variables</a></li>
+<li>The <a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/docs/Authentication.md#programmatic-authentication">programmatic approach</a></li>
+<li>With an <a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/docs/Authentication.md#authentication-with-external-configuration">external credentials file</a></li>
+</ol>
+<p>The following section describes the different authentication types and provides environment variable examples.
+Examples for other configuration methods are available by following the provided links.</p>
+<h3 id="authentication" class="tsd-anchor-link">Authentication<a href="#authentication" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Consult the <a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/docs/Authentication.md">authentication document</a>
+for comprehensive details of all the available authentication methods and how to configure them with environment settings
+or programmatically.</p>
+<p>Quick start for Cloudant with an IAM API key:</p>
+<pre><code class="sh"><span class="hl-3">CLOUDANT_URL</span><span class="hl-1">=</span><span class="hl-2">https://~replace-with-cloudant-host~.cloudantnosqldb.appdomain.cloud</span><span class="hl-1"> </span><span class="hl-4"># use your own Cloudant public or private URL</span><br/><span class="hl-3">CLOUDANT_APIKEY</span><span class="hl-1">=</span><span class="hl-2">a1b2c3d4e5f6f1g4h7j3k6l9m2p5q8s1t4v7x0z3</span><span class="hl-1"> </span><span class="hl-4"># use your own IAM API key</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Quick start for Apache CouchDB with a username/password session:</p>
+<pre><code class="sh"><span class="hl-3">CLOUDANT_AUTH_TYPE</span><span class="hl-1">=</span><span class="hl-2">COUCHDB_SESSION</span><br/><span class="hl-3">CLOUDANT_URL</span><span class="hl-1">=</span><span class="hl-2">https://~replace-with-your-unique-host~.example:6984</span><span class="hl-1"> </span><span class="hl-4"># use your CouchDB URL</span><br/><span class="hl-3">CLOUDANT_USERNAME</span><span class="hl-1">=</span><span class="hl-2">username</span><span class="hl-1"> </span><span class="hl-4"># replace with your username</span><br/><span class="hl-3">CLOUDANT_PASSWORD</span><span class="hl-1">=</span><span class="hl-2">password</span><span class="hl-1"> </span><span class="hl-4"># replace with your password</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="automatic-retries" class="tsd-anchor-link">Automatic retries<a href="#automatic-retries" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>The SDK supports a generalized retry feature that can automatically retry on common errors.</p>
+<p>The <a href="https://github.com/IBM/ibm-cloud-sdk-common#automatic-retries">automatic retries</a> section has details on how to enable the retries with default values and customize the retries programmatically or with external configuration.</p>
+<h3 id="request-timeout-configuration" class="tsd-anchor-link">Request timeout configuration<a href="#request-timeout-configuration" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>No request timeout is defined, but a 2.5m connect and 2.5m read timeout is set by default. Be sure to set a request timeout appropriate to your application usage and environment.
+The <a href="https://github.com/IBM/ibm-cloud-sdk-common#configuring-request-timeouts">request timeout</a> section contains details on how to change the value.</p>
+<p><strong>Note:</strong> System settings may take precedence over configured timeout values.</p>
+<h3 id="code-examples" class="tsd-anchor-link">Code examples<a href="#code-examples" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Quick start example to list all databases (assumes environment variable <a href="#authentication">authentication</a>):</p>
+<pre><code class="js"><span class="hl-4">// section: code</span><br/><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-3">CloudantV1</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@ibm-cloud/cloudant&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">service</span><span class="hl-1"> = </span><span class="hl-3">CloudantV1</span><span class="hl-1">.</span><span class="hl-0">newInstance</span><span class="hl-1">({});</span><br/><br/><span class="hl-3">service</span><span class="hl-1">.</span><span class="hl-0">getAllDbs</span><span class="hl-1">().</span><span class="hl-0">then</span><span class="hl-1">(</span><span class="hl-3">response</span><span class="hl-1"> </span><span class="hl-6">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-3">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-3">response</span><span class="hl-1">.</span><span class="hl-3">result</span><span class="hl-1">);</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+<p><a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/docs/Examples.md">More tutorial examples</a> for creating a database
+and document create, read, update and delete operations.</p>
+<p>For a complete list of code examples, see the <a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/examples#examples-for-node">examples directory</a>.</p>
+<h3 id="error-handling" class="tsd-anchor-link">Error handling<a href="#error-handling" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>For sample code on handling errors, see
+<a href="https://cloud.ibm.com/apidocs/cloudant?code=node#error-handling">Cloudant API docs</a>.</p>
+<h3 id="raw-io" class="tsd-anchor-link">Raw IO<a href="#raw-io" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>For endpoints that read or write document content it is possible to bypass
+usage of the built-in interface with byte streams.</p>
+<p>Depending on the specific SDK operation it may be possible to:</p>
+<ul>
+<li>accept a user-provided byte stream to send to the server as a request body</li>
+<li>return a byte stream of the server response body to the user</li>
+</ul>
+<p>Request byte stream can be supplied for <code>NodeJS.ReadableStream</code> or <code>Buffer</code> type parameters
+.
+For these cases you can pass this byte stream directly to the HTTP request body.</p>
+<p>Response byte stream is supported in functions with the suffix of <code>AsStream</code>.
+The returned byte stream allows the response body to be consumed
+without triggering JSON unmarshalling that is typically performed by the SDK.</p>
+<p>The <a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/docs/Examples.md#3-update-your-previously-created-document">update document</a> section
+contains examples for both request and response byte stream cases.</p>
+<p>The API reference contains further examples of using byte streams.
+They are titled &quot;Example request as stream&quot; and are initially collapsed.
+Expand them to see examples of:</p>
+<ul>
+<li>
+<p>Byte requests:</p>
+<ul>
+<li><a href="https://cloud.ibm.com/apidocs/cloudant?code=node#postbulkdocs">Bulk modify multiple documents in a database</a></li>
+</ul>
+</li>
+<li>
+<p>Byte responses:</p>
+<ul>
+<li><a href="https://cloud.ibm.com/apidocs/cloudant?code=node#postalldocs">Query a list of all documents in a database</a></li>
+<li><a href="https://cloud.ibm.com/apidocs/cloudant?code=node#postchanges">Query the database document changes feed</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="further-resources" class="tsd-anchor-link">Further resources<a href="#further-resources" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><ul>
+<li><a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/docs">Cloudant Node.js SDK feature docs</a></li>
+<li><a href="https://cloud.ibm.com/apidocs/cloudant?code=node">Cloudant API docs</a>:
+API reference including usage examples for Cloudant Node.js SDK API.</li>
+<li><a href="https://ibm.github.io/cloudant-node-sdk/">TypeDoc</a>:
+Cloudant Node.js SDK API Documentation.</li>
+<li><a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-getting-started-with-cloudant">Cloudant docs</a>:
+The official documentation page for Cloudant.</li>
+<li><a href="https://blog.cloudant.com/">Cloudant blog</a>:
+Many useful articles about how to optimize Cloudant for common problems.</li>
+</ul>
+<h3 id="browser-usage" class="tsd-anchor-link">Browser usage<a href="#browser-usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>You can use the SDK directly from JavaScript running in a browser if:</p>
+<ul>
+<li>Polyfills for required Node.js system modules are available.</li>
+<li>The server configuration allows cross-origin resource sharing (CORS).</li>
+</ul>
+<h4 id="polyfills" class="tsd-anchor-link">Polyfills<a href="#polyfills" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Use either:</p>
+<ul>
+<li>A bundler that includes polyfills for Node.js system modules in the browser.</li>
+<li>Or a Node.js compatible browser-based runtime.</li>
+</ul>
+<p>The Node.js system modules required are:</p>
+<ul>
+<li><code>assert</code></li>
+<li><code>buffer</code></li>
+<li><code>crypto</code></li>
+<li><code>fs</code></li>
+<li><code>http</code></li>
+<li><code>https</code></li>
+<li><code>os</code></li>
+<li><code>path</code></li>
+<li><code>process</code></li>
+<li><code>querystring</code></li>
+<li><code>stream</code></li>
+<li><code>timers</code></li>
+<li><code>url</code></li>
+<li><code>util</code></li>
+<li><code>vm</code></li>
+<li><code>zlib</code></li>
+</ul>
+<p>Additionally the SDK or its dependencies need to be able to resolve the globals:</p>
+<ul>
+<li><code>Buffer</code></li>
+<li><code>process</code></li>
+<li><code>Readable</code></li>
+<li><code>setImmediate</code> and <code>setTimeout</code></li>
+</ul>
+<p>Environment variables:</p>
+<ul>
+<li><code>NODE_DEBUG</code> (must be resolvable from the <code>process.env</code> even if it is unset)</li>
+</ul>
+<p>It may be possible to omit some of these requirements for specific use cases.</p>
+<h4 id="cors" class="tsd-anchor-link">CORS<a href="#cors" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>To allow CORS requests from the SDK in the browser:</p>
+<ol>
+<li>Configure the server with a CORS origin matching the URL protocol, host and port of the JavaScript application.</li>
+<li>Either
+<ul>
+<li>Configure the server with a CORS headers allow list that includes the default headers plus the SDK's extra headers:
+<ul>
+<li><code>user-agent</code></li>
+<li><code>x-ibmcloud-sdk-analytics</code></li>
+<li><code>content-encoding</code> (unless SDK <a href="media/KNOWN_ISSUES.md#Disabling-request-body-compression">request body compression is disabled</a>)</li>
+</ul>
+</li>
+<li>Or configure the SDK to remove the extra headers from requests, for example:<pre><code class="js"><span class="hl-4">// Set a request interceptor to remove the headers from the requests</span><br/><span class="hl-3">service</span><span class="hl-1">.</span><span class="hl-0">getHttpClient</span><span class="hl-1">().</span><span class="hl-3">interceptors</span><span class="hl-1">.</span><span class="hl-3">request</span><span class="hl-1">.</span><span class="hl-0">use</span><span class="hl-1">(</span><span class="hl-3">requestConfig</span><span class="hl-1"> </span><span class="hl-6">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-6">delete</span><span class="hl-1"> </span><span class="hl-3">requestConfig</span><span class="hl-1">.</span><span class="hl-3">headers</span><span class="hl-1">[</span><span class="hl-2">&#39;User-Agent&#39;</span><span class="hl-1">]</span><br/><span class="hl-6">delete</span><span class="hl-1"> </span><span class="hl-3">requestConfig</span><span class="hl-1">.</span><span class="hl-3">headers</span><span class="hl-1">[</span><span class="hl-2">&#39;X-IBMCloud-SDK-Analytics&#39;</span><span class="hl-1">]</span><br/><span class="hl-5">return</span><span class="hl-1"> </span><span class="hl-3">requestConfig</span><span class="hl-1">;</span><br/><span class="hl-1">});</span><br/><span class="hl-4">// Disable request body compression</span><br/><span class="hl-3">service</span><span class="hl-1">.</span><span class="hl-0">setEnableGzipCompression</span><span class="hl-1">(</span><span class="hl-6">false</span><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="questions" class="tsd-anchor-link">Questions<a href="#questions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>If you are having difficulties using this SDK or have a question about the
+IBM Cloud services, ask a question on
+<a href="http://stackoverflow.com/questions/ask?tags=ibm-cloud">Stack Overflow</a>.</p>
+<h2 id="issues" class="tsd-anchor-link">Issues<a href="#issues" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>If you encounter an issue with the project, you are welcome to submit a
+<a href="https://github.com/IBM/cloudant-node-sdk/issues">bug report</a>.</p>
+<p>Before you submit a bug report, search for
+<a href="https://github.com/IBM/cloudant-node-sdk/issues?q=is%3Aissue">similar issues</a> and review the
+<a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/KNOWN_ISSUES.md">KNOWN_ISSUES file</a> to verify that your issue hasn't been reported yet.</p>
+<p>Please consult the <a href="https://github.com/IBM/cloudant-node-sdk/security/policy">security policy</a> before opening security related issues.</p>
+<h2 id="versioning-and-lts-support" class="tsd-anchor-link">Versioning and LTS support<a href="#versioning-and-lts-support" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>This SDK follows semantic versioning with respect to the definition of user facing APIs.
+This means under some circumstances breaking changes may occur within a major or minor version
+of the SDK related to changes in supported language platforms.</p>
+<p>The SDK is supported on the available LTS releases of the language platform.
+The LTS language versions are listed in the prerequisites:</p>
+<ul>
+<li><a href="https://github.com/IBM/cloudant-node-sdk/#prerequisites">LTS versions currently supported by the SDK</a></li>
+<li><a href="#prerequisites">LTS versions for this release of the SDK</a></li>
+</ul>
+<p>Incompatible changes from new language versions are not added to the SDK
+until they are available in the minimum supported language version.</p>
+<p>When language LTS versions move out of support the following will happen:</p>
+<ul>
+<li>Existing SDK releases will continue to run on obsolete language versions, but will no longer be supported.</li>
+<li>The minimum language version supported by the SDK will be updated to the next available LTS.</li>
+<li>New language features may be added in subsequent SDK releases that will cause breaking changes
+if the new releases of the SDK are used with older, now unsupported, language levels.</li>
+</ul>
+<h2 id="open-source-at-ibm" class="tsd-anchor-link">Open source at IBM<a href="#open-source-at-ibm" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Find more open source projects on the <a href="http://ibm.github.io/">IBM GitHub</a> page.</p>
+<h2 id="contributing" class="tsd-anchor-link">Contributing<a href="#contributing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>For more information, see <a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/CONTRIBUTING.md">CONTRIBUTING</a>.</p>
+<h2 id="license" class="tsd-anchor-link">License<a href="#license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>This SDK is released under the Apache 2.0 license. To read the full text of the license, see <a href="https://github.com/IBM/cloudant-node-sdk/tree/v0.12.11/LICENSE">LICENSE</a>.</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#ibm-cloudant-nodejs-sdk-version-01211"><span>IBM <wbr/>Cloudant <wbr/>Node.js <wbr/>SDK <wbr/>Version 0.12.11</span></a><ul><li><a href="#overview"><span>Overview</span></a></li><li><a href="#features"><span>Features</span></a></li><li><a href="#prerequisites"><span>Prerequisites</span></a></li><li><a href="#installation"><span>Installation</span></a></li><li><a href="#using-the-sdk"><span>Using the <wbr/>SDK</span></a></li><li><ul><li><a href="#authentication"><span>Authentication</span></a></li><li><a href="#automatic-retries"><span>Automatic retries</span></a></li><li><a href="#request-timeout-configuration"><span>Request timeout configuration</span></a></li><li><a href="#code-examples"><span>Code examples</span></a></li><li><a href="#error-handling"><span>Error handling</span></a></li><li><a href="#raw-io"><span>Raw <wbr/>IO</span></a></li><li><a href="#further-resources"><span>Further resources</span></a></li><li><a href="#browser-usage"><span>Browser usage</span></a></li><li><ul><li><a href="#polyfills"><span>Polyfills</span></a></li><li><a href="#cors"><span>CORS</span></a></li></ul></li></ul></li><li><a href="#questions"><span>Questions</span></a></li><li><a href="#issues"><span>Issues</span></a></li><li><a href="#versioning-and-lts-support"><span>Versioning and <wbr/>LTS support</span></a></li><li><a href="#open-source-at-ibm"><span>Open source at <wbr/>IBM</span></a></li><li><a href="#contributing"><span>Contributing</span></a></li><li><a href="#license"><span>License</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">@ibm-cloud/cloudant - v0.12.11</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
