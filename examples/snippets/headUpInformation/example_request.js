@@ -3,9 +3,8 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 
 const service = CloudantV1.newInstance({});
 
-service.getUpInformation().then(response => {
+service.headUpInformation().then(response => {
   console.log('Service is up and healthy');
-  console.log(response.result);
 })
   .catch(err => {
     if (err.code === 503) {

@@ -552,8 +552,17 @@ import { CloudantV1 } from '@ibm-cloud/cloudant';
 const service = CloudantV1.newInstance({});
 
 service.getUpInformation().then(response => {
+  console.log('Service is up and healthy');
   console.log(response.result);
-});
+})
+  .catch(err => {
+    if (err.code === 503) {
+      console.error(`Service is unavailable, status code: ${err.code}, ${err.message}`);
+    }
+    else {
+      console.error(`Issue checking service health, status: ${err.code}, ${err.message}`);
+    }
+  });
 ```
 
 ## getUuids
