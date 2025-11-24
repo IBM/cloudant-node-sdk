@@ -336,8 +336,8 @@ class CloudantV1 extends CloudantBaseService {
    * and might repeat changes. Polling modes for this method work like polling modes for the changes feed.
    *
    * @param {Object} [params] - The parameters to send to the service.
-   * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
-   * key order.
+   * @param {boolean} [params.descending] - Query parameter to specify whether to return rows in descending by key
+   * order.
    * @param {string} [params.feed] - Query parameter to specify the changes feed type.
    * @param {number} [params.heartbeat] - Query parameter to specify the period in milliseconds after which an empty
    * line is sent in the results. Off by default and only applicable for `continuous` and `eventsource` feeds. Overrides
@@ -475,13 +475,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.lastEventId] - Header parameter to specify the ID of the last events received by the server
    * on a previous connection. Overrides `since` query parameter.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in each returned document. Active only when `include_docs` is `true`.
-   * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
-   * key order.
+   * in each returned document. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
+   * @param {boolean} [params.descending] - Query parameter to specify whether to return changes in the descending order
+   * with most recent change first. The `since` parameter has no effect when using descending order.
    * @param {string} [params.feed] - Query parameter to specify the changes feed type.
    * @param {string} [params.filter] - Query parameter to specify a filter to emit only specific events from the changes
    * stream.
@@ -670,13 +673,16 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.lastEventId] - Header parameter to specify the ID of the last events received by the server
    * on a previous connection. Overrides `since` query parameter.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in each returned document. Active only when `include_docs` is `true`.
-   * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
-   * key order.
+   * in each returned document. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
+   * @param {boolean} [params.descending] - Query parameter to specify whether to return changes in the descending order
+   * with most recent change first. The `since` parameter has no effect when using descending order.
    * @param {string} [params.feed] - Query parameter to specify the changes feed type.
    * @param {string} [params.filter] - Query parameter to specify a filter to emit only specific events from the changes
    * stream.
@@ -867,8 +873,8 @@ class CloudantV1 extends CloudantBaseService {
    * Query to retrieve a list of database names from the instance.
    *
    * @param {Object} [params] - The parameters to send to the service.
-   * @param {boolean} [params.descending] - Query parameter to specify whether to return the documents in descending by
-   * key order.
+   * @param {boolean} [params.descending] - Query parameter to specify whether to return rows in descending by key
+   * order.
    * @param {string} [params.endKey] - Query parameter to specify to stop returning records when the specified key is
    * reached. String representation of any JSON type that matches the key type emitted by the view function.
    * @param {number} [params.limit] - Query parameter to specify the number of returned documents to limit the result
@@ -1322,17 +1328,18 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
-   * attachment stubs if the particular attachment is compressed.
-   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
+   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information for
+   * compressed attachments. This only applies when requesting documents in the response.
+   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachment content in included
+   * document content or only the attachment metadata. This only applies when requesting documents in the response.
    * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
-   * each returned document. Active only when `include_docs` is `true`.
+   * each returned document. This only applies when requesting documents in the response.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
    * in the response.
-   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether the specified end key should be included in
-   * the result.
+   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether to include the specified end key in the
+   * result.
    * @param {number} [params.limit] - Parameter to specify the number of returned documents to limit the result to.
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
@@ -1417,17 +1424,18 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
-   * attachment stubs if the particular attachment is compressed.
-   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
+   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information for
+   * compressed attachments. This only applies when requesting documents in the response.
+   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachment content in included
+   * document content or only the attachment metadata. This only applies when requesting documents in the response.
    * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
-   * each returned document. Active only when `include_docs` is `true`.
+   * each returned document. This only applies when requesting documents in the response.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
    * in the response.
-   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether the specified end key should be included in
-   * the result.
+   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether to include the specified end key in the
+   * result.
    * @param {number} [params.limit] - Parameter to specify the number of returned documents to limit the result to.
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
@@ -1699,10 +1707,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {BulkGetQueryDocument[]} params.docs - List of document items to get in bulk.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
    * matter what rev was requested.
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
@@ -1777,10 +1787,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {BulkGetQueryDocument[]} params.docs - List of document items to get in bulk.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
    * matter what rev was requested.
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
@@ -1853,10 +1865,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {BulkGetQueryDocument[]} params.docs - List of document items to get in bulk.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
    * matter what rev was requested.
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
@@ -1929,10 +1943,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {BulkGetQueryDocument[]} params.docs - List of document items to get in bulk.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
    * matter what rev was requested.
    * @param {boolean} [params.revs] - Query parameter to specify whether to include a list of all known document
@@ -2077,12 +2093,15 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in each returned document. Active only when `include_docs` is `true`.
+   * in each returned document. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
    * conflicted revisions in the `_deleted_conflicts` property of the returned document.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
@@ -2170,12 +2189,15 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in each returned document. Active only when `include_docs` is `true`.
+   * in each returned document. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
    * conflicted revisions in the `_deleted_conflicts` property of the returned document.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
@@ -2261,12 +2283,15 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in each returned document. Active only when `include_docs` is `true`.
+   * in each returned document. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
    * conflicted revisions in the `_deleted_conflicts` property of the returned document.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
@@ -2352,12 +2377,15 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.docId - Path parameter to specify the document ID.
    * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in each returned document. Active only when `include_docs` is `true`.
+   * in each returned document. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
    * conflicted revisions in the `_deleted_conflicts` property of the returned document.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
@@ -2662,12 +2690,15 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
    * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in each returned document. Active only when `include_docs` is `true`.
+   * in each returned document. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
    * conflicted revisions in the `_deleted_conflicts` property of the returned document.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
@@ -2894,17 +2925,18 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
-   * attachment stubs if the particular attachment is compressed.
-   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
+   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information for
+   * compressed attachments. This only applies when requesting documents in the response.
+   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachment content in included
+   * document content or only the attachment metadata. This only applies when requesting documents in the response.
    * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
-   * each returned document. Active only when `include_docs` is `true`.
+   * each returned document. This only applies when requesting documents in the response.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
    * in the response.
-   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether the specified end key should be included in
-   * the result.
+   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether to include the specified end key in the
+   * result.
    * @param {number} [params.limit] - Parameter to specify the number of returned documents to limit the result to.
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
@@ -3061,17 +3093,18 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
    * @param {string} params.view - Path parameter to specify the map reduce view function name.
-   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
-   * attachment stubs if the particular attachment is compressed.
-   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
+   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information for
+   * compressed attachments. This only applies when requesting documents in the response.
+   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachment content in included
+   * document content or only the attachment metadata. This only applies when requesting documents in the response.
    * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
-   * each returned document. Active only when `include_docs` is `true`.
+   * each returned document. This only applies when requesting documents in the response.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
    * in the response.
-   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether the specified end key should be included in
-   * the result.
+   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether to include the specified end key in the
+   * result.
    * @param {number} [params.limit] - Parameter to specify the number of returned documents to limit the result to.
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
@@ -3201,17 +3234,18 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
    * @param {string} params.view - Path parameter to specify the map reduce view function name.
-   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
-   * attachment stubs if the particular attachment is compressed.
-   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
+   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information for
+   * compressed attachments. This only applies when requesting documents in the response.
+   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachment content in included
+   * document content or only the attachment metadata. This only applies when requesting documents in the response.
    * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
-   * each returned document. Active only when `include_docs` is `true`.
+   * each returned document. This only applies when requesting documents in the response.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
    * in the response.
-   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether the specified end key should be included in
-   * the result.
+   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether to include the specified end key in the
+   * result.
    * @param {number} [params.limit] - Parameter to specify the number of returned documents to limit the result to.
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
@@ -3533,17 +3567,18 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.partitionKey - Path parameter to specify the database partition key.
-   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
-   * attachment stubs if the particular attachment is compressed.
-   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
+   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information for
+   * compressed attachments. This only applies when requesting documents in the response.
+   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachment content in included
+   * document content or only the attachment metadata. This only applies when requesting documents in the response.
    * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
-   * each returned document. Active only when `include_docs` is `true`.
+   * each returned document. This only applies when requesting documents in the response.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
    * in the response.
-   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether the specified end key should be included in
-   * the result.
+   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether to include the specified end key in the
+   * result.
    * @param {number} [params.limit] - Parameter to specify the number of returned documents to limit the result to.
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
@@ -3630,17 +3665,18 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {string} params.partitionKey - Path parameter to specify the database partition key.
-   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
-   * attachment stubs if the particular attachment is compressed.
-   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
+   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information for
+   * compressed attachments. This only applies when requesting documents in the response.
+   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachment content in included
+   * document content or only the attachment metadata. This only applies when requesting documents in the response.
    * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
-   * each returned document. Active only when `include_docs` is `true`.
+   * each returned document. This only applies when requesting documents in the response.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
    * in the response.
-   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether the specified end key should be included in
-   * the result.
+   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether to include the specified end key in the
+   * result.
    * @param {number} [params.limit] - Parameter to specify the number of returned documents to limit the result to.
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
@@ -3946,17 +3982,18 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
    * @param {string} params.view - Path parameter to specify the map reduce view function name.
-   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
-   * attachment stubs if the particular attachment is compressed.
-   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
+   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information for
+   * compressed attachments. This only applies when requesting documents in the response.
+   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachment content in included
+   * document content or only the attachment metadata. This only applies when requesting documents in the response.
    * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
-   * each returned document. Active only when `include_docs` is `true`.
+   * each returned document. This only applies when requesting documents in the response.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
    * in the response.
-   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether the specified end key should be included in
-   * the result.
+   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether to include the specified end key in the
+   * result.
    * @param {number} [params.limit] - Parameter to specify the number of returned documents to limit the result to.
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
@@ -4084,17 +4121,18 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.ddoc - Path parameter to specify the design document name. The design document name is the
    * design document ID excluding the `_design/` prefix.
    * @param {string} params.view - Path parameter to specify the map reduce view function name.
-   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information in
-   * attachment stubs if the particular attachment is compressed.
-   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachments bodies in a response.
+   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information for
+   * compressed attachments. This only applies when requesting documents in the response.
+   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachment content in included
+   * document content or only the attachment metadata. This only applies when requesting documents in the response.
    * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
-   * each returned document. Active only when `include_docs` is `true`.
+   * each returned document. This only applies when requesting documents in the response.
    * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
    * order.
    * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
    * in the response.
-   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether the specified end key should be included in
-   * the result.
+   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether to include the specified end key in the
+   * result.
    * @param {number} [params.limit] - Parameter to specify the number of returned documents to limit the result to.
    * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
    * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
@@ -6049,12 +6087,15 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.docId - Path parameter to specify the ID of the stored replication configuration in the
    * `_replicator` database.
    * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.conflicts] - Query parameter to specify whether to include a list of conflicted revisions
-   * in each returned document. Active only when `include_docs` is `true`.
+   * in each returned document. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.deletedConflicts] - Query parameter to specify whether to include a list of deleted
    * conflicted revisions in the `_deleted_conflicts` property of the returned document.
    * @param {boolean} [params.latest] - Query parameter to specify whether to force retrieving latest leaf revision, no
@@ -7305,10 +7346,12 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} [params.accept] - The type of the response: application/json, multipart/mixed, multipart/related,
    * or application/octet-stream.
    * @param {string} [params.ifNoneMatch] - Header parameter for a conditional HTTP request not matching an ETag.
-   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachments bodies in a
-   * response.
+   * @param {boolean} [params.attachments] - Query parameter to specify whether to include attachment content in the
+   * response. Note that when used with a view-style query or changes feed this only applies when requesting documents
+   * in the response.
    * @param {boolean} [params.attEncodingInfo] - Query parameter to specify whether to include the encoding information
-   * in attachment stubs if the particular attachment is compressed.
+   * for compressed attachments. Note that when used with a view-style query or changes feed this only applies when
+   * requesting documents in the response.
    * @param {boolean} [params.localSeq] - Query parameter to specify whether to include the last update sequence for the
    * document.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -8135,7 +8178,7 @@ namespace CloudantV1 {
 
   /** Parameters for the `getDbUpdates` operation. */
   export interface GetDbUpdatesParams extends DefaultParams {
-    /** Query parameter to specify whether to return the documents in descending by key order. */
+    /** Query parameter to specify whether to return rows in descending by key order. */
     descending?: boolean;
     /** Query parameter to specify the changes feed type. */
     feed?: GetDbUpdatesConstants.Feed | string;
@@ -8232,17 +8275,22 @@ namespace CloudantV1 {
      *  Overrides `since` query parameter.
      */
     lastEventId?: string;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
-     *  Active only when `include_docs` is `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document. Note
+     *  that when used with a view-style query or changes feed this only applies when requesting documents in the
+     *  response.
      */
     conflicts?: boolean;
-    /** Query parameter to specify whether to return the documents in descending by key order. */
+    /** Query parameter to specify whether to return changes in the descending order with most recent change first.
+     *  The `since` parameter has no effect when using descending order.
+     */
     descending?: boolean;
     /** Query parameter to specify the changes feed type. */
     feed?: PostChangesConstants.Feed | string;
@@ -8381,17 +8429,22 @@ namespace CloudantV1 {
      *  Overrides `since` query parameter.
      */
     lastEventId?: string;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
-     *  Active only when `include_docs` is `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document. Note
+     *  that when used with a view-style query or changes feed this only applies when requesting documents in the
+     *  response.
      */
     conflicts?: boolean;
-    /** Query parameter to specify whether to return the documents in descending by key order. */
+    /** Query parameter to specify whether to return changes in the descending order with most recent change first.
+     *  The `since` parameter has no effect when using descending order.
+     */
     descending?: boolean;
     /** Query parameter to specify the changes feed type. */
     feed?: PostChangesAsStreamConstants.Feed | string;
@@ -8488,7 +8541,7 @@ namespace CloudantV1 {
 
   /** Parameters for the `getAllDbs` operation. */
   export interface GetAllDbsParams extends DefaultParams {
-    /** Query parameter to specify whether to return the documents in descending by key order. */
+    /** Query parameter to specify whether to return rows in descending by key order. */
     descending?: boolean;
     /** Query parameter to specify to stop returning records when the specified key is reached. String
      *  representation of any JSON type that matches the key type emitted by the view function.
@@ -8590,21 +8643,23 @@ namespace CloudantV1 {
   export interface PostAllDocsParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
-    /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Parameter to specify whether to include the encoding information for compressed attachments. This only
+     *  applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Parameter to specify whether to include attachments bodies in a response. */
+    /** Parameter to specify whether to include attachment content in included document content or only the
+     *  attachment metadata. This only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
-     *  only when `include_docs` is `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. This only
+     *  applies when requesting documents in the response.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
     /** Parameter to specify whether to include the full content of the documents in the response. */
     includeDocs?: boolean;
-    /** Parameter to specify whether the specified end key should be included in the result. */
+    /** Parameter to specify whether to include the specified end key in the result. */
     inclusiveEnd?: boolean;
     /** Parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
@@ -8628,21 +8683,23 @@ namespace CloudantV1 {
   export interface PostAllDocsAsStreamParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
-    /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Parameter to specify whether to include the encoding information for compressed attachments. This only
+     *  applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Parameter to specify whether to include attachments bodies in a response. */
+    /** Parameter to specify whether to include attachment content in included document content or only the
+     *  attachment metadata. This only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
-     *  only when `include_docs` is `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. This only
+     *  applies when requesting documents in the response.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
     /** Parameter to specify whether to include the full content of the documents in the response. */
     includeDocs?: boolean;
-    /** Parameter to specify whether the specified end key should be included in the result. */
+    /** Parameter to specify whether to include the specified end key in the result. */
     inclusiveEnd?: boolean;
     /** Parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
@@ -8696,10 +8753,12 @@ namespace CloudantV1 {
     db: string;
     /** List of document items to get in bulk. */
     docs: BulkGetQueryDocument[];
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
     /** Query parameter to specify whether to force retrieving latest leaf revision, no matter what rev was
@@ -8716,10 +8775,12 @@ namespace CloudantV1 {
     db: string;
     /** List of document items to get in bulk. */
     docs: BulkGetQueryDocument[];
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
     /** Query parameter to specify whether to force retrieving latest leaf revision, no matter what rev was
@@ -8736,10 +8797,12 @@ namespace CloudantV1 {
     db: string;
     /** List of document items to get in bulk. */
     docs: BulkGetQueryDocument[];
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
     /** Query parameter to specify whether to force retrieving latest leaf revision, no matter what rev was
@@ -8756,10 +8819,12 @@ namespace CloudantV1 {
     db: string;
     /** List of document items to get in bulk. */
     docs: BulkGetQueryDocument[];
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
     /** Query parameter to specify whether to force retrieving latest leaf revision, no matter what rev was
@@ -8802,14 +8867,17 @@ namespace CloudantV1 {
     docId: string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
-     *  Active only when `include_docs` is `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document. Note
+     *  that when used with a view-style query or changes feed this only applies when requesting documents in the
+     *  response.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to include a list of deleted conflicted revisions in the
@@ -8842,14 +8910,17 @@ namespace CloudantV1 {
     docId: string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
-     *  Active only when `include_docs` is `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document. Note
+     *  that when used with a view-style query or changes feed this only applies when requesting documents in the
+     *  response.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to include a list of deleted conflicted revisions in the
@@ -8882,14 +8953,17 @@ namespace CloudantV1 {
     docId: string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
-     *  Active only when `include_docs` is `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document. Note
+     *  that when used with a view-style query or changes feed this only applies when requesting documents in the
+     *  response.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to include a list of deleted conflicted revisions in the
@@ -8922,14 +8996,17 @@ namespace CloudantV1 {
     docId: string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
-     *  Active only when `include_docs` is `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document. Note
+     *  that when used with a view-style query or changes feed this only applies when requesting documents in the
+     *  response.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to include a list of deleted conflicted revisions in the
@@ -9045,14 +9122,17 @@ namespace CloudantV1 {
     ddoc: string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
-     *  Active only when `include_docs` is `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document. Note
+     *  that when used with a view-style query or changes feed this only applies when requesting documents in the
+     *  response.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to include a list of deleted conflicted revisions in the
@@ -9127,21 +9207,23 @@ namespace CloudantV1 {
   export interface PostDesignDocsParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
-    /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Parameter to specify whether to include the encoding information for compressed attachments. This only
+     *  applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Parameter to specify whether to include attachments bodies in a response. */
+    /** Parameter to specify whether to include attachment content in included document content or only the
+     *  attachment metadata. This only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
-     *  only when `include_docs` is `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. This only
+     *  applies when requesting documents in the response.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
     /** Parameter to specify whether to include the full content of the documents in the response. */
     includeDocs?: boolean;
-    /** Parameter to specify whether the specified end key should be included in the result. */
+    /** Parameter to specify whether to include the specified end key in the result. */
     inclusiveEnd?: boolean;
     /** Parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
@@ -9192,21 +9274,23 @@ namespace CloudantV1 {
     ddoc: string;
     /** Path parameter to specify the map reduce view function name. */
     view: string;
-    /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Parameter to specify whether to include the encoding information for compressed attachments. This only
+     *  applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Parameter to specify whether to include attachments bodies in a response. */
+    /** Parameter to specify whether to include attachment content in included document content or only the
+     *  attachment metadata. This only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
-     *  only when `include_docs` is `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. This only
+     *  applies when requesting documents in the response.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
     /** Parameter to specify whether to include the full content of the documents in the response. */
     includeDocs?: boolean;
-    /** Parameter to specify whether the specified end key should be included in the result. */
+    /** Parameter to specify whether to include the specified end key in the result. */
     inclusiveEnd?: boolean;
     /** Parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
@@ -9290,21 +9374,23 @@ namespace CloudantV1 {
     ddoc: string;
     /** Path parameter to specify the map reduce view function name. */
     view: string;
-    /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Parameter to specify whether to include the encoding information for compressed attachments. This only
+     *  applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Parameter to specify whether to include attachments bodies in a response. */
+    /** Parameter to specify whether to include attachment content in included document content or only the
+     *  attachment metadata. This only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
-     *  only when `include_docs` is `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. This only
+     *  applies when requesting documents in the response.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
     /** Parameter to specify whether to include the full content of the documents in the response. */
     includeDocs?: boolean;
-    /** Parameter to specify whether the specified end key should be included in the result. */
+    /** Parameter to specify whether to include the specified end key in the result. */
     inclusiveEnd?: boolean;
     /** Parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
@@ -9424,21 +9510,23 @@ namespace CloudantV1 {
     db: string;
     /** Path parameter to specify the database partition key. */
     partitionKey: string;
-    /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Parameter to specify whether to include the encoding information for compressed attachments. This only
+     *  applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Parameter to specify whether to include attachments bodies in a response. */
+    /** Parameter to specify whether to include attachment content in included document content or only the
+     *  attachment metadata. This only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
-     *  only when `include_docs` is `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. This only
+     *  applies when requesting documents in the response.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
     /** Parameter to specify whether to include the full content of the documents in the response. */
     includeDocs?: boolean;
-    /** Parameter to specify whether the specified end key should be included in the result. */
+    /** Parameter to specify whether to include the specified end key in the result. */
     inclusiveEnd?: boolean;
     /** Parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
@@ -9464,21 +9552,23 @@ namespace CloudantV1 {
     db: string;
     /** Path parameter to specify the database partition key. */
     partitionKey: string;
-    /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Parameter to specify whether to include the encoding information for compressed attachments. This only
+     *  applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Parameter to specify whether to include attachments bodies in a response. */
+    /** Parameter to specify whether to include attachment content in included document content or only the
+     *  attachment metadata. This only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
-     *  only when `include_docs` is `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. This only
+     *  applies when requesting documents in the response.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
     /** Parameter to specify whether to include the full content of the documents in the response. */
     includeDocs?: boolean;
-    /** Parameter to specify whether the specified end key should be included in the result. */
+    /** Parameter to specify whether to include the specified end key in the result. */
     inclusiveEnd?: boolean;
     /** Parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
@@ -9628,21 +9718,23 @@ namespace CloudantV1 {
     ddoc: string;
     /** Path parameter to specify the map reduce view function name. */
     view: string;
-    /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Parameter to specify whether to include the encoding information for compressed attachments. This only
+     *  applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Parameter to specify whether to include attachments bodies in a response. */
+    /** Parameter to specify whether to include attachment content in included document content or only the
+     *  attachment metadata. This only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
-     *  only when `include_docs` is `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. This only
+     *  applies when requesting documents in the response.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
     /** Parameter to specify whether to include the full content of the documents in the response. */
     includeDocs?: boolean;
-    /** Parameter to specify whether the specified end key should be included in the result. */
+    /** Parameter to specify whether to include the specified end key in the result. */
     inclusiveEnd?: boolean;
     /** Parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
@@ -9719,21 +9811,23 @@ namespace CloudantV1 {
     ddoc: string;
     /** Path parameter to specify the map reduce view function name. */
     view: string;
-    /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Parameter to specify whether to include the encoding information for compressed attachments. This only
+     *  applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Parameter to specify whether to include attachments bodies in a response. */
+    /** Parameter to specify whether to include attachment content in included document content or only the
+     *  attachment metadata. This only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
-     *  only when `include_docs` is `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. This only
+     *  applies when requesting documents in the response.
      */
     conflicts?: boolean;
     /** Parameter to specify whether to return the documents in descending by key order. */
     descending?: boolean;
     /** Parameter to specify whether to include the full content of the documents in the response. */
     includeDocs?: boolean;
-    /** Parameter to specify whether the specified end key should be included in the result. */
+    /** Parameter to specify whether to include the specified end key in the result. */
     inclusiveEnd?: boolean;
     /** Parameter to specify the number of returned documents to limit the result to. */
     limit?: number;
@@ -10841,14 +10935,17 @@ namespace CloudantV1 {
     docId: string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
-    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document.
-     *  Active only when `include_docs` is `true`.
+    /** Query parameter to specify whether to include a list of conflicted revisions in each returned document. Note
+     *  that when used with a view-style query or changes feed this only applies when requesting documents in the
+     *  response.
      */
     conflicts?: boolean;
     /** Query parameter to specify whether to include a list of deleted conflicted revisions in the
@@ -11164,10 +11261,12 @@ namespace CloudantV1 {
     accept?: GetLocalDocumentConstants.Accept | string;
     /** Header parameter for a conditional HTTP request not matching an ETag. */
     ifNoneMatch?: string;
-    /** Query parameter to specify whether to include attachments bodies in a response. */
+    /** Query parameter to specify whether to include attachment content in the response. Note that when used with a
+     *  view-style query or changes feed this only applies when requesting documents in the response.
+     */
     attachments?: boolean;
-    /** Query parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Query parameter to specify whether to include the encoding information for compressed attachments. Note that
+     *  when used with a view-style query or changes feed this only applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
     /** Query parameter to specify whether to include the last update sequence for the document. */
@@ -11784,16 +11883,18 @@ namespace CloudantV1 {
    * Schema for an all documents query operation.
    */
   export class AllDocsQuery {
-    /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Parameter to specify whether to include the encoding information for compressed attachments. This only
+     *  applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
 
-    /** Parameter to specify whether to include attachments bodies in a response. */
+    /** Parameter to specify whether to include attachment content in included document content or only the
+     *  attachment metadata. This only applies when requesting documents in the response.
+     */
     attachments?: boolean;
 
-    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
-     *  only when `include_docs` is `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. This only
+     *  applies when requesting documents in the response.
      */
     conflicts?: boolean;
 
@@ -11803,7 +11904,7 @@ namespace CloudantV1 {
     /** Parameter to specify whether to include the full content of the documents in the response. */
     includeDocs?: boolean;
 
-    /** Parameter to specify whether the specified end key should be included in the result. */
+    /** Parameter to specify whether to include the specified end key in the result. */
     inclusiveEnd?: boolean;
 
     /** Parameter to specify the number of returned documents to limit the result to. */
@@ -12260,26 +12361,28 @@ namespace CloudantV1 {
     /** Attachment MIME type. */
     contentType?: string;
 
-    /** Base64-encoded content. Available if attachment content is requested by using the query parameters
-     *  `attachments=true` or `atts_since`. Note that when used with a view or changes feed `include_docs` must also be
-     *  `true`.
+    /** Base64-encoded content. Available when requested with `attachments=true` or `atts_since`. When retrieving
+     *  attachments for a single document this field is only avialable when accepting an application/json response. For
+     *  multipart responses each attachment is instead included in a separate part of the response (see `follows`).
+     *
+     *  Note that SDK deserialization of documents with included attachments automatically decodes the Base64 encoded
+     *  attachment content string to bytes.
      */
     data?: Buffer;
 
-    /** Content hash digest. It starts with prefix which announce hash type (e.g. `md5-`) and continues with
-     *  Base64-encoded hash digest.
+    /** Content hash digest. It starts with prefix declaring the hash type, `md5-` for example, and continues with
+     *  the Base64-encoded hash digest.
      */
     digest?: string;
 
-    /** Compressed attachment size in bytes. Available if content_type was in list of compressible types when the
-     *  attachment was added and the query parameter `att_encoding_info` is `true`. Note that when used with a view or
-     *  changes feed `include_docs` must also be `true`.
+    /** Compressed attachment size in bytes. Available for compressed attachments when requested with
+     *  `att_encoding_info`. The database compresses attachments if the content_type is in the list of compressible
+     *  types when added.
      */
     encodedLength?: number;
 
-    /** Compression codec. Available if content_type was in list of compressible types when the attachment was added
-     *  and the and the query parameter `att_encoding_info` is `true`. Note that when used with a view or changes feed
-     *  `include_docs` must also be `true`.
+    /** Compression codec. Available for compressed attachments when requested with `att_encoding_info`. The
+     *  database compresses attachments if the content_type is in the list of compressible types when added.
      */
     encoding?: string;
 
@@ -12289,10 +12392,12 @@ namespace CloudantV1 {
     /** Real attachment size in bytes. Not available if inline attachment content requested. */
     length?: number;
 
-    /** Revision number when attachment was added. */
+    /** Revision number at attachment addition. */
     revpos?: number;
 
-    /** Has `true` value if object contains stub info and no content. Otherwise omitted in response. */
+    /** Has `true` value if object has stub attachment metadata, but not attachment content. Otherwise omitted in
+     *  response.
+     */
     stub?: boolean;
 
     static serialize(obj): Attachment.Transport {
@@ -12969,7 +13074,10 @@ namespace CloudantV1 {
     /** The active size of the content, in bytes. */
     active: number;
 
-    /** The total uncompressed size of the content, in bytes. */
+    /** The total uncompressed size of the content, in bytes.
+     *
+     *  This is the value used for IBM Cloudant storage billing.
+     */
     external: number;
 
     /** The total size of the content as stored on disk, in bytes. */
@@ -14039,7 +14147,14 @@ namespace CloudantV1 {
    * Schema for design document options.
    */
   export class DesignDocumentOptions {
-    /** Whether this design document describes partitioned or global indexes. */
+    /** Whether this design document describes partitioned or global indexes. Set this option to `false` for a
+     *  design document that describes global indexes in a partitioned database. A design document describes either
+     *  global or partitioned indexes, but not both. By default, for a partitioned database this option is `true` and
+     *  the design document describes partitioned indexes for queries on a single partition at a time. When set to
+     *  `false` this option allows creating global indexes in this design document for queries spanning many partitions.
+     *  For non-partitioned databases, the default is `false` and design documents default to global. Only partitioned
+     *  databases can have partitioned indexes.
+     */
     partitioned?: boolean;
 
     static serialize(obj): DesignDocumentOptions.Transport {
@@ -19208,16 +19323,18 @@ namespace CloudantV1 {
    * Schema for a query view operation.
    */
   export class ViewQuery {
-    /** Parameter to specify whether to include the encoding information in attachment stubs if the particular
-     *  attachment is compressed.
+    /** Parameter to specify whether to include the encoding information for compressed attachments. This only
+     *  applies when requesting documents in the response.
      */
     attEncodingInfo?: boolean;
 
-    /** Parameter to specify whether to include attachments bodies in a response. */
+    /** Parameter to specify whether to include attachment content in included document content or only the
+     *  attachment metadata. This only applies when requesting documents in the response.
+     */
     attachments?: boolean;
 
-    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. Active
-     *  only when `include_docs` is `true`.
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. This only
+     *  applies when requesting documents in the response.
      */
     conflicts?: boolean;
 
@@ -19227,7 +19344,7 @@ namespace CloudantV1 {
     /** Parameter to specify whether to include the full content of the documents in the response. */
     includeDocs?: boolean;
 
-    /** Parameter to specify whether the specified end key should be included in the result. */
+    /** Parameter to specify whether to include the specified end key in the result. */
     inclusiveEnd?: boolean;
 
     /** Parameter to specify the number of returned documents to limit the result to. */
