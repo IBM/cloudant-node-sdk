@@ -414,4 +414,3 @@ void publishNpm(registry, tag='next') {
 void publishDocs() {
   sh './scripts/typedoc/publish-doc.sh'
 }
-
