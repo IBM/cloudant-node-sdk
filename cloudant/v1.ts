@@ -16,6 +16,7 @@
 
 import extend from 'extend';
 import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
+import { Readable } from 'node:stream';
 import {
   AbortSignal,
   Authenticator,
@@ -1276,7 +1277,12 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const body = CloudantV1.Document.serialize(_params.document);
+    let body;
+    if (_params.document instanceof Readable || _params.document instanceof Buffer) {
+      body = _params.document;
+    } else {
+      body = CloudantV1.Document.serialize(_params.document)
+    }
     const query = {
       'batch': _params.batch,
     };
@@ -1662,7 +1668,12 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const body = CloudantV1.BulkDocs.serialize(_params.bulkDocs);
+    let body;
+    if (_params.bulkDocs instanceof Readable || _params.bulkDocs instanceof Buffer) {
+      body = _params.bulkDocs;
+    } else {
+      body = CloudantV1.BulkDocs.serialize(_params.bulkDocs)
+    }
     const path = {
       'db': _params.db,
     };
@@ -2499,7 +2510,12 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const body = CloudantV1.Document.serialize(_params.document);
+    let body;
+    if (_params.document instanceof Readable || _params.document instanceof Buffer) {
+      body = _params.document;
+    } else {
+      body = CloudantV1.Document.serialize(_params.document)
+    }
     const query = {
       'batch': _params.batch,
       'new_edits': _params.newEdits,
@@ -7438,7 +7454,12 @@ class CloudantV1 extends CloudantBaseService {
       return Promise.reject(_validationErrors);
     }
 
-    const body = CloudantV1.Document.serialize(_params.document);
+    let body;
+    if (_params.document instanceof Readable || _params.document instanceof Buffer) {
+      body = _params.document;
+    } else {
+      body = CloudantV1.Document.serialize(_params.document)
+    }
     const query = {
       'batch': _params.batch,
     };
