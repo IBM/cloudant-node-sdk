@@ -37,8 +37,7 @@ export abstract class BasePageIterator<
     | CloudantV1.Document
     | CloudantV1.SearchResultRow
     | CloudantV1.ViewResultRow,
-> implements PageIterator<I>
-{
+> implements PageIterator<I> {
   protected client: CloudantV1;
   protected pageSize: number;
   protected _hasNext: boolean = true;
