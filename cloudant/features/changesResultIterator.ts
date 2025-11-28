@@ -25,9 +25,7 @@ enum TransientErrorSuppression {
   TIMER,
 }
 
-export class ChangesResultIterableIterator
-  implements AsyncIterableIterator<CloudantV1.ChangesResult>
-{
+export class ChangesResultIterableIterator implements AsyncIterableIterator<CloudantV1.ChangesResult> {
   private readonly timeoutPromise = promisify(setTimeout);
   private readonly cancelToken = 'CloudantChangesIteratorCancel';
   private readonly client: CloudantV1;
