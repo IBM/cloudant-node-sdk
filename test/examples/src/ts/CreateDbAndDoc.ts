@@ -76,12 +76,9 @@ createDb.then(() => {
     */
     // ==========================================================================
     .then((createDocumentResponse) => {
-      // Keeping track of the revision number of the document object
-      // is necessary for further UPDATE/DELETE operations:
-      exampleDocument._rev = createDocumentResponse.result.rev;
       console.log(
-        'You have created the document:\n' +
-          JSON.stringify(exampleDocument, null, 2)
+        'You have created the document. Response body:\n' +
+          JSON.stringify(createDocumentResponse.result, null, 2)
       );
     });
 });
