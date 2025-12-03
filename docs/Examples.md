@@ -100,12 +100,9 @@ createDb.then(() => {
     */
     // ==========================================================================
     .then((createDocumentResponse) => {
-      // Keeping track of the revision number of the document object
-      // is necessary for further UPDATE/DELETE operations:
-      exampleDocument._rev = createDocumentResponse.result.rev;
       console.log(
-        'You have created the document:\n' +
-          JSON.stringify(exampleDocument, null, 2)
+        'You have created the document. Response body:\n' +
+          JSON.stringify(createDocumentResponse.result, null, 2)
       );
     });
 });
@@ -174,12 +171,9 @@ const createDbAndDoc = async () => {
   }); */
   // ==========================================================================
 
-  // Keeping track of the revision number of the document object
-  // is necessary for further UPDATE/DELETE operations:
-  exampleDocument._rev = createDocumentResponse.result.rev;
   console.log(
-    'You have created the document:\n' +
-      JSON.stringify(exampleDocument, null, 2)
+    'You have created the document. Response body:\n' +
+      JSON.stringify(createDocumentResponse.result, null, 2)
   );
 };
 
@@ -194,7 +188,7 @@ When you run the code, you see a result similar to the following output.
 
 ```text
 "orders" database created.
-You have created the document:
+You have created the document. Response body:
 {
   "_id": "example",
   "name": "Bob Smith",

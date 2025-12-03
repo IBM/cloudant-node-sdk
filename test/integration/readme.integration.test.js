@@ -24,11 +24,18 @@ const { updateDoc } = require('../examples/src/js/UpdateDoc.js');
 const { deleteDoc } = require('../examples/src/js/DeleteDoc.js');
 
 const setAuthentication = () => {
-  process.env.CLOUDANT_AUTH_TYPE = 'basic';
-  process.env.CLOUDANT_USERNAME = 'admin';
-  process.env.CLOUDANT_PASSWORD = 'pass';
+  process.env.CLOUDANT_AUTH_TYPE = 'noauth';
   process.env.CLOUDANT_URL = process.env.WIREMOCK_URL;
 };
+
+function getExpectedJoinedConsoleOutput(filename) {
+  return fs.readFileSync(filename, 'utf8', (err, data) => {
+    if (err) {
+      return console.log(err);
+    }
+    return data;
+  });
+}
 
 describe('Readme integration tests', () => {
   let consoleLogSpy;
@@ -65,15 +72,8 @@ describe('Readme integration tests', () => {
   });
 
   it('Create db and doc for the first time', async () => {
-    const expectedJoinedConsoleOutput = fs.readFileSync(
-      'test/examples/output/CreateDbAndDoc.txt',
-      'utf8',
-      (err, data) => {
-        if (err) {
-          return console.log(err);
-        }
-        return data;
-      }
+    const expectedJoinedConsoleOutput = getExpectedJoinedConsoleOutput(
+      'test/examples/output/CreateDbAndDoc.txt'
     );
     await createDbAndDoc();
     const consoleOutput = consoleLogSpy
@@ -84,15 +84,8 @@ describe('Readme integration tests', () => {
   });
 
   it('Get document from orders database', async () => {
-    const expectedJoinedConsoleOutput = fs.readFileSync(
-      'test/examples/output/GetInfoFromExistingDatabase.txt',
-      'utf8',
-      (err, data) => {
-        if (err) {
-          return console.log(err);
-        }
-        return data;
-      }
+    const expectedJoinedConsoleOutput = getExpectedJoinedConsoleOutput(
+      'test/examples/output/GetInfoFromExistingDatabase.txt'
     );
     await getInfoFromExistingDatabase();
     const consoleOutput = consoleLogSpy
@@ -103,15 +96,8 @@ describe('Readme integration tests', () => {
   });
 
   it('Update doc for the first time', async () => {
-    const expectedJoinedConsoleOutput = fs.readFileSync(
-      'test/examples/output/UpdateDoc.txt',
-      'utf8',
-      (err, data) => {
-        if (err) {
-          return console.log(err);
-        }
-        return data;
-      }
+    const expectedJoinedConsoleOutput = getExpectedJoinedConsoleOutput(
+      'test/examples/output/UpdateDoc.txt'
     );
     await updateDoc();
     const consoleOutput = consoleLogSpy
@@ -122,15 +108,8 @@ describe('Readme integration tests', () => {
   });
 
   it('Update doc for the second time', async () => {
-    const expectedJoinedConsoleOutput = fs.readFileSync(
-      'test/examples/output/UpdateDoc2.txt',
-      'utf8',
-      (err, data) => {
-        if (err) {
-          return console.log(err);
-        }
-        return data;
-      }
+    const expectedJoinedConsoleOutput = getExpectedJoinedConsoleOutput(
+      'test/examples/output/UpdateDoc2.txt'
     );
     await updateDoc();
     const consoleOutput = consoleLogSpy
@@ -141,19 +120,23 @@ describe('Readme integration tests', () => {
   });
 
   it('Delete existing doc', async () => {
+    const expectedJoinedConsoleOutput = getExpectedJoinedConsoleOutput(
+      'test/examples/output/DeleteDoc.txt'
+    );
     await deleteDoc();
     const consoleOutput = consoleLogSpy.getCalls().map((a) => a.args[0]);
-    expect(consoleOutput.join('\n')).toBe('You have deleted the document.');
+    expect(consoleOutput.join('\n')).toBe(expectedJoinedConsoleOutput);
   });
 
   it('Delete non-existing doc', async () => {
+    const expectedJoinedConsoleOutput = getExpectedJoinedConsoleOutput(
+      'test/examples/output/DeleteDoc2.txt'
+    );
     await deleteDoc();
     const consoleOutput = consoleLogSpy
       .getCalls()
       .map((a) => a.args[0])
       .join('\n');
-    expect(consoleOutput).toBe(
-      'Cannot delete document because either "orders" database or the "example" document was not found.'
-    );
+    expect(consoleOutput).toBe(expectedJoinedConsoleOutput);
   });
 });
