@@ -669,4 +669,4 @@ You have deleted the document.
 
 ## Further code examples
 
-For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.12/examples#examples-for-node).
+For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.13/examples#examples-for-node).
