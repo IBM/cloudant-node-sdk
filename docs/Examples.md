@@ -190,10 +190,9 @@ When you run the code, you see a result similar to the following output.
 "orders" database created.
 You have created the document. Response body:
 {
-  "_id": "example",
-  "name": "Bob Smith",
-  "joined": "2019-01-24T10:42:59.000Z",
-  "_rev": "1-1b403633540686aa32d013fda9041a5d"
+  "id": "example",
+  "rev": "1-1b403633540686aa32d013fda9041a5d",
+  "ok": true
 }
 ```
 
