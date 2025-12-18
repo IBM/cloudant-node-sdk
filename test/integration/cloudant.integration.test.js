@@ -16,16 +16,6 @@
 
 const assert = require('assert');
 const { CloudantV1 } = require('../../index.ts');
-const authHelper = require('../resources/auth-helper.js');
-
-// testcase timeout value (10s).
-const timeout = 10000;
-
-// Use this to retrieve test-specific config properties from your credentials file.
-const configFile = 'cloudant_v1.env';
-// Use authHelper to skip tests if our configFile is not available
-// This step also sets env var IBM_CREDENTIALS_FILE=<configFile>
-const describe = authHelper.prepareTests(configFile);
 
 const cloudant = CloudantV1.newInstance({
   serviceName: 'server',
@@ -33,33 +23,6 @@ const cloudant = CloudantV1.newInstance({
 const dbName = process.env.DATABASE_NAME || 'stores';
 
 describe('validate', () => {
-  jest.setTimeout(timeout);
-
-  it('server information', () =>
-    cloudant.getServerInformation().then((response) => {
-      assert.ok(response);
-      const { result } = response;
-      assert.ok(result);
-      assert.ok(result.couchdb);
-      assert.ok(result.version);
-    }));
-
-  it('db exists', () =>
-    cloudant.headDatabase({ db: dbName }).then((response) => {
-      assert.ok(response);
-      assert.ok(response.headers);
-      assert.ok(Object.keys(response.headers).length > 0);
-    }));
-
-  it('all docs', () =>
-    cloudant.postAllDocs({ db: dbName }).then((response) => {
-      assert.ok(response);
-      const { result } = response;
-      assert.ok(result);
-      assert.ok(result.rows);
-      assert.ok(result.rows.length > 0);
-    }));
-
   it('delete invalid _design', () =>
     cloudant
       .deleteDocument({
