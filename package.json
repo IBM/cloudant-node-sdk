@@ -81,7 +81,12 @@
     ],
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "testResultsProcessor": "jest-junit"
+    "testResultsProcessor": "jest-junit",
+    "globals": {
+      "ts-jest": {
+        "isolatedModules": true
+      }
+    }
   },
   "jest-junit": {
     "suiteName": "Generated unit tests",
