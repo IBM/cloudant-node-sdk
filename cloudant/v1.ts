@@ -5217,8 +5217,8 @@ class CloudantV1 extends CloudantBaseService {
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {IndexDefinition} params.index - Schema for a `json` or `text` query index definition. Indexes of type
    * `text` have additional configuration properties that do not apply to `json` indexes, these are:
-   * * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
-   * document fields and what analyzer to use for that purpose.
+   * * `default_analyzer` - the default text analyzer to use
+   * * `default_field` - whether to index the text in all document fields and what analyzer to use for that purpose.
    * @param {string} [params.ddoc] - Specifies the design document name in which the index will be created. The design
    * document name is the design document ID excluding the `_design/` prefix.
    * @param {string} [params.name] - name.
@@ -10564,8 +10564,8 @@ namespace CloudantV1 {
     db: string;
     /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
      *  properties that do not apply to `json` indexes, these are:
-     *  * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
-     *  document fields and what analyzer to use for that purpose.
+     *  * `default_analyzer` - the default text analyzer to use
+     *  * `default_field` - whether to index the text in all document fields and what analyzer to use for that purpose.
      */
     index: IndexDefinition;
     /** Specifies the design document name in which the index will be created. The design document name is the
@@ -12103,8 +12103,9 @@ namespace CloudantV1 {
   export class Analyzer {
     /** Schema for the name of the Apache Lucene analyzer to use for text indexing. The default value varies
      *  depending on the analyzer usage:
-     *  * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query
-     *  text index default_field the default is `standard`.
+     *  * For search indexes the default is `standard`
+     *  * For query text indexes the default is `keyword`
+     *  * For a query text index default_field the default is `standard`.
      */
     name: Analyzer.Constants.Name | string;
 
@@ -12194,18 +12195,23 @@ namespace CloudantV1 {
   }
 
   /**
-   * Schema for a search analyzer configuration.
+   * Analyzer configuration for search indexes. The default and fields properties are only applicable for the `perfield`
+   * analyzer name.
    */
   export class AnalyzerConfiguration {
     /** Schema for the name of the Apache Lucene analyzer to use for text indexing. The default value varies
      *  depending on the analyzer usage:
-     *  * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query
-     *  text index default_field the default is `standard`.
+     *  * For search indexes the default is `standard`
+     *  * For query text indexes the default is `keyword`
+     *  * For a query text index default_field the default is `standard`.
      */
     name: AnalyzerConfiguration.Constants.Name | string;
 
     /** Custom stopwords to use with the named analyzer. */
     stopwords?: string[];
+
+    /** Schema for a full text search analyzer. */
+    default?: Analyzer;
 
     /** Schema for mapping a field name to a per field analyzer. */
     fields?: {[key: string]: Analyzer};
@@ -12220,6 +12226,9 @@ namespace CloudantV1 {
       }
       if (obj.stopwords !== undefined) {
         copy.stopwords = obj.stopwords;
+      }
+      if (obj.default !== undefined) {
+        copy.default = Analyzer.serialize(obj.default);
       }
       if (obj.fields !== undefined) {
         copy.fields = BaseService.convertModel(obj.fields, Analyzer.serialize, true);
@@ -12237,6 +12246,9 @@ namespace CloudantV1 {
       }
       if (obj.stopwords !== undefined) {
         copy.stopwords = obj.stopwords;
+      }
+      if (obj.default !== undefined) {
+        copy.default = Analyzer.deserialize(obj.default);
       }
       if (obj.fields !== undefined) {
         copy.fields = BaseService.convertModel(obj.fields, Analyzer.deserialize, true);
@@ -12295,6 +12307,7 @@ namespace CloudantV1 {
       export interface Transport {
         name: string;
         stopwords?: string[];
+        default?: Analyzer.Transport;
         fields?: {[key: string]: Analyzer.Transport};
       }
   }
@@ -15655,8 +15668,8 @@ namespace CloudantV1 {
   /**
    * Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
    * properties that do not apply to `json` indexes, these are:
-   * * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
-   * document fields and what analyzer to use for that purpose.
+   * * `default_analyzer` - the default text analyzer to use
+   * * `default_field` - whether to index the text in all document fields and what analyzer to use for that purpose.
    */
   export class IndexDefinition {
     /** Schema for a full text search analyzer. */
@@ -15678,9 +15691,10 @@ namespace CloudantV1 {
 
     /** Whether to scan every document for arrays and store the length for each array found. Set the
      *  index_array_lengths field to false if:
-     *  * You do not need to know the length of an array. * You do not use the `$size` operator. * The documents in your
-     *  database are complex, or not completely under your control. As a result, it is difficult to estimate the impact
-     *  of the extra processing that is needed to determine and store the arrays lengths.
+     *  * You do not need to know the length of an array.
+     *  * You do not use the `$size` operator.
+     *  * The documents in your database are complex, or not completely under your control. As a result, it is difficult
+     *  to estimate the impact of the extra processing that is needed to determine and store the arrays lengths.
      */
     indexArrayLengths?: boolean;
 
@@ -15867,8 +15881,8 @@ namespace CloudantV1 {
 
     /** Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
      *  properties that do not apply to `json` indexes, these are:
-     *  * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
-     *  document fields and what analyzer to use for that purpose.
+     *  * `default_analyzer` - the default text analyzer to use
+     *  * `default_field` - whether to index the text in all document fields and what analyzer to use for that purpose.
      */
     def: IndexDefinition;
 
@@ -18026,7 +18040,9 @@ namespace CloudantV1 {
    * Schema for a search index definition.
    */
   export class SearchIndexDefinition {
-    /** Schema for a search analyzer configuration. */
+    /** Analyzer configuration for search indexes. The default and fields properties are only applicable for the
+     *  `perfield` analyzer name.
+     */
     analyzer?: AnalyzerConfiguration;
 
     /** String form of a JavaScript function that is called for each document in the database. The function takes
