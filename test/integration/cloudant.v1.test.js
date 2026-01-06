@@ -652,6 +652,7 @@ describe('CloudantV1_integration', () => {
     const analyzerConfigurationModel = {
       name: 'standard',
       stopwords: ['testString'],
+      default: analyzerModel,
       fields: { 'key1': analyzerModel },
     };
 
