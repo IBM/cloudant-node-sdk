@@ -1,6 +1,6 @@
 {
   "name": "@ibm-cloud/cloudant",
-  "version": "0.12.13",
+  "version": "0.12.14",
   "description": "IBM Cloudant Node.js SDK",
   "main": "index.js",
   "repository": {
