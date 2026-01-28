@@ -673,6 +673,26 @@ service.postDocument({
 });
 ```
 
+### [Example request as a stream](snippets/postDocument/example_request_as_a_stream.js)
+
+[embedmd]:# (snippets/postDocument/example_request_as_a_stream.js)
+```js
+// section: code
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+let productsDocStream = fs.createReadStream("upload.json");
+
+service.postDocument({
+  db: 'products',
+  contentType: 'application/json',
+  document: productsDocStream
+}).then(response => {
+  console.log(response.result);
+});
+```
+
 ## putDatabase
 
 _PUT `/{db}`_
