@@ -673,6 +673,27 @@ service.postDocument({
 });
 ```
 
+### [Example request as a stream](snippets/postDocument/example_request_as_a_stream.js)
+
+[embedmd]:# (snippets/postDocument/example_request_as_a_stream.js)
+```js
+// section: code
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+import { createReadStream } from 'node:fs'
+
+const service = CloudantV1.newInstance({});
+
+const productsDocStream = createReadStream('products_doc.json')
+
+service.postDocument({
+  db: 'products',
+  contentType: 'application/json',
+  document: productsDocStream
+}).then(response => {
+  console.log(response.result);
+});
+```
+
 ## putDatabase
 
 _PUT `/{db}`_
@@ -723,6 +744,7 @@ service.postAllDocs({
 ```js
 // section: code
 import { CloudantV1 } from '@ibm-cloud/cloudant';
+import { createWriteStream } from 'node:fs'
 
 const service = CloudantV1.newInstance({});
 
@@ -732,7 +754,7 @@ service.postAllDocsAsStream({
   startKey: 'abc',
   limit: 10
 }).then(response => {
-  let stream = fs.createWriteStream("result.json");
+  const stream = createWriteStream("result.json");
   response.result.pipe(stream);
   response.result.on('end', () => stream.end());
 });
@@ -845,10 +867,11 @@ service.postBulkDocs({
 ```js
 // section: code
 import { CloudantV1 } from '@ibm-cloud/cloudant';
+import { createReadStream } from 'node:fs'
 
 const service = CloudantV1.newInstance({});
 
-let stream = fs.createReadStream("upload.json");
+const stream = createReadStream("upload.json");
 
 service.postBulkDocs({
   db: 'events',
@@ -991,13 +1014,14 @@ service.postChanges({
 ```js
 // section: code
 import { CloudantV1 } from '@ibm-cloud/cloudant';
+import { createWriteStream } from 'node:fs'
 
 const service = CloudantV1.newInstance({});
 
 service.postChangesAsStream({
   db: 'orders'
 }).then(response => {
-  let stream = fs.createWriteStream("result.json");
+  const stream = createWriteStream("result.json");
   response.result.pipe(stream);
   response.result.on('end', () => stream.end());
 });

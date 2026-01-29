@@ -1,9 +1,10 @@
 // section: code
 import { CloudantV1 } from '@ibm-cloud/cloudant';
+import { createReadStream } from 'node:fs'
 
 const service = CloudantV1.newInstance({});
 
-let stream = fs.createReadStream("upload.json");
+const stream = createReadStream("upload.json");
 
 service.postBulkDocs({
   db: 'events',
