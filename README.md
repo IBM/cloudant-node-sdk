@@ -69,7 +69,7 @@ project:
 - Familiar user experience with IBM Cloud SDKs.
 - Flexibility to use either built-in models or byte-based requests and responses for documents.
 - Built-in [Changes feed follower](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.14/docs/Changes_Follower.md)
-- Built-in [Pagination](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.14/docs/Pagination.md) (beta)
+- Built-in [Pagination](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.14/docs/Pagination.md)
 - `Promise` based design with asynchronous HTTP requests.
 - Use either as native JavaScript or take advantage of TypeScript models.
 - Transparently compresses request and response bodies.
