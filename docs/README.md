@@ -1,4 +1,4 @@
-# IBM Cloudant Node.js SDK Version 0.12.14 Detailed Documentation
+# IBM Cloudant Node.js SDK Version 0.12.15 Detailed Documentation
 
 ## Table of Contents
 
