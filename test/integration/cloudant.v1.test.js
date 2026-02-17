@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-console */
+
 
 const { readExternalSources } = require('ibm-cloud-sdk-core');
-/* eslint-disable import/order */
 const CloudantV1 = require('../../dist/cloudant/v1');
 const authHelper = require('../resources/auth-helper.js');
 

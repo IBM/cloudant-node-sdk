@@ -82,7 +82,11 @@ export class Pagination<I> {
    *
    * This function is useful for handling pages in an enhanced for loop e.g.
    * ```ts
-   * for await (const row: ReadonlyArray<DocsResultRow> of Pagination.newPagination(client, PagerType.POST_ALL_DOCS, allDocsParams).pages()){
+   * for await (const row: ReadonlyArray<DocsResultRow> of Pagination.newPagination(
+   *   client,
+   *   PagerType.POST_ALL_DOCS,
+   *   allDocsParams
+   * ).pages()){
    *   ...
    * }
    * ```
@@ -111,7 +115,11 @@ export class Pagination<I> {
    *
    * This function is useful for handling rows in an enhanced for loop e.g.
    * ```ts
-   * for await (const row: DocsResultRow of Pagination.newPagination(client, PagerType.POST_ALL_DOCS, allDocsParams).rows()) {
+   * for await (const row: DocsResultRow of Pagination.newPagination(
+   *   client,
+   *   PagerType.POST_ALL_DOCS,
+   *   allDocsParams
+   * ).rows()) {
    *   ...
    * }
    * ```

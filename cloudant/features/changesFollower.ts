@@ -124,7 +124,8 @@ export class ChangesFollower {
       readTimeout < ChangesParamsHelper.MIN_CLIENT_TIMEOUT
     ) {
       throw new Error(
-        `To use ChangesFollower the client read timeout must be at least ${ChangesParamsHelper.MIN_CLIENT_TIMEOUT} ms. The client read timeout is ${readTimeout} ms.`
+        'To use ChangesFollower the client read timeout must be at least ' +
+          `${ChangesParamsHelper.MIN_CLIENT_TIMEOUT} ms. The client read timeout is ${readTimeout} ms.`
       );
     }
   }
@@ -135,7 +136,8 @@ export class ChangesFollower {
    * The end conditions are:
    *  * a terminal error (e.g. unauthorized client).
    *  * transient errors occur for longer than the error suppression duration.
-   *  * the number of changes received reaches the limit specified in the {@link CloudantV1.PostChangesParams} used to instantiate this {@link ChangesFollower}.
+   *  * the number of changes received reaches the limit specified in the
+   *    {@link CloudantV1.PostChangesParams} used to instantiate this {@link ChangesFollower}.
    *  * {@link stop} is called.
    *
    * The same change may be received more than once.
@@ -156,7 +158,8 @@ export class ChangesFollower {
    * The end conditions are:
    *  * a terminal error (e.g. unauthorized client).
    *  * transient errors occur for longer than the error suppression duration.
-   *  * the number of changes received reaches the limit specified in the {@link CloudantV1.PostChangesParams} used to instantiate this {@link ChangesFollower}.
+   *  * the number of changes received reaches the limit specified in the
+   *    {@link CloudantV1.PostChangesParams} used to instantiate this {@link ChangesFollower}.
    *  * {@link stop} is called.
    *
    * The same change may be received more than once.

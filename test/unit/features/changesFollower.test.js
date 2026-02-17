@@ -162,7 +162,8 @@ describe('Test ChangesFollower', () => {
             minimumTestParams
           );
         }).toThrow(
-          `To use ChangesFollower the client read timeout must be at least 60000 ms. The client read timeout is ${client.getTimeout()} ms.`
+          'To use ChangesFollower the client read timeout must be at least 60000 ms. ' +
+            `The client read timeout is ${client.getTimeout()} ms.`
         );
       }
     );
@@ -574,8 +575,8 @@ describe('Test ChangesFollower', () => {
     }
   );
   /**
-   * Checks that setting a limit terminates the stream early for both modes and limits smaller, the same and larger than the default
-   * batch size.
+   * Checks that setting a limit terminates the stream early for both modes and
+   * limits smaller, the same and larger than the default batch size.
    */
   it.each(getModesAndLimits(50))(
     'testLimit $mode $limit',
