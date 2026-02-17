@@ -39,12 +39,16 @@ function getInvalidLimitCases() {
     {
       'name': 'params validation limit less than min',
       'limit': BasePageIterator.MIN_LIMIT - 1,
-      'errorMsg': `The provided limit ${BasePageIterator.MIN_LIMIT - 1} is lower than the minimum page size value of ${BasePageIterator.MIN_LIMIT}.`,
+      'errorMsg':
+        `The provided limit ${BasePageIterator.MIN_LIMIT - 1} ` +
+        `is lower than the minimum page size value of ${BasePageIterator.MIN_LIMIT}.`,
     },
     {
       'name': 'params validation limit greater than max',
       'limit': BasePageIterator.MAX_LIMIT + 1,
-      'errorMsg': `The provided limit ${BasePageIterator.MAX_LIMIT + 1} exceeds the maximum page size value of ${BasePageIterator.MAX_LIMIT}.`,
+      'errorMsg':
+        `The provided limit ${BasePageIterator.MAX_LIMIT + 1} ` +
+        `exceeds the maximum page size value of ${BasePageIterator.MAX_LIMIT}.`,
     },
   ];
 }
@@ -152,7 +156,8 @@ describe('Params validation tests', () => {
       const t = () => new AllDocsBasePageIterator(mockClient, params);
       expect(t).toThrow(Error);
       expect(t).toThrow(
-        `The param 'key' is invalid when using pagination. No need to paginate as 'key' returns a single result for an ID.`
+        "The param 'key' is invalid when using pagination. " +
+          "No need to paginate as 'key' returns a single result for an ID."
       );
     });
   });

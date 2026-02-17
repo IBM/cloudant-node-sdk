@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-param-reassign */
 function delay(milliseconds) {
   return new Promise((resolve) => {
     setTimeout(resolve, milliseconds);

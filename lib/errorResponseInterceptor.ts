@@ -104,6 +104,7 @@ export async function errorResponseStreamConverter(axiosError) {
     );
     try {
       axiosError.response.data = JSON.parse(data);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
       // JSON parse failure, just use the original
       // error stream as a string, matching axios behavior
