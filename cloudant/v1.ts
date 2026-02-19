@@ -12130,7 +12130,10 @@ namespace CloudantV1 {
      */
     name: Analyzer.Constants.Name | string;
 
-    /** Custom stopwords to use with the named analyzer. */
+    /** Custom stopwords to use with the named analyzer where supported. Not used for `keyword`, `simple`,
+     *  `whitespace`, `simple_asciifolding` or `perfield` analyzers. Ensure stopwords match the folded case for
+     *  analyzers that perform folding.
+     */
     stopwords?: string[];
 
     static serialize(obj): Analyzer.Transport {
@@ -12228,7 +12231,10 @@ namespace CloudantV1 {
      */
     name: AnalyzerConfiguration.Constants.Name | string;
 
-    /** Custom stopwords to use with the named analyzer. */
+    /** Custom stopwords to use with the named analyzer where supported. Not used for `keyword`, `simple`,
+     *  `whitespace`, `simple_asciifolding` or `perfield` analyzers. Ensure stopwords match the folded case for
+     *  analyzers that perform folding.
+     */
     stopwords?: string[];
 
     /** Schema for a full text search analyzer. */
@@ -13922,8 +13928,8 @@ namespace CloudantV1 {
      *  The validation function can abort the pending document write by throwing one of two error objects:
      *
      *  ```
-     *  // user is not authorized to make the change but may re-authenticate throw({ unauthorized: 'Error message here.'
-     *  });
+     *  // user is not authorized to make the change but may
+     *  // re-authenticate throw({ unauthorized: 'Error message here.' });
      *
      *  // change is not allowed throw({ forbidden: 'Error message here.' });
      *  ```
