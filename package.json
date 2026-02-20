@@ -44,7 +44,7 @@
     "ibm-cloud-sdk-core": "5.4.6"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.2",
+    "@eslint/js": "10.0.1",
     "@ibm-cloud/sdk-test-utilities": "^1.0.0",
     "@types/extend": "3.0.4",
     "@types/jest": "30.0.0",
