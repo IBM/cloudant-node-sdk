@@ -22,15 +22,16 @@ updates:
       eslint:
         dependency-type: "development"
         patterns:
-          - "eslint*"
+          - "eslint"
+          - "@eslint/*"
+      eslint-plugins:
+        dependency-type: "development"
+        patterns:
+          - "eslint-*"
           - "@typescript-eslint/*"
     ignore:
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
-      - dependency-name: "eslint*"
-        update-types: ["version-update:semver-patch"]
-      - dependency-name: "@typescript-eslint/*"
-        update-types: ["version-update:semver-patch"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -40,4 +41,3 @@ updates:
     target-branch: "gh-pages"
     pull-request-branch-name:
       separator: "-"
-
