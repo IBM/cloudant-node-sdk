@@ -41,3 +41,4 @@ updates:
     target-branch: "gh-pages"
     pull-request-branch-name:
       separator: "-"
+
