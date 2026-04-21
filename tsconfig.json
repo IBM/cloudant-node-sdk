@@ -7,7 +7,8 @@
         "es2022",
         "dom"
     ],
-
+    // TS6 changed strict default to true, generated code produces a lot of errors so use false
+    "strict": false,
     /* Build source files into a folder called `dist` to maintain clean directories, free of ts-generated files */
     "outDir": "./dist",
 
