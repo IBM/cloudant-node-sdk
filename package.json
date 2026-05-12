@@ -59,7 +59,7 @@
     "eslint-plugin-jsdoc": "62.9.0",
     "eslint-plugin-prettier": "5.5.5",
     "globals": "17.6.0",
-    "jest": "30.3.0",
+    "jest": "30.4.1",
     "jest-junit": "17.0.0",
     "nock": "14.0.15",
     "prettier": "3.8.3",
