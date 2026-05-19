@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@types/node": "22.19.18",
-    "ibm-cloud-sdk-core": "5.4.14"
+    "ibm-cloud-sdk-core": "5.4.19"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
