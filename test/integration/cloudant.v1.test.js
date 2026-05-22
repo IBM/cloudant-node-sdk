@@ -1803,7 +1803,7 @@ describe('CloudantV1_integration', () => {
     const params = {
       db: 'testString',
       admins: securityObjectModel,
-      cloudant: { 'key1': ['_reader'] },
+      cloudant: { antsellseadespecteposene: ['_reader', '_writer', '_admin'] },
       couchdbAuthOnly: true,
       members: securityObjectModel,
     };

@@ -37,7 +37,7 @@ import { getAuthenticatorFromEnvCloudantExtension } from '../lib/getAuthenticato
 /**
  * NoSQL database based on Apache CouchDB
  *
- * See: https://cloud.ibm.com/docs/services/Cloudant/
+ * See: https://cloud.ibm.com/docs/Cloudant
  */
 
 class CloudantV1 extends CloudantBaseService {
@@ -469,7 +469,7 @@ class CloudantV1 extends CloudantBaseService {
    * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
    * of documents that will need to be scanned.
    *
-   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -667,7 +667,7 @@ class CloudantV1 extends CloudantBaseService {
    * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
    * of documents that will need to be scanned.
    *
-   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -3773,6 +3773,7 @@ class CloudantV1 extends CloudantBaseService {
    * Lucene Query Parser Syntax. Search indexes are defined by an index function, similar to a map function in MapReduce
    * views. The index function decides what data to index and store in the index.
    *
+   *
    * Before using read the
    * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand
    * the limitations and appropriate use cases.
@@ -3881,6 +3882,7 @@ class CloudantV1 extends CloudantBaseService {
    * Lucene Query Parser Syntax. Search indexes are defined by an index function, similar to a map function in MapReduce
    * views. The index function decides what data to index and store in the index.
    *
+   *
    * Before using read the
    * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand
    * the limitations and appropriate use cases.
@@ -3987,6 +3989,7 @@ class CloudantV1 extends CloudantBaseService {
    * for accessing views, the POST method supports the specification of explicit keys to be retrieved from the view
    * results. The remainder of the POST view functionality is identical to the `GET /{db}/_design/{ddoc}/_view/{view}`
    * API.
+   *
    *
    * Before using read the
    * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand
@@ -4126,6 +4129,7 @@ class CloudantV1 extends CloudantBaseService {
    * for accessing views, the POST method supports the specification of explicit keys to be retrieved from the view
    * results. The remainder of the POST view functionality is identical to the `GET /{db}/_design/{ddoc}/_view/{view}`
    * API.
+   *
    *
    * Before using read the
    * [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand
@@ -4294,7 +4298,7 @@ class CloudantV1 extends CloudantBaseService {
    * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
    * of documents that will need to be scanned.
    *
-   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -4450,7 +4454,7 @@ class CloudantV1 extends CloudantBaseService {
    * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
    * of documents that will need to be scanned.
    *
-   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -4606,7 +4610,7 @@ class CloudantV1 extends CloudantBaseService {
    * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
    * of documents that will need to be scanned.
    *
-   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -4749,7 +4753,7 @@ class CloudantV1 extends CloudantBaseService {
    * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
    * of documents that will need to be scanned.
    *
-   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -4904,7 +4908,7 @@ class CloudantV1 extends CloudantBaseService {
    * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
    * of documents that will need to be scanned.
    *
-   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -5059,7 +5063,7 @@ class CloudantV1 extends CloudantBaseService {
    * use these operators in conjunction with equality operators or create and use a partial index to reduce the number
    * of documents that will need to be scanned.
    *
-   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+   * See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
    * combination and conditional operators.
    *
    * For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -6623,7 +6627,7 @@ class CloudantV1 extends CloudantBaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
-   * @param {JsonObject} params.cloudant - Database permissions for Cloudant users and/or API keys.
+   * @param {JsonObject} params.cloudant - Database permissions for Cloudant users, API keys or both.
    * @param {SecurityObject} [params.admins] - Schema for names and roles to map to a database permission.
    * @param {boolean} [params.couchdbAuthOnly] - Manage permissions using the `_users` database only.
    * @param {SecurityObject} [params.members] - Schema for names and roles to map to a database permission.
@@ -6757,7 +6761,7 @@ class CloudantV1 extends CloudantBaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.db - Path parameter to specify the database name.
    * @param {SecurityObject} [params.admins] - Schema for names and roles to map to a database permission.
-   * @param {JsonObject} [params.cloudant] - Database permissions for Cloudant users and/or API keys.
+   * @param {JsonObject} [params.cloudant] - Database permissions for Cloudant users, API keys or both.
    * @param {boolean} [params.couchdbAuthOnly] - Manage permissions using the `_users` database only.
    * @param {SecurityObject} [params.members] - Schema for names and roles to map to a database permission.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
@@ -8286,8 +8290,8 @@ namespace CloudantV1 {
      *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
      *  the number of documents that will need to be scanned.
      *
-     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
-     *  combination and conditional operators.
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+     *  available combination and conditional operators.
      *
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
@@ -8440,8 +8444,8 @@ namespace CloudantV1 {
      *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
      *  the number of documents that will need to be scanned.
      *
-     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
-     *  combination and conditional operators.
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+     *  available combination and conditional operators.
      *
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
@@ -9949,8 +9953,8 @@ namespace CloudantV1 {
      *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
      *  the number of documents that will need to be scanned.
      *
-     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
-     *  combination and conditional operators.
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+     *  available combination and conditional operators.
      *
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
@@ -10057,8 +10061,8 @@ namespace CloudantV1 {
      *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
      *  the number of documents that will need to be scanned.
      *
-     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
-     *  combination and conditional operators.
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+     *  available combination and conditional operators.
      *
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
@@ -10165,8 +10169,8 @@ namespace CloudantV1 {
      *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
      *  the number of documents that will need to be scanned.
      *
-     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
-     *  combination and conditional operators.
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+     *  available combination and conditional operators.
      *
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
@@ -10271,8 +10275,8 @@ namespace CloudantV1 {
      *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
      *  the number of documents that will need to be scanned.
      *
-     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
-     *  combination and conditional operators.
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+     *  available combination and conditional operators.
      *
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
@@ -10383,8 +10387,8 @@ namespace CloudantV1 {
      *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
      *  the number of documents that will need to be scanned.
      *
-     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
-     *  combination and conditional operators.
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+     *  available combination and conditional operators.
      *
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
@@ -10495,8 +10499,8 @@ namespace CloudantV1 {
      *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
      *  the number of documents that will need to be scanned.
      *
-     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
-     *  combination and conditional operators.
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+     *  available combination and conditional operators.
      *
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
@@ -11081,7 +11085,7 @@ namespace CloudantV1 {
   export interface PutCloudantSecurityConfigurationParams extends DefaultParams {
     /** Path parameter to specify the database name. */
     db: string;
-    /** Database permissions for Cloudant users and/or API keys. */
+    /** Database permissions for Cloudant users, API keys or both. */
     cloudant: JsonObject;
     /** Schema for names and roles to map to a database permission. */
     admins?: SecurityObject;
@@ -11093,7 +11097,7 @@ namespace CloudantV1 {
 
   /** Constants for the `putCloudantSecurityConfiguration` operation. */
   export namespace PutCloudantSecurityConfigurationConstants {
-    /** Database permissions for Cloudant users and/or API keys. */
+    /** Database permissions for Cloudant users, API keys or both. */
     export enum Cloudant {
       READER = '_reader',
       WRITER = '_writer',
@@ -11118,7 +11122,7 @@ namespace CloudantV1 {
     db: string;
     /** Schema for names and roles to map to a database permission. */
     admins?: SecurityObject;
-    /** Database permissions for Cloudant users and/or API keys. */
+    /** Database permissions for Cloudant users, API keys or both. */
     cloudant?: JsonObject;
     /** Manage permissions using the `_users` database only. */
     couchdbAuthOnly?: boolean;
@@ -11128,7 +11132,7 @@ namespace CloudantV1 {
 
   /** Constants for the `putSecurity` operation. */
   export namespace PutSecurityConstants {
-    /** Database permissions for Cloudant users and/or API keys. */
+    /** Database permissions for Cloudant users, API keys or both. */
     export enum Cloudant {
       READER = '_reader',
       WRITER = '_writer',
@@ -15027,8 +15031,8 @@ namespace CloudantV1 {
      *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
      *  the number of documents that will need to be scanned.
      *
-     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
-     *  combination and conditional operators.
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+     *  available combination and conditional operators.
      *
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
@@ -15755,8 +15759,8 @@ namespace CloudantV1 {
      *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
      *  the number of documents that will need to be scanned.
      *
-     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
-     *  combination and conditional operators.
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+     *  available combination and conditional operators.
      *
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
@@ -16894,8 +16898,8 @@ namespace CloudantV1 {
      *  selectors use these operators in conjunction with equality operators or create and use a partial index to reduce
      *  the number of documents that will need to be scanned.
      *
-     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
-     *  combination and conditional operators.
+     *  See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+     *  available combination and conditional operators.
      *
      *  For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
      */
@@ -18558,7 +18562,7 @@ namespace CloudantV1 {
     /** Schema for names and roles to map to a database permission. */
     admins?: SecurityObject;
 
-    /** Database permissions for Cloudant users and/or API keys. */
+    /** Database permissions for Cloudant users, API keys or both. */
     cloudant?: JsonObject;
 
     /** Manage permissions using the `_users` database only. */
