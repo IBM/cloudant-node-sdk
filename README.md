@@ -61,7 +61,8 @@ project:
 
 - Supported by IBM Cloudant.
 - Server compatibility with:
-  - IBM Cloudant.
+  - IBM Cloudant (Gen 1).
+  - IBM Cloudant (Gen 2) - see [compatibility notes](https://github.com/IBM/cloudant-node-sdk/tree/v0.12.22/KNOWN_ISSUES.md#cloudant-gen-2-compatibility).
   - [Apache CouchDB 3.x](https://docs.couchdb.org/en/stable/) for data operations.
 - Includes all the most popular and latest supported endpoints for
   applications.
