@@ -65,7 +65,7 @@
     "prettier": "3.9.4",
     "sinon": "22.0.0",
     "ts-jest": "29.4.11",
-    "typedoc": "0.28.19",
+    "typedoc": "0.28.20",
     "typescript": "6.0.3"
   },
   "peerDependencies": {
