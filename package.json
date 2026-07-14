@@ -40,7 +40,7 @@
     "node": "^22 || ^24"
   },
   "dependencies": {
-    "@types/node": "22.20.0",
+    "@types/node": "22.20.1",
     "ibm-cloud-sdk-core": "5.5.0"
   },
   "devDependencies": {
