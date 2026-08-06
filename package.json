@@ -100,5 +100,9 @@
     "/auth",
     "/cloudant",
     "/lib"
-  ]
+  ],
+  "allowScripts": {
+    "fsevents": false,
+    "unrs-resolver": false
+  }
 }
