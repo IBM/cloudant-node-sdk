@@ -25,6 +25,11 @@ enum TransientErrorSuppression {
   TIMER,
 }
 
+type SeqEntry = {
+  type: 'row' | 'page';
+  lastSeq: string;
+};
+
 export class ChangesResultIterableIterator implements AsyncIterableIterator<CloudantV1.ChangesResult> {
   private readonly timeoutPromise = promisify(setTimeout);
   private readonly cancelToken = 'CloudantChangesIteratorCancel';
@@ -42,6 +47,7 @@ export class ChangesResultIterableIterator implements AsyncIterableIterator<Clou
   private readonly expRetryGate: number = Math.floor(
     Math.log2(ChangesParamsHelper.LONGPOLL_TIMEOUT / this.baseDelay)
   );
+  private readonly seqMap = new Map<string, SeqEntry[]>();
   private cancel: (error?: Error) => void;
   private countDown: number;
   private inflight: Promise<any> = null;
@@ -124,6 +130,10 @@ export class ChangesResultIterableIterator implements AsyncIterableIterator<Clou
     return this;
   }
 
+  getSeqMap(): Map<string, SeqEntry[]> {
+    return this.seqMap;
+  }
+
   async return(value?: any): Promise<IteratorResult<CloudantV1.ChangesResult>> {
     this.logger.debug('Iterator return entry.');
     if (!this.stopped) {
@@ -195,6 +205,18 @@ export class ChangesResultIterableIterator implements AsyncIterableIterator<Clou
         }
 
         this.since = response.result.lastSeq;
+
+        const { results }: CloudantV1.ChangesResult = response.result;
+        if (results.length > 0 && results.at(-1).seq != null) {
+          const lastItem = results.at(-1);
+          const rowEntries = this.seqMap.get(lastItem.seq) ?? [];
+          rowEntries.push({ type: 'row', lastSeq: response.result.lastSeq });
+          this.seqMap.set(lastItem.seq, rowEntries);
+        }
+        const pageEntries = this.seqMap.get(response.result.lastSeq) ?? [];
+        pageEntries.push({ type: 'page', lastSeq: response.result.lastSeq });
+        this.seqMap.set(response.result.lastSeq, pageEntries);
+
         this.pending = response.result.pending;
 
         if (this.mode === Mode.FINITE && this.pending === 0) {
