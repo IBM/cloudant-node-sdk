@@ -726,4 +726,111 @@ describe('Test ChangesFollower', () => {
       }
     });
   });
+  describe('latestSequenceFrom', () => {
+    /**
+     * Throws when passed null.
+     */
+    it('testLatestSequenceFromWithNull', () => {
+      const changesFollower = new ChangesFollower(service, minimumTestParams);
+      expect(() => changesFollower.latestSequenceFrom(null)).toThrow(
+        'Provided sequence ID must be a non-empty string.'
+      );
+    });
+
+    /**
+     * Throws when passed an empty string.
+     */
+    it('testLatestSequenceFromWithEmptyString', () => {
+      const changesFollower = new ChangesFollower(service, minimumTestParams);
+      expect(() => changesFollower.latestSequenceFrom('')).toThrow(
+        'Provided sequence ID must be a non-empty string.'
+      );
+    });
+
+    /**
+     * Returns the input seq when the feed has not started yet.
+     */
+    it('testLatestSequenceFromBeforeFeedStarts', () => {
+      const changesFollower = new ChangesFollower(service, minimumTestParams);
+      expect(changesFollower.latestSequenceFrom('seq-a')).toBe('seq-a');
+    });
+
+    /**
+     * Returns the input seq unchanged when the seq was never seen by this follower.
+     */
+    it('testLatestSequenceFromUnknownSeq', (done) => {
+      postChangesPromiseMock.mockResolvedValueOnce({
+        result: {
+          results: [{ id: 'a', seq: 'seq-a', changes: [] }],
+          pending: 0,
+          lastSeq: 'seq-a',
+        },
+      });
+      const changesFollower = new ChangesFollower(service, minimumTestParams);
+      const stream = changesFollower.startOneOff();
+      stream.on('data', () => {});
+      stream.on('end', () => {
+        try {
+          expect(changesFollower.latestSequenceFrom('seq-unknown')).toBe(
+            'seq-unknown'
+          );
+        } finally {
+          done();
+        }
+      });
+    });
+
+    /**
+     * Returns the input seq unchanged when querying with a seq from the middle
+     * of a batch — only the last item's seq is stored in seqMarkers.
+     */
+    it('testLatestSequenceFromMiddleOfBatch', (done) => {
+      postChangesPromiseMock.mockResolvedValueOnce({
+        result: {
+          results: [
+            { id: 'a', seq: 'seq-a', changes: [] },
+            { id: 'b', seq: 'seq-b', changes: [] },
+            { id: 'c', seq: 'seq-c', changes: [] },
+          ],
+          pending: 0,
+          lastSeq: 'seq-c',
+        },
+      });
+      const changesFollower = new ChangesFollower(service, minimumTestParams);
+      const stream = changesFollower.startOneOff();
+      stream.on('data', () => {});
+      stream.on('end', () => {
+        try {
+          // seq-a and seq-b are middle items — not stored in seqMarkers
+          expect(changesFollower.latestSequenceFrom('seq-a')).toBe('seq-a');
+          expect(changesFollower.latestSequenceFrom('seq-b')).toBe('seq-b');
+        } finally {
+          done();
+        }
+      });
+    });
+
+    /**
+     * End-to-end: returns the correct last_seq through a full stream.
+     */
+    it('testLatestSequenceFromEndToEnd', (done) => {
+      postChangesPromiseMock.mockResolvedValueOnce({
+        result: {
+          results: [{ id: 'a', seq: 'seq-a', changes: [] }],
+          pending: 0,
+          lastSeq: 'seq-b',
+        },
+      });
+      const changesFollower = new ChangesFollower(service, minimumTestParams);
+      const stream = changesFollower.startOneOff();
+      stream.on('data', () => {});
+      stream.on('end', () => {
+        try {
+          expect(changesFollower.latestSequenceFrom('seq-a')).toBe('seq-b');
+        } finally {
+          done();
+        }
+      });
+    });
+  });
 });
