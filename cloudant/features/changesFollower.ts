@@ -188,6 +188,45 @@ export class ChangesFollower {
   }
 
   /**
+   * Return the most recent sequence ID that is safe to use as a checkpoint
+   * after the given sequence ID.
+   *
+   * Call this after fully processing a {@link ChangesResultItem} to obtain
+   * a safe value to persist as {@link CloudantV1.PostChangesParams.since}
+   * for the next run.
+   *
+   * @param lastPersistedSeqId - the `seq` of the last {@link ChangesResultItem}
+   * you have fully processed
+   * @return {string | null} the most recent safe sequence ID to persist, or
+   * `null` if no newer checkpoint is available or the supplied ID was not
+   * seen by this {@link ChangesFollower} instance
+   */
+  getLastSeqNewerThan(lastPersistedSeqId: string): string | null {
+    if (!this.changesResultIterator) {
+      return null;
+    }
+    const seqMap = this.changesResultIterator.getSeqMap();
+    let found = false;
+    let result: string | null = null;
+
+    Array.from(seqMap.entries()).every(([key, entries]) =>
+      entries.every((entry) => {
+        if (found) {
+          if (entry.type === 'row') return false;
+          result = entry.lastSeq;
+        }
+        if (!found && key === lastPersistedSeqId) {
+          found = true;
+          result = entry.lastSeq;
+        }
+        return true;
+      })
+    );
+
+    return found ? result : null;
+  }
+
+  /**
    *
    * @param mode the mode in which to run the ChangesFollower
    * @private
