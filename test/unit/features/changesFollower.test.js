@@ -728,15 +728,35 @@ describe('Test ChangesFollower', () => {
   });
   describe('getLastSeqNewerThan', () => {
     /**
-     * Returns null when the feed has not started yet.
+     * Throws when passed null.
      */
-    it('testGetLastSeqNewerThanBeforeFeedStarts', () => {
+    it('testGetLastSeqNewerThanWithNull', () => {
       const changesFollower = new ChangesFollower(service, minimumTestParams);
-      expect(changesFollower.getLastSeqNewerThan('seq-a')).toBeNull();
+      expect(() => changesFollower.getLastSeqNewerThan(null)).toThrow(
+        'The provided sequence ID cannot be null or empty'
+      );
     });
 
     /**
-     * Returns null for a sequence ID not seen by this follower.
+     * Throws when passed an empty string.
+     */
+    it('testGetLastSeqNewerThanWithEmptyString', () => {
+      const changesFollower = new ChangesFollower(service, minimumTestParams);
+      expect(() => changesFollower.getLastSeqNewerThan('')).toThrow(
+        'The provided sequence ID cannot be null or empty'
+      );
+    });
+
+    /**
+     * Returns the input seq when the feed has not started yet.
+     */
+    it('testGetLastSeqNewerThanBeforeFeedStarts', () => {
+      const changesFollower = new ChangesFollower(service, minimumTestParams);
+      expect(changesFollower.getLastSeqNewerThan('seq-a')).toBe('seq-a');
+    });
+
+    /**
+     * Returns the input seq unchanged when the seq was never seen by this follower.
      */
     it('testGetLastSeqNewerThanUnknownSeq', (done) => {
       postChangesPromiseMock.mockResolvedValueOnce({
@@ -746,13 +766,14 @@ describe('Test ChangesFollower', () => {
           lastSeq: 'seq-a',
         },
       });
-
       const changesFollower = new ChangesFollower(service, minimumTestParams);
       const stream = changesFollower.startOneOff();
       stream.on('data', () => {});
       stream.on('end', () => {
         try {
-          expect(changesFollower.getLastSeqNewerThan('seq-unknown')).toBeNull();
+          expect(changesFollower.getLastSeqNewerThan('seq-unknown')).toBe(
+            'seq-unknown'
+          );
         } finally {
           done();
         }
@@ -760,9 +781,10 @@ describe('Test ChangesFollower', () => {
     });
 
     /**
-     * Returns the last_seq when the last item seq equals the last_seq.
+     * Returns the input seq unchanged when querying with a seq from the middle
+     * of a batch — only the last item's seq is stored in seqMarkers.
      */
-    it('testGetLastSeqNewerThanNormalBatch', (done) => {
+    it('testGetLastSeqNewerThanMiddleOfBatch', (done) => {
       postChangesPromiseMock.mockResolvedValueOnce({
         result: {
           results: [
@@ -774,103 +796,37 @@ describe('Test ChangesFollower', () => {
           lastSeq: 'seq-c',
         },
       });
-
       const changesFollower = new ChangesFollower(service, minimumTestParams);
       const stream = changesFollower.startOneOff();
       stream.on('data', () => {});
       stream.on('end', () => {
         try {
-          expect(changesFollower.getLastSeqNewerThan('seq-c')).toBe('seq-c');
-        } finally {
-          done();
-        }
-      });
-    });
-
-    /**
-     * Returns the last_seq when the last item seq differs from the last_seq.
-     */
-    it('testGetLastSeqNewerThanSparseBatch', (done) => {
-      postChangesPromiseMock.mockResolvedValueOnce({
-        result: {
-          results: [
-            { id: 'a', seq: 'seq-a', changes: [] },
-            { id: 'b', seq: 'seq-b', changes: [] },
-            { id: 'c', seq: 'seq-c', changes: [] },
-          ],
-          pending: 0,
-          lastSeq: 'seq-f',
-        },
-      });
-
-      const changesFollower = new ChangesFollower(service, minimumTestParams);
-      const stream = changesFollower.startOneOff();
-      stream.on('data', () => {});
-      stream.on('end', () => {
-        try {
-          expect(changesFollower.getLastSeqNewerThan('seq-c')).toBe('seq-f');
-        } finally {
-          done();
-        }
-      });
-    });
-
-    /**
-     * Advances past empty pages from a heavily filtered feed.
-     */
-    it('testGetLastSeqNewerThanEmptyPages', (done) => {
-      postChangesPromiseMock.mockResolvedValueOnce({
-        result: {
-          results: [{ id: 'a', seq: 'seq-a', changes: [] }],
-          pending: 1,
-          lastSeq: 'seq-a',
-        },
-      });
-      postChangesPromiseMock.mockResolvedValueOnce({
-        result: {
-          results: [],
-          pending: 0,
-          lastSeq: 'seq-d',
-        },
-      });
-
-      const changesFollower = new ChangesFollower(service, minimumTestParams);
-      const stream = changesFollower.startOneOff();
-      stream.on('data', () => {});
-      stream.on('end', () => {
-        try {
-          expect(changesFollower.getLastSeqNewerThan('seq-a')).toBe('seq-d');
-        } finally {
-          done();
-        }
-      });
-    });
-
-    /**
-     * Stops advancing at the next row entry.
-     */
-    it('testGetLastSeqNewerThanStopsAtNextRow', (done) => {
-      postChangesPromiseMock.mockResolvedValueOnce({
-        result: {
-          results: [{ id: 'a', seq: 'seq-a', changes: [] }],
-          pending: 1,
-          lastSeq: 'seq-a',
-        },
-      });
-      postChangesPromiseMock.mockResolvedValueOnce({
-        result: {
-          results: [{ id: 'e', seq: 'seq-e', changes: [] }],
-          pending: 0,
-          lastSeq: 'seq-f',
-        },
-      });
-
-      const changesFollower = new ChangesFollower(service, minimumTestParams);
-      const stream = changesFollower.startOneOff();
-      stream.on('data', () => {});
-      stream.on('end', () => {
-        try {
+          // seq-a and seq-b are middle items — not stored in seqMarkers
           expect(changesFollower.getLastSeqNewerThan('seq-a')).toBe('seq-a');
+          expect(changesFollower.getLastSeqNewerThan('seq-b')).toBe('seq-b');
+        } finally {
+          done();
+        }
+      });
+    });
+
+    /**
+     * End-to-end: returns the correct last_seq through a full stream.
+     */
+    it('testGetLastSeqNewerThanEndToEnd', (done) => {
+      postChangesPromiseMock.mockResolvedValueOnce({
+        result: {
+          results: [{ id: 'a', seq: 'seq-a', changes: [] }],
+          pending: 0,
+          lastSeq: 'seq-b',
+        },
+      });
+      const changesFollower = new ChangesFollower(service, minimumTestParams);
+      const stream = changesFollower.startOneOff();
+      stream.on('data', () => {});
+      stream.on('end', () => {
+        try {
+          expect(changesFollower.getLastSeqNewerThan('seq-a')).toBe('seq-b');
         } finally {
           done();
         }

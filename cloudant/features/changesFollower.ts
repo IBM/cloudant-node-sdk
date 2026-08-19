@@ -201,29 +201,14 @@ export class ChangesFollower {
    * `null` if no newer checkpoint is available or the supplied ID was not
    * seen by this {@link ChangesFollower} instance
    */
-  getLastSeqNewerThan(lastPersistedSeqId: string): string | null {
-    if (!this.changesResultIterator) {
-      return null;
+  getLastSeqNewerThan(lastPersistedSeqId: string): string {
+    if (!lastPersistedSeqId) {
+      throw new Error('The provided sequence ID cannot be null or empty');
     }
-    const seqMap = this.changesResultIterator.getSeqMap();
-    let found = false;
-    let result: string | null = null;
-
-    Array.from(seqMap.entries()).every(([key, entries]) =>
-      entries.every((entry) => {
-        if (found) {
-          if (entry.type === 'row') return false;
-          result = entry.lastSeq;
-        }
-        if (!found && key === lastPersistedSeqId) {
-          found = true;
-          result = entry.lastSeq;
-        }
-        return true;
-      })
-    );
-
-    return found ? result : null;
+    if (!this.changesResultIterator) {
+      return lastPersistedSeqId;
+    }
+    return this.changesResultIterator.lastSeqSince(lastPersistedSeqId);
   }
 
   /**
