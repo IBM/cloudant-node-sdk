@@ -27,7 +27,7 @@ enum TransientErrorSuppression {
 
 type SeqEntry = {
   type: 'row' | 'page';
-  lastSeq: string;
+  seq: string | null;
 };
 
 export class ChangesResultIterableIterator implements AsyncIterableIterator<CloudantV1.ChangesResult> {
@@ -47,7 +47,10 @@ export class ChangesResultIterableIterator implements AsyncIterableIterator<Clou
   private readonly expRetryGate: number = Math.floor(
     Math.log2(ChangesParamsHelper.LONGPOLL_TIMEOUT / this.baseDelay)
   );
-  private readonly seqMap = new Map<string, SeqEntry[]>();
+  private readonly seqMarkers: SeqEntry[] = [];
+  private static readonly SEQ_MARKERS_CAPACITY = 200;
+  private static readonly SEQ_MARKERS_EVICTION_COUNT =
+    ChangesResultIterableIterator.SEQ_MARKERS_CAPACITY / 10;
   private cancel: (error?: Error) => void;
   private countDown: number;
   private inflight: Promise<any> = null;
@@ -130,8 +133,23 @@ export class ChangesResultIterableIterator implements AsyncIterableIterator<Clou
     return this;
   }
 
-  getSeqMap(): Map<string, SeqEntry[]> {
-    return this.seqMap;
+  lastSeqSince(lastPersistedSeqId: string): string {
+    let found = false;
+    let result: string | null = null;
+
+    this.seqMarkers.every((entry) => {
+      if (found) {
+        if (entry.type === 'row') return false;
+        result = entry.seq;
+      }
+      if (!found && entry.seq === lastPersistedSeqId) {
+        found = true;
+        result = entry.seq;
+      }
+      return true;
+    });
+
+    return found ? result : lastPersistedSeqId;
   }
 
   async return(value?: any): Promise<IteratorResult<CloudantV1.ChangesResult>> {
@@ -207,15 +225,25 @@ export class ChangesResultIterableIterator implements AsyncIterableIterator<Clou
         this.since = response.result.lastSeq;
 
         const { results }: CloudantV1.ChangesResult = response.result;
-        if (results.length > 0 && results.at(-1).seq != null) {
-          const lastItem = results.at(-1);
-          const rowEntries = this.seqMap.get(lastItem.seq) ?? [];
-          rowEntries.push({ type: 'row', lastSeq: response.result.lastSeq });
-          this.seqMap.set(lastItem.seq, rowEntries);
+        if (
+          this.seqMarkers.length >=
+          ChangesResultIterableIterator.SEQ_MARKERS_CAPACITY
+        ) {
+          this.seqMarkers.splice(
+            0,
+            ChangesResultIterableIterator.SEQ_MARKERS_EVICTION_COUNT
+          );
         }
-        const pageEntries = this.seqMap.get(response.result.lastSeq) ?? [];
-        pageEntries.push({ type: 'page', lastSeq: response.result.lastSeq });
-        this.seqMap.set(response.result.lastSeq, pageEntries);
+        if (results.length > 0) {
+          this.seqMarkers.push({
+            type: 'row',
+            seq: results.at(-1).seq,
+          });
+        }
+        this.seqMarkers.push({
+          type: 'page',
+          seq: response.result.lastSeq,
+        });
 
         this.pending = response.result.pending;
 
