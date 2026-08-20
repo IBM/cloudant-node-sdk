@@ -25,6 +25,11 @@ enum TransientErrorSuppression {
   TIMER,
 }
 
+type SeqEntry = {
+  type: 'row' | 'page';
+  seq: string | null;
+};
+
 export class ChangesResultIterableIterator implements AsyncIterableIterator<CloudantV1.ChangesResult> {
   private readonly timeoutPromise = promisify(setTimeout);
   private readonly cancelToken = 'CloudantChangesIteratorCancel';
@@ -42,6 +47,10 @@ export class ChangesResultIterableIterator implements AsyncIterableIterator<Clou
   private readonly expRetryGate: number = Math.floor(
     Math.log2(ChangesParamsHelper.LONGPOLL_TIMEOUT / this.baseDelay)
   );
+  private readonly seqMarkers: SeqEntry[] = [];
+  private static readonly SEQ_MARKERS_CAPACITY = 200;
+  private static readonly SEQ_MARKERS_EVICTION_COUNT =
+    ChangesResultIterableIterator.SEQ_MARKERS_CAPACITY / 10;
   private cancel: (error?: Error) => void;
   private countDown: number;
   private inflight: Promise<any> = null;
@@ -124,6 +133,25 @@ export class ChangesResultIterableIterator implements AsyncIterableIterator<Clou
     return this;
   }
 
+  lastSeqSince(lastPersistedSeqId: string): string {
+    let found = false;
+    let result: string | null = null;
+
+    this.seqMarkers.every((entry) => {
+      if (found) {
+        if (entry.type === 'row') return false;
+        result = entry.seq;
+      }
+      if (!found && entry.seq === lastPersistedSeqId) {
+        found = true;
+        result = entry.seq;
+      }
+      return true;
+    });
+
+    return found ? result : lastPersistedSeqId;
+  }
+
   async return(value?: any): Promise<IteratorResult<CloudantV1.ChangesResult>> {
     this.logger.debug('Iterator return entry.');
     if (!this.stopped) {
@@ -195,6 +223,28 @@ export class ChangesResultIterableIterator implements AsyncIterableIterator<Clou
         }
 
         this.since = response.result.lastSeq;
+
+        const { results }: CloudantV1.ChangesResult = response.result;
+        if (
+          this.seqMarkers.length >=
+          ChangesResultIterableIterator.SEQ_MARKERS_CAPACITY
+        ) {
+          this.seqMarkers.splice(
+            0,
+            ChangesResultIterableIterator.SEQ_MARKERS_EVICTION_COUNT
+          );
+        }
+        if (results.length > 0) {
+          this.seqMarkers.push({
+            type: 'row',
+            seq: results.at(-1).seq,
+          });
+        }
+        this.seqMarkers.push({
+          type: 'page',
+          seq: response.result.lastSeq,
+        });
+
         this.pending = response.result.pending;
 
         if (this.mode === Mode.FINITE && this.pending === 0) {
