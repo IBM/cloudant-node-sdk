@@ -197,9 +197,10 @@ export class ChangesFollower {
    *
    * @param lastPersistedSeqId - the `seq` of the last {@link ChangesResultItem}
    * you have fully processed
-   * @return {string | null} the most recent safe sequence ID to persist, or
-   * `null` if no newer checkpoint is available or the supplied ID was not
-   * seen by this {@link ChangesFollower} instance
+   * @throws {Error} if the provided sequence ID is null or empty
+   * @return {string} the most recent safe sequence ID to persist. Returns the
+   * supplied ID unchanged if no newer checkpoint is available, the feed has
+   * not started yet, or the supplied ID was not seen by this {@link ChangesFollower} instance.
    */
   getLastSeqNewerThan(lastPersistedSeqId: string): string {
     if (!lastPersistedSeqId) {
