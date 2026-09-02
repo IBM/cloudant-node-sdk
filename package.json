@@ -103,6 +103,7 @@
   ],
   "allowScripts": {
     "fsevents": false,
-    "unrs-resolver": false
+    "unrs-resolver": false,
+    "@parcel/watcher": false
   }
 }
