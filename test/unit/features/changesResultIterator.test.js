@@ -456,24 +456,26 @@ describe('Test seqMarkers', () => {
   // --------------------------------------------------------------------------
   // Page type factory
   //
-  // pageType(type, base) builds a mock postChanges response for one of 9 types:
+  // pageType(type, base) builds a mock postChanges response for one of 10 types:
   //
-  //   Type 1: rows=[b, b+1],     lastSeq=b+1  (last row == last_seq, no nulls)
-  //   Type 2: rows=[b, b+1],     lastSeq=b+2  (last row != last_seq, no nulls)
-  //   Type 3: rows=[null, b+1],  lastSeq=b+1  (leading null, last row == last_seq)
-  //   Type 4: rows=[null, b+1],  lastSeq=b+2  (leading null, last row != last_seq)
-  //   Type 5: rows=[b, null],    lastSeq=b+1  (trailing null last row)
-  //   Type 6: rows=[b, null],    lastSeq=b+2  (trailing null last row, last_seq beyond)
-  //   Type 7: rows=[null, null], lastSeq=b+1  (all nulls)
-  //   Type 8: rows=[null, null], lastSeq=b+2  (all nulls, last_seq beyond)
-  //   Type 9: rows=[],           lastSeq=b    (empty page)
+  //   Type 1:  rows=[b, b+1],     lastSeq=b+1  (last row == last_seq, no nulls)
+  //   Type 2:  rows=[b, b+1],     lastSeq=b+2  (last row != last_seq, no nulls)
+  //   Type 3:  rows=[null, b+1],  lastSeq=b+1  (leading null, last row == last_seq)
+  //   Type 4:  rows=[null, b+1],  lastSeq=b+2  (leading null, last row != last_seq)
+  //   Type 5:  rows=[b, null],    lastSeq=b+1  (trailing null last row)
+  //   Type 6:  rows=[b, null],    lastSeq=b+2  (trailing null last row, last_seq beyond)
+  //   Type 7:  rows=[null, null], lastSeq=b+1  (all nulls)
+  //   Type 8:  rows=[null, null], lastSeq=b+2  (all nulls, last_seq beyond)
+  //   Type 9:  rows=[],           lastSeq=b    (empty page)
+  //   Type 10: rows=[b, b+1],     lastSeq=null (non-empty rows, null last_seq)
   //
   // What gets stored in seqMarkers per type:
-  //   Types 1,3: ROW('(b+1)-aa'), PAGE('(b+1)-aa')
-  //   Types 2,4: ROW('(b+1)-aa'), PAGE('(b+2)-aa')
-  //   Types 5,7: ROW(null),       PAGE('(b+1)-aa')
-  //   Types 6,8: ROW(null),       PAGE('(b+2)-aa')
-  //   Type  9:   PAGE('b-aa')  (no ROW)
+  //   Types 1,3:  ROW('(b+1)-aa'), PAGE('(b+1)-aa')
+  //   Types 2,4:  ROW('(b+1)-aa'), PAGE('(b+2)-aa')
+  //   Types 5,7:  ROW(null),       PAGE('(b+1)-aa')
+  //   Types 6,8:  ROW(null),       PAGE('(b+2)-aa')
+  //   Type  9:    PAGE('b-aa')  (no ROW)
+  //   Type  10:   ROW('(b+1)-aa'), PAGE(null)
   //
   // Bases should be spaced at least 3 apart; multiples of 10 are idiomatic.
   // --------------------------------------------------------------------------
@@ -532,6 +534,12 @@ describe('Test seqMarkers', () => {
         };
       case 9:
         return { results: [], lastSeq: seq(base), pending: 0 };
+      case 10:
+        return {
+          results: [makeRow(seq(base)), makeRow(seq(base + 1))],
+          lastSeq: null,
+          pending: 0,
+        };
       default:
         throw new Error(`Unknown page type: ${type}`);
     }
@@ -596,6 +604,13 @@ describe('Test seqMarkers', () => {
     ['Type 7: last_seq key → itself', 7, 10, seq(11), seq(11)],
     ['Type 8: last_seq key → itself', 8, 10, seq(12), seq(12)],
     ['Type 9: last_seq key → itself', 9, 10, seq(10), seq(10)],
+    [
+      'Type 10: null last_seq skipped, stays at matched row seq',
+      10,
+      10,
+      seq(11),
+      seq(11),
+    ],
   ])(
     'testLastSeqSinceAlone: %s',
     async (name, type, base, querySeq, expectedSeq) => {
@@ -732,6 +747,102 @@ describe('Test seqMarkers', () => {
       expect(result).toBe(expectedSeq);
     }
   );
+
+  // --------------------------------------------------------------------------
+  // Null last_seq pages (type 10): null PAGE entries must be skipped.
+  //
+  // Type 10 stores ROW('(b+1)-aa') then PAGE(null). The null PAGE is stored
+  // but skipped by lastSeqSince, so the ROW still acts as a scan barrier.
+  //
+  //   [type1(10), type10(20), type9(30)]: ROW('11') PAGE('11') | ROW('21') PAGE(null) | PAGE('30')
+  //     Query seq(11) → found at ROW('11'); PAGE('11') → result='11';
+  //     ROW('21') stops → seq(11)
+  //
+  //   [type9(10), type10(20)]: PAGE('10') | ROW('21') PAGE(null)
+  //     Query seq(10) → found at PAGE('10'); ROW('21') stops → seq(10)
+  //
+  //   [type9(10), type9(20), type10(30)]: PAGE('10') | PAGE('20') | ROW('31') PAGE(null)
+  //     Query seq(10) → found; PAGE('20') → result='20'; ROW('31') stops → seq(20)
+  //
+  //   [type9(10), type10(20), type9(30), type9(40)]: PAGE('10') | ROW('21') PAGE(null)
+  //     | PAGE('30') | PAGE('40')
+  //     Query seq(10) → found; ROW('21') stops → seq(10)
+  //
+  //   [type9(10), type10(20), type10(30), type9(40)]: PAGE('10') | ROW('21') PAGE(null)
+  //     | ROW('31') PAGE(null) | PAGE('40')
+  //     Query seq(10) → found; ROW('21') stops → seq(10)
+  //
+  //   [type9(10), emptyNullPage, type9(30)]: PAGE('10') | PAGE(null) | PAGE('30')
+  //     (empty page with null lastSeq — no ROW barrier)
+  //     Query seq(10) → found; PAGE(null) skipped; PAGE('30') → result='30' → seq(30)
+  // --------------------------------------------------------------------------
+
+  it.each([
+    [
+      'null middle page: ROW from null page stops loop',
+      [1, 10, 9],
+      [10, 20, 30],
+      seq(11),
+      seq(11),
+    ],
+    [
+      'null last page: ROW from null page stops loop',
+      [9, 10],
+      [10, 20],
+      seq(10),
+      seq(10),
+    ],
+    [
+      'empty then null last page: null PAGE skipped, stays at p2 row seq',
+      [9, 9, 10],
+      [10, 20, 30],
+      seq(10),
+      seq(20),
+    ],
+    [
+      'empty then null with ROW then empty: ROW from null page stops loop',
+      [9, 10, 9, 9],
+      [10, 20, 30, 40],
+      seq(10),
+      seq(10),
+    ],
+    [
+      'two consecutive null pages: both null PAGEs skipped, ROW stops loop',
+      [9, 10, 10, 9],
+      [10, 20, 30, 40],
+      seq(10),
+      seq(10),
+    ],
+  ])(
+    'testLastSeqSinceNullLastSeqPage: %s',
+    async (name, types, bases, querySeq, expectedSeq) => {
+      const pages = types.map((t, i) => pageType(t, bases[i]));
+      const result = await lastSeqSince(pages, querySeq);
+      expect(result).toBe(expectedSeq);
+    }
+  );
+
+  // --------------------------------------------------------------------------
+  // Null last_seq on an empty page — no ROW barrier, scan continues past it.
+  //
+  // An empty page with null lastSeq adds only PAGE(null). Since there is no
+  // ROW to stop the scan, and the null PAGE is skipped, the scanner advances
+  // to the next valid PAGE entry beyond it.
+  //
+  //   [type9(10), emptyNullPage, type9(30)]: PAGE('10') | PAGE(null) | PAGE('30')
+  //     Query seq(10) → found; PAGE(null) skipped; PAGE('30') → seq(30)
+  // --------------------------------------------------------------------------
+
+  it('testLastSeqSinceNullLastSeqAdvancesBeyond', async () => {
+    // Build an empty page with null lastSeq directly (no row entries, null lastSeq).
+    // This is distinct from type 10 which has rows (and therefore a ROW barrier).
+    const emptyNullPage = { results: [], lastSeq: null, pending: 0 };
+    const result = await lastSeqSince(
+      [pageType(9, 10), emptyNullPage, pageType(9, 30)],
+      seq(10)
+    );
+    expect(result).toBe(seq(30));
+  });
 
   // --------------------------------------------------------------------------
   // Eviction

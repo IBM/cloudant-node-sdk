@@ -140,7 +140,7 @@ export class ChangesResultIterableIterator implements AsyncIterableIterator<Clou
     this.seqMarkers.every((entry) => {
       if (found) {
         if (entry.type === 'row') return false;
-        result = entry.seq;
+        if (entry.seq != null) result = entry.seq;
       }
       if (!found && entry.seq === lastPersistedSeqId) {
         found = true;
