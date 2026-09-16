@@ -726,39 +726,39 @@ describe('Test ChangesFollower', () => {
       }
     });
   });
-  describe('getLastSeqNewerThan', () => {
+  describe('latestSequenceFrom', () => {
     /**
      * Throws when passed null.
      */
-    it('testGetLastSeqNewerThanWithNull', () => {
+    it('testLatestSequenceFromWithNull', () => {
       const changesFollower = new ChangesFollower(service, minimumTestParams);
-      expect(() => changesFollower.getLastSeqNewerThan(null)).toThrow(
-        'The provided sequence ID cannot be null or empty'
+      expect(() => changesFollower.latestSequenceFrom(null)).toThrow(
+        'Provided sequence ID must be a non-empty string.'
       );
     });
 
     /**
      * Throws when passed an empty string.
      */
-    it('testGetLastSeqNewerThanWithEmptyString', () => {
+    it('testLatestSequenceFromWithEmptyString', () => {
       const changesFollower = new ChangesFollower(service, minimumTestParams);
-      expect(() => changesFollower.getLastSeqNewerThan('')).toThrow(
-        'The provided sequence ID cannot be null or empty'
+      expect(() => changesFollower.latestSequenceFrom('')).toThrow(
+        'Provided sequence ID must be a non-empty string.'
       );
     });
 
     /**
      * Returns the input seq when the feed has not started yet.
      */
-    it('testGetLastSeqNewerThanBeforeFeedStarts', () => {
+    it('testLatestSequenceFromBeforeFeedStarts', () => {
       const changesFollower = new ChangesFollower(service, minimumTestParams);
-      expect(changesFollower.getLastSeqNewerThan('seq-a')).toBe('seq-a');
+      expect(changesFollower.latestSequenceFrom('seq-a')).toBe('seq-a');
     });
 
     /**
      * Returns the input seq unchanged when the seq was never seen by this follower.
      */
-    it('testGetLastSeqNewerThanUnknownSeq', (done) => {
+    it('testLatestSequenceFromUnknownSeq', (done) => {
       postChangesPromiseMock.mockResolvedValueOnce({
         result: {
           results: [{ id: 'a', seq: 'seq-a', changes: [] }],
@@ -771,7 +771,7 @@ describe('Test ChangesFollower', () => {
       stream.on('data', () => {});
       stream.on('end', () => {
         try {
-          expect(changesFollower.getLastSeqNewerThan('seq-unknown')).toBe(
+          expect(changesFollower.latestSequenceFrom('seq-unknown')).toBe(
             'seq-unknown'
           );
         } finally {
@@ -784,7 +784,7 @@ describe('Test ChangesFollower', () => {
      * Returns the input seq unchanged when querying with a seq from the middle
      * of a batch — only the last item's seq is stored in seqMarkers.
      */
-    it('testGetLastSeqNewerThanMiddleOfBatch', (done) => {
+    it('testLatestSequenceFromMiddleOfBatch', (done) => {
       postChangesPromiseMock.mockResolvedValueOnce({
         result: {
           results: [
@@ -802,8 +802,8 @@ describe('Test ChangesFollower', () => {
       stream.on('end', () => {
         try {
           // seq-a and seq-b are middle items — not stored in seqMarkers
-          expect(changesFollower.getLastSeqNewerThan('seq-a')).toBe('seq-a');
-          expect(changesFollower.getLastSeqNewerThan('seq-b')).toBe('seq-b');
+          expect(changesFollower.latestSequenceFrom('seq-a')).toBe('seq-a');
+          expect(changesFollower.latestSequenceFrom('seq-b')).toBe('seq-b');
         } finally {
           done();
         }
@@ -813,7 +813,7 @@ describe('Test ChangesFollower', () => {
     /**
      * End-to-end: returns the correct last_seq through a full stream.
      */
-    it('testGetLastSeqNewerThanEndToEnd', (done) => {
+    it('testLatestSequenceFromEndToEnd', (done) => {
       postChangesPromiseMock.mockResolvedValueOnce({
         result: {
           results: [{ id: 'a', seq: 'seq-a', changes: [] }],
@@ -826,7 +826,7 @@ describe('Test ChangesFollower', () => {
       stream.on('data', () => {});
       stream.on('end', () => {
         try {
-          expect(changesFollower.getLastSeqNewerThan('seq-a')).toBe('seq-b');
+          expect(changesFollower.latestSequenceFrom('seq-a')).toBe('seq-b');
         } finally {
           done();
         }

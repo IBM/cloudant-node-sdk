@@ -188,28 +188,32 @@ export class ChangesFollower {
   }
 
   /**
-   * Return the most recent sequence ID that is safe to use as a checkpoint
-   * after the given sequence ID.
+   * Returns the most recent sequence ID that is safe to use as a checkpoint,
+   * advancing beyond the supplied checkpoint sequence ID where possible.
    *
-   * Call this after fully processing a {@link ChangesResultItem} to obtain
-   * a safe value to persist as {@link CloudantV1.PostChangesParams.since}
-   * for the next run.
+   * With highly filtered changes feeds, multiple pages can pass through the
+   * follower without returning any changes. Using only the `seq` of the last
+   * processed {@link ChangesResultItem} in those cases causes a long changes
+   * feed rewind on the next run. To avoid this, call this method after fully
+   * processing each {@link ChangesResultItem} with a non-null `seq` and
+   * persist the returned value to use as the `since` parameter for the next
+   * run.
    *
-   * @param lastPersistedSeqId - the `seq` of the last {@link ChangesResultItem}
-   * you have fully processed
-   * @throws {Error} if the provided sequence ID is null or empty
-   * @return {string} the most recent safe sequence ID to persist. Returns the
-   * supplied ID unchanged if no newer checkpoint is available, the feed has
-   * not started yet, or the supplied ID was not seen by this {@link ChangesFollower} instance.
+   * @param checkpointSequenceId - the last checkpoint sequence ID — either the
+   * non-null `seq` of the last {@link ChangesResultItem} fully processed, or
+   * a value previously returned by this method.
+   * @throws {Error} if `checkpointSequenceId` is null or empty
+   * @return {string} the most recent safe sequence ID to use as a checkpoint,
+   * or the supplied value if no newer sequence is available
    */
-  getLastSeqNewerThan(lastPersistedSeqId: string): string {
-    if (!lastPersistedSeqId) {
-      throw new Error('The provided sequence ID cannot be null or empty');
+  latestSequenceFrom(checkpointSequenceId: string): string {
+    if (!checkpointSequenceId) {
+      throw new Error('Provided sequence ID must be a non-empty string.');
     }
     if (!this.changesResultIterator) {
-      return lastPersistedSeqId;
+      return checkpointSequenceId;
     }
-    return this.changesResultIterator.lastSeqSince(lastPersistedSeqId);
+    return this.changesResultIterator.lastSeqSince(checkpointSequenceId);
   }
 
   /**

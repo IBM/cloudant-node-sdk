@@ -133,7 +133,7 @@ export class ChangesResultIterableIterator implements AsyncIterableIterator<Clou
     return this;
   }
 
-  lastSeqSince(lastPersistedSeqId: string): string {
+  lastSeqSince(lastPersistedSeq: string): string {
     let found = false;
     let result: string | null = null;
 
@@ -142,14 +142,14 @@ export class ChangesResultIterableIterator implements AsyncIterableIterator<Clou
         if (entry.type === 'row') return false;
         if (entry.seq != null) result = entry.seq;
       }
-      if (!found && entry.seq === lastPersistedSeqId) {
+      if (!found && entry.seq === lastPersistedSeq) {
         found = true;
         result = entry.seq;
       }
       return true;
     });
 
-    return found ? result : lastPersistedSeqId;
+    return found ? result : lastPersistedSeq;
   }
 
   async return(value?: any): Promise<IteratorResult<CloudantV1.ChangesResult>> {
