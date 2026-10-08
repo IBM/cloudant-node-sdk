@@ -69,9 +69,8 @@
     "typescript": "6.0.3"
   },
   "peerDependencies": {
-    "@types/tough-cookie": "^4.0.0",
     "extend": "^3.0.2",
-    "tough-cookie": "^4.0.0"
+    "tough-cookie": "^6.0.0"
   },
   "jest": {
     "collectCoverage": true,
