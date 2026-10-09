@@ -51,7 +51,7 @@ jobs:
       shell: bash
       run: ${GITHUB_WORKSPACE}/scripts/setup_wiremock.sh
     - name: Install deps
-      run: npm ci --no-audit
+      run: npm ci --no-audit --min-release-age=0
     - name: Build package
       run: npm run build
     - name: Run tests

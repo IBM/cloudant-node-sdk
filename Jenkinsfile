@@ -321,7 +321,7 @@ void applyCustomizations() {
       withEnv(['NPMRC_EMAIL=' + env.NPMRC_USER]) {
         withNpmEnv(registryArtifactoryDown) {
           // Get the dependencies
-          sh "npm ci --no-audit"
+          sh "npm ci --no-audit --min-release-age=0"
           // Get the target version with build meta if needed
           newVersion = getNewVersion(isDevRelease)
           // Update to the new version, not tagging for dev releases
@@ -380,7 +380,7 @@ void runTests() {
   withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory')]) {
     withEnv(['NPMRC_EMAIL=' + env.NPMRC_USER]) {
       withNpmEnv(registryArtifactoryDown) {
-        sh "npm ci --no-audit"
+        sh "npm ci --no-audit --min-release-age=0"
         sh 'npm test'
       }
     }
