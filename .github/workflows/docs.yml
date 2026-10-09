@@ -18,6 +18,6 @@ jobs:
         check-latest: false
         cache: 'npm'
     - name: Install deps
-      run: npm ci --no-audit
+      run: npm ci --no-audit --min-release-age=0
     - name: Build docs
       run: npm run typedoc
