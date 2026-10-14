@@ -26,8 +26,8 @@ export {
   BasicAuthenticator,
   IamAuthenticator,
   CouchdbSessionAuthenticator,
-  CouchdbSessionAuthenticatorOptions,
 } from './auth';
+export type { CouchdbSessionAuthenticatorOptions } from './auth';
 
 export { ChangesFollower } from './cloudant/features/changesFollower';
 export { Stream } from './cloudant/features/stream';
@@ -35,4 +35,4 @@ export {
   Pagination,
   PagerType,
 } from './cloudant/features/pagination/pagination';
-export { Pager } from './cloudant/features/pagination/pager';
+export type { Pager } from './cloudant/features/pagination/pager';

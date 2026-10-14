@@ -7,9 +7,11 @@
         "es2022",
         "dom"
     ],
+    "isolatedModules": true,
     // TS6 changed strict default to true, generated code produces a lot of errors so use false
     "strict": false,
     /* Build source files into a folder called `dist` to maintain clean directories, free of ts-generated files */
+    "rootDir": ".",
     "outDir": "./dist",
 
     /* Specify library files to be included in the compilation:  */
