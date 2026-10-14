@@ -15,7 +15,7 @@
  */
 
 const assert = require('assert');
-const nock = require('nock');
+const { default: nock } = require('nock');
 const { getClient } = require('./features/testDataProviders.js');
 const {
   errorResponseInterceptor,
