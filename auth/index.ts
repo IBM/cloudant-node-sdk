@@ -22,8 +22,6 @@ export {
   getAuthenticatorFromEnvironment,
 } from 'ibm-cloud-sdk-core';
 
-export {
-  CouchdbSessionAuthenticator,
-  CouchdbSessionAuthenticatorOptions,
-} from './couchdbSessionAuthenticator';
+export { CouchdbSessionAuthenticator } from './couchdbSessionAuthenticator';
+export type { CouchdbSessionAuthenticatorOptions } from './couchdbSessionAuthenticator';
 export { SessionTokenManager } from './sessionTokenManager';
