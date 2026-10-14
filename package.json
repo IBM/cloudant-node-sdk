@@ -70,16 +70,6 @@
     "extend": "^3.0.2",
     "tough-cookie": "^6.0.0"
   },
-  "jest": {
-    "collectCoverage": true,
-    "coverageDirectory": "./coverage/",
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/test/"
-    ],
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "testResultsProcessor": "jest-junit"
-  },
   "jest-junit": {
     "suiteName": "Generated unit tests",
     "outputDirectory": "./junitreports/",
