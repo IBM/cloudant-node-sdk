@@ -7446,10 +7446,21 @@ describe('CloudantV1', () => {
         apiKey: 'testString',
       };
 
+      // ReplicationDatabaseAuthIBMIam
+      const replicationDatabaseAuthIbmIamModel = {
+        apiKey: 'testString',
+      };
+
+      // ReplicationDatabaseAuthIBM
+      const replicationDatabaseAuthIbmModel = {
+        iam: replicationDatabaseAuthIbmIamModel,
+      };
+
       // ReplicationDatabaseAuth
       const replicationDatabaseAuthModel = {
         basic: replicationDatabaseAuthBasicModel,
         iam: replicationDatabaseAuthIamModel,
+        ibm: replicationDatabaseAuthIbmModel,
       };
 
       // ReplicationDatabase
@@ -7488,6 +7499,7 @@ describe('CloudantV1', () => {
         httpConnections: 10,
         owner: 'testString',
         queryParams: { 'key1': 'testString' },
+        requestCompression: 'gzip',
         retriesPerRequest: 3,
         selector: { _id: { '$regex': 'docid' } },
         sinceSeq: '34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU',
@@ -7847,10 +7859,21 @@ describe('CloudantV1', () => {
         apiKey: 'testString',
       };
 
+      // ReplicationDatabaseAuthIBMIam
+      const replicationDatabaseAuthIbmIamModel = {
+        apiKey: 'testString',
+      };
+
+      // ReplicationDatabaseAuthIBM
+      const replicationDatabaseAuthIbmModel = {
+        iam: replicationDatabaseAuthIbmIamModel,
+      };
+
       // ReplicationDatabaseAuth
       const replicationDatabaseAuthModel = {
         basic: replicationDatabaseAuthBasicModel,
         iam: replicationDatabaseAuthIamModel,
+        ibm: replicationDatabaseAuthIbmModel,
       };
 
       // ReplicationDatabase
@@ -7889,6 +7912,7 @@ describe('CloudantV1', () => {
         httpConnections: 10,
         owner: 'testString',
         queryParams: { 'key1': 'testString' },
+        requestCompression: 'gzip',
         retriesPerRequest: 3,
         selector: { _id: { '$regex': 'docid' } },
         sinceSeq: '34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU',

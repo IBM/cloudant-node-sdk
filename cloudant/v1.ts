@@ -14253,7 +14253,9 @@ namespace CloudantV1 {
     /** Indicates if the view is currently being updated. */
     updaterRunning: boolean;
 
-    /** Schema for an ability to tell if view is up-to-date without querying it. */
+    /** Schema for information about pending updates for an index, calculated across all available copies of all
+     *  shards.
+     */
     updatesPending: UpdatesPending;
 
     /** Number of clients waiting on views from this design document. */
@@ -16672,8 +16674,11 @@ namespace CloudantV1 {
     /** Schema for basic authentication of replication source or target database. */
     basic?: ReplicationDatabaseAuthBasic;
 
-    /** Schema for an IAM API key for replication database authentication. */
+    /** Deprecated: use the `ibm` property instead to configure IAM for replication database authentication. */
     iam?: ReplicationDatabaseAuthIam;
+
+    /** IBM IAM replication auth for CouchDB or Cloudant. */
+    ibm?: ReplicationDatabaseAuthIBM;
 
     static serialize(obj): ReplicationDatabaseAuth.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
@@ -16685,6 +16690,9 @@ namespace CloudantV1 {
       }
       if (obj.iam !== undefined) {
         copy.iam = ReplicationDatabaseAuthIam.serialize(obj.iam);
+      }
+      if (obj.ibm !== undefined) {
+        copy.ibm = ReplicationDatabaseAuthIBM.serialize(obj.ibm);
       }
       return copy as unknown as ReplicationDatabaseAuth.Transport;
     }
@@ -16700,6 +16708,9 @@ namespace CloudantV1 {
       if (obj.iam !== undefined) {
         copy.iam = ReplicationDatabaseAuthIam.deserialize(obj.iam);
       }
+      if (obj.ibm !== undefined) {
+        copy.ibm = ReplicationDatabaseAuthIBM.deserialize(obj.ibm);
+      }
       return copy as unknown as ReplicationDatabaseAuth;
     }
   }
@@ -16707,6 +16718,7 @@ namespace CloudantV1 {
       export interface Transport {
         basic?: ReplicationDatabaseAuthBasic.Transport;
         iam?: ReplicationDatabaseAuthIam.Transport;
+        ibm?: ReplicationDatabaseAuthIBM.Transport;
       }
   }
 
@@ -16756,7 +16768,77 @@ namespace CloudantV1 {
   }
 
   /**
-   * Schema for an IAM API key for replication database authentication.
+   * IBM IAM replication auth for CouchDB or Cloudant.
+   */
+  export class ReplicationDatabaseAuthIBM {
+    /** IAM API key for replication database authentication. */
+    iam: ReplicationDatabaseAuthIBMIam;
+
+    static serialize(obj): ReplicationDatabaseAuthIBM.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuthIBM.Transport = <ReplicationDatabaseAuthIBM.Transport>{};
+      if (obj.iam !== undefined) {
+        copy.iam = ReplicationDatabaseAuthIBMIam.serialize(obj.iam);
+      }
+      return copy as unknown as ReplicationDatabaseAuthIBM.Transport;
+    }
+
+    static deserialize(obj): ReplicationDatabaseAuthIBM {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuthIBM = <ReplicationDatabaseAuthIBM>{};
+      if (obj.iam !== undefined) {
+        copy.iam = ReplicationDatabaseAuthIBMIam.deserialize(obj.iam);
+      }
+      return copy as unknown as ReplicationDatabaseAuthIBM;
+    }
+  }
+  export namespace ReplicationDatabaseAuthIBM {
+      export interface Transport {
+        iam: ReplicationDatabaseAuthIBMIam.Transport;
+      }
+  }
+
+  /**
+   * IAM API key for replication database authentication.
+   */
+  export class ReplicationDatabaseAuthIBMIam {
+    /** IAM API key. */
+    apiKey: string;
+
+    static serialize(obj): ReplicationDatabaseAuthIBMIam.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuthIBMIam.Transport = <ReplicationDatabaseAuthIBMIam.Transport>{};
+      if (obj.apiKey !== undefined) {
+        copy.api_key = obj.apiKey;
+      }
+      return copy as unknown as ReplicationDatabaseAuthIBMIam.Transport;
+    }
+
+    static deserialize(obj): ReplicationDatabaseAuthIBMIam {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuthIBMIam = <ReplicationDatabaseAuthIBMIam>{};
+      if (obj.api_key !== undefined) {
+        copy.apiKey = obj.api_key;
+      }
+      return copy as unknown as ReplicationDatabaseAuthIBMIam;
+    }
+  }
+  export namespace ReplicationDatabaseAuthIBMIam {
+      export interface Transport {
+        api_key: string;
+      }
+  }
+
+  /**
+   * Deprecated: use the `ibm` property instead to configure IAM for replication database authentication.
    */
   export class ReplicationDatabaseAuthIam {
     /** IAM API key. */
@@ -16862,6 +16944,12 @@ namespace CloudantV1 {
 
     /** Schema for a map of string key value pairs, such as query parameters. */
     queryParams?: JsonObject;
+
+    /** Specify whether to compress HTTP request bodies during replication. Set to `gzip` to compress request bodies
+     *  or `none` to disable compression. Only use `gzip` if the remote server accepts compressed requests. If unset,
+     *  the default is determined by the server administrator.
+     */
+    requestCompression?: ReplicationDocument.Constants.RequestCompression | string;
 
     /** Number of times a replication request is retried. The requests are retried with a doubling exponential
      *  backoff starting at 0.25 seconds, with a cap at 5 minutes.
@@ -17033,6 +17121,9 @@ namespace CloudantV1 {
       if (obj.queryParams !== undefined) {
         copy.query_params = obj.queryParams;
       }
+      if (obj.requestCompression !== undefined) {
+        copy.request_compression = obj.requestCompression;
+      }
       if (obj.retriesPerRequest !== undefined) {
         copy.retries_per_request = obj.retriesPerRequest;
       }
@@ -17096,6 +17187,7 @@ namespace CloudantV1 {
         'httpConnections',
         'owner',
         'queryParams',
+        'requestCompression',
         'retriesPerRequest',
         'selector',
         'sinceSeq',
@@ -17184,6 +17276,9 @@ namespace CloudantV1 {
       if (obj.query_params !== undefined) {
         copy.queryParams = obj.query_params;
       }
+      if (obj.request_compression !== undefined) {
+        copy.requestCompression = obj.request_compression;
+      }
       if (obj.retries_per_request !== undefined) {
         copy.retriesPerRequest = obj.retries_per_request;
       }
@@ -17247,6 +17342,7 @@ namespace CloudantV1 {
         'http_connections',
         'owner',
         'query_params',
+        'request_compression',
         'retries_per_request',
         'selector',
         'since_seq',
@@ -17271,6 +17367,13 @@ namespace CloudantV1 {
     }
   }
   export namespace ReplicationDocument {
+    export namespace Constants {
+      /** Specify whether to compress HTTP request bodies during replication. Set to `gzip` to compress request bodies or `none` to disable compression. Only use `gzip` if the remote server accepts compressed requests. If unset, the default is determined by the server administrator. */
+      export enum RequestCompression {
+        NONE = 'none',
+        GZIP = 'gzip',
+      }
+    }
       export interface Transport {
         _attachments?: {[key: string]: Attachment.Transport};
         _conflicts?: string[];
@@ -17292,6 +17395,7 @@ namespace CloudantV1 {
         http_connections?: number;
         owner?: string;
         query_params?: JsonObject;
+        request_compression?: string;
         retries_per_request?: number;
         selector?: JsonObject;
         since_seq?: string;
@@ -18192,6 +18296,11 @@ namespace CloudantV1 {
     /** Unique signature of the search index. */
     signature: string;
 
+    /** Schema for information about pending updates for an index, calculated across all available copies of all
+     *  shards.
+     */
+    updatesPending?: UpdatesPending;
+
     static serialize(obj): SearchIndexInfo.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
         return obj;
@@ -18214,6 +18323,9 @@ namespace CloudantV1 {
       }
       if (obj.signature !== undefined) {
         copy.signature = obj.signature;
+      }
+      if (obj.updatesPending !== undefined) {
+        copy.updates_pending = UpdatesPending.serialize(obj.updatesPending);
       }
       return copy as unknown as SearchIndexInfo.Transport;
     }
@@ -18241,6 +18353,9 @@ namespace CloudantV1 {
       if (obj.signature !== undefined) {
         copy.signature = obj.signature;
       }
+      if (obj.updates_pending !== undefined) {
+        copy.updatesPending = UpdatesPending.deserialize(obj.updates_pending);
+      }
       return copy as unknown as SearchIndexInfo;
     }
   }
@@ -18252,6 +18367,7 @@ namespace CloudantV1 {
         doc_del_count: number;
         pending_seq: number;
         signature: string;
+        updates_pending?: UpdatesPending.Transport;
       }
   }
 
@@ -19170,18 +19286,33 @@ namespace CloudantV1 {
   }
 
   /**
-   * Schema for an ability to tell if view is up-to-date without querying it.
+   * Schema for information about pending updates for an index, calculated across all available copies of all shards.
    */
   export class UpdatesPending {
-    /** Sum of shard copies with the least amount of work to do. */
+    /** The number of shard copies that reported an answer. Copies that are unreachable or in maintenance mode are
+     *  not included. Compare with the `copies_expected` value.
+     */
+    copies?: number;
+
+    /** The expected number of shard copy responses. If `copies` is less than this value, the results might be
+     *  partial and `maximum` might not represent the true backlog.
+     */
+    copiesExpected?: number;
+
+    /** The backlog of the least up-to-date copy of each shard range. A value of `0` means the index is fully built
+     *  on every copy.
+     */
+    maximum?: number;
+
+    /** The backlog of the most up-to-date copy of each shard range. A value of `0` means that at least one complete
+     *  copy exists for every shard range.
+     */
     minimum: number;
 
-    /** Sum of unique shards. This value is zero when at least one copy of every shard range is up-to-date and the
-     *  view is able to answer a query without index building delays.
-     */
+    /** The backlog of the preferred shard copies, which are the copies that queries are routed to by default. */
     preferred: number;
 
-    /** Sum of all shard copies. */
+    /** The total backlog across all shard copies. */
     total: number;
 
     static serialize(obj): UpdatesPending.Transport {
@@ -19189,6 +19320,15 @@ namespace CloudantV1 {
         return obj;
       }
       let copy: UpdatesPending.Transport = <UpdatesPending.Transport>{};
+      if (obj.copies !== undefined) {
+        copy.copies = obj.copies;
+      }
+      if (obj.copiesExpected !== undefined) {
+        copy.copies_expected = obj.copiesExpected;
+      }
+      if (obj.maximum !== undefined) {
+        copy.maximum = obj.maximum;
+      }
       if (obj.minimum !== undefined) {
         copy.minimum = obj.minimum;
       }
@@ -19206,6 +19346,15 @@ namespace CloudantV1 {
         return obj;
       }
       let copy: UpdatesPending = <UpdatesPending>{};
+      if (obj.copies !== undefined) {
+        copy.copies = obj.copies;
+      }
+      if (obj.copies_expected !== undefined) {
+        copy.copiesExpected = obj.copies_expected;
+      }
+      if (obj.maximum !== undefined) {
+        copy.maximum = obj.maximum;
+      }
       if (obj.minimum !== undefined) {
         copy.minimum = obj.minimum;
       }
@@ -19220,6 +19369,9 @@ namespace CloudantV1 {
   }
   export namespace UpdatesPending {
       export interface Transport {
+        copies?: number;
+        copies_expected?: number;
+        maximum?: number;
         minimum: number;
         preferred: number;
         total: number;
