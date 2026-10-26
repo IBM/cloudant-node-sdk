@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-// eslint-disable-next-line max-classes-per-file
+/* eslint max-classes-per-file: 0 */
+
 import { Authenticator, BaseService, UserOptions } from 'ibm-cloud-sdk-core';
 import { CookieJar } from 'tough-cookie';
 import { Agent as HttpsAgent } from 'node:https';

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/* eslint-disable max-classes-per-file */
+/* eslint max-classes-per-file: 0 */
 
 import { BasePageIterator } from '../../../../cloudant/features/pagination/basePageIterator';
 import { FindPageIterator } from '../../../../cloudant/features/pagination/findPageIterator';
