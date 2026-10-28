@@ -34,6 +34,13 @@ pipeline {
         }
       }
     }
+
+    stage('Build') {
+      steps {
+        buildSdk()
+      }
+    }
+
     stage('QA') {
       steps {
         withEnv(['DOCKER_HOST=',
@@ -86,6 +93,12 @@ pipeline {
       }
       steps {
         scanCode()
+      }
+    }
+
+    stage('Package') {
+      steps {
+        packageArtifacts()
       }
     }
 
@@ -309,7 +322,9 @@ void defaultInit() {
 
 // Language specific implementations of the methods:
 // applyCustomizations()
+// buildSdk()
 // runTests()
+// packageArtifacts()
 // publishStaging()
 // publishPublic()
 // publishDocs()
@@ -376,15 +391,23 @@ def withNpmEnv(registry, closure) {
   }
 }
 
-void runTests() {
+void buildSdk() {
   withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory')]) {
     withEnv(['NPMRC_EMAIL=' + env.NPMRC_USER]) {
       withNpmEnv(registryArtifactoryDown) {
-        sh "npm ci --no-audit"
-        sh 'npm test'
+        sh 'npm ci --no-audit'
       }
     }
   }
+  sh 'npm run build'
+}
+
+void runTests() {
+  sh 'npm test'
+}
+
+void packageArtifacts() {
+  sh 'npm pack ./dist'
 }
 
 void publishStaging() {
@@ -407,7 +430,6 @@ void publishPublic() {
 }
 
 void publishNpm(registry, tag='next') {
-  sh 'npm run build'
   sh "npm publish --tag ${tag} ./dist"
 }
 
