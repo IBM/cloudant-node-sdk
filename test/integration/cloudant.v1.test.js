@@ -777,6 +777,98 @@ describe('CloudantV1_integration', () => {
     expect(res.result).toBeDefined();
   });
 
+  test('headUpInformation()', async () => {
+    const res = await cloudantService.headUpInformation();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('getActiveTasks()', async () => {
+    const res = await cloudantService.getActiveTasks();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('getActivityTrackerEvents()', async () => {
+    const res = await cloudantService.getActivityTrackerEvents();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('postActivityTrackerEvents()', async () => {
+    const params = {
+      types: ['management', 'data'],
+    };
+
+    const res = await cloudantService.postActivityTrackerEvents(params);
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('getCapacityDatabasesInformation()', async () => {
+    const res = await cloudantService.getCapacityDatabasesInformation();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('getCurrentDatabasesInformation()', async () => {
+    const res = await cloudantService.getCurrentDatabasesInformation();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('getCurrentThroughputInformation()', async () => {
+    const res = await cloudantService.getCurrentThroughputInformation();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('getMembershipInformation()', async () => {
+    const res = await cloudantService.getMembershipInformation();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('getUpInformation()', async () => {
+    const res = await cloudantService.getUpInformation();
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
+  test('postIndexInfo()', async () => {
+    const params = {
+      db: 'testString',
+      attEncodingInfo: false,
+      attachments: false,
+      conflicts: false,
+      descending: false,
+      includeDocs: false,
+      inclusiveEnd: true,
+      limit: 0,
+      skip: 0,
+      updateSeq: false,
+      endKey: 'testString',
+      key: 'testString',
+      keys: ['_design/cookbook'],
+      startKey: 'testString',
+      type: ['search'],
+    };
+
+    const res = await cloudantService.postIndexInfo(params);
+    expect(res).toBeDefined();
+    expect(res.status).toBe(200);
+    expect(res.result).toBeDefined();
+  });
+
   test('postView()', async () => {
     const params = {
       db: 'testString',
@@ -1484,10 +1576,21 @@ describe('CloudantV1_integration', () => {
       apiKey: 'testString',
     };
 
+    // ReplicationDatabaseAuthIBMIam
+    const replicationDatabaseAuthIbmIamModel = {
+      apiKey: 'testString',
+    };
+
+    // ReplicationDatabaseAuthIBM
+    const replicationDatabaseAuthIbmModel = {
+      iam: replicationDatabaseAuthIbmIamModel,
+    };
+
     // ReplicationDatabaseAuth
     const replicationDatabaseAuthModel = {
       basic: replicationDatabaseAuthBasicModel,
       iam: replicationDatabaseAuthIamModel,
+      ibm: replicationDatabaseAuthIbmModel,
     };
 
     // ReplicationDatabase
@@ -1526,6 +1629,7 @@ describe('CloudantV1_integration', () => {
       httpConnections: 10,
       owner: 'testString',
       queryParams: { 'key1': 'testString' },
+      requestCompression: 'gzip',
       retriesPerRequest: 3,
       selector: { _id: { '$regex': 'docid' } },
       sinceSeq: '34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU',
@@ -1622,10 +1726,21 @@ describe('CloudantV1_integration', () => {
       apiKey: 'testString',
     };
 
+    // ReplicationDatabaseAuthIBMIam
+    const replicationDatabaseAuthIbmIamModel = {
+      apiKey: 'testString',
+    };
+
+    // ReplicationDatabaseAuthIBM
+    const replicationDatabaseAuthIbmModel = {
+      iam: replicationDatabaseAuthIbmIamModel,
+    };
+
     // ReplicationDatabaseAuth
     const replicationDatabaseAuthModel = {
       basic: replicationDatabaseAuthBasicModel,
       iam: replicationDatabaseAuthIamModel,
+      ibm: replicationDatabaseAuthIbmModel,
     };
 
     // ReplicationDatabase
@@ -1664,6 +1779,7 @@ describe('CloudantV1_integration', () => {
       httpConnections: 10,
       owner: 'testString',
       queryParams: { 'key1': 'testString' },
+      requestCompression: 'gzip',
       retriesPerRequest: 3,
       selector: { _id: { '$regex': 'docid' } },
       sinceSeq: '34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU',
@@ -1960,73 +2076,6 @@ describe('CloudantV1_integration', () => {
     };
 
     const res = await cloudantService.getDocumentShardsInfo(params);
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
-  test('headUpInformation()', async () => {
-    const res = await cloudantService.headUpInformation();
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
-  test('getActiveTasks()', async () => {
-    const res = await cloudantService.getActiveTasks();
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
-  test('getActivityTrackerEvents()', async () => {
-    const res = await cloudantService.getActivityTrackerEvents();
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
-  test('postActivityTrackerEvents()', async () => {
-    const params = {
-      types: ['management', 'data'],
-    };
-
-    const res = await cloudantService.postActivityTrackerEvents(params);
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
-  test('getCapacityDatabasesInformation()', async () => {
-    const res = await cloudantService.getCapacityDatabasesInformation();
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
-  test('getCurrentDatabasesInformation()', async () => {
-    const res = await cloudantService.getCurrentDatabasesInformation();
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
-  test('getCurrentThroughputInformation()', async () => {
-    const res = await cloudantService.getCurrentThroughputInformation();
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
-  test('getMembershipInformation()', async () => {
-    const res = await cloudantService.getMembershipInformation();
-    expect(res).toBeDefined();
-    expect(res.status).toBe(200);
-    expect(res.result).toBeDefined();
-  });
-
-  test('getUpInformation()', async () => {
-    const res = await cloudantService.getUpInformation();
     expect(res).toBeDefined();
     expect(res.status).toBe(200);
     expect(res.result).toBeDefined();

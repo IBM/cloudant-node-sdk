@@ -3093,6 +3093,563 @@ class CloudantV1 extends CloudantBaseService {
     );
   }
   /*************************
+   * monitoring
+   ************************/
+
+  /**
+   * Retrieve HTTP headers about whether the server is up.
+   *
+   * Retrieves the HTTP headers about whether the server is up.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
+   */
+  public headUpInformation(
+    params?: CloudantV1.HeadUpInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headUpInformation');
+
+    const parameters = {
+      options: {
+        url: '/_up',
+        method: 'HEAD',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Retrieve list of running tasks.
+   *
+   * Lists running tasks, including the task type, name, status, and process ID. The result includes a JSON array of the
+   * currently running tasks, with each task described as a single object. Depending on the operation type, the set of
+   * response object fields might be different.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.ActiveTask[]>>}
+   */
+  public getActiveTasks(
+    params?: CloudantV1.GetActiveTasksParams
+  ): Promise<CloudantV1.Response<CloudantV1.ActiveTask[]>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getActiveTasks');
+
+    const parameters = {
+      options: {
+        url: '/_active_tasks',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ActiveTask.deserialize,
+    );
+  }
+
+  /**
+   * Retrieve activity tracking events information.
+   *
+   * Check event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEvents>>}
+   */
+  public getActivityTrackerEvents(
+    params?: CloudantV1.GetActivityTrackerEventsParams
+  ): Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEvents>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getActivityTrackerEvents');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/user/activity_tracker/events',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.ActivityTrackerEvents.deserialize,
+    );
+  }
+
+  /**
+   * Modify activity tracking events configuration.
+   *
+   * Configure event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string[]} params.types - An array of event types sent to IBM Cloud Activity Tracker Event Routing for the
+   * IBM Cloudant instance. "management" is a required element of this array.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
+   */
+  public postActivityTrackerEvents(
+    params: CloudantV1.PostActivityTrackerEventsParams
+  ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
+    const _params = { ...params };
+    const _requiredParams = ['types'];
+    const _validParams = ['types', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const body = {
+      'types': _params.types,
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postActivityTrackerEvents');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/user/activity_tracker/events',
+        method: 'POST',
+        body,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.Ok.deserialize,
+    );
+  }
+
+  /**
+   * Retrieve maximum allowed database count.
+   *
+   * Retrieves the maximum number of databases currently allowed in the instance.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.CapacityDatabasesInformation>>}
+   */
+  public getCapacityDatabasesInformation(
+    params?: CloudantV1.GetCapacityDatabasesInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.CapacityDatabasesInformation>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCapacityDatabasesInformation');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/user/capacity/databases',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.CapacityDatabasesInformation.deserialize,
+    );
+  }
+
+  /**
+   * Retrieve current database count.
+   *
+   * Retrieves the current number of databases that exist in the instance.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.CurrentDatabasesInformation>>}
+   */
+  public getCurrentDatabasesInformation(
+    params?: CloudantV1.GetCurrentDatabasesInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.CurrentDatabasesInformation>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCurrentDatabasesInformation');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/user/current/databases',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.CurrentDatabasesInformation.deserialize,
+    );
+  }
+
+  /**
+   * Retrieve the current provisioned throughput capacity consumption.
+   *
+   * View the current consumption of provisioned throughput capacity for an IBM Cloudant instance. The current
+   * consumption shows the quantities of reads, writes, and global queries conducted against the instance for a given
+   * second.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.CurrentThroughputInformation>>}
+   */
+  public getCurrentThroughputInformation(
+    params?: CloudantV1.GetCurrentThroughputInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.CurrentThroughputInformation>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCurrentThroughputInformation');
+
+    const parameters = {
+      options: {
+        url: '/_api/v2/user/current/throughput',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.CurrentThroughputInformation.deserialize,
+    );
+  }
+
+  /**
+   * Retrieve cluster membership information.
+   *
+   * Displays the nodes that are part of the cluster as `cluster_nodes`. The field, `all_nodes`, displays all nodes this
+   * node knows about, including the ones that are part of the cluster. This endpoint is useful when you set up a
+   * cluster.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.MembershipInformation>>}
+   */
+  public getMembershipInformation(
+    params?: CloudantV1.GetMembershipInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.MembershipInformation>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getMembershipInformation');
+
+    const parameters = {
+      options: {
+        url: '/_membership',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.MembershipInformation.deserialize,
+    );
+  }
+
+  /**
+   * Retrieve information about whether the server is up.
+   *
+   * Confirms that the server is up, running, and ready to respond to requests. If the cluster is unavailable the
+   * endpoint returns a `503` response code.
+   *
+   * **Tip:**  The authentication for this endpoint is only enforced when using IAM.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.UpInformation>>}
+   */
+  public getUpInformation(
+    params?: CloudantV1.GetUpInformationParams
+  ): Promise<CloudantV1.Response<CloudantV1.UpInformation>> {
+    const _params = { ...params };
+    const _requiredParams = [];
+    const _validParams = ['signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getUpInformation');
+
+    const parameters = {
+      options: {
+        url: '/_up',
+        method: 'GET',
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.UpInformation.deserialize,
+    );
+  }
+
+  /**
+   * Retrieve index status for all design documents.
+   *
+   * **EXPERIMENTAL** Returns index status grouped by type for all design documents in the database or a filtered
+   * subset. Results are grouped into `view_indexes` and `search_indexes`. Each entry identifies the index by its design
+   * document and, for search indexes, its `name`. Use a `keys` array in the request body to select design documents by
+   * ID. Use this endpoint to verify whether a database's indexes are fully built, for example before switching traffic
+   * to a replica.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.db - Path parameter to specify the database name.
+   * @param {boolean} [params.attEncodingInfo] - Parameter to specify whether to include the encoding information for
+   * compressed attachments. This only applies when requesting documents in the response.
+   * @param {boolean} [params.attachments] - Parameter to specify whether to include attachment content in included
+   * document content or only the attachment metadata. This only applies when requesting documents in the response.
+   * @param {boolean} [params.conflicts] - Parameter to specify whether to include a list of conflicted revisions in
+   * each returned document. This only applies when requesting documents in the response.
+   * @param {boolean} [params.descending] - Parameter to specify whether to return the documents in descending by key
+   * order.
+   * @param {boolean} [params.includeDocs] - Parameter to specify whether to include the full content of the documents
+   * in the response.
+   * @param {boolean} [params.inclusiveEnd] - Parameter to specify whether to include the specified end key in the
+   * result.
+   * @param {number} [params.limit] - Parameter to specify the number of returned documents to limit the result to.
+   * @param {number} [params.skip] - Parameter to specify the number of records before starting to return the results.
+   * @param {boolean} [params.updateSeq] - Parameter to specify whether to include in the response an update_seq value
+   * indicating the sequence id of the database the view reflects.
+   * @param {string} [params.endKey] - Schema for a document ID.
+   * @param {string} [params.key] - Schema for a document ID.
+   * @param {string[]} [params.keys] - Schema for a list of document IDs.
+   * @param {string} [params.startKey] - Schema for a document ID.
+   * @param {string[]} [params.type] - Index types to filter results by. If omitted, the response includes all index
+   * types.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<CloudantV1.Response<CloudantV1.IndexInfoResult>>}
+   */
+  public postIndexInfo(
+    params: CloudantV1.PostIndexInfoParams
+  ): Promise<CloudantV1.Response<CloudantV1.IndexInfoResult>> {
+    const _params = { ...params };
+    const _requiredParams = ['db'];
+    const _validParams = ['db', 'attEncodingInfo', 'attachments', 'conflicts', 'descending', 'includeDocs', 'inclusiveEnd', 'limit', 'skip', 'updateSeq', 'endKey', 'key', 'keys', 'startKey', 'type', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const body = {
+      'att_encoding_info': _params.attEncodingInfo,
+      'attachments': _params.attachments,
+      'conflicts': _params.conflicts,
+      'descending': _params.descending,
+      'include_docs': _params.includeDocs,
+      'inclusive_end': _params.inclusiveEnd,
+      'limit': _params.limit,
+      'skip': _params.skip,
+      'update_seq': _params.updateSeq,
+      'end_key': _params.endKey,
+      'key': _params.key,
+      'keys': _params.keys,
+      'start_key': _params.startKey,
+      'type': _params.type,
+    };
+
+    const path = {
+      'db': _params.db,
+    };
+
+    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postIndexInfo');
+
+    const parameters = {
+      options: {
+        url: '/{db}/_index_info',
+        method: 'POST',
+        body,
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequestAndDeserializeResponse(
+      parameters,
+      CloudantV1.IndexInfoResult.deserialize,
+    );
+  }
+  /*************************
    * views
    ************************/
 
@@ -7683,463 +8240,6 @@ class CloudantV1 extends CloudantBaseService {
       CloudantV1.DocumentShardInfo.deserialize,
     );
   }
-  /*************************
-   * monitoring
-   ************************/
-
-  /**
-   * Retrieve HTTP headers about whether the server is up.
-   *
-   * Retrieves the HTTP headers about whether the server is up.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.EmptyObject>>}
-   */
-  public headUpInformation(
-    params?: CloudantV1.HeadUpInformationParams
-  ): Promise<CloudantV1.Response<CloudantV1.EmptyObject>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['signal', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'headUpInformation');
-
-    const parameters = {
-      options: {
-        url: '/_up',
-        method: 'HEAD',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          this.baseOptions.headers,
-          {
-          },
-          _params.headers
-        ),
-        axiosOptions: {
-          signal: _params.signal,
-        },
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Retrieve list of running tasks.
-   *
-   * Lists running tasks, including the task type, name, status, and process ID. The result includes a JSON array of the
-   * currently running tasks, with each task described as a single object. Depending on the operation type, the set of
-   * response object fields might be different.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.ActiveTask[]>>}
-   */
-  public getActiveTasks(
-    params?: CloudantV1.GetActiveTasksParams
-  ): Promise<CloudantV1.Response<CloudantV1.ActiveTask[]>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['signal', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getActiveTasks');
-
-    const parameters = {
-      options: {
-        url: '/_active_tasks',
-        method: 'GET',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          this.baseOptions.headers,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-        axiosOptions: {
-          signal: _params.signal,
-        },
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.ActiveTask.deserialize,
-    );
-  }
-
-  /**
-   * Retrieve activity tracking events information.
-   *
-   * Check event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEvents>>}
-   */
-  public getActivityTrackerEvents(
-    params?: CloudantV1.GetActivityTrackerEventsParams
-  ): Promise<CloudantV1.Response<CloudantV1.ActivityTrackerEvents>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['signal', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getActivityTrackerEvents');
-
-    const parameters = {
-      options: {
-        url: '/_api/v2/user/activity_tracker/events',
-        method: 'GET',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          this.baseOptions.headers,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-        axiosOptions: {
-          signal: _params.signal,
-        },
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.ActivityTrackerEvents.deserialize,
-    );
-  }
-
-  /**
-   * Modify activity tracking events configuration.
-   *
-   * Configure event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string[]} params.types - An array of event types sent to IBM Cloud Activity Tracker Event Routing for the
-   * IBM Cloudant instance. "management" is a required element of this array.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.Ok>>}
-   */
-  public postActivityTrackerEvents(
-    params: CloudantV1.PostActivityTrackerEventsParams
-  ): Promise<CloudantV1.Response<CloudantV1.Ok>> {
-    const _params = { ...params };
-    const _requiredParams = ['types'];
-    const _validParams = ['types', 'signal', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const body = {
-      'types': _params.types,
-    };
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'postActivityTrackerEvents');
-
-    const parameters = {
-      options: {
-        url: '/_api/v2/user/activity_tracker/events',
-        method: 'POST',
-        body,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          this.baseOptions.headers,
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          _params.headers
-        ),
-        axiosOptions: {
-          signal: _params.signal,
-        },
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.Ok.deserialize,
-    );
-  }
-
-  /**
-   * Retrieve maximum allowed database count.
-   *
-   * Retrieves the maximum number of databases currently allowed in the instance.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.CapacityDatabasesInformation>>}
-   */
-  public getCapacityDatabasesInformation(
-    params?: CloudantV1.GetCapacityDatabasesInformationParams
-  ): Promise<CloudantV1.Response<CloudantV1.CapacityDatabasesInformation>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['signal', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCapacityDatabasesInformation');
-
-    const parameters = {
-      options: {
-        url: '/_api/v2/user/capacity/databases',
-        method: 'GET',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          this.baseOptions.headers,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-        axiosOptions: {
-          signal: _params.signal,
-        },
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.CapacityDatabasesInformation.deserialize,
-    );
-  }
-
-  /**
-   * Retrieve current database count.
-   *
-   * Retrieves the current number of databases that exist in the instance.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.CurrentDatabasesInformation>>}
-   */
-  public getCurrentDatabasesInformation(
-    params?: CloudantV1.GetCurrentDatabasesInformationParams
-  ): Promise<CloudantV1.Response<CloudantV1.CurrentDatabasesInformation>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['signal', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCurrentDatabasesInformation');
-
-    const parameters = {
-      options: {
-        url: '/_api/v2/user/current/databases',
-        method: 'GET',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          this.baseOptions.headers,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-        axiosOptions: {
-          signal: _params.signal,
-        },
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.CurrentDatabasesInformation.deserialize,
-    );
-  }
-
-  /**
-   * Retrieve the current provisioned throughput capacity consumption.
-   *
-   * View the current consumption of provisioned throughput capacity for an IBM Cloudant instance. The current
-   * consumption shows the quantities of reads, writes, and global queries conducted against the instance for a given
-   * second.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.CurrentThroughputInformation>>}
-   */
-  public getCurrentThroughputInformation(
-    params?: CloudantV1.GetCurrentThroughputInformationParams
-  ): Promise<CloudantV1.Response<CloudantV1.CurrentThroughputInformation>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['signal', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getCurrentThroughputInformation');
-
-    const parameters = {
-      options: {
-        url: '/_api/v2/user/current/throughput',
-        method: 'GET',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          this.baseOptions.headers,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-        axiosOptions: {
-          signal: _params.signal,
-        },
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.CurrentThroughputInformation.deserialize,
-    );
-  }
-
-  /**
-   * Retrieve cluster membership information.
-   *
-   * Displays the nodes that are part of the cluster as `cluster_nodes`. The field, `all_nodes`, displays all nodes this
-   * node knows about, including the ones that are part of the cluster. This endpoint is useful when you set up a
-   * cluster.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.MembershipInformation>>}
-   */
-  public getMembershipInformation(
-    params?: CloudantV1.GetMembershipInformationParams
-  ): Promise<CloudantV1.Response<CloudantV1.MembershipInformation>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['signal', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getMembershipInformation');
-
-    const parameters = {
-      options: {
-        url: '/_membership',
-        method: 'GET',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          this.baseOptions.headers,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-        axiosOptions: {
-          signal: _params.signal,
-        },
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.MembershipInformation.deserialize,
-    );
-  }
-
-  /**
-   * Retrieve information about whether the server is up.
-   *
-   * Confirms that the server is up, running, and ready to respond to requests. If the cluster is unavailable the
-   * endpoint returns a `503` response code.
-   *
-   * **Tip:**  The authentication for this endpoint is only enforced when using IAM.
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<CloudantV1.Response<CloudantV1.UpInformation>>}
-   */
-  public getUpInformation(
-    params?: CloudantV1.GetUpInformationParams
-  ): Promise<CloudantV1.Response<CloudantV1.UpInformation>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['signal', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(CloudantV1.DEFAULT_SERVICE_NAME, 'v1', 'getUpInformation');
-
-    const parameters = {
-      options: {
-        url: '/_up',
-        method: 'GET',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          this.baseOptions.headers,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-        axiosOptions: {
-          signal: _params.signal,
-        },
-      }),
-    };
-
-    return this.createRequestAndDeserializeResponse(
-      parameters,
-      CloudantV1.UpInformation.deserialize,
-    );
-  }
 }
 
 /*************************
@@ -9286,6 +9386,106 @@ namespace CloudantV1 {
     export enum Accept {
       APPLICATION_JSON = 'application/json',
       APPLICATION_OCTET_STREAM = 'application/octet-stream',
+    }
+  }
+
+  /** Parameters for the `headUpInformation` operation. */
+  export interface HeadUpInformationParams extends DefaultParams {
+  }
+
+  /** Parameters for the `getActiveTasks` operation. */
+  export interface GetActiveTasksParams extends DefaultParams {
+  }
+
+  /** Parameters for the `getActivityTrackerEvents` operation. */
+  export interface GetActivityTrackerEventsParams extends DefaultParams {
+  }
+
+  /** Parameters for the `postActivityTrackerEvents` operation. */
+  export interface PostActivityTrackerEventsParams extends DefaultParams {
+    /** An array of event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance.
+     *  "management" is a required element of this array.
+     */
+    types: PostActivityTrackerEventsConstants.Types[] | string[];
+  }
+
+  /** Constants for the `postActivityTrackerEvents` operation. */
+  export namespace PostActivityTrackerEventsConstants {
+    /** Types */
+    export enum Types {
+      MANAGEMENT = 'management',
+      DATA = 'data',
+    }
+  }
+
+  /** Parameters for the `getCapacityDatabasesInformation` operation. */
+  export interface GetCapacityDatabasesInformationParams extends DefaultParams {
+  }
+
+  /** Parameters for the `getCurrentDatabasesInformation` operation. */
+  export interface GetCurrentDatabasesInformationParams extends DefaultParams {
+  }
+
+  /** Parameters for the `getCurrentThroughputInformation` operation. */
+  export interface GetCurrentThroughputInformationParams extends DefaultParams {
+  }
+
+  /** Parameters for the `getMembershipInformation` operation. */
+  export interface GetMembershipInformationParams extends DefaultParams {
+  }
+
+  /** Parameters for the `getUpInformation` operation. */
+  export interface GetUpInformationParams extends DefaultParams {
+  }
+
+  /** Parameters for the `postIndexInfo` operation. */
+  export interface PostIndexInfoParams extends DefaultParams {
+    /** Path parameter to specify the database name. */
+    db: string;
+    /** Parameter to specify whether to include the encoding information for compressed attachments. This only
+     *  applies when requesting documents in the response.
+     */
+    attEncodingInfo?: boolean;
+    /** Parameter to specify whether to include attachment content in included document content or only the
+     *  attachment metadata. This only applies when requesting documents in the response.
+     */
+    attachments?: boolean;
+    /** Parameter to specify whether to include a list of conflicted revisions in each returned document. This only
+     *  applies when requesting documents in the response.
+     */
+    conflicts?: boolean;
+    /** Parameter to specify whether to return the documents in descending by key order. */
+    descending?: boolean;
+    /** Parameter to specify whether to include the full content of the documents in the response. */
+    includeDocs?: boolean;
+    /** Parameter to specify whether to include the specified end key in the result. */
+    inclusiveEnd?: boolean;
+    /** Parameter to specify the number of returned documents to limit the result to. */
+    limit?: number;
+    /** Parameter to specify the number of records before starting to return the results. */
+    skip?: number;
+    /** Parameter to specify whether to include in the response an update_seq value indicating the sequence id of
+     *  the database the view reflects.
+     */
+    updateSeq?: boolean;
+    /** Schema for a document ID. */
+    endKey?: string;
+    /** Schema for a document ID. */
+    key?: string;
+    /** Schema for a list of document IDs. */
+    keys?: string[];
+    /** Schema for a document ID. */
+    startKey?: string;
+    /** Index types to filter results by. If omitted, the response includes all index types. */
+    type?: PostIndexInfoConstants.Type[] | string[];
+  }
+
+  /** Constants for the `postIndexInfo` operation. */
+  export namespace PostIndexInfoConstants {
+    /** Type */
+    export enum Type {
+      SEARCH = 'search',
+      VIEW = 'view',
     }
   }
 
@@ -11360,55 +11560,6 @@ namespace CloudantV1 {
     db: string;
     /** Path parameter to specify the document ID. */
     docId: string;
-  }
-
-  /** Parameters for the `headUpInformation` operation. */
-  export interface HeadUpInformationParams extends DefaultParams {
-  }
-
-  /** Parameters for the `getActiveTasks` operation. */
-  export interface GetActiveTasksParams extends DefaultParams {
-  }
-
-  /** Parameters for the `getActivityTrackerEvents` operation. */
-  export interface GetActivityTrackerEventsParams extends DefaultParams {
-  }
-
-  /** Parameters for the `postActivityTrackerEvents` operation. */
-  export interface PostActivityTrackerEventsParams extends DefaultParams {
-    /** An array of event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance.
-     *  "management" is a required element of this array.
-     */
-    types: PostActivityTrackerEventsConstants.Types[] | string[];
-  }
-
-  /** Constants for the `postActivityTrackerEvents` operation. */
-  export namespace PostActivityTrackerEventsConstants {
-    /** Types */
-    export enum Types {
-      MANAGEMENT = 'management',
-      DATA = 'data',
-    }
-  }
-
-  /** Parameters for the `getCapacityDatabasesInformation` operation. */
-  export interface GetCapacityDatabasesInformationParams extends DefaultParams {
-  }
-
-  /** Parameters for the `getCurrentDatabasesInformation` operation. */
-  export interface GetCurrentDatabasesInformationParams extends DefaultParams {
-  }
-
-  /** Parameters for the `getCurrentThroughputInformation` operation. */
-  export interface GetCurrentThroughputInformationParams extends DefaultParams {
-  }
-
-  /** Parameters for the `getMembershipInformation` operation. */
-  export interface GetMembershipInformationParams extends DefaultParams {
-  }
-
-  /** Parameters for the `getUpInformation` operation. */
-  export interface GetUpInformationParams extends DefaultParams {
   }
 
   /*************************
@@ -14253,7 +14404,9 @@ namespace CloudantV1 {
     /** Indicates if the view is currently being updated. */
     updaterRunning: boolean;
 
-    /** Schema for an ability to tell if view is up-to-date without querying it. */
+    /** Schema for information about pending updates for an index, calculated across all available copies of all
+     *  shards.
+     */
     updatesPending: UpdatesPending;
 
     /** Number of clients waiting on views from this design document. */
@@ -15904,6 +16057,74 @@ namespace CloudantV1 {
   }
 
   /**
+   * Schema for the result of an _index_info request.
+   */
+  export class IndexInfoResult {
+    /** The ID of the first design document after the current page of results. Pass this value as `start_key` to
+     *  retrieve the next page. This field is `null` when no more design documents are available, or when the request
+     *  includes a `keys` parameter.
+     */
+    bookmark: string | null;
+
+    /** The status of each search index across the design documents in the current page of results. */
+    searchIndexes: SearchIndexInformation[];
+
+    /** The total number of design documents in the database. A design document can contain multiple indexes. */
+    totalRows: number;
+
+    /** The view index status for each design document in the current page of results. */
+    viewIndexes: ViewIndexInformation[];
+
+    static serialize(obj): IndexInfoResult.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexInfoResult.Transport = <IndexInfoResult.Transport>{};
+      if (obj.bookmark !== undefined) {
+        copy.bookmark = obj.bookmark;
+      }
+      if (obj.searchIndexes !== undefined) {
+        copy.search_indexes = BaseService.convertModel(obj.searchIndexes, SearchIndexInformation.serialize);
+      }
+      if (obj.totalRows !== undefined) {
+        copy.total_rows = obj.totalRows;
+      }
+      if (obj.viewIndexes !== undefined) {
+        copy.view_indexes = BaseService.convertModel(obj.viewIndexes, ViewIndexInformation.serialize);
+      }
+      return copy as unknown as IndexInfoResult.Transport;
+    }
+
+    static deserialize(obj): IndexInfoResult {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: IndexInfoResult = <IndexInfoResult>{};
+      if (obj.bookmark !== undefined) {
+        copy.bookmark = obj.bookmark;
+      }
+      if (obj.search_indexes !== undefined) {
+        copy.searchIndexes = BaseService.convertModel(obj.search_indexes, SearchIndexInformation.deserialize);
+      }
+      if (obj.total_rows !== undefined) {
+        copy.totalRows = obj.total_rows;
+      }
+      if (obj.view_indexes !== undefined) {
+        copy.viewIndexes = BaseService.convertModel(obj.view_indexes, ViewIndexInformation.deserialize);
+      }
+      return copy as unknown as IndexInfoResult;
+    }
+  }
+  export namespace IndexInfoResult {
+      export interface Transport {
+        bookmark: string;
+        search_indexes: SearchIndexInformation[];
+        total_rows: number;
+        view_indexes: ViewIndexInformation[];
+      }
+  }
+
+  /**
    * Schema for information about an index.
    */
   export class IndexInformation {
@@ -16672,8 +16893,11 @@ namespace CloudantV1 {
     /** Schema for basic authentication of replication source or target database. */
     basic?: ReplicationDatabaseAuthBasic;
 
-    /** Schema for an IAM API key for replication database authentication. */
+    /** Deprecated: use the `ibm` property instead to configure IAM for replication database authentication. */
     iam?: ReplicationDatabaseAuthIam;
+
+    /** IBM IAM replication auth for CouchDB or Cloudant. */
+    ibm?: ReplicationDatabaseAuthIBM;
 
     static serialize(obj): ReplicationDatabaseAuth.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
@@ -16685,6 +16909,9 @@ namespace CloudantV1 {
       }
       if (obj.iam !== undefined) {
         copy.iam = ReplicationDatabaseAuthIam.serialize(obj.iam);
+      }
+      if (obj.ibm !== undefined) {
+        copy.ibm = ReplicationDatabaseAuthIBM.serialize(obj.ibm);
       }
       return copy as unknown as ReplicationDatabaseAuth.Transport;
     }
@@ -16700,6 +16927,9 @@ namespace CloudantV1 {
       if (obj.iam !== undefined) {
         copy.iam = ReplicationDatabaseAuthIam.deserialize(obj.iam);
       }
+      if (obj.ibm !== undefined) {
+        copy.ibm = ReplicationDatabaseAuthIBM.deserialize(obj.ibm);
+      }
       return copy as unknown as ReplicationDatabaseAuth;
     }
   }
@@ -16707,6 +16937,7 @@ namespace CloudantV1 {
       export interface Transport {
         basic?: ReplicationDatabaseAuthBasic.Transport;
         iam?: ReplicationDatabaseAuthIam.Transport;
+        ibm?: ReplicationDatabaseAuthIBM.Transport;
       }
   }
 
@@ -16756,7 +16987,77 @@ namespace CloudantV1 {
   }
 
   /**
-   * Schema for an IAM API key for replication database authentication.
+   * IBM IAM replication auth for CouchDB or Cloudant.
+   */
+  export class ReplicationDatabaseAuthIBM {
+    /** IAM API key for replication database authentication. */
+    iam: ReplicationDatabaseAuthIBMIam;
+
+    static serialize(obj): ReplicationDatabaseAuthIBM.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuthIBM.Transport = <ReplicationDatabaseAuthIBM.Transport>{};
+      if (obj.iam !== undefined) {
+        copy.iam = ReplicationDatabaseAuthIBMIam.serialize(obj.iam);
+      }
+      return copy as unknown as ReplicationDatabaseAuthIBM.Transport;
+    }
+
+    static deserialize(obj): ReplicationDatabaseAuthIBM {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuthIBM = <ReplicationDatabaseAuthIBM>{};
+      if (obj.iam !== undefined) {
+        copy.iam = ReplicationDatabaseAuthIBMIam.deserialize(obj.iam);
+      }
+      return copy as unknown as ReplicationDatabaseAuthIBM;
+    }
+  }
+  export namespace ReplicationDatabaseAuthIBM {
+      export interface Transport {
+        iam: ReplicationDatabaseAuthIBMIam.Transport;
+      }
+  }
+
+  /**
+   * IAM API key for replication database authentication.
+   */
+  export class ReplicationDatabaseAuthIBMIam {
+    /** IAM API key. */
+    apiKey: string;
+
+    static serialize(obj): ReplicationDatabaseAuthIBMIam.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuthIBMIam.Transport = <ReplicationDatabaseAuthIBMIam.Transport>{};
+      if (obj.apiKey !== undefined) {
+        copy.api_key = obj.apiKey;
+      }
+      return copy as unknown as ReplicationDatabaseAuthIBMIam.Transport;
+    }
+
+    static deserialize(obj): ReplicationDatabaseAuthIBMIam {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ReplicationDatabaseAuthIBMIam = <ReplicationDatabaseAuthIBMIam>{};
+      if (obj.api_key !== undefined) {
+        copy.apiKey = obj.api_key;
+      }
+      return copy as unknown as ReplicationDatabaseAuthIBMIam;
+    }
+  }
+  export namespace ReplicationDatabaseAuthIBMIam {
+      export interface Transport {
+        api_key: string;
+      }
+  }
+
+  /**
+   * Deprecated: use the `ibm` property instead to configure IAM for replication database authentication.
    */
   export class ReplicationDatabaseAuthIam {
     /** IAM API key. */
@@ -16862,6 +17163,12 @@ namespace CloudantV1 {
 
     /** Schema for a map of string key value pairs, such as query parameters. */
     queryParams?: JsonObject;
+
+    /** Specify whether to compress HTTP request bodies during replication. Set to `gzip` to compress request bodies
+     *  or `none` to disable compression. Only use `gzip` if the remote server accepts compressed requests. If unset,
+     *  the default is determined by the server administrator.
+     */
+    requestCompression?: ReplicationDocument.Constants.RequestCompression | string;
 
     /** Number of times a replication request is retried. The requests are retried with a doubling exponential
      *  backoff starting at 0.25 seconds, with a cap at 5 minutes.
@@ -17033,6 +17340,9 @@ namespace CloudantV1 {
       if (obj.queryParams !== undefined) {
         copy.query_params = obj.queryParams;
       }
+      if (obj.requestCompression !== undefined) {
+        copy.request_compression = obj.requestCompression;
+      }
       if (obj.retriesPerRequest !== undefined) {
         copy.retries_per_request = obj.retriesPerRequest;
       }
@@ -17096,6 +17406,7 @@ namespace CloudantV1 {
         'httpConnections',
         'owner',
         'queryParams',
+        'requestCompression',
         'retriesPerRequest',
         'selector',
         'sinceSeq',
@@ -17184,6 +17495,9 @@ namespace CloudantV1 {
       if (obj.query_params !== undefined) {
         copy.queryParams = obj.query_params;
       }
+      if (obj.request_compression !== undefined) {
+        copy.requestCompression = obj.request_compression;
+      }
       if (obj.retries_per_request !== undefined) {
         copy.retriesPerRequest = obj.retries_per_request;
       }
@@ -17247,6 +17561,7 @@ namespace CloudantV1 {
         'http_connections',
         'owner',
         'query_params',
+        'request_compression',
         'retries_per_request',
         'selector',
         'since_seq',
@@ -17271,6 +17586,13 @@ namespace CloudantV1 {
     }
   }
   export namespace ReplicationDocument {
+    export namespace Constants {
+      /** Specify whether to compress HTTP request bodies during replication. Set to `gzip` to compress request bodies or `none` to disable compression. Only use `gzip` if the remote server accepts compressed requests. If unset, the default is determined by the server administrator. */
+      export enum RequestCompression {
+        NONE = 'none',
+        GZIP = 'gzip',
+      }
+    }
       export interface Transport {
         _attachments?: {[key: string]: Attachment.Transport};
         _conflicts?: string[];
@@ -17292,6 +17614,7 @@ namespace CloudantV1 {
         http_connections?: number;
         owner?: string;
         query_params?: JsonObject;
+        request_compression?: string;
         retries_per_request?: number;
         selector?: JsonObject;
         since_seq?: string;
@@ -18192,6 +18515,11 @@ namespace CloudantV1 {
     /** Unique signature of the search index. */
     signature: string;
 
+    /** Schema for information about pending updates for an index, calculated across all available copies of all
+     *  shards.
+     */
+    updatesPending?: UpdatesPending;
+
     static serialize(obj): SearchIndexInfo.Transport {
       if (obj === undefined || obj === null || typeof obj === 'string') {
         return obj;
@@ -18214,6 +18542,9 @@ namespace CloudantV1 {
       }
       if (obj.signature !== undefined) {
         copy.signature = obj.signature;
+      }
+      if (obj.updatesPending !== undefined) {
+        copy.updates_pending = UpdatesPending.serialize(obj.updatesPending);
       }
       return copy as unknown as SearchIndexInfo.Transport;
     }
@@ -18241,6 +18572,9 @@ namespace CloudantV1 {
       if (obj.signature !== undefined) {
         copy.signature = obj.signature;
       }
+      if (obj.updates_pending !== undefined) {
+        copy.updatesPending = UpdatesPending.deserialize(obj.updates_pending);
+      }
       return copy as unknown as SearchIndexInfo;
     }
   }
@@ -18252,6 +18586,112 @@ namespace CloudantV1 {
         doc_del_count: number;
         pending_seq: number;
         signature: string;
+        updates_pending?: UpdatesPending.Transport;
+      }
+  }
+
+  /**
+   * Schema for search index status for a named index within a design document.
+   */
+  export class SearchIndexInformation {
+    /** ok. */
+    ok: boolean;
+
+    /** The cause of the error (if available). */
+    causedBy?: string;
+
+    /** The name of the error. */
+    error?: string;
+
+    /** The reason the error occurred (if available). */
+    reason?: string;
+
+    /** An internal error reference (if available). */
+    ref?: number;
+
+    /** Schema for a design document ID including a `_design/` prefix. */
+    ddoc: string;
+
+    /** Schema for metadata information about a search index. */
+    info?: SearchIndexInfo;
+
+    /** The name of the search index. */
+    name: string;
+
+    static serialize(obj): SearchIndexInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchIndexInformation.Transport = <SearchIndexInformation.Transport>{};
+      if (obj.ok !== undefined) {
+        copy.ok = obj.ok;
+      }
+      if (obj.causedBy !== undefined) {
+        copy.caused_by = obj.causedBy;
+      }
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.reason !== undefined) {
+        copy.reason = obj.reason;
+      }
+      if (obj.ref !== undefined) {
+        copy.ref = obj.ref;
+      }
+      if (obj.ddoc !== undefined) {
+        copy.ddoc = obj.ddoc;
+      }
+      if (obj.info !== undefined) {
+        copy.info = SearchIndexInfo.serialize(obj.info);
+      }
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      return copy as unknown as SearchIndexInformation.Transport;
+    }
+
+    static deserialize(obj): SearchIndexInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: SearchIndexInformation = <SearchIndexInformation>{};
+      if (obj.ok !== undefined) {
+        copy.ok = obj.ok;
+      }
+      if (obj.caused_by !== undefined) {
+        copy.causedBy = obj.caused_by;
+      }
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.reason !== undefined) {
+        copy.reason = obj.reason;
+      }
+      if (obj.ref !== undefined) {
+        copy.ref = obj.ref;
+      }
+      if (obj.ddoc !== undefined) {
+        copy.ddoc = obj.ddoc;
+      }
+      if (obj.info !== undefined) {
+        copy.info = SearchIndexInfo.deserialize(obj.info);
+      }
+      if (obj.name !== undefined) {
+        copy.name = obj.name;
+      }
+      return copy as unknown as SearchIndexInformation;
+    }
+  }
+  export namespace SearchIndexInformation {
+      export interface Transport {
+        ok: boolean;
+        caused_by?: string;
+        error?: string;
+        reason?: string;
+        ref?: number;
+        ddoc: string;
+        info?: SearchIndexInfo.Transport;
+        name: string;
       }
   }
 
@@ -19170,18 +19610,33 @@ namespace CloudantV1 {
   }
 
   /**
-   * Schema for an ability to tell if view is up-to-date without querying it.
+   * Schema for information about pending updates for an index, calculated across all available copies of all shards.
    */
   export class UpdatesPending {
-    /** Sum of shard copies with the least amount of work to do. */
+    /** The number of shard copies that reported an answer. Copies that are unreachable or in maintenance mode are
+     *  not included. Compare with the `copies_expected` value.
+     */
+    copies?: number;
+
+    /** The expected number of shard copy responses. If `copies` is less than this value, the results might be
+     *  partial and `maximum` might not represent the true backlog.
+     */
+    copiesExpected?: number;
+
+    /** The backlog of the least up-to-date copy of each shard range. A value of `0` means the index is fully built
+     *  on every copy.
+     */
+    maximum?: number;
+
+    /** The backlog of the most up-to-date copy of each shard range. A value of `0` means that at least one complete
+     *  copy exists for every shard range.
+     */
     minimum: number;
 
-    /** Sum of unique shards. This value is zero when at least one copy of every shard range is up-to-date and the
-     *  view is able to answer a query without index building delays.
-     */
+    /** The backlog of the preferred shard copies, which are the copies that queries are routed to by default. */
     preferred: number;
 
-    /** Sum of all shard copies. */
+    /** The total backlog across all shard copies. */
     total: number;
 
     static serialize(obj): UpdatesPending.Transport {
@@ -19189,6 +19644,15 @@ namespace CloudantV1 {
         return obj;
       }
       let copy: UpdatesPending.Transport = <UpdatesPending.Transport>{};
+      if (obj.copies !== undefined) {
+        copy.copies = obj.copies;
+      }
+      if (obj.copiesExpected !== undefined) {
+        copy.copies_expected = obj.copiesExpected;
+      }
+      if (obj.maximum !== undefined) {
+        copy.maximum = obj.maximum;
+      }
       if (obj.minimum !== undefined) {
         copy.minimum = obj.minimum;
       }
@@ -19206,6 +19670,15 @@ namespace CloudantV1 {
         return obj;
       }
       let copy: UpdatesPending = <UpdatesPending>{};
+      if (obj.copies !== undefined) {
+        copy.copies = obj.copies;
+      }
+      if (obj.copies_expected !== undefined) {
+        copy.copiesExpected = obj.copies_expected;
+      }
+      if (obj.maximum !== undefined) {
+        copy.maximum = obj.maximum;
+      }
       if (obj.minimum !== undefined) {
         copy.minimum = obj.minimum;
       }
@@ -19220,6 +19693,9 @@ namespace CloudantV1 {
   }
   export namespace UpdatesPending {
       export interface Transport {
+        copies?: number;
+        copies_expected?: number;
+        maximum?: number;
         minimum: number;
         preferred: number;
         total: number;
@@ -19326,6 +19802,111 @@ namespace CloudantV1 {
   export namespace UuidsResult {
       export interface Transport {
         uuids: string[];
+      }
+  }
+
+  /**
+   * Schema for view index status for a design document.
+   */
+  export class ViewIndexInformation {
+    /** ok. */
+    ok: boolean;
+
+    /** The cause of the error (if available). */
+    causedBy?: string;
+
+    /** The name of the error. */
+    error?: string;
+
+    /** The reason the error occurred (if available). */
+    reason?: string;
+
+    /** An internal error reference (if available). */
+    ref?: number;
+
+    /** Schema for a design document ID including a `_design/` prefix. */
+    ddoc: string;
+
+    /** View index information. */
+    info?: DesignDocumentViewIndex;
+
+    /** The map-reduce view names in the design document. */
+    views: string[];
+
+    static serialize(obj): ViewIndexInformation.Transport {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ViewIndexInformation.Transport = <ViewIndexInformation.Transport>{};
+      if (obj.ok !== undefined) {
+        copy.ok = obj.ok;
+      }
+      if (obj.causedBy !== undefined) {
+        copy.caused_by = obj.causedBy;
+      }
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.reason !== undefined) {
+        copy.reason = obj.reason;
+      }
+      if (obj.ref !== undefined) {
+        copy.ref = obj.ref;
+      }
+      if (obj.ddoc !== undefined) {
+        copy.ddoc = obj.ddoc;
+      }
+      if (obj.info !== undefined) {
+        copy.info = DesignDocumentViewIndex.serialize(obj.info);
+      }
+      if (obj.views !== undefined) {
+        copy.views = obj.views;
+      }
+      return copy as unknown as ViewIndexInformation.Transport;
+    }
+
+    static deserialize(obj): ViewIndexInformation {
+      if (obj === undefined || obj === null || typeof obj === 'string') {
+        return obj;
+      }
+      let copy: ViewIndexInformation = <ViewIndexInformation>{};
+      if (obj.ok !== undefined) {
+        copy.ok = obj.ok;
+      }
+      if (obj.caused_by !== undefined) {
+        copy.causedBy = obj.caused_by;
+      }
+      if (obj.error !== undefined) {
+        copy.error = obj.error;
+      }
+      if (obj.reason !== undefined) {
+        copy.reason = obj.reason;
+      }
+      if (obj.ref !== undefined) {
+        copy.ref = obj.ref;
+      }
+      if (obj.ddoc !== undefined) {
+        copy.ddoc = obj.ddoc;
+      }
+      if (obj.info !== undefined) {
+        copy.info = DesignDocumentViewIndex.deserialize(obj.info);
+      }
+      if (obj.views !== undefined) {
+        copy.views = obj.views;
+      }
+      return copy as unknown as ViewIndexInformation;
+    }
+  }
+  export namespace ViewIndexInformation {
+      export interface Transport {
+        ok: boolean;
+        caused_by?: string;
+        error?: string;
+        reason?: string;
+        ref?: number;
+        ddoc: string;
+        info?: DesignDocumentViewIndex.Transport;
+        views: string[];
       }
   }
 
