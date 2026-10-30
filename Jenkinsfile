@@ -97,12 +97,15 @@ pipeline {
     }
 
     stage('Package') {
+      when {
+        buildingTag()
+      }
       steps {
         packageArtifacts()
       }
     }
 
-    stage('Publish[staging]') {
+    stage('Package and Publish[staging]') {
       when {
         not {
           buildingTag()
@@ -113,6 +116,7 @@ pipeline {
       }
       steps {
         bumpVersion(true)
+        packageArtifacts()
         customizePublishingInfo()
         withEnv(["LIB_NAME=${libName}",
           "TYPE=${buildType}",
@@ -431,23 +435,20 @@ void publishStaging() {
   withCredentials([usernamePassword(usernameVariable: 'NPMRC_USER', passwordVariable: 'NPMRC_TOKEN', credentialsId: 'artifactory')]) {
     withEnv(['NPMRC_EMAIL=' + env.NPMRC_USER]) {
       withNpmEnv(registryArtifactoryUp) {
-        publishNpm(registryArtifactoryUp)
+        publishNpm()
       }
     }
   }
 }
 
 void publishPublic() {
-  withCredentials([string(credentialsId: 'npm-mail', variable: 'NPMRC_EMAIL'),
-                  usernamePassword(credentialsId: 'npm-creds', passwordVariable: 'NPMRC_TOKEN', usernameVariable: 'NPMRC_USER')]) {
-    withNpmEnv(registryPublic) {
-      publishNpm(registryPublic, 'latest')
-    }
-  }
+  // No-op
+  // This happens via OIDC Trusted Publisher
 }
 
-void publishNpm(registry, tag='next') {
-  sh "npm publish --tag ${tag} ./dist"
+void publishNpm(tag='next') {
+  // Publish the pack file
+  sh "npm publish --tag ${tag} ibm-cloud-cloudant-${env.NEW_SDK_VERSION}.tgz"
 }
 
 void publishDocs() {
