@@ -35,7 +35,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^22 || ^24"
+    "node": "^22 || ^24 || ^26.13.0"
   },
   "dependencies": {
     "@types/node": "22.20.5",
