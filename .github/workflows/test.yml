@@ -14,7 +14,6 @@ env:
   WIREMOCK_PORT: 8080
 jobs:
   test:
-    continue-on-error: ${{ matrix.node == '26' }}
     strategy:
       matrix:
         node: ['22', '24', '26']
