@@ -375,8 +375,10 @@ const sourceDb: CloudantV1.ReplicationDatabase = {
 
 const targetDb: CloudantV1.ReplicationDatabase = {
   auth: {
-    iam: {
-      'apiKey': 'a1b2c3d4e5f6f1g4h7j3k6l9m2p5q8s1t4v7x0z3' //use your own IAM API key
+    ibm: {
+      iam: {
+        'apiKey': 'a1b2c3d4e5f6f1g4h7j3k6l9m2p5q8s1t4v7x0z3' //use your own IAM API key
+      }
     }
   },
   url: 'https://~replace-with-target-host~.cloudantnosqldb.appdomain.cloud/animaldb-target'
