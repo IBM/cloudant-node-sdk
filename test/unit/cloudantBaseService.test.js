@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2026. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -267,6 +267,105 @@ describe('Test CloudantBaseService', () => {
         false
       );
       assert.strictEqual(service.baseOptions.httpsAgent.keepAlive, true);
+    });
+  });
+
+  describe('Gen 1 only operations', () => {
+    const serviceUrl = 'https://example.invalid';
+    const gen1ErrorsVar = 'CLOUDANT_SDK_GEN1_ERRORS';
+    const knownIssuesUrl =
+      'https://github.com/IBM/cloudant-node-sdk/blob/main/KNOWN_ISSUES.md#cloudant-gen-2-compatibility';
+    const gen1Operations = [
+      'getActivityTrackerEvents',
+      'getCapacityDatabasesInformation',
+      'getCapacityThroughputInformation',
+      'getCorsInformation',
+      'getCurrentDatabasesInformation',
+      'getCurrentThroughputInformation',
+      'postActivityTrackerEvents',
+      'postApiKeys',
+      'putCapacityThroughputConfiguration',
+      'putCloudantSecurityConfiguration',
+      'putCorsConfiguration',
+    ];
+    const expectedMessage = (operationId) =>
+      `The operation ${operationId} is unavailable for Gen 2 Cloudant plans. ` +
+      `See ${knownIssuesUrl} for more information.`;
+
+    const params = (operationId) => ({
+      defaultOptions: {
+        serviceUrl,
+        headers: {
+          'X-IBMCloud-SDK-Analytics': `service_name=cloudant;service_version=v1;operation_id=${operationId}`,
+        },
+      },
+      options: { url: '/example', method: 'GET' },
+    });
+
+    let originalGen1Errors;
+    let sendRequestStub;
+    let service;
+
+    beforeEach(() => {
+      originalGen1Errors = process.env[gen1ErrorsVar];
+      delete process.env[gen1ErrorsVar];
+      service = new CloudantBaseService({
+        authenticator: new NoAuthAuthenticator(),
+        serviceUrl,
+      });
+      sendRequestStub = sinon.stub().resolves({ result: {} });
+      service.requestWrapperInstance.sendRequest = sendRequestStub;
+    });
+
+    afterEach(() => {
+      if (originalGen1Errors === undefined) {
+        delete process.env[gen1ErrorsVar];
+      } else {
+        process.env[gen1ErrorsVar] = originalGen1Errors;
+      }
+      sinon.restore();
+    });
+
+    gen1Operations.forEach((operationId) => {
+      it(`Throws for ${operationId} when errors are enabled`, async () => {
+        process.env[gen1ErrorsVar] = 'true';
+        await assert.rejects(service.createRequest(params(operationId)), {
+          code: 'CLOUDANT_SDK_UNSUPPORTED_OPERATION',
+          message: expectedMessage(operationId),
+        });
+        assert.ok(sendRequestStub.notCalled);
+      });
+    });
+
+    it('Reads the errors setting case insensitively', async () => {
+      process.env[gen1ErrorsVar] = 'TRUE';
+      await assert.rejects(
+        service.createRequest(params('getCorsInformation')),
+        { code: 'CLOUDANT_SDK_UNSUPPORTED_OPERATION' }
+      );
+    });
+
+    it('Still sends the request when errors are not enabled', async () => {
+      await service.createRequest(params('getCorsInformation'));
+      assert.ok(sendRequestStub.calledOnce);
+    });
+
+    it('Still sends the request when errors are set to false', async () => {
+      process.env[gen1ErrorsVar] = 'false';
+      await service.createRequest(params('getCorsInformation'));
+      assert.ok(sendRequestStub.calledOnce);
+    });
+
+    it('Does not throw for other operations when errors are enabled', async () => {
+      process.env[gen1ErrorsVar] = 'true';
+      await service.createRequest(params('getAllDbs'));
+      assert.ok(sendRequestStub.calledOnce);
+    });
+
+    it('Does not throw for an operation with a similar name', async () => {
+      process.env[gen1ErrorsVar] = 'true';
+      await service.createRequest(params('getCorsInformationFake'));
+      assert.ok(sendRequestStub.calledOnce);
     });
   });
 });

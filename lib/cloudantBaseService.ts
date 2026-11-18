@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020, 2024. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2026. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,12 @@
 
 /* eslint max-classes-per-file: 0 */
 
-import { Authenticator, BaseService, UserOptions } from 'ibm-cloud-sdk-core';
+import {
+  Authenticator,
+  BaseService,
+  getNewLogger,
+  UserOptions,
+} from 'ibm-cloud-sdk-core';
 import { CookieJar } from 'tough-cookie';
 import { Agent as HttpsAgent } from 'node:https';
 import { Agent as HttpAgent } from 'node:http';
@@ -25,6 +30,19 @@ import {
   errorResponseInterceptor,
   errorResponseStreamConverter,
 } from './errorResponseInterceptor';
+
+const logger = getNewLogger('cloudant-node-sdk');
+logger.warn.enabled = true;
+logger.error.enabled = true;
+
+const GEN2_KNOWN_ISSUES_URL =
+  'https://github.com/IBM/cloudant-node-sdk/blob/main/KNOWN_ISSUES.md#cloudant-gen-2-compatibility';
+
+/**
+ * Set to "true" to throw an error, in addition to logging a warning,
+ * when an operation that is unavailable for Gen 2 is used.
+ */
+const CLOUDANT_SDK_GEN1_ERRORS = 'CLOUDANT_SDK_GEN1_ERRORS';
 
 /**
  * Set default timeout to 2.5 minutes (= 150 000 ms)
@@ -67,7 +85,30 @@ const attIdRule = {
   operationIds: AttachmentOperations,
 };
 
-const validationRules = [docIdRule, attIdRule];
+/**
+ * Gen 1 operations are not available for Gen 2.
+ */
+const Gen1OnlyOperations = [
+  'getActivityTrackerEvents',
+  'getCapacityDatabasesInformation',
+  'getCapacityThroughputInformation',
+  'getCorsInformation',
+  'getCurrentDatabasesInformation',
+  'getCurrentThroughputInformation',
+  'postActivityTrackerEvents',
+  'postApiKeys',
+  'putCapacityThroughputConfiguration',
+  'putCloudantSecurityConfiguration',
+  'putCorsConfiguration',
+];
+
+const gen1OnlyRule = {
+  pathSegment: '',
+  errorParameterName: '',
+  operationIds: Gen1OnlyOperations,
+};
+
+const validationRules = [docIdRule, attIdRule, gen1OnlyRule];
 const rulesByOperation = {};
 validationRules.forEach((rule) => {
   rule.operationIds.forEach((operationId) => {
@@ -88,6 +129,20 @@ Object.freeze(rulesByOperation);
  */
 class InvalidArgumentValueError extends Error {
   code?: string;
+}
+
+/**
+ * Error for operations that are unavailable for Gen 2.
+ */
+class UnsupportedOperationError extends Error {
+  code?: string;
+}
+
+/**
+ * Whether the CLOUDANT_SDK_GEN1_ERRORS environment variable is set to "true".
+ */
+function isGen1ErrorEnabled(): boolean {
+  return process.env[CLOUDANT_SDK_GEN1_ERRORS]?.toLowerCase() === 'true';
 }
 
 /**
@@ -189,7 +244,8 @@ export abstract class CloudantBaseService extends BaseService {
   }
 
   /**
-   * Extend createRequest to handle document and attachment validation.
+   * Extend createRequest to handle document and attachment validation
+   * and to warn about operations that are unavailable in Gen 2.
    */
   protected createRequest(parameters: any): Promise<any> {
     let operationId = null;
@@ -206,6 +262,18 @@ export abstract class CloudantBaseService extends BaseService {
         operationId != null &&
         Object.keys(rulesByOperation).includes(operationId)
       ) {
+        // Warn about Gen 1 operations that are unavailable for Gen 2 plans
+        if (rulesByOperation[operationId].includes(gen1OnlyRule)) {
+          const message =
+            `The operation ${operationId} is unavailable for Gen 2 Cloudant plans. ` +
+            `See ${GEN2_KNOWN_ISSUES_URL} for more information.`;
+          logger.warn(message);
+          if (isGen1ErrorEnabled()) {
+            const err = new UnsupportedOperationError(message);
+            err.code = 'CLOUDANT_SDK_UNSUPPORTED_OPERATION';
+            return Promise.reject(err);
+          }
+        }
         const violatedRules = rulesByOperation[operationId].filter((rule) => {
           // get the path segment e.g. doc_id from the response's path object
           if (
