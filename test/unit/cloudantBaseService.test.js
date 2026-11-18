@@ -22,6 +22,8 @@ const {
   IamAuthenticator,
   NoAuthAuthenticator,
 } = require('ibm-cloud-sdk-core');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const debug = require('debug');
 const sinon = require('sinon');
 const { CookieJar, MemoryCookieStore } = require('tough-cookie');
 const { CloudantBaseService } = require('../../lib/cloudantBaseService.ts');
@@ -267,6 +269,88 @@ describe('Test CloudantBaseService', () => {
         false
       );
       assert.strictEqual(service.baseOptions.httpsAgent.keepAlive, true);
+    });
+  });
+
+  describe('Gen 1 path warning', () => {
+    const serviceUrl = 'http://example.invalid';
+    const params = ({ url, operationId }) => ({
+      defaultOptions: {
+        serviceUrl,
+        headers: {
+          'X-IBMCloud-SDK-Analytics': `service_name=cloudant;service_version=v1;operation_id=${operationId}`,
+        },
+      },
+      options: { url, method: 'GET' },
+    });
+
+    let logStub;
+    let sendRequestStub;
+    let service;
+
+    beforeEach(() => {
+      logStub = sinon.stub(debug, 'log');
+      service = new CloudantBaseService({
+        authenticator: new NoAuthAuthenticator(),
+        serviceUrl,
+      });
+      sendRequestStub = sinon.stub().resolves({ result: {} });
+      service.requestWrapperInstance.sendRequest = sendRequestStub;
+    });
+
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it('Warns for a /_api/v2 path and still sends the request', async () => {
+      await service.createRequest(
+        params({
+          url: '/_api/v2/user/config/cors',
+          operationId: 'getCorsInformation',
+        })
+      );
+      assert.strictEqual(logStub.callCount, 1);
+      const msg = logStub.getCall(0).args.join(' ');
+      assert.ok(
+        msg.includes(
+          'The operation getCorsInformation is unavailable for Gen 2 Cloudant plans. ' +
+            'See https://github.com/IBM/cloudant-node-sdk/blob/main/KNOWN_ISSUES.md#cloudant-gen-2-compatibility ' +
+            'for more information.'
+        )
+      );
+      assert.ok(sendRequestStub.calledOnce);
+    });
+
+    it('Warns for the bare /_api/v2 path', async () => {
+      await service.createRequest(
+        params({ url: '/_api/v2', operationId: 'fakeOperation' })
+      );
+      assert.strictEqual(logStub.callCount, 1);
+    });
+
+    it('Warns for a /_api/v2 path with a path template', async () => {
+      await service.createRequest(
+        params({
+          url: '/_api/v2/db/{db}/_security',
+          operationId: 'putCloudantSecurityConfiguration',
+        })
+      );
+      assert.strictEqual(logStub.callCount, 1);
+    });
+
+    it('Does not warn for other paths', async () => {
+      await service.createRequest(
+        params({ url: '/_all_dbs', operationId: 'getAllDbs' })
+      );
+      assert.strictEqual(logStub.callCount, 0);
+      assert.ok(sendRequestStub.calledOnce);
+    });
+
+    it('Does not warn for similar path', async () => {
+      await service.createRequest(
+        params({ url: '/_api/v2foo', operationId: 'fakeOperation' })
+      );
+      assert.strictEqual(logStub.callCount, 0);
     });
   });
 });
