@@ -16,7 +16,12 @@
 
 /* eslint max-classes-per-file: 0 */
 
-import { Authenticator, BaseService, UserOptions } from 'ibm-cloud-sdk-core';
+import {
+  Authenticator,
+  BaseService,
+  getNewLogger,
+  UserOptions,
+} from 'ibm-cloud-sdk-core';
 import { CookieJar } from 'tough-cookie';
 import { Agent as HttpsAgent } from 'node:https';
 import { Agent as HttpAgent } from 'node:http';
@@ -26,10 +31,23 @@ import {
   errorResponseStreamConverter,
 } from './errorResponseInterceptor';
 
+const logger = getNewLogger('cloudant-node-sdk');
+logger.warn.enabled = true;
+logger.error.enabled = true;
+
+const GEN2_KNOWN_ISSUES_URL =
+  'https://github.com/IBM/cloudant-node-sdk/blob/main/KNOWN_ISSUES.md#cloudant-gen-2-compatibility';
+
 /**
  * Set default timeout to 2.5 minutes (= 150 000 ms)
  */
 const READ_TIMEOUT = 150_000;
+
+/**
+ * Gen 1 (control plane) operations are served from the /_api/v2 path.
+ * None of them are available for Gen 2 Cloudant plans.
+ */
+const GEN1_ONLY_PATH = /^\/_api\/v2(\/|$)/;
 
 /**
  * Set Validation rules
@@ -189,7 +207,8 @@ export abstract class CloudantBaseService extends BaseService {
   }
 
   /**
-   * Extend createRequest to handle document and attachment validation.
+   * Extend createRequest to handle document and attachment validation
+   * and to warn about operations that are unavailable in Gen 2.
    */
   protected createRequest(parameters: any): Promise<any> {
     let operationId = null;
@@ -201,6 +220,14 @@ export abstract class CloudantBaseService extends BaseService {
         .split(';')
         .find((element) => element.startsWith('operation_id'))
         .split('=');
+      // Warn about Gen 1 operations that are unavailable for Gen 2 plans
+      if (GEN1_ONLY_PATH.test(parameters.options.url)) {
+        const target = operationId || parameters.options.url;
+        logger.warn(
+          `The operation ${target} is unavailable for Gen 2 Cloudant plans. ` +
+            `See ${GEN2_KNOWN_ISSUES_URL} for more information.`
+        );
+      }
       // Check if operation id exists in rulesByOperation object
       if (
         operationId != null &&
