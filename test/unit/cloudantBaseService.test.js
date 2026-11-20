@@ -321,6 +321,19 @@ describe('Test CloudantBaseService', () => {
       assert.ok(sendRequestStub.calledOnce);
     });
 
+    it('Warns with the path when the operation id is empty', async () => {
+      await service.createRequest(
+        params({ url: '/_api/v2/user/config/cors', operationId: '' })
+      );
+      assert.strictEqual(logStub.callCount, 1);
+      const msg = logStub.getCall(0).args.join(' ');
+      assert.ok(
+        msg.includes(
+          'The operation /_api/v2/user/config/cors is unavailable for Gen 2 Cloudant plans.'
+        )
+      );
+    });
+
     it('Warns for the bare /_api/v2 path', async () => {
       await service.createRequest(
         params({ url: '/_api/v2', operationId: 'fakeOperation' })

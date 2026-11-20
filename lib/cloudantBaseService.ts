@@ -222,8 +222,9 @@ export abstract class CloudantBaseService extends BaseService {
         .split('=');
       // Warn about Gen 1 operations that are unavailable for Gen 2 plans
       if (GEN1_ONLY_PATH.test(parameters.options.url)) {
+        const target = operationId || parameters.options.url;
         logger.warn(
-          `The operation ${operationId} is unavailable for Gen 2 Cloudant plans. ` +
+          `The operation ${target} is unavailable for Gen 2 Cloudant plans. ` +
             `See ${GEN2_KNOWN_ISSUES_URL} for more information.`
         );
       }
