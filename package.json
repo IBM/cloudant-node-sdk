@@ -60,7 +60,7 @@
     "jest": "30.5.2",
     "jest-junit": "17.0.0",
     "nock": "15.0.6",
-    "prettier": "3.9.10",
+    "prettier": "3.10.1",
     "sinon": "22.1.0",
     "ts-jest": "29.4.15",
     "typedoc": "0.28.20",
