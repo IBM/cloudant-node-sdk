@@ -1532,6 +1532,46 @@ service.deleteIndex({
 // This example will fail if `getUserByName` index doesn't exist. To create the index, see [Create a new index on a database.](#postindex)
 ```
 
+## postIndexInfo
+
+_POST `/{db}/_index_info`_
+
+### [Example request](snippets/postIndexInfo/example_request.js)
+
+[embedmd]:# (snippets/postIndexInfo/example_request.js)
+```js
+// section: code
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postIndexInfo({
+  db: 'recipes'
+}).then(response => {
+  console.log(response.result);
+});
+```
+
+### [Example request with type and keys](snippets/postIndexInfo/example_request_with_type_and_keys.js)
+
+[embedmd]:# (snippets/postIndexInfo/example_request_with_type_and_keys.js)
+```js
+// section: code
+import { CloudantV1 } from '@ibm-cloud/cloudant';
+
+const service = CloudantV1.newInstance({});
+
+service.postIndexInfo({
+  db: 'recipes',
+  keys: ['_design/cookbook'],
+  type: ['search']
+}).then(response => {
+  console.log(response.result);
+});
+// section: markdown
+// This example requires the `cookbook` design document to exist with a Cloudant Search index. To create the design document, see [Create or modify a design document.](#putdesigndocument)
+```
+
 ## deleteLocalDocument
 
 _DELETE `/{db}/_local/{doc_id}`_
